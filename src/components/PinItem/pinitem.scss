@@ -1,0 +1,10 @@
+.pin-item {
+  .card {
+    box-shadow: 0px 2px 5px $gray-200;
+  }
+
+  &-tags {
+    text-transform: lowercase;
+    font-size: $h6-font-size * 0.75;
+  }
+}
