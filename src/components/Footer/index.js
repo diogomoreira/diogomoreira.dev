@@ -1,18 +1,19 @@
+import Container from "components/Container"
 import React from "react"
-
-import "./footer.scss"
+import { FooterContainer, FooterInfo, FooterItem } from "./styled"
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
   return (
-    <footer className="container-fluid footer text-light mt-5">
-      <div className="container py-4 text-center">
-        <div id="footer-info">
-          © {currentYear} diogodmoreira.com{" "}
-          <span className="footer-item">Termos de Uso</span>
-        </div>
-      </div>
-    </footer>
+    <FooterContainer>
+      <Container>
+        <FooterInfo>
+          <FooterItem>© {currentYear}</FooterItem>
+          <FooterItem highlight>diogodmoreira.com</FooterItem>
+          <FooterItem>Termos de Uso</FooterItem>
+        </FooterInfo>
+      </Container>
+    </FooterContainer>
   )
 }
 
