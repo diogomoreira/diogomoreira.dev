@@ -1,11 +1,12 @@
 backend:
   name: github
   repo: diogomoreira/diogodmoreira.com
-  branch: master # Branch to update (optional; defaults to master)
+  branch: main # Branch to update (optional; defaults to master)
+  site_domain: diogodmoreira.com
 
 publish_mode: editorial_workflow
-media_folder: static/assets
-public_folder: /assets # The src attribute for uploaded media will begin with /images/uploads
+media_folder: "content/assets"
+public_folder: "assets" # The src attribute for uploaded media will begin with /images/uploads
 
 collections:
   - name: "blog"
