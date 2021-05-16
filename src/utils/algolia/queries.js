@@ -24,6 +24,7 @@ const blogQuery = `{
         fields {
           slug
         }
+        timeToRead
         excerpt(pruneLength: 5000)
       }
     }
