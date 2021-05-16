@@ -22,12 +22,10 @@ import {
 import ReactTooltip from "react-tooltip"
 
 const ResearchItem = ({ researchItem }) => {
-  console.log(researchItem.id)
   const preRef = React.createRef()
 
   const copyCitation = bibtexRef => {
     navigator.clipboard.writeText(bibtexRef.current.textContent)
-    console.log(bibtexRef.current.textContent)
   }
 
   return (
