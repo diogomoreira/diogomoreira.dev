@@ -8,6 +8,8 @@ import { PageSection } from "components/Layout"
 import SEO from "components/SEO"
 import BlogPostCardItem from "components/BlogPostCardItem"
 import { threeColumnBreakPoints } from "utils/masonry/breakpoints"
+import Container from "components/Container"
+import { TagTitle, TagTitleDetails } from "./styled"
 
 const Tag = ({ pageContext, data }) => {
   const { tag } = pageContext
@@ -21,14 +23,16 @@ const Tag = ({ pageContext, data }) => {
           description={`${totalCount} posts marcados com #${tag}`}
           pathname={`tags/${kebabCase(tag)}`}
         />
-        <PageSection>
-          <h1 className="page-title">Tags</h1>
-          <h4 className="mb-5">
-            <span class="text-muted">#</span>
-            {tag}
-          </h4>
-        </PageSection>
-        <PageSection className="bg-light py-5">
+        <Container>
+          <h1>Blog</h1>
+          <TagTitle>
+            Tag #<code>{tag}</code> -{" "}
+            <TagTitleDetails>
+              {totalCount} {totalCount > 1 ? "posts" : "post"}
+            </TagTitleDetails>
+          </TagTitle>
+        </Container>
+        <Container>
           <ResponsiveMasonry columnsCountBreakPoints={threeColumnBreakPoints}>
             <Masonry gutter="1rem">
               {edges.map(({ node }) => {
@@ -41,12 +45,13 @@ const Tag = ({ pageContext, data }) => {
                     slug={node.fields.slug}
                     cover={node.frontmatter.cover}
                     description={node.frontmatter.description}
+                    tags={node.frontmatter.tags}
                   />
                 )
               })}
             </Masonry>
           </ResponsiveMasonry>
-        </PageSection>
+        </Container>
       </Layout>
     </>
   )

@@ -7,6 +7,8 @@ import { Layout } from "components/Layout"
 import Header from "components/Header"
 import SEO from "components/SEO"
 import BlogPostContent from "components/BlogPostContent"
+import Container from "components/Container"
+import Content from "components/Content"
 
 const BlogPostLayout = ({ data }) => {
   const { frontmatter, html, excerpt, timeToRead } = data.markdownRemark
@@ -18,31 +20,27 @@ const BlogPostLayout = ({ data }) => {
     config: { identifier: path, title },
   }
   return (
-    <Layout>
+    <Layout marginTop="0">
       <SEO
         title={title}
         description={description || excerpt}
         image={cover?.childImageSharp?.resize}
         pathname={path}
       />
-      <div>
-        <Header
-          title={title}
-          description={description}
-          date={date}
-          cover={cover}
-          timeToRead={timeToRead}
-          tags={tags}
-        />
-        <div className="container px-4 px-lg-5 main-container">
-          <div className="row">
-            <div className="col-12">
-              <BlogPostContent html={html} />
-              {comments && <DiscussionEmbed {...disqusConfig} />}
-            </div>
-          </div>
-        </div>
-      </div>
+      <Header
+        title={title}
+        description={description}
+        date={date}
+        cover={cover}
+        timeToRead={timeToRead}
+        tags={tags}
+      />
+      <Container>
+        <Content>
+          <BlogPostContent html={html} />
+          {comments && <DiscussionEmbed {...disqusConfig} />}
+        </Content>
+      </Container>
     </Layout>
   )
 }
