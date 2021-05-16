@@ -13,6 +13,10 @@ export const useSiteMetadata = () => {
             linkedin
             twitter
           }
+          menu {
+            name
+            link
+          }
         }
       }
     }
