@@ -7,6 +7,7 @@ export const useSiteMetadata = () => {
         siteMetadata {
           title
           description
+          siteUrl
           social {
             github
             instagram

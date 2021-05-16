@@ -9,7 +9,7 @@ module.exports = {
       "My thoughts about life, software development, games, music and so forth",
     author: "Diogo Moreira",
     keywords: ["software development", "teaching"],
-    siteUrl: "https://diogodmoreira.com/",
+    siteUrl: `https://diogodmoreira.com/`,
     social: {
       twitter: "https://twitter.com/diogodmoreira",
       github: "https://github.com/diogomoreira",
@@ -197,6 +197,12 @@ module.exports = {
       resolve: "gatsby-plugin-styled-components",
       options: {
         displayName: "true",
+      },
+    },
+    {
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: process.env.GATSBY_DISQUS_SHORTNAME,
       },
     },
     "gatsby-plugin-offline",

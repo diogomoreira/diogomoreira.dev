@@ -1,23 +1,25 @@
 import React from "react"
 
 import { graphql } from "gatsby"
-import { DiscussionEmbed } from "disqus-react"
-
+import { Disqus } from "gatsby-plugin-disqus"
 import { Layout } from "components/Layout"
 import Header from "components/Header"
 import SEO from "components/SEO"
 import BlogPostContent from "components/BlogPostContent"
 import Container from "components/Container"
 import Content from "components/Content"
+import { useSiteMetadata } from "hooks/useMetadata"
 
 const BlogPostLayout = ({ data }) => {
   const { frontmatter, html, excerpt, timeToRead } = data.markdownRemark
   const { title, date, description, cover, tags, comments } = frontmatter
-  const path = data.markdownRemark.fields.slug
+  const path = useSiteMetadata().siteUrl + data.markdownRemark.fields.slug
+  const postId = data.markdownRemark.id
 
   const disqusConfig = {
-    shortname: process.env.GATSBY_DISQUS_SHORTNAME,
-    config: { identifier: path, title },
+    url: path,
+    identifier: postId,
+    title: title,
   }
   return (
     <Layout marginTop="0">
@@ -38,7 +40,7 @@ const BlogPostLayout = ({ data }) => {
       <Container>
         <Content>
           <BlogPostContent html={html} />
-          {comments && <DiscussionEmbed {...disqusConfig} />}
+          {comments && <Disqus {...disqusConfig} />}
         </Content>
       </Container>
     </Layout>
