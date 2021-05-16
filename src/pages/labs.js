@@ -5,24 +5,27 @@ import ProjectCardItem from "components/ProjectCardItem"
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 import { twoColumnBreakPoints } from "utils/masonry/breakpoints"
 import { Layout } from "components/Layout"
-import { PageSection } from "components/Layout"
+import Container from "components/Container"
+import Content from "components/Content"
 
 const Labs = ({ data }) => {
   const projects = data.allProjectsJson.nodes
   return (
     <Layout>
       <SEO title="Labs" />
-      <PageSection className="py-3">
+      <Container className="py-3">
         <h1 className="page-title">Labs</h1>
-        <p className="lh-lg">
-          Aqui uma lista com alguns dos meus projetos pessoais, desenvolvidos
-          principalmente enquanto estudo alguma tecnologia nova. Atualmente
-          estudando/praticando <b>React</b> e <b>TypeScript</b>, juntamente com
-          algumas ferramentas para testes automatizados, como <b>Jest</b>
-        </p>
-      </PageSection>
+        <Content>
+          <p className="lh-lg">
+            Aqui uma lista com alguns dos meus projetos pessoais, desenvolvidos
+            principalmente enquanto estudo alguma tecnologia nova. Atualmente
+            estudando/praticando <b>React</b> e <b>TypeScript</b>, juntamente
+            com algumas ferramentas para testes automatizados, como <b>Jest</b>
+          </p>
+        </Content>
+      </Container>
 
-      <PageSection className="bg-light py-5">
+      <Container>
         <ResponsiveMasonry columnsCountBreakPoints={twoColumnBreakPoints}>
           <Masonry gutter="1rem">
             {projects.map(project => (
@@ -30,7 +33,7 @@ const Labs = ({ data }) => {
             ))}
           </Masonry>
         </ResponsiveMasonry>
-      </PageSection>
+      </Container>
     </Layout>
   )
 }

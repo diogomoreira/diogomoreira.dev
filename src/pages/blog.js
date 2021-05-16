@@ -5,10 +5,10 @@ import algoliasearch from "algoliasearch/lite"
 
 import { Layout } from "components/Layout"
 import SEO from "components/SEO"
-import { PageSection } from "components/Layout"
 import InstantSearchBox from "components/InstantSearchBox"
 import BlogTags from "components/BlogTags"
 import BlogHits from "components/BlogHits"
+import Container from "components/Container"
 
 const Blog = ({
   data: {
@@ -25,16 +25,14 @@ const Blog = ({
     <>
       <Layout>
         <SEO title="Blog" pathname="blog" />
-        <InstantSearch searchClient={searchClient} indexName={indexName}>
-          <PageSection className="py-3">
-            <h1 className="page-title">Blog</h1>
+        <Container>
+          <InstantSearch searchClient={searchClient} indexName={indexName}>
+            <h1>Blog</h1>
             <InstantSearchBox />
             <BlogTags tags={group} />
-          </PageSection>
-          <PageSection className="bg-light py-5">
             <BlogHits />
-          </PageSection>
-        </InstantSearch>
+          </InstantSearch>
+        </Container>
       </Layout>
     </>
   )
