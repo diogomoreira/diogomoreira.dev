@@ -7,28 +7,26 @@ import {
   faLinkedin,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons"
+import { SocialLink, SocialLinksContainer } from "./styled"
 
 export default function SocialLinks() {
   const metadata = useSiteMetadata()
-
   return (
-    <div id="social-icons">
-      <div className="d-flex social-icons-list justify-content-center gap-3">
-        <a href={metadata.social.twitter} className="text-black-50 fs-1">
-          <FontAwesomeIcon icon={faTwitter} />
-        </a>
-        <a href={metadata.social.github} className="text-black-50 fs-1">
-          <FontAwesomeIcon icon={faGithub} />
-        </a>
+    <SocialLinksContainer>
+      <SocialLink href={metadata.social.twitter}>
+        <FontAwesomeIcon icon={faTwitter} />
+      </SocialLink>
+      <SocialLink href={metadata.social.github}>
+        <FontAwesomeIcon icon={faGithub} />
+      </SocialLink>
 
-        <a href={metadata.social.linkedin} className="text-black-50 fs-1">
-          <FontAwesomeIcon icon={faLinkedin} />
-        </a>
+      <SocialLink href={metadata.social.linkedin}>
+        <FontAwesomeIcon icon={faLinkedin} />
+      </SocialLink>
 
-        <a href={metadata.social.instagram} className="text-black-50 fs-1">
-          <FontAwesomeIcon icon={faInstagram} />
-        </a>
-      </div>
-    </div>
+      <SocialLink href={metadata.social.instagram}>
+        <FontAwesomeIcon icon={faInstagram} />
+      </SocialLink>
+    </SocialLinksContainer>
   )
 }

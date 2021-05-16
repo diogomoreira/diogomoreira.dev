@@ -1,6 +1,14 @@
-import { GatsbyImage } from "gatsby-plugin-image"
+import {
+  Card,
+  CardImage,
+  CardBody,
+  CardFooter,
+  CardTitle,
+  CardDetails,
+  CardHashTag,
+} from "components/Card"
 import React from "react"
-import "./pinitem.scss"
+import { StackItems } from "styles/globalStyles"
 
 const PinItem = ({
   objectID,
@@ -12,41 +20,26 @@ const PinItem = ({
   tags,
 }) => {
   return (
-    <div key={objectID} className="pin-item">
-      <div className="card">
+    <Card key={objectID}>
+      <CardImage image={image.childImageSharp.gatsbyImageData} title={title} />
+      <CardBody>
+        <CardDetails date={publishDate} />
         <a href={link} target="_blank">
-          <GatsbyImage
-            image={image.childImageSharp.gatsbyImageData}
-            alt={title}
-            className="card-img-top"
-          />
+          <CardTitle>{title}</CardTitle>
         </a>
-        <div className="card-body">
-          <a
-            href={link}
-            className="text-decoration-none text-dark"
-            target="_blank"
-          >
-            <h5 className="card-title">{title}</h5>
-          </a>
-          <h6 className="card-subtitle mb-2 text-black-50 fw-light">
-            <time>{publishDate}</time>
-          </h6>
-          <hr />
-          <div
-            className="card-text text-black-50"
-            dangerouslySetInnerHTML={{ __html: description }}
-          />
-        </div>
-        <div className="pin-item-tags card-footer card-text">
-          {tags.map(tag => (
-            <span className="me-2 text-decoration-none text-black-50">
-              #{tag}
-            </span>
+        <p
+          className="card-text text-black-50"
+          dangerouslySetInnerHTML={{ __html: description }}
+        />
+      </CardBody>
+      <CardFooter>
+        <StackItems>
+          {tags.map((tag, i) => (
+            <CardHashTag key={i}>{tag}</CardHashTag>
           ))}
-        </div>
-      </div>
-    </div>
+        </StackItems>
+      </CardFooter>
+    </Card>
   )
 }
 

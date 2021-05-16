@@ -1,6 +1,6 @@
 import { Link } from "gatsby"
 import React from "react"
-import "./blog-post-listitem.scss"
+// import "./blog-post-listitem.scss"
 
 const BlogPostListItem = ({ id, frontmatter, fields }) => {
   return (

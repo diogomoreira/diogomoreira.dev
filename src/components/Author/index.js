@@ -2,19 +2,29 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import React from "react"
 import { Link } from "gatsby"
 
-import "./author.scss"
-import { PageSection } from "components/Layout"
 import SocialLinks from "components/SocialLinks"
+import {
+  AuthorAvatar,
+  AuthorContainer,
+  AuthorProfileText,
+  AuthorTitle,
+} from "./styled"
+import Content from "components/Content"
+import { useSiteMetadata } from "hooks/useMetadata"
 
 const Author = ({ image }) => {
+  const metadata = useSiteMetadata()
   return (
-    <PageSection className="py-3">
-      <div
-        id="author"
-        className="d-flex flex-column flex-sm-column flex-md-row"
-      >
-        <div className="author-text lh-lg me-md-4 order-1 order-md-0">
-          <h1 className="page-title">Diogo Moreira</h1>
+    <AuthorContainer>
+      <AuthorAvatar>
+        <GatsbyImage
+          image={image.childImageSharp.gatsbyImageData}
+          alt={metadata.title}
+        />
+      </AuthorAvatar>
+      <AuthorProfileText>
+        <AuthorTitle>Diogo Moreira</AuthorTitle>
+        <Content>
           <p>
             Olá! Me chamo <strong>Diogo Moreira</strong>.{" "}
             <strong>Professor</strong> no{" "}
@@ -38,17 +48,10 @@ const Author = ({ image }) => {
             Seja bem vindo ao meu site e a vontade para entrar em contato por
             qualquer rede social!
           </p>
-          <SocialLinks />
-        </div>
-        <div className="author-profile-photo py-5 pt-0 d-flex order-0 order-md-1">
-          <GatsbyImage
-            imgClassName="img-thumbnail rounded"
-            image={image.childImageSharp.gatsbyImageData}
-            alt={`Diogo Moreira`}
-          />
-        </div>
-      </div>
-    </PageSection>
+        </Content>
+        <SocialLinks />
+      </AuthorProfileText>
+    </AuthorContainer>
   )
 }
 

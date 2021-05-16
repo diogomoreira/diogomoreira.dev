@@ -1,5 +1,6 @@
 import Container from "components/Container"
 import React from "react"
+import pkgJson from "/package.json"
 import { FooterContainer, FooterInfo, FooterItem } from "./styled"
 
 const Footer = () => {
@@ -9,7 +10,9 @@ const Footer = () => {
       <Container>
         <FooterInfo>
           <FooterItem>© {currentYear}</FooterItem>
-          <FooterItem highlight>diogodmoreira.com</FooterItem>
+          <FooterItem highlight>
+            diogodmoreira.com - v{pkgJson.version}
+          </FooterItem>
           <FooterItem>Termos de Uso</FooterItem>
         </FooterInfo>
       </Container>

@@ -1,19 +1,20 @@
 import { Link } from "gatsby"
 import React from "react"
 import kebabCase from "lodash/kebabCase"
+// import AwesomeButton from "react-awesome-button"
+import { BlogTagsContainer, TagButton } from "./styled"
+import Content from "components/Content"
 
 const BlogTags = ({ tags }) => {
   return (
-    <div className="pb-5 d-none d-sm-block">
+    <BlogTagsContainer>
+      <Content>Navegue por tags:</Content>
       {tags.map(tag => (
         <Link to={`/tags/${kebabCase(tag.fieldValue)}`}>
-          <button type="button" class="btn btn-dark me-2">
-            {tag.fieldValue}{" "}
-            <span class="badge bg-secondary">{tag.totalCount}</span>
-          </button>
+          <TagButton>{tag.fieldValue}</TagButton>
         </Link>
       ))}
-    </div>
+    </BlogTagsContainer>
   )
 }
 

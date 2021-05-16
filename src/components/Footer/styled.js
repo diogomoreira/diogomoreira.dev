@@ -4,7 +4,9 @@ export const FooterContainer = styled.footer`
   margin-top: 2rem;
 `
 export const FooterInfo = styled.div`
-  border-top: 1px solid var(--borderColor);
+  border-top: var(--borderThickness);
+  border-image-slice: var(--borderSlice);
+  border-image-source: var(--borderSource);
   display: flex;
   justify-content: center;
   align-items: center;

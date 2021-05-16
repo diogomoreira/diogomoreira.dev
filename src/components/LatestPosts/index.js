@@ -1,17 +1,56 @@
 import BlogPostCardItem from "components/BlogPostCardItem"
-import BlogPostListItem from "components/BlogPostListItem"
-import { PageSection } from "components/Layout"
+import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
-import { threeColumnBreakPoints } from "utils/masonry/breakpoints"
+import {
+  threeColumnBreakPoints,
+  twoColumnBreakPoints,
+} from "utils/masonry/breakpoints"
+import { LatestPostsContainer, LatestPostTitle } from "./styled"
 
-const LatestPosts = ({ posts }) => {
+const LatestPosts = () => {
+  const { allMarkdownRemark } = useStaticQuery(graphql`
+    {
+      allMarkdownRemark(
+        limit: 2
+        sort: { fields: frontmatter___date, order: DESC }
+      ) {
+        nodes {
+          id
+          frontmatter {
+            title
+            cover {
+              childImageSharp {
+                gatsbyImageData(quality: 70, webpOptions: { quality: 90 })
+                resize {
+                  src
+                  width
+                  height
+                }
+              }
+            }
+            date(formatString: "LL", locale: "pt-br")
+            description
+            tags
+            comments
+          }
+          fields {
+            slug
+          }
+          timeToRead
+        }
+      }
+    }
+  `)
+
   return (
-    <PageSection className="bg-light py-5">
-      <h2>Últimas postagens</h2>
+    <LatestPostsContainer>
+      <LatestPostTitle>
+        <span>Últimas postagens</span>
+      </LatestPostTitle>
       <ResponsiveMasonry columnsCountBreakPoints={threeColumnBreakPoints}>
         <Masonry gutter="1rem">
-          {posts.map(postItem => {
+          {allMarkdownRemark.nodes.map(postItem => {
             return (
               <BlogPostCardItem
                 key={postItem.id}
@@ -19,14 +58,16 @@ const LatestPosts = ({ posts }) => {
                 title={postItem.frontmatter.title}
                 date={postItem.frontmatter.date}
                 slug={postItem.fields.slug}
+                tags={postItem.frontmatter.tags}
                 cover={postItem.frontmatter.cover}
+                timeToRead={postItem.timeToRead}
                 description={postItem.frontmatter.description}
               />
             )
           })}
         </Masonry>
       </ResponsiveMasonry>
-    </PageSection>
+    </LatestPostsContainer>
   )
 }
 
