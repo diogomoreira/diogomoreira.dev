@@ -18,7 +18,7 @@ module.exports = {
     },
     menu: [
       { name: "Blog", link: "/blog" },
-      { name: "Research", link: "/research" },
+      { name: "Pesquisa", link: "/research" },
       { name: "Labs", link: "/labs" },
       { name: "Links", link: "/links" },
     ],
@@ -119,16 +119,6 @@ module.exports = {
     "gatsby-transformer-sharp",
     "gatsby-plugin-netlify-cms",
     {
-      resolve: "gatsby-plugin-sass",
-      options: {
-        additionalData: `
-        @import "bootstrap/scss/functions";
-        @import "bootstrap/scss/variables";
-        @import "bootstrap/scss/mixins";
-        `,
-      },
-    },
-    {
       resolve: "gatsby-plugin-algolia",
       options: {
         appId: process.env.GATSBY_ALGOLIA_APP_ID,
@@ -139,6 +129,7 @@ module.exports = {
       },
     },
     "gatsby-plugin-image",
+    "gatsby-plugin-dark-mode",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
     "gatsby-remark-images",
@@ -206,15 +197,17 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [`Roboto`],
+        fonts: [
+          `Inter\:100,300,400,500,700,900`, // you can also specify font weights and styles
+        ],
         display: "swap",
       },
     },
     {
       resolve: `gatsby-plugin-nprogress`,
       options: {
-        color: `tomato`,
-        showSpinner: false,
+        color: `blue`,
+        showSpinner: true,
       },
     },
     "gatsby-plugin-resolve-src",
