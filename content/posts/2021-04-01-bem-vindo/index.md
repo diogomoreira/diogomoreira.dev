@@ -9,10 +9,10 @@ cover: cover.jpg
 comments: true
 ---
 
-Olá, seja bem vindo a essa **nova versão do meu site**. Nesse site pessoal eu
-busco compartilhar um pouco da minha vida, seja em relação aos meus gostos
-pessoais, impressões sobre algum assunto ou as descobertas que venho fazendo
-como entusiasta de tecnologia ou nas minhas pesquisas acadêmicas.
+Olá, seja bem vindo a **nova versão do meu site**. Nesse site pessoal eu busco
+compartilhar um pouco da minha vida, seja em relação aos meus gostos pessoais,
+impressões sobre algum assunto ou descobertas que venho fazendo como entusiasta
+de tecnologia ou nas minhas pesquisas acadêmicas.
 
 Aos que estão aqui pela primeira vez, permita-me apresentar. Me chamo **Diogo
 Moreira**, sou formado em **Análise e Desenvolvimento de Sistemas** pelo
@@ -34,9 +34,7 @@ familiares.
 
 Quanto aos conteúdos que pretendo postar aqui, esperem alguns posts sobre
 desenvolvimento _web_ e testes de software, que são as áreas que estou estudando
-com mais frequência ultimamente. Inclusive, um dos primeiros posts que vou
-escrever vai ser sobre como desenvolvi essa nova versão do site com
-**GatsbyJS**.
+com mais frequência ultimamente.
 
 Aos poucos espero também compartilhar um pouco mais da minha vida e dos meus
 gostos por aqui. Espero que gostem do conteúdo que vou postar e estou aberto pra
