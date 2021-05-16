@@ -7,7 +7,7 @@ export const CardImage = styled.div`
 `
 
 export const Card = styled.div`
-  border: var(--borderThickness) var(--borderColor);
+  border: var(--border-default-width) var(--border-color);
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
@@ -19,16 +19,16 @@ export const CardInfo = styled.div`
 
 export const CardBody = styled.div`
   padding: 0.5rem 1rem 1.25rem 1rem;
-  font-size: 0.9rem;
+  font-size: var(--font-size-h4);
 
   p {
-    color: var(--secondaryTextColor);
+    color: var(--secondary-text-color);
   }
 `
 
 export const CardDetails = styled.div`
   display: flex;
-  font-size: 0.75rem;
+  font-size: var(--font-size-h5);
   color: var(--gray-light);
 `
 
@@ -64,14 +64,14 @@ export const CardDate = styled.span`
 export const CardTitle = styled.h3`
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: var(--fg);
+  color: var(--text-color);
   font-weight: var(--font-weight-title);
   font-size: var(--font-size-h2);
 `
 
 export const CardFooter = styled.div`
   padding: 1rem 1rem;
-  background-color: var(--detailsColor);
-  color: var(--secondaryTextColor);
+  background-color: var(--details-color);
+  color: var(--secondary-text-color);
   font-size: 0.9rem;
 `

@@ -1,7 +1,6 @@
 import React from "react"
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { transitionDuration } from "styles/globalStyles"
 
 export const ModeTogglerContainer = styled.div`
   padding: 0 1rem;
@@ -11,10 +10,10 @@ export const ToggleSlot = styled.div`
   position: relative;
   height: 1.5em;
   width: 3em;
-  border: var(--borderThickness) var(--gray-lighter);
+  border: var(--border-default-width) var(--gray-lighter);
   border-radius: 10em;
   background-color: var(--white);
-  transition: background-color ${transitionDuration};
+  transition: background-color var(--transition-duration);
 `
 export const LightThemeIcon = styled(FontAwesomeIcon)`
   position: absolute;
@@ -24,8 +23,8 @@ export const LightThemeIcon = styled(FontAwesomeIcon)`
   opacity: 1;
   transform: translate(25%, 25%) rotate(0deg);
   transform-origin: 50% 50%;
-  transition: opacity ${transitionDuration},
-    transform ${transitionDuration} cubic-bezier(1, 0.25, 0.83, 0.67);
+  transition: opacity var(--transition-duration),
+    transform var(--transition-duration) cubic-bezier(1, 0.25, 0.83, 0.67);
 `
 
 export const DarkThemeIcon = styled(FontAwesomeIcon)`
@@ -34,8 +33,8 @@ export const DarkThemeIcon = styled(FontAwesomeIcon)`
   color: var(--white);
   transform: translate(180%, 25%) rotate(0deg);
   transform-origin: 50% 50%;
-  transition: opacity ${transitionDuration},
-    transform ${transitionDuration} cubic-bezier(1, 0.25, 0.83, 0.67);
+  transition: opacity var(--transition-duration),
+    transform var(--transition-duration) cubic-bezier(1, 0.25, 0.83, 0.67);
 `
 
 export const ToggleButton = styled.div`
@@ -46,9 +45,9 @@ export const ToggleButton = styled.div`
   border-radius: 50%;
   background-color: #ffeccf;
   box-shadow: inset 0px 0px 0px 0.1em #ffbb52;
-  transition: background-color ${transitionDuration},
-    border-color ${transitionDuration},
-    transform ${transitionDuration} cubic-bezier(1, 0.25, 0.83, 0.67);
+  transition: background-color var(--transition-duration),
+    border-color var(--transition-duration),
+    transform var(--transition-duration) cubic-bezier(1, 0.25, 0.83, 0.67);
 `
 
 export const TogglerInput = styled.input`
@@ -64,7 +63,7 @@ export const TogglerInput = styled.input`
 
     & ${LightThemeIcon} {
       opacity: 0;
-      transition: opacity ${transitionDuration};
+      transition: opacity var(--transition-duration);
     }
 
     & ${DarkThemeIcon} {

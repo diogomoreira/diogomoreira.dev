@@ -15,12 +15,12 @@ export const openDetailKeyframe = keyframes`
 
 export const ResearchItemDetail = styled.details`
   margin-bottom: 1rem;
-  border: var(--borderThickness);
-  border-color: var(--borderColor);
+  border: var(--border-default-width);
+  border-color: var(--border-color);
   box-shadow: var(--shadow);
 `
 export const ResearchItemSummary = styled.summary`
-  background-color: var(--detailsColor);
+  background-color: var(--details-color);
   padding: 0.75rem 1rem;
   ::marker {
     content: "📄";
@@ -43,7 +43,7 @@ export const ResearchItemContent = styled.div`
 
 export const ResearchItemAuthors = styled.div`
   margin-top: 0.5rem;
-  border-top: 1px solid var(--borderColor);
+  border-top: 1px solid var(--border-color);
   padding-top: 0.5rem;
 `
 
@@ -57,7 +57,7 @@ export const ResearchItemAuthor = styled.span`
 `
 
 export const ResearchItemFooter = styled.footer`
-  background-color: var(--detailsColor);
+  background-color: var(--details-color);
   padding: 1rem;
 `
 

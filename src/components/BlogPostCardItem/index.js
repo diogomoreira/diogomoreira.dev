@@ -26,7 +26,12 @@ const BlogPostCardItem = ({
 }) => {
   return (
     <Card key={objectID}>
-      <CardImage image={cover.childImageSharp.gatsbyImageData} title={title} />
+      <Link to={`/${slug}`}>
+        <CardImage
+          image={cover.childImageSharp.gatsbyImageData}
+          title={title}
+        />
+      </Link>
       <CardBody>
         <CardDetails timeToRead={timeToRead} date={date} />
         <Link to={`/${slug}`}>

@@ -10,9 +10,9 @@ export const NavTogglerContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    border: var(--borderThickness);
-    border-color: var(--borderColor);
-    background-color: var(--bg);
+    border: var(--border-default-width);
+    border-color: var(--border-color);
+    background-color: var(--background-color);
     cursor: pointer;
     z-index: ${props => (props.opened ? "3" : "1")};
   `};

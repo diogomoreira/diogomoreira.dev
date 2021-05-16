@@ -12,6 +12,7 @@ const NavItems = ({ toggleMenu }) => {
     <S.NavItems opened={toggleMenu}>
       {menu.map((item, i) => (
         <S.NavLink
+          key={i}
           to={item.link}
           partiallyActive={true}
           activeClassName="active"

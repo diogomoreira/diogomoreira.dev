@@ -18,19 +18,20 @@ const GlobalStyle = createGlobalStyle`
 
     --font-size-base: 1.25rem;
 
-    --font-size-h1: 2rem;
-    --font-size-h2: 1.5rem;
-    --font-size-h3: 1.17rem;
-    --font-size-h4: 1rem;
-    --font-size-h5: .83rem;
-    --font-size-h6: .67rem;
+    --font-size-h1: calc(var(--font-size-base) + 0.75rem);
+    --font-size-h2: calc(var(--font-size-base) + 0.25rem);
+    --font-size-h3: calc(var(--font-size-base) - 0.08rem);
+    --font-size-h4: calc(var(--font-size-base) - 0.25rem);
+    --font-size-h5: calc(var(--font-size-base) - 0.42rem);
+    --font-size-h6: calc(var(--font-size-base) - 0.58rem);
 
-    --border-radius: 15px;
+    --border-radius: 0px;
+    --transition-duration: 200ms;
 
     --white: #f3f9fb;
     --black: #141414;
 
-    --white-rbg: 243,249,251;
+    --white-rgb: 243, 249, 251;
     --black-rgb: 20, 20, 20;
 
     --gray-white: #eeeeee;
@@ -111,69 +112,67 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    --bg: var(--white);
-    --fg: var(--black);
-    --bg-rgb: var(--white-rgb);
-    --fg-rgb: var(--black-rgb);
+    --background-color: var(--white);
+    --background-color-rgb: var(--white-rgb);
+    --text-color: var(--black);
+    --text-color-rgb: var(--black-rgb);
+    --secondary-text-color: var(--gray-light);
 
-    --textColor: var(--fg);
-    --secondaryTextColor: var(--gray-light);
 
-    --linkColor: var(--blue);
-    --menuLinkColor: var(--gray);
-    --menuTitleColor: var(--gray);
-    --borderColor: rgba(var(--gray-light-rgb), 0.25);
-    --borderThickness: 2px solid;
-    --borderSlice: 1;
-    --borderSource: linear-gradient(
+    --link-color: var(--blue);
+    --menu-link-color: var(--gray);
+    --menu-title-color: var(--gray);
+    --border-color: rgba(var(--gray-light-rgb), 0.25);
+    --border-default-width: 2px solid;
+    --border-slice: 1;
+    --border-source: linear-gradient(
       to right,
       rgb(var(--gray-white-rgb)) 30%,
       rgb(var(--gray-lighter-rgb)) 30%
     );
 
-
-    --detailsColor:  var(--gray-white);
+    --details-color:  var(--gray-white);
     --shadow: 2px 2px 2px rgba(var(--gray-dark-rgb), 0.2);
 
-    --button-bg: var(--linkColor);
+    --button-bg: var(--link-color);
     --button-border: var(--blue-darker);
-    --button-textColor: var(--white);
+    --button-text-color: var(--white);
 
-    --inputBg: var(--white);
-    --inputFg: var(--gray);
+    --input-background-color: var(--white);
+    --input-text-color: var(--gray);
 
-    background-color: var(--bg);
-    color: var(--fg);
-    transition: ${transitionDuration};
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: var(--transition-duration);
     a {
-      color: var(--linkColor);
+      color: var(--link-color);
     }
   }
 
   body.dark {
-    --bg: var(--black);
-    --fg: var(--gray-lighter);
+    --background-color: var(--black);
+    --text-color: var(--gray-lighter);
 
-    --bg-rgb: var(--black-rgb);
-    --fg-rgb: var(--white-rgb);
+    --background-color-rgb: var(--black-rgb);
+    --text-color-rgb: var(--white-rgb);
 
-    --secondaryTextColor: var(--fg);
-    --linkColor: var(--orange);
-    --menuLinkColor: var(--gray-lighter);
-    --menuTitleColor: var(--gray-lighter);
-    --borderColor: rgba(var(--gray-light-rgb), 0.4);
-    --borderSource: linear-gradient(
+    --secondary-text-color: var(--text-color);
+    --link-color: var(--orange);
+    --menu-link-color: var(--gray-lighter);
+    --menu-title-color: var(--gray-lighter);
+    --border-color: rgba(var(--gray-light-rgb), 0.4);
+    --border-source: linear-gradient(
       to right,
       rgb(var(--gray-dark-rgb)) 30%,
       rgb(var(--gray-rgb)) 30%
     );
-    --detailsColor: var(--gray-darker);
-    --shadow: 2px 2px 2px rgba(var(--white-rbg), 0.1);
-    --button-bg: var(--linkColor);
+    --details-color: var(--gray-darker);
+    --shadow: 2px 2px 2px rgba(var(--white-rgb), 0.1);
+    --button-bg: var(--link-color);
     --button-border: var(--orange-darker);
-    --button-textColor: var(--gray-darker);
-    --inputBg: var(--gray-dark);
-    --inputFg: var(--gray-lighter);
+    --button-text-color: var(--gray-darker);
+    --input-background-color: var(--gray-dark);
+    --input-text-color: var(--gray-lighter);
   }
 
   a {
@@ -217,10 +216,10 @@ const GlobalStyle = createGlobalStyle`
 
 export const ButtonStyle = css`
   display: inline-block;
-  border: var(--borderThickness);
+  border: var(--border-default-width);
   border-color: var(--button-border);
   background-color: var(--button-bg);
-  color: var(--button-textColor);
+  color: var(--button-text-color);
   box-shadow: var(--shadow);
   /* border-radius: 0.75em 0.75em 0.75em 0.75em; */
   padding: 0.5rem 1rem 0.5rem 1rem;
@@ -247,7 +246,7 @@ export const TagStyle = css`
   padding: 0.25rem 0.75rem;
   /* border-radius: 0.75em 0.75em 0.75em 0.75em; */
   background-color: var(--button-bg);
-  color: var(--button-textColor);
+  color: var(--button-text-color);
   ::before {
     content: "#";
   }
@@ -255,9 +254,9 @@ export const TagStyle = css`
 
 export const TitleStyle = css`
   text-transform: uppercase;
-  border-bottom: var(--borderThickness);
-  border-image-slice: var(--borderSlice);
-  border-image-source: var(--borderSource);
+  border-bottom: var(--border-default-width);
+  border-image-slice: var(--border-slice);
+  border-image-source: var(--border-source);
   /* padding-bottom: 0.25rem; */
   line-height: 24px;
   padding-bottom: 1rem;

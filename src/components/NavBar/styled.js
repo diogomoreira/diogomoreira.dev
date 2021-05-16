@@ -14,15 +14,15 @@ export const NavInnerContainer = styled(Container)``
 export const SiteTitle = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.75rem;
 
   h1 {
-    color: var(--menuTitleColor);
+    color: var(--menu-title-color);
     text-transform: uppercase;
     text-decoration: none;
     letter-spacing: -0.075em;
     font-weight: 700;
     font-size: 0.85rem;
+    margin-left: 1rem;
   }
 `
 
@@ -37,7 +37,7 @@ export const NavMenu = styled.div`
   -moz-osx-font-smoothing: grayscale;
 
   a {
-    color: var(--menuLinkColor);
+    color: var(--menu-link-color);
   }
 `
 
@@ -45,8 +45,8 @@ export const NavContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: var(--borderThickness);
-  border-image-slice: var(--borderSlice);
-  border-image-source: var(--borderSource);
+  border-bottom: var(--border-default-width);
+  border-image-slice: var(--border-slice);
+  border-image-source: var(--border-source);
   padding-bottom: 1rem;
 `
