@@ -193,6 +193,12 @@ module.exports = {
         icon: `${__dirname}/content/images/logo.png`,
       },
     },
+    {
+      resolve: "gatsby-plugin-styled-components",
+      options: {
+        displayName: "true",
+      },
+    },
     "gatsby-plugin-offline",
     {
       resolve: `gatsby-plugin-google-fonts`,

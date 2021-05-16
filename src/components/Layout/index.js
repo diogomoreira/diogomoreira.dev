@@ -16,13 +16,3 @@ export function Layout(props) {
     </>
   )
 }
-
-export function PageSection({ children, className }) {
-  return (
-    <div className={`container-fluid ${className}`}>
-      <div className="container px-4">
-        <div className="site-section">{children}</div>
-      </div>
-    </div>
-  )
-}

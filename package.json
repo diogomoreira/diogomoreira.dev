@@ -47,7 +47,7 @@
     "gatsby-plugin-sass": "^4.2.0",
     "gatsby-plugin-sharp": "^3.2.1",
     "gatsby-plugin-sitemap": "^3.2.0",
-    "gatsby-plugin-styled-components": "^4.4.0",
+    "gatsby-plugin-styled-components": "^4.5.0",
     "gatsby-plugin-transition-link": "^1.20.5",
     "gatsby-remark-autolink-headers": "^4.0.0",
     "gatsby-remark-copy-linked-files": "^4.0.0",
