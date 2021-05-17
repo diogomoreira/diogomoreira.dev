@@ -2,6 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
+import fallBackImage from "./fallbackImage"
 
 function SEO({ description, lang, meta, image: metaImage, title, pathname }) {
   const { site } = useStaticQuery(
@@ -19,13 +20,12 @@ function SEO({ description, lang, meta, image: metaImage, title, pathname }) {
       }
     `
   )
-
   const metaDescription = description || site.siteMetadata.description
   const canonical = pathname ? `${site.siteMetadata.siteUrl}${pathname}` : null
   const image =
     metaImage && metaImage.src
       ? `${site.siteMetadata.siteUrl}${metaImage.src}`
-      : null
+      : `${site.siteMetadata.siteUrl}${fallBackImage}`
 
   return (
     <Helmet
@@ -78,33 +78,24 @@ function SEO({ description, lang, meta, image: metaImage, title, pathname }) {
           content: metaDescription,
         },
       ]
-        .concat(
-          metaImage
-            ? [
-                {
-                  property: "og:image",
-                  content: image,
-                },
-                {
-                  property: "og:image:width",
-                  content: metaImage.width,
-                },
-                {
-                  property: "og:image:height",
-                  content: metaImage.height,
-                },
-                {
-                  name: "twitter:card",
-                  content: "summary_large_image",
-                },
-              ]
-            : [
-                {
-                  name: "twitter:card",
-                  content: "summary",
-                },
-              ]
-        )
+        .concat([
+          {
+            property: "og:image",
+            content: image,
+          },
+          {
+            property: "og:image:width",
+            content: image.width,
+          },
+          {
+            property: "og:image:height",
+            content: image.height,
+          },
+          {
+            name: "twitter:card",
+            content: "summary_large_image",
+          },
+        ])
         .concat(meta)}
     />
   )
