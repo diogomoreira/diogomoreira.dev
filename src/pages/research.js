@@ -9,7 +9,7 @@ import Content from "components/Content"
 export default function Research({ data }) {
   return (
     <Layout>
-      <SEO title="Pesquisa" />
+      <SEO title="Pesquisa" pathname="research" />
       <Container>
         <h1>Pesquisa</h1>
         <Content>

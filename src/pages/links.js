@@ -19,11 +19,11 @@ const Links = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title="Links" />
-      <Container className="py-3">
+      <SEO title="Links" pathname="links" />
+      <Container>
         <h1>Links</h1>
         <Content>
-          <p className="lh-lg">
+          <p>
             Inspirado no site do{" "}
             <strong>
               <a href="https://crisdias.link/">Cris Dias</a>
@@ -37,7 +37,7 @@ const Links = ({ data }) => {
           </p>
         </Content>
       </Container>
-      <Container className="bg-light py-3">
+      <Container>
         <InstantSearch searchClient={searchClient} indexName={indexName}>
           <InstantSearchBox />
           <PinRefinementList

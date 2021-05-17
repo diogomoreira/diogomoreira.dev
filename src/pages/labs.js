@@ -12,7 +12,7 @@ const Labs = ({ data }) => {
   const projects = data.allProjectsJson.nodes
   return (
     <Layout>
-      <SEO title="Labs" />
+      <SEO title="Labs" pathname="labs" />
       <Container className="py-3">
         <h1 className="page-title">Labs</h1>
         <Content>
