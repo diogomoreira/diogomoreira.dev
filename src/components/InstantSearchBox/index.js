@@ -14,7 +14,6 @@ const InstantSearchBox = ({ currentRefinement, refine }) => {
         className="form-control"
         placeholder="Pesquisar..."
         aria-label="Search"
-        aria-describedby="addon-wrapping"
       />
       <SearchMeta>
         <Stats

@@ -34,7 +34,7 @@ export const AuthorAvatar = styled.div`
   flex: 1 0 auto;
 
   div {
-    border: 0.5rem solid var(--background-color);
+    border: 0.5rem solid var(--border-color);
     border-radius: 50%;
     box-shadow: 0px 3px 7px rgba(var(--black-rgb), 0.2);
     img {
@@ -44,11 +44,6 @@ export const AuthorAvatar = styled.div`
 
   ${media.lessThan("medium")`
     max-width: 60%;
-    div {
-      border: 0.5rem solid var(--background-color);
-      border-radius: 50%;
-      box-shadow: 0px 3px 7px rgba(var(--black-rgb), 0.2);
-    }
     margin-bottom: 2rem;
   `}
 `

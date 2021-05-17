@@ -10,6 +10,8 @@ export const SearchBoxInput = styled.input`
   padding: 1rem;
   border: var(--border-default-width) var(--border-color);
   background-color: var(--input-background-color);
+  border-radius: 0;
+  appearance: none;
 `
 export const SearchMeta = styled.div`
   display: flex;

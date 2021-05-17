@@ -7,6 +7,7 @@ export const PinRefinementContainer = styled.div`
 
 export const PinRefinementButton = styled.button.attrs({ type: "button" })`
   ${ButtonStyle}
+  padding: 0.5rem;
 `
 
 export const PinRefinementButtonLabel = styled.span`
@@ -14,5 +15,5 @@ export const PinRefinementButtonLabel = styled.span`
 `
 
 export const PinRefinementButtonCount = styled.span`
-  color: var(--gray-lighter);
+  color: var(--gray-white);
 `

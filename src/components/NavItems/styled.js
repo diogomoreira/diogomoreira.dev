@@ -3,30 +3,6 @@ import { Link } from "gatsby"
 
 import media from "styled-media-query"
 
-export const NavItems = styled.nav`
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-
-  ${media.lessThan("medium")`
-    display: ${props => (props.opened ? "flex" : "none")};
-    justify-content: center;
-    align-items: center;
-    justify-items: stretch;
-    position: fixed;
-    background-color: rgba(var(--background-color-rgb), 0.9);
-    color: var(--text-color);
-    left: 0;
-    top: 0;
-    height: 100vh;
-    width: 100vw;
-    flex-direction: column;
-    z-index: 2;
-    font-size: var(--font-size-h2);
-    transition: display var(--transition-duration) ease-in-out;
-  `}
-`
-
 // Codepen by Gabriel Cojea - https://codepen.io/gabrielcojea/pen/ExPaBzQ
 export const NavLink = styled(Link)`
   position: relative;
@@ -48,4 +24,32 @@ export const NavLink = styled(Link)`
       width: 100%;
     }
   }
+`
+
+export const NavItems = styled.nav`
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  ${media.lessThan("medium")`
+    display: ${props => (props.opened ? "flex" : "none")};
+    justify-content: center;
+    align-items: center;
+    justify-items: stretch;
+    flex-direction: column;
+    position: fixed;
+    background-color: rgba(var(--background-color-rgb), 0.9);
+    color: var(--text-color);
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 2;
+    font-size: var(--font-size-h2);
+    transition: display var(--transition-duration) ease-in-out;
+
+    > ${NavLink} {
+      margin-bottom: 2rem;
+    }
+  `}
 `

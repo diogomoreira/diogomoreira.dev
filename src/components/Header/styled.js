@@ -6,9 +6,17 @@ import { TagStyle } from "styles/globalStyles"
 
 export const HeaderImage = styled(GatsbyImage)`
   width: 100%;
-  max-height: 300px;
+  max-height: 750px;
+
+  ${media.lessThan("huge")`
+    max-height: 500px;
+  `}
 
   ${media.lessThan("large")`
+    max-height: 300px;
+  `}
+
+  ${media.lessThan("medium")`
     max-height: 200px;
   `}
 `
