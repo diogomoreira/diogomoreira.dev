@@ -118,7 +118,6 @@ const GlobalStyle = createGlobalStyle`
     --text-color-rgb: var(--black-rgb);
     --secondary-text-color: var(--gray-light);
 
-
     --link-color: var(--blue);
     --menu-link-color: var(--gray);
     --menu-title-color: var(--gray);
@@ -156,7 +155,7 @@ const GlobalStyle = createGlobalStyle`
     --background-color-rgb: var(--black-rgb);
     --text-color-rgb: var(--white-rgb);
 
-    --secondary-text-color: var(--text-color);
+    --secondary-text-color: var(--gray-white);
     --link-color: var(--orange);
     --menu-link-color: var(--gray-lighter);
     --menu-title-color: var(--gray-lighter);
@@ -238,7 +237,13 @@ export const StackItems = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.5rem;
+
+  > * {
+    margin-left: 0.75rem;
+    :first-child {
+      margin-left: 0;
+    }
+  }
 `
 
 export const TagStyle = css`
