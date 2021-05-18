@@ -10,17 +10,23 @@ public_folder: "assets" # The src attribute for uploaded media will begin with /
 
 collections:
   - name: "blog"
-    label: "Blog"
+    label: "Blog Post"
     folder: "content/posts"
-    path: "{{year}}/{{slug}}"
+    path: "{{year}}-{{month}}-{{day}}-{{slug}}"
     media_folder: ""
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "index"
     fields:
       # - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "string" }
       - { label: "Tags", name: "tags", widget: "list" }
+      - {
+          label: "Comments",
+          name: "comments",
+          widget: "boolean",
+          default: true,
+        }
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - {
           label: "Featured Image",
