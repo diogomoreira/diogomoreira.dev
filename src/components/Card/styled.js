@@ -67,6 +67,9 @@ export const CardTitle = styled.h3`
   color: var(--text-color);
   font-weight: var(--font-weight-title);
   font-size: var(--font-size-h2);
+  padding-bottom: 1rem;
+  border-bottom: var(--border-default-width) var(--border-color);
+  margin-bottom: 1rem;
 `
 
 export const CardFooter = styled.div`
