@@ -7,7 +7,7 @@ export const BodyContainer = styled.div`
 `
 
 export const SiteContent = styled.div`
-  margin-top: 1rem;
+  margin-top: 2rem;
   flex: 1;
   ${props =>
     props.marginTop &&
