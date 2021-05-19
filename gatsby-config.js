@@ -205,7 +205,6 @@ module.exports = {
         shortname: process.env.GATSBY_DISQUS_SHORTNAME,
       },
     },
-    "gatsby-plugin-offline",
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
