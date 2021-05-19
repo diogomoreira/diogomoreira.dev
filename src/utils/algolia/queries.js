@@ -11,7 +11,7 @@ const blogQuery = `{
         frontmatter {
           title
           description
-          date(formatString: "LL", locale: "pt-br")
+          date
           tags
         }
         image: frontmatter {
@@ -49,7 +49,7 @@ const linkQuery = `{
           )
         }
       }
-      publishDate(formatString: "LL", locale: "pt-br")
+      publishDate
       tags
     }
   }
