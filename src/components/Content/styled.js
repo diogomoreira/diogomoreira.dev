@@ -16,5 +16,25 @@ export const Content = styled.article`
     &:not(:last-child) {
       margin-bottom: 1rem;
     }
+
+    em {
+      font-style: italic;
+    }
+  }
+
+  ul,
+  ol {
+    list-style: square;
+    list-style-position: inside;
+    margin: 2rem auto;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 2rem auto;
   }
 `
