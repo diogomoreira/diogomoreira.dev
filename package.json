@@ -65,6 +65,7 @@
     "katex": "^0.13.3",
     "lodash": "^4.17.21",
     "masonry-layout": "^4.2.2",
+    "moment": "^2.29.1",
     "netlify-cms-app": "^2.14.38",
     "open-iconic": "^1.1.1",
     "prism-react-renderer": "^1.2.0",

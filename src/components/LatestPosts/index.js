@@ -29,7 +29,7 @@ const LatestPosts = () => {
                 }
               }
             }
-            date(formatString: "LL", locale: "pt-br")
+            date
             description
             tags
             comments
