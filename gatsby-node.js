@@ -29,7 +29,7 @@ exports.createPages = async ({ graphql, actions }) => {
               slug
             }
             frontmatter {
-              date(locale: "pt-br", formatString: "DD MMM[,] YYYY")
+              date
               description
               title
               tags
@@ -42,7 +42,7 @@ exports.createPages = async ({ graphql, actions }) => {
             }
             frontmatter {
               title
-              date(locale: "pt-br", formatString: "DD MMM[,] YYYY")
+              date
             }
             id
           }
@@ -52,7 +52,7 @@ exports.createPages = async ({ graphql, actions }) => {
             }
             frontmatter {
               title
-              date(locale: "pt-br", formatString: "DD MMM[,] YYYY")
+              date
             }
             id
           }

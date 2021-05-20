@@ -1,7 +1,7 @@
-import { Link } from "gatsby"
 import React from "react"
 import * as S from "./styled"
 import { GatsbyImage } from "gatsby-plugin-image"
+import moment from "moment"
 
 const CardTitle = S.CardTitle
 const Card = S.Card
@@ -27,7 +27,9 @@ function CardDetails({ timeToRead, date }) {
           {timeToRead} {timeToRead > 1 ? `minutos` : `minuto`}
         </S.CardTimeToRead>
       )}
-      {date && <S.CardDate>{date}</S.CardDate>}
+      {date && (
+        <S.CardDate>{moment(date).locale("pt-br").format("LL")}</S.CardDate>
+      )}
     </S.CardDetails>
   )
 }
