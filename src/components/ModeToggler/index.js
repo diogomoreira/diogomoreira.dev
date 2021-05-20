@@ -15,20 +15,25 @@ export default function ModeToggler() {
   return (
     <ModeTogglerContainer>
       <ThemeToggler>
-        {({ theme, toggleTheme }) => (
-          <label>
-            <TogglerInput
-              type="checkbox"
-              onChange={e => toggleTheme(e.target.checked ? "dark" : "light")}
-              checked={theme === "dark"}
-            ></TogglerInput>
-            <ToggleSlot>
-              <LightThemeIcon icon={faSun} />
-              <ToggleButton />
-              <DarkThemeIcon icon={faMoon} />
-            </ToggleSlot>
-          </label>
-        )}
+        {({ theme, toggleTheme }) => {
+          if (theme == null) {
+            return null
+          }
+          return (
+            <label>
+              <TogglerInput
+                type="checkbox"
+                onChange={e => toggleTheme(e.target.checked ? "dark" : "light")}
+                checked={theme === "dark"}
+              ></TogglerInput>
+              <ToggleSlot>
+                <LightThemeIcon icon={faSun} />
+                <ToggleButton />
+                <DarkThemeIcon icon={faMoon} />
+              </ToggleSlot>
+            </label>
+          )
+        }}
       </ThemeToggler>
     </ModeTogglerContainer>
   )
