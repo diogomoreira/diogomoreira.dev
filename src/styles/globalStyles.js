@@ -114,6 +114,9 @@ const GlobalStyle = createGlobalStyle`
   body {
     --background-color: var(--white);
     --background-color-rgb: var(--white-rgb);
+
+    --secondary-background: var(--gray-lighter);
+
     --text-color: var(--black);
     --text-color-rgb: var(--black-rgb);
     --secondary-text-color: var(--gray-light);
@@ -154,6 +157,8 @@ const GlobalStyle = createGlobalStyle`
 
     --background-color-rgb: var(--black-rgb);
     --text-color-rgb: var(--white-rgb);
+
+    --secondary-background: var(--gray-dark);
 
     --secondary-text-color: var(--gray-white);
     --link-color: var(--orange);
