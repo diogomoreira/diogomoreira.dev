@@ -12,7 +12,7 @@ export const ToggleSlot = styled.div`
   width: 3em;
   border: var(--border-default-width) var(--gray-lighter);
   border-radius: 10em;
-  background-color: var(--white);
+  background-color: var(--gray-white);
   transition: background-color var(--transition-duration);
 `
 export const LightThemeIcon = styled(FontAwesomeIcon)`
@@ -51,15 +51,15 @@ export const ToggleButton = styled.div`
 `
 
 export const TogglerInput = styled.input`
+  height: 1.5em;
+  width: 3em;
   position: absolute;
   opacity: 0;
   cursor: pointer;
-  height: 0;
-  width: 0;
 
   &:checked ~ ${ToggleSlot} {
-    background-color: #374151;
-    border: 2px solid #1e232b;
+    background-color: var(--gray-darker);
+    border: 2px solid var(--gray);
 
     & ${LightThemeIcon} {
       opacity: 0;
@@ -72,7 +72,7 @@ export const TogglerInput = styled.input`
     }
 
     ${ToggleButton} {
-      background-color: #485367;
+      background-color: var(--gray);
       box-shadow: inset 0px 0px 0px 0.1em var(--white);
       transform: translate(20%, 25%);
     }
