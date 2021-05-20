@@ -7,6 +7,7 @@ import {
   CardDetails,
   CardHashTag,
 } from "components/Card"
+import moment from "moment"
 import React from "react"
 import { StackItems } from "styles/globalStyles"
 
@@ -21,7 +22,12 @@ const PinItem = ({
 }) => {
   return (
     <Card key={objectID}>
-      <CardImage image={image.childImageSharp.gatsbyImageData} title={title} />
+      <a href={link} target="_blank">
+        <CardImage
+          image={image.childImageSharp.gatsbyImageData}
+          title={title}
+        />
+      </a>
       <CardBody>
         <CardDetails date={publishDate} />
         <a href={link} target="_blank">

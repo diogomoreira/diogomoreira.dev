@@ -85,7 +85,7 @@ export const query = graphql`
                 }
               }
             }
-            date(formatString: "LL", locale: "pt-br")
+            date
             description
             tags
             comments
