@@ -12,6 +12,6 @@ export const SocialLinksContainer = styled.div`
   justify-content: space-between;
 `
 
-export const SocialLink = styled.a.attrs({ target: "_blank" })`
+export const SocialLink = styled.a.attrs({ target: "_blank", rel: "nofollow" })`
   font-size: 2rem;
 `

@@ -3,6 +3,7 @@ import Container from "components/Container"
 
 export const NavContainer = styled.header`
   padding-top: 1rem;
+  background-color: var(--menu-background);
 
   a {
     text-decoration: none;
@@ -33,7 +34,7 @@ export const NavMenu = styled.div`
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: var(--font-weight-title);
   -moz-osx-font-smoothing: grayscale;
 
   a {

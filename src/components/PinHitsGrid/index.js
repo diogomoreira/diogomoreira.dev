@@ -9,7 +9,7 @@ const PinHitsGrid = ({ hits }) => {
     <ResponsiveMasonry columnsCountBreakPoints={threeColumnBreakPoints}>
       <Masonry gutter="1rem">
         {hits.map(hit => {
-          return <PinItem {...hit} />
+          return <PinItem key={hit.objectID} {...hit} />
         })}
       </Masonry>
     </ResponsiveMasonry>

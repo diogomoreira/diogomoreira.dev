@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import { TagStyle } from "styles/globalStyles"
@@ -6,7 +7,18 @@ export const CardImage = styled.div`
   flex: 1;
 `
 
-export const Card = styled.div`
+export const Card = styled(motion.div).attrs({
+  variants: {
+    enter: {
+      y: 0,
+      opacity: 1,
+    },
+    exit: {
+      y: 5,
+      opacity: 0,
+    },
+  },
+})`
   border: var(--border-default-width) var(--border-color);
   box-shadow: var(--shadow);
   display: flex;
@@ -23,13 +35,14 @@ export const CardBody = styled.div`
 
   p {
     color: var(--secondary-text-color);
+    margin-bottom: 1rem;
   }
 `
 
 export const CardDetails = styled.div`
   display: flex;
   font-size: var(--font-size-h5);
-  color: var(--gray-light);
+  color: var(--gray);
 `
 
 export const CardLinkHashTag = styled(Link)`

@@ -20,8 +20,9 @@ export default function ModeToggler() {
             return null
           }
           return (
-            <label>
+            <label htmlFor="toggler">
               <TogglerInput
+                id="toggler"
                 type="checkbox"
                 onChange={e => toggleTheme(e.target.checked ? "dark" : "light")}
                 checked={theme === "dark"}

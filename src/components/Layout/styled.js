@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import styled, { css } from "styled-components"
 
 export const BodyContainer = styled.div`
@@ -6,7 +7,19 @@ export const BodyContainer = styled.div`
   flex-direction: column;
 `
 
-export const SiteContent = styled.div`
+export const SiteContent = styled(motion.div).attrs({
+  variants: {
+    enter: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        // when: "beforeChildren",
+        staggerChildren: 0.15,
+      },
+    },
+    exit: { y: 5, opacity: 0 },
+  },
+})`
   margin-top: 2rem;
   flex: 1;
   ${props =>

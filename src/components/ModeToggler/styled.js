@@ -12,7 +12,7 @@ export const ToggleSlot = styled.div`
   width: 3em;
   border: var(--border-default-width) var(--gray-lighter);
   border-radius: 10em;
-  background-color: var(--gray-white);
+  background-color: var(--white);
   transition: background-color var(--transition-duration);
 `
 export const LightThemeIcon = styled(FontAwesomeIcon)`
