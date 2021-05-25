@@ -6,8 +6,7 @@ import Layout from "components/Layout"
 import LatestPosts from "components/LatestPosts"
 import Container from "components/Container"
 
-const IndexPage = ({ data }) => {
-  const { image } = data
+const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Sobre" />
