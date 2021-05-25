@@ -12,7 +12,7 @@ const IndexPage = ({ data }) => {
     <Layout>
       <SEO title="Sobre" />
       <Container>
-        <Author image={image} />
+        <Author />
         <LatestPosts />
       </Container>
     </Layout>
@@ -20,13 +20,3 @@ const IndexPage = ({ data }) => {
 }
 
 export default IndexPage
-
-export const query = graphql`
-  query IndexPageQuery {
-    image: file(relativePath: { eq: "profile_photo.jpg" }) {
-      childImageSharp {
-        gatsbyImageData(width: 350, height: 350)
-      }
-    }
-  }
-`
