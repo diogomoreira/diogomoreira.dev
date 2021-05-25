@@ -1,8 +1,8 @@
 import React from "react"
-import { Layout } from "components/Layout"
 import SEO from "components/SEO"
 import Author from "components/Author"
 import { graphql } from "gatsby"
+import Layout from "components/Layout"
 import LatestPosts from "components/LatestPosts"
 import Container from "components/Container"
 

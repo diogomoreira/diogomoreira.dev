@@ -3,8 +3,8 @@ import { graphql } from "gatsby"
 import SEO from "components/SEO"
 import ProjectCardItem from "components/ProjectCardItem"
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
-import { twoColumnBreakPoints } from "utils/masonry/breakpoints"
-import { Layout } from "components/Layout"
+import { threeColumnBreakPoints } from "utils/masonry/breakpoints"
+import Layout from "components/Layout"
 import Container from "components/Container"
 import Content from "components/Content"
 
@@ -26,7 +26,7 @@ const Labs = ({ data }) => {
       </Container>
 
       <Container>
-        <ResponsiveMasonry columnsCountBreakPoints={twoColumnBreakPoints}>
+        <ResponsiveMasonry columnsCountBreakPoints={threeColumnBreakPoints}>
           <Masonry gutter="1rem">
             {projects.map(project => (
               <ProjectCardItem project={project} />
