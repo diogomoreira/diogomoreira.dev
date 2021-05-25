@@ -28,8 +28,8 @@ const Labs = ({ data }) => {
       <Container>
         <ResponsiveMasonry columnsCountBreakPoints={threeColumnBreakPoints}>
           <Masonry gutter="1rem">
-            {projects.map(project => (
-              <ProjectCardItem project={project} />
+            {projects.map((project, i) => (
+              <ProjectCardItem key={i} project={project} />
             ))}
           </Masonry>
         </ResponsiveMasonry>
