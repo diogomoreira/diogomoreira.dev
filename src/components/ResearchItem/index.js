@@ -1,5 +1,4 @@
 import React from "react"
-import { CopyToClipboard } from "react-copy-to-clipboard"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faCopy,
@@ -20,6 +19,7 @@ import {
   ResearchItemSummary,
 } from "./styled"
 import ReactTooltip from "react-tooltip"
+import { AnimatePresence } from "framer-motion"
 
 const ResearchItem = ({ researchItem }) => {
   const preRef = React.createRef()
@@ -35,12 +35,12 @@ const ResearchItem = ({ researchItem }) => {
           <time>{researchItem.year}</time> - {researchItem.title}
         </span>
       </ResearchItemSummary>
-      <ResearchItemContent>
+      <ResearchItemContent animate={{ y: ["50%", "0%"], opacity: ["0", "1"] }}>
         <p>{researchItem.abstract}</p>
         <ResearchItemAuthors>
           <span>Autores</span>:{" "}
-          {researchItem.authors.map(author => (
-            <ResearchItemAuthor>{author}</ResearchItemAuthor>
+          {researchItem.authors.map((author, i) => (
+            <ResearchItemAuthor key={i}>{author}</ResearchItemAuthor>
           ))}
         </ResearchItemAuthors>
       </ResearchItemContent>

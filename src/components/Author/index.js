@@ -28,7 +28,7 @@ const Author = ({ image }) => {
           <p>
             Olá! Me chamo <strong>Diogo Moreira</strong>.{" "}
             <strong>Professor</strong> no{" "}
-            <a href="https://ifpb.edu.br" target="_blank">
+            <a href="https://ifpb.edu.br" target="_blank" rel="nofollow">
               Instituto Federal de Educação, Ciência e Tecnologia da Paraíba
             </a>{" "}
             desde 2014. Graduado em{" "}

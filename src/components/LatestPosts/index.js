@@ -12,7 +12,7 @@ const LatestPosts = () => {
   const { allMarkdownRemark } = useStaticQuery(graphql`
     {
       allMarkdownRemark(
-        limit: 2
+        limit: 3
         sort: { fields: frontmatter___date, order: DESC }
       ) {
         nodes {
@@ -45,9 +45,7 @@ const LatestPosts = () => {
 
   return (
     <LatestPostsContainer>
-      <LatestPostTitle>
-        <span>Últimas postagens</span>
-      </LatestPostTitle>
+      <LatestPostTitle>Últimas postagens</LatestPostTitle>
       <ResponsiveMasonry columnsCountBreakPoints={threeColumnBreakPoints}>
         <Masonry gutter="1rem">
           {allMarkdownRemark.nodes.map(postItem => {

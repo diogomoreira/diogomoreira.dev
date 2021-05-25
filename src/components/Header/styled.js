@@ -1,5 +1,6 @@
 import { Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
+
 import styled from "styled-components"
 import media from "styled-media-query"
 import { TagStyle } from "styles/globalStyles"
@@ -7,6 +8,7 @@ import { TagStyle } from "styles/globalStyles"
 export const HeaderImage = styled(GatsbyImage)`
   width: 100%;
   max-height: 750px;
+  margin-top: -2rem;
 
   ${media.lessThan("huge")`
     max-height: 500px;

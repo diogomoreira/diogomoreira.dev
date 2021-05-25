@@ -21,6 +21,7 @@ const PinRefinementList = ({
         const elementId = `${item.label}-type-btnradio`
         return (
           <PinRefinementButton
+            key={i}
             name={elementId}
             id={elementId}
             onClick={e => refine(item.value)}

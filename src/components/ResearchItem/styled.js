@@ -1,24 +1,25 @@
+import { motion } from "framer-motion"
 import styled, { keyframes } from "styled-components"
 import { ButtonStyle, transitionDuration } from "styles/globalStyles"
 
-export const openDetailKeyframe = keyframes`
-  from {
-    opacity: 0;
-    margin-top: -20px;
-  }
-
-  to {
-    opacity: 1;
-    margin-top: 0px;
-  }
-`
-
-export const ResearchItemDetail = styled.details`
+export const ResearchItemDetail = styled(motion.details).attrs({
+  variants: {
+    enter: {
+      y: 0,
+      opacity: 1,
+    },
+    exit: {
+      y: 5,
+      opacity: 0,
+    },
+  },
+})`
   margin-bottom: 1rem;
   border: var(--border-default-width);
   border-color: var(--border-color);
   box-shadow: var(--shadow);
 `
+
 export const ResearchItemSummary = styled.summary`
   background-color: var(--details-color);
   padding: 0.75rem 1rem;
@@ -29,12 +30,9 @@ export const ResearchItemSummary = styled.summary`
     margin-left: 1rem;
     font-weight: var(--font-weight-normal);
   }
-  transform: rotate(0);
-  transform-origin: 0.2rem 50%;
-  transition: 0.25s transform ease;
 `
 
-export const ResearchItemContent = styled.div`
+export const ResearchItemContent = styled(motion.div)`
   padding: 1rem;
   font-size: var(--font-size-h5);
   font-weight: var(--font-weight-light);

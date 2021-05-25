@@ -1,6 +1,17 @@
 import styled from "styled-components"
+import { motion } from "framer-motion"
 
-export const Content = styled.article`
+export const Content = styled(motion.article).attrs({
+  // initial: { opacity: 0, y: 25 },
+  // animate: { opacity: 1, y: 0 },
+  // exit: { opacity: 0, x: 25 },
+  // transition: {
+  //   type: "tween",
+  //   mass: 0.35,
+  //   stiffness: 75,
+  //   duration: 0.75,
+  // },
+})`
   font-size: var(--font-size-base);
   margin-block-start: 1.75em;
   margin-block-end: 1.75em;
