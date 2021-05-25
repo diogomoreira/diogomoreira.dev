@@ -2,7 +2,7 @@ import React from "react"
 
 import { graphql } from "gatsby"
 import { Disqus } from "gatsby-plugin-disqus"
-import { Layout } from "components/Layout"
+import Layout from "components/Layout"
 import Header from "components/Header"
 import SEO from "components/SEO"
 import BlogPostContent from "components/BlogPostContent"
@@ -22,7 +22,7 @@ const BlogPostLayout = ({ data }) => {
     title: title,
   }
   return (
-    <Layout marginTop="0">
+    <Layout>
       <SEO
         title={title}
         description={description || excerpt}

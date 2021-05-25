@@ -3,7 +3,7 @@ import SEO from "components/SEO"
 import { InstantSearch } from "react-instantsearch-dom"
 import algoliasearch from "algoliasearch"
 
-import { Layout } from "components/Layout"
+import Layout from "components/Layout"
 import InstantSearchBox from "components/InstantSearchBox"
 import PinRefinementList from "components/PinRefinementList"
 import PinHitsGrid from "components/PinHitsGrid"
