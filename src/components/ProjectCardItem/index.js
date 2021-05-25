@@ -1,15 +1,14 @@
 import React from "react"
-import { GatsbyImage } from "gatsby-plugin-image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGithub } from "@fortawesome/free-brands-svg-icons"
 import {
   Card,
   CardBody,
   CardFooter,
+  CardHashTag,
   CardImage,
   CardTitle,
 } from "components/Card"
-import { CardLinkHashTag } from "components/Card/styled"
 import { StackItems } from "styles/globalStyles"
 import { ProjectLink } from "./styled"
 
@@ -27,8 +26,8 @@ const ProjectCardItem = ({ project }) => {
           <CardTitle>{project.title}</CardTitle>
           <p dangerouslySetInnerHTML={{ __html: project.description }}></p>
           <StackItems>
-            {project.stack.map(item => (
-              <CardLinkHashTag>{item}</CardLinkHashTag>
+            {project.stack.map((item, i) => (
+              <CardHashTag key={i}>{item}</CardHashTag>
             ))}
           </StackItems>
         </CardBody>
