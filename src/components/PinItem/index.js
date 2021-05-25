@@ -20,7 +20,6 @@ const PinItem = ({
   publishDate,
   tags,
 }) => {
-  console.log(objectID)
   return (
     <Card key={objectID}>
       <a href={link} target="_blank">
