@@ -15,6 +15,7 @@ import {
   HeaderTitle,
 } from "./styled"
 import { StackItems } from "styles/globalStyles"
+import moment from "moment"
 
 const Header = ({ title, description, date, cover, timeToRead, tags }) => {
   return (
@@ -24,14 +25,15 @@ const Header = ({ title, description, date, cover, timeToRead, tags }) => {
         <HeaderTitle>{title}</HeaderTitle>
         <HeaderLead>{description}</HeaderLead>
         <HeaderInfo>
-          <time>{date}</time> · Leitura de <span className="oi oi-clock"></span>{" "}
-          {timeToRead} {timeToRead > 1 ? `minutos` : `minuto`}
+          <time>{moment(date).locale("pt-br").format("LL")}</time> · Leitura de{" "}
+          <span className="oi oi-clock"></span> {timeToRead}{" "}
+          {timeToRead > 1 ? `minutos` : `minuto`}
         </HeaderInfo>
         <HeaderTags>
           <StackItems>
             <FontAwesomeIcon icon={faTags} />
-            {tags.map(tag => (
-              <HeaderTagLink to={`/tags/${kebabCase(tag)}`}>
+            {tags.map((tag, i) => (
+              <HeaderTagLink key={i} to={`/tags/${kebabCase(tag)}`}>
                 {tag}
               </HeaderTagLink>
             ))}
