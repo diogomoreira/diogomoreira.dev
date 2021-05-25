@@ -12,7 +12,16 @@ import {
 import Content from "components/Content"
 import { useSiteMetadata } from "hooks/useMetadata"
 
-const Author = ({ image }) => {
+const Author = () => {
+  const { image } = useStaticQuery(graphql`
+    {
+      image: file(relativePath: { eq: "profile_photo.jpg" }) {
+        childImageSharp {
+          gatsbyImageData(width: 350, height: 350)
+        }
+      }
+    }
+  `)
   const metadata = useSiteMetadata()
   return (
     <AuthorContainer>
