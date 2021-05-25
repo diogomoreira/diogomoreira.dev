@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import { Link } from "gatsby"
-
 import media from "styled-media-query"
 
 // Codepen by Gabriel Cojea - https://codepen.io/gabrielcojea/pen/ExPaBzQ

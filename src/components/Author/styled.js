@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import styled from "styled-components"
 import media from "styled-media-query"
 
@@ -29,7 +30,18 @@ export const AuthorTitle = styled.h1`
   `}
 `
 
-export const AuthorAvatar = styled.div`
+export const AuthorAvatar = styled(motion.div).attrs({
+  variants: {
+    enter: {
+      scale: 1,
+      opacity: 1,
+    },
+    exit: {
+      scale: 0.5,
+      opacity: 0,
+    },
+  },
+})`
   max-width: 25%;
   flex: 1 0 auto;
 
