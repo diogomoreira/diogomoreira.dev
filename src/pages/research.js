@@ -2,9 +2,9 @@ import React from "react"
 import { graphql } from "gatsby"
 import ResearchItem from "components/ResearchItem"
 import SEO from "components/SEO"
-import { Layout } from "components/Layout"
 import Container from "components/Container"
 import Content from "components/Content"
+import Layout from "components/Layout"
 
 export default function Research({ data }) {
   return (
@@ -59,11 +59,9 @@ export default function Research({ data }) {
         </Content>
       </Container>
       <Container>
-        <div id="publications">
-          {data.allReference.nodes.map(researchItem => {
-            return <ResearchItem researchItem={researchItem} />
-          })}
-        </div>
+        {data.allReference.nodes.map((researchItem, i) => {
+          return <ResearchItem key={i} researchItem={researchItem} />
+        })}
       </Container>
     </Layout>
   )

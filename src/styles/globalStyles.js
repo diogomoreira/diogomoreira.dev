@@ -26,7 +26,7 @@ const GlobalStyle = createGlobalStyle`
     --font-size-h6: calc(var(--font-size-base) - 0.58rem);
 
     --border-radius: 0px;
-    --transition-duration: 200ms;
+    --transition-duration: 250ms;
 
     --white: #f3f9fb;
     --black: #141414;
@@ -54,6 +54,10 @@ const GlobalStyle = createGlobalStyle`
     --blue-darker: #27426f;
     --orange: #FF8811;
     --orange-darker: #dd6f00;
+  }
+
+  * {
+    /* transition: var(--transition-duration); */
   }
 
   /* http://meyerweb.com/eric/tools/css/reset/
@@ -116,6 +120,7 @@ const GlobalStyle = createGlobalStyle`
     --background-color-rgb: var(--white-rgb);
 
     --secondary-background: var(--gray-lighter);
+    --menu-background: var(--gray-white);
 
     --text-color: var(--black);
     --text-color-rgb: var(--black-rgb);
@@ -145,7 +150,6 @@ const GlobalStyle = createGlobalStyle`
 
     background-color: var(--background-color);
     color: var(--text-color);
-    transition: var(--transition-duration);
     a {
       color: var(--link-color);
     }
@@ -159,6 +163,7 @@ const GlobalStyle = createGlobalStyle`
     --text-color-rgb: var(--white-rgb);
 
     --secondary-background: var(--gray-dark);
+    --menu-background: var(--gray-darker);
 
     --secondary-text-color: var(--gray-white);
     --link-color: var(--orange);
@@ -244,9 +249,10 @@ export const StackItems = styled.div`
   flex-wrap: wrap;
 
   > * {
-    margin-left: 0.75rem;
-    :first-child {
-      margin-left: 0;
+    margin-right: 0.75rem;
+    margin-bottom: 0.75rem;
+    :last-child {
+      margin-right: 0;
     }
   }
 `
