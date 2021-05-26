@@ -1,8 +1,7 @@
 import React, { useState } from "react"
-import { Link } from "gatsby"
 import { useSiteMetadata } from "hooks/useMetadata"
 import * as S from "./styled"
-import { faRssSquare } from "@fortawesome/free-solid-svg-icons"
+import { faRssSquare } from "@fortawesome/free-solid-svg-icons/faRssSquare"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const NavItems = ({ toggleMenu }) => {
@@ -20,9 +19,9 @@ const NavItems = ({ toggleMenu }) => {
           {item.name}
         </S.NavLink>
       ))}
-      <Link to="/rss.xml">
+      <S.NavLink to="/rss.xml">
         <FontAwesomeIcon icon={faRssSquare} />
-      </Link>
+      </S.NavLink>
     </S.NavItems>
   )
 }

@@ -1,6 +1,7 @@
 import React from "react"
 import { ThemeToggler } from "gatsby-plugin-dark-mode"
-import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons"
+import { faSun } from "@fortawesome/free-solid-svg-icons/faSun"
+import { faMoon } from "@fortawesome/free-solid-svg-icons/faMoon"
 
 import {
   ModeTogglerContainer,
