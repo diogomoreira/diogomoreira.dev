@@ -1,4 +1,5 @@
-import { faBars, faWindowClose } from "@fortawesome/free-solid-svg-icons"
+import { faBars } from "@fortawesome/free-solid-svg-icons/faBars"
+import { faWindowClose } from "@fortawesome/free-solid-svg-icons/faWindowClose"
 import React from "react"
 import * as S from "./styled"
 

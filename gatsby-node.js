@@ -1,6 +1,6 @@
 const { createFilePath } = require("gatsby-source-filesystem")
 const path = require("path")
-const _ = require("lodash")
+const kebabCase = require("lodash.kebabcase")
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
@@ -81,7 +81,7 @@ exports.createPages = async ({ graphql, actions }) => {
   // Make tag pages
   tags.forEach(tag => {
     createPage({
-      path: `/tags/${_.kebabCase(tag.fieldValue)}/`,
+      path: `/tags/${kebabCase(tag.fieldValue)}/`,
       component: tagPageTemplate,
       context: {
         tag: tag.fieldValue,

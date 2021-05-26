@@ -1,10 +1,10 @@
 import React from "react"
 
-import kebabCase from "lodash/kebabCase"
-import { Link } from "gatsby"
+import kebabCase from "lodash.kebabcase"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTags } from "@fortawesome/free-solid-svg-icons"
-import { GatsbyImage } from "gatsby-plugin-image"
+import { faTags } from "@fortawesome/free-solid-svg-icons/faTags"
+import { format } from "date-fns"
+import { ptBR } from "date-fns/locale"
 import Container from "components/Container"
 import {
   HeaderImage,
@@ -15,7 +15,6 @@ import {
   HeaderTitle,
 } from "./styled"
 import { StackItems } from "styles/globalStyles"
-import moment from "moment"
 
 const Header = ({ title, description, date, cover, timeToRead, tags }) => {
   return (
@@ -25,8 +24,10 @@ const Header = ({ title, description, date, cover, timeToRead, tags }) => {
         <HeaderTitle>{title}</HeaderTitle>
         <HeaderLead>{description}</HeaderLead>
         <HeaderInfo>
-          <time>{moment(date).locale("pt-br").format("LL")}</time> · Leitura de{" "}
-          <span className="oi oi-clock"></span> {timeToRead}{" "}
+          <time>
+            {format(new Date(date), "dd 'de' LLLL 'de' yyyy", { locale: ptBR })}
+          </time>{" "}
+          · Leitura de <span className="oi oi-clock"></span> {timeToRead}{" "}
           {timeToRead > 1 ? `minutos` : `minuto`}
         </HeaderInfo>
         <HeaderTags>

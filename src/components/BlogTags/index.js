@@ -1,6 +1,6 @@
 import { Link } from "gatsby"
 import React from "react"
-import kebabCase from "lodash/kebabCase"
+import kebabCase from "lodash.kebabcase"
 import { BlogTagsContainer, TagButton } from "./styled"
 import Content from "components/Content"
 import { StackItems } from "styles/globalStyles"
