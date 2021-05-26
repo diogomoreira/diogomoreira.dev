@@ -1,7 +1,7 @@
 import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { connectPoweredBy } from "react-instantsearch-dom"
-import { faAlgolia } from "@fortawesome/free-brands-svg-icons"
+import { faAlgolia } from "@fortawesome/free-brands-svg-icons/faAlgolia"
 
 const PoweredBy = ({ url }) => (
   <div>

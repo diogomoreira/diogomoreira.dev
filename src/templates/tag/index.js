@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import kebabCase from "lodash/kebabCase"
+import kebabCase from "lodash.kebabcase"
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 
 import Layout from "components/Layout"

@@ -1,12 +1,7 @@
 import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {
-  faCopy,
-  faWindowClose,
-  faCode,
-  faDownload,
-  faQuoteRight,
-} from "@fortawesome/free-solid-svg-icons"
+import { faDownload } from "@fortawesome/free-solid-svg-icons/faDownload"
+import { faQuoteRight } from "@fortawesome/free-solid-svg-icons/faQuoteRight"
 import {
   ResearchItemAuthor,
   ResearchItemAuthors,

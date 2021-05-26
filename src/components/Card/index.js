@@ -1,7 +1,8 @@
 import React from "react"
 import * as S from "./styled"
 import { GatsbyImage } from "gatsby-plugin-image"
-import moment from "moment"
+import { format } from "date-fns"
+import { ptBR } from "date-fns/locale"
 
 const CardTitle = S.CardTitle
 const Card = S.Card
@@ -28,7 +29,9 @@ function CardDetails({ timeToRead, date }) {
         </S.CardTimeToRead>
       )}
       {date && (
-        <S.CardDate>{moment(date).locale("pt-br").format("LL")}</S.CardDate>
+        <S.CardDate>
+          {format(new Date(date), "dd 'de' LLLL 'de' yyyy", { locale: ptBR })}
+        </S.CardDate>
       )}
     </S.CardDetails>
   )

@@ -7,7 +7,6 @@ import {
   CardDetails,
   CardHashTag,
 } from "components/Card"
-import moment from "moment"
 import React from "react"
 import { StackItems } from "styles/globalStyles"
 

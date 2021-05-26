@@ -1,12 +1,10 @@
 import React from "react"
 import { useSiteMetadata } from "hooks/useMetadata"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {
-  faTwitter,
-  faGithub,
-  faLinkedin,
-  faInstagram,
-} from "@fortawesome/free-brands-svg-icons"
+import { faTwitter } from "@fortawesome/free-brands-svg-icons"
+import { faGithub } from "@fortawesome/free-brands-svg-icons/faGithub"
+import { faLinkedin } from "@fortawesome/free-brands-svg-icons/faLinkedin"
+import { faInstagram } from "@fortawesome/free-brands-svg-icons/faInstagram"
 import { SocialLink, SocialLinksContainer } from "./styled"
 
 export default function SocialLinks() {

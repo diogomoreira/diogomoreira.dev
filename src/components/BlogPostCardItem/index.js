@@ -1,7 +1,8 @@
 import React from "react"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { Link } from "gatsby"
-import kebabCase from "lodash/kebabCase"
+import kebabCase from "lodash.kebabcase"
+import dashify from "dashify"
 
 import {
   Card,
