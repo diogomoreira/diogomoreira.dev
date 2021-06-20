@@ -41,7 +41,7 @@ export const CardBody = styled.div`
 
 export const CardDetails = styled.div`
   display: flex;
-  font-size: var(--font-size-h5);
+  font-size: var(--font-size-h4);
   color: var(--gray);
 `
 
@@ -54,7 +54,7 @@ export const CardHashTag = styled.span`
 `
 
 export const CardTimeToRead = styled.span`
-  color: var(--detailsTextColor);
+  color: var(--input-text-color);
 
   :not(:last-child) {
     ::after {
@@ -65,7 +65,7 @@ export const CardTimeToRead = styled.span`
 `
 
 export const CardDate = styled.span`
-  color: var(--detailsTextColor);
+  color: var(--input-text-color);
   :not(:last-child) {
     ::after {
       padding: 0 0.25rem;
@@ -75,9 +75,7 @@ export const CardDate = styled.span`
 `
 
 export const CardTitle = styled.h3`
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: var(--text-color);
+  color: var(--input-text-color);
   font-weight: var(--font-weight-title);
   font-size: var(--font-size-h2);
   padding-bottom: 1rem;

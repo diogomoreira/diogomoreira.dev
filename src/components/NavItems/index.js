@@ -19,6 +19,7 @@ const NavItems = ({ toggleMenu }) => {
           {item.name}
         </S.NavLink>
       ))}
+      <S.NavLink to="/cv.pdf">CV</S.NavLink>
       <S.NavLink to="/rss.xml">
         <FontAwesomeIcon icon={faRssSquare} />
       </S.NavLink>

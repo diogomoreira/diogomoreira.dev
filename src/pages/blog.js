@@ -9,6 +9,7 @@ import InstantSearchBox from "components/InstantSearchBox"
 import BlogTags from "components/BlogTags"
 import BlogHits from "components/BlogHits"
 import Container from "components/Container"
+import { PageTitle } from "styles/globalStyles"
 
 const Blog = ({
   data: {
@@ -26,7 +27,7 @@ const Blog = ({
       <SEO title="Blog" pathname="blog" />
       <Container>
         <InstantSearch searchClient={searchClient} indexName={indexName}>
-          <h1>Blog</h1>
+          <PageTitle>Blog</PageTitle>
           <InstantSearchBox />
           <BlogTags tags={group} />
           <BlogHits />

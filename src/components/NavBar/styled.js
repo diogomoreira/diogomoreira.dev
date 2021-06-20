@@ -23,6 +23,7 @@ export const SiteTitle = styled.div`
     letter-spacing: -0.075em;
     font-weight: 700;
     font-size: 0.85rem;
+    margin: 0;
     margin-left: 1rem;
   }
 `
@@ -31,8 +32,6 @@ export const NavMenu = styled.div`
   display: flex;
   align-items: center;
   text-transform: uppercase;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 0.85rem;
   font-weight: var(--font-weight-title);
   -moz-osx-font-smoothing: grayscale;

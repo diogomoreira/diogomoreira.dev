@@ -12,7 +12,7 @@ export const NavLink = styled(Link)`
     right: 0;
     width: 0;
     height: 2px;
-    background-color: var(--text-color);
+    background-color: var(--link-color);
     transition: width var(--transition-duration) cubic-bezier(0.25, 1, 0.5, 1);
   }
 
