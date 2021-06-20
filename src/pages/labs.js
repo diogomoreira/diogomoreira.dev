@@ -7,6 +7,7 @@ import { threeColumnBreakPoints } from "utils/masonry/breakpoints"
 import Layout from "components/Layout"
 import Container from "components/Container"
 import Content from "components/Content"
+import { PageTitle } from "styles/globalStyles"
 
 const Labs = ({ data }) => {
   const projects = data.allProjectsJson.nodes
@@ -14,7 +15,7 @@ const Labs = ({ data }) => {
     <Layout>
       <SEO title="Labs" pathname="labs" />
       <Container className="py-3">
-        <h1 className="page-title">Labs</h1>
+        <PageTitle>Labs</PageTitle>
         <Content>
           <p className="lh-lg">
             Aqui uma lista com alguns dos meus projetos pessoais, desenvolvidos

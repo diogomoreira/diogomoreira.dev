@@ -5,7 +5,9 @@ import { graphql, Link, useStaticQuery } from "gatsby"
 import SocialLinks from "components/SocialLinks"
 import {
   AuthorAvatar,
+  AuthorAvatarWrapper,
   AuthorContainer,
+  AuthorHeadline,
   AuthorProfileText,
   AuthorTitle,
 } from "./styled"
@@ -32,10 +34,11 @@ const Author = () => {
         />
       </AuthorAvatar>
       <AuthorProfileText>
-        <AuthorTitle>Diogo Moreira</AuthorTitle>
         <Content>
+          <p>Olá! Me chamo</p>
+          <AuthorTitle>Diogo Moreira</AuthorTitle>
+          <AuthorHeadline>Professor. Dev. Pesquisador</AuthorHeadline>
           <p>
-            Olá! Me chamo <strong>Diogo Moreira</strong>.{" "}
             <strong>Professor</strong> no{" "}
             <a href="https://ifpb.edu.br" target="_blank" rel="nofollow">
               Instituto Federal de Educação, Ciência e Tecnologia da Paraíba

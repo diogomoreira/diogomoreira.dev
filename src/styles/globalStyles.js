@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
     --font-weight-extra-bold: 900;
     --font-weight-title: 700;
 
-    --font-size-base: 1.25rem;
+    --font-size-base: 1.125rem;
 
     --font-size-h1: calc(var(--font-size-base) + 0.75rem);
     --font-size-h2: calc(var(--font-size-base) + 0.25rem);
@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
     --font-size-h5: calc(var(--font-size-base) - 0.42rem);
     --font-size-h6: calc(var(--font-size-base) - 0.58rem);
 
-    --border-radius: 0px;
+    --border-radius: 10px;
     --transition-duration: 250ms;
 
     --white: #f3f9fb;
@@ -54,6 +54,8 @@ const GlobalStyle = createGlobalStyle`
     --blue-darker: #27426f;
     --orange: #FF8811;
     --orange-darker: #dd6f00;
+    --green: #1de9b6;
+    --green-darker: #00b686;
   }
 
   * {
@@ -112,7 +114,7 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.8;
     text-rendering: optimizeLegibility;
     font-smooth: always;
-    /* font-size: var(--font-size-base); */
+    font-size: var(--font-size-base);
   }
 
   body {
@@ -139,7 +141,7 @@ const GlobalStyle = createGlobalStyle`
     );
 
     --details-color:  var(--gray-white);
-    --shadow: 2px 2px 2px rgba(var(--gray-dark-rgb), 0.2);
+    --shadow: 3px 3px 0px rgba(var(--gray-dark-rgb), 0.2);
 
     --button-bg: var(--link-color);
     --button-border: var(--blue-darker);
@@ -166,7 +168,7 @@ const GlobalStyle = createGlobalStyle`
     --menu-background: var(--gray-darker);
 
     --secondary-text-color: var(--gray-white);
-    --link-color: var(--orange);
+    --link-color: var(--green-darker);
     --menu-link-color: var(--gray-lighter);
     --menu-title-color: var(--gray-lighter);
     --border-color: rgba(var(--gray-light-rgb), 0.4);
@@ -178,7 +180,7 @@ const GlobalStyle = createGlobalStyle`
     --details-color: var(--gray-darker);
     --shadow: 2px 2px 2px rgba(var(--white-rgb), 0.1);
     --button-bg: var(--link-color);
-    --button-border: var(--orange-darker);
+    --button-border: var(--green-darker);
     --button-text-color: var(--gray-darker);
     --input-background-color: var(--gray-dark);
     --input-text-color: var(--gray-lighter);
@@ -195,12 +197,15 @@ const GlobalStyle = createGlobalStyle`
   h1, h2, h3, h4, h5, h6 {
     font-weight: var(--font-weight-title);
     line-height: normal;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 
   h1 {
 	  font-size: var(--font-size-h1);
     letter-spacing: 0.41;
   }
+
   h2 {
     font-size: var(--font-size-h2);
     letter-spacing: 0.41;
@@ -219,7 +224,6 @@ const GlobalStyle = createGlobalStyle`
   }
   h6 {
     font-size: var(--font-size-h6);
-    /* letter-spacing: 0.41; */
   }
 `
 
@@ -258,7 +262,7 @@ export const StackItems = styled.div`
 `
 
 export const TagStyle = css`
-  font-size: calc(var(--font-size-h5) * 0.75);
+  font-size: calc(var(--font-size-h5));
   padding: 0.25rem 0.75rem;
   /* border-radius: 0.75em 0.75em 0.75em 0.75em; */
   background-color: var(--button-bg);
@@ -277,6 +281,22 @@ export const TitleStyle = css`
   line-height: 24px;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
+`
+
+export const PageTitle = styled.h1`
+  display: flex;
+  align-items: center;
+
+  ::after {
+    content: "";
+    display: block;
+    position: relative;
+    top: 5px;
+    width: 100%;
+    height: 1px;
+    margin-left: 20px;
+    background-color: var(--secondary-background);
+  }
 `
 
 export default GlobalStyle
