@@ -17,15 +17,15 @@ export const Content = styled(motion.article).attrs({
   margin-block-end: 1.75em;
   p {
     color: var(--text-color);
-    letter-spacing: 0.025em;
-    line-height: 37px;
+    /* letter-spacing: 0.025em; */
+    line-height: 1.8;
 
     a:hover {
       text-decoration: underline;
     }
 
     &:not(:last-child) {
-      margin-bottom: 1rem;
+      margin-bottom: 20px;
     }
 
     em {
@@ -33,19 +33,42 @@ export const Content = styled(motion.article).attrs({
     }
   }
 
+  img {
+    margin-bottom: 36px;
+  }
+
   ul,
   ol {
     list-style: square;
     list-style-position: inside;
-    margin: 2rem auto;
+    margin-top: 20px auto;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
+  h1 {
+    font-size: var(--font-size-h1);
+    letter-spacing: 0.41;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+  }
+  h2 {
+    font-size: var(--font-size-h2);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    letter-spacing: 0.41;
+  }
+  h3 {
+    font-size: var(--font-size-h3);
+    letter-spacing: 0.34;
+  }
+  h4 {
+    font-size: var(--font-size-h4);
+    letter-spacing: 0.35;
+  }
+  h5 {
+    font-size: var(--font-size-h5);
+    letter-spacing: 0.38;
+  }
   h6 {
-    margin: 2rem auto;
+    font-size: var(--font-size-h6);
   }
 `

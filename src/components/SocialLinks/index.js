@@ -13,17 +13,21 @@ export default function SocialLinks() {
     <SocialLinksContainer>
       <SocialLink href={metadata.social.twitter}>
         <FontAwesomeIcon icon={faTwitter} />
+        <span>Twitter</span>
       </SocialLink>
       <SocialLink href={metadata.social.github}>
         <FontAwesomeIcon icon={faGithub} />
+        <span>Github</span>
       </SocialLink>
 
       <SocialLink href={metadata.social.linkedin}>
         <FontAwesomeIcon icon={faLinkedin} />
+        <span>LinkedIn</span>
       </SocialLink>
 
       <SocialLink href={metadata.social.instagram}>
         <FontAwesomeIcon icon={faInstagram} />
+        <span>Instagram</span>
       </SocialLink>
     </SocialLinksContainer>
   )

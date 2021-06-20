@@ -9,6 +9,7 @@ import PinRefinementList from "components/PinRefinementList"
 import PinHitsGrid from "components/PinHitsGrid"
 import Container from "components/Container"
 import Content from "components/Content"
+import { PageTitle } from "styles/globalStyles"
 
 const Links = ({ data }) => {
   const searchClient = algoliasearch(
@@ -21,7 +22,7 @@ const Links = ({ data }) => {
     <Layout>
       <SEO title="Links" pathname="links" />
       <Container>
-        <h1>Links</h1>
+        <PageTitle>Links</PageTitle>
         <Content>
           <p>
             Inspirado no site do{" "}

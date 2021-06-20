@@ -5,13 +5,14 @@ import SEO from "components/SEO"
 import Container from "components/Container"
 import Content from "components/Content"
 import Layout from "components/Layout"
+import { PageTitle } from "styles/globalStyles"
 
 export default function Research({ data }) {
   return (
     <Layout>
       <SEO title="Pesquisa" pathname="research" />
       <Container>
-        <h1>Pesquisa</h1>
+        <PageTitle>Pesquisa</PageTitle>
         <Content>
           <p className="lh-lg">
             Uma lista das minhas publicações pode ser encontrada abaixo, assim
