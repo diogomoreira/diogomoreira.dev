@@ -5,7 +5,6 @@ import { graphql, Link, useStaticQuery } from "gatsby"
 import SocialLinks from "components/SocialLinks"
 import {
   AuthorAvatar,
-  AuthorAvatarWrapper,
   AuthorContainer,
   AuthorHeadline,
   AuthorProfileText,
