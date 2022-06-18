@@ -1,7 +1,7 @@
-const striptags = require("striptags")
+import striptags from "striptags";
 
-const blogIndexName = "BLOG_POSTS"
-const linksIndexName = "LINKS"
+const blogIndexName = "BLOG_POSTS";
+const linksIndexName = "LINKS";
 
 const blogQuery = `{
   allMarkdownRemark {
@@ -29,7 +29,7 @@ const blogQuery = `{
       }
     }
   }
-}`
+}`;
 
 const linkQuery = `{
   allLinksJson {
@@ -53,30 +53,19 @@ const linkQuery = `{
       tags
     }
   }
-}`
+}`;
 
-function pageToAlgoliaRecord({
-  node: { id, frontmatter, image, fields, ...rest },
-}) {
+function pageToAlgoliaRecord({ node: { id, frontmatter, image, fields, ...rest } }) {
   return {
     objectID: id,
     ...frontmatter,
     cover: image.cover,
     ...fields,
     ...rest,
-  }
+  };
 }
 
-function linkToAlgoliaRecord({
-  id,
-  title,
-  type,
-  link,
-  description,
-  image,
-  publishDate,
-  tags,
-}) {
+function linkToAlgoliaRecord({ id, title, type, link, description, image, publishDate, tags }) {
   return {
     objectID: id,
     title: title,
@@ -86,14 +75,13 @@ function linkToAlgoliaRecord({
     image: image,
     publishDate: publishDate,
     tags: tags,
-  }
+  };
 }
 
 const queries = [
   {
     query: blogQuery,
-    transformer: ({ data }) =>
-      data.allMarkdownRemark.edges.map(pageToAlgoliaRecord),
+    transformer: ({ data }) => data.allMarkdownRemark.edges.map(pageToAlgoliaRecord),
     indexName: blogIndexName,
     settings: { attributesToSnippet: [`excerpt:20`] },
   },
@@ -102,6 +90,6 @@ const queries = [
     transformer: ({ data }) => data.allLinksJson.nodes.map(linkToAlgoliaRecord),
     indexName: linksIndexName,
   },
-]
+];
 
-module.exports = queries
+export default queries;

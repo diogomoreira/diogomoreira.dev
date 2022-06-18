@@ -1,6 +1,6 @@
-import styled, { createGlobalStyle, css } from "styled-components"
+import styled, { createGlobalStyle, css } from "styled-components";
 
-export const transitionDuration = "200ms"
+export const transitionDuration = "200ms";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -225,7 +225,7 @@ const GlobalStyle = createGlobalStyle`
   h6 {
     font-size: var(--font-size-h6);
   }
-`
+`;
 
 export const ButtonStyle = css`
   display: inline-block;
@@ -245,7 +245,7 @@ export const ButtonStyle = css`
   :not(:last-child) {
     margin-right: 0.5rem;
   }
-`
+`;
 
 export const StackItems = styled.div`
   display: flex;
@@ -259,7 +259,7 @@ export const StackItems = styled.div`
       margin-right: 0;
     }
   }
-`
+`;
 
 export const TagStyle = css`
   font-size: calc(var(--font-size-h5));
@@ -270,7 +270,7 @@ export const TagStyle = css`
   ::before {
     content: "#";
   }
-`
+`;
 
 export const TitleStyle = css`
   text-transform: uppercase;
@@ -281,7 +281,7 @@ export const TitleStyle = css`
   line-height: 24px;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
-`
+`;
 
 export const PageTitle = styled.h1`
   display: flex;
@@ -297,6 +297,6 @@ export const PageTitle = styled.h1`
     margin-left: 20px;
     background-color: var(--secondary-background);
   }
-`
+`;
 
-export default GlobalStyle
+export default GlobalStyle;
