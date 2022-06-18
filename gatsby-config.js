@@ -69,10 +69,10 @@ module.exports = {
     {
       resolve: "gatsby-plugin-algolia",
       options: {
-        appId: process.env.GATSBY_ALGOLIA_APP_ID,
-        apiKey: process.env.GATSBY_ALGOLIA_ADMIN_KEY,
-        indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME,
-        queries,
+        appId: process.env.ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_ADMIN_KEY,
+        indexName: process.env.ALGOLIA_INDEX_NAME,
+        queries: queries,
         chunkSize: 1000,
       },
     },
@@ -128,7 +128,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
-        trackingId: process.env.GATSBY_GA_TRACKING_ID,
+        trackingId: process.env.GA_TRACKING_ID,
       },
     },
     {
@@ -150,7 +150,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-disqus`,
       options: {
-        shortname: process.env.GATSBY_DISQUS_SHORTNAME,
+        shortname: process.env.DISQUS_SHORTNAME,
       },
     },
     {
