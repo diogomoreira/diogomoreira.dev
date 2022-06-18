@@ -17,10 +17,10 @@ const Blog = ({
   },
 }) => {
   const searchClient = algoliasearch(
-    process.env.GATSBY_ALGOLIA_APP_ID,
-    process.env.GATSBY_ALGOLIA_API_KEY
+    process.env.ALGOLIA_APP_ID,
+    process.env.ALGOLIA_API_KEY
   )
-  const indexName = process.env.GATSBY_ALGOLIA_BLOG_INDEX_NAME
+  const indexName = process.env.ALGOLIA_BLOG_INDEX_NAME
 
   return (
     <Layout>
