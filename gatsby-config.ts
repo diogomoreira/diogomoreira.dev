@@ -1,12 +1,17 @@
-require("dotenv").config()
+import queries from "./src/utils/algolia/queries";
+import feed from "./config/feed.config";
+import type { GatsbyConfig } from "gatsby";
+import menu from "./config/menu.config";
+import dotenv from "dotenv";
 
-const queries = require(`${__dirname}/src/utils/algolia/queries`)
+dotenv.config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
 
-module.exports = {
+const config: GatsbyConfig = {
   siteMetadata: {
     title: "Diogo Moreira",
-    description:
-      "My thoughts about life, software development, games, music and so forth",
+    description: "My thoughts about life, software development, games, music and so forth",
     author: "Diogo Moreira",
     keywords: ["software development", "teaching"],
     siteUrl: `https://diogodmoreira.com/`,
@@ -16,16 +21,11 @@ module.exports = {
       linkedin: "https://www.linkedin.com/in/diogodmoreira",
       instagram: "https://www.instagram.com/diogo.dmoreira",
     },
-    menu: [
-      { name: "Blog", link: "/blog" },
-      { name: "Pesquisa", link: "/research" },
-      { name: "Labs", link: "/labs" },
-      { name: "Links", link: "/links" },
-    ],
+    menu,
   },
   plugins: [
     "gatsby-transformer-json",
-    "gatsby-plugin-feed",
+    { resolve: "gatsby-plugin-feed", options: feed },
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -53,7 +53,6 @@ module.exports = {
         path: `${__dirname}/content/collections/`,
         name: "collections",
       },
-      // plugins: [`gatsby-transformer-json`],
     },
     {
       resolve: "gatsby-source-filesystem",
@@ -156,9 +155,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [
-          `Inter\:700`, // you can also specify font weights and styles
-        ],
+        fonts: [`Inconsolata\:700`],
         display: "swap",
       },
     },
@@ -171,4 +168,6 @@ module.exports = {
     },
     "gatsby-plugin-resolve-src",
   ],
-}
+};
+
+export default config;
