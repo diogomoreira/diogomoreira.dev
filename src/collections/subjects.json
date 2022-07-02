@@ -1,0 +1,12 @@
+[
+  {
+    "institution": "IFPB",
+    "semester": "2022.1",
+    "subjects": [
+      { "link": "https://classroom.google.com/c/NTAwMDI1NzgzODg3", "name": "Linguagens de Marcação" },
+      { "link": "https://classroom.google.com/c/NTAwMDI2MDczMzYx", "name": "Linguagens de Scripts para Web" },
+      { "link": "https://classroom.google.com/c/NTAwMDI2OTk5ODQ3", "name": "Testes de Software" },
+      { "link": "https://classroom.google.com/c/NTAwMDI2OTUyMjQx", "name": "Interação Humano-Computador" }
+    ]
+  }
+]
