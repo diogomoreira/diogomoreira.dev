@@ -1,20 +1,13 @@
-import React from "react"
+import React from "react";
 
-import kebabCase from "lodash.kebabcase"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTags } from "@fortawesome/free-solid-svg-icons/faTags"
-import { format } from "date-fns"
-import { ptBR } from "date-fns/locale"
-import Container from "components/Container"
-import {
-  HeaderImage,
-  HeaderInfo,
-  HeaderLead,
-  HeaderTagLink,
-  HeaderTags,
-  HeaderTitle,
-} from "./styled"
-import { StackItems } from "styles/globalStyles"
+import kebabCase from "lodash.kebabcase";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTags } from "@fortawesome/free-solid-svg-icons/faTags";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
+import Container from "../Container";
+import { HeaderImage, HeaderInfo, HeaderLead, HeaderTagLink, HeaderTags, HeaderTitle } from "./styled";
+import { StackItems } from "../../styles/global";
 
 const Header = ({ title, description, date, cover, timeToRead, tags }) => {
   return (
@@ -24,11 +17,8 @@ const Header = ({ title, description, date, cover, timeToRead, tags }) => {
         <HeaderTitle>{title}</HeaderTitle>
         <HeaderLead>{description}</HeaderLead>
         <HeaderInfo>
-          <time>
-            {format(new Date(date), "dd 'de' LLLL 'de' yyyy", { locale: ptBR })}
-          </time>{" "}
-          · Leitura de <span className="oi oi-clock"></span> {timeToRead}{" "}
-          {timeToRead > 1 ? `minutos` : `minuto`}
+          <time>{format(new Date(date), "dd 'de' LLLL 'de' yyyy", { locale: ptBR })}</time> · Leitura de{" "}
+          <span className="oi oi-clock"></span> {timeToRead} {timeToRead > 1 ? `minutos` : `minuto`}
         </HeaderInfo>
         <HeaderTags>
           <StackItems>
@@ -42,7 +32,7 @@ const Header = ({ title, description, date, cover, timeToRead, tags }) => {
         </HeaderTags>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
