@@ -1,18 +1,14 @@
-import queries from "./src/utils/algolia/queries";
-import feed from "./config/feed.config";
 import type { GatsbyConfig } from "gatsby";
-import menu from "./config/menu.config";
-import dotenv from "dotenv";
-
-dotenv.config({
-  path: `.env.${process.env.NODE_ENV}`,
-});
+import path from "path";
 
 const config: GatsbyConfig = {
   siteMetadata: {
     title: "Diogo Moreira",
     description: "My thoughts about life, software development, games, music and so forth",
-    author: "Diogo Moreira",
+    author: {
+      name: "Diogo Moreira",
+      description: "Software Engineer and Professor. Trying my best to make things worth.",
+    },
     keywords: ["software development", "teaching"],
     siteUrl: `https://diogodmoreira.com/`,
     social: {
@@ -21,74 +17,42 @@ const config: GatsbyConfig = {
       linkedin: "https://www.linkedin.com/in/diogodmoreira",
       instagram: "https://www.instagram.com/diogo.dmoreira",
     },
-    menu,
+    menu: [
+      { name: "menu.blog", link: "/blog", external: false },
+      { name: "menu.academic", link: "/academic", external: false },
+      { name: "menu.labs", link: "/labs", external: false },
+      { name: "menu.links", link: "/links", external: false },
+      { name: "menu.cv", link: "/cv.pdf", external: true },
+    ],
   },
+  graphqlTypegen: true,
   plugins: [
-    "gatsby-transformer-json",
-    { resolve: "gatsby-plugin-feed", options: feed },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        path: `${__dirname}/content/images/`,
-        name: "images",
-      },
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        path: `${__dirname}/content/posts`,
-        name: "posts",
-      },
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        path: `${__dirname}/src/pages/`,
-        name: "pages",
-      },
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        path: `${__dirname}/content/collections/`,
-        name: "collections",
-      },
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        path: `${__dirname}/content/publications`,
-        name: "publications",
-      },
-    },
-    "gatsby-transformer-bibtex",
-    "gatsby-plugin-sharp",
-    "gatsby-transformer-sharp",
     "gatsby-plugin-netlify-cms",
     {
-      resolve: "gatsby-plugin-algolia",
+      resolve: "gatsby-plugin-styled-components",
       options: {
-        appId: process.env.ALGOLIA_APP_ID,
-        apiKey: process.env.ALGOLIA_ADMIN_KEY,
-        indexName: process.env.ALGOLIA_INDEX_NAME,
-        queries: queries,
-        chunkSize: 1000,
+        displayName: process.env.NODE_ENV === "development",
+      },
+    },
+    {
+      resolve: "gatsby-plugin-google-analytics",
+      options: {
+        trackingId: "4564656",
       },
     },
     "gatsby-plugin-image",
-    "gatsby-plugin-dark-mode",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
-    "gatsby-remark-images",
-    "gatsby-remark-prismjs",
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: "gatsby-plugin-manifest",
       options: {
-        commonmark: true,
-        footnotes: true,
-        pedantic: true,
-        gfm: true,
-        plugins: [
+        icon: "./src/images/logo.png",
+      },
+    },
+    {
+      resolve: "gatsby-plugin-mdx",
+      options: {
+        gatsbyRemarkPlugins: [
           {
             resolve: "gatsby-remark-copy-linked-files",
             options: {
@@ -124,49 +88,96 @@ const config: GatsbyConfig = {
         ],
       },
     },
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
+    "gatsby-transformer-bibtex",
+    "gatsby-transformer-json",
+    "gatsby-plugin-dark-mode",
     {
-      resolve: "gatsby-plugin-google-analytics",
+      resolve: `gatsby-theme-i18n`,
       options: {
-        trackingId: process.env.GA_TRACKING_ID,
+        defaultLang: `en`,
+        configPath: path.resolve(`./i18n/config.json`),
       },
     },
     {
-      resolve: "gatsby-plugin-manifest",
+      resolve: "gatsby-source-filesystem",
       options: {
-        name: "Diogo Moreira",
-        start_url: "/blog",
-        background_color: `#000`,
-        display: `standalone`,
-        icon: `${__dirname}/content/images/logo.png`,
+        name: "images",
+        path: "./src/images/",
+      },
+      __key: "images",
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "pages",
+        path: "./src/pages/",
+      },
+      __key: "pages",
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "posts",
+        path: "./src/blog/",
+      },
+      __key: "posts",
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "collections",
+        path: "./src/collections/",
+      },
+      __key: "collections",
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "publications",
+        path: "./src/publications/",
+      },
+      __key: "publications",
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "static",
+        path: "./static/",
+      },
+      __key: "static",
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "locale",
+        path: "./i18n/l10n",
+      },
+      __key: "locale",
+    },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [`Anek Latin\:100,300,500,600`],
+        display: "swap",
       },
     },
     {
-      resolve: "gatsby-plugin-styled-components",
+      resolve: `gatsby-theme-i18n-react-i18next`,
       options: {
-        displayName: "true",
+        locales: `./i18n/l10n`,
+        i18nextOptions: {
+          ns: ["translation"],
+        },
       },
     },
     {
       resolve: `gatsby-plugin-disqus`,
       options: {
-        shortname: process.env.DISQUS_SHORTNAME,
+        shortname: process.env.GATSBY_DISQUS_SHORTNAME,
       },
     },
-    {
-      resolve: `gatsby-plugin-google-fonts`,
-      options: {
-        fonts: [`Inconsolata\:700`],
-        display: "swap",
-      },
-    },
-    {
-      resolve: `gatsby-plugin-nprogress`,
-      options: {
-        color: `blue`,
-        showSpinner: true,
-      },
-    },
-    "gatsby-plugin-resolve-src",
   ],
 };
 
