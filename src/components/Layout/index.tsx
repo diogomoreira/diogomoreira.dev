@@ -1,9 +1,11 @@
 import React from "react";
-import NavBar from "components/NavBar";
-import Footer from "components/Footer";
-import GlobalStyle from "styles/globalStyles";
+import NavBar from "../NavBar";
+import Footer from "../Footer";
 import { motion } from "framer-motion";
 import styled, { css } from "styled-components";
+import GlobalStyle from "../../styles/global";
+import Container from "../Container";
+import { ToastContainer } from "react-toastify";
 
 export const BodyContainer = styled.div`
   display: flex;
@@ -34,7 +36,7 @@ export default function Layout({ children }) {
       <BodyContainer>
         <NavBar />
         <SiteContent initial="exit" animate="enter" exit="exit">
-          {children}
+          <Container>{children}</Container>
         </SiteContent>
         <Footer />
       </BodyContainer>

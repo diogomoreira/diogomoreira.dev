@@ -1,72 +1,35 @@
-import BlogPostCardItem from "components/BlogPostCardItem"
-import { graphql, useStaticQuery } from "gatsby"
-import React from "react"
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
-import {
-  threeColumnBreakPoints,
-  twoColumnBreakPoints,
-} from "utils/masonry/breakpoints"
-import { LatestPostsContainer, LatestPostTitle } from "./styled"
+import * as React from "react";
+import { graphql, PageProps, useStaticQuery } from "gatsby";
+import BlogPostCardItem from "../BlogPostCardItem";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import { threeColumnBreakPoints, twoColumnBreakPoints } from "../../utils/masonry/breakpoints";
+import { LatestPostsContainer, LatestPostTitle } from "./styled";
 
-const LatestPosts = () => {
-  const { allMarkdownRemark } = useStaticQuery(graphql`
-    {
-      allMarkdownRemark(
-        limit: 3
-        sort: { fields: frontmatter___date, order: DESC }
-      ) {
-        nodes {
-          id
-          frontmatter {
-            title
-            cover {
-              childImageSharp {
-                gatsbyImageData(quality: 70, webpOptions: { quality: 90 })
-                resize {
-                  src
-                  width
-                  height
-                }
-              }
-            }
-            date
-            description
-            tags
-            comments
-          }
-          fields {
-            slug
-          }
-          timeToRead
-        }
-      }
-    }
-  `)
-
+const LatestPosts = ({ posts }) => {
   return (
     <LatestPostsContainer>
       <LatestPostTitle>Últimas postagens</LatestPostTitle>
-      <ResponsiveMasonry columnsCountBreakPoints={threeColumnBreakPoints}>
+      <ResponsiveMasonry columnsCountBreakPoints={twoColumnBreakPoints}>
         <Masonry gutter="1rem">
-          {allMarkdownRemark.nodes.map(postItem => {
+          {posts.map(postItem => {
             return (
               <BlogPostCardItem
                 key={postItem.id}
                 objectID={postItem.id}
                 title={postItem.frontmatter.title}
                 date={postItem.frontmatter.date}
-                slug={postItem.fields.slug}
+                slug={postItem.frontmatter.slug}
                 tags={postItem.frontmatter.tags}
                 cover={postItem.frontmatter.cover}
                 timeToRead={postItem.timeToRead}
                 description={postItem.frontmatter.description}
               />
-            )
+            );
           })}
         </Masonry>
       </ResponsiveMasonry>
     </LatestPostsContainer>
-  )
-}
+  );
+};
 
-export default LatestPosts
+export default LatestPosts;
