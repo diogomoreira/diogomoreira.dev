@@ -1,0 +1,44 @@
+{
+  "menu": {
+    "about": "About",
+    "blog": "Blog",
+    "academic": "Academic",
+    "labs": "Labs",
+    "links": "Links",
+    "cv": "CV"
+  },
+  "index": {
+    "present": "Hi! I'm",
+    "titles": "Professor. Software Engineer. Researcher",
+    "ifpb": "Federal Institute of Paraiba",
+    "text": {
+      "professional": "Professor @ <ifpbLink>{{ifpb}}</ifpbLink> since 2014. I've made an Undergraduate in System Analysis and Development (2012), a Specialization in Software Engineer (2015), and a Master's in Software Engineer at CESAR School (2019).",
+      "personal": "Friend. Music lover. Gamer in spare time. You can get to know me a little better from what I write on the <blogRef>blog</blogRef> or what I recommend for reading, music, movies and games through the <linkRef>links</linkRef> section of my website."
+    },
+    "latest": "Latest posts"
+  },
+  "blog": {
+    "control": { "back": "View all posts" }
+  },
+  "academic": {
+    "teaching": {
+      "intro": "I'm working as a Professor since 2014. Below you can find links to the pages of my current teaching classes and a brief teaching history. All teaching classes are hosted on <0>Google Classroom</0> and can only be accessed with an institutional email."
+    },
+    "authors": "Authors",
+    "copycitation": "Copy citation",
+    "copied": "copied to clipboard!",
+    "researching": {
+      "title": "Publications",
+      "intro": "My research interests are mainly related to Software Engineering, especially <0>Software Testing</0>, <1>Software Quality</1> and <2>Design Patterns</2>.",
+      "groups": "I am also a member of the <gpes>Software Engineering Research Group</gpes> (GPES, IFPB, Brazil). If you wish, see my profile on <researchGate>Research Gate</researchGate>, <scholar>Google Scholar</scholar>, <orcid>ORCID</orcid> or <lattes>Lattes</lattes> (portuguese only).",
+      "list": "A list of my publications can be found below, as well as BibTeX entries for citations and the link to the articles. Feel free to contact me at <email>diogo.moreira [at] ifpb.edu.br</email> if you would like to discuss any of the articles or request additional materials, I will be glad to help."
+    }
+  },
+  "labs": {
+    "intro": "Here's a list of some of my personal projects and others that I've been involved in professionally. I am currently studying/practicing the following topics",
+    "stack": ["Observability", "TypeScript", "Node.js", "React", "NestJS", "Jest", "TestCafe"]
+  },
+  "links": {
+    "intro": "Here I gather some of what I've been reading, watching, listening to or playing. The links here generally take you to streaming sites or stores so you can buy or subscribe to a service. Feel free to report me any wrong information here. Browse the categories if you prefer, or type a term in the search box."
+  }
+}
