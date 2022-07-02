@@ -1,56 +1,39 @@
-import React from "react"
-import { GatsbyImage } from "gatsby-plugin-image"
-import { Link } from "gatsby"
-import kebabCase from "lodash.kebabcase"
+import React from "react";
+import { GatsbyImage } from "gatsby-plugin-image";
+import { LocalizedLink as Link } from "gatsby-theme-i18n";
 
-import {
-  Card,
-  CardBody,
-  CardDetails,
-  CardFooter,
-  CardImage,
-  CardLinkHashTag,
-  CardTitle,
-} from "components/Card"
-import { StackItems } from "styles/globalStyles"
+import kebabCase from "lodash.kebabcase";
 
-const BlogPostCardItem = ({
-  objectID,
-  description,
-  title,
-  cover,
-  date,
-  tags,
-  slug,
-  timeToRead,
-}) => {
+import { Card, CardBody, CardDetails, CardFooter, CardImage, CardLinkHashTag, CardTitle } from "../Card";
+import { StackItems } from "../../styles/global";
+
+type;
+
+const BlogPostCardItem = ({ objectID, description, title, cover, date, tags, slug, timeToRead }) => {
   return (
-    <Card key={objectID}>
-      <Link to={`/${slug}`}>
-        <CardImage
-          image={cover.childImageSharp.gatsbyImageData}
-          title={title}
-        />
-      </Link>
-      <CardBody>
-        <CardDetails timeToRead={timeToRead} date={date} />
-        <Link to={`/${slug}`}>
-          <CardTitle>{title}</CardTitle>
+    <div key={objectID}>
+      {/* <Link to={`/blog/${slug}`}> */}
+      <CardImage image={cover.childImageSharp.gatsbyImageData} title={title} />
+      {/* </Link> */}
+      <div>
+        <Link to={`/blog/${slug}`}>
+          <h3>{title}</h3>
         </Link>
-        {description}
-      </CardBody>
-      <CardFooter>
-        <StackItems>
-          {tags &&
-            tags.map((tag, i) => (
-              <CardLinkHashTag key={i} to={`/tags/${kebabCase(tag)}`}>
-                {tag}
-              </CardLinkHashTag>
-            ))}
-        </StackItems>
-      </CardFooter>
-    </Card>
-  )
-}
+        <CardDetails timeToRead={timeToRead} date={date} />
+        <article>{description}</article>
+        <footer>
+          <div>
+            {tags &&
+              tags.map((tag, i) => (
+                <Link key={i} to={`/tags/${kebabCase(tag)}`}>
+                  {tag}
+                </Link>
+              ))}
+          </div>
+        </footer>
+      </div>
+    </div>
+  );
+};
 
-export default BlogPostCardItem
+export default BlogPostCardItem;

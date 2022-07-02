@@ -1,8 +1,8 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { Helmet } from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
-import fallBackImage from "./fallbackImage"
+import React from "react";
+import PropTypes from "prop-types";
+import { Helmet } from "react-helmet";
+import { useStaticQuery, graphql } from "gatsby";
+import fallBackImage from "./fallbackImage";
 
 function SEO({ description, lang, meta, image: metaImage, title, pathname }) {
   const { site } = useStaticQuery(
@@ -12,20 +12,23 @@ function SEO({ description, lang, meta, image: metaImage, title, pathname }) {
           siteMetadata {
             title
             description
-            author
+            author {
+              name
+              description
+            }
             keywords
             siteUrl
           }
         }
       }
-    `
-  )
-  const metaDescription = description || site.siteMetadata.description
-  const canonical = pathname ? `${site.siteMetadata.siteUrl}${pathname}` : null
+    `,
+  );
+  const metaDescription = description || site.siteMetadata.description;
+  const canonical = pathname ? `${site.siteMetadata.siteUrl}${pathname}` : null;
   const image =
     metaImage && metaImage.src
       ? `${site.siteMetadata.siteUrl}${metaImage.src}`
-      : `${site.siteMetadata.siteUrl}${fallBackImage}`
+      : `${site.siteMetadata.siteUrl}${fallBackImage}`;
 
   return (
     <Helmet
@@ -98,14 +101,14 @@ function SEO({ description, lang, meta, image: metaImage, title, pathname }) {
         ])
         .concat(meta)}
     />
-  )
+  );
 }
 
 SEO.defaultProps = {
   lang: `pt-br`,
   meta: [],
   description: ``,
-}
+};
 SEO.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
@@ -117,6 +120,6 @@ SEO.propTypes = {
     width: PropTypes.number.isRequired,
   }),
   pathname: PropTypes.string,
-}
+};
 
-export default SEO
+export default SEO;

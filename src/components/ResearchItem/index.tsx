@@ -1,28 +1,117 @@
-import React from "react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faDownload } from "@fortawesome/free-solid-svg-icons/faDownload"
-import { faQuoteRight } from "@fortawesome/free-solid-svg-icons/faQuoteRight"
-import {
-  ResearchItemAuthor,
-  ResearchItemAuthors,
-  ResearchItemBibTex,
-  ResearchItemButton,
-  ResearchItemContent,
-  ResearchItemCopyTooltip,
-  ResearchItemDetail,
-  ResearchItemFooter,
-  ResearchItemSummary,
-} from "./styled"
-import ReactTooltip from "react-tooltip"
-import { AnimatePresence } from "framer-motion"
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDownload } from "@fortawesome/free-solid-svg-icons/faDownload";
+import { faQuoteRight } from "@fortawesome/free-solid-svg-icons/faQuoteRight";
+import { motion } from "framer-motion";
+import styled, { keyframes } from "styled-components";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
+
+const ResearchItemDetail = styled(motion.details).attrs({
+  variants: {
+    enter: {
+      y: 0,
+      opacity: 1,
+    },
+    exit: {
+      y: 5,
+      opacity: 0,
+    },
+  },
+})`
+  margin-bottom: 1rem;
+  overflow: hidden;
+  border: var(--border-default);
+  border-radius: var(--border-radius);
+  border-color: var(--border-color);
+`;
+
+const ResearchItemSummary = styled.summary`
+  font-size: var(--font-size-h3);
+  background-color: var(--secondary-color);
+  padding: 0.75rem 1rem;
+  ::marker {
+    content: "📄";
+  }
+  span {
+    margin-left: 1rem;
+    font-weight: var(--font-weight-bold);
+  }
+`;
+
+const ResearchItemContent = styled(motion.div)`
+  padding: 1rem;
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-base);
+  text-align: justify;
+`;
+
+const ResearchItemAuthors = styled.div`
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--border-color);
+  font-weight: var(--font-weight-bold);
+  padding-top: 0.5rem;
+`;
+
+const ResearchItemAuthor = styled.span`
+  :not(:last-child) {
+    ::after {
+      content: ", ";
+    }
+  }
+`;
+
+const ResearchItemFooter = styled.footer`
+  display: flex;
+  background-color: var(--secondary-color);
+  padding: 1rem;
+  gap: var(--gap);
+`;
+
+const ResearchItemBibTex = styled.pre`
+  display: none;
+`;
+
+const ResearchItemButton = styled.button.attrs({ type: "button" })`
+  border-color: var(--button-border);
+  background-color: var(--button-background);
+  padding: 0.75rem 1rem;
+  display: inline-block;
+  border: var(--border-width);
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-h4);
+  /* font-weight: var(--font-weight-bold); */
+  color: var(--button-foreground);
+  svg {
+    margin-right: 0.5rem;
+  }
+  a {
+    color: var(--button-foreground);
+    text-decoration: none;
+  }
+`;
+
+export type ResearchItemProps = {
+  title: string;
+  abstract: string;
+  authors: string;
+  doi: string;
+  url: string;
+  year: string;
+  journal: string;
+  booktitle: string;
+  id: string;
+  raw: string;
+};
 
 const ResearchItem = ({ researchItem }) => {
-  const preRef = React.createRef()
-
-  const copyCitation = bibtexRef => {
-    navigator.clipboard.writeText(bibtexRef.current.textContent)
-  }
-
+  const preRef = React.createRef();
+  const { t } = useTranslation();
+  const copyCitation = (bibtexRef: string) => {
+    navigator.clipboard.writeText(bibtexRef.current.textContent);
+    toast(`"${researchItem.title}" ${t("academic.copied")}`);
+  };
   return (
     <ResearchItemDetail key={researchItem.id}>
       <ResearchItemSummary>
@@ -33,25 +122,26 @@ const ResearchItem = ({ researchItem }) => {
       <ResearchItemContent animate={{ y: ["50%", "0%"], opacity: ["0", "1"] }}>
         <p>{researchItem.abstract}</p>
         <ResearchItemAuthors>
-          <span>Autores</span>:{" "}
+          <span>{t("academic.authors")}</span>:{" "}
           {researchItem.authors.map((author, i) => (
             <ResearchItemAuthor key={i}>{author}</ResearchItemAuthor>
           ))}
         </ResearchItemAuthors>
       </ResearchItemContent>
-      <ResearchItemFooter className="card-footer">
+      <ResearchItemFooter>
         <ResearchItemButton onClick={e => copyCitation(preRef)}>
-          <FontAwesomeIcon icon={faQuoteRight} /> Copiar citação (BibTeX)
+          <FontAwesomeIcon icon={faQuoteRight} /> {t("academic.copycitation")} (BibTeX)
         </ResearchItemButton>
         <ResearchItemBibTex ref={preRef}>{researchItem.raw}</ResearchItemBibTex>
-        <a href={researchItem.url} target="_blank">
-          <ResearchItemButton type="button">
+
+        <ResearchItemButton>
+          <a href={researchItem.url} target="_blank">
             <FontAwesomeIcon icon={faDownload} /> Download
-          </ResearchItemButton>
-        </a>
+          </a>
+        </ResearchItemButton>
       </ResearchItemFooter>
     </ResearchItemDetail>
-  )
-}
+  );
+};
 
-export default ResearchItem
+export default ResearchItem;

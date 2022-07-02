@@ -1,2 +1,2 @@
-import FallBackImage from "/content/images/og-fallback.jpg"
-export default FallBackImage
+import FallBackImage from "../../images/og-fallback.jpg";
+export default FallBackImage;

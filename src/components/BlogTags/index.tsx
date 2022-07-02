@@ -1,9 +1,10 @@
-import { Link } from "gatsby"
-import React from "react"
-import kebabCase from "lodash.kebabcase"
-import { BlogTagsContainer, TagButton } from "./styled"
-import Content from "components/Content"
-import { StackItems } from "styles/globalStyles"
+import { LocalizedLink as Link } from "gatsby-theme-i18n";
+
+import React from "react";
+import kebabCase from "lodash.kebabcase";
+import { BlogTagsContainer, TagButton } from "./styled";
+import Content from "../Content";
+import { StackItems } from "../../styles/global";
 
 const BlogTags = ({ tags }) => {
   return (
@@ -17,7 +18,7 @@ const BlogTags = ({ tags }) => {
         ))}
       </StackItems>
     </BlogTagsContainer>
-  )
-}
+  );
+};
 
-export default BlogTags
+export default BlogTags;
