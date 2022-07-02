@@ -1,13 +1,16 @@
 import styled, { createGlobalStyle, css } from "styled-components";
-
-export const transitionDuration = "200ms";
+import { Titles } from "./typography";
+import { StackItems } from "./utils";
 
 const GlobalStyle = createGlobalStyle`
 
   :root {
     --viewport-sm-max: 450px;
     --viewport-md-max: 768px;
-    --viewport-lg-max: 1170px;
+    --viewport-lg-max: 1000px;
+
+    --font-family-title: "Anek Latin";
+    --font-family-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
     --font-weight-lighter: 100;
     --font-weight-light: 200;
@@ -16,16 +19,24 @@ const GlobalStyle = createGlobalStyle`
     --font-weight-extra-bold: 900;
     --font-weight-title: 700;
 
-    --font-size-base: 1.125rem;
+    --font-size-base: 17px;
 
     --font-size-h1: calc(var(--font-size-base) + 0.75rem);
     --font-size-h2: calc(var(--font-size-base) + 0.25rem);
-    --font-size-h3: calc(var(--font-size-base) - 0.08rem);
+    --font-size-h3: var(--font-size-base);
     --font-size-h4: calc(var(--font-size-base) - 0.25rem);
     --font-size-h5: calc(var(--font-size-base) - 0.42rem);
     --font-size-h6: calc(var(--font-size-base) - 0.58rem);
 
-    --border-radius: 10px;
+    --line-height: 1.8;
+
+    --padding: 1.25rem;
+    --gap: 1.25rem;
+    --margin-default: 2rem;
+
+    --border-radius: 5px;
+    --border-width: 1px;
+    --border-style: solid;
     --transition-duration: 250ms;
 
     --white: #f3f9fb;
@@ -52,14 +63,11 @@ const GlobalStyle = createGlobalStyle`
 
     --blue: #345995;
     --blue-darker: #27426f;
-    --orange: #FF8811;
-    --orange-darker: #dd6f00;
     --green: #1de9b6;
     --green-darker: #00b686;
-  }
 
-  * {
-    /* transition: var(--transition-duration); */
+    --menu-text-color: var(--gray-lighter);
+    --menu-border: var(--gray-darker);
   }
 
   /* http://meyerweb.com/eric/tools/css/reset/
@@ -108,49 +116,36 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-family: var(--font-family-body);
     font-weight: var(--font-weight-normal);
     font-size: var(--font-size-base);
-    line-height: 1.8;
+    line-height: var(--line-height);
     text-rendering: optimizeLegibility;
     font-smooth: always;
-    font-size: var(--font-size-base);
   }
 
   body {
-    --background-color: var(--white);
-    --background-color-rgb: var(--white-rgb);
 
-    --secondary-background: var(--gray-lighter);
-    --menu-background: var(--gray-white);
-
-    --text-color: var(--black);
-    --text-color-rgb: var(--black-rgb);
+    --primary-color: var(--white);
+    --secondary-color: var(--gray-white);
+    --text-color: var(--gray-dark);
     --secondary-text-color: var(--gray-light);
 
-    --link-color: var(--blue);
-    --menu-link-color: var(--gray);
-    --menu-title-color: var(--gray);
-    --border-color: rgba(var(--gray-light-rgb), 0.25);
-    --border-default-width: 2px solid;
-    --border-slice: 1;
-    --border-source: linear-gradient(
-      to right,
-      rgb(var(--gray-white-rgb)) 30%,
-      rgb(var(--gray-lighter-rgb)) 30%
-    );
+    --accent-color: var(--gray-dark);
+    --link-color: var(--green-darker);
 
-    --details-color:  var(--gray-white);
-    --shadow: 3px 3px 0px rgba(var(--gray-dark-rgb), 0.2);
-
-    --button-bg: var(--link-color);
-    --button-border: var(--blue-darker);
-    --button-text-color: var(--white);
+    --border-color: var(--gray-lighter);
+    --border-default: var(--border-width) var(--border-style) var(--border-color);
 
     --input-background-color: var(--white);
     --input-text-color: var(--gray);
 
-    background-color: var(--background-color);
+    --button-background: var(--green-darker);
+    --button-foreground: var(--white);
+    --tag-background: var(--gray-darker);
+    --tag-foreground: var(--green);
+
+    background-color: var(--primary-color);
     color: var(--text-color);
     a {
       color: var(--link-color);
@@ -158,82 +153,47 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body.dark {
-    --background-color: var(--black);
-    --text-color: var(--gray-lighter);
+    --primary-color: var(--gray-black);
+    --secondary-color: var(--gray-dark);
+    --text-color: var(--gray-white);
+    --secondary-text-color: var(--gray-lighter);
 
-    --background-color-rgb: var(--black-rgb);
-    --text-color-rgb: var(--white-rgb);
-
-    --secondary-background: var(--gray-dark);
-    --menu-background: var(--gray-darker);
-
-    --secondary-text-color: var(--gray-white);
+    --accent-color: var(--green);
     --link-color: var(--green-darker);
-    --menu-link-color: var(--gray-lighter);
-    --menu-title-color: var(--gray-lighter);
-    --border-color: rgba(var(--gray-light-rgb), 0.4);
-    --border-source: linear-gradient(
-      to right,
-      rgb(var(--gray-dark-rgb)) 30%,
-      rgb(var(--gray-rgb)) 30%
-    );
-    --details-color: var(--gray-darker);
-    --shadow: 2px 2px 2px rgba(var(--white-rgb), 0.1);
-    --button-bg: var(--link-color);
-    --button-border: var(--green-darker);
-    --button-text-color: var(--gray-darker);
-    --input-background-color: var(--gray-dark);
-    --input-text-color: var(--gray-lighter);
+
+    --border-color: var(--gray-dark);
+    --border-default: var(--border-width) var(--border-style) var(--border-color);
+
+    --input-background-color: var(--white);
+    --input-text-color: var(--gray);
+
+    --button-background: var(--green-darker);
+    --button-foreground: var(--white);
+    --tag-background: var(--green-darker);
+    --tag-foreground: var(--gray-darker);
   }
 
   a {
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: .15em;
+    text-decoration-thickness: 1px;
   }
 
   b, strong {
     font-weight: var(--font-weight-bold);
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-weight: var(--font-weight-title);
-    line-height: normal;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  h1 {
-	  font-size: var(--font-size-h1);
-    letter-spacing: 0.41;
-  }
-
-  h2 {
-    font-size: var(--font-size-h2);
-    letter-spacing: 0.41;
-  }
-  h3 {
-    font-size: var(--font-size-h3);
-    letter-spacing: 0.34;
-  }
-  h4 {
-    font-size: var(--font-size-h4);
-    letter-spacing: 0.35;
-  }
-  h5 {
-    font-size: var(--font-size-h5);
-    letter-spacing: 0.38;
-  }
-  h6 {
-    font-size: var(--font-size-h6);
-  }
+  ${Titles}
+  ${StackItems}
 `;
 
 export const ButtonStyle = css`
   display: inline-block;
-  border: var(--border-default-width);
+  border: var(--border-width);
   border-color: var(--button-border);
   background-color: var(--button-bg);
   color: var(--button-text-color);
-  box-shadow: var(--shadow);
   /* border-radius: 0.75em 0.75em 0.75em 0.75em; */
   padding: 0.5rem 1rem 0.5rem 1rem;
   font-size: var(--font-size-h5);
@@ -244,20 +204,6 @@ export const ButtonStyle = css`
 
   :not(:last-child) {
     margin-right: 0.5rem;
-  }
-`;
-
-export const StackItems = styled.div`
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-
-  > * {
-    margin-right: 0.75rem;
-    margin-bottom: 0.75rem;
-    :last-child {
-      margin-right: 0;
-    }
   }
 `;
 
@@ -274,29 +220,11 @@ export const TagStyle = css`
 
 export const TitleStyle = css`
   text-transform: uppercase;
-  border-bottom: var(--border-default-width);
-  border-image-slice: var(--border-slice);
-  border-image-source: var(--border-source);
+  border-bottom: var(--border-width);
   /* padding-bottom: 0.25rem; */
   line-height: 24px;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
-`;
-
-export const PageTitle = styled.h1`
-  display: flex;
-  align-items: center;
-
-  ::after {
-    content: "";
-    display: block;
-    position: relative;
-    top: 5px;
-    width: 100%;
-    height: 1px;
-    margin-left: 20px;
-    background-color: var(--secondary-background);
-  }
 `;
 
 export default GlobalStyle;
