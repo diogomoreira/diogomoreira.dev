@@ -3,7 +3,6 @@ import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 import React from "react";
 import styled from "styled-components";
 import Tag from "../Tag";
-import * as DOMPurify from "dompurify";
 import { LocalizedLink as Link } from "gatsby-theme-i18n";
 
 const ItemContainer = styled.article`
@@ -70,7 +69,7 @@ const ListItem: React.FC<ItemProps> = (props: ItemProps) => {
           </Link>
           <ItemDate>{date}</ItemDate>
         </ItemHeader>
-        <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}></p>
+        <p dangerouslySetInnerHTML={{ __html: content }}></p>
         <footer>
           <ItemTags>
             {tags?.map((tag, idx) => (
@@ -93,7 +92,7 @@ const CardItem: React.FC<ItemProps> = (props: ItemProps) => {
           <h2>{title}</h2>
           <ItemDate>{date}</ItemDate>
         </ItemHeader>
-        <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}></p>
+        <p dangerouslySetInnerHTML={{ __html: content }}></p>
         <footer>
           <ItemTags>
             {tags?.map((tag, idx) => (
@@ -131,7 +130,7 @@ const PinItem: React.FC<PinItemProps> = (props: PinItemProps) => {
           <ItemDate>{hit.publishDate}</ItemDate>
         </ItemHeader>
         <p>{JSON.stringify(hit)}</p>
-        <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(hit.description) }}></p>
+        <p dangerouslySetInnerHTML={{ __html: hit.description }}></p>
         <footer>
           <ItemTags>
             {hit.tags?.map((tag, idx) => (
