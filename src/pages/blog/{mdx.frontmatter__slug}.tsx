@@ -44,12 +44,8 @@ const Title = styled.h1`
 
 const BlogPost = ({ data }: PageProps<Queries.PostBySlugQuery>) => {
   const post = data.mdx;
-  console.log(post);
-
   const { t } = useTranslation();
   const frontmatter = post?.frontmatter;
-  // console.log(frontmatter);
-
   const blogPath = `${useSiteMetadata().siteUrl}/blog/${frontmatter?.slug}`;
   const disqusConfig = {
     url: blogPath,
