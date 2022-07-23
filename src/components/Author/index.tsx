@@ -93,7 +93,7 @@ export const AuthorAvatar = styled(motion.div).attrs({
 const Author: React.FC = () => {
   const { image } = useStaticQuery(graphql`
     {
-      image: file(relativePath: { eq: "profile_photo_index.png" }) {
+      image: file(relativePath: { eq: "profile_photo_index.jpeg" }) {
         childImageSharp {
           gatsbyImageData(width: 350, height: 350)
         }
