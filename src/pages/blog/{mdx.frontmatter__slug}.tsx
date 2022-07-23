@@ -44,26 +44,30 @@ const Title = styled.h1`
 
 const BlogPost = ({ data }: PageProps<Queries.PostBySlugQuery>) => {
   const post = data.mdx;
+  console.log(post);
+
   const { t } = useTranslation();
-  const { frontmatter } = post;
-  const blogPath = `${useSiteMetadata().siteUrl}/blog/${frontmatter!.slug}`;
+  const frontmatter = post?.frontmatter;
+  // console.log(frontmatter);
+
+  const blogPath = `${useSiteMetadata().siteUrl}/blog/${frontmatter?.slug}`;
   const disqusConfig = {
     url: blogPath,
-    identifier: post.id,
-    title: post.title,
+    identifier: post?.id,
+    title: post?.frontmatter?.title,
   };
 
   return (
     <Layout>
-      <SEO title={frontmatter!.title} />
+      <SEO title={frontmatter?.title} />
       <Controls>
         <Link to="/blog">← {t("blog.control.back")}</Link>
       </Controls>
-      <Title>{frontmatter!.title}</Title>
+      <Title>{frontmatter?.title}</Title>
       <Metadata>
-        <time>{frontmatter!.date}</time>
+        <time>{frontmatter?.date}</time>
         <span>◆</span>
-        <span>{post.timeToRead} min read</span>
+        <span>{post?.timeToRead} min read</span>
         <span>◆</span>
         <StackItems>
           {post?.frontmatter?.tags?.map((tag, i) => (
@@ -72,12 +76,12 @@ const BlogPost = ({ data }: PageProps<Queries.PostBySlugQuery>) => {
         </StackItems>
       </Metadata>
       <CoverImage>
-        <GatsbyImage image={frontmatter!.cover?.childImageSharp?.gatsbyImageData} alt={frontmatter!.title} />
+        <GatsbyImage image={frontmatter?.cover?.childImageSharp?.gatsbyImageData} alt={frontmatter?.title} />
       </CoverImage>
       <Content>
-        <MDXRenderer>{post.body}</MDXRenderer>
+        <MDXRenderer>{post?.body}</MDXRenderer>
       </Content>
-      <footer>{frontmatter.comments && <Disqus {...disqusConfig} />}</footer>
+      <footer>{frontmatter?.comments && <Disqus {...disqusConfig} />}</footer>
     </Layout>
   );
 };
