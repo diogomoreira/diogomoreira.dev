@@ -8,6 +8,7 @@ import NavToggler from "../NavToggler";
 import useToggle from "../../hooks/useToggle";
 import styled from "styled-components";
 import Container from "../Container";
+import LanguageSwitcher from "../LanguageSwitcher";
 
 export const NavContainer = styled.header`
   padding-top: 1rem;
@@ -91,6 +92,7 @@ export default function NavBar() {
             <NavItems toggleMenu={toggleMenu} />
             <ModeToggler />
             <NavToggler toggleMenu={toggleMenu} toggleFunction={setToggleMenu} />
+            <LanguageSwitcher />
           </NavMenu>
         </NavContent>
       </NavInnerContainer>
