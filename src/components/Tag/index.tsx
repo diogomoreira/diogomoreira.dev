@@ -4,8 +4,9 @@ import styled from "styled-components";
 const StyledTag = styled.span`
   background-color: var(--tag-background);
   border-radius: var(--border-radius);
-  padding: 0.1rem 0.5rem;
+  padding: 0.25rem 0.5rem;
   color: var(--tag-foreground);
+  margin: 0 0.25rem;
 `;
 
 const Tag = ({ children }) => {

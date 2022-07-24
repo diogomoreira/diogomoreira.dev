@@ -23,7 +23,7 @@
     "date": "2022-07-01",
     "description": "Esse é o repositório com o código-fonte desse site que você está visitando. Na primeira \"grande\" atualização do site, migrei o código para TypeScript, além de refatorar boa parte do código para deixar os componentes mais simples. Por fim, introduzi a Internacionalização. Fique a vontade para fazer um fork e criar seu próprio site, caso queira",
     "stack": ["gatsby", "react", "styled-components", "algolia", "netlify cms", "typescript", "i18n"],
-    "image": "../images/projects/diogodmoreira.com.v1.jpg",
+    "image": "../images/projects/diogodmoreira.com.v1.1.jpg",
     "url": "https://github.com/diogomoreira/diogodmoreira.com"
   },
   {
@@ -32,7 +32,7 @@
     "date": "2022-07-01",
     "description": "This is the repository with the source code for the site you are visiting. In the first \"big\" update of the site, I migrated the code to TypeScript and also to refactored most part of the code to make the components simpler. Finally, I introduced Internationalization. Feel free to fork and create your own site if you want",
     "stack": ["gatsby", "react", "styled-components", "algolia", "netlify cms", "typescript", "i18n"],
-    "image": "../images/projects/diogodmoreira.com.v1.jpg",
+    "image": "../images/projects/diogodmoreira.com.v1.1.jpg",
     "url": "https://github.com/diogomoreira/diogodmoreira.com"
   }
 ]

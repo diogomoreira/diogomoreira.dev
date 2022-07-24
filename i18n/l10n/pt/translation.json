@@ -17,6 +17,9 @@
     },
     "latest": "Últimas postagens"
   },
+  "blog": {
+    "control": { "back": "Ver todas as postagens" }
+  },
   "academic": {
     "teaching": {
       "intro": "Auto como Professor desde 2014. Abaixo você pode encontrar links para as páginas das minhas aulas no semestre atual. Todas as páginas de salas de aula são hospedados no <0>Google Classroom</0> e só podem ser acessados via email institucional."

@@ -42,6 +42,8 @@ const Title = styled.h1`
   font-size: calc(var(--font-size-h1) * 2.5);
 `;
 
+const StackTags = styled.div``;
+
 const BlogPost = ({ data }: PageProps<Queries.PostBySlugQuery>) => {
   const post = data.mdx;
   const { t } = useTranslation();
@@ -65,11 +67,11 @@ const BlogPost = ({ data }: PageProps<Queries.PostBySlugQuery>) => {
         <span>◆</span>
         <span>{post?.timeToRead} min read</span>
         <span>◆</span>
-        <StackItems>
+        <StackTags>
           {post?.frontmatter?.tags?.map((tag, i) => (
             <Tag key={i}>{tag}</Tag>
           ))}
-        </StackItems>
+        </StackTags>
       </Metadata>
       <CoverImage>
         <GatsbyImage image={frontmatter?.cover?.childImageSharp?.gatsbyImageData} alt={frontmatter?.title} />
