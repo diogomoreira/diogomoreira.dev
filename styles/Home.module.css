@@ -38,6 +38,7 @@
   font-size: 4rem;
   text-align: center;
   margin: 0.75rem 0;
+  letter-spacing: -0.2rem;
 }
 
 .title > span:first-child {
