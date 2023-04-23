@@ -1,0 +1,37 @@
+@import "@/styles/variables";
+@import "@/styles/breakpoints";
+
+@mixin box-shadow {
+  box-shadow: $box-shadow-x $box-shadow-y $box-shadow-blur $box-shadow-color;
+}
+
+@mixin border {
+  border: $border-width $border-style $background-lighter-color;
+}
+
+@mixin border-radius {
+  border-radius: $border-radius;
+}
+
+@mixin card {
+  @include box-shadow();
+  @include border();
+  overflow: hidden;
+}
+
+@mixin list-item-time {
+  background-color: $background-color;
+  color: $text-color;
+  padding: $spacer-sm;
+  font-size: $font-size-sm;
+}
+
+@mixin list-item-tag {
+  @include list-item-time();
+  background-color: $background-dark-color;
+}
+
+@mixin list-item {
+  @include box-shadow();
+  background-color: $background-light-color;
+}

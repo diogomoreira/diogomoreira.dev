@@ -1,0 +1,11 @@
+.#{$button-root} {
+  &--disabled {
+    span {
+      text-decoration: line-through;
+    }
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+}

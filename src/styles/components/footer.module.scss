@@ -1,0 +1,17 @@
+@import "@/styles/variables.scss";
+
+.footerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacer-sm;
+  color: $primary-color;
+  justify-content: center;
+  font-size: $font-size-sm;
+  padding: $padding-lg $padding-none;
+  border-top: $border-width $border-style $background-lighter-color;
+
+  a {
+    color: $hyperlink-color;
+  }
+}
