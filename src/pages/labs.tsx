@@ -14,9 +14,10 @@ const LabsPage: NextPage<LabsPageProps> = ({ items }: LabsPageProps) => {
       <NextSeo title="Labs" description="Some projects i've been working on" />
       <h1>💻 Labs</h1>
       <p>
-        I wanted to share some of my side projects that I've been working on as
-        hobbies outside of my regular job. These projects allow me to explore my
-        interests and learn new skills while also having fun and being creative.
+        I wanted to share some of my side projects that I&apos;ve been working
+        on as hobbies outside of my regular job. These projects allow me to
+        explore my interests and learn new skills while also having fun and
+        being creative.
       </p>
       <ResponsiveMasonry columnsCountBreakPoints={ColumnCountBreakpoints}>
         <Masonry gutter="1rem">
