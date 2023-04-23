@@ -16,12 +16,12 @@ const LinksPage: NextPage<LinksPageProps> = ({ links }: LinksPageProps) => {
       />
       <h1>💾 Links</h1>
       <p>
-        This is where I'll be sharing some cool stuff I've been really into
-        lately. From groovy tunes that get me moving to podcasts that keep me
-        thinking, and books that I just can't put down, I'll be dropping some
-        recommendations for things I've been loving. Take a peek and see if
-        anything catches your fancy! Who knows, you might just find your new
-        obsession.
+        This is where I&apos;ll be sharing some cool stuff I&apos;ve been really
+        into lately. From groovy tunes that get me moving to podcasts that keep
+        me thinking, and books that I just can&apos;t put down, I&apos;ll be
+        dropping some recommendations for things I&apos;ve been loving. Take a
+        peek and see if anything catches your fancy! Who knows, you might just
+        find your new obsession.
       </p>
       <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1 }}>
         <Masonry gutter="1rem">
