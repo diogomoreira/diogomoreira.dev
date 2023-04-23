@@ -12,9 +12,7 @@ type NoteItem = {
 type LabItem = {
   title: string;
   timestamp: string;
-  description: {
-    [key: string]: string;
-  };
+  description: string;
   stack: string[];
   image: string;
   url: string;
