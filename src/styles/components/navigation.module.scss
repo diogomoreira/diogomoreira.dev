@@ -1,0 +1,56 @@
+@import "@/styles/breakpoints";
+@import "@/styles/variables";
+
+.navigationContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: $font-size-sm;
+  padding: $padding-lg $padding-none;
+}
+
+.navigationLogo {
+  font-family: var(--font-family-monospace);
+  text-transform: lowercase;
+  color: $text-color;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+}
+
+.navigationListItem {
+  display: none;
+
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+
+  @include md-breakpoint {
+    display: flex;
+  }
+  flex: 1;
+  justify-content: flex-end;
+  gap: 1.75rem;
+
+  & > li {
+    text-align: center;
+    text-transform: lowercase;
+    letter-spacing: 0px;
+
+    a {
+      text-decoration: none;
+      color: $secondary-color;
+
+      &:hover {
+        color: $hyperlink-hover-color;
+      }
+    }
+  }
+}
+
+.navigationListItemLink {
+  display: flex;
+  gap: $spacer-sm;
+  align-items: center;
+}
