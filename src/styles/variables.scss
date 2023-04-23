@@ -1,0 +1,82 @@
+// Layout
+$spacer-none: 0;
+$spacer: 1rem !default;
+$spacer-xs: $spacer * 0.25;
+$spacer-sm: $spacer * 0.5;
+$spacer-lg: $spacer * 1.5;
+$spacer-xl: $spacer * 2.5;
+
+$xs-breakpoint: 576px;
+$sm-breakpoint: 768px;
+$md-breakpoint: 1024px;
+$lg-breakpoint: 1290px;
+$xl-breakpoint: 1440px;
+
+$max-width: $md-breakpoint;
+
+$padding-none: 0;
+$padding-xs: $spacer-xs;
+$padding-sm: $spacer-sm;
+$padding-base: $spacer;
+$padding-lg: $spacer-lg;
+$padding-xl: $spacer-xl;
+
+$margin-none: 0;
+$margin-xs: $spacer-xs;
+$margin-sm: $spacer-sm;
+$margin-base: $spacer;
+$margin-lg: $spacer-lg;
+$margin-xl: $spacer-xl;
+
+$border-width: 1px;
+$border-width-thick: 3px;
+$border-style: solid;
+$border-radius: 5px;
+
+$background-color: #1e1621;
+$background-lighter-color: lighten($background-color, 15%);
+$background-light-color: lighten($background-color, 5%);
+$background-dark-color: darken($background-color, 5%);
+$background-darker-color: darken($background-color, 15%);
+
+$primary-color: #e3e6e3;
+$secondary-color: #59b36a;
+
+$text-color: $primary-color;
+$text-color-inverted: $background-light-color;
+$hyperlink-color: $secondary-color;
+$hyperlink-hover-color: darken($hyperlink-color, 15%);
+
+$box-shadow-y: 5px;
+$box-shadow-x: 5px;
+$box-shadow-blur: 0px;
+$box-shadow-color: rgba($background-dark-color, 0.5);
+
+$font-size-base: 16px;
+$font-size-sm: $font-size-base * 0.875 !default;
+$font-size-lg: $font-size-base * 1.25 !default;
+
+$font-weight-lighter: lighter !default;
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-semibold: 600 !default;
+$font-weight-bold: 700 !default;
+$font-weight-bolder: bolder !default;
+
+$font-weight-base: $font-weight-normal !default;
+
+$line-height-base: 1.75 !default;
+$line-height-sm: 1.25 !default;
+$line-height-lg: 2 !default;
+
+// Headings properties
+$font-size-heading-h1: $font-size-base * 2.5 !default;
+$font-size-heading-h2: $font-size-base * 1.75 !default;
+$font-size-heading-h3: $font-size-base * 1.5 !default;
+$font-size-heading-h4: $font-size-base * 1.35 !default;
+$font-size-heading-h5: $font-size-base * 1.2 !default;
+$font-size-heading-h6: $font-size-base !default;
+
+$headings-margin-bottom: $spacer * 0.5 !default;
+$headings-font-weight: 500 !default;
+$headings-line-height: 1.2 !default;

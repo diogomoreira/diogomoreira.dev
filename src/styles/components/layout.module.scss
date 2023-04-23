@@ -1,0 +1,12 @@
+@import "@/styles/variables.scss";
+@import "@/styles/breakpoints.scss";
+
+.layoutContainer {
+  display: grid;
+  gap: $margin-lg;
+  grid-template-columns: 100%;
+  grid-template-rows: auto 1fr auto;
+  margin: 0 auto;
+  padding: $padding-none $padding-lg;
+  max-width: $max-width;
+}

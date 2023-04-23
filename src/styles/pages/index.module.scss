@@ -1,0 +1,47 @@
+@import "@/styles/breakpoints";
+@import "@/styles/mixins";
+
+.container {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 1rem;
+
+  @include md-breakpoint {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  h1 {
+    font-weight: $font-weight-base;
+    font-size: $font-size-heading-h3;
+    margin-bottom: 0;
+    @include md-breakpoint {
+      flex-direction: row;
+      text-align: left;
+      font-size: $font-size-heading-h1;
+    }
+    strong {
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  h2 {
+    margin-top: $margin-sm;
+    font-weight: $font-weight-light;
+    font-size: $font-size-heading-h4;
+  }
+
+  img {
+    @include box-shadow();
+    border-radius: 50%;
+    // border: 0.25rem solid $highlight-primary-color;
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+}
