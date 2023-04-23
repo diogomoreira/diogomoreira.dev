@@ -21,7 +21,7 @@ const LabItem: React.FC<LabItemProps> = ({ item }: LabItemProps) => {
         <div>
           <time>{formatDateI18N(item.timestamp, router.locale ?? "en")}</time>
         </div>
-        <p>{item.description.en}</p>
+        <p>{item.description}</p>
         <footer>
           <div>
             {item.stack.map((stackItem, idx) => (
