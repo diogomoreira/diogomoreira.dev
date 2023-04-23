@@ -1,0 +1,37 @@
+{
+  "present": "Hi! I'm <0>Diogo Moreira</0> 👋🏻",
+  "titles": "A Software Engineer, Professor and Researcher",
+  "menu": {
+    "about": "About",
+    "blog": "Blog",
+    "academic": "Academic",
+    "labs": "Labs",
+    "links": "Links",
+    "cv": "CV"
+  },
+  "about": {
+    "greeting": {
+      "morning": "Good morning!",
+      "afternoon": "Good afternoon!",
+      "evening": "Good evening!"
+    }
+  },
+  "blog": {
+    "control": { "back": "View all posts" }
+  },
+  "labs": {
+    "intro": "Here's a list of some of my personal projects and others that I've been involved in professionally. I am currently studying/practicing the following topics",
+    "stack": [
+      "Observability",
+      "TypeScript",
+      "Node.js",
+      "React",
+      "NestJS",
+      "Jest",
+      "TestCafe"
+    ]
+  },
+  "links": {
+    "intro": "Here I gather some of what I've been reading, watching, listening to or playing. The links here generally take you to streaming sites or stores so you can buy or subscribe to a service. Feel free to report me any wrong information here. Browse the categories if you prefer, or type a term in the search box."
+  }
+}
