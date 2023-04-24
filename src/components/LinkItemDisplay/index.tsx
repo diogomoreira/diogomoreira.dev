@@ -5,6 +5,7 @@ import { faThumbTack } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { v4 as uuidv4 } from "uuid";
 
 type LinkItemDisplayProps = { item: LinkItem };
 
@@ -16,21 +17,14 @@ const icons: Record<string, string> = {
   music: "🎧",
 };
 
-const LinkItemDisplay: React.FC<LinkItemDisplayProps> = ({
-  item,
-}: LinkItemDisplayProps) => {
+const LinkItemDisplay: React.FC<LinkItemDisplayProps> = ({ item }: LinkItemDisplayProps) => {
   const router = useRouter();
   const icon: string = icons[item.type];
   return (
     <div className={styles.linkItemContainer}>
       <div className={styles.linkItemImageContainer}>
         <a href={item.link} target="_blank" rel="noreferrer">
-          <Image
-            alt={item.title}
-            src={`/images/links/${item.image}`}
-            fill
-            className={styles.linkItemImage}
-          />
+          <Image alt={item.title} src={`/images/links/${item.image}`} fill className={styles.linkItemImage} />
         </a>
       </div>
       <div className={styles.linkItemDetails}>
@@ -47,8 +41,8 @@ const LinkItemDisplay: React.FC<LinkItemDisplayProps> = ({
             <time>{formatDateI18N(item.timestamp, router.locale ?? "en")}</time>
           </div>
           <div className={styles.linkItemTags}>
-            {item.tags.map((stackItem, idx) => (
-              <span key={idx}>{stackItem}</span>
+            {item.tags.map(stackItem => (
+              <span key={uuidv4()}>{stackItem}</span>
             ))}
           </div>
         </div>

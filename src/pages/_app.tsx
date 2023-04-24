@@ -16,20 +16,14 @@ const fontFamilyMonospace = Fira({
 });
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const { siteUrl, title, author } = useAppMetadata();
-  const authorTwitter = `@${author.twitter}`;
-  const titleTemplate = `${title} | %s`;
+  const { title, author } = useAppMetadata();
   return (
     <Layout className={fontFamilyMonospace.variable}>
       <DefaultSeo
         {...defaultSeo}
         // don't let search engines index branch/deploy previews
-        dangerouslySetAllPagesToNoIndex={
-          process.env.NEXT_PUBLIC_VERCEL_ENV !== "production"
-        }
-        dangerouslySetAllPagesToNoFollow={
-          process.env.NEXT_PUBLIC_VERCEL_ENV !== "production"
-        }
+        dangerouslySetAllPagesToNoIndex={process.env.CONTEXT !== "production"}
+        dangerouslySetAllPagesToNoFollow={process.env.CONTEXT !== "production"}
       />
       <Component {...pageProps} />
     </Layout>
