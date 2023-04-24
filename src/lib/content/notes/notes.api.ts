@@ -21,8 +21,9 @@ function getNoteBySlug(slug: string): NoteItem {
 
 function getAllNotes(sortFn?: (ts1: Date, ts2: Date) => number): NoteItem[] {
   const slugs = getNotesSlugs();
-  const posts = slugs.map((slug) => getNoteBySlug(slug));
-  // TODO: sort posts by date in descending order
+  const posts = slugs
+    .map(slug => getNoteBySlug(slug))
+    .sort((a, b) => (new Date(a.timestamp) < new Date(b.timestamp) ? -1 : 1));
   return posts;
 }
 

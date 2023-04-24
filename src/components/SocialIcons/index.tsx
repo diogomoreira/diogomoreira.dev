@@ -1,9 +1,8 @@
 import { useAppMetadata } from "@/lib/config";
 import styles from "@/styles/components/social-icons.module.scss";
-import { IconDefinition, faGithub, faInstagram, faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faGithub, faInstagram, faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-type SocialItem = { link: string; icon: IconDefinition };
+import { v4 as uuidv4 } from "uuid";
 
 const SocialIcons = () => {
   const { author } = useAppMetadata();
@@ -16,8 +15,8 @@ const SocialIcons = () => {
 
   return (
     <div className={styles.socialIconsContainer}>
-      {social.map((socialItem, idx) => (
-        <a key={idx} href={socialItem.link} target="_blank" rel="noreferrer">
+      {social.map(socialItem => (
+        <a key={uuidv4()} href={socialItem.link} target="_blank" rel="noreferrer">
           <FontAwesomeIcon icon={socialItem.icon} />
         </a>
       ))}

@@ -4,12 +4,13 @@ import formatDateI18N from "@/utils/date.i18.formatter";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 
 type LabItemProps = {
   item: LabItem;
 };
 
-const LabItem: React.FC<LabItemProps> = ({ item }: LabItemProps) => {
+const LabItemDisplay: React.FC<LabItemProps> = ({ item }: LabItemProps) => {
   const router = useRouter();
   return (
     <div className={styles.labItemContainer}>
@@ -24,8 +25,8 @@ const LabItem: React.FC<LabItemProps> = ({ item }: LabItemProps) => {
         <p>{item.description}</p>
         <footer>
           <div>
-            {item.stack.map((stackItem, idx) => (
-              <span key={idx}>{stackItem}</span>
+            {item.stack.map(stackItem => (
+              <span key={uuidv4()}>{stackItem}</span>
             ))}
           </div>
         </footer>
@@ -34,4 +35,4 @@ const LabItem: React.FC<LabItemProps> = ({ item }: LabItemProps) => {
   );
 };
 
-export default LabItem;
+export default LabItemDisplay;
