@@ -5,7 +5,6 @@ import { Fira_Code as Fira } from "@next/font/google";
 import { appWithTranslation } from "next-i18next";
 import type { AppProps } from "next/app";
 
-import { useAppMetadata } from "@/lib/config";
 import { defaultSeo } from "@/lib/config/seo.config";
 import "@/styles/globals.scss";
 import { DefaultSeo } from "next-seo";
@@ -16,7 +15,6 @@ const fontFamilyMonospace = Fira({
 });
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const { title, author } = useAppMetadata();
   return (
     <Layout className={fontFamilyMonospace.variable}>
       <DefaultSeo
