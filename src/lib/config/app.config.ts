@@ -1,17 +1,9 @@
-import {
-  faFlask,
-  faGraduationCap,
-  faHome,
-  faLink,
-  faNoteSticky,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faFlask, faGraduationCap, faHome, faLink, faNoteSticky, faUser } from "@fortawesome/free-solid-svg-icons";
 import packageJson from "package.json";
 
 const AppMetadata = {
   title: "Diogo Moreira",
-  description:
-    "My thoughts about life, software development, games, music and so forth",
+  description: "My thoughts about life, software development, games, music and so forth",
   keywords: ["software development", "teaching"],
   siteUrl: `https://diogodmoreira.com/`,
   siteLocale: "en-US",
@@ -24,6 +16,10 @@ const AppMetadata = {
     linkedin: "diogodmoreira",
     instagram: "diogo.dmoreira",
     keybase: "diogomoreira",
+    googleScholar: "DlSdlvEAAAAJ",
+    researchGate: "Diogo_Moreira4",
+    orcid: "0000-0003-1803-6565",
+    lattes: "2745996619940977",
   },
   menu: [
     { name: "Home", link: "/", icon: faHome },
