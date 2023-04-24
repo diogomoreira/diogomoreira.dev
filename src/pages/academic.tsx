@@ -1,4 +1,5 @@
 import Section from "@/components/Section";
+import { useAppMetadata } from "@/lib/config";
 import { CustomBibTexEntry, getPublicationEntriesSorted } from "@/lib/content";
 import styles from "@/styles/pages/academic.module.scss";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
@@ -11,7 +12,7 @@ type AcademicProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const AcademicPage: NextPage<AcademicProps> = ({ papers }) => {
   const { t } = useTranslation("academic");
-
+  const { author } = useAppMetadata();
   return (
     <>
       <h1>🎓 Academic</h1>
@@ -33,16 +34,16 @@ const AcademicPage: NextPage<AcademicProps> = ({ papers }) => {
           components={{
             gpes: <a title="Link for Gpes" href="https://gpes.github.io/" />,
             researchGate: (
-              <a title="Link for ResearchGate" href="https://www.researchgate.net/profile/Diogo_Moreira4" />
+              <a title="Link for ResearchGate" href={`https://www.researchgate.net/profile/${author.researchGate}`} />
             ),
             scholar: (
               <a
                 title="Link for Google Scholar"
-                href="https://scholar.google.com.br/citations?hl=pt-BR&user=DlSdlvEAAAAJ"
+                href={`https://scholar.google.com.br/citations?hl=pt-BR&user=${author.googleScholar}`}
               />
             ),
-            orcid: <a title="Link for Orcid" href="https://orcid.org/0000-0003-1803-6565" />,
-            lattes: <a title="Link for Lattes" href="http://lattes.cnpq.br/2745996619940977" />,
+            orcid: <a title="Link for Orcid" href={`https://orcid.org/${author.orcid}`} />,
+            lattes: <a title="Link for Lattes" href={`https://lattes.cnpq.br/${author.lattes}`} />,
           }}></Translation>
       </p>
       <p>
