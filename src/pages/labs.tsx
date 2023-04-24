@@ -1,10 +1,11 @@
-import LabItem from "@/components/LabItem";
-import { getLabProjects } from "@/lib/content";
+import LabItemDisplay from "@/components/LabItemDisplay";
+import { LabItem, getLabProjects } from "@/lib/content";
 import { ColumnCountBreakpoints } from "@/utils/masonry.columns";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import { v4 as uuidv4 } from "uuid";
 
 type LabsPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -19,8 +20,8 @@ const LabsPage: NextPage<LabsPageProps> = ({ items }: LabsPageProps) => {
       </p>
       <ResponsiveMasonry columnsCountBreakPoints={ColumnCountBreakpoints}>
         <Masonry gutter="1rem">
-          {items.map((item, idx) => (
-            <LabItem key={idx} item={item} />
+          {items.map(item => (
+            <LabItemDisplay key={uuidv4()} item={item} />
           ))}
         </Masonry>
       </ResponsiveMasonry>

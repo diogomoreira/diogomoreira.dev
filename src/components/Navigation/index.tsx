@@ -4,6 +4,7 @@ import Link from "next/link";
 import styles from "@/styles/components/navigation.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
+import { v4 as uuidv4 } from "uuid";
 
 const Navigation = () => {
   const { menu } = useAppMetadata();
@@ -15,8 +16,8 @@ const Navigation = () => {
         <div>{title}</div>
       </Link>
       <ul className={styles.navigationListItem}>
-        {menu.map((item, index) => (
-          <li key={index}>
+        {menu.map(item => (
+          <li key={uuidv4()}>
             <Link className={styles.navigationListItemLink} href={item.link}>
               <FontAwesomeIcon icon={item.icon} />
               {item.name}
