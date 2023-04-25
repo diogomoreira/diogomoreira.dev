@@ -1,3 +1,4 @@
+import React from "react";
 import LabItemDisplay from "@/components/LabItemDisplay";
 import { LabItem, getLabProjects } from "@/lib/content";
 import { ColumnCountBreakpoints } from "@/utils/masonry.columns";

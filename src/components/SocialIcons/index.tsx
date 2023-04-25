@@ -1,3 +1,4 @@
+import React from "react";
 import { useAppMetadata } from "@/lib/config";
 import styles from "@/styles/components/social-icons.module.scss";
 import { faGithub, faInstagram, faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons";

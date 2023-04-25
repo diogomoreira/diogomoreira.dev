@@ -1,3 +1,4 @@
+import React from "react";
 import Layout from "@/components/Layout";
 import "prism-themes/themes/prism-vsc-dark-plus.css";
 

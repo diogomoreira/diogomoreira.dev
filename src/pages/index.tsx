@@ -1,3 +1,4 @@
+import React from "react";
 import NotesList from "@/components/NotesList";
 import Section from "@/components/Section";
 import { useAppMetadata } from "@/lib/config";

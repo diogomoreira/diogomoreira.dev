@@ -1,3 +1,4 @@
+import React from "react";
 import { LinkItem } from "@/lib/content";
 import styles from "@/styles/components/linkitem.module.scss";
 import formatDateI18N from "@/utils/date.i18.formatter";

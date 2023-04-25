@@ -1,3 +1,4 @@
+import React from "react";
 import Section from "@/components/Section";
 import { useAppMetadata } from "@/lib/config";
 import { CustomBibTexEntry, getPublicationEntriesSorted } from "@/lib/content";
@@ -10,7 +11,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 type AcademicProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-const AcademicPage: NextPage<AcademicProps> = ({ papers }) => {
+const AcademicPage: NextPage<AcademicProps> = ({ papers }: AcademicProps) => {
   const { t } = useTranslation("academic");
   const { author } = useAppMetadata();
   return (
@@ -84,8 +85,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const bibTexEntries = getPublicationEntriesSorted();
   return {
     props: {
-      ...(await serverSideTranslations(locale || "en", ["academic"])),
       papers: bibTexEntries,
+      ...(await serverSideTranslations(locale || "en", ["academic"])),
     },
   };
 };

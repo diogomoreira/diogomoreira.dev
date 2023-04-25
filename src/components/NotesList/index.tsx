@@ -1,6 +1,6 @@
+import React from "react";
 import { NoteItem } from "@/lib/content";
 import styles from "@/styles/components/noteslist.module.scss";
-import React from "react";
 import Note from "../Note";
 
 type NotesListProps = {

@@ -1,3 +1,4 @@
+import React from "react";
 import NotesList from "@/components/NotesList";
 import { NoteItem, getAllNotes } from "@/lib/content";
 import styles from "@/styles/pages/notes.module.scss";
