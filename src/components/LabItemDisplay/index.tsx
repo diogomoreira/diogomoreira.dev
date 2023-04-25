@@ -15,10 +15,16 @@ const LabItemDisplay: React.FC<LabItemProps> = ({ item }: LabItemProps) => {
   return (
     <div className={styles.labItemContainer}>
       <div className={styles.labItemImageContainer}>
-        <Image alt={item.title} src={item.image} fill={true} />
+        <a href={item.url} title={item.title} target="_blank" rel="noreferrer">
+          <Image alt={item.title} src={item.image} fill={true} />
+        </a>
       </div>
       <div className={styles.labItemDetails}>
-        <h1>{item.title}</h1>
+        <h1>
+          <a href={item.url} title={item.title} target="_blank" rel="noreferrer">
+            {item.title}
+          </a>
+        </h1>
         <div>
           <time>{formatDateI18N(item.timestamp, router.locale ?? "en")}</time>
         </div>
