@@ -4,7 +4,7 @@
 echo '🏗️ Styling, testing and building before commit...'
 
 # Check Prettier standards
-npm run prettier ||
+npm run format ||
 (
     echo '🤮 Its F**KING RAW - Your styling looks disgusting. 🤢🤮🤢🤮
             Prettier Check Failed. Run npm run format:fix, add changes and try commit again.';
@@ -22,7 +22,7 @@ npm run lint ||
 # Check tsconfig standards
 npm run check-types ||
 (
-    echo '🤡😂❌🤡 Failed Type check. 🤡😂❌🤡
+    echo '❌ Failed Type check.
             Are you seriously trying to write that? Make the changes required above.'
     false;
 )
