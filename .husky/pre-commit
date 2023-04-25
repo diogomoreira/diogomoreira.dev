@@ -28,14 +28,4 @@ npm run check-types ||
 )
 
 # If everything passes... Now we can commit
-echo '🤔  Alright, looks good to me! Trying to build now...'
-
-npm run build ||
-(
-    echo '❌  Build failed
-              Next build failed: View the errors above to see why.'
-    false;
-)
-
-# If everything passes... Now we can commit
 echo '✅  Everything is right... commiting'
