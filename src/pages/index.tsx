@@ -1,7 +1,7 @@
 import React from "react";
 import NotesList from "@/components/NotesList";
 import Section from "@/components/Section";
-import { useAppMetadata } from "@/lib/config";
+import { useAppConfig } from "@/lib/config";
 import { NoteItem, getAllNotes } from "@/lib/content";
 import styles from "@/styles/pages/index.module.scss";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
@@ -15,7 +15,7 @@ import Link from "next/link";
 type IndexPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const IndexPage: NextPage<IndexPageProps> = ({ notes }: IndexPageProps) => {
-  const { title, description } = useAppMetadata();
+  const { title, description } = useAppConfig();
   const { t } = useTranslation("index");
 
   return (

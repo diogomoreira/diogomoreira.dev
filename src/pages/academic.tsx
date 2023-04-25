@@ -1,6 +1,6 @@
 import React from "react";
 import Section from "@/components/Section";
-import { useAppMetadata } from "@/lib/config";
+import { useAppConfig } from "@/lib/config";
 import { CustomBibTexEntry, getPublicationEntriesSorted } from "@/lib/content";
 import styles from "@/styles/pages/academic.module.scss";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
@@ -13,7 +13,9 @@ type AcademicProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const AcademicPage: NextPage<AcademicProps> = ({ papers }: AcademicProps) => {
   const { t } = useTranslation("academic");
-  const { author } = useAppMetadata();
+  const {
+    author: { researchGate, googleScholar, orcid, lattes, academicEmail },
+  } = useAppConfig();
   return (
     <>
       <h1>🎓 Academic</h1>
@@ -35,18 +37,18 @@ const AcademicPage: NextPage<AcademicProps> = ({ papers }: AcademicProps) => {
           i18nKey="academic.researching.groups"
           t={t}
           components={{
-            gpes: <a title="Link for Gpes" href="https://gpes.github.io/" />,
+            gpes: <a title="Link for GPES website" href="https://gpes.github.io/" />,
             researchGate: (
-              <a title="Link for ResearchGate" href={`https://www.researchgate.net/profile/${author.researchGate}`} />
+              <a title="Link for ResearchGate" href={`https://www.researchgate.net/profile/${researchGate}`} />
             ),
             scholar: (
               <a
                 title="Link for Google Scholar"
-                href={`https://scholar.google.com.br/citations?hl=pt-BR&user=${author.googleScholar}`}
+                href={`https://scholar.google.com.br/citations?hl=pt-BR&user=${googleScholar}`}
               />
             ),
-            orcid: <a title="Link for Orcid" href={`https://orcid.org/${author.orcid}`} />,
-            lattes: <a title="Link for Lattes" href={`https://lattes.cnpq.br/${author.lattes}`} />,
+            orcid: <a title="Link for Orcid" href={`https://orcid.org/${orcid}`} />,
+            lattes: <a title="Link for Lattes" href={`https://lattes.cnpq.br/${lattes}`} />,
           }}
         ></Translation>
       </p>
@@ -55,7 +57,7 @@ const AcademicPage: NextPage<AcademicProps> = ({ papers }: AcademicProps) => {
           i18nKey="academic.researching.list"
           t={t}
           components={{
-            email: <a title="Email link for academic purposes" href="mailto:diogo.moreira@ifpb.edu.br" />,
+            email: <a title="Email link for academic purposes" href={`mailto:${academicEmail}`} />,
           }}
         ></Translation>
       </p>
