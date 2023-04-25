@@ -1,19 +1,23 @@
 import React from "react";
-import { useAppMetadata } from "@/lib/config";
+import { useAppConfig } from "@/lib/config";
 import { articleJsonLd } from "@/lib/config/seo.config";
 import { getAllNotes, getNoteBySlug, mdxToHtml } from "@/lib/content";
-import styles from "@/styles/pages/post/postpage.module.scss";
+import styles from "@/styles/pages/notes/slug.module.scss";
 import Giscus from "@giscus/react";
 import { InferGetStaticPropsType } from "next";
 import { MDXRemote } from "next-mdx-remote";
 import { ArticleJsonLd, NextSeo } from "next-seo";
 import Image from "next/image";
 import logo from "public/images/logo.png";
+import formatDateI18N from "@/utils/date.i18.formatter";
+import { v4 as uuid } from "uuid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
 type NoteProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const Note: React.FC<NoteProps> = ({ source, frontMatter }: NoteProps) => {
-  const { siteUrl } = useAppMetadata();
+  const { siteUrl } = useAppConfig();
   const postUrl = `${siteUrl}/notes/${frontMatter.slug}`;
   return (
     <>
@@ -29,9 +33,30 @@ const Note: React.FC<NoteProps> = ({ source, frontMatter }: NoteProps) => {
       />
       <article>
         <h1>{frontMatter.title}</h1>
+        <p className={styles.noteDescription}>{frontMatter.description}</p>
+        <div className={styles.noteDetails}>
+          <time className={styles.noteDetailsTimestamp}>
+            <span>
+              <FontAwesomeIcon icon={faCalendar} />
+            </span>
+            <span>{formatDateI18N(frontMatter.timestamp)}</span>
+          </time>
+          <div className={styles.noteDetailsCategory}>
+            <span>Category:</span>
+            <span>{frontMatter.category}</span>
+          </div>
+          <div className={styles.noteDetailsTags}>
+            <div>Tagged with:</div>
+            <div className={styles.noteDetailsTagsList}>
+              {frontMatter.tags.map(tag => (
+                <span key={uuid()}>{tag}</span>
+              ))}
+            </div>
+          </div>
+        </div>
         {frontMatter.cover && (
           <div className={styles.cover}>
-            <Image src={`/images/posts/cover/${frontMatter.cover}`} fill={true} alt={frontMatter.title} />
+            <Image src={`/images/notes/cover/${frontMatter.cover}`} fill alt={frontMatter.title} sizes="1000px" />
           </div>
         )}
         <div className={styles.content}>

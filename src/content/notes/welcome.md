@@ -2,9 +2,9 @@
 title: "Welcome to my website!"
 timestamp: "2020-09-27"
 description: Who I am, what I do and a little about this site.
-category: Personal
-tags: [personal]
-# cover: welcome-cover.jpeg
+category: personal
+tags: [career, personal, hobbies]
+cover: welcome.jpg
 comments: true
 ---
 

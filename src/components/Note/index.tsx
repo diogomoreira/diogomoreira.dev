@@ -1,6 +1,7 @@
 import { NoteItem } from "@/lib/content";
 import styles from "@/styles/components/noteslist.module.scss";
 import formatDateI18N from "@/utils/date.i18.formatter";
+import { capitalize } from "lodash";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -14,7 +15,7 @@ const Note: React.FC<NoteProps> = ({ note }: NoteProps) => {
     <article className={styles.note}>
       {note.cover && (
         <div className={styles.noteItemCover}>
-          <Image src={`/images/posts/cover/${note.cover}`} alt={note.title} fill={true} />
+          <Image src={`/images/notes/cover/${note.cover}`} alt={note.title} fill sizes="400px" />
         </div>
       )}
       <div className={styles.noteItem}>
@@ -22,7 +23,7 @@ const Note: React.FC<NoteProps> = ({ note }: NoteProps) => {
           <h1>{note.title}</h1>
         </Link>
         <div className={styles.noteDetails}>
-          <span>{note.category}</span>
+          <span>{capitalize(note.category)}</span>
           <time>{formatDateI18N(note.timestamp, locale)}</time>
         </div>
         <p className={styles.noteDescription}>{note.description}</p>

@@ -1,7 +1,7 @@
 import { faFlask, faGraduationCap, faHome, faLink, faNoteSticky, faUser } from "@fortawesome/free-solid-svg-icons";
 import packageJson from "package.json";
 
-const AppMetadata = {
+const appConfig = {
   title: "Diogo Moreira",
   description: "My thoughts about life, software development, games, music and so forth",
   keywords: ["software development", "teaching"],
@@ -10,7 +10,9 @@ const AppMetadata = {
   siteVersion: packageJson.version,
   author: {
     name: "Diogo Moreira",
+    image: "images/profile.jpg",
     email: "diogo.dmoreira@gmail.com",
+    academicEmail: "diogo.moreira@ifpb.edu.br",
     github: "diogomoreira",
     twitter: "diogodmoreira",
     linkedin: "diogodmoreira",
@@ -35,8 +37,8 @@ const AppMetadata = {
   ],
 };
 
-const useAppMetadata = () => {
-  return AppMetadata;
+const useAppConfig = () => {
+  return appConfig;
 };
 
-export { AppMetadata, useAppMetadata };
+export { appConfig, useAppConfig };
