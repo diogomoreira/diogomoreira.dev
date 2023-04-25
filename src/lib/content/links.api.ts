@@ -3,7 +3,7 @@ import { LinkItem } from "@/lib/content";
 
 export function getLinks(): LinkItem[] {
   return links
-    .map<LinkItem>((link) => ({
+    .map<LinkItem>(link => ({
       title: link.title,
       type: link.type,
       link: link.link,
@@ -12,7 +12,5 @@ export function getLinks(): LinkItem[] {
       timestamp: link.publishDate,
       tags: link.tags,
     }))
-    .sort((link1, link2) =>
-      new Date(link1.timestamp) < new Date(link2.timestamp) ? 1 : -1
-    );
+    .sort((link1, link2) => (new Date(link1.timestamp) < new Date(link2.timestamp) ? 1 : -1));
 }

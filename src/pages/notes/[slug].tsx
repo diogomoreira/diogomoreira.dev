@@ -16,10 +16,7 @@ const Note: React.FC<NoteProps> = ({ source, frontMatter }: NoteProps) => {
   const postUrl = `${siteUrl}/notes/${frontMatter.slug}`;
   return (
     <>
-      <NextSeo
-        title={frontMatter.title}
-        description={frontMatter.description}
-      />
+      <NextSeo title={frontMatter.title} description={frontMatter.description} />
 
       <ArticleJsonLd
         url={postUrl}
@@ -34,11 +31,7 @@ const Note: React.FC<NoteProps> = ({ source, frontMatter }: NoteProps) => {
         <h1>{frontMatter.title}</h1>
         {frontMatter.cover && (
           <div className={styles.cover}>
-            <Image
-              src={`/images/posts/cover/${frontMatter.cover}`}
-              fill={true}
-              alt={frontMatter.title}
-            />
+            <Image src={`/images/posts/cover/${frontMatter.cover}`} fill={true} alt={frontMatter.title} />
           </div>
         )}
         <div className={styles.content}>
@@ -84,7 +77,7 @@ export async function getStaticProps({ params }: StaticPropsParams) {
 export async function getStaticPaths() {
   const notes = getAllNotes();
   return {
-    paths: notes.map((post) => ({
+    paths: notes.map(post => ({
       params: {
         slug: post.slug,
       },

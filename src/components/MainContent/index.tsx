@@ -4,9 +4,7 @@ type MainContentProps = {
   children: React.ReactNode;
 };
 
-const MainContent: React.FC<MainContentProps> = ({
-  children,
-}: MainContentProps) => {
+const MainContent: React.FC<MainContentProps> = ({ children }: MainContentProps) => {
   return <main>{children}</main>;
 };
 

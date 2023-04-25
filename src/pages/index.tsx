@@ -22,20 +22,11 @@ const IndexPage: NextPage<IndexPageProps> = ({ notes }: IndexPageProps) => {
       <NextSeo title="Home Page" description={description} />
       <div className={styles.container}>
         <div>
-          <Image
-            src={`/images/profile.jpg`}
-            width={175}
-            height={175}
-            alt={title}
-          />
+          <Image src={"/images/profile.jpg"} width={175} height={175} alt={title} />
         </div>
         <div>
           <h1>
-            <Translation
-              t={t}
-              i18nKey="me"
-              components={[<strong key="name" />]}
-            ></Translation>
+            <Translation t={t} i18nKey="me" components={[<strong key="name" />]}></Translation>
           </h1>
           <h2>
             <Translation t={t} i18nKey="titles"></Translation>
@@ -60,9 +51,7 @@ const IndexPage: NextPage<IndexPageProps> = ({ notes }: IndexPageProps) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<{ notes: NoteItem[] }> = async ({
-  locale,
-}) => {
+export const getStaticProps: GetStaticProps<{ notes: NoteItem[] }> = async ({ locale }) => {
   const latest5notes = getAllNotes().splice(0, 5);
   return {
     props: {

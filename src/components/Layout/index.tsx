@@ -9,10 +9,7 @@ type LayoutProps = {
   className?: string;
 };
 
-const Layout: React.FC<LayoutProps> = ({
-  children,
-  className,
-}: LayoutProps) => {
+const Layout: React.FC<LayoutProps> = ({ children, className }: LayoutProps) => {
   return (
     <div className={`${styles.layoutContainer} ${className}`}>
       <Navigation />
