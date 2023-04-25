@@ -35,3 +35,13 @@
   @include box-shadow();
   background-color: $background-light-color;
 }
+
+@mixin tag {
+  &::before {
+    content: "#";
+    color: $background-lighter-color;
+  }
+  background-color: $background-darker-color;
+  color: $text-color;
+  font-size: $font-size-sm;
+}

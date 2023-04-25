@@ -43,6 +43,7 @@ $primary-color: #e3e6e3;
 $secondary-color: #59b36a;
 
 $text-color: $primary-color;
+$text-color-grayed: darken($primary-color, 15%);
 $text-color-inverted: $background-light-color;
 $hyperlink-color: $secondary-color;
 $hyperlink-hover-color: darken($hyperlink-color, 15%);

@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppMetadata } from "@/lib/config";
+import { useAppConfig } from "@/lib/config";
 import Link from "next/link";
 
 import styles from "@/styles/components/navigation.module.scss";
@@ -8,7 +8,7 @@ import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
 
 const Navigation = () => {
-  const { menu } = useAppMetadata();
+  const { menu } = useAppConfig();
   const title = "diogodmoreira.com";
   return (
     <nav className={styles.navigationContainer}>

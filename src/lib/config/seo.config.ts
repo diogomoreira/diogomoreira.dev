@@ -1,8 +1,8 @@
 import { ArticleJsonLdProps, DefaultSeoProps, SocialProfileJsonLdProps } from "next-seo";
 import logo from "public/images/logo.png";
-import { AppMetadata } from "./app.config";
+import { appConfig } from "./app.config";
 
-const { siteUrl, siteLocale, title, description, author } = AppMetadata;
+const { siteUrl, siteLocale, title, description, author } = appConfig;
 const authorTwitter = `@${author.twitter}`;
 const titleTemplate = `${title} | %s`;
 
