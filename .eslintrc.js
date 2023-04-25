@@ -3,7 +3,13 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:@next/next/recommended"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "prettier",
+    "plugin:@next/next/recommended",
+  ],
   overrides: [],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -16,5 +22,10 @@ module.exports = {
     "linebreak-style": ["error", "unix"],
     quotes: ["error", "double"],
     semi: ["error", "always"],
+  },
+  settings: {
+    react: {
+      version: "detect",
+    },
   },
 };

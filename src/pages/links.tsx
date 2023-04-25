@@ -1,3 +1,4 @@
+import React from "react";
 import LinkItemDisplay from "@/components/LinkItemDisplay";
 import { LinkItem, getLinks } from "@/lib/content";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
