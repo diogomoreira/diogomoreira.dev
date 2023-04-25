@@ -17,7 +17,7 @@ const SocialIcons = () => {
   return (
     <div className={styles.socialIconsContainer}>
       {social.map(socialItem => (
-        <a key={uuidv4()} href={socialItem.link} target="_blank" rel="noreferrer">
+        <a key={uuidv4()} title={`Link for ${socialItem.key}`} href={socialItem.link} target="_blank" rel="noreferrer">
           <FontAwesomeIcon icon={socialItem.icon} />
         </a>
       ))}
