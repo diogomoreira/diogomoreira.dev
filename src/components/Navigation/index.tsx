@@ -1,3 +1,4 @@
+import React from "react";
 import { useAppMetadata } from "@/lib/config";
 import Link from "next/link";
 

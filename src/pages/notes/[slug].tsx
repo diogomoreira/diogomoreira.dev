@@ -1,3 +1,4 @@
+import React from "react";
 import { useAppMetadata } from "@/lib/config";
 import { articleJsonLd } from "@/lib/config/seo.config";
 import { getAllNotes, getNoteBySlug, mdxToHtml } from "@/lib/content";
@@ -17,7 +18,6 @@ const Note: React.FC<NoteProps> = ({ source, frontMatter }: NoteProps) => {
   return (
     <>
       <NextSeo title={frontMatter.title} description={frontMatter.description} />
-
       <ArticleJsonLd
         url={postUrl}
         title={frontMatter.title}

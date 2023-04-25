@@ -1,3 +1,4 @@
+import React from "react";
 import { useAppMetadata } from "@/lib/config";
 import styles from "@/styles/components/footer.module.scss";
 import SocialIcons from "../SocialIcons";
