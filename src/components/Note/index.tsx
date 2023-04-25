@@ -14,11 +14,7 @@ const Note: React.FC<NoteProps> = ({ note }: NoteProps) => {
     <article className={styles.note}>
       {note.cover && (
         <div className={styles.noteItemCover}>
-          <Image
-            src={`/images/posts/cover/${note.cover}`}
-            alt={note.title}
-            fill={true}
-          />
+          <Image src={`/images/posts/cover/${note.cover}`} alt={note.title} fill={true} />
         </div>
       )}
       <div className={styles.noteItem}>

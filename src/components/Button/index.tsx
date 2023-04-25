@@ -8,11 +8,7 @@ type ButtonProps = {
   href: string;
 };
 
-const Button: React.FC<ButtonProps> = ({
-  children,
-  type,
-  href,
-}: ButtonProps) => {
+const Button: React.FC<ButtonProps> = ({ children, type, href }: ButtonProps) => {
   return (
     <AwesomeButton type={type} cssModule={styles} href={href}>
       {children}

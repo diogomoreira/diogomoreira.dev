@@ -20,14 +20,16 @@ const AcademicPage: NextPage<AcademicProps> = ({ papers }) => {
         <Translation
           i18nKey="academic.teaching.intro"
           t={t}
-          components={[<strong key={"se"} />, <strong key={"stq"} />, <strong key={"dp"} />]}></Translation>
+          components={[<strong key={"se"} />, <strong key={"stq"} />, <strong key={"dp"} />]}
+        ></Translation>
       </p>
       <Section>Publications</Section>
       <p>
         <Translation
           i18nKey="academic.researching.intro"
           t={t}
-          components={[<strong key={"se"} />, <strong key={"stq"} />, <strong key={"dp"} />]}></Translation>{" "}
+          components={[<strong key={"se"} />, <strong key={"stq"} />, <strong key={"dp"} />]}
+        ></Translation>{" "}
         <Translation
           i18nKey="academic.researching.groups"
           t={t}
@@ -44,7 +46,8 @@ const AcademicPage: NextPage<AcademicProps> = ({ papers }) => {
             ),
             orcid: <a title="Link for Orcid" href={`https://orcid.org/${author.orcid}`} />,
             lattes: <a title="Link for Lattes" href={`https://lattes.cnpq.br/${author.lattes}`} />,
-          }}></Translation>
+          }}
+        ></Translation>
       </p>
       <p>
         <Translation
@@ -52,7 +55,8 @@ const AcademicPage: NextPage<AcademicProps> = ({ papers }) => {
           t={t}
           components={{
             email: <a title="Email link for academic purposes" href="mailto:diogo.moreira@ifpb.edu.br" />,
-          }}></Translation>
+          }}
+        ></Translation>
       </p>
       <div className={styles.papers}>
         {papers.map((paper: CustomBibTexEntry) => (

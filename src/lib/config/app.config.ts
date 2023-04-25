@@ -5,7 +5,7 @@ const AppMetadata = {
   title: "Diogo Moreira",
   description: "My thoughts about life, software development, games, music and so forth",
   keywords: ["software development", "teaching"],
-  siteUrl: `https://diogodmoreira.com/`,
+  siteUrl: "https://diogodmoreira.com/",
   siteLocale: "en-US",
   siteVersion: packageJson.version,
   author: {

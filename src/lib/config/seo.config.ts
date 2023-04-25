@@ -1,8 +1,4 @@
-import {
-  ArticleJsonLdProps,
-  DefaultSeoProps,
-  SocialProfileJsonLdProps,
-} from "next-seo";
+import { ArticleJsonLdProps, DefaultSeoProps, SocialProfileJsonLdProps } from "next-seo";
 import logo from "public/images/logo.png";
 import { AppMetadata } from "./app.config";
 
@@ -49,10 +45,7 @@ export const socialProfileJsonLd: SocialProfileJsonLdProps = {
 };
 
 // Inspired by https://github.com/jakejarvis/jarv.is/
-export const articleJsonLd: Pick<
-  ArticleJsonLdProps,
-  "authorName" | "publisherName" | "publisherLogo"
-> = {
+export const articleJsonLd: Pick<ArticleJsonLdProps, "authorName" | "publisherName" | "publisherLogo"> = {
   authorName: [author.name],
   publisherName: siteUrl,
   publisherLogo: `${siteUrl}${logo.src}`,
