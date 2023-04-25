@@ -11,7 +11,6 @@ function getNotesSlugs() {
 }
 
 function getNoteBySlug(slug: string): NoteItem {
-  // TODO: get the real slug
   const realSlug = slug.replace(/\.md$/, "");
   const fullPath = join(notesDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
@@ -19,7 +18,7 @@ function getNoteBySlug(slug: string): NoteItem {
   return { content, ...data, slug: realSlug } as NoteItem;
 }
 
-function getAllNotes(sortFn?: (ts1: Date, ts2: Date) => number): NoteItem[] {
+function getAllNotes(): NoteItem[] {
   const slugs = getNotesSlugs();
   const posts = slugs
     .map(slug => getNoteBySlug(slug))

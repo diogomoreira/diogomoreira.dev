@@ -6,7 +6,7 @@ import rehypePrism from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 
-async function mdxToHtml(content: string, data: any) {
+async function mdxToHtml(content: string, data: Record<string, unknown>) {
   return serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkGfm],
