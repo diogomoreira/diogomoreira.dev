@@ -53,7 +53,7 @@ const IndexPage: NextPage<IndexPageProps> = ({ notes }: IndexPageProps) => {
 };
 
 export const getStaticProps: GetStaticProps<{ notes: NoteItem[] }> = async ({ locale }) => {
-  const latest5notes = getAllNotes().splice(0, 5);
+  const latest5notes: NoteItem[] = getAllNotes().splice(0, 5);
   return {
     props: {
       notes: latest5notes,

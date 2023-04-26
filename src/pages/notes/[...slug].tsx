@@ -1,7 +1,7 @@
 import React from "react";
 import { useAppConfig } from "@/lib/config";
 import { articleJsonLd } from "@/lib/config/seo.config";
-import { getAllNotes, getNoteBySlug, mdxToHtml } from "@/lib/content";
+import { ContentPath, getNoteBySlug, getNotesSlugs, mdxToHtml } from "@/lib/content";
 import styles from "@/styles/pages/notes/slug.module.scss";
 import Giscus from "@giscus/react";
 import { InferGetStaticPropsType } from "next";
@@ -17,8 +17,23 @@ import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 type NoteProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const Note: React.FC<NoteProps> = ({ source, frontMatter }: NoteProps) => {
-  const { siteUrl } = useAppConfig();
+  const { siteUrl, giscus } = useAppConfig();
   const postUrl = `${siteUrl}/notes/${frontMatter.slug}`;
+  const {
+    repo,
+    repoId,
+    category,
+    categoryId,
+    mapping,
+    term,
+    reactionsEnabled,
+    emitMetadata,
+    inputPosition,
+    theme,
+    lang,
+    loading,
+  } = giscus;
+
   return (
     <>
       <NextSeo title={frontMatter.title} description={frontMatter.description} />
@@ -56,7 +71,12 @@ const Note: React.FC<NoteProps> = ({ source, frontMatter }: NoteProps) => {
         </div>
         {frontMatter.cover && (
           <div className={styles.cover}>
-            <Image src={`/images/notes/cover/${frontMatter.cover}`} fill alt={frontMatter.title} sizes="1000px" />
+            <Image
+              src={`${ContentPath.NOTES_COVER_IMAGES}/${frontMatter.cover}`}
+              fill
+              alt={frontMatter.title}
+              sizes="1000px"
+            />
           </div>
         )}
         <div className={styles.content}>
@@ -64,18 +84,18 @@ const Note: React.FC<NoteProps> = ({ source, frontMatter }: NoteProps) => {
         </div>
         <Giscus
           id="note-comments"
-          repo="diogomoreira/diogodmoreira.com"
-          repoId="MDEwOlJlcG9zaXRvcnkzNjM3NTY5NTM="
-          category="General"
-          categoryId="DIC_kwDOFa59mc4CV9_B"
-          mapping="url"
-          term="0"
-          reactionsEnabled="1"
-          emitMetadata="0"
-          inputPosition="bottom"
-          theme="dark_protanopia"
-          lang="en"
-          loading="lazy"
+          repo={repo}
+          repoId={repoId}
+          category={category}
+          categoryId={categoryId}
+          mapping={mapping}
+          term={term}
+          reactionsEnabled={reactionsEnabled}
+          emitMetadata={emitMetadata}
+          inputPosition={inputPosition}
+          theme={theme}
+          lang={lang}
+          loading={loading}
         />
       </article>
     </>
@@ -84,13 +104,13 @@ const Note: React.FC<NoteProps> = ({ source, frontMatter }: NoteProps) => {
 
 type StaticPropsParams = {
   params: {
-    slug: string;
+    slug: string[];
   };
 };
 
-export async function getStaticProps({ params }: StaticPropsParams) {
-  const post = getNoteBySlug(params.slug);
-  const source = await mdxToHtml(post.content, post);
+export async function getStaticProps({ params: { slug } }: StaticPropsParams) {
+  const post = getNoteBySlug(slug);
+  const source = await mdxToHtml(post);
   return {
     props: {
       source,
@@ -100,13 +120,9 @@ export async function getStaticProps({ params }: StaticPropsParams) {
 }
 
 export async function getStaticPaths() {
-  const notes = getAllNotes();
+  const notesSlug = getNotesSlugs();
   return {
-    paths: notes.map(post => ({
-      params: {
-        slug: post.slug,
-      },
-    })),
+    paths: notesSlug.map(noteSlug => ({ params: { slug: noteSlug } })),
     fallback: false,
   };
 }
