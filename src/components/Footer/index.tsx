@@ -2,7 +2,6 @@ import React from "react";
 import { useAppConfig } from "@/lib/config";
 import styles from "@/styles/components/footer.module.scss";
 import SocialIcons from "../SocialIcons";
-import Image from "next/image";
 
 const Footer = () => {
   const {

@@ -31,9 +31,7 @@ const LinksPage: NextPage<LinksPageProps> = ({ links }: LinksPageProps) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<{
-  links: LinkItem[];
-}> = async ({ locale }) => {
+export const getStaticProps: GetStaticProps<{ links: LinkItem[] }> = async ({ locale }) => {
   const links = getLinks();
   return {
     props: {
