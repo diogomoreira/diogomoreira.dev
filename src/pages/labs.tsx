@@ -1,5 +1,4 @@
 import React from "react";
-import ProjectItemDisplay from "@/components/ProjectItemDisplay";
 import { ProjectItem, getProjects } from "@/lib/content";
 import { ColumnCountBreakpoints } from "@/utils/masonry.columns";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
