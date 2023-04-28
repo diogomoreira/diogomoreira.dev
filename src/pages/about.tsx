@@ -5,8 +5,6 @@ import { NextSeo } from "next-seo";
 import styles from "@/styles/pages/about.module.scss";
 import Image from "next/image";
 import { useAppConfig } from "@/lib/config";
-import Section from "@/components/Section";
-import Timeline from "@/components/Timeline";
 
 type AboutPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 

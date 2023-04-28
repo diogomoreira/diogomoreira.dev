@@ -1,14 +1,11 @@
 import React from "react";
 import Section from "@/components/Section";
 import { useAppConfig } from "@/lib/config";
-import { CustomBibTexEntry, PaperItem, getPublicationEntriesSorted } from "@/lib/content";
+import { getPublicationEntriesSorted } from "@/lib/content";
 import styles from "@/styles/pages/academic.module.scss";
-import { faDownload } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import PaperItemDisplay from "@/components/PaperItemDisplay";
 import PapersList from "@/components/PapersList";
 
 type AcademicProps = InferGetStaticPropsType<typeof getStaticProps>;

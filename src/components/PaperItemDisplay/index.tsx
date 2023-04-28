@@ -1,9 +1,6 @@
 import { PaperItem } from "@/lib/content";
 import React from "react";
 import styles from "@/styles/components/paperitem.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload } from "@fortawesome/free-solid-svg-icons";
-import Button from "../Button";
 
 type PaperItemDisplayProps = {
   item: PaperItem;
