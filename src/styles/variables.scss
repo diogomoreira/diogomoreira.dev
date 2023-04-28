@@ -51,7 +51,7 @@ $hyperlink-hover-color: darken($hyperlink-color, 15%);
 $box-shadow-y: 5px;
 $box-shadow-x: 5px;
 $box-shadow-blur: 0px;
-$box-shadow-color: rgba($background-dark-color, 0.5);
+$box-shadow-color: $background-dark-color;
 
 $font-size-base: 16px;
 $font-size-sm: $font-size-base * 0.875 !default;

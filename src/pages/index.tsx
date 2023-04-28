@@ -1,16 +1,17 @@
 import React from "react";
-import NotesList from "@/components/NotesList";
-import Section from "@/components/Section";
-import { useAppConfig } from "@/lib/config";
-import { NoteItem, getAllNotes } from "@/lib/content";
-import styles from "@/styles/pages/index.module.scss";
+import Image from "next/image";
+import Link from "next/link";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
 
-import Image from "next/image";
-import Link from "next/link";
+import NotesList from "@/components/NotesList";
+import Section from "@/components/Section";
+import { useAppConfig } from "@/lib/config";
+import { NoteItem, getAllNotes } from "@/lib/content";
+import styles from "@/styles/pages/index.module.scss";
+import { motion } from "framer-motion";
 
 type IndexPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -22,9 +23,9 @@ const IndexPage: NextPage<IndexPageProps> = ({ notes }: IndexPageProps) => {
     <>
       <NextSeo title="Home Page" description={description} />
       <div className={styles.container}>
-        <div>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 100 }} transition={{ duration: 1 }}>
           <Image src={"/images/profile.jpg"} width={175} height={175} alt={title} />
-        </div>
+        </motion.div>
         <div>
           <h1>
             <Translation t={t} i18nKey="me" components={[<strong key="name" />]}></Translation>

@@ -3,7 +3,6 @@
 
 .linkItemContainer {
   @include card;
-  @include list-item();
   display: grid;
   // grid-template-rows: 200px auto;
   grid-template-columns: 1fr;
@@ -68,14 +67,7 @@
   flex-wrap: wrap;
   font-size: $font-size-sm;
   > * {
-    color: $text-color;
-    padding: $spacer-sm;
-    font-size: $font-size-sm;
-    &::before {
-      content: "#";
-      color: $background-lighter-color;
-    }
-    background-color: $background-darker-color;
+    @include tag();
   }
   @include md-breakpoint {
     border-left: $border-width $border-style $background-lighter-color;

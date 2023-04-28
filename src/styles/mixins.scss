@@ -16,24 +16,17 @@
 @mixin card {
   @include box-shadow();
   @include border();
+  @include border-radius();
   overflow: hidden;
 }
 
 @mixin list-item-time {
-  background-color: $background-color;
-  color: $text-color;
-  padding: $spacer-sm;
-  font-size: $font-size-sm;
 }
 
 @mixin list-item-tag {
-  @include list-item-time();
-  background-color: $background-dark-color;
 }
 
 @mixin list-item {
-  @include box-shadow();
-  background-color: $background-light-color;
 }
 
 @mixin tag {
@@ -44,4 +37,29 @@
   background-color: $background-darker-color;
   color: $text-color;
   font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  padding: $spacer-xs $spacer-sm;
+}
+
+@mixin article-image {
+  margin: $spacer-xl $spacer-sm;
+  position: relative;
+  aspect-ratio: 21/9;
+
+  > img {
+    @include box-shadow();
+    border-radius: $border-radius;
+    object-fit: cover;
+    max-width: 100%;
+  }
+}
+
+%clearfix {
+  &:after,
+  &:before {
+    content: "";
+    display: block;
+    width: 100%;
+    clear: both;
+  }
 }
