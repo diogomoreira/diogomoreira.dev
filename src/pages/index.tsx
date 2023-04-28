@@ -11,7 +11,6 @@ import Section from "@/components/Section";
 import { useAppConfig } from "@/lib/config";
 import { NoteItem, getAllNotes } from "@/lib/content";
 import styles from "@/styles/pages/index.module.scss";
-import { motion } from "framer-motion";
 
 type IndexPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -23,9 +22,9 @@ const IndexPage: NextPage<IndexPageProps> = ({ notes }: IndexPageProps) => {
     <>
       <NextSeo title="Home Page" description={description} />
       <div className={styles.container}>
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 100 }} transition={{ duration: 1 }}>
+        <div>
           <Image src={"/images/profile.jpg"} width={175} height={175} alt={title} />
-        </motion.div>
+        </div>
         <div>
           <h1>
             <Translation t={t} i18nKey="me" components={[<strong key="name" />]}></Translation>

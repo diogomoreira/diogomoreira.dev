@@ -57,11 +57,9 @@ const Note: React.FC<NoteProps> = ({ source, frontMatter }: NoteProps) => {
             <span>{formatDateI18N(frontMatter.timestamp)}</span>
           </time>
           <div className={styles.noteDetailsCategory}>
-            <span>Category:</span>
             <span>{frontMatter.category}</span>
           </div>
           <div className={styles.noteDetailsTags}>
-            <div>Tagged with:</div>
             <div className={styles.noteDetailsTagsList}>
               {frontMatter.tags.map(tag => (
                 <span key={uuid()}>{tag}</span>

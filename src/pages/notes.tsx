@@ -12,10 +12,14 @@ const NotesPage: NextPage<NotesPageProps> = ({ notes }: NotesPageProps) => {
     <>
       <h1>🪴 Notes</h1>
       <p>
-        First: this is digital garden. Is a type of blog that is structured around the concept of organic growth and
-        interconnectedness of ideas (here, we&apos;ll call them <strong>notes</strong>). Unlike traditional blogs that
-        follow a linear chronological order, digital gardens allow the author to cultivate a collection of ideas that
-        evolve and grow over time.
+        <b>First</b>: this is digital garden. Is a type of blog that is structured around the concept of organic growth
+        and interconnectedness of ideas (here, we&apos;ll call them <strong>notes</strong>). Unlike traditional blogs
+        that follow a linear chronological order, digital gardens allow the author to cultivate a collection of ideas
+        that evolve and grow over time.
+      </p>
+      <p>
+        Most of the notes here will be written in Portuguese (Brazil) from the start and then translated to English.
+        Feel free to help me translate some notes if you wish.
       </p>
       <div className={styles.contentContainer}>
         <NotesList notes={notes} />
