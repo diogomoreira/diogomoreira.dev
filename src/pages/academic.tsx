@@ -1,13 +1,15 @@
 import React from "react";
 import Section from "@/components/Section";
 import { useAppConfig } from "@/lib/config";
-import { CustomBibTexEntry, getPublicationEntriesSorted } from "@/lib/content";
+import { CustomBibTexEntry, PaperItem, getPublicationEntriesSorted } from "@/lib/content";
 import styles from "@/styles/pages/academic.module.scss";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import PaperItemDisplay from "@/components/PaperItemDisplay";
+import PapersList from "@/components/PapersList";
 
 type AcademicProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -62,22 +64,7 @@ const AcademicPage: NextPage<AcademicProps> = ({ papers }: AcademicProps) => {
         ></Translation>
       </p>
       <div className={styles.papers}>
-        {papers.map((paper: CustomBibTexEntry) => (
-          <details key={paper.id} className={styles.paperElement}>
-            <summary className={styles.paperTitle}>
-              <h2>{paper.title}</h2>
-              <time>{paper.year}</time>
-            </summary>
-            <p>{paper.abstract}</p>
-            <div className={styles.paperDetails}>
-              <span className={styles.paperAuthor}>{paper.author.join(", ")}</span>
-              {/* TODO: Change it to button */}
-              <a title="Download" href={paper.url} target="_blank" rel="noreferrer">
-                <span>Download</span> <FontAwesomeIcon icon={faDownload} />
-              </a>
-            </div>
-          </details>
-        ))}
+        <PapersList items={papers} />
       </div>
     </>
   );
