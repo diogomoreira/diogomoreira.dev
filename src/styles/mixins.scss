@@ -46,6 +46,10 @@
   position: relative;
   aspect-ratio: 21/9;
 
+  @include md-breakpoint {
+    margin: 0;
+  }
+
   > img {
     @include box-shadow();
     border-radius: $border-radius;
