@@ -1,5 +1,5 @@
 export * from "./content.types";
-export * from "./labs.api";
+export * from "./projects.api";
 export * from "./links.api";
 export * from "./notes";
 export * from "./papers.api";
