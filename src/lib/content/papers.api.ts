@@ -2,24 +2,15 @@ import { BibEntry, parseBibFile } from "bibtex";
 import { readFileSync } from "fs";
 import path, { join } from "path";
 import { ContentPath } from "./paths";
+import { PaperItem } from "./content.types";
 
 const PAPERS_BIBTEX_PATH = path.join(process.cwd(), ContentPath.PAPERS);
 
-export type CustomBibTexEntry = {
-  id: string;
-  title: string;
-  abstract: string;
-  doi: string;
-  year: string;
-  url: string;
-  author: string[];
-};
-
-export function getPublicationEntries(): CustomBibTexEntry[] {
+export function getPublicationEntries(): PaperItem[] {
   const fullPath = join(PAPERS_BIBTEX_PATH, "papers.bib");
   const papersBibFile = readFileSync(fullPath, "utf-8");
   const bibTexEntries = parseBibFile(papersBibFile);
-  const customEntries = bibTexEntries.entries_raw.map<CustomBibTexEntry>((entry: BibEntry) => ({
+  const customEntries = bibTexEntries.entries_raw.map<PaperItem>((entry: BibEntry) => ({
     id: entry._id,
     title: entry.getFieldAsString("title") as string,
     abstract: entry.getFieldAsString("abstract") as string,
@@ -31,6 +22,6 @@ export function getPublicationEntries(): CustomBibTexEntry[] {
   return customEntries;
 }
 
-export function getPublicationEntriesSorted(): CustomBibTexEntry[] {
+export function getPublicationEntriesSorted(): PaperItem[] {
   return getPublicationEntries().sort((firstEntry, secondEntry) => (firstEntry.year > secondEntry.year ? -1 : 1));
 }

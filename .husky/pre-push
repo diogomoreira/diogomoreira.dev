@@ -27,5 +27,5 @@ npm run check-types ||
     false;
 )
 
-# If everything passes... Now we can commit
-echo '✅  Everything is right... commiting'
+# If everything passes... Now we can push
+echo '✅  Everything is right... pushing'

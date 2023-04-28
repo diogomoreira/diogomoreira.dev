@@ -9,13 +9,23 @@ type NoteItem = {
   content: string;
 };
 
-type LabItem = {
+type ProjectItem = {
   title: string;
   timestamp: string;
   description: string;
   stack: string[];
   image: string;
   url: string;
+};
+
+type PaperItem = {
+  id: string;
+  title: string;
+  abstract: string;
+  doi: string;
+  year: string;
+  url: string;
+  author: string[];
 };
 
 type LinkItem = {
@@ -28,4 +38,4 @@ type LinkItem = {
   tags: string[];
 };
 
-export { type NoteItem, type LabItem, type LinkItem };
+export { type NoteItem, type ProjectItem, type LinkItem, type PaperItem };
