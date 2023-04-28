@@ -3,7 +3,6 @@
 
 .labItemContainer {
   @include card;
-  @include list-item();
 
   h1 {
     font-size: $font-size-lg;
@@ -28,8 +27,7 @@
       flex-wrap: wrap;
 
       > * {
-        @include list-item-time();
-        // background-color: $background-dark-color;
+        @include tag();
         font-family: var(--font-family-monospace);
       }
     }

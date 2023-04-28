@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const Navigation = () => {
   const { menu } = useAppConfig();
-  const title = "diogodmoreira.com";
+  const title = "{ diogomoreira }";
   return (
     <nav className={styles.navigationContainer}>
       <Link className={styles.navigationLogo} href={"/"}>
@@ -21,7 +21,6 @@ const Navigation = () => {
           <li key={uuidv4()}>
             <Link className={styles.navigationListItemLink} href={item.link}>
               <FontAwesomeIcon icon={item.icon} />
-              {item.name}
             </Link>
           </li>
         ))}
