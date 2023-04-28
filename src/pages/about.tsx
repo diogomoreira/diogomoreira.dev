@@ -2,15 +2,26 @@ import React from "react";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
+import styles from "@/styles/pages/about.module.scss";
+import Image from "next/image";
+import { useAppConfig } from "@/lib/config";
+import Section from "@/components/Section";
+import Timeline from "@/components/Timeline";
 
 type AboutPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const AboutPage: NextPage<AboutPageProps> = () => {
+  const {
+    author: { name },
+  } = useAppConfig();
   return (
     <>
       <NextSeo title="About me" description="A little more about me" />
 
       <h1>👋🏻 About me</h1>
+      <div className={styles.cover}>
+        <Image src={"/images/pages/about/cover.jpg"} width={1000} height={500} alt={name} />
+      </div>
       <p>
         Welcome to <strong>my website</strong>. Here, I aim to share a glimpse into my life, including my personal
         interests, thoughts on various subjects, and discoveries I&apos;ve made as a technology enthusiast or through my
