@@ -1,7 +1,7 @@
 import React from "react";
 import { useAppConfig } from "@/lib/config";
 import capitalize from "lodash/capitalize";
-import styles from "@/styles/components/social-icons.module.scss";
+import styles from "@/styles/components/socialicons.module.scss";
 import { faGithub, faInstagram, faKeybase, faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { v4 as uuidv4 } from "uuid";

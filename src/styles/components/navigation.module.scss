@@ -3,9 +3,18 @@
 
 .navigationContainer {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
   font-size: $font-size-sm;
+  gap: $spacer-lg;
+  border-bottom: $border-width $border-style $background-lighter-color;
+
+  @include md-breakpoint {
+    flex-direction: row;
+    border-bottom: none;
+  }
+
+  align-items: center;
   padding: $padding-lg $padding-none;
 }
 
@@ -20,15 +29,14 @@
 }
 
 .navigationListItem {
-  display: none;
-
+  font-size: $font-size-lg;
+  @include md-breakpoint {
+    font-size: $font-size-base;
+  }
+  display: flex;
   list-style: none;
   margin: 0 auto;
   padding: 0;
-
-  @include md-breakpoint {
-    display: flex;
-  }
   flex: 1;
   justify-content: flex-end;
   gap: 1.75rem;

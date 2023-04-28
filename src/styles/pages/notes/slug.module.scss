@@ -50,22 +50,12 @@
     flex-wrap: wrap;
     > span {
       @include tag();
-      font-weight: $font-weight-semibold;
-      padding: $spacer-xs $spacer-sm;
     }
   }
 }
 
 .cover {
-  margin: $spacer-xl $spacer-sm;
-  position: relative;
-  aspect-ratio: 21/9;
-
-  > img {
-    @include box-shadow();
-    border-radius: $border-radius;
-    object-fit: cover;
-  }
+  @include article-image();
 }
 
 .content {

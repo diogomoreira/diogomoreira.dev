@@ -1,4 +1,4 @@
-import { LabItem } from "@/lib/content";
+import { ProjectItem } from "@/lib/content";
 import styles from "@/styles/components/labitem.module.scss";
 import formatDateI18N from "@/utils/date.i18.formatter";
 import Image from "next/image";
@@ -6,11 +6,11 @@ import { useRouter } from "next/router";
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 
-type LabItemProps = {
-  item: LabItem;
+type ProjectItemDisplayProps = {
+  item: ProjectItem;
 };
 
-const LabItemDisplay: React.FC<LabItemProps> = ({ item }: LabItemProps) => {
+const ProjectItemDisplay: React.FC<ProjectItemDisplayProps> = ({ item }: ProjectItemDisplayProps) => {
   const router = useRouter();
   return (
     <div className={styles.labItemContainer}>
@@ -41,4 +41,4 @@ const LabItemDisplay: React.FC<LabItemProps> = ({ item }: LabItemProps) => {
   );
 };
 
-export default LabItemDisplay;
+export default ProjectItemDisplay;
