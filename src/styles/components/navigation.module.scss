@@ -7,15 +7,48 @@
   justify-content: space-between;
   font-size: $font-size-sm;
   gap: $spacer-lg;
-  border-bottom: $border-width $border-style $background-lighter-color;
 
   @include md-breakpoint {
     flex-direction: row;
-    border-bottom: none;
   }
 
   align-items: center;
   padding: $padding-lg $padding-none;
+}
+
+.navigationLogoContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menuToggle {
+  display: block;
+  font-size: $font-size-lg;
+
+  > input[type="checkbox"] {
+    width: 35px;
+    height: 35px;
+    // display: none;
+  }
+
+  > input[type="checkbox"] + label:before {
+    font-family: "Font Awesome 5 Free";
+    display: inline-block;
+  }
+
+  > input[type="checkbox"] + label:before {
+    content: "\f0c9";
+  }
+
+  input[type="checkbox"]:checked + label:before {
+    content: "\f805";
+  }
+
+  @include md-breakpoint {
+    display: none;
+  }
 }
 
 .navigationLogo {
@@ -29,19 +62,34 @@
 }
 
 .navigationListItem {
-  font-size: $font-size-lg;
-  @include md-breakpoint {
-    font-size: $font-size-base;
-  }
-  display: flex;
+  font-size: $font-size-base;
+  flex-direction: column;
+  align-items: flex-start;
   list-style: none;
   margin: 0 auto;
   padding: 0;
-  flex: 1;
+  width: 100%;
   justify-content: flex-end;
   gap: 1.75rem;
+  transition: 200ms ease-in-out;
+
+  & [hidden] {
+    transition: 200ms ease-in-out;
+  }
+
+  @include md-breakpoint {
+    display: flex;
+    flex-direction: row;
+  }
 
   & > li {
+    width: 100%;
+    border-bottom: $border-width $border-style $background-light-color;
+
+    @include md-breakpoint {
+      border: none;
+    }
+
     text-align: center;
     text-transform: lowercase;
     letter-spacing: 0px;
@@ -49,6 +97,7 @@
     a {
       text-decoration: none;
       color: $secondary-color;
+      padding: $spacer $spacer-none;
 
       &:hover {
         color: $hyperlink-hover-color;

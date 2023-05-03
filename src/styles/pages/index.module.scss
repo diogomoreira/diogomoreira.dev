@@ -6,12 +6,10 @@
   gap: 2rem;
   align-items: center;
   flex-direction: column;
-  text-align: center;
   margin-bottom: 1rem;
 
   @include md-breakpoint {
     flex-direction: row;
-    text-align: left;
   }
 
   h1 {
@@ -35,9 +33,8 @@
   }
 
   img {
-    @include box-shadow();
     border-radius: 50%;
-    // border: 0.25rem solid $highlight-primary-color;
+    border: 0.25rem solid $background-lighter-color;
   }
 }
 
