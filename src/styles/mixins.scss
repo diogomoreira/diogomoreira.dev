@@ -11,6 +11,7 @@
 
 @mixin border-radius {
   border-radius: $border-radius;
+  overflow: hidden;
 }
 
 @mixin card {
@@ -18,15 +19,6 @@
   @include border();
   @include border-radius();
   overflow: hidden;
-}
-
-@mixin list-item-time {
-}
-
-@mixin list-item-tag {
-}
-
-@mixin list-item {
 }
 
 @mixin tag {
@@ -37,7 +29,7 @@
   background-color: $background-darker-color;
   color: $text-color;
   font-size: $font-size-sm;
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-light;
   padding: $spacer-xs $spacer-sm;
 }
 

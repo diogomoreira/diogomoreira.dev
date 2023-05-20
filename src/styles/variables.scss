@@ -31,16 +31,16 @@ $margin-xl: $spacer-xl;
 $border-width: 1px;
 $border-width-thick: 3px;
 $border-style: solid;
-$border-radius: 5px;
+$border-radius: 0px;
 
-$background-color: #1e1621;
-$background-lighter-color: lighten($background-color, 15%);
+$background-color: #0d1523;
+$background-lighter-color: lighten($background-color, 10%);
 $background-light-color: lighten($background-color, 5%);
 $background-dark-color: darken($background-color, 5%);
-$background-darker-color: darken($background-color, 15%);
+$background-darker-color: darken($background-color, 10%);
 
-$primary-color: #e3e6e3;
-$secondary-color: #59b36a;
+$primary-color: #f3f3f3;
+$secondary-color: #e8a013;
 
 $text-color: $primary-color;
 $text-color-grayed: darken($primary-color, 15%);

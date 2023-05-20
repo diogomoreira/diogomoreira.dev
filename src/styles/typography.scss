@@ -41,7 +41,6 @@ main {
   code[class*="language-"],
   pre[class*="language-"] {
     font-size: $font-size-base !important;
-    font-family: var(--font-family-monospace) !important;
     font-weight: $font-weight-normal;
     white-space: pre-wrap;
   }

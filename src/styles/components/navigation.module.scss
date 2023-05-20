@@ -1,7 +1,21 @@
 @import "@/styles/breakpoints";
 @import "@/styles/variables";
 
+.navigationLayoutContainer {
+  background-color: $background-darker-color;
+  border-bottom: 1px solid $background-lighter-color;
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 9;
+}
+
 .navigationContainer {
+  flex: 1;
+  @include md-breakpoint {
+    max-width: $max-width;
+  }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -13,7 +27,7 @@
   }
 
   align-items: center;
-  padding: $padding-lg $padding-none;
+  padding: $padding-lg $padding-lg;
 }
 
 .navigationLogoContainer {
@@ -67,42 +81,13 @@
   align-items: flex-start;
   list-style: none;
   margin: 0 auto;
-  padding: 0;
-  width: 100%;
+  padding: $padding-none;
   justify-content: flex-end;
-  gap: 1.75rem;
-  transition: 200ms ease-in-out;
-
-  & [hidden] {
-    transition: 200ms ease-in-out;
-  }
+  gap: $spacer;
 
   @include md-breakpoint {
     display: flex;
     flex-direction: row;
-  }
-
-  & > li {
-    width: 100%;
-    border-bottom: $border-width $border-style $background-light-color;
-
-    @include md-breakpoint {
-      border: none;
-    }
-
-    text-align: center;
-    text-transform: lowercase;
-    letter-spacing: 0px;
-
-    a {
-      text-decoration: none;
-      color: $secondary-color;
-      padding: $spacer $spacer-none;
-
-      &:hover {
-        color: $hyperlink-hover-color;
-      }
-    }
   }
 }
 
@@ -110,4 +95,23 @@
   display: flex;
   gap: $spacer-sm;
   align-items: center;
+  flex: 1;
+  text-align: center;
+  text-transform: lowercase;
+  letter-spacing: 0px;
+  color: $secondary-color;
+  text-decoration: none;
+  transition: 200ms ease-in-out;
+  &:hover {
+    color: $hyperlink-hover-color;
+    transition: 200ms ease-in-out;
+  }
+}
+
+.navigationListItemIcon {
+  min-width: 30px;
+}
+
+.navigationListItemLabel {
+  padding: $spacer $spacer-none;
 }

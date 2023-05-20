@@ -12,7 +12,8 @@
 
 .note {
   display: flex;
-  @include card();
+  padding: $padding-lg $padding-none;
+  gap: $spacer;
 }
 
 .noteItem {
@@ -21,11 +22,17 @@
   display: flex;
   flex-direction: column;
   gap: $spacer-sm;
-  padding: $padding-base;
+
+  > time {
+    border-left: 3px $border-style $background-lighter-color;
+    padding-left: $spacer;
+    font-weight: $font-weight-light;
+    font-size: $font-size-sm;
+  }
 
   h1 {
     font-weight: $font-weight-semibold;
-    font-size: $font-size-heading-h5;
+    font-size: $font-size-heading-h3;
     margin: $margin-none;
   }
 
@@ -42,6 +49,7 @@
   flex: 1;
   position: relative;
   aspect-ratio: 16/9;
+  @include border-radius();
 
   > img {
     object-fit: cover;
@@ -89,4 +97,14 @@
   margin-top: 0;
   font-weight: $font-weight-light;
   font-size: $font-size-sm;
+}
+
+.noteTags {
+  display: flex;
+  gap: $spacer-sm;
+  font-size: $font-size-sm;
+
+  > * {
+    @include tag();
+  }
 }
