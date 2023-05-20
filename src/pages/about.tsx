@@ -21,11 +21,6 @@ const AboutPage: NextPage<AboutPageProps> = () => {
         <Image src={"/images/pages/about/cover.jpg"} width={1000} height={500} alt={name} />
       </div>
       <p>
-        Welcome to <strong>my website</strong>. Here, I aim to share a glimpse into my life, including my personal
-        interests, thoughts on various subjects, and discoveries I&apos;ve made as a technology enthusiast or through my
-        academic research.
-      </p>
-      <p>
         For those who are new here, let me introduce myself. My name is <strong>Diogo Dantas Moreira</strong>, and I
         hold a degree in <strong>System Analysis and Development</strong> from the{" "}
         <a href="https://ifpb.edu.br">Federal Institute of Paraíba</a>, where I later worked as an adjunct professor. I
