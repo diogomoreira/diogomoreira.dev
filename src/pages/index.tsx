@@ -32,6 +32,9 @@ const IndexPage: NextPage<IndexPageProps> = ({ notes }: IndexPageProps) => {
           <h2>
             <Translation t={t} i18nKey="titles"></Translation>
           </h2>
+          <p>
+            Read <Link href={"/about"}>more about me</Link>
+          </p>
         </div>
       </div>
       <div>
