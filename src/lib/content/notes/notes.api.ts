@@ -15,7 +15,7 @@ function getNoteBySlug(slug: string[]): NoteItem {
 }
 
 function getNotesSlugs(contentDir?: string): string[][] {
-  const dir = contentDir || notesDirectory;
+  const dir = contentDir ?? notesDirectory;
   const paths: string[][] = [];
   fs.readdirSync(dir).forEach(file => {
     const path = `${dir}/${file}`;
