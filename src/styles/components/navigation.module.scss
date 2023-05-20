@@ -46,18 +46,6 @@
     height: 35px;
   }
 
-  > input[type="checkbox"] + label:before {
-    display: inline-block;
-  }
-
-  > input[type="checkbox"] + label:before {
-    content: "\f0c9";
-  }
-
-  input[type="checkbox"]:checked + label:before {
-    content: "\f805";
-  }
-
   @include md-breakpoint {
     display: none;
   }
