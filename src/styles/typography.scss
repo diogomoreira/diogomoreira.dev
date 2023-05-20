@@ -1,0 +1,58 @@
+main {
+  font-size: $font-size-base;
+  font-weight: $font-weight-light;
+  // Headings
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: $font-size-heading-h1;
+    font-weight: $font-weight-bold;
+    line-height: $headings-line-height;
+    margin: $margin-base 0;
+  }
+
+  h1 {
+    font-size: $font-size-heading-h1;
+  }
+
+  h2 {
+    font-size: $font-size-heading-h2;
+  }
+
+  h3 {
+    font-size: $font-size-heading-h3;
+  }
+
+  h4 {
+    font-size: $font-size-heading-h4;
+  }
+
+  p {
+    margin: $margin-base 0;
+    line-height: $line-height-lg;
+  }
+
+  /*
+    * Workaround due to PrismJS
+    */
+  code[class*="language-"],
+  pre[class*="language-"] {
+    font-size: $font-size-base !important;
+    font-weight: $font-weight-normal;
+    white-space: pre-wrap;
+  }
+
+  a {
+    text-decoration: none;
+    transition: 200ms;
+    color: $hyperlink-color;
+
+    &:hover {
+      color: $hyperlink-hover-color;
+      transition: 200ms;
+    }
+  }
+}

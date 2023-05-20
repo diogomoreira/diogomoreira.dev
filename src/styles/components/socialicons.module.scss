@@ -1,0 +1,19 @@
+@import "@/styles/variables";
+.socialIconsContainer {
+  display: flex;
+  gap: $spacer;
+  margin: 1rem 0;
+
+  a {
+    font-size: $font-size-lg;
+    color: $hyperlink-color;
+    font-weight: 400;
+    text-decoration: none;
+    transition: 200ms;
+
+    &:hover {
+      color: $hyperlink-hover-color;
+      transition: 200ms;
+    }
+  }
+}
