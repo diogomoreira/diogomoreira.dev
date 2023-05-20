@@ -8,9 +8,9 @@ about software development, games, photography, life and so forth.
 The following directories and their contents are Copyright Diogo Dantas Moreira.
 You may not reuse anything therein without my permission:
 
-- content/
-  - posts
+- public/
   - images
+- src/content
 
 All other directories and files are MIT Licensed as described below. If you do
 use them, a link back to http://github.com/diogomoreira would be appreciated,

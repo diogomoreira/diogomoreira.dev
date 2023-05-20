@@ -1,0 +1,48 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+.labItemContainer {
+  @include card;
+
+  h1 {
+    font-size: $font-size-lg;
+    margin: $spacer-none;
+  }
+
+  time {
+    font-size: $font-size-sm;
+  }
+
+  p {
+    font-size: $font-size-sm;
+  }
+
+  footer {
+    font-size: $font-size-sm;
+    display: flex;
+    flex-direction: column;
+    div {
+      display: flex;
+      gap: $spacer-sm;
+      flex-wrap: wrap;
+
+      > * {
+        @include tag();
+        font-family: var(--font-family-monospace);
+      }
+    }
+  }
+}
+
+.labItemImageContainer {
+  position: relative;
+  aspect-ratio: 16/9;
+
+  > img {
+    object-fit: cover;
+  }
+}
+
+.labItemDetails {
+  padding: $padding-base;
+}

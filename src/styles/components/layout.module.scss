@@ -1,0 +1,8 @@
+@import "@/styles/variables.scss";
+@import "@/styles/breakpoints.scss";
+
+.layoutContainer {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: $spacer-lg;
+}
