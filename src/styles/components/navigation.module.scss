@@ -44,11 +44,9 @@
   > input[type="checkbox"] {
     width: 35px;
     height: 35px;
-    // display: none;
   }
 
   > input[type="checkbox"] + label:before {
-    font-family: "Font Awesome 5 Free";
     display: inline-block;
   }
 
