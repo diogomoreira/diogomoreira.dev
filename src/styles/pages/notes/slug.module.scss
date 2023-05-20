@@ -1,0 +1,93 @@
+@import "@/styles/variables.scss";
+@import "@/styles/mixins.scss";
+
+.noteDescription {
+  color: $text-color-grayed;
+  font-size: $font-size-sm;
+}
+
+.noteDetails {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  @include md-breakpoint {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  border-top: $border-width $border-style $background-light-color;
+  padding: $spacer $spacer-none;
+  font-size: $font-size-sm;
+  gap: $spacer;
+
+  > * {
+    align-items: center;
+  }
+
+  .noteDetailsTimestamp {
+    display: flex;
+    gap: $spacer-sm;
+    > *:not(:first-child) {
+      font-weight: $font-weight-light;
+    }
+  }
+
+  .noteDetailsCategory {
+    display: flex;
+    gap: $spacer-sm;
+    font-weight: $font-weight-light;
+    > span:not(:first-child) {
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  .noteDetailsTags {
+    display: flex;
+    align-items: center;
+    gap: $spacer-sm;
+    font-weight: $font-weight-light;
+  }
+
+  .noteDetailsTagsList {
+    display: flex;
+    align-items: center;
+    gap: $spacer-sm;
+    flex-wrap: wrap;
+    > span {
+      @include tag();
+    }
+  }
+}
+
+.cover {
+  @include article-image();
+}
+
+.content {
+  line-height: $line-height-lg;
+
+  p {
+    margin: $margin-lg 0;
+    code {
+      @include border-radius();
+      font-family: var(--font-family-monospace);
+      background-color: $background-lighter-color;
+      padding: $spacer-xs;
+    }
+  }
+
+  ul {
+    padding: $padding-none $padding-lg;
+    margin: $margin-lg $margin-none;
+    list-style: square;
+  }
+
+  blockquote {
+    @include border-radius();
+    @include box-shadow();
+    background-color: $background-lighter-color;
+    padding: $spacer-sm $spacer;
+    margin: $spacer-xl $spacer-sm;
+  }
+}

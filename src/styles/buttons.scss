@@ -1,0 +1,12 @@
+@import "@/styles/mixins.scss";
+
+button {
+  @include card();
+  background-color: $background-darker-color;
+  color: $text-color;
+  padding: $spacer-sm $spacer;
+  display: flex;
+  gap: $spacer-xs;
+  align-items: center;
+  justify-content: center;
+}

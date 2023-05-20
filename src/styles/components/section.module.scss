@@ -1,0 +1,6 @@
+@import "@/styles/variables.scss";
+
+.section {
+  padding: $padding-base $padding-none;
+  border-bottom: 1px solid $background-lighter-color;
+}

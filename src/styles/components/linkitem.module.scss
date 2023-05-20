@@ -1,0 +1,84 @@
+@import "@/styles/variables";
+@import "@/styles/mixins";
+
+.linkItemContainer {
+  @include card;
+  display: grid;
+  // grid-template-rows: 200px auto;
+  grid-template-columns: 1fr;
+  gap: $spacer-sm;
+  @include md-breakpoint {
+    grid-template-columns: 200px 1fr;
+  }
+
+  h1 {
+    font-size: $font-size-lg;
+    margin: $spacer-none;
+  }
+
+  time {
+    font-size: $font-size-sm;
+  }
+
+  p {
+    font-size: $font-size-sm;
+    margin: $spacer-sm $spacer-none;
+  }
+
+  footer {
+    font-size: $font-size-sm;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.linkItemImageContainer {
+  position: relative;
+  min-height: 200px;
+  img {
+    object-fit: cover;
+  }
+}
+
+.linkItemDetails {
+  padding: $padding-base;
+  h1 {
+    font-size: $font-size-heading-h5;
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-base;
+  }
+}
+
+.linkItemInfo {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+  @include md-breakpoint {
+    flex-direction: row;
+    align-items: center;
+  }
+  gap: $spacer-sm;
+}
+
+.linkItemTags {
+  display: flex;
+  gap: $spacer-sm;
+  flex-wrap: wrap;
+  font-size: $font-size-sm;
+  > * {
+    @include tag();
+  }
+  @include md-breakpoint {
+    border-left: $border-width $border-style $background-lighter-color;
+    padding-left: $spacer;
+    margin-left: $spacer;
+  }
+}
+
+.linkItemDate {
+  display: flex;
+  align-items: center;
+  gap: $spacer-sm;
+  margin: $spacer-sm $spacer-none;
+}

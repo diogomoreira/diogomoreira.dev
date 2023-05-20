@@ -1,0 +1,45 @@
+@import "@/styles/variables.scss";
+@import "@/styles/breakpoints.scss";
+@import "@/styles/mixins";
+
+.paperElement {
+  @include card();
+  p {
+    font-weight: $font-weight-light;
+    font-size: $font-size-sm;
+    color: $text-color;
+    padding: $padding-sm $padding-base;
+  }
+}
+
+.paperTitle {
+  padding: $padding-base $padding-base;
+  background-color: $background-lighter-color;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  h2 {
+    margin: 0;
+    font-size: $font-size-base;
+  }
+}
+
+.paperDetails {
+  display: flex;
+  background-color: $background-darker-color;
+  padding: $padding-base;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-light;
+  justify-content: space-between;
+  gap: $spacer;
+  align-items: center;
+}
+
+.paperYear {
+  color: $primary-color;
+}
+
+.paperDownloadButton {
+  padding: $padding-sm $padding-xl;
+}

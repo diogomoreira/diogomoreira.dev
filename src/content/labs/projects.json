@@ -1,0 +1,10 @@
+[
+  {
+    "title": "diogodmoreira.com@v1.1",
+    "timestamp": "2022-07-01",
+    "description": "This is the repository with the source code for the site in the first version, made with Gatsby. Feel free to fork and create your own site if you want",
+    "stack": ["gatsby", "react", "styled-components", "algolia", "netlify cms", "typescript", "i18n"],
+    "image": "/images/labs/diogodmoreira.com-gatsby.png",
+    "url": "https://github.com/diogomoreira/diogodmoreira.com/releases/tag/v1.1"
+  }
+]

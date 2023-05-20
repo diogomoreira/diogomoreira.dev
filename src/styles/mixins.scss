@@ -1,0 +1,61 @@
+@import "@/styles/variables";
+@import "@/styles/breakpoints";
+
+@mixin box-shadow {
+  box-shadow: $box-shadow-x $box-shadow-y $box-shadow-blur $box-shadow-color;
+}
+
+@mixin border {
+  border: $border-width $border-style $background-lighter-color;
+}
+
+@mixin border-radius {
+  border-radius: $border-radius;
+  overflow: hidden;
+}
+
+@mixin card {
+  @include box-shadow();
+  @include border();
+  @include border-radius();
+  overflow: hidden;
+}
+
+@mixin tag {
+  &::before {
+    content: "#";
+    color: $background-lighter-color;
+  }
+  background-color: $background-darker-color;
+  color: $text-color;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-light;
+  padding: $spacer-xs $spacer-sm;
+}
+
+@mixin article-image {
+  margin: $spacer-xl $spacer-sm;
+  position: relative;
+  aspect-ratio: 21/9;
+
+  @include md-breakpoint {
+    margin: 0;
+  }
+
+  > img {
+    @include box-shadow();
+    border-radius: $border-radius;
+    object-fit: cover;
+    max-width: 100%;
+  }
+}
+
+%clearfix {
+  &:after,
+  &:before {
+    content: "";
+    display: block;
+    width: 100%;
+    clear: both;
+  }
+}

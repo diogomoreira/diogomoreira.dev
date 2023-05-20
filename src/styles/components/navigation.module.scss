@@ -1,0 +1,103 @@
+@import "@/styles/breakpoints";
+@import "@/styles/variables";
+
+.navigationLayoutContainer {
+  background-color: $background-darker-color;
+  border-bottom: 1px solid $background-lighter-color;
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 9;
+}
+
+.navigationContainer {
+  flex: 1;
+  @include md-breakpoint {
+    max-width: $max-width;
+  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: $font-size-sm;
+  gap: $spacer-lg;
+
+  @include md-breakpoint {
+    flex-direction: row;
+  }
+
+  align-items: center;
+  padding: $padding-lg $padding-lg;
+}
+
+.navigationLogoContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menuToggle {
+  display: block;
+  font-size: $font-size-lg;
+
+  > input[type="checkbox"] {
+    width: 35px;
+    height: 35px;
+  }
+
+  @include md-breakpoint {
+    display: none;
+  }
+}
+
+.navigationLogo {
+  font-family: var(--font-family-monospace);
+  text-transform: lowercase;
+  color: $text-color;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+}
+
+.navigationListItem {
+  font-size: $font-size-base;
+  flex-direction: column;
+  align-items: flex-start;
+  list-style: none;
+  margin: 0 auto;
+  padding: $padding-none;
+  justify-content: flex-end;
+  gap: $spacer;
+
+  @include md-breakpoint {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.navigationListItemLink {
+  display: flex;
+  gap: $spacer-sm;
+  align-items: center;
+  flex: 1;
+  text-align: center;
+  text-transform: lowercase;
+  letter-spacing: 0px;
+  color: $secondary-color;
+  text-decoration: none;
+  transition: 200ms ease-in-out;
+  &:hover {
+    color: $hyperlink-hover-color;
+    transition: 200ms ease-in-out;
+  }
+}
+
+.navigationListItemIcon {
+  min-width: 30px;
+}
+
+.navigationListItemLabel {
+  padding: $spacer $spacer-none;
+}
