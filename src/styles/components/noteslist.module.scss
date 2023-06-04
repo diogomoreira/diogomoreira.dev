@@ -7,104 +7,44 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: $spacer;
 }
 
 .note {
   display: flex;
-  padding: $padding-lg $padding-none;
-  gap: $spacer;
+}
+
+.noteItemContainer {
+  border-bottom: $border-width $border-style $background-lighter-color;
+  padding: $padding-base $padding-none;
+
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
 .noteItem {
-  flex: 3;
+  flex: 1;
   justify-content: space-between;
+  align-items: center;
   display: flex;
-  flex-direction: column;
   gap: $spacer-sm;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-light;
+  align-items: flex-start;
+  flex-direction: column;
 
-  > time {
-    border-left: 3px $border-style $background-lighter-color;
-    padding-left: $spacer;
-    font-weight: $font-weight-light;
-    font-size: $font-size-sm;
+  @include md-breakpoint {
+    flex-direction: row;
   }
 
   h1 {
-    font-weight: $font-weight-semibold;
-    font-size: $font-size-heading-h3;
+    font-weight: $font-weight-normal;
+    font-size: $font-size-base;
     margin: $margin-none;
+    flex: 1;
   }
 
-  p {
-    margin: $margin-none;
-  }
-
-  article {
-    display: flex;
-  }
-}
-
-.noteItemCover {
-  flex: 1;
-  position: relative;
-  aspect-ratio: 16/9;
-  @include border-radius();
-
-  > img {
-    object-fit: cover;
-  }
-}
-
-.noteDetails {
-  display: flex;
-  justify-content: flex-start;
-  font-size: $font-size-sm;
-
-  > span {
-    font-weight: $font-weight-semibold;
-  }
-
-  > ul {
-    padding: $spacer-none;
-    display: flex;
-    gap: $spacer-sm;
-  }
-
-  > div {
-    display: none;
-    align-items: center;
-    gap: $spacer-sm;
-  }
-
-  @include md-breakpoint {
-    align-items: center;
-    > * {
-      padding: $padding-none $padding-base $padding-none $padding-none;
-      &:not(:first-child) {
-        border-left: 1px solid $background-lighter-color;
-        padding: $padding-none $padding-base;
-      }
-    }
-
-    > div {
-      display: flex;
-    }
-  }
-}
-
-.noteDescription {
-  margin-top: 0;
-  font-weight: $font-weight-light;
-  font-size: $font-size-sm;
-}
-
-.noteTags {
-  display: flex;
-  gap: $spacer-sm;
-  font-size: $font-size-sm;
-
-  > * {
-    @include tag();
+  > time {
+    color: $text-color;
   }
 }
