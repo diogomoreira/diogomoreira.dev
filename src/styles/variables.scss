@@ -46,7 +46,7 @@ $text-color: $primary-color;
 $text-color-grayed: darken($primary-color, 15%);
 $text-color-inverted: $background-light-color;
 $hyperlink-color: $secondary-color;
-$hyperlink-hover-color: darken($hyperlink-color, 15%);
+$hyperlink-hover-color: lighten($hyperlink-color, 15%);
 
 $box-shadow-y: 5px;
 $box-shadow-x: 5px;

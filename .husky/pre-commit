@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-echo '🏗️  Styling, testing and building before commit...'
+echo '🔧  Styling, testing and building before commit...'
 
 # Check Prettier standards
 npm run format ||
@@ -28,4 +28,4 @@ npm run check-types ||
 )
 
 # If everything passes... Now we can push
-echo '✅  Everything is right... pushing'
+echo '✅  Everything is right... commiting'
