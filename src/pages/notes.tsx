@@ -4,6 +4,7 @@ import { NoteItem, getAllNotes } from "@/lib/content";
 import styles from "@/styles/pages/notes.module.scss";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { compareDesc } from "date-fns";
 
 type NotesPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -31,7 +32,9 @@ const NotesPage: NextPage<NotesPageProps> = ({ notes }: NotesPageProps) => {
 export const getStaticProps: GetStaticProps<{
   notes: NoteItem[];
 }> = async ({ locale }) => {
-  const notes = getAllNotes();
+  const notes = (await getAllNotes()).sort((noteA, noteB) =>
+    compareDesc(new Date(noteA.timestamp), new Date(noteB.timestamp)),
+  );
   return {
     props: {
       notes,

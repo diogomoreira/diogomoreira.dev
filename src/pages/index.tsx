@@ -11,6 +11,7 @@ import Section from "@/components/Section";
 import { useAppConfig } from "@/lib/config";
 import { NoteItem, getAllNotes } from "@/lib/content";
 import styles from "@/styles/pages/index.module.scss";
+import { compareDesc } from "date-fns";
 
 type IndexPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -56,10 +57,13 @@ const IndexPage: NextPage<IndexPageProps> = ({ notes }: IndexPageProps) => {
 };
 
 export const getStaticProps: GetStaticProps<{ notes: NoteItem[] }> = async ({ locale }) => {
-  const latest5notes: NoteItem[] = getAllNotes().splice(0, 5);
+  const latest5notes: NoteItem[] = (await getAllNotes()).sort((noteA, noteB) =>
+    compareDesc(new Date(noteA.timestamp), new Date(noteB.timestamp)),
+  );
+
   return {
     props: {
-      notes: latest5notes,
+      notes: latest5notes.splice(0, 5),
       ...(await serverSideTranslations(locale || "en", ["index"])),
     },
   };
