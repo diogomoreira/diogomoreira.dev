@@ -1,9 +1,9 @@
 @import "@/styles/breakpoints";
 @import "@/styles/variables";
+@import "@/styles/mixins";
 
 .navigationLayoutContainer {
   background-color: $background-darker-color;
-  border-bottom: 1px solid $background-lighter-color;
   display: flex;
   justify-content: center;
   position: sticky;
@@ -27,7 +27,7 @@
   }
 
   align-items: center;
-  padding: $padding-lg $padding-lg;
+  padding: $padding-lg;
 }
 
 .navigationLogoContainer {
@@ -52,50 +52,72 @@
 }
 
 .navigationLogo {
-  font-family: var(--font-family-monospace);
-  text-transform: lowercase;
   color: $text-color;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: $spacer;
   text-decoration: none;
+
+  img {
+    @include border();
+  }
+
+  div {
+    font-weight: $font-weight-normal;
+    font-size: $font-size-heading-h6;
+    span:first-child {
+      font-weight: $font-weight-semibold;
+    }
+  }
 }
 
 .navigationListItem {
-  font-size: $font-size-base;
   flex-direction: column;
   align-items: flex-start;
+  width: 100%;
   list-style: none;
   margin: 0 auto;
   padding: $padding-none;
   justify-content: flex-end;
-  gap: $spacer;
+  gap: $spacer-xs;
 
   @include md-breakpoint {
     display: flex;
     flex-direction: row;
+    align-items: center;
   }
 }
 
+.navigationItemThemeToggle {
+  padding: $padding-base;
+}
+
 .navigationListItemLink {
+  background-color: $background-dark-color;
   display: flex;
-  gap: $spacer-sm;
+  gap: $spacer-xs;
   align-items: center;
   flex: 1;
   text-align: center;
   text-transform: lowercase;
   letter-spacing: 0px;
-  color: $secondary-color;
+  color: $text-color;
   text-decoration: none;
   transition: 200ms ease-in-out;
   &:hover {
-    color: $hyperlink-hover-color;
     transition: 200ms ease-in-out;
+    background-color: $background-light-color;
   }
+  padding: $padding-none $padding-base;
+}
+
+.navigationListItemCurrent {
+  background-color: $background-lighter-color;
 }
 
 .navigationListItemIcon {
-  min-width: 30px;
+  min-width: 15px;
+  max-height: 15px;
 }
 
 .navigationListItemLabel {
