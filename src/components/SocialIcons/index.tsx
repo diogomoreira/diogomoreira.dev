@@ -2,9 +2,10 @@ import React from "react";
 import { useAppConfig } from "@/lib/config";
 import capitalize from "lodash/capitalize";
 import styles from "@/styles/components/socialicons.module.scss";
-import { faGithub, faInstagram, faKeybase, faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faGithub, faInstagram, faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { v4 as uuidv4 } from "uuid";
+import { faKey } from "@fortawesome/free-solid-svg-icons";
 
 const SocialIcons = () => {
   const {
@@ -16,7 +17,7 @@ const SocialIcons = () => {
     { key: "github", link: `https://github.com/${github}`, icon: faGithub },
     { key: "twitter", link: `https://twitter.com/${twitter}`, icon: faTwitter },
     { key: "linkedin", link: `https://linkedin.com/in/${linkedin}`, icon: faLinkedin },
-    { key: "keybase", link: `https://keybase.io/${keybase}`, icon: faKeybase },
+    { key: "keybase", link: `https://keybase.io/${keybase}`, icon: faKey },
   ];
 
   return (

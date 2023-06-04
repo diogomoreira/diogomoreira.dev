@@ -14,7 +14,7 @@ const NotesList: React.FC<NotesListProps> = ({ notes }: NotesListProps) => {
       {notes.length > 0 ? (
         <ul className={styles.notesContainer}>
           {notes?.map(note => (
-            <li key={note.slug}>
+            <li key={note.slug} className={styles.noteItemContainer}>
               <Note note={note} />
             </li>
           ))}
