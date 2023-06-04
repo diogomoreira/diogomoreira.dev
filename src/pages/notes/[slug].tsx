@@ -1,7 +1,7 @@
 import React from "react";
 import { useAppConfig } from "@/lib/config";
 import { articleJsonLd } from "@/lib/config/seo.config";
-import { ContentPath, getNoteBySlug, getNotesSlugs, mdxToHtml } from "@/lib/content";
+import { ContentPath, getNoteByPath, getNotesSlugs, mdxToHtml } from "@/lib/content";
 import styles from "@/styles/pages/notes/slug.module.scss";
 import Giscus from "@giscus/react";
 import { InferGetStaticPropsType } from "next";
@@ -102,12 +102,13 @@ const Note: React.FC<NoteProps> = ({ source, frontMatter }: NoteProps) => {
 
 type StaticPropsParams = {
   params: {
-    slug: string[];
+    slug: string;
   };
 };
 
-export async function getStaticProps({ params: { slug } }: StaticPropsParams) {
-  const post = getNoteBySlug(slug);
+export async function getStaticProps({ params }: StaticPropsParams) {
+  const { slug } = params;
+  const post = await getNoteByPath(slug);
   const source = await mdxToHtml(post);
   return {
     props: {
@@ -118,9 +119,9 @@ export async function getStaticProps({ params: { slug } }: StaticPropsParams) {
 }
 
 export async function getStaticPaths() {
-  const notesSlug = getNotesSlugs();
+  const notes = await getNotesSlugs();
   return {
-    paths: notesSlug.map(noteSlug => ({ params: { slug: noteSlug } })),
+    paths: notes.map(({ slug }) => ({ params: { slug } })),
     fallback: false,
   };
 }
