@@ -6,6 +6,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { v4 as uuidv4 } from "uuid";
+import sizeOf from "image-size";
 
 type LinksPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -20,7 +21,13 @@ const LinksPage: NextPage<LinksPageProps> = ({ links }: LinksPageProps) => {
         some recommendations for things I&apos;ve been loving. Take a peek and see if anything catches your fancy! Who
         knows, you might just find your new obsession.
       </p>
-      <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1 }}>
+      <ResponsiveMasonry
+        columnsCountBreakPoints={{
+          576: 1,
+          768: 3,
+          1024: 4,
+        }}
+      >
         <Masonry gutter="1rem">
           {links.map(item => (
             <LinkItemDisplay key={uuidv4()} item={item} />
@@ -33,6 +40,11 @@ const LinksPage: NextPage<LinksPageProps> = ({ links }: LinksPageProps) => {
 
 export const getStaticProps: GetStaticProps<{ links: LinkItem[] }> = async ({ locale }) => {
   const links = getLinks();
+  links.forEach(link => {
+    const imageSize = sizeOf(`public/images/links/${link.image}`);
+    link.imageWidth = imageSize.width;
+    link.imageHeight = imageSize.height;
+  });
   return {
     props: {
       links: links,

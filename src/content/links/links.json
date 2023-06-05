@@ -79,5 +79,23 @@
     "image": "kid-cudi-man-on-the-moon.webp",
     "publishDate": "2023-01-31",
     "tags": ["music", "hip-hop"]
+  },
+  {
+    "title": "FLCL",
+    "type": "tvseries",
+    "link": "https://www.adultswim.com/videos/flcl",
+    "description": "Naota Nandaba is an ordinary sixth grader living in a city where nothing amazing ever seems to happen. After his brother Tasuku leaves town to play baseball in America, Naota takes it upon himself to look after everything Tasuku left behind. Little does Naota know, however, that his mundane existence is on the verge of being changed forever.",
+    "image": "flcl.jpeg",
+    "publishDate": "2023-06-04",
+    "tags": ["anime", "ova", "comedy"]
+  },
+  {
+    "title": "Phoebe Bridgers - Punisher",
+    "type": "music",
+    "link": "https://open.spotify.com/album/6Pp6qGEywDdofgFC1oFbSH?si=WZktdFvAQNGVHrbM_maTAw",
+    "description": "Punisher is the second studio album by American singer-songwriter Phoebe Bridgers. Released in 2020, the album showcases Bridgers' introspective and emotionally charged songwriting, delving into themes of love, loss, and existential musings.",
+    "image": "punisher_album_cover.jpg",
+    "publishDate": "2023-05-10",
+    "tags": ["indie", "folk", "rock", "singer-songwriter"]
   }
 ]
