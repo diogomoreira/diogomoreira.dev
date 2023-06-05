@@ -24,9 +24,7 @@ const LinkItemDisplay: React.FC<LinkItemDisplayProps> = ({ item }: LinkItemDispl
   return (
     <div className={styles.linkItemContainer}>
       <div className={styles.linkItemImageContainer}>
-        <a href={item.link} target="_blank" rel="noreferrer">
-          <Image alt={item.title} src={`/images/links/${item.image}`} fill className={styles.linkItemImage} />
-        </a>
+        <Image alt={item.title} src={`/images/links/${item.image}`} fill className={styles.linkItemImage} />
       </div>
       <div className={styles.linkItemDetails}>
         <a href={item.link} target="_blank" rel="noreferrer">
