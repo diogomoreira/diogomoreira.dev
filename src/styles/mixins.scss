@@ -46,7 +46,7 @@
     @include box-shadow();
     border-radius: $border-radius;
     object-fit: cover;
-    max-width: 100%;
+    width: 100%;
   }
 }
 
