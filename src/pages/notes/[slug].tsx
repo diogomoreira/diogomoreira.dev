@@ -69,12 +69,7 @@ const Note: React.FC<NoteProps> = ({ source, frontMatter }: NoteProps) => {
         </div>
         {frontMatter.cover && (
           <div className={styles.cover}>
-            <Image
-              src={`${ContentPath.NOTES_COVER_IMAGES}/${frontMatter.cover}`}
-              fill
-              alt={frontMatter.title}
-              sizes="1000px"
-            />
+            <Image src={`${ContentPath.NOTES_COVER_IMAGES}/${frontMatter.cover}`} fill alt={frontMatter.title} />
           </div>
         )}
         <div className={styles.content}>

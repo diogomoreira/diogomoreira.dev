@@ -18,7 +18,7 @@ const AboutPage: NextPage<AboutPageProps> = () => {
 
       <h1>👋🏻 About me</h1>
       <div className={styles.cover}>
-        <Image src={"/images/pages/about/cover.jpg"} width={1000} height={500} alt={name} />
+        <Image src={"/images/pages/about/cover.jpg"} fill alt={name} />
       </div>
       <p>
         For those who are new here, let me introduce myself. My name is <strong>Diogo Dantas Moreira</strong>, and I
