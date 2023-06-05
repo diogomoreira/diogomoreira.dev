@@ -6,7 +6,6 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { v4 as uuidv4 } from "uuid";
-import sizeOf from "image-size";
 
 type LinksPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -40,11 +39,6 @@ const LinksPage: NextPage<LinksPageProps> = ({ links }: LinksPageProps) => {
 
 export const getStaticProps: GetStaticProps<{ links: LinkItem[] }> = async ({ locale }) => {
   const links = getLinks();
-  links.forEach(link => {
-    const imageSize = sizeOf(`public/images/links/${link.image}`);
-    link.imageWidth = imageSize.width;
-    link.imageHeight = imageSize.height;
-  });
   return {
     props: {
       links: links,
