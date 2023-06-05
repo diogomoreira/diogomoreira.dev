@@ -3,10 +3,8 @@
 
 .linkItemContainer {
   @include card;
-  display: grid;
-  // grid-template-rows: 200px auto;
-  grid-template-columns: 1fr;
   gap: $spacer-sm;
+  display: relative;
   @include md-breakpoint {
     grid-template-columns: 200px 1fr;
   }
@@ -33,11 +31,17 @@
 }
 
 .linkItemImageContainer {
-  position: relative;
-  min-height: 200px;
-  img {
-    object-fit: cover;
+  width: 100%;
+  > div {
+    position: unset !important;
   }
+}
+
+.linkItemImage {
+  object-fit: cover;
+  width: 100% !important;
+  position: relative !important;
+  height: unset !important;
 }
 
 .linkItemDetails {
@@ -55,8 +59,8 @@
 
   align-items: flex-start;
   @include md-breakpoint {
-    flex-direction: row;
-    align-items: center;
+    // flex-direction: row;
+    // align-items: center;
   }
   gap: $spacer-sm;
 }
@@ -68,11 +72,6 @@
   font-size: $font-size-sm;
   > * {
     @include tag();
-  }
-  @include md-breakpoint {
-    border-left: $border-width $border-style $background-lighter-color;
-    padding-left: $spacer;
-    margin-left: $spacer;
   }
 }
 
