@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "@/components/Layout";
 import "prism-themes/themes/prism-nord.css";
 
-import { Fira_Code as Fira, Inconsolata, Nunito, Open_Sans, Work_Sans } from "next/font/google";
+import { Inconsolata, Nunito, Work_Sans } from "next/font/google";
 import { appWithTranslation } from "next-i18next";
 import type { AppProps } from "next/app";
 
