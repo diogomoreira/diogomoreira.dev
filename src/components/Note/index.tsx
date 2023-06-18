@@ -10,7 +10,7 @@ const Note: React.FC<NoteProps> = ({ note }: NoteProps) => {
   const { locale } = useRouter();
   return (
     <article className={styles.note}>
-      <Link className={styles.noteItem} href={`notes/${note.slug}`}>
+      <Link className={styles.noteItem} href={`/${note.slug}`}>
         <h1>{note.title}</h1>
         <time>{formatDateI18N(note.timestamp, locale)}</time>
       </Link>

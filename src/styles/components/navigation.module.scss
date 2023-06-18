@@ -58,16 +58,12 @@
   gap: $spacer;
   text-decoration: none;
 
-  img {
-    @include border();
+  span {
+    font-family: $font-family-title;
   }
 
-  div {
-    font-weight: $font-weight-normal;
-    font-size: $font-size-heading-h6;
-    span:first-child {
-      font-weight: $font-weight-semibold;
-    }
+  img {
+    @include border();
   }
 }
 
@@ -95,7 +91,7 @@
 .navigationListItemLink {
   background-color: $background-dark-color;
   display: flex;
-  gap: $spacer-xs;
+  gap: $spacer;
   align-items: center;
   flex: 1;
   text-align: center;
@@ -122,4 +118,5 @@
 
 .navigationListItemLabel {
   padding: $spacer $spacer-none;
+  font-family: var(--font-family-title);
 }

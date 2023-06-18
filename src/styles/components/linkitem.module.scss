@@ -65,6 +65,10 @@
   gap: $spacer-sm;
 }
 
+.linkTypesContainer {
+  margin: $spacer-lg $spacer-none;
+}
+
 .linkItemTags {
   display: flex;
   gap: $spacer-sm;
@@ -72,6 +76,22 @@
   font-size: $font-size-sm;
   > * {
     @include tag();
+  }
+}
+
+.linkTypeSelector {
+  cursor: pointer;
+  &:hover {
+    background-color: $background-light-color;
+  }
+}
+
+.linkTypeSelectorCurrent {
+  background-color: $background-lighter-color;
+  &::before {
+    content: "#";
+    color: $background-darker-color;
+    font-weight: $font-weight-bold;
   }
 }
 
