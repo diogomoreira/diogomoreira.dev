@@ -2,7 +2,7 @@ import React from "react";
 import { useAppConfig } from "@/lib/config";
 import { articleJsonLd } from "@/lib/config/seo.config";
 import { ContentPath, getNoteByPath, getNotesSlugs, mdxToHtml } from "@/lib/content";
-import styles from "@/styles/pages/notes/slug.module.scss";
+import styles from "@/styles/pages/slug.module.scss";
 import Giscus from "@giscus/react";
 import { InferGetStaticPropsType } from "next";
 import { MDXRemote } from "next-mdx-remote";
@@ -47,7 +47,7 @@ const Note: React.FC<NoteProps> = ({ source, frontMatter }: NoteProps) => {
         {...articleJsonLd}
       />
       <article>
-        <h1>{frontMatter.title}</h1>
+        <h1 className={styles.noteTitle}>{frontMatter.title}</h1>
         <p className={styles.noteDescription}>{frontMatter.description}</p>
         <div className={styles.noteDetails}>
           <time className={styles.noteDetailsTimestamp}>
