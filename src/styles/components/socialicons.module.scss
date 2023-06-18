@@ -1,7 +1,7 @@
 @import "@/styles/variables";
 .socialIconsContainer {
   display: flex;
-  gap: $spacer;
+  gap: $spacer-lg;
   margin: 1rem 0;
 
   a {

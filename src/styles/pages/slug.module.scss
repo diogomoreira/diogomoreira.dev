@@ -1,6 +1,10 @@
 @import "@/styles/variables.scss";
 @import "@/styles/mixins.scss";
 
+.noteTitle {
+  // font-size: $font-size-heading-h1 * 1.25
+}
+
 .noteDescription {
   color: $text-color-grayed;
   font-size: $font-size-sm;

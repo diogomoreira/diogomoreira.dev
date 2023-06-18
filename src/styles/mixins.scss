@@ -25,11 +25,12 @@
   &::before {
     content: "#";
     color: $background-lighter-color;
+    font-weight: $font-weight-bold;
   }
   background-color: $background-darker-color;
   color: $text-color;
   font-size: $font-size-sm;
-  font-weight: $font-weight-light;
+  font-weight: $font-weight-base;
   padding: $spacer-xs $spacer-sm;
 }
 
