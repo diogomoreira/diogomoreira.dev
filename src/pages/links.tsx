@@ -8,7 +8,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { v4 as uuidv4 } from "uuid";
-import { ColumnCountBreakpoints } from "@/utils/masonry.columns";
+import { ThreeColumnsMaxBreakpoints } from "@/utils/masonry.columns";
 
 type LinksPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -45,7 +45,7 @@ const LinksPage: NextPage<LinksPageProps> = ({ links }: LinksPageProps) => {
           ))}
         </div>
       </div>
-      <ResponsiveMasonry columnsCountBreakPoints={ColumnCountBreakpoints}>
+      <ResponsiveMasonry columnsCountBreakPoints={ThreeColumnsMaxBreakpoints}>
         <Masonry gutter="1rem">
           {displayLinks.map(item => (
             <LinkItemDisplay key={uuidv4()} item={item} />

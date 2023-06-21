@@ -42,7 +42,7 @@
     "description": "An action RPG developed by PlatinumGames and published by Square Enix. The game takes place in a post-apocalyptic world where players control androids, 2B and 9S, as they fight to reclaim Earth from alien machines.",
     "image": "nier-automata.jpg",
     "publishDate": "2021-04-17",
-    "tags": ["game", "science fiction"]
+    "tags": ["rpg", "dystopia", "action"]
   },
   {
     "title": "Nujabes - Luv(sic) Hexalogy",
@@ -97,5 +97,32 @@
     "image": "punisher_album_cover.jpg",
     "publishDate": "2023-05-10",
     "tags": ["indie", "folk", "rock", "singer-songwriter"]
+  },
+  {
+    "title": "Final Fantasy XV",
+    "type": "game",
+    "link": "",
+    "description": "The story follows Prince Noctis and his friends as he embarks on a journey to reclaim his kingdom that has been invaded by the empire of Niflheim. He discovers he is on a quest to combat the powers of darkness with the powers of light only the Lucian lineage of kings can wield. This is one of my favorites in the series and I've been waiting for this game since 2007 when the first trailers were released (under the FF Versus XIII name).",
+    "image": "final-fantasy-xv.jpeg",
+    "publishDate": "2023-06-21",
+    "tags": ["rpg", "fantasy", "final-fantasy", "action"]
+  },
+  {
+    "title": "Persona 5",
+    "type": "game",
+    "link": "",
+    "description": "A group of high school students create a vigilante group to expose the crimes of corrupt adults but soon find themselves in the midst of a worldwide conspiracy and targeted by powerful individuals who would do anything to silence them. This is one of my favorite games that I played in Playstation 4. It took me more than 85 hours to finish but it totally worth it.",
+    "image": "persona5.jpeg",
+    "publishDate": "2023-06-21",
+    "tags": ["rpg", "japanese", "turn-based"]
+  },
+  {
+    "title": "Final Fantasy VII (Remake)",
+    "type": "game",
+    "link": "",
+    "description": "Re-imagining of Final Fantasy VII (1997). A former soldier joins an eco-terrorist group in a mission against the electric power company he used to work for in order to protect the planet and all who reside on it. This game totally lives up to the fame of Final Fantasy VII from PS1, it's a must play for all JRPG fans",
+    "image": "final-fantasy-vii.webp",
+    "publishDate": "2023-06-21",
+    "tags": ["rpg", "japanese", "final-fantasy", "action"]
   }
 ]

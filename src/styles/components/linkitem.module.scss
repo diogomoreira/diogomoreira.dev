@@ -21,6 +21,7 @@
   p {
     font-size: $font-size-sm;
     margin: $spacer-sm $spacer-none;
+    // line-height: $line-height-sm;
   }
 
   footer {
@@ -49,7 +50,7 @@
   h1 {
     font-size: $font-size-heading-h5;
     font-weight: $font-weight-semibold;
-    line-height: $line-height-base;
+    line-height: $line-height-sm;
   }
 }
 
