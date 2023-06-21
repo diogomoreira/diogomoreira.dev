@@ -12,7 +12,7 @@ $md-breakpoint: 1024px;
 $lg-breakpoint: 1290px;
 $xl-breakpoint: 1440px;
 
-$max-width: $md-breakpoint;
+$max-width: $xl-breakpoint;
 
 $padding-none: 0;
 $padding-xs: $spacer-xs;
@@ -73,7 +73,7 @@ $font-weight-bolder: bolder !default;
 $font-weight-base: $font-weight-normal !default;
 
 $line-height-base: 1.75 !default;
-$line-height-sm: 1.25 !default;
+$line-height-sm: 1.5 !default;
 $line-height-lg: 2 !default;
 
 // Headings properties
