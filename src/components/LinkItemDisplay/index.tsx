@@ -2,8 +2,6 @@ import React from "react";
 import { LinkItem } from "@/lib/content";
 import styles from "@/styles/components/linkitem.module.scss";
 import formatDateI18N from "@/utils/date.i18.formatter";
-import { faThumbTack } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { v4 as uuidv4 } from "uuid";
