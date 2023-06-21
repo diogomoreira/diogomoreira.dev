@@ -34,9 +34,6 @@ const LinkItemDisplay: React.FC<LinkItemDisplayProps> = ({ item }: LinkItemDispl
         </a>
         <div className={styles.linkItemInfo}>
           <div className={styles.linkItemDate}>
-            <span>
-              <FontAwesomeIcon icon={faThumbTack} />
-            </span>
             <time>{formatDateI18N(item.timestamp, router.locale ?? "en")}</time>
           </div>
           <div className={styles.linkItemTags}>
