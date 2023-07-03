@@ -36,6 +36,7 @@ const appConfig: ApplicationConfig = {
     linkedin: "diogodmoreira",
     instagram: "diogo.dmoreira",
     keybase: "diogomoreira",
+    mastodon: "diogomoreira",
     googleScholar: "DlSdlvEAAAAJ",
     researchGate: "Diogo_Moreira4",
     orcid: "0000-0003-1803-6565",
