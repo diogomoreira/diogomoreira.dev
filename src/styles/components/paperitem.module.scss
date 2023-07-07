@@ -5,17 +5,21 @@
 .paperElement {
   @include card();
   p {
-    font-weight: $font-weight-light;
     font-size: $font-size-sm;
-    color: $text-color;
-    padding: $padding-sm $padding-base;
+    color: $light-foreground-color;
+    @include color-scheme(dark) {
+      color: $dark-foreground-color;
+    }
+    padding: $spacer-sm $spacer;
   }
 }
 
 .paperTitle {
-  padding: $padding-base $padding-base;
-  background-color: $background-lighter-color;
-
+  padding: $spacer $spacer;
+  background-color: $light-darker-color;
+  @include color-scheme(dark) {
+    background-color: $dark-light-color;
+  }
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -27,19 +31,26 @@
 
 .paperDetails {
   display: flex;
-  background-color: $background-darker-color;
-  padding: $padding-base;
+  background-color: $light-darker-color;
+
+  @include color-scheme(dark) {
+    background-color: $dark-lighter-color;
+  }
+  padding: $spacer;
   font-size: $font-size-sm;
-  font-weight: $font-weight-light;
+  font-weight: $font-weight-semibold;
   justify-content: space-between;
   gap: $spacer;
   align-items: center;
 }
 
 .paperYear {
-  color: $primary-color;
+  color: $light-foreground-color;
+  @include color-scheme(dark) {
+    color: $dark-foreground-color;
+  }
 }
 
 .paperDownloadButton {
-  padding: $padding-sm $padding-xl;
+  padding: $spacer-sm $spacer-xl;
 }
