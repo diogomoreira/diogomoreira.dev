@@ -14,10 +14,11 @@ const Footer = () => {
       <div className={styles.footerItems}>
         <div>
           <div>
-            <b>{siteVersion}</b>. Copyright © 2013 - {currentYear}. {name}
+            Copyright © 2013 - {currentYear}. {name}
           </div>
           <div>
-            Check out the <a href="https://github.com/diogomoreira/diogodmoreira.com">source code</a>
+            Check out the <a href="https://github.com/diogomoreira/diogodmoreira.com">source code</a>. Current version{" "}
+            <b>{siteVersion}</b>
           </div>
         </div>
         <SocialIcons />

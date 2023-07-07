@@ -16,7 +16,9 @@ const PaperItemDisplay: React.FC<PaperItemDisplayProps> = ({ item }: PaperItemDi
       <p>{item.abstract}</p>
       <div className={styles.paperDetails}>
         <span className={styles.paperAuthor}>{item.author.join(", ")}</span>
-        <button>Download</button>
+        <a href={`https://www.doi.org/${item.doi}`} target="_blank" rel="noreferrer">
+          Download
+        </a>
       </div>
     </details>
   );

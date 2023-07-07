@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "@/components/Layout";
 import "prism-themes/themes/prism-nord.css";
 
-import { Inconsolata, Nunito, Work_Sans } from "next/font/google";
+import { Inconsolata } from "next/font/google";
 import { appWithTranslation } from "next-i18next";
 import type { AppProps } from "next/app";
 
@@ -15,19 +15,9 @@ const fontFamilyMonospace = Inconsolata({
   variable: "--font-family-monospace",
 });
 
-const fontFamilyTitle = Work_Sans({
-  subsets: ["latin-ext"],
-  variable: "--font-family-title",
-});
-
-const fontFamilyBody = Nunito({
-  subsets: ["latin"],
-  variable: "--font-family-body",
-});
-
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <Layout className={`${fontFamilyMonospace.variable} ${fontFamilyTitle.variable} ${fontFamilyBody.variable}`}>
+    <Layout className={fontFamilyMonospace.variable}>
       <DefaultSeo
         {...defaultSeo}
         // don't let search engines index branch/deploy previews
