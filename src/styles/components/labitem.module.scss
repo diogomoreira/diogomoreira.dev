@@ -28,7 +28,6 @@
 
       > * {
         @include tag();
-        font-family: var(--font-family-monospace);
       }
     }
   }
@@ -44,5 +43,5 @@
 }
 
 .labItemDetails {
-  padding: $padding-base;
+  padding: $spacer;
 }
