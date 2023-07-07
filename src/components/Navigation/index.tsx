@@ -37,9 +37,12 @@ const Navigation = () => {
                 } `}
                 href={item.link}
                 onClick={() => setShowMenu(false)}
+                title={item.name}
               >
                 <FontAwesomeIcon className={styles.navigationListItemIcon} icon={item.icon} />
-                <span className={styles.navigationListItemLabel}>{item.name}</span>
+                <span hidden={!showMenu} className={styles.navigationListItemLabel}>
+                  {item.name}
+                </span>
               </Link>
             </li>
           ))}
