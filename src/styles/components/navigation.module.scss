@@ -40,6 +40,7 @@
 .menuToggle {
   display: block;
   font-size: $font-size-lg;
+  color: $dark-foreground-color;
 
   > input[type="checkbox"] {
     width: 35px;
@@ -117,5 +118,5 @@
 }
 
 .navigationListItemLabel {
-  font-family: var(--font-family-title);
+  font-family: $font-family-title;
 }
