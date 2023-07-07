@@ -14,8 +14,13 @@
 }
 
 .noteItemContainer {
-  border-bottom: $border-width $border-style $background-lighter-color;
-  padding: $padding-base $padding-none;
+  border-bottom-width: $border-width;
+  border-bottom-style: $border-style;
+  border-bottom-color: $light-border-color;
+  @include color-scheme(dark) {
+    border-bottom-color: $dark-border-color;
+  }
+  padding: $spacer $spacer-none;
 
   &:last-child {
     border-bottom: none;
@@ -29,7 +34,6 @@
   display: flex;
   gap: $spacer-sm;
   font-size: $font-size-sm;
-  font-weight: $font-weight-light;
   align-items: flex-start;
   flex-direction: column;
 
@@ -39,12 +43,16 @@
 
   h1 {
     font-size: $font-size-base;
-    font-weight: $font-weight-normal;
-    margin: $margin-none;
+    font-weight: $font-weight-semibold;
+    margin: $spacer-none;
     flex: 1;
   }
 
   > time {
-    color: $text-color;
+    color: $light-foreground-color;
+
+    @include color-scheme(dark) {
+      color: $dark-foreground-color;
+    }
   }
 }

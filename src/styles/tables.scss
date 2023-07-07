@@ -1,26 +1,47 @@
 @use "sass:color";
 @import "@/styles/variables";
+@import "@/styles/mixins";
 
 table {
   min-width: 100%;
   max-width: 100%;
-  border: $border-width $border-style $background-dark-color;
+  border-width: $border-width;
+  border-style: $border-style;
+  border-color: $light-border-color;
+  @include color-scheme(dark) {
+    border-color: $dark-border-color;
+  }
   border-collapse: collapse;
 
   th {
-    background-color: color.scale($background-dark-color, $lightness: -50%);
-    color: $text-color-inverted;
+    background-color: $light-dark-color;
+    color: $light-foreground-color;
+    @include color-scheme(dark) {
+      background-color: $dark-light-color;
+      color: $dark-foreground-color;
+    }
   }
   td {
     padding: 0.25rem 0.5rem;
-    border: $border-width $border-style $background-dark-color;
+    border-width: $border-width;
+    border-style: $border-style;
+    border-color: $light-border-color;
+    @include color-scheme(dark) {
+      border-color: $dark-border-color;
+    }
   }
   tr:nth-child(even) {
-    background-color: color.scale($background-color, $lightness: -5%);
+    background-color: $light-dark-color;
+    @include color-scheme(dark) {
+      background-color: $dark-light-color;
+    }
   }
 
   tr:nth-child(odd) {
-    background-color: color.scale($background-color, $lightness: -10%);
+    background-color: $light-darker-color;
+    @include color-scheme(dark) {
+      background-color: $dark-lighter-color;
+    }
   }
 }
 

@@ -2,11 +2,15 @@
 @import "@/styles/mixins.scss";
 
 .noteTitle {
-  // font-size: $font-size-heading-h1 * 1.25
+  font-size: $font-size-heading-h1 * 1.25;
+  font-weight: $font-weight-bold;
 }
 
 .noteDescription {
-  color: $text-color-grayed;
+  color: $light-foreground-color;
+  @include color-scheme(dark) {
+    color: $dark-foreground-color;
+  }
   font-size: $font-size-sm;
 }
 
@@ -20,7 +24,12 @@
     align-items: center;
   }
 
-  border-top: $border-width $border-style $background-light-color;
+  border-top-width: $border-width;
+  border-top-style: $border-style;
+  border-top-color: $light-border-color;
+  @include color-scheme(dark) {
+    border-top-color: $dark-border-color;
+  }
   padding: $spacer $spacer-none;
   font-size: $font-size-sm;
   gap: $spacer;
@@ -33,14 +42,13 @@
     display: flex;
     gap: $spacer-sm;
     > *:not(:first-child) {
-      font-weight: $font-weight-light;
+      font-weight: $font-weight-base;
     }
   }
 
   .noteDetailsCategory {
     display: flex;
     gap: $spacer-sm;
-    font-weight: $font-weight-light;
     > span:not(:first-child) {
       font-weight: $font-weight-bold;
     }
@@ -50,7 +58,6 @@
     display: flex;
     align-items: center;
     gap: $spacer-sm;
-    font-weight: $font-weight-light;
   }
 
   .noteDetailsTagsList {
@@ -72,25 +79,32 @@
   line-height: $line-height-lg;
 
   p {
-    margin: $margin-lg 0;
+    margin: $spacer-lg 0;
     code {
       @include border-radius();
       font-family: var(--font-family-monospace);
-      background-color: $background-lighter-color;
+
+      background-color: $light-dark-color;
+      @include color-scheme(dark) {
+        background-color: $dark-lighter-color;
+      }
       padding: $spacer-xs;
     }
   }
 
   ul {
-    padding: $padding-none $padding-lg;
-    margin: $margin-lg $margin-none;
+    padding: $spacer-none $spacer-lg;
+    margin: $spacer-lg $spacer-none;
     list-style: square;
   }
 
   blockquote {
     @include border-radius();
     @include box-shadow();
-    background-color: $background-lighter-color;
+    background-color: $light-dark-color;
+    @include color-scheme(dark) {
+      background-color: $dark-lighter-color;
+    }
     padding: $spacer-sm $spacer;
     margin: $spacer-xl $spacer-sm;
   }

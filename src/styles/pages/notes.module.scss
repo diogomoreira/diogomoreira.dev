@@ -5,17 +5,6 @@
   display: flex;
   gap: $spacer;
   margin-bottom: $spacer-xl;
-
-  input {
-    width: 100%;
-    border: 1px solid $background-dark-color;
-    padding: $padding-base;
-    color: $secondary-color;
-
-    &:hover {
-      cursor: not-allowed;
-    }
-  }
 }
 
 .contentContainer {
@@ -28,16 +17,24 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  color: $secondary-color;
+  color: $light-foreground-color;
+  @include color-scheme(dark) {
+    color: $dark-foreground-color;
+  }
 
   > * {
     content: "";
     align-self: stretch;
-    padding: $padding-none $padding-lg $padding-none $padding-none;
+    padding: $spacer-none $spacer-lg $spacer-none $spacer-none;
 
     &:not(:first-child) {
-      border-left: 1px solid $background-dark-color;
-      padding: $padding-none $padding-lg;
+      border-left-width: $border-width;
+      border-left-style: $border-style;
+      border-left-color: $light-border-color;
+      @include color-scheme(dark) {
+        border-left-color: $dark-border-color;
+      }
+      padding: $spacer-none $spacer-lg;
     }
   }
 }
@@ -48,7 +45,7 @@
 
 .contentReadingTime {
   display: flex;
-  gap: $margin-sm;
+  gap: $spacer-sm;
   align-items: center;
 }
 

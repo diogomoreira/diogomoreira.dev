@@ -27,13 +27,18 @@
   // }
 
   h2 {
-    margin-top: $margin-sm;
-    font-weight: $font-weight-light;
+    margin-top: $spacer-sm;
+    font-weight: $font-weight-base;
     font-size: $font-size-heading-h4;
   }
 
   img {
-    border: 0.25rem solid $background-lighter-color;
+    border-width: $border-width-thick;
+    border-style: $border-style;
+    border-color: $light-border-color;
+    @include color-scheme(dark) {
+      border-color: $dark-border-color;
+    }
   }
 }
 

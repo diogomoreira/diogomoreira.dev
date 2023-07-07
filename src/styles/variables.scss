@@ -7,63 +7,68 @@ $spacer-lg: $spacer * 1.5;
 $spacer-xl: $spacer * 2.5;
 
 $xs-breakpoint: 576px;
-$sm-breakpoint: 768px;
+$sm-breakpoint: 840px;
 $md-breakpoint: 1024px;
 $lg-breakpoint: 1290px;
 $xl-breakpoint: 1440px;
 
-$max-width: $lg-breakpoint;
-
-$padding-none: 0;
-$padding-xs: $spacer-xs;
-$padding-sm: $spacer-sm;
-$padding-base: $spacer;
-$padding-lg: $spacer-lg;
-$padding-xl: $spacer-xl;
-
-$margin-none: 0;
-$margin-xs: $spacer-xs;
-$margin-sm: $spacer-sm;
-$margin-base: $spacer;
-$margin-lg: $spacer-lg;
-$margin-xl: $spacer-xl;
+$max-width: $sm-breakpoint;
 
 $border-width: 1px;
 $border-width-thick: 3px;
 $border-style: solid;
 $border-radius: 0px;
 
-$background-color: #0e1117;
-$background-lighter-color: lighten($background-color, 20%);
-$background-light-color: lighten($background-color, 5%);
-$background-dark-color: darken($background-color, 5%);
-$background-darker-color: darken($background-color, 20%);
+$white: #f8f8f8;
+$black: #0e1117;
+$indian-yellow: #e09e50;
+$pewter-blue: #8cbdb9;
+$japanese-indigo: #2d3e4e;
 
-$primary-color: #f3f3f3;
-$secondary-color: #e8a013;
+// Dark theme colors
+$dark-color: $black;
+$dark-lighter-color: lighten($dark-color, 20%);
+$dark-light-color: lighten($dark-color, 5%);
+$dark-dark-color: darken($dark-color, 5%);
+$dark-darker-color: darken($dark-color, 20%);
 
-$text-color: $primary-color;
-$text-color-grayed: darken($primary-color, 15%);
-$text-color-inverted: $background-light-color;
-$hyperlink-color: $secondary-color;
-$hyperlink-hover-color: lighten($hyperlink-color, 15%);
+$dark-background-color: $dark-color;
+$dark-highlight-color: $pewter-blue;
+$dark-highlight-hover-color: lighten($dark-highlight-color, 15%);
+$dark-foreground-color: $white;
+$dark-foreground-hover-color: darken($dark-foreground-color, 15%);
+$dark-foreground-inverted-color: $dark-light-color;
+$dark-border-color: $dark-lighter-color;
+
+// Light theme colors
+$light-color: $white;
+$light-lighter-color: lighten($light-color, 20%);
+$light-light-color: lighten($light-color, 5%);
+$light-dark-color: darken($light-color, 5%);
+$light-darker-color: darken($light-color, 10%);
+
+$light-background-color: $light-color;
+$light-highlight-color: $japanese-indigo;
+$light-highlight-hover-color: lighten($light-highlight-color, 15%);
+$light-foreground-color: $black;
+$light-foreground-hover-color: darken($light-foreground-color, 15%);
+$light-foreground-inverted-color: $light-light-color;
+$light-border-color: $light-darker-color;
 
 $box-shadow-y: 5px;
 $box-shadow-x: 5px;
 $box-shadow-blur: 0px;
-$box-shadow-color: $background-dark-color;
 
-$font-family-body: var(--font-family-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-  Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-$font-family-title: var(--font-family-title), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-  Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+$font-family-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+  "Helvetica Neue", sans-serif;
+$font-family-title: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+  "Helvetica Neue", sans-serif;
 $font-family-code: var(--font-family-monospace), monospace;
 
-$font-size-base: 18px;
+$font-size-base: 16px;
 $font-size-sm: $font-size-base * 0.875 !default;
 $font-size-lg: $font-size-base * 1.25 !default;
 
-$font-weight-lighter: lighter !default;
 $font-weight-light: 200 !default;
 $font-weight-normal: 300 !default;
 $font-weight-semibold: 500 !default;

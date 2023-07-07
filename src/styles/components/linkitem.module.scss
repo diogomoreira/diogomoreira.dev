@@ -4,7 +4,6 @@
 .linkItemContainer {
   @include card;
   gap: $spacer-sm;
-  display: relative;
   @include md-breakpoint {
     grid-template-columns: 200px 1fr;
   }
@@ -21,7 +20,6 @@
   p {
     font-size: $font-size-sm;
     margin: $spacer-sm $spacer-none;
-    // line-height: $line-height-sm;
   }
 
   footer {
@@ -46,7 +44,7 @@
 }
 
 .linkItemDetails {
-  padding: $padding-base;
+  padding: $spacer;
   h1 {
     font-size: $font-size-heading-h5;
     font-weight: $font-weight-semibold;
@@ -83,15 +81,17 @@
 .linkTypeSelector {
   cursor: pointer;
   &:hover {
-    background-color: $background-light-color;
+    background-color: $light-dark-color;
   }
 }
 
 .linkTypeSelectorCurrent {
-  background-color: $background-lighter-color;
+  background-color: $light-dark-color;
+  @include color-scheme(dark) {
+    background-color: $dark-light-color;
+  }
   &::before {
     content: "#";
-    color: $background-darker-color;
     font-weight: $font-weight-bold;
   }
 }

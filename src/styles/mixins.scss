@@ -2,11 +2,19 @@
 @import "@/styles/breakpoints";
 
 @mixin box-shadow {
-  box-shadow: $box-shadow-x $box-shadow-y $box-shadow-blur $box-shadow-color;
+  box-shadow: $box-shadow-x $box-shadow-y $box-shadow-blur $light-dark-color;
+  @include color-scheme(dark) {
+    box-shadow: $box-shadow-x $box-shadow-y $box-shadow-blur $dark-light-color;
+  }
 }
 
 @mixin border {
-  border: $border-width $border-style $background-lighter-color;
+  border-width: $border-width;
+  border-style: $border-style;
+  border-color: $light-border-color;
+  @include color-scheme(dark) {
+    border-color: $dark-border-color;
+  }
 }
 
 @mixin border-radius {
@@ -24,13 +32,21 @@
 @mixin tag {
   &::before {
     content: "#";
-    color: $background-lighter-color;
-    font-weight: $font-weight-bold;
+    color: $light-foreground-color;
+    @include color-scheme(dark) {
+      color: $dark-foreground-color;
+    }
+    font-weight: $font-weight-base;
   }
-  background-color: $background-darker-color;
-  color: $text-color;
+  background-color: $light-dark-color;
+  color: $light-foreground-color;
+  @include color-scheme(dark) {
+    background-color: $dark-lighter-color;
+    color: $dark-foreground-color;
+  }
+  font-family: var(--font-family-monospace);
   font-size: $font-size-sm;
-  font-weight: $font-weight-base;
+  font-weight: $font-weight-semibold;
   padding: $spacer-xs $spacer-sm;
 }
 
@@ -58,5 +74,11 @@
     display: block;
     width: 100%;
     clear: both;
+  }
+}
+
+@mixin color-scheme($value: light) {
+  @media (prefers-color-scheme: $value) {
+    @content;
   }
 }

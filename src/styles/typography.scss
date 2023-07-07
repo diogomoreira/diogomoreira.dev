@@ -15,7 +15,7 @@ main {
     font-size: $font-size-heading-h1;
     font-weight: $font-weight-semibold;
     line-height: $headings-line-height;
-    margin: $margin-lg 0;
+    margin: $spacer-lg 0;
   }
 
   h1 {
@@ -35,7 +35,7 @@ main {
   }
 
   p {
-    margin: $margin-base 0;
+    margin: $spacer 0;
     line-height: $line-height-lg;
   }
 
@@ -50,13 +50,27 @@ main {
     white-space: pre-wrap;
   }
 
+  strong {
+    font-weight: $font-weight-bold;
+  }
+
   a {
     text-decoration: none;
     transition: 200ms;
-    color: $hyperlink-color;
+    color: $light-highlight-color;
+    font-weight: $font-weight-semibold;
+
+    @include color-scheme(dark) {
+      color: $dark-highlight-color;
+    }
 
     &:hover {
-      color: $hyperlink-hover-color;
+      color: $light-highlight-hover-color;
+
+      @include color-scheme(dark) {
+        color: $dark-highlight-hover-color;
+      }
+
       transition: 200ms;
     }
   }

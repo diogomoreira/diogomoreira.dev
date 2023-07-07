@@ -1,4 +1,6 @@
 @import "@/styles/variables";
+@import "@/styles/mixins";
+
 .socialIconsContainer {
   display: flex;
   gap: $spacer-lg;
@@ -6,13 +8,22 @@
 
   a {
     font-size: $font-size-lg;
-    color: $hyperlink-color;
     font-weight: 400;
     text-decoration: none;
     transition: 200ms;
 
+    color: $light-highlight-color;
+
+    @include color-scheme(dark) {
+      color: $dark-highlight-color;
+    }
+
     &:hover {
-      color: $hyperlink-hover-color;
+      color: $light-highlight-hover-color;
+
+      @include color-scheme(dark) {
+        color: $dark-highlight-hover-color;
+      }
       transition: 200ms;
     }
   }
