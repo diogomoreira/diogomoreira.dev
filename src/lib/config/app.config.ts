@@ -52,7 +52,6 @@ const appConfig: ApplicationConfig = {
     reactionsEnabled: "1",
     emitMetadata: "0",
     inputPosition: "bottom",
-    theme: "dark_protanopia",
     lang: "en",
     loading: "lazy",
   },

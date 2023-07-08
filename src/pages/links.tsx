@@ -6,9 +6,8 @@ import { LinkItem, getLinks } from "@/lib/content";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { v4 as uuidv4 } from "uuid";
-import { ThreeColumnsMaxBreakpoints } from "@/utils/masonry.columns";
+import LinksList from "@/components/LinksList";
 
 type LinksPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -45,13 +44,7 @@ const LinksPage: NextPage<LinksPageProps> = ({ links }: LinksPageProps) => {
           ))}
         </div>
       </div>
-      <ResponsiveMasonry columnsCountBreakPoints={ThreeColumnsMaxBreakpoints}>
-        <Masonry gutter="1rem">
-          {displayLinks.map(item => (
-            <LinkItemDisplay key={uuidv4()} item={item} />
-          ))}
-        </Masonry>
-      </ResponsiveMasonry>
+      <LinksList links={displayLinks} />
     </>
   );
 };
