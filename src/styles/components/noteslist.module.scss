@@ -7,24 +7,15 @@
   padding: 0;
   display: flex;
   flex-direction: column;
+  gap: $spacer;
 }
 
 .note {
   display: flex;
-}
-
-.noteItemContainer {
-  border-bottom-width: $border-width;
-  border-bottom-style: $border-style;
-  border-bottom-color: $light-border-color;
-  @include color-scheme(dark) {
-    border-bottom-color: $dark-border-color;
-  }
-  padding: $spacer $spacer-none;
-
-  &:last-child {
-    border-bottom: none;
-  }
+  flex-direction: column;
+  padding: $spacer;
+  font-weight: $font-weight-base;
+  @include card();
 }
 
 .noteItem {
@@ -49,10 +40,28 @@
   }
 
   > time {
-    color: $light-foreground-color;
+    color: $light-dark-color;
+    font-weight: $font-weight-light;
 
     @include color-scheme(dark) {
       color: $dark-foreground-color;
     }
+  }
+}
+
+.description {
+  font-weight: $font-weight-base;
+  font-size: $font-size-sm;
+  color: $light-foreground-color;
+
+  @include color-scheme(dark) {
+    color: $dark-foreground-color;
+  }
+}
+
+.readMore {
+  color: $light-highlight-color;
+  @include color-scheme(dark) {
+    color: $dark-highlight-color;
   }
 }

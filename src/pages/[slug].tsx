@@ -13,6 +13,7 @@ import formatDateI18N from "@/utils/date.i18.formatter";
 import { v4 as uuid } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { useTheme } from "@/lib/hooks";
 
 type NoteProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -29,10 +30,11 @@ const Note: React.FC<NoteProps> = ({ source, frontMatter }: NoteProps) => {
     reactionsEnabled,
     emitMetadata,
     inputPosition,
-    theme,
     lang,
     loading,
   } = giscus;
+
+  const theme = useTheme();
 
   return (
     <>
