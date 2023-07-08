@@ -39,10 +39,10 @@
     font-weight: $font-weight-base;
   }
   background-color: $light-dark-color;
-  color: $light-foreground-color;
+  color: $light-title-color;
   @include color-scheme(dark) {
     background-color: $dark-lighter-color;
-    color: $dark-foreground-color;
+    color: $dark-title-color;
   }
   font-family: var(--font-family-monospace);
   font-size: $font-size-sm;

@@ -40,7 +40,7 @@
   }
 
   > time {
-    color: $light-dark-color;
+    color: $light-foreground-color;
     font-weight: $font-weight-light;
 
     @include color-scheme(dark) {
