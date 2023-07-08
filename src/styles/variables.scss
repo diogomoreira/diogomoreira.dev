@@ -19,10 +19,12 @@ $border-width-thick: 3px;
 $border-style: solid;
 $border-radius: 0px;
 
-$white: #f8f8f8;
+$white: rgb(244, 244, 245);
+$light-gray: #a1a1aa;
+$dark-gray: #18181a;
 $black: #0e1117;
 $indian-yellow: #e09e50;
-$pewter-blue: #8cbdb9;
+$cornflower-blue: #8194dd;
 $japanese-indigo: #2d3e4e;
 
 // Dark theme colors
@@ -33,9 +35,10 @@ $dark-dark-color: darken($dark-color, 5%);
 $dark-darker-color: darken($dark-color, 20%);
 
 $dark-background-color: $dark-color;
-$dark-highlight-color: $pewter-blue;
+$dark-highlight-color: $cornflower-blue;
 $dark-highlight-hover-color: lighten($dark-highlight-color, 15%);
-$dark-foreground-color: $white;
+$dark-title-color: $white;
+$dark-foreground-color: $light-gray;
 $dark-foreground-hover-color: darken($dark-foreground-color, 15%);
 $dark-foreground-inverted-color: $dark-light-color;
 $dark-border-color: $dark-lighter-color;
@@ -50,7 +53,8 @@ $light-darker-color: darken($light-color, 10%);
 $light-background-color: $light-color;
 $light-highlight-color: $japanese-indigo;
 $light-highlight-hover-color: lighten($light-highlight-color, 15%);
-$light-foreground-color: $black;
+$light-title-color: $black;
+$light-foreground-color: $dark-gray;
 $light-foreground-hover-color: darken($light-foreground-color, 15%);
 $light-foreground-inverted-color: $light-dark-color;
 $light-border-color: $light-darker-color;
