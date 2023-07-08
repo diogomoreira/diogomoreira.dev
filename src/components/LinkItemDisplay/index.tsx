@@ -12,6 +12,9 @@ const icons: Record<string, string> = {
   book: "📚",
   podcast: "🎙️",
   tvseries: "📺",
+  article: "📄",
+  app: "📱",
+  movie: "🎬",
   game: "🕹️",
   music: "🎧",
 };
@@ -34,13 +37,15 @@ const LinkItemDisplay: React.FC<LinkItemDisplayProps> = ({ item }: LinkItemDispl
           <div className={styles.linkItemDate}>
             <time>{formatDateI18N(item.timestamp, router.locale ?? "en")}</time>
           </div>
+        </div>
+        <p dangerouslySetInnerHTML={{ __html: item.description }}></p>
+        <div className={styles.linkItemInfo}>
           <div className={styles.linkItemTags}>
             {item.tags.map(stackItem => (
               <span key={uuidv4()}>{stackItem}</span>
             ))}
           </div>
         </div>
-        <p dangerouslySetInnerHTML={{ __html: item.description }}></p>
       </div>
     </div>
   );
