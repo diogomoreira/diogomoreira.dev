@@ -82,6 +82,9 @@
   cursor: pointer;
   &:hover {
     background-color: $light-dark-color;
+    @include color-scheme(dark) {
+      background-color: $dark-light-color;
+    }
   }
 }
 
