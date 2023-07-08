@@ -5,12 +5,13 @@ import styles from "@/styles/pages/notes.module.scss";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { compareDesc } from "date-fns";
+import { Content } from "@/components/Layout/Content";
 
 type NotesPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const NotesPage: NextPage<NotesPageProps> = ({ notes }: NotesPageProps) => {
   return (
-    <>
+    <Content>
       <h1>🪴 Notes</h1>
       <p>
         <b>First</b>: this is digital garden. Is a type of blog that is structured around the concept of organic growth
@@ -32,7 +33,7 @@ const NotesPage: NextPage<NotesPageProps> = ({ notes }: NotesPageProps) => {
       <div className={styles.contentContainer}>
         <NotesList notes={notes} />
       </div>
-    </>
+    </Content>
   );
 };
 

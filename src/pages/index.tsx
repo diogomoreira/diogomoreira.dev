@@ -12,6 +12,7 @@ import { useAppConfig } from "@/lib/config";
 import { NoteItem, getAllNotes } from "@/lib/content";
 import styles from "@/styles/pages/index.module.scss";
 import { compareDesc } from "date-fns";
+import { Content } from "@/components/Layout/Content";
 
 type IndexPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -20,7 +21,7 @@ const IndexPage: NextPage<IndexPageProps> = ({ notes }: IndexPageProps) => {
   const { t } = useTranslation("index");
 
   return (
-    <>
+    <Content>
       <NextSeo title="Home Page" description={description} />
       <div className={styles.container}>
         <div>
@@ -52,7 +53,7 @@ const IndexPage: NextPage<IndexPageProps> = ({ notes }: IndexPageProps) => {
       </div>
       <Section>Recent updates</Section>
       <NotesList notes={notes} />
-    </>
+    </Content>
   );
 };
 
