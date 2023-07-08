@@ -98,7 +98,7 @@ public class CloudStorageConfiguration {
         Storage storage = LocalStorageHelper.getOptions().getService();
         BlobInfo blobInfo = BlobInfo.newBuilder(BlobId.of("my-mock-bucket", "my-mock-object")).build();
         // Create some file that you want to use and reflect the
-        // you expect from your Cloud Storage
+        // one you expect from your Cloud Storage bucket
         storage.create(blobInfo, Files.readAllBytes(Path.of("src", "test", "resources", "test-resource.txt")));
         return storage;
     }
