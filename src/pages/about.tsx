@@ -7,6 +7,7 @@ import contentStyle from "@/styles/pages/slug.module.scss";
 import Image from "next/image";
 import { useAppConfig } from "@/lib/config";
 import Link from "next/link";
+import { Content } from "@/components/Layout/Content";
 
 type AboutPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -15,7 +16,7 @@ const AboutPage: NextPage<AboutPageProps> = () => {
     author: { name },
   } = useAppConfig();
   return (
-    <>
+    <Content>
       <NextSeo title="About me" description="A little more about me" />
 
       <h1>👋🏻 About me</h1>
@@ -50,7 +51,7 @@ const AboutPage: NextPage<AboutPageProps> = () => {
         </p>
         <p>Gradually, I&apos;ll share more about my life and interests here.</p>
       </div>
-    </>
+    </Content>
   );
 };
 

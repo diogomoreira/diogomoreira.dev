@@ -6,12 +6,13 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import ProjectsList from "@/components/ProjectsList";
+import { Content } from "@/components/Layout/Content";
 
 type LabsPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const LabsPage: NextPage<LabsPageProps> = ({ items }: LabsPageProps) => {
   return (
-    <div>
+    <Content>
       <NextSeo title="Labs" description="Some projects i've been working on" />
       <h1>💻 Labs</h1>
       <p>
@@ -23,7 +24,7 @@ const LabsPage: NextPage<LabsPageProps> = ({ items }: LabsPageProps) => {
           <ProjectsList items={items} />
         </Masonry>
       </ResponsiveMasonry>
-    </div>
+    </Content>
   );
 };
 

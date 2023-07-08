@@ -7,6 +7,7 @@ import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import PapersList from "@/components/PapersList";
+import { Content } from "@/components/Layout/Content";
 
 type AcademicProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -16,7 +17,7 @@ const AcademicPage: NextPage<AcademicProps> = ({ papers }: AcademicProps) => {
     author: { researchGate, googleScholar, orcid, lattes, academicEmail },
   } = useAppConfig();
   return (
-    <>
+    <Content>
       <h1>🎓 Academic</h1>
       <p>
         <Translation
@@ -63,7 +64,7 @@ const AcademicPage: NextPage<AcademicProps> = ({ papers }: AcademicProps) => {
       <div className={styles.papers}>
         <PapersList items={papers} />
       </div>
-    </>
+    </Content>
   );
 };
 
