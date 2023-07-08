@@ -12,8 +12,8 @@ const NoteItemDisplay: React.FC<NoteProps> = ({ note }: NoteProps) => {
     <article className={styles.note}>
       <Link href={`/${note.slug}`}>
         <div className={styles.noteItem}>
-          <h1>{note.title}</h1>
           <time>{formatDateI18N(note.timestamp, locale)}</time>
+          <h1>{note.title}</h1>
         </div>
       </Link>
     </article>
