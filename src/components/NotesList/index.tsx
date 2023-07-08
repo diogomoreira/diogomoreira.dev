@@ -1,7 +1,7 @@
 import React from "react";
 import { NoteItem } from "@/lib/content";
 import styles from "@/styles/components/noteslist.module.scss";
-import Note from "../Note";
+import NoteItemDisplay from "../NoteItemDisplay";
 import EmptyState, { EmptyContentType } from "../EmptyState";
 
 type NotesListProps = {
@@ -15,7 +15,7 @@ const NotesList: React.FC<NotesListProps> = ({ notes }: NotesListProps) => {
         <ul className={styles.notesContainer}>
           {notes?.map(note => (
             <li key={note.slug} className={styles.noteItemContainer}>
-              <Note note={note} />
+              <NoteItemDisplay note={note} />
             </li>
           ))}
         </ul>

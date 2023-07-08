@@ -6,16 +6,18 @@ import { useRouter } from "next/router";
 import React from "react";
 type NoteProps = { note: NoteItem };
 
-const Note: React.FC<NoteProps> = ({ note }: NoteProps) => {
+const NoteItemDisplay: React.FC<NoteProps> = ({ note }: NoteProps) => {
   const { locale } = useRouter();
   return (
     <article className={styles.note}>
-      <Link className={styles.noteItem} href={`/${note.slug}`}>
-        <h1>{note.title}</h1>
-        <time>{formatDateI18N(note.timestamp, locale)}</time>
+      <Link href={`/${note.slug}`}>
+        <div className={styles.noteItem}>
+          <h1>{note.title}</h1>
+          <time>{formatDateI18N(note.timestamp, locale)}</time>
+        </div>
       </Link>
     </article>
   );
 };
 
-export default Note;
+export default NoteItemDisplay;
