@@ -1,9 +1,9 @@
 import links from "@/content/links/links.json";
-import { LinkItem } from "@/lib/content";
+import { BookmarkItem } from "@/lib/content";
 
-export function getLinks(): LinkItem[] {
+export function getBookmarks(): BookmarkItem[] {
   return links
-    .map<LinkItem>(link => ({
+    .map<BookmarkItem>(link => ({
       title: link.title,
       type: link.type,
       link: link.link,
