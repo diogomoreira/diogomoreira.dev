@@ -9,12 +9,7 @@ const TripsPage: NextPage = () => {
   return (
     <ContentFluid>
       <h1>🗺️ Trips</h1>
-      <p>
-        <b>First</b>: this is digital garden. Is a type of blog that is structured around the concept of organic growth
-        and interconnectedness of ideas (here, we&apos;ll call them <strong>notes</strong>). Unlike traditional blogs
-        that follow a linear chronological order, digital gardens allow the author to cultivate a collection of ideas
-        that evolve and grow over time.
-      </p>
+      <p>Work in progress...</p>
     </ContentFluid>
   );
 };
