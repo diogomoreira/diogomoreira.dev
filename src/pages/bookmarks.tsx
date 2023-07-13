@@ -26,7 +26,7 @@ const BookmarksPage: NextPage<BookmarksPageProps> = ({ links }: BookmarksPagePro
     <>
       <Content>
         <NextSeo title="Links" description="Some links of things i'm enjoying lately" />
-        <h1>💾 Links</h1>
+        <h1>🏷️ Bookmarks</h1>
         <p>
           This is where I&apos;ll be sharing some cool stuff I&apos;ve been really into lately. From groovy tunes that
           get me moving to podcasts that keep me thinking, and books that I just can&apos;t put down, I&apos;ll be
