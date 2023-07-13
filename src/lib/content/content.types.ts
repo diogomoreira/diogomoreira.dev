@@ -28,7 +28,7 @@ type PaperItem = {
   author: string[];
 };
 
-type LinkItem = {
+type BookmarkItem = {
   title: string;
   type: string;
   link: string;
@@ -38,4 +38,4 @@ type LinkItem = {
   tags: string[];
 };
 
-export { type NoteItem, type ProjectItem, type LinkItem, type PaperItem };
+export { type NoteItem, type ProjectItem, type BookmarkItem, type PaperItem };

@@ -3,19 +3,19 @@
 
 .notesContainer {
   list-style: none;
-  margin: 0;
+  margin: $spacer-lg $spacer-none;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: $spacer;
+  gap: $spacer-lg;
 }
 
 .note {
   display: flex;
   flex-direction: column;
-  padding: $spacer;
+  // padding: $spacer;
   font-weight: $font-weight-base;
-  @include card();
+  // @include card();
 }
 
 .noteItem {
@@ -23,25 +23,38 @@
   justify-content: space-between;
   align-items: center;
   display: flex;
-  gap: $spacer-sm;
+  gap: $spacer;
   font-size: $font-size-sm;
   align-items: flex-start;
   flex-direction: column;
+  padding-bottom: $spacer;
+  border-bottom-width: $border-width;
+  border-bottom-style: $border-style;
+  border-bottom-color: $light-border-color;
+  @include color-scheme(dark) {
+    border-bottom-color: $dark-border-color;
+  }
 
   @include md-breakpoint {
+    border-bottom: none;
+    padding-bottom: $spacer-none;
+
     flex-direction: row;
+    align-items: center;
   }
 
   > h1 {
     font-size: $font-size-base;
-    font-weight: $font-weight-semibold;
+    font-weight: $font-weight-base;
     margin: $spacer-none;
     flex: 1;
   }
 
   > time {
+    font-size: $font-size-base;
     color: $light-foreground-color;
     font-weight: $font-weight-light;
+    font-family: $font-family-code;
     min-width: 6rem;
     max-width: 6rem;
 

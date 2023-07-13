@@ -31,7 +31,7 @@ const AboutPage: NextPage<AboutPageProps> = () => {
         <p>
           I enjoy playing video games, particularly role-playing games. I also enjoy reading, although I wish I had more
           time for it. I love watching anime, TV series, and movies, especially those related to science fiction and
-          fantasy themes. Take a look at some of the things I&apos;m into lately <Link href={"/links"}>here</Link>.
+          fantasy themes. Take a look at some of the things I&apos;m into lately <Link href={"/bookmarks"}>here</Link>.
         </p>
         <p>
           I&apos;m a soccer fan and <b>São Paulo FC</b> supporter. Lately I&apos;ve been enjoying Formula 1 as well.

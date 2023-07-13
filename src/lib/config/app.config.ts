@@ -1,5 +1,15 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faFlask, faGraduationCap, faHome, faLink, faPenNib, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBookmark,
+  faBriefcase,
+  faFlask,
+  faGraduationCap,
+  faHome,
+  faLink,
+  faPenNib,
+  faPlane,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { GiscusProps } from "@giscus/react";
 import packageJson from "package.json";
 
@@ -58,6 +68,7 @@ const appConfig: ApplicationConfig = {
   menu: [
     { name: "Home", link: "/", icon: faHome },
     { name: "About", link: "/about", icon: faUser },
+    { name: "CV", link: "/cv", icon: faBriefcase },
     { name: "Notes", link: "/notes", icon: faPenNib },
     {
       name: "Academic",
@@ -65,7 +76,8 @@ const appConfig: ApplicationConfig = {
       icon: faGraduationCap,
     },
     { name: "Labs", link: "/labs", icon: faFlask },
-    { name: "Links", link: "/links", icon: faLink },
+    { name: "Bookmarks", link: "/bookmarks", icon: faBookmark },
+    { name: "Trips", link: "/trips", icon: faPlane },
   ],
 };
 

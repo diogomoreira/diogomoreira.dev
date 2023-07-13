@@ -52,7 +52,14 @@ const IndexPage: NextPage<IndexPageProps> = ({ notes }: IndexPageProps) => {
         </p>
       </div>
       <Section>Recent updates</Section>
-      <NotesList notes={notes} />
+      <div className={styles.notes}>
+        <div>
+          <NotesList notes={notes} />
+        </div>
+        <div>
+          <Link href={"/notes"}>See more</Link>
+        </div>
+      </div>
     </Content>
   );
 };

@@ -45,3 +45,9 @@
   display: flex;
   gap: 1rem;
 }
+
+.notes {
+  display: flex;
+  flex-direction: column;
+  gap: $spacer;
+}

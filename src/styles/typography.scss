@@ -43,7 +43,7 @@ main {
     line-height: $line-height-lg;
 
     a {
-      text-decoration: underline dashed;
+      text-decoration: underline solid;
       text-decoration-thickness: 1px;
       text-underline-offset: 0.25em;
     }
@@ -68,7 +68,7 @@ main {
     text-decoration: none;
     transition: 200ms;
     color: $light-highlight-color;
-    font-weight: $font-weight-semibold;
+    font-weight: $font-weight-base;
 
     @include color-scheme(dark) {
       color: $dark-highlight-color;
