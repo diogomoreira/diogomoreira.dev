@@ -35,7 +35,7 @@ $dark-dark-color: darken($dark-color, 5%);
 $dark-darker-color: darken($dark-color, 20%);
 
 $dark-background-color: $dark-color;
-$dark-highlight-color: $cornflower-blue;
+$dark-highlight-color: $indian-yellow;
 $dark-highlight-hover-color: lighten($dark-highlight-color, 15%);
 $dark-title-color: $white;
 $dark-foreground-color: $light-gray;
@@ -70,7 +70,8 @@ $font-family-title: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxyge
 $font-family-code: var(--font-family-monospace), monospace;
 
 $font-size-base: 16px;
-$font-size-sm: $font-size-base * 0.875 !default;
+$font-size-xs: $font-size-base * 0.7 !default;
+$font-size-sm: $font-size-base * 0.85 !default;
 $font-size-lg: $font-size-base * 1.25 !default;
 
 $font-weight-light: 300 !default;

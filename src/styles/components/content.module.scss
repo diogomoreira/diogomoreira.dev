@@ -8,5 +8,6 @@
 
 .mainContentContainerFluid {
   margin: 0 auto;
+  max-width: $xl-breakpoint;
   padding: $spacer-lg $spacer-lg;
 }

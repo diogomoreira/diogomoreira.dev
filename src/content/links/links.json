@@ -101,7 +101,7 @@
   {
     "title": "Final Fantasy XV",
     "type": "game",
-    "link": "",
+    "link": "https://www.amazon.com.br/Final-Fantasy-XV-Royal-PlayStation/dp/B0792HGXB7/ref=sr_1_1?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=16VRJIETGFPIB&keywords=final+fantasy+xv&qid=1689553101&sprefix=final+fantasy+xv%2Caps%2C174&sr=8-1&ufe=app_do%3Aamzn1.fos.6d798eae-cadf-45de-946a-f477d47705b9",
     "description": "The story follows Prince Noctis and his friends as he embarks on a journey to reclaim his kingdom that has been invaded by the empire of Niflheim. He discovers he is on a quest to combat the powers of darkness with the powers of light only the Lucian lineage of kings can wield. This is one of my favorites in the series and I've been waiting for this game since 2007 when the first trailers were released (under the FF Versus XIII name).",
     "image": "final-fantasy-xv.jpeg",
     "publishDate": "2023-06-21",
@@ -110,7 +110,7 @@
   {
     "title": "Persona 5",
     "type": "game",
-    "link": "",
+    "link": "https://www.amazon.com.br/Sega-PS-22026-7-Persona-Royal-PlayStation/dp/B085PS9F4H/ref=sr_1_3?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=1VF0A73DNSXK5&keywords=persona+5&qid=1689553083&sprefix=persona+5%2Caps%2C209&sr=8-3&ufe=app_do%3Aamzn1.fos.6121c6c4-c969-43ae-92f7-cc248fc6181d",
     "description": "A group of high school students create a vigilante group to expose the crimes of corrupt adults but soon find themselves in the midst of a worldwide conspiracy and targeted by powerful individuals who would do anything to silence them. This is one of my favorite games that I played in Playstation 4. It took me more than 85 hours to finish but it totally worth it.",
     "image": "persona5.jpeg",
     "publishDate": "2023-06-21",
@@ -119,10 +119,19 @@
   {
     "title": "Final Fantasy VII (Remake)",
     "type": "game",
-    "link": "",
+    "link": "https://www.amazon.com.br/Final-Fantasy-VII-Remake-PlayStation/dp/B00ZS80PC2/ref=sr_1_1?adgrpid=1144592297642983&hvadid=71537182391657&hvbmt=be&hvdev=c&hvlocphy=677&hvnetw=o&hvqmt=e&hvtargid=kwd-71537546014528%3Aloc-20&hydadcr=5683_13210321&keywords=final+fantasy+vii+remake+amazon&qid=1689553066&sr=8-1&ufe=app_do%3Aamzn1.fos.db68964d-7c0e-4bb2-a95c-e5cb9e32eb12",
     "description": "Re-imagining of Final Fantasy VII (1997). A former soldier joins an eco-terrorist group in a mission against the electric power company he used to work for in order to protect the planet and all who reside on it. This game totally lives up to the fame of Final Fantasy VII from PS1, it's a must play for all JRPG fans",
     "image": "final-fantasy-vii.webp",
     "publishDate": "2023-06-21",
     "tags": ["rpg", "japanese", "final-fantasy", "action"]
+  },
+  {
+    "title": "Immersive Van Gogh: Why Art is in Crisis",
+    "type": "video",
+    "link": "https://www.youtube.com/watch?v=cOFBAJStuk8&ab_channel=BroeyDeschanel",
+    "description": "",
+    "image": "immersive-van-gogh.jpeg",
+    "publishDate": "2023-07-16",
+    "tags": ["art", "video essay"]
   }
 ]
