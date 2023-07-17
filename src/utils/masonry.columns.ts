@@ -4,5 +4,4 @@ export const ThreeColumnsMaxBreakpoints = {
   840: 3,
   1024: 4,
   1290: 5,
-  1440: 6,
 };
