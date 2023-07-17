@@ -1,25 +1,11 @@
 @import "@/styles/variables";
 @import "@/styles/mixins";
 
-.linkItemContainer {
+.bookmarkItemContainer {
   @include card;
   gap: $spacer-sm;
   @include md-breakpoint {
     grid-template-columns: 200px 1fr;
-  }
-
-  h1 {
-    font-size: $font-size-lg;
-    margin: $spacer-none;
-  }
-
-  time {
-    font-size: $font-size-sm;
-  }
-
-  p {
-    font-size: $font-size-sm;
-    margin: $spacer-sm $spacer-none;
   }
 
   footer {
@@ -29,14 +15,15 @@
   }
 }
 
-.linkItemImageContainer {
+.bookmarkItemImageContainer {
   width: 100%;
+  height: fit-content;
   > div {
     position: unset !important;
   }
 }
 
-.linkItemImage {
+.bookmarkItemImage {
   box-shadow: inset 0 0 100px #000;
   object-fit: cover;
   width: 100% !important;
@@ -44,16 +31,35 @@
   height: unset !important;
 }
 
-.linkItemDetails {
+.bookmarkItemDetails {
   padding: $spacer;
+
   h1 {
-    font-size: $font-size-heading-h5;
-    font-weight: $font-weight-semibold;
+    font-size: $font-size-base;
+    margin: $spacer-none;
+    line-height: $line-height-sm;
+    a {
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  time {
+    font-size: $font-size-sm;
+    color: $dark-color;
+    @include color-scheme(dark) {
+      color: $light-color;
+    }
+  }
+
+  p {
+    font-size: $font-size-sm;
+    margin: $spacer-sm $spacer-none;
+    margin-bottom: $spacer;
     line-height: $line-height-sm;
   }
 }
 
-.linkItemInfo {
+.bookmarkItemInfo {
   display: flex;
   flex-direction: column;
 
@@ -65,11 +71,11 @@
   gap: $spacer-sm;
 }
 
-.linkTypesContainer {
+.bookmarkTypesContainer {
   margin: $spacer-lg $spacer-none;
 }
 
-.linkItemTags {
+.bookmarkItemTags {
   display: flex;
   gap: $spacer-sm;
   flex-wrap: wrap;
@@ -79,7 +85,7 @@
   }
 }
 
-.linkTypeSelector {
+.bookmarkTypeSelector {
   cursor: pointer;
   &:hover {
     background-color: $light-dark-color;
@@ -89,7 +95,7 @@
   }
 }
 
-.linkTypeSelectorCurrent {
+.bookmarkTypeSelectorCurrent {
   background-color: $light-dark-color;
   @include color-scheme(dark) {
     background-color: $dark-light-color;
@@ -100,7 +106,7 @@
   }
 }
 
-.linkItemDate {
+.bookmarkItemDate {
   display: flex;
   align-items: center;
   gap: $spacer-sm;

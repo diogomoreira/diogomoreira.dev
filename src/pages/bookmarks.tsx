@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "@/styles/components/linkitem.module.scss";
+import styles from "@/styles/components/bookmark.module.scss";
 
 import { BookmarkItem, getBookmarks } from "@/lib/content";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
@@ -33,12 +33,12 @@ const BookmarksPage: NextPage<BookmarksPageProps> = ({ links }: BookmarksPagePro
           dropping some recommendations for things I&apos;ve been loving. Take a peek and see if anything catches your
           fancy!
         </p>
-        <div className={styles.linkTypesContainer}>
-          <div className={styles.linkItemTags}>
+        <div className={styles.bookmarkTypesContainer}>
+          <div className={styles.bookmarkItemTags}>
             {categories.map(tag => (
               <span
                 onClick={() => filterCategory(tag)}
-                className={tag === currentCategory ? styles.linkTypeSelectorCurrent : styles.linkTypeSelector}
+                className={tag === currentCategory ? styles.bookmarkTypeSelectorCurrent : styles.bookmarkTypeSelector}
                 key={uuidv4()}
               >
                 {tag}
