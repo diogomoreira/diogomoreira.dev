@@ -34,11 +34,6 @@ const BookmarkItemDisplay: React.FC<BookmarkItemDisplayProps> = ({ item }: Bookm
             <span>{icon}</span> {item.title}
           </a>
         </h1>
-        <div className={styles.bookmarkItemInfo}>
-          <div className={styles.bookmarkItemDate}>
-            <time>{formatDateI18N(item.timestamp, router.locale ?? "en")}</time>
-          </div>
-        </div>
         <p dangerouslySetInnerHTML={{ __html: item.description }}></p>
         <div className={styles.bookmarkItemInfo}>
           <div className={styles.bookmarkItemTags}>

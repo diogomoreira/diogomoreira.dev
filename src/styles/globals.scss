@@ -8,6 +8,10 @@ body {
   padding: 0;
   background-color: $light-background-color;
   color: $light-foreground-color;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "cv11", "salt", "ss01", "ss03", "cv01", "cv02", "cv03", "cv04", "cv05", "cv06", "cv09", "cv10";
 
   @include color-scheme(dark) {
     background-color: $dark-background-color;
