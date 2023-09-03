@@ -68,7 +68,6 @@ const appConfig: ApplicationConfig = {
   menu: [
     { name: "Home", link: "/", icon: faHome },
     { name: "About", link: "/about", icon: faUser },
-    { name: "CV", link: "/cv", icon: faBriefcase },
     { name: "Notes", link: "/notes", icon: faPenNib },
     {
       name: "Academic",
@@ -77,7 +76,6 @@ const appConfig: ApplicationConfig = {
     },
     { name: "Labs", link: "/labs", icon: faFlask },
     { name: "Bookmarks", link: "/bookmarks", icon: faBookmark },
-    { name: "Trips", link: "/trips", icon: faPlane },
   ],
 };
 
