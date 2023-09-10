@@ -1,15 +1,5 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import {
-  faBookmark,
-  faBriefcase,
-  faFlask,
-  faGraduationCap,
-  faHome,
-  faLink,
-  faPenNib,
-  faPlane,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBookmark, faFlask, faGraduationCap, faHome, faPenNib, faUser } from "@fortawesome/free-solid-svg-icons";
 import { GiscusProps } from "@giscus/react";
 import packageJson from "package.json";
 
