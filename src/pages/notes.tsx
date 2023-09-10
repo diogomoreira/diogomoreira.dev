@@ -19,17 +19,6 @@ const NotesPage: NextPage<NotesPageProps> = ({ notes }: NotesPageProps) => {
         that follow a linear chronological order, digital gardens allow the author to cultivate a collection of ideas
         that evolve and grow over time.
       </p>
-      <p>
-        Most of the notes here will be written in Portuguese (Brazil) from the start and then translated to English.
-        Feel free to{" "}
-        <a
-          href="https://github.com/diogomoreira/diogodmoreira.com/tree/main/src/content/notes"
-          title="Notes folders on this website repo"
-        >
-          help me translate
-        </a>{" "}
-        some notes if you wish.
-      </p>
       <div className={styles.contentContainer}>
         <NotesList notes={notes} />
       </div>
