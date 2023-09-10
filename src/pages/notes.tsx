@@ -8,10 +8,6 @@ import { compareDesc } from "date-fns";
 import { Content } from "@/components/Layout/Content";
 
 type NotesPageProps = InferGetStaticPropsType<typeof getStaticProps>;
-type NotesByYear = {
-  year: string;
-  notes: NoteItem[];
-};
 
 const NotesPage: NextPage<NotesPageProps> = ({ notes }: NotesPageProps) => {
   return (
