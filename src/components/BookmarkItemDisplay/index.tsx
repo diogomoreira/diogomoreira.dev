@@ -1,9 +1,7 @@
 import React from "react";
 import { BookmarkItem } from "@/lib/content";
 import styles from "@/styles/components/bookmark.module.scss";
-import formatDateI18N from "@/utils/date.i18.formatter";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { v4 as uuidv4 } from "uuid";
 
 type BookmarkItemDisplayProps = { item: BookmarkItem };
@@ -21,7 +19,6 @@ const icons: Record<string, string> = {
 };
 
 const BookmarkItemDisplay: React.FC<BookmarkItemDisplayProps> = ({ item }: BookmarkItemDisplayProps) => {
-  const router = useRouter();
   const icon: string = icons[item.type];
   return (
     <div className={styles.bookmarkItemContainer}>

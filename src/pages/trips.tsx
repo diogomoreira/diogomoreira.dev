@@ -5,7 +5,7 @@ import React from "react";
 
 type TripsPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-const TripsPage: NextPage = () => {
+const TripsPage: NextPage<TripsPageProps> = () => {
   return (
     <ContentFluid>
       <h1>🗺️ Trips</h1>

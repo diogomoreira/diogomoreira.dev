@@ -1,0 +1,12 @@
+@import "@/styles/variables.scss";
+@import "@/styles/mixins";
+
+.workItem {
+  @include card();
+  margin-bottom: $spacer;
+  padding: $spacer-lg;
+
+  > * {
+    margin: none;
+  }
+}
