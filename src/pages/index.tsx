@@ -17,7 +17,7 @@ import { Content } from "@/components/Layout/Content";
 type IndexPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const IndexPage: NextPage<IndexPageProps> = ({ notes }: IndexPageProps) => {
-  const { title, description } = useAppConfig();
+  const { author, title, description } = useAppConfig();
   const { t } = useTranslation("index");
 
   return (
@@ -25,7 +25,7 @@ const IndexPage: NextPage<IndexPageProps> = ({ notes }: IndexPageProps) => {
       <NextSeo title="Home Page" description={description} />
       <div className={styles.container}>
         <div>
-          <Image src={"/images/profile.jpg"} width={175} height={175} alt={title} />
+          <Image src={author.image} width={175} height={175} alt={title} />
         </div>
         <div>
           <h1>
