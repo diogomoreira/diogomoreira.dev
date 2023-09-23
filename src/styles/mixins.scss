@@ -29,7 +29,21 @@
   overflow: hidden;
 }
 
+@mixin clickable-element-background {
+  background-color: $light-dark-color;
+  color: $light-title-color;
+  @include color-scheme(dark) {
+    background-color: $dark-lighter-color;
+    color: $dark-title-color;
+  }
+}
+
 @mixin tag {
+  @include clickable-element-background();
+  padding: $spacer-xs $spacer-sm;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  font-family: var(--font-family-monospace);
   &::before {
     content: "#";
     color: $light-foreground-color;
@@ -38,16 +52,6 @@
     }
     font-weight: $font-weight-base;
   }
-  background-color: $light-dark-color;
-  color: $light-title-color;
-  @include color-scheme(dark) {
-    background-color: $dark-lighter-color;
-    color: $dark-title-color;
-  }
-  font-family: var(--font-family-monospace);
-  font-size: $font-size-sm;
-  font-weight: $font-weight-semibold;
-  padding: $spacer-xs $spacer-sm;
 }
 
 @mixin article-image {

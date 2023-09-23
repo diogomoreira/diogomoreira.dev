@@ -9,6 +9,7 @@ import type { AppProps } from "next/app";
 import "@/styles/globals.scss";
 import { DefaultSeo } from "next-seo";
 import { defaultSeo } from "@/lib/config/seo.config";
+import { GoogleAnalytics } from "nextjs-google-analytics";
 
 const fontFamilyMonospace = Inconsolata({
   subsets: ["latin"],
@@ -18,6 +19,7 @@ const fontFamilyMonospace = Inconsolata({
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <Layout className={fontFamilyMonospace.variable}>
+      <GoogleAnalytics trackPageViews />
       <DefaultSeo
         {...defaultSeo}
         // don't let search engines index branch/deploy previews

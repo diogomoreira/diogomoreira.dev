@@ -3,7 +3,6 @@ import { useAppConfig } from "@/lib/config";
 import { articleJsonLd } from "@/lib/config/seo.config";
 import { ContentPath, getNoteByPath, getNotesSlugs, mdxToHtml } from "@/lib/content";
 import styles from "@/styles/pages/slug.module.scss";
-import Giscus from "@giscus/react";
 import { InferGetStaticPropsType } from "next";
 import { MDXRemote } from "next-mdx-remote";
 import { ArticleJsonLd, NextSeo } from "next-seo";
@@ -13,29 +12,14 @@ import formatDateI18N from "@/utils/date.i18.formatter";
 import { v4 as uuid } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
-import { useTheme } from "@/lib/hooks";
 import { Content } from "@/components/Layout/Content";
+import Comments from "@/components/Comments";
 
 type NoteProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const Note: React.FC<NoteProps> = ({ source, frontMatter }: NoteProps) => {
-  const { siteUrl, giscus } = useAppConfig();
+  const { siteUrl } = useAppConfig();
   const postUrl = `${siteUrl}/notes/${frontMatter.slug}`;
-  const {
-    repo,
-    repoId,
-    category,
-    categoryId,
-    mapping,
-    term,
-    reactionsEnabled,
-    emitMetadata,
-    inputPosition,
-    lang,
-    loading,
-  } = giscus;
-
-  const theme = useTheme();
 
   return (
     <Content>
@@ -78,21 +62,7 @@ const Note: React.FC<NoteProps> = ({ source, frontMatter }: NoteProps) => {
         <div className={styles.content}>
           <MDXRemote {...source} />
         </div>
-        <Giscus
-          id="note-comments"
-          repo={repo}
-          repoId={repoId}
-          category={category}
-          categoryId={categoryId}
-          mapping={mapping}
-          term={term}
-          reactionsEnabled={reactionsEnabled}
-          emitMetadata={emitMetadata}
-          inputPosition={inputPosition}
-          theme={theme}
-          lang={lang}
-          loading={loading}
-        />
+        <Comments />
       </article>
     </Content>
   );
