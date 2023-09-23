@@ -28,7 +28,7 @@ const appConfig: ApplicationConfig = {
   siteVersion: packageJson.version,
   author: {
     name: "Diogo Moreira",
-    image: "images/profile.jpg",
+    image: "/images/profile_photo.jpg",
     email: "diogo.dmoreira@gmail.com",
     academicEmail: "diogo.moreira@ifpb.edu.br",
     github: "diogomoreira",
