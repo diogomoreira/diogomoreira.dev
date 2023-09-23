@@ -3,7 +3,6 @@ import { useAppConfig } from "@/lib/config";
 import { articleJsonLd } from "@/lib/config/seo.config";
 import { ContentPath, getNoteByPath, getNotesSlugs, mdxToHtml } from "@/lib/content";
 import styles from "@/styles/pages/slug.module.scss";
-import Giscus from "@giscus/react";
 import { InferGetStaticPropsType } from "next";
 import { MDXRemote } from "next-mdx-remote";
 import { ArticleJsonLd, NextSeo } from "next-seo";
@@ -13,7 +12,6 @@ import formatDateI18N from "@/utils/date.i18.formatter";
 import { v4 as uuid } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
-import { useTheme } from "@/lib/hooks";
 import { Content } from "@/components/Layout/Content";
 import Comments from "@/components/Comments";
 
