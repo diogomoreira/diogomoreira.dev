@@ -23,8 +23,8 @@ const LinksPage: NextPage = () => {
         <SocialIcons />
       </div>
       <div className={styles.links}>
-        <LinksPageItem icon="🌎" description="About me" href="http://diogodmoreira.com" />
-        <LinksPageItem icon="🛠️" description="Development tools/hardware I use" href="http://diogodmoreira.com" />
+        <LinksPageItem icon="🌎" description="About me" href="https://diogodmoreira.com" />
+        <LinksPageItem icon="🛠️" description="Development tools/hardware I use" href="https://diogodmoreira.com/uses" />
       </div>
     </Content>
   );
