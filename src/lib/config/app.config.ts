@@ -1,6 +1,5 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faBookmark, faFlask, faGraduationCap, faHome, faPenNib, faUser } from "@fortawesome/free-solid-svg-icons";
-import { GiscusProps } from "@giscus/react";
 import packageJson from "package.json";
 
 type ApplicationConfig = {
@@ -11,7 +10,6 @@ type ApplicationConfig = {
   siteLocale: string;
   siteVersion: string;
   author: { [key: string]: string };
-  giscus: GiscusProps;
   menu: {
     name: string;
     link: string;
@@ -41,19 +39,6 @@ const appConfig: ApplicationConfig = {
     researchGate: "Diogo_Moreira4",
     orcid: "0000-0003-1803-6565",
     lattes: "2745996619940977",
-  },
-  giscus: {
-    repo: "diogomoreira/diogodmoreira.com",
-    repoId: "MDEwOlJlcG9zaXRvcnkzNjM3NTY5NTM=",
-    category: "General",
-    categoryId: "DIC_kwDOFa59mc4CV9_B",
-    mapping: "url",
-    term: "0",
-    reactionsEnabled: "1",
-    emitMetadata: "0",
-    inputPosition: "bottom",
-    lang: "en",
-    loading: "lazy",
   },
   menu: [
     { name: "Home", link: "/", icon: faHome },
