@@ -23,7 +23,9 @@ const BookmarkItemDisplay: React.FC<BookmarkItemDisplayProps> = ({ item }: Bookm
   return (
     <div className={styles.bookmarkItemContainer}>
       <a href={item.link} target="_blank" rel="noreferrer">
-        <Image alt={item.title} src={`/images/bookmarks/${item.image}`} fill className={styles.bookmarkItemImage} />
+        <div className={styles.bookmarkItemImageContainer}>
+          <Image alt={item.title} src={`/images/bookmarks/${item.image}`} fill className={styles.bookmarkItemImage} />
+        </div>
       </a>
       <div className={styles.bookmarkItemDetails}>
         <h1>
