@@ -23,7 +23,7 @@
 }
 
 @mixin card {
-  @include box-shadow();
+  // @include box-shadow();
   @include border();
   @include border-radius();
   overflow: hidden;
@@ -40,6 +40,7 @@
 
 @mixin tag {
   @include clickable-element-background();
+  border-radius: $border-radius-sm;
   padding: $spacer-xs $spacer-sm;
   font-size: $font-size-sm;
   font-weight: $font-weight-semibold;
@@ -56,18 +57,20 @@
 
 @mixin article-image {
   margin: $spacer-xl $spacer-sm;
+  display: block;
   position: relative;
-  aspect-ratio: 21/9;
+  aspect-ratio: 16/9;
 
   @include md-breakpoint {
     margin: 0;
   }
 
   > img {
-    @include box-shadow();
+    @include border();
     border-radius: $border-radius;
     object-fit: cover;
     width: 100%;
+    max-height: 100%;
   }
 }
 
