@@ -56,6 +56,7 @@
 
 .cover {
   @include article-image();
+  overflow: hidden;
   margin: 0;
 }
 
