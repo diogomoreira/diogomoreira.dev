@@ -73,6 +73,8 @@
 
 .cover {
   @include article-image();
+  @include border();
+  @include border-radius();
 }
 
 .content {

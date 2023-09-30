@@ -56,6 +56,10 @@
 
 .cover {
   @include article-image();
+  @include image-hover-zoom();
+  @include border();
+  @include border-radius();
+  aspect-ratio: 16/9;
   overflow: hidden;
   margin: 0;
 }
