@@ -2,11 +2,13 @@
 @import "@/styles/mixins.scss";
 
 .section {
-  padding: $spacer $spacer-none;
-  border-bottom-width: $border-width;
-  border-bottom-style: $border-style;
-  border-bottom-color: $light-border-color;
+  margin: $spacer $spacer-none;
+  padding-left: $spacer;
+  letter-spacing: -1px;
+  border-left-width: $border-width-thick;
+  border-left-style: $border-style;
+  border-left-color: $light-border-color;
   @include color-scheme(dark) {
-    border-bottom-color: $dark-border-color;
+    border-left-color: $dark-border-color;
   }
 }
