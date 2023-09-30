@@ -32,6 +32,7 @@
   }
 
   img {
+    border-radius: $border-radius;
     border-width: $border-width-thick;
     border-style: $border-style;
     border-color: $light-border-color;

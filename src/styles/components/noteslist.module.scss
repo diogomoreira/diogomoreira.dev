@@ -3,48 +3,38 @@
 
 .notesContainer {
   list-style: none;
-  margin: $spacer-lg $spacer-none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
+  padding: $spacer-none;
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @include sm-breakpoint {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include lg-breakpoint {
+    grid-template-columns: repeat(3, 1fr);
+  }
   gap: $spacer-lg;
 }
 
 .note {
-  display: flex;
-  flex-direction: column;
-  // padding: $spacer;
+  display: grid;
+  gap: $spacer;
   font-weight: $font-weight-base;
   // @include card();
 }
 
 .noteItem {
-  flex: 1;
   justify-content: space-between;
   align-items: center;
   display: flex;
-  gap: $spacer;
+  gap: $spacer-xs;
   font-size: $font-size-sm;
   align-items: flex-start;
   flex-direction: column;
-  padding-bottom: $spacer;
-  border-bottom-width: $border-width;
-  border-bottom-style: $border-style;
-  border-bottom-color: $light-border-color;
-  @include color-scheme(dark) {
-    border-bottom-color: $dark-border-color;
-  }
-
-  @include md-breakpoint {
-    border-bottom: none;
-    padding-bottom: $spacer-none;
-
-    flex-direction: row;
-    align-items: center;
-  }
 
   > h1 {
-    font-size: $font-size-base;
+    font-size: $font-size-heading-h5;
     font-weight: $font-weight-semibold;
     margin: $spacer-none;
     flex: 1;
@@ -62,6 +52,11 @@
       color: $dark-foreground-color;
     }
   }
+}
+
+.cover {
+  @include article-image();
+  margin: 0;
 }
 
 .description {
