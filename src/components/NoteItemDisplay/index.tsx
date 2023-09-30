@@ -9,17 +9,19 @@ type NoteProps = { note: NoteItem };
 const NoteItemDisplay: React.FC<NoteProps> = ({ note }: NoteProps) => {
   return (
     <article className={styles.note}>
-      <div className={styles.cover}>
-        <Image
-          src={`${ContentPath.NOTES_COVER_IMAGES}/${note.cover}`}
-          fill
-          alt={note.title}
-          sizes="33vw"
-          style={{
-            objectFit: "cover", // cover, contain, none
-          }}
-        />
-      </div>
+      <Link href={`/${note.slug}`}>
+        <div className={styles.cover}>
+          <Image
+            src={`${ContentPath.NOTES_COVER_IMAGES}/${note.cover}`}
+            fill
+            alt={note.title}
+            sizes="33vw"
+            style={{
+              objectFit: "cover", // cover, contain, none
+            }}
+          />
+        </div>
+      </Link>
       <Link href={`/${note.slug}`}>
         <div className={styles.noteItem}>
           <time>{formatDateI18N(note.timestamp)}</time>
