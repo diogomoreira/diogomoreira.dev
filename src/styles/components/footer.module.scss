@@ -9,11 +9,6 @@
   }
   font-size: $font-size-sm;
   font-weight: $font-weight-base;
-  padding: $spacer-lg $spacer-none;
-  border-top: $border-width $border-style $light-border-color;
-  @include color-scheme(dark) {
-    border-top: $border-width $border-style $dark-border-color;
-  }
   a {
     color: $light-highlight-color;
     @include color-scheme(dark) {
@@ -32,6 +27,11 @@
   align-items: center;
   gap: $spacer;
 
+  padding: $spacer $spacer-none;
+  border-top: $border-width $border-style $light-border-color;
+  @include color-scheme(dark) {
+    border-top: $border-width $border-style $dark-border-color;
+  }
   @include md-breakpoint {
     flex-direction: row;
     text-align: left;

@@ -1,6 +1,6 @@
 {
   "name": "diogodmoreira.com",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -20,7 +20,6 @@
     "@fortawesome/free-solid-svg-icons": "6.4.0",
     "@fortawesome/react-fontawesome": "0.2.0",
     "@giscus/react": "2.3.0",
-    "@types/marked": "^5.0.0",
     "bibtex": "0.9.0",
     "date-fns": "2.29.3",
     "gray-matter": "4.0.3",
@@ -41,7 +40,6 @@
     "rehype-slug": "5.1.0",
     "remark-gfm": "3.0.1",
     "sass": "1.62.1",
-    "sharp": "0.32.1",
     "typescript": "5.0.4",
     "uuid": "9.0.0"
   },
@@ -50,7 +48,6 @@
     "@types/lodash": "4.14.194",
     "@types/node": "18.16.2",
     "@types/react": "18.2.0",
-    "@types/react-dom": "18.2.1",
     "@types/react-responsive-masonry": "2.1.0",
     "@types/uuid": "9.0.1",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
