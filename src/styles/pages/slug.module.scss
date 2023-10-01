@@ -102,12 +102,11 @@
 
   blockquote {
     @include border-radius();
-    @include box-shadow();
     background-color: $light-dark-color;
     @include color-scheme(dark) {
       background-color: $dark-lighter-color;
     }
     padding: $spacer-sm $spacer;
-    margin: $spacer-xl $spacer-sm;
+    margin: $spacer-xl $spacer-none;
   }
 }
