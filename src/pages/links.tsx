@@ -16,8 +16,7 @@ const LinksPage: NextPage = () => {
         <Image src={author.image} width={175} height={175} alt={author.name} className={styles.profilePhoto} />
       </div>
       <div className={styles.presentation}>
-        <h1 className={styles.title}>Diogo Moreira</h1>
-        <h2 className={styles.username}>@diogodmoreira</h2>
+        <h1 className={styles.title}>{author.name}</h1>
       </div>
       <div className={styles.presentation}>
         <SocialIcons />
