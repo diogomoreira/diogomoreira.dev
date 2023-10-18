@@ -1,7 +1,36 @@
-## Diogo Moreira's personal website
+# ![](public/images/banner.png)
 
-This is the data of my blog and personal website, where I post some thoughts
-about software development, games, photography, life and so forth.
+This is the data for my blog and personal website, where I post some thoughts
+about software development, games, photography, life and so forth. I also post some things related to my academic experience, some projects and links for cool stuff I've been really into lately.
+
+## Tech stack
+
+- React + Next.js
+- Typescript
+- CSS Modules + SASS
+
+## Project overview (TODO)
+
+```
+- src
+  - components/*
+  - content/*
+  - lib/*
+  - pages/*
+  - styles/*
+  - utils/*
+```
+
+## How to run
+
+To run this project, you'll need [**NodeJS 14+**](https://nodejs.org/en) and [**Yarn**](https://classic.yarnpkg.com/en/docs/install).
+
+```
+git clone git@github.com:diogomoreira/diogodmoreira.com.git
+cd diogodmoreira.com
+yarn install
+yarn dev
+```
 
 ## License
 
