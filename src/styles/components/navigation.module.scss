@@ -102,6 +102,7 @@
   color: $dark-title-color;
   text-decoration: none;
   transition: 200ms ease-in-out;
+  border-radius: $border-radius-sm;
   &:hover {
     transition: 200ms ease-in-out;
     background-color: $dark-light-color;

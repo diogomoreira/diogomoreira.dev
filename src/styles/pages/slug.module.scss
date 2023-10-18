@@ -83,7 +83,7 @@
   p {
     margin: $spacer 0;
     code {
-      @include border-radius();
+      border-radius: $border-radius-sm;
       font-family: var(--font-family-monospace);
 
       background-color: $light-dark-color;
