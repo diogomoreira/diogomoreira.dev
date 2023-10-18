@@ -10,6 +10,7 @@ import "@/styles/globals.scss";
 import { DefaultSeo } from "next-seo";
 import { defaultSeo } from "@/lib/config/seo.config";
 import { GoogleAnalytics } from "nextjs-google-analytics";
+import { Analytics } from "@vercel/analytics/react";
 
 const fontFamilyMonospace = Inconsolata({
   subsets: ["latin"],
@@ -27,6 +28,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         dangerouslySetAllPagesToNoFollow={process.env.CONTEXT !== "production"}
       />
       <Component {...pageProps} />
+      <Analytics />
     </Layout>
   );
 };
