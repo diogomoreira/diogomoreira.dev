@@ -1,10 +1,9 @@
 import React from "react";
-import { useAppConfig } from "@/lib/config";
-import { articleJsonLd } from "@/lib/config/seo.config";
-import { ContentPath, getNoteByPath, getNotesSlugs, mdxToHtml } from "@/lib/content";
+import { useAppConfig } from "@/config";
+import { articleJsonLd } from "@/config/seo.config";
+import { ContentPath, getNoteByPath, getNotesSlugs, markdownToHTML } from "@/lib/content";
 import styles from "@/styles/pages/slug.module.scss";
 import { InferGetStaticPropsType } from "next";
-import { MDXRemote } from "next-mdx-remote";
 import { ArticleJsonLd, NextSeo } from "next-seo";
 import Image from "next/image";
 import logo from "public/images/logo.png";
@@ -17,51 +16,49 @@ import Comments from "@/components/Comments";
 
 type NoteProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-const Note: React.FC<NoteProps> = ({ source, frontMatter }: NoteProps) => {
+const Note: React.FC<NoteProps> = ({ source, post }: NoteProps) => {
   const { siteUrl } = useAppConfig();
-  const postUrl = `${siteUrl}/notes/${frontMatter.slug}`;
+  const postUrl = `${siteUrl}/notes/${post.slug}`;
 
   return (
     <Content>
-      <NextSeo title={frontMatter.title} description={frontMatter.description} />
+      <NextSeo title={post.title} description={post.description} />
       <ArticleJsonLd
         url={postUrl}
-        title={frontMatter.title}
-        description={frontMatter.description}
-        datePublished={frontMatter.timestamp}
-        dateModified={frontMatter.timestamp}
-        images={[`${siteUrl}/${frontMatter.cover || logo.src}`]}
+        title={post.title}
+        description={post.description}
+        datePublished={post.timestamp}
+        dateModified={post.timestamp}
+        images={[`${siteUrl}/${post.cover || logo.src}`]}
         {...articleJsonLd}
       />
       <article>
-        <h1 className={styles.noteTitle}>{frontMatter.title}</h1>
-        <p className={styles.noteDescription}>{frontMatter.description}</p>
+        <h1 className={styles.noteTitle}>{post.title}</h1>
+        <p className={styles.noteDescription}>{post.description}</p>
         <div className={styles.noteDetails}>
           <time className={styles.noteDetailsTimestamp}>
             <span>
               <FontAwesomeIcon icon={faCalendar} />
             </span>
-            <span>{formatDateI18N(frontMatter.timestamp)}</span>
+            <span>{formatDateI18N(post.timestamp)}</span>
           </time>
           <div className={styles.noteDetailsCategory}>
-            <span>{frontMatter.category}</span>
+            <span>{post.category}</span>
           </div>
           <div className={styles.noteDetailsTags}>
             <div className={styles.noteDetailsTagsList}>
-              {frontMatter.tags.map(tag => (
+              {post.tags.map(tag => (
                 <span key={uuid()}>{tag}</span>
               ))}
             </div>
           </div>
         </div>
-        {frontMatter.cover && (
+        {post.cover && (
           <div className={styles.cover}>
-            <Image src={`${ContentPath.NOTES_COVER_IMAGES}/${frontMatter.cover}`} fill alt={frontMatter.title} />
+            <Image src={`${ContentPath.NOTES_COVER_IMAGES}/${post.cover}`} fill alt={post.title} />
           </div>
         )}
-        <div className={styles.content}>
-          <MDXRemote {...source} />
-        </div>
+        <div className={styles.content} dangerouslySetInnerHTML={{ __html: source }}></div>
         <Comments />
       </article>
     </Content>
@@ -77,11 +74,11 @@ type StaticPropsParams = {
 export async function getStaticProps({ params }: StaticPropsParams) {
   const { slug } = params;
   const post = await getNoteByPath(slug);
-  const source = await mdxToHtml(post);
+  const source = await markdownToHTML(post.body);
   return {
     props: {
       source,
-      frontMatter: post,
+      post: post,
     },
   };
 }
@@ -89,7 +86,7 @@ export async function getStaticProps({ params }: StaticPropsParams) {
 export async function getStaticPaths() {
   const notes = await getNotesSlugs();
   return {
-    paths: notes.map(({ slug }) => ({ params: { slug } })),
+    paths: notes.map<StaticPropsParams>(slug => ({ params: { slug } })),
     fallback: false,
   };
 }

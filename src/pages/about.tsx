@@ -5,7 +5,7 @@ import { NextSeo } from "next-seo";
 import styles from "@/styles/pages/about.module.scss";
 import contentStyle from "@/styles/pages/slug.module.scss";
 import Image from "next/image";
-import { useAppConfig } from "@/lib/config";
+import { useAppConfig } from "@/config";
 import Link from "next/link";
 import { Content } from "@/components/Layout/Content";
 
