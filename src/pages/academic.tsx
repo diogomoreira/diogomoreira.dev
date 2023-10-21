@@ -1,6 +1,6 @@
 import React from "react";
 import Section from "@/components/Section";
-import { useAppConfig } from "@/lib/config";
+import { useAppConfig } from "@/config";
 import { getPublicationEntriesSorted } from "@/lib/content";
 import styles from "@/styles/pages/academic.module.scss";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";

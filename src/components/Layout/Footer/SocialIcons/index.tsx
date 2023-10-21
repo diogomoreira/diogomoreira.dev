@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppConfig } from "@/lib/config";
+import { useAppConfig } from "@/config";
 import capitalize from "lodash/capitalize";
 import styles from "@/styles/components/socialicons.module.scss";
 import { faGithub, faInstagram, faLinkedin, faMastodon, faTwitter } from "@fortawesome/free-brands-svg-icons";

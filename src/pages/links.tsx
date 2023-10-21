@@ -1,7 +1,7 @@
 import { Content } from "@/components/Layout/Content";
 
 import LinksPageItem from "@/components/LinksPageItem";
-import { useAppConfig } from "@/lib/config";
+import { useAppConfig } from "@/config";
 import { NextPage } from "next";
 import React from "react";
 import styles from "@/styles/pages/links.module.scss";

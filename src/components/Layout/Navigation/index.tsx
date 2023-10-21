@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAppConfig } from "@/lib/config";
+import { useAppConfig } from "@/config";
 import Link from "next/link";
 
 import styles from "@/styles/components/navigation.module.scss";

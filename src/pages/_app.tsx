@@ -8,7 +8,7 @@ import type { AppProps } from "next/app";
 
 import "@/styles/globals.scss";
 import { DefaultSeo } from "next-seo";
-import { defaultSeo } from "@/lib/config/seo.config";
+import { defaultSeo } from "@/config/seo.config";
 import { GoogleAnalytics } from "nextjs-google-analytics";
 import { Analytics } from "@vercel/analytics/react";
 

@@ -8,7 +8,7 @@ import { NextSeo } from "next-seo";
 
 import NotesList from "@/components/NotesList";
 import Section from "@/components/Section";
-import { useAppConfig } from "@/lib/config";
+import { useAppConfig } from "@/config";
 import { NoteItem, getAllNotes } from "@/lib/content";
 import styles from "@/styles/pages/index.module.scss";
 import { compareDesc } from "date-fns";
