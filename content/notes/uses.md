@@ -1,7 +1,6 @@
 ---
 title: My hardware/software setup
 description: Elements of my setup that have enhanced my productivity and efficiency, from hardware to software.
-slug: uses
 lang: en-us
 status: draft
 timestamp: "2023-07-09T16:00:00"

@@ -1,7 +1,6 @@
 ---
 title: Mocking Google Cloud Storage Blob Objects
 description: Google Cloud Storage is widely used as a cloud storage service to allow users to store and retrieve objects. When working with it, it's essential to write efficient unit tests to ensure that the application behaves as expected. In this post, we'll going to create mocks that simulates Google Storage objects.
-slug: mocking-google-cloud-storage
 lang: en-us
 status: draft
 timestamp: "2023-05-20"
@@ -12,6 +11,10 @@ tags: [testing, google_cloud, java]
 ---
 
 Google Cloud Storage is widely used as a cloud storage service to allow users to store and retrieve objects. When working with Google Cloud Storage, it's essential to write efficient unit tests to ensure that the application behaves as expected.
+
+## Contents
+
+## Introduction
 
 One common challenge in unit testing is dealing with external dependencies, that's when we use [_mocks_](https://stackoverflow.com/questions/2665812/what-is-mocking) such as Blob Objects from Google Cloud Storage, which may not be readily available during testing or needs to be mocked due to _pricing restrictions_. In this blog post, we will explore how to mock Blob Objects from **Google Cloud Storage** for efficient unit testing.
 

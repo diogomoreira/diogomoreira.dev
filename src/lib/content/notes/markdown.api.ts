@@ -1,20 +1,25 @@
-import { serialize } from "next-mdx-remote/serialize";
-
-import rehypeCodeTitles from "rehype-code-titles";
-import rehypePrism from "rehype-prism-plus";
+import remarkRehype from "remark-rehype";
+import { unified } from "unified";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
+import rehypeStringify from "rehype-stringify";
+import rehypePrism from "@mapbox/rehype-prism";
+import remarkToc from "remark-toc";
 import remarkGfm from "remark-gfm";
-import { NoteItem } from "@/lib/content";
+import rehypeSanitize from "rehype-sanitize";
 
-async function mdxToHtml(data: NoteItem) {
-  return serialize(data.content, {
-    mdxOptions: {
-      remarkPlugins: [remarkGfm],
-      rehypePlugins: [rehypeSlug, rehypeCodeTitles, rehypePrism],
-      format: "mdx",
-    },
-    scope: data,
-  });
+const remarkProcessor = unified()
+  .use(remarkGfm)
+  .use(remarkToc)
+  .use(remarkRehype)
+  .use(rehypeSanitize)
+  .use(rehypeSlug)
+  .use(rehypeAutolinkHeadings)
+  .use(rehypePrism)
+  .use(rehypeStringify);
+
+async function markdownToHTML(data: string) {
+  return remarkProcessor.process(data).then(v => v.toString());
 }
 
-export { mdxToHtml };
+export { markdownToHTML };
