@@ -6,20 +6,20 @@ import rehypeStringify from "rehype-stringify";
 import rehypePrism from "@mapbox/rehype-prism";
 import remarkToc from "remark-toc";
 import remarkGfm from "remark-gfm";
-import rehypeSanitize from "rehype-sanitize";
+import remarkParse from "remark-parse";
 
-const remarkProcessor = unified()
+const unifiedProcessor = unified()
+  .use(remarkParse)
   .use(remarkGfm)
   .use(remarkToc)
   .use(remarkRehype)
-  .use(rehypeSanitize)
+  .use(rehypePrism)
   .use(rehypeSlug)
   .use(rehypeAutolinkHeadings)
-  .use(rehypePrism)
   .use(rehypeStringify);
 
 async function markdownToHTML(data: string) {
-  return remarkProcessor.process(data).then(v => v.toString());
+  return unifiedProcessor.process(data).then(v => v.toString());
 }
 
 export { markdownToHTML };
