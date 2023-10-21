@@ -1,7 +1,6 @@
 ---
 title: Versioning .dotfiles
 description: Why versioning dotfiles?
-slug: dotfiles
 lang: en-us
 status: draft
 timestamp: "2023-04-28"

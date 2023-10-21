@@ -1,41 +1,39 @@
-type NoteItem = {
-  title: string;
-  timestamp: string;
+export type NoteItem = {
+  body: string;
   category: string;
-  tags: string[];
-  slug: string;
   cover?: string;
   description: string;
-  content: string;
+  slug: string;
+  tags: string[];
+  timestamp: string;
+  title: string;
 };
 
-type ProjectItem = {
-  title: string;
-  timestamp: string;
+export type ProjectItem = {
   description: string;
-  stack: string[];
   image: string;
+  stack: string[];
+  timestamp: string;
+  title: string;
   url: string;
 };
 
-type PaperItem = {
+export type PaperItem = {
+  abstract: string;
+  author: string[];
+  doi: string;
   id: string;
   title: string;
-  abstract: string;
-  doi: string;
-  year: string;
   url: string;
-  author: string[];
+  year: string;
 };
 
-type BookmarkItem = {
-  title: string;
-  type: string;
-  link: string;
+export type BookmarkItem = {
   description: string;
   image: string;
-  timestamp: string;
+  link: string;
   tags: string[];
+  timestamp: string;
+  title: string;
+  type: string;
 };
-
-export { type NoteItem, type ProjectItem, type BookmarkItem, type PaperItem };

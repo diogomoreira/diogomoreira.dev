@@ -2,38 +2,37 @@ import matter from "gray-matter";
 import { join } from "path";
 import { NoteItem } from "../content.types";
 import { ContentPath } from "../paths";
-import fs from "fs";
-import { readFile, readdir } from "fs/promises";
+import fs from "fs/promises";
 
 const notesDirectory = join(process.cwd(), ContentPath.NOTES);
 
-type NoteSlug = {
-  slug: string;
-  realPath: string;
-};
-
 async function getNoteByPath(slug: string): Promise<NoteItem> {
-  const fullPath = join(notesDirectory, `${slug}.mdx`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-  const { content, data } = matter(fileContents);
-  return { content, ...data, slug } as NoteItem;
+  const fullPath = join(notesDirectory, `${slug}.md`);
+  return fs.readFile(fullPath, { encoding: "utf8" }).then((fileContent: string) => {
+    const { content, data } = matter(fileContent);
+    return {
+      body: content,
+      category: data.category,
+      cover: data.cover,
+      description: data.description,
+      tags: data.tags,
+      timestamp: data.timestamp,
+      title: data.title,
+      slug: slug,
+    };
+  });
 }
 
-async function getNotesSlugs(): Promise<NoteSlug[]> {
-  const files = await readdir(notesDirectory);
-  const slugs: NoteSlug[] = [];
-  for (const file of files) {
-    const realPath = join(notesDirectory, file);
-    const fileContent = await readFile(realPath, { encoding: "utf-8" });
-    const frontMatter = matter(fileContent);
-    slugs.push({ slug: frontMatter.data["slug"], realPath });
-  }
-  return slugs;
+async function getNotesSlugs(): Promise<string[]> {
+  return fs
+    .readdir(notesDirectory)
+    .then(files => files.map(file => file.replace(/\.[^/.]+$/, "")))
+    .then(promises => Promise.all(promises));
 }
 
 async function getAllNotes(): Promise<NoteItem[]> {
   const noteSlug = await getNotesSlugs();
-  return Promise.all(noteSlug.map(({ slug }) => getNoteByPath(slug)));
+  return Promise.all(noteSlug.map(slug => getNoteByPath(slug)));
 }
 
-export { getNoteByPath, getAllNotes, getNotesSlugs, type NoteSlug };
+export { getNoteByPath, getAllNotes, getNotesSlugs };
