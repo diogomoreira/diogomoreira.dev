@@ -26,7 +26,6 @@
     "date-fns": "2.29.3",
     "gray-matter": "4.0.3",
     "i18next": "22.4.15",
-    "jsdom": "22.1.0",
     "lodash": "4.17.21",
     "next": "13.3.1",
     "next-i18next": "13.2.2",
@@ -51,8 +50,6 @@
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "13.3.1",
-    "@types/dompurify": "3.0.4",
-    "@types/jsdom": "21.1.4",
     "@types/lodash": "4.14.194",
     "@types/mapbox__rehype-prism": "0.8.2",
     "@types/node": "18.16.2",
