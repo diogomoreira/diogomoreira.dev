@@ -9,10 +9,9 @@ import Image from "next/image";
 import logo from "public/images/logo.png";
 import formatDateI18N from "@/utils/date.i18.formatter";
 import { v4 as uuid } from "uuid";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { Content } from "@/components/Layout/Content";
 import Comments from "@/components/Comments";
+import { FaCalendar } from "react-icons/fa6";
 
 type NoteProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -38,7 +37,7 @@ const Note: React.FC<NoteProps> = ({ source, post }: NoteProps) => {
         <div className={styles.noteDetails}>
           <time className={styles.noteDetailsTimestamp}>
             <span>
-              <FontAwesomeIcon icon={faCalendar} />
+              <FaCalendar />
             </span>
             <span>{formatDateI18N(post.timestamp)}</span>
           </time>
