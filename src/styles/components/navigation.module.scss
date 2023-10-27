@@ -93,7 +93,7 @@
 .navigationListItemLink {
   background-color: $dark-color;
   display: flex;
-  gap: $spacer;
+  gap: $spacer-sm;
   align-items: center;
   flex: 1;
   text-align: center;
@@ -115,8 +115,7 @@
 }
 
 .navigationListItemIcon {
-  min-width: 15px;
-  max-height: 15px;
+  font-size: $font-size-base;
 }
 
 .navigationListItemLabel {

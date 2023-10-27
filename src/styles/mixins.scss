@@ -23,7 +23,6 @@
 }
 
 @mixin card {
-  // @include box-shadow();
   @include border();
   @include border-radius();
   overflow: hidden;
