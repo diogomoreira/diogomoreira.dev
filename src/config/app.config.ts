@@ -1,6 +1,6 @@
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faBookmark, faFlask, faGraduationCap, faHome, faPenNib, faUser } from "@fortawesome/free-solid-svg-icons";
 import packageJson from "package.json";
+import { IconType } from "react-icons";
+import { FaHouseChimney, FaUser, FaPenNib, FaGraduationCap, FaFlask, FaBookmark } from "react-icons/fa6";
 
 type ApplicationConfig = {
   title: string;
@@ -13,7 +13,7 @@ type ApplicationConfig = {
   menu: {
     name: string;
     link: string;
-    icon: IconProp;
+    icon: IconType;
   }[];
 };
 
@@ -41,16 +41,16 @@ const appConfig: ApplicationConfig = {
     lattes: "2745996619940977",
   },
   menu: [
-    { name: "Home", link: "/", icon: faHome },
-    { name: "About", link: "/about", icon: faUser },
-    { name: "Notes", link: "/notes", icon: faPenNib },
+    { name: "Home", link: "/", icon: FaHouseChimney },
+    { name: "About", link: "/about", icon: FaUser },
+    { name: "Notes", link: "/notes", icon: FaPenNib },
     {
       name: "Academic",
       link: "/academic",
-      icon: faGraduationCap,
+      icon: FaGraduationCap,
     },
-    { name: "Labs", link: "/labs", icon: faFlask },
-    { name: "Bookmarks", link: "/bookmarks", icon: faBookmark },
+    { name: "Labs", link: "/labs", icon: FaFlask },
+    { name: "Bookmarks", link: "/bookmarks", icon: FaBookmark },
   ],
 };
 
