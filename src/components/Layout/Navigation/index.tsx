@@ -3,10 +3,9 @@ import { useAppConfig } from "@/config";
 import Link from "next/link";
 
 import styles from "@/styles/components/navigation.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FiMenu } from "react-icons/fi";
 import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
 
 const Navigation = () => {
@@ -25,27 +24,28 @@ const Navigation = () => {
             </div>
           </Link>
           <div className={styles.menuToggle}>
-            <FontAwesomeIcon icon={faBars} onClick={() => setShowMenu(!showMenu)} />
+            <FiMenu onClick={() => setShowMenu(!showMenu)} />
           </div>
         </div>
         <ul className={styles.navigationListItem} hidden={!showMenu}>
-          {menu.map(item => (
-            <li key={uuidv4()}>
-              <Link
-                className={`${styles.navigationListItemLink} ${
-                  router.pathname === item.link && styles.navigationListItemCurrent
-                } `}
-                href={item.link}
-                onClick={() => setShowMenu(false)}
-                title={item.name}
-              >
-                <FontAwesomeIcon className={styles.navigationListItemIcon} icon={item.icon} />
-                <span hidden={!showMenu} className={styles.navigationListItemLabel}>
-                  {item.name}
-                </span>
-              </Link>
-            </li>
-          ))}
+          {menu.map(item => {
+            const MenuItemIcon = item.icon;
+            return (
+              <li key={uuidv4()}>
+                <Link
+                  className={`${styles.navigationListItemLink} ${
+                    router.pathname === item.link && styles.navigationListItemCurrent
+                  } `}
+                  href={item.link}
+                  onClick={() => setShowMenu(false)}
+                  title={item.name}
+                >
+                  <MenuItemIcon className={styles.navigationListItemIcon} />
+                  <span className={styles.navigationListItemLabel}>{item.name}</span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </div>
