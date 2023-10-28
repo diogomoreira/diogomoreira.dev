@@ -6,11 +6,10 @@ $spacer-sm: $spacer * 0.5;
 $spacer-lg: $spacer * 1.5;
 $spacer-xl: $spacer * 2.5;
 
-$xs-breakpoint: 576px;
-$sm-breakpoint: 840px;
+$xs-breakpoint: 360px;
+$sm-breakpoint: 768px;
 $md-breakpoint: 1024px;
-$lg-breakpoint: 1290px;
-$xl-breakpoint: 1440px;
+$lg-breakpoint: 1920px;
 
 $max-width: $md-breakpoint;
 
