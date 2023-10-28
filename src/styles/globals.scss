@@ -6,7 +6,9 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: $light-background-color;
+  background-image: radial-gradient($light-dark-color 1px, transparent 1px);
+  background-size: 15px 15px;
+  background-color: $white;
   color: $light-foreground-color;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -14,7 +16,9 @@ body {
   font-feature-settings: "cv11", "salt", "ss01", "ss03", "cv01", "cv02", "cv03", "cv04", "cv05", "cv06", "cv09", "cv10";
 
   @include color-scheme(dark) {
-    background-color: $dark-background-color;
+    background-image: radial-gradient($dark-light-color 1px, transparent 1px);
+    background-size: 15px 15px;
+    background-color: $black;
     color: $dark-foreground-color;
   }
 }
