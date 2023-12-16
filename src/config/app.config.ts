@@ -9,6 +9,7 @@ type ApplicationConfig = {
   siteUrl: string;
   siteLocale: string;
   siteVersion: string;
+  repository: string;
   author: { [key: string]: string };
   menu: {
     name: string;
@@ -22,8 +23,9 @@ const appConfig: ApplicationConfig = {
   description: "My thoughts about life, software development, games, music and so forth",
   keywords: ["software development", "teaching"],
   siteUrl: "https://diogodmoreira.com/",
-  siteLocale: "en-US",
+  siteLocale: "en",
   siteVersion: packageJson.version,
+  repository: "https://github.com/diogomoreira/diogodmoreira.com",
   author: {
     name: "Diogo Moreira",
     image: "/images/profile_photo.jpg",
@@ -41,16 +43,16 @@ const appConfig: ApplicationConfig = {
     lattes: "2745996619940977",
   },
   menu: [
-    { name: "Home", link: "/", icon: FaHouseChimney },
-    { name: "About", link: "/about", icon: FaUser },
-    { name: "Notes", link: "/notes", icon: FaPenNib },
+    { name: "menu.home", link: "/", icon: FaHouseChimney },
+    { name: "menu.about", link: "/about", icon: FaUser },
+    { name: "menu.blog", link: "/blog", icon: FaPenNib },
     {
-      name: "Academic",
+      name: "menu.academic",
       link: "/academic",
       icon: FaGraduationCap,
     },
-    { name: "Labs", link: "/labs", icon: FaFlask },
-    { name: "Bookmarks", link: "/bookmarks", icon: FaBookmark },
+    { name: "menu.labs", link: "/labs", icon: FaFlask },
+    { name: "menu.bookmarks", link: "/bookmarks", icon: FaBookmark },
   ],
 };
 

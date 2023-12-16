@@ -1,16 +1,15 @@
 {
-  "academic": {
-    "teaching": {
-      "intro": "I've majored in System Analysis and Development in 2012 at Instituto Federal da Paraíba. After this, i've made a specialization in Software Engineering between 2013~2014 at Estácio. Lastly, I did my master's in Software Engineer at CESAR School (Recife, Brazil) in 2019. I'm working as a Adjunct Professor since 2014 at Instituto Federal da Paraíba (in the same campus I did my major), where I lectured subjects related to <0>Software Engineer</0> topics, such as <1>Software Quality and Testing</1> and <2>Design Patterns</2>"
-    },
-    "authors": "Authors",
-    "copycitation": "Copy citation",
-    "copied": "copied to clipboard!",
-    "researching": {
-      "title": "Publications",
-      "intro": "My research interests are mainly related to Software Engineering, especially <0>Software Testing</0>, <1>Software Quality</1> and <2>Design Patterns</2>.",
-      "groups": "I am also a member of the <gpes>Software Engineering Research Group</gpes> (GPES, IFPB, Brazil). If you wish, see my profile on <researchGate>Research Gate</researchGate>, <scholar>Google Scholar</scholar>, <orcid>ORCID</orcid> or <lattes>Lattes</lattes> (portuguese only).",
-      "list": "A list of my publications can be found below along with link to download the articles. Feel free to contact me at <email>diogo.moreira [at] ifpb.edu.br</email> if you would like to discuss any of the articles or request additional materials, I will be glad to help."
-    }
+  "title": "Academic",
+  "teaching": {
+    "intro": "I've majored in System Analysis and Development in 2012 at Instituto Federal da Paraíba. After this, i've made a specialization in Software Engineering between 2013~2014 at Estácio. Lastly, I did my master's in Software Engineer at CESAR School (Recife, Brazil) in 2019. I'm working as a Adjunct Professor since 2014 at Instituto Federal da Paraíba (in the same campus I did my major), where I lectured subjects related to <0>Software Engineer</0> topics, such as <1>Software Quality and Testing</1> and <2>Design Patterns</2>"
+  },
+  "authors": "Authors",
+  "copycitation": "Copy citation",
+  "copied": "copied to clipboard!",
+  "researching": {
+    "title": "Publications",
+    "intro": "My research interests are mainly related to Software Engineering, especially <0>Software Testing</0>, <1>Software Quality</1> and <2>Design Patterns</2>.",
+    "groups": "I am also a member of the <gpes>Software Engineering Research Group</gpes> (GPES, IFPB, Brazil). If you wish, see my profile on <researchGate>Research Gate</researchGate>, <scholar>Google Scholar</scholar>, <orcid>ORCID</orcid> or <lattes>Lattes</lattes> (portuguese only).",
+    "list": "A list of my publications can be found below along with link to download the articles. Feel free to contact me at <email>diogo.moreira [at] ifpb.edu.br</email> if you would like to discuss any of the articles or request additional materials, I will be glad to help."
   }
 }
