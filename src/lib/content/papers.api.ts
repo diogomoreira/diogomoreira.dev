@@ -18,6 +18,7 @@ export function getPublicationEntries(): PaperItem[] {
     year: entry.getFieldAsString("year") as string,
     url: entry.getFieldAsString("url") as string,
     author: (entry.getFieldAsString("author") as string).split("and").map(author => author.trim()),
+    media: (entry.getFieldAsString("journal") as string) || (entry.getFieldAsString("booktitle") as string),
   }));
   return customEntries;
 }
