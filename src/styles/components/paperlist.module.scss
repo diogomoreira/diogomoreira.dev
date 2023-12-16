@@ -1,0 +1,7 @@
+@import "@/styles/variables.scss";
+
+.paperListByYear {
+  display: flex;
+  flex-direction: column;
+  gap: $spacer-sm;
+}

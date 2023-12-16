@@ -77,7 +77,7 @@
   margin: 0 auto;
   padding: $spacer-none;
   justify-content: flex-end;
-  gap: $spacer-xs;
+  gap: $spacer-sm;
 
   @include md-breakpoint {
     display: flex;
@@ -91,23 +91,22 @@
 }
 
 .navigationListItemLink {
-  background-color: $dark-color;
+  // background-color: $dark-color;
   display: flex;
   gap: $spacer-sm;
   align-items: center;
   flex: 1;
   text-align: center;
-  text-transform: lowercase;
   letter-spacing: 0px;
   color: $dark-title-color;
   text-decoration: none;
   transition: 200ms ease-in-out;
-  border-radius: $border-radius-sm;
+
   &:hover {
     transition: 200ms ease-in-out;
     background-color: $dark-light-color;
   }
-  padding: $spacer;
+  padding: $spacer-sm;
 }
 
 .navigationListItemCurrent {
@@ -120,4 +119,24 @@
 
 .navigationListItemLabel {
   font-family: $font-family-title;
+  text-transform: lowercase;
+}
+
+.navigationListChangeLanguageLabel {
+  font-family: $font-family-title;
+  @include md-breakpoint {
+    display: none;
+  }
+}
+
+.localeSelect {
+  border: 0;
+  border-radius: $border-radius-sm;
+  padding: $spacer-xs;
+  background-color: $light-dark-color;
+  color: $light-title-color;
+  @include color-scheme(dark) {
+    background-color: $dark-lighter-color;
+    color: $dark-title-color;
+  }
 }
