@@ -7,7 +7,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
 import { v4 as uuidv4 } from "uuid";
 import BookmarksList from "@/components/BookmarksList";
-import { Content, ContentFluid } from "@/components/Layout/Content";
+import { Content } from "@/components/Layout/Content";
 import { useTranslation } from "next-i18next";
 
 export const getStaticProps: GetStaticProps<{ links: BookmarkItem[] }> = async ({ locale }) => {
