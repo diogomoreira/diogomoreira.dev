@@ -87,6 +87,7 @@
 
 .bookmarkTypeSelector {
   cursor: pointer;
+  @include border();
   &:hover {
     background-color: $light-dark-color;
     @include color-scheme(dark) {
@@ -96,6 +97,7 @@
 }
 
 .bookmarkTypeSelectorCurrent {
+  @include border();
   background-color: $light-dark-color;
   @include color-scheme(dark) {
     background-color: $dark-light-color;

@@ -45,15 +45,14 @@ const BookmarksPage: NextPage<BookmarksPageProps> = ({ links }: BookmarksPagePro
         <div className={styles.bookmarkTypesContainer}>
           <div className={styles.bookmarkItemTags}>
             {categories.map(tag => (
-              <span
-                role="button"
+              <button
                 onClick={() => filterCategory(tag)}
                 onKeyDown={() => filterCategory(tag)}
                 className={tag === currentCategory ? styles.bookmarkTypeSelectorCurrent : styles.bookmarkTypeSelector}
                 key={uuidv4()}
               >
                 {tag}
-              </span>
+              </button>
             ))}
           </div>
         </div>
