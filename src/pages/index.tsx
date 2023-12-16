@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
@@ -13,12 +13,10 @@ import { PostItem, getAllPosts } from "@/lib/content";
 import styles from "@/styles/pages/index.module.scss";
 import { Content } from "@/components/Layout/Content";
 
-export const getStaticProps: GetStaticProps<{ posts: PostItem[] }> = async ({ locale }) => {
-  const posts: PostItem[] = await getAllPosts();
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const currentLocale = locale || "en";
   return {
     props: {
-      posts: posts,
       ...(await serverSideTranslations(currentLocale, ["index", "common"])),
     },
   };
@@ -26,7 +24,12 @@ export const getStaticProps: GetStaticProps<{ posts: PostItem[] }> = async ({ lo
 
 type IndexPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-const IndexPage: NextPage<IndexPageProps> = ({ posts }: IndexPageProps) => {
+const IndexPage: NextPage<IndexPageProps> = () => {
+  const [posts, setPosts] = useState<PostItem[]>([]);
+  useEffect(() => {
+    getAllPosts().then(posts => setPosts(posts));
+  }, []);
+
   const { author, title, description } = useAppConfig();
   const { t } = useTranslation(["index", "common"]);
 
