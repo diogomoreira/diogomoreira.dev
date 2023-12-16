@@ -18,23 +18,23 @@ const AcademicPage: NextPage<AcademicProps> = ({ papers }: AcademicProps) => {
   } = useAppConfig();
   return (
     <Content>
-      <h1>🎓 Academic</h1>
+      <h1>🎓 {t("title")}</h1>
       <p>
         <Translation
-          i18nKey="academic.teaching.intro"
+          i18nKey="teaching.intro"
           t={t}
           components={[<strong key={"se"} />, <strong key={"stq"} />, <strong key={"dp"} />]}
         ></Translation>
       </p>
-      <Section>Publications</Section>
+      <Section>{t("researching.title")}</Section>
       <p>
         <Translation
-          i18nKey="academic.researching.intro"
+          i18nKey="researching.intro"
           t={t}
           components={[<strong key={"se"} />, <strong key={"stq"} />, <strong key={"dp"} />]}
         ></Translation>{" "}
         <Translation
-          i18nKey="academic.researching.groups"
+          i18nKey="researching.groups"
           t={t}
           components={{
             gpes: <a title="Link for GPES website" href="https://gpes.github.io/" />,
@@ -54,7 +54,7 @@ const AcademicPage: NextPage<AcademicProps> = ({ papers }: AcademicProps) => {
       </p>
       <p>
         <Translation
-          i18nKey="academic.researching.list"
+          i18nKey="researching.list"
           t={t}
           components={{
             email: <a title="Email link for academic purposes" href={`mailto:${academicEmail}`} />,
@@ -69,11 +69,12 @@ const AcademicPage: NextPage<AcademicProps> = ({ papers }: AcademicProps) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const currentLocale = locale || "en";
   const bibTexEntries = getPublicationEntriesSorted();
   return {
     props: {
       papers: bibTexEntries,
-      ...(await serverSideTranslations(locale || "en", ["academic"])),
+      ...(await serverSideTranslations(currentLocale, ["academic", "common"])),
     },
   };
 };

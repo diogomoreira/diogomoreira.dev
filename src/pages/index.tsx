@@ -6,19 +6,29 @@ import { Trans as Translation, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
 
-import NotesList from "@/components/NotesList";
+import PostsList from "@/components/PostsList";
 import Section from "@/components/Section";
 import { useAppConfig } from "@/config";
-import { NoteItem, getAllNotes } from "@/lib/content";
+import { PostItem, getAllPosts } from "@/lib/content";
 import styles from "@/styles/pages/index.module.scss";
-import { compareDesc } from "date-fns";
 import { Content } from "@/components/Layout/Content";
+
+export const getStaticProps: GetStaticProps<{ posts: PostItem[] }> = async ({ locale }) => {
+  const posts: PostItem[] = await getAllPosts();
+  const currentLocale = locale || "en";
+  return {
+    props: {
+      posts: posts,
+      ...(await serverSideTranslations(currentLocale, ["index", "common"])),
+    },
+  };
+};
 
 type IndexPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-const IndexPage: NextPage<IndexPageProps> = ({ notes }: IndexPageProps) => {
+const IndexPage: NextPage<IndexPageProps> = ({ posts }: IndexPageProps) => {
   const { author, title, description } = useAppConfig();
-  const { t } = useTranslation("index");
+  const { t } = useTranslation(["index", "common"]);
 
   return (
     <Content>
@@ -35,7 +45,12 @@ const IndexPage: NextPage<IndexPageProps> = ({ notes }: IndexPageProps) => {
             <Translation t={t} i18nKey="titles"></Translation>
           </h2>
           <p>
-            Read <Link href={"/about"}>more about me</Link>
+            <Translation
+              t={t}
+              ns={"common"}
+              i18nKey="common.readmore"
+              components={[<Link key="read-more-link" href={"/about"} />]}
+            ></Translation>
           </p>
         </div>
       </div>
@@ -46,35 +61,26 @@ const IndexPage: NextPage<IndexPageProps> = ({ notes }: IndexPageProps) => {
             i18nKey="presentation"
             components={{
               bold: <strong key={"bold"} />,
-              dgarden: <Link href={"/notes"} />,
+              blog: <Link href={"/blog"} />,
             }}
           ></Translation>
         </p>
       </div>
-      <Section>Recent updates</Section>
+      <Section>
+        <Translation t={t} ns={"index"} i18nKey="latest"></Translation>
+      </Section>
       <div className={styles.notes}>
         <div>
-          <NotesList notes={notes} />
+          <PostsList posts={posts} />
         </div>
         <div>
-          <Link href={"/notes"}>See more +</Link>
+          <Link href={"/blog"}>
+            <Translation t={t} ns={"common"} i18nKey="common.seemore"></Translation>
+          </Link>
         </div>
       </div>
     </Content>
   );
-};
-
-export const getStaticProps: GetStaticProps<{ notes: NoteItem[] }> = async ({ locale }) => {
-  const latest5notes: NoteItem[] = (await getAllNotes()).sort((noteA, noteB) =>
-    compareDesc(new Date(noteA.timestamp), new Date(noteB.timestamp)),
-  );
-
-  return {
-    props: {
-      notes: latest5notes.splice(0, 5),
-      ...(await serverSideTranslations(locale || "en", ["index"])),
-    },
-  };
 };
 
 export default IndexPage;

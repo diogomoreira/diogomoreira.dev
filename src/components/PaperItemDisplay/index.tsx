@@ -11,7 +11,7 @@ const PaperItemDisplay: React.FC<PaperItemDisplayProps> = ({ item }: PaperItemDi
     <details key={item.id} className={styles.paperElement}>
       <summary className={styles.paperTitle}>
         <h2>{item.title}</h2>
-        <time>{item.year}</time>
+        <div>{item.media}</div>
       </summary>
       <p>{item.abstract}</p>
       <div className={styles.paperDetails}>
