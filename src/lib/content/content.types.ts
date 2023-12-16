@@ -1,12 +1,20 @@
-export type NoteItem = {
+export type PostItem = {
+  id: string;
   body: string;
-  category: string;
-  cover?: string;
-  description: string;
-  slug: string;
-  tags: string[];
-  timestamp: string;
   title: string;
+  description: string;
+  url: string;
+  comments_count: number;
+  public_reactions_count: number;
+  positive_reactions_count: number;
+  cover_image: string;
+  social_image: string;
+  canonical_url: string;
+  created_at: string;
+  published_at: string;
+  edited_at: string;
+  reading_time_minutes: number;
+  tag_list: string[];
 };
 
 export type ProjectItem = {
@@ -26,6 +34,7 @@ export type PaperItem = {
   title: string;
   url: string;
   year: string;
+  media: string;
 };
 
 export type BookmarkItem = {
