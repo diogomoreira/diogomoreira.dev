@@ -1,0 +1,15 @@
+{
+  "title": "Acadêmico",
+  "teaching": {
+    "intro": "Me formei em Análise e Desenvolvimento de Sistemas em 2012 pelo Instituto Federal da Paraíba. Depois disso, fiz especialização em Engenharia de Software entre 2013~2014 na Estácio. Por fim, fiz meu mestrado em Engenharia de Software na Escola CESAR (Recife, Brasil) em 2019. Atuo como Professor Adjunto desde 2014 no Instituto Federal da Paraíba (no mesmo campus onde fiz minha graduação), onde lecionei assuntos relacionados a tópicos de <0>Engenheiro de Software</0>, como <1>Qualidade e Teste de Software</1> e <2>Padrões de Projeto</2>"
+  },
+  "authors": "Autores",
+  "copycitation": "Copiar citação",
+  "copied": "Copiado para a área de transferência!",
+  "researching": {
+    "title": "Publicações",
+    "intro": "Meus interesses de pesquisa estão principalmente relacionados à Engenharia de Software, especialmente <0>Testes de Software</0>, <1>Qualidade de Software</1> e <2>Padrões de Projeto</2>.",
+    "groups": "Também sou membro do <gpes>Grupo de Pesquisa em Engenharia de Software</gpes> (GPES, IFPB, Brasil). Se desejar, veja meu perfil no <researchGate>Research Gate</researchGate>, <scholar>Google Scholar</scholar>, <orcid>ORCID</orcid> ou <lattes>Lattes</lattes> (somente em português).",
+    "list": "Uma lista de minhas publicações pode ser encontrada abaixo junto com o link para download dos artigos. Sinta-se à vontade para entrar em contato comigo em <email>diogo.moreira [at] ifpb.edu.br</email> se desejar discutir algum dos artigos ou solicitar materiais adicionais, terei prazer em ajudar."
+  }
+}
