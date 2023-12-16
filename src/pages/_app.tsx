@@ -1,16 +1,15 @@
-import React from "react";
 import Layout from "@/components/Layout";
-import "prism-themes/themes/prism-nord.css";
+import React from "react";
 
-import { Inconsolata } from "next/font/google";
 import { appWithTranslation } from "next-i18next";
 import type { AppProps } from "next/app";
+import { Inconsolata } from "next/font/google";
 
-import "@/styles/globals.scss";
-import { DefaultSeo } from "next-seo";
 import { defaultSeo } from "@/config/seo.config";
-import { GoogleAnalytics } from "nextjs-google-analytics";
+import "@/styles/globals.scss";
 import { Analytics } from "@vercel/analytics/react";
+import { DefaultSeo } from "next-seo";
+import { GoogleAnalytics } from "nextjs-google-analytics";
 
 const fontFamilyMonospace = Inconsolata({
   subsets: ["latin"],

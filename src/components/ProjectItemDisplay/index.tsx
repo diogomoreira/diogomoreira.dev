@@ -1,15 +1,17 @@
 import { ProjectItem } from "@/lib/content";
 import styles from "@/styles/components/labitem.module.scss";
-import formatDateI18N from "@/utils/date.i18.formatter";
 import Image from "next/image";
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
+import { useTranslation } from "next-i18next";
 
 type ProjectItemDisplayProps = {
   item: ProjectItem;
 };
 
 const ProjectItemDisplay: React.FC<ProjectItemDisplayProps> = ({ item }: ProjectItemDisplayProps) => {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.labItemContainer}>
       <div className={styles.labItemImageContainer}>
@@ -24,7 +26,11 @@ const ProjectItemDisplay: React.FC<ProjectItemDisplayProps> = ({ item }: Project
           </a>
         </h1>
         <div>
-          <time>{formatDateI18N(item.timestamp)}</time>
+          <time>
+            {t("{{val, datetime}}", {
+              val: new Date(item.timestamp),
+            })}
+          </time>
         </div>
         <p>{item.description}</p>
         <footer>

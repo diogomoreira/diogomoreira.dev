@@ -7,18 +7,28 @@ import { NextSeo } from "next-seo";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import ProjectsList from "@/components/ProjectsList";
 import { Content } from "@/components/Layout/Content";
+import { useTranslation } from "next-i18next";
+
+export const getStaticProps: GetStaticProps<{ items: ProjectItem[] }> = async ({ locale }) => {
+  const currentLocale = locale || "en";
+  const items = getProjects(currentLocale);
+  return {
+    props: {
+      items,
+      ...(await serverSideTranslations(currentLocale, ["labs", "common"])),
+    },
+  };
+};
 
 type LabsPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const LabsPage: NextPage<LabsPageProps> = ({ items }: LabsPageProps) => {
+  const { t } = useTranslation("labs");
   return (
     <Content>
       <NextSeo title="Labs" description="Some projects i've been working on" />
-      <h1>💻 Labs</h1>
-      <p>
-        I wanted to share some of my side projects that I&apos;ve been working on as hobbies outside of my regular job.
-        These projects allow me to explore my interests and learn new skills while also having fun and being creative.
-      </p>
+      <h1>💻 {t("title")}</h1>
+      <p>{t("intro")}</p>
       <ResponsiveMasonry columnsCountBreakPoints={ThreeColumnsMaxBreakpoints}>
         <Masonry gutter="1rem">
           <ProjectsList items={items} />
@@ -26,16 +36,6 @@ const LabsPage: NextPage<LabsPageProps> = ({ items }: LabsPageProps) => {
       </ResponsiveMasonry>
     </Content>
   );
-};
-
-export const getStaticProps: GetStaticProps<{ items: ProjectItem[] }> = async ({ locale }) => {
-  const items = getProjects();
-  return {
-    props: {
-      items,
-      ...(await serverSideTranslations(locale || "en", ["labs"])),
-    },
-  };
 };
 
 export default LabsPage;

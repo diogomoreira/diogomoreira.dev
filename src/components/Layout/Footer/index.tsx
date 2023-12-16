@@ -1,24 +1,31 @@
-import React from "react";
 import { useAppConfig } from "@/config";
 import styles from "@/styles/components/footer.module.scss";
+import { Trans as Translation, useTranslation } from "next-i18next";
+import React from "react";
 import SocialIcons from "./SocialIcons";
 
 const Footer = () => {
   const {
+    repository,
     siteVersion,
     author: { name },
   } = useAppConfig();
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
   return (
     <footer className={styles.footerContainer}>
       <div className={styles.footerItems}>
-        <div>
+        <div className={styles.footerInfo}>
           <div>
             Copyright © 2013 - {currentYear}. {name}
           </div>
           <div>
-            Check out the <a href="https://github.com/diogomoreira/diogodmoreira.com">source code</a>. Current version{" "}
-            <b>{siteVersion}</b>
+            <Translation
+              t={t}
+              i18nKey={"footer.sourceCode"}
+              components={[<a key={"source-code-repository"} href={repository} />]}
+            ></Translation>
+            . {t("footer.currentVersion")} <b>{siteVersion}</b>
           </div>
         </div>
         <SocialIcons />

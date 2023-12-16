@@ -8,6 +8,18 @@ import { NextSeo } from "next-seo";
 import { v4 as uuidv4 } from "uuid";
 import BookmarksList from "@/components/BookmarksList";
 import { Content, ContentFluid } from "@/components/Layout/Content";
+import { useTranslation } from "next-i18next";
+
+export const getStaticProps: GetStaticProps<{ links: BookmarkItem[] }> = async ({ locale }) => {
+  const currentLocale = locale || "en";
+  const links = getBookmarks(currentLocale);
+  return {
+    props: {
+      links: links,
+      ...(await serverSideTranslations(currentLocale, ["bookmarks", "common"])),
+    },
+  };
+};
 
 type BookmarksPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -15,6 +27,8 @@ const BookmarksPage: NextPage<BookmarksPageProps> = ({ links }: BookmarksPagePro
   const [displayLinks, setDisplayLinks] = useState(links);
   const categories = Array.from(new Set(links.flatMap(link => link.type)));
   const [currentCategory, setCurrentCategory] = useState<string | null>(null);
+
+  const { t } = useTranslation("bookmarks");
 
   const filterCategory = (category: string) => {
     const newDisplayLinks = category === currentCategory ? links : links.filter(link => link.type === category);
@@ -26,13 +40,8 @@ const BookmarksPage: NextPage<BookmarksPageProps> = ({ links }: BookmarksPagePro
     <>
       <Content>
         <NextSeo title="Links" description="Some links of things i'm enjoying lately" />
-        <h1>🏷️ Bookmarks</h1>
-        <p>
-          This is where I&apos;ll be sharing some cool stuff I&apos;ve been really into lately. From groovy tunes that
-          get me moving to podcasts that keep me thinking, and books that I just can&apos;t put down, I&apos;ll be
-          dropping some recommendations for things I&apos;ve been loving. Take a peek and see if anything catches your
-          fancy!
-        </p>
+        <h1>🏷️ {t("title")}</h1>
+        <p>{t("intro")}</p>
         <div className={styles.bookmarkTypesContainer}>
           <div className={styles.bookmarkItemTags}>
             {categories.map(tag => (
@@ -47,21 +56,11 @@ const BookmarksPage: NextPage<BookmarksPageProps> = ({ links }: BookmarksPagePro
           </div>
         </div>
       </Content>
-      <ContentFluid>
+      <Content>
         <BookmarksList links={displayLinks} />
-      </ContentFluid>
+      </Content>
     </>
   );
-};
-
-export const getStaticProps: GetStaticProps<{ links: BookmarkItem[] }> = async ({ locale }) => {
-  const links = getBookmarks();
-  return {
-    props: {
-      links: links,
-      ...(await serverSideTranslations(locale || "en", ["links"])),
-    },
-  };
 };
 
 export default BookmarksPage;

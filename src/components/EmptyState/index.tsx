@@ -2,7 +2,7 @@ import React from "react";
 import styles from "@/styles/components/emptystate.module.scss";
 
 export enum EmptyContentType {
-  NOTES = "notes",
+  POSTS = "posts",
   PAPERS = "papers",
   PROJECTS = "projects",
   LINKS = "links",
