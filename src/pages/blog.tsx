@@ -5,22 +5,24 @@ import styles from "@/styles/pages/notes.module.scss";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-type BlogPageProps = InferGetStaticPropsType<typeof getStaticProps>;
-
-export const getStaticProps: GetStaticProps<{ posts: PostItem[] }> = async ({ locale }) => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const currentLocale = locale || "en";
-  const posts: PostItem[] = await getAllPosts();
   return {
     props: {
-      posts,
       ...(await serverSideTranslations(currentLocale, ["blog", "common"])),
     },
   };
 };
 
-const BlogPage: NextPage<BlogPageProps> = ({ posts }: BlogPageProps) => {
+type BlogPageProps = InferGetStaticPropsType<typeof getStaticProps>;
+
+const BlogPage: NextPage<BlogPageProps> = () => {
+  const [posts, setPosts] = useState<PostItem[]>([]);
+  useEffect(() => {
+    getAllPosts().then(posts => setPosts(posts));
+  }, []);
   const { t } = useTranslation("blog");
   return (
     <Content>
