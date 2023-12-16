@@ -21,11 +21,16 @@
     background-color: $dark-light-color;
   }
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
+  gap: $spacer-xs;
   h2 {
     margin: 0;
     font-size: $font-size-base;
+  }
+
+  div {
+    font-size: $font-size-sm;
   }
 }
 

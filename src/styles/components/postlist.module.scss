@@ -1,7 +1,7 @@
 @import "@/styles/variables.scss";
 @import "@/styles/mixins";
 
-.notesContainer {
+.postsContainer {
   list-style: none;
   padding: $spacer-none;
   display: grid;
@@ -21,14 +21,14 @@
   gap: $spacer-lg;
 }
 
-.note {
+.post {
   display: grid;
-  gap: $spacer;
+  gap: $spacer-xs;
   font-weight: $font-weight-base;
-  // @include card();
+  @include card();
 }
 
-.noteItem {
+.postItem {
   justify-content: space-between;
   align-items: center;
   display: flex;
@@ -36,6 +36,7 @@
   font-size: $font-size-sm;
   align-items: flex-start;
   flex-direction: column;
+  padding: $spacer;
 
   > h1 {
     font-size: $font-size-heading-h5;
@@ -58,11 +59,34 @@
   }
 }
 
+.postTags {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  gap: $spacer-xs;
+  font-size: $font-size-sm;
+  align-items: flex-start;
+  padding: $spacer-xs $spacer;
+}
+
+.postMetadata {
+  justify-content: flex-end;
+  align-items: center;
+  display: flex;
+  gap: $spacer;
+  align-items: flex-start;
+  padding: $spacer;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+}
+
+.postTag {
+  @include tag();
+}
+
 .cover {
   @include article-image();
   @include image-hover-zoom();
-  @include border();
-  @include border-radius();
   aspect-ratio: 16/9;
   overflow: hidden;
   margin: 0;
