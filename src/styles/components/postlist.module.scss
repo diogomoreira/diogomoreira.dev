@@ -30,7 +30,6 @@
 
 .postItem {
   justify-content: space-between;
-  align-items: center;
   display: flex;
   gap: $spacer-xs;
   font-size: $font-size-sm;
@@ -61,7 +60,6 @@
 
 .postTags {
   justify-content: space-between;
-  align-items: center;
   display: flex;
   gap: $spacer-xs;
   font-size: $font-size-sm;
@@ -71,7 +69,6 @@
 
 .postMetadata {
   justify-content: flex-end;
-  align-items: center;
   display: flex;
   gap: $spacer;
   align-items: flex-start;
