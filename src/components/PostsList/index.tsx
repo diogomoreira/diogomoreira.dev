@@ -12,13 +12,13 @@ const PostsList: React.FC<PostsListProps> = ({ posts }: PostsListProps) => {
   return (
     <>
       {posts.length > 0 ? (
-        <ul className={styles.postsContainer}>
+        <div className={styles.postsContainer}>
           {posts?.map(note => (
-            <li key={note.id}>
+            <div key={note.id}>
               <PostItemDisplay post={note} />
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
         <EmptyState type={EmptyContentType.POSTS} />
       )}

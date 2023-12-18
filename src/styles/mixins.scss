@@ -41,7 +41,6 @@
   @include clickable-element-background();
   border-radius: $border-radius-sm;
   padding: $spacer-xs $spacer-sm;
-  font-size: $font-size-sm;
   font-weight: $font-weight-semibold;
   font-family: var(--font-family-monospace);
   &::before {
