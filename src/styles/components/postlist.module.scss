@@ -2,9 +2,9 @@
 @import "@/styles/mixins";
 
 .postsContainer {
+  display: grid;
   list-style: none;
   padding: $spacer-none;
-  display: grid;
   grid-template-columns: 1fr;
 
   @include sm-breakpoint {
@@ -12,13 +12,9 @@
   }
 
   @include md-breakpoint {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr 1fr;
   }
-
-  @include lg-breakpoint {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  gap: $spacer-lg;
+  gap: $spacer;
 }
 
 .post {
@@ -35,7 +31,7 @@
   font-size: $font-size-sm;
   align-items: flex-start;
   flex-direction: column;
-  padding: $spacer;
+  padding: $spacer-xs $spacer;
 
   > h1 {
     font-size: $font-size-heading-h5;
@@ -49,8 +45,6 @@
     color: $light-foreground-color;
     font-weight: $font-weight-light;
     font-family: $font-family-code;
-    min-width: 6rem;
-    max-width: 6rem;
 
     @include color-scheme(dark) {
       color: $dark-foreground-color;
@@ -59,22 +53,32 @@
 }
 
 .postTags {
-  justify-content: space-between;
+  justify-content: flex-start;
   display: flex;
+  flex-wrap: wrap;
   gap: $spacer-xs;
-  font-size: $font-size-sm;
+  font-size: $font-size-xs;
   align-items: flex-start;
-  padding: $spacer-xs $spacer;
+  padding: $spacer-sm $spacer;
 }
 
 .postMetadata {
-  justify-content: flex-end;
+  justify-content: space-between;
   display: flex;
   gap: $spacer;
-  align-items: flex-start;
+  align-items: center;
   padding: $spacer;
-  font-size: $font-size-sm;
-  font-weight: $font-weight-semibold;
+  font-size: $font-size-xs;
+
+  > div:first-child {
+    display: flex;
+    gap: $spacer-xs;
+  }
+
+  > div:last-child {
+    display: flex;
+    gap: $spacer-xs;
+  }
 }
 
 .postTag {

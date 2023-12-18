@@ -24,16 +24,6 @@ const PostItemDisplay: React.FC<PostProps> = ({ post }: PostProps) => {
           />
         </div>
       </a>
-      <a href={post.url} target="_blank" rel="noopener noreferrer">
-        <div className={styles.postItem}>
-          <time>
-            {t("{{val, datetime}}", {
-              val: new Date(post.published_at),
-            })}
-          </time>
-          <h1>{post.title}</h1>
-        </div>
-      </a>
       <div className={styles.postTags}>
         {post.tag_list.map(tag => (
           <span className={styles.postTag} key={tag}>
@@ -41,16 +31,32 @@ const PostItemDisplay: React.FC<PostProps> = ({ post }: PostProps) => {
           </span>
         ))}
       </div>
+      <a href={post.url} target="_blank" rel="noopener noreferrer">
+        <div className={styles.postItem}>
+          <h1>{post.title}</h1>
+        </div>
+      </a>
+
       <div className={styles.postMetadata}>
-        <span>
-          {post.reading_time_minutes} {t("common.minutes")}
-        </span>
-        <span>
-          <FaComments /> {post.comments_count}
-        </span>
-        <span>
-          <FaRegThumbsUp /> {post.public_reactions_count}
-        </span>
+        <div>
+          <span>{t("common.publishedAt")}</span>
+          <time>
+            {t("{{val, datetime}}", {
+              val: new Date(post.published_at),
+            })}
+          </time>
+        </div>
+        <div>
+          <span>
+            {post.reading_time_minutes} {t("common.minutes")}
+          </span>
+          <span>
+            <FaComments /> {post.comments_count}
+          </span>
+          <span>
+            <FaRegThumbsUp /> {post.public_reactions_count}
+          </span>
+        </div>
       </div>
     </article>
   );
