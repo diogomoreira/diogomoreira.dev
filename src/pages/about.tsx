@@ -3,7 +3,7 @@ import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
 import styles from "@/styles/pages/about.module.scss";
-import contentStyle from "@/styles/pages/slug.module.scss";
+import contentStyle from "@/styles/pages/post.module.scss";
 import Image from "next/image";
 import { useAppConfig } from "@/config";
 import Link from "next/link";
