@@ -12,6 +12,7 @@ import { useAppConfig } from "@/config";
 import { PostItem, getAllPosts } from "@/lib/content";
 import styles from "@/styles/pages/index.module.scss";
 import { Content } from "@/components/Layout/Content";
+import SocialIcons from "@/components/Layout/Footer/SocialIcons";
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const currentLocale = locale || "en";
@@ -55,6 +56,9 @@ const IndexPage: NextPage<IndexPageProps> = () => {
               components={[<Link key="read-more-link" href={"/about"} />]}
             ></Translation>
           </p>
+          <div>
+            <SocialIcons />
+          </div>
         </div>
       </div>
       <div>
