@@ -23,8 +23,8 @@ const App = ({ Component, pageProps }: AppProps) => {
       <DefaultSeo
         {...defaultSeo}
         // don't let search engines index branch/deploy previews
-        dangerouslySetAllPagesToNoIndex={process.env.CONTEXT !== "production"}
-        dangerouslySetAllPagesToNoFollow={process.env.CONTEXT !== "production"}
+        dangerouslySetAllPagesToNoIndex={process.env.NEXT_PUBLIC_CONTEXT !== "production"}
+        dangerouslySetAllPagesToNoFollow={process.env.NEXT_PUBLIC_CONTEXT !== "production"}
       />
       <Component {...pageProps} />
       <Analytics />
