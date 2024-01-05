@@ -1,6 +1,6 @@
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { Trans as Translation, useTranslation } from "next-i18next";
+import { useTranslation } from "next-i18next";
 import React from "react";
 import { Content } from "@/components/Layout/Content";
 import styles from "@/styles/pages/post.module.scss";
