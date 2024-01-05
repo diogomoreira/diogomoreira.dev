@@ -20,7 +20,6 @@
 .footerItems {
   max-width: $max-width;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   margin: 0 auto;
   text-align: center;
@@ -33,11 +32,6 @@
     border-top: $border-width $border-style $dark-border-color;
   }
 
-  @include md-breakpoint {
-    flex-direction: row;
-    text-align: left;
-  }
-
   b {
     font-weight: $font-weight-semibold;
   }
@@ -45,6 +39,5 @@
 
 .footerInfo {
   display: flex;
-  flex-direction: column;
   gap: $spacer-xs;
 }

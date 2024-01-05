@@ -15,20 +15,18 @@ const Footer = () => {
   return (
     <footer className={styles.footerContainer}>
       <div className={styles.footerItems}>
-        <div className={styles.footerInfo}>
-          <div>
-            Copyright © 2013 - {currentYear}. {name}
-          </div>
-          <div>
-            <Translation
-              t={t}
-              i18nKey={"footer.sourceCode"}
-              components={[<a key={"source-code-repository"} href={repository} />]}
-            ></Translation>
-            . {t("footer.currentVersion")} <b>{siteVersion}</b>
-          </div>
+        <div>
+          Copyright © 2013 - {currentYear}. {name}
         </div>
-        <SocialIcons />
+        <div>
+          {t("footer.currentVersion")} <b>{siteVersion}</b>.{" "}
+          <Translation
+            t={t}
+            i18nKey={"footer.sourceCode"}
+            components={[<a key={"source-code-repository"} href={repository} />]}
+          ></Translation>
+          .
+        </div>
       </div>
     </footer>
   );

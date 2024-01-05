@@ -58,7 +58,6 @@ const Navigation = () => {
               </li>
             );
           })}
-          <hr></hr>
           <li>
             <a
               className={styles.navigationListItemLink}
