@@ -2,7 +2,6 @@ import { useAppConfig } from "@/config";
 import styles from "@/styles/components/footer.module.scss";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import React from "react";
-import SocialIcons from "./SocialIcons";
 
 const Footer = () => {
   const {
