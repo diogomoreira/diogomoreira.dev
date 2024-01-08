@@ -1,6 +1,6 @@
 import React from "react";
 import { ProjectItem, getProjects } from "@/lib/content";
-import { ThreeColumnsMaxBreakpoints, TwoColumnsMaxBreakpoints } from "@/utils/masonry.columns";
+import { ThreeColumnsMaxBreakpoints } from "@/utils/masonry.columns";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
