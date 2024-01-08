@@ -23,16 +23,16 @@ const LinksPage: NextPage<LinksPageProps> = () => {
   const { author, siteUrl } = useAppConfig();
   return (
     <>
-      <div className={styles.profilePhotoContainer}>
-        <Image src={author.image} width={175} height={175} alt={author.name} className={styles.profilePhoto} />
+      <div>
+        <Image src={author.image} width={175} height={175} alt={author.name} />
       </div>
-      <div className={styles.presentation}>
-        <h1 className={styles.title}>{author.name}</h1>
+      <div>
+        <h1>{author.name}</h1>
       </div>
-      <div className={styles.presentation}>
+      <div>
         <SocialIcons />
       </div>
-      <div className={styles.links}>
+      <div>
         <LinksPageItem icon="🔗" description={t("website")} href={`${siteUrl}`} />
         <LinksPageItem icon="🛠️" description={t("uses")} href={`${siteUrl}/uses`} />
       </div>
