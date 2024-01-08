@@ -24,11 +24,17 @@ const BookmarkItemDisplay: React.FC<BookmarkItemDisplayProps> = ({ item }: Bookm
   return (
     <Card>
       <CardImage title={item.title} url={item.link}>
-        <Image alt={item.title} className="object-cover" src={`/images/bookmarks/${item.image}`} fill />
+        <Image
+          className="object-contain"
+          alt={item.title}
+          src={`/images/bookmarks/${item.image}`}
+          width={1920}
+          height={1080}
+        />
       </CardImage>
       <CardBody>
         <CardTitle title={item.title} url={item.link} icon={icon} />
-        <p className="text-xs leading-relaxed" dangerouslySetInnerHTML={{ __html: item.description }}></p>
+        <p className="text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: item.description }}></p>
         <Tags>
           {item.tags.map(stackItem => (
             <Tag key={uuidv4()}>{stackItem}</Tag>

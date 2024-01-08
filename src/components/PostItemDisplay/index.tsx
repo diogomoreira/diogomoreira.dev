@@ -13,7 +13,7 @@ const PostItemDisplay: React.FC<PostProps> = ({ post }: PostProps) => {
     <Card>
       <article>
         <CardImage url={post.url} title={post.title}>
-          <Image className="object-cover" src={post.cover_image} fill alt={post.title} />
+          <Image className="object-contain" src={post.cover_image} alt={post.title} width={1920} height={1080} />
         </CardImage>
         <CardBody>
           <CardTitle url={post.url} title={post.title} />
