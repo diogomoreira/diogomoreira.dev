@@ -1,4 +1,5 @@
 import React from "react";
+import ExternalLink from "../Link/ExternalLink";
 
 type CardProps = {
   children: React.ReactNode;
@@ -16,17 +17,18 @@ const Card: React.FC<CardProps> = ({ children }: CardProps) => (
 
 const CardImage: React.FC<CardProps & CardTitleProps> = ({ children, url, title }: CardProps & CardTitleProps) => (
   <a href={url} title={title} target="_blank" rel="noopener noreferrer">
-    <div className="aspect-video h-40 w-full relative">{children}</div>
+    <div className="aspect-video shadow-sm w-full relative">{children}</div>
   </a>
 );
 
 const CardTitle: React.FC<CardTitleProps> = ({ url, title, icon }: CardTitleProps) => (
   <div>
-    <a href={url} title={title} target="_blank" rel="noreferrer">
-      <h1 className="text-lg font-bold">
-        {icon} {title}
-      </h1>
-    </a>
+    <h1 className="text-lg font-bold">
+      {icon}{" "}
+      <ExternalLink url={url} title={title}>
+        {title}
+      </ExternalLink>
+    </h1>
   </div>
 );
 

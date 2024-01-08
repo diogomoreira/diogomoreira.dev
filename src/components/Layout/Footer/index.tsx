@@ -12,9 +12,9 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
     <footer className="bg-slate-200 dark:bg-slate-800">
-      <div className="flex justify-between px-10 py-10 items-center max-w-5xl container mx-auto text-xs">
+      <div className="flex justify-between px-10 py-4 items-center max-w-5xl container mx-auto text-sm">
         <div>
-          Copyright © 2013 - {currentYear}. {name}
+          <span>Copyright © 2013 - {currentYear}</span>. <span className="font-semibold">{name}</span>
         </div>
         <div>
           {t("footer.currentVersion")} <b>{siteVersion}</b>.{" "}
