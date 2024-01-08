@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 type ResponseData = {
   posts: PostItem[];
-}
+};
 
 /**
  * This endpoint retrieves all posts from different sources and aggregate
@@ -12,10 +12,7 @@ type ResponseData = {
  * @param req
  * @param res
  */
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<ResponseData>
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
   const postsFromDEVto = await getAllPosts();
   res.status(200).json({ posts: postsFromDEVto });
 }
