@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "@/styles/components/linkitem.module.scss";
+import { Button } from "../Button";
 
 type LinksPageItemProps = {
   icon: string;
@@ -10,10 +10,10 @@ type LinksPageItemProps = {
 const LinksPageItem: React.FC<LinksPageItemProps> = ({ icon, description, href }: LinksPageItemProps) => {
   return (
     <a href={href}>
-      <button className={styles.linkContainer}>
+      <Button>
         <span>{icon}</span>
         <span>{description}</span>
-      </button>
+      </Button>
     </a>
   );
 };
