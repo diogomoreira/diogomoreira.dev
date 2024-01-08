@@ -1,9 +1,10 @@
 import { ProjectItem } from "@/lib/content";
-import styles from "@/styles/components/labitem.module.scss";
 import Image from "next/image";
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useTranslation } from "next-i18next";
+import { Card, CardBody, CardFooter, CardImage, CardTitle } from "../Card";
+import { Tag, Tags } from "../Tag";
 
 type ProjectItemDisplayProps = {
   item: ProjectItem;
@@ -13,35 +14,27 @@ const ProjectItemDisplay: React.FC<ProjectItemDisplayProps> = ({ item }: Project
   const { t } = useTranslation();
 
   return (
-    <div className={styles.labItemContainer}>
-      <div className={styles.labItemImageContainer}>
-        <a href={item.url} title={item.title} target="_blank" rel="noreferrer">
-          <Image alt={item.title} src={item.image} fill={true} />
-        </a>
-      </div>
-      <div className={styles.labItemDetails}>
-        <h1>
-          <a href={item.url} title={item.title} target="_blank" rel="noreferrer">
-            {item.title}
-          </a>
-        </h1>
-        <div>
-          <time>
-            {t("{{val, datetime}}", {
-              val: new Date(item.timestamp),
-            })}
-          </time>
-        </div>
-        <p>{item.description}</p>
-        <footer>
-          <div>
-            {item.stack.map(stackItem => (
-              <span key={uuidv4()}>{stackItem}</span>
-            ))}
-          </div>
-        </footer>
-      </div>
-    </div>
+    <Card>
+      <CardImage url={item.url} title={item.title}>
+        <Image className="object-cover" alt={item.title} src={item.image} fill />
+      </CardImage>
+      <CardBody>
+        <CardTitle url={item.url} title={item.title} />
+        <p className="text-sm leading-relaxed">{item.description}</p>
+        <Tags>
+          {item.stack.map(stackItem => (
+            <Tag key={uuidv4()}>{stackItem}</Tag>
+          ))}
+        </Tags>
+      </CardBody>
+      <CardFooter>
+        <time>
+          {t("{{val, datetime}}", {
+            val: new Date(item.timestamp),
+          })}
+        </time>
+      </CardFooter>
+    </Card>
   );
 };
 

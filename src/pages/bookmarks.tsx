@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styles from "@/styles/components/bookmark.module.scss";
 
 import { BookmarkItem, getBookmarks } from "@/lib/content";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
@@ -7,8 +6,9 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
 import { v4 as uuidv4 } from "uuid";
 import BookmarksList from "@/components/BookmarksList";
-import { Content } from "@/components/Layout/Content";
 import { useTranslation } from "next-i18next";
+import { Tag, Tags } from "@/components/Tag";
+import { Button } from "@/components/Button";
 
 export const getStaticProps: GetStaticProps<{ links: BookmarkItem[] }> = async ({ locale }) => {
   const currentLocale = locale || "en";
@@ -38,28 +38,24 @@ const BookmarksPage: NextPage<BookmarksPageProps> = ({ links }: BookmarksPagePro
 
   return (
     <>
-      <Content>
-        <NextSeo title="Links" description="Some links of things i'm enjoying lately" />
-        <h1>🏷️ {t("title")}</h1>
-        <p>{t("intro")}</p>
-        <div className={styles.bookmarkTypesContainer}>
-          <div className={styles.bookmarkItemTags}>
-            {categories.map(tag => (
-              <button
-                onClick={() => filterCategory(tag)}
-                onKeyDown={() => filterCategory(tag)}
-                className={tag === currentCategory ? styles.bookmarkTypeSelectorCurrent : styles.bookmarkTypeSelector}
-                key={uuidv4()}
-              >
-                {tag}
-              </button>
-            ))}
-          </div>
-        </div>
-      </Content>
-      <Content>
-        <BookmarksList links={displayLinks} />
-      </Content>
+      <NextSeo title="Links" description="Some links of things i'm enjoying lately" />
+      <h1 className="text-4xl mb-6 font-bold">🏷️ {t("title")}</h1>
+      <p className="leading-loose mb-6">{t("intro")}</p>
+      <div className="mb-6">
+        <Tags>
+          {categories.map(tag => (
+            <Button
+              className={tag === currentCategory ? "bg-slate-800" : ""}
+              onClick={() => filterCategory(tag)}
+              onKeyDown={() => filterCategory(tag)}
+              key={uuidv4()}
+            >
+              {tag}
+            </Button>
+          ))}
+        </Tags>
+      </div>
+      <BookmarksList links={displayLinks} />
     </>
   );
 };

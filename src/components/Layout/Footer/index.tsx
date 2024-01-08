@@ -1,5 +1,4 @@
 import { useAppConfig } from "@/config";
-import styles from "@/styles/components/footer.module.scss";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import React from "react";
 
@@ -12,8 +11,8 @@ const Footer = () => {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
   return (
-    <footer className={styles.footerContainer}>
-      <div className={styles.footerItems}>
+    <footer className="bg-slate-200 dark:bg-slate-800">
+      <div className="flex justify-between px-10 py-10 items-center max-w-5xl container mx-auto text-xs">
         <div>
           Copyright © 2013 - {currentYear}. {name}
         </div>
@@ -22,7 +21,7 @@ const Footer = () => {
           <Translation
             t={t}
             i18nKey={"footer.sourceCode"}
-            components={[<a key={"source-code-repository"} href={repository} />]}
+            components={[<a className="underline" key={"source-code-repository"} href={repository} />]}
           ></Translation>
           .
         </div>

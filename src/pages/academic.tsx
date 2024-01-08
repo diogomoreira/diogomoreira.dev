@@ -2,12 +2,11 @@ import React from "react";
 import Section from "@/components/Section";
 import { useAppConfig } from "@/config";
 import { getPublicationEntriesSorted } from "@/lib/content";
-import styles from "@/styles/pages/academic.module.scss";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import PapersList from "@/components/PapersList";
-import { Content } from "@/components/Layout/Content";
+import { NextSeo } from "next-seo";
 
 type AcademicProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -17,17 +16,20 @@ const AcademicPage: NextPage<AcademicProps> = ({ papers }: AcademicProps) => {
     author: { researchGate, googleScholar, orcid, lattes, academicEmail },
   } = useAppConfig();
   return (
-    <Content>
-      <h1>🎓 {t("title")}</h1>
-      <p>
+    <>
+      <NextSeo title="Academic" description="My academic profile" />
+      <h1 className="text-4xl mb-6 font-bold">🎓 {t("title")}</h1>
+      <p className="leading-loose mb-4">
         <Translation
           i18nKey="teaching.intro"
           t={t}
           components={[<strong key={"se"} />, <strong key={"stq"} />, <strong key={"dp"} />]}
         ></Translation>
       </p>
-      <Section>{t("researching.title")}</Section>
-      <p>
+      <h2 className="text-2xl tracking-tight font-bold flex justify-between border-b border-slate-200 dark:border-slate-600 mb-4">
+        {t("researching.title")}
+      </h2>
+      <p className="leading-loose mb-4">
         <Translation
           i18nKey="researching.intro"
           t={t}
@@ -52,7 +54,7 @@ const AcademicPage: NextPage<AcademicProps> = ({ papers }: AcademicProps) => {
           }}
         ></Translation>
       </p>
-      <p>
+      <p className="leading-loose mb-4">
         <Translation
           i18nKey="researching.list"
           t={t}
@@ -61,10 +63,8 @@ const AcademicPage: NextPage<AcademicProps> = ({ papers }: AcademicProps) => {
           }}
         ></Translation>
       </p>
-      <div className={styles.papers}>
-        <PapersList items={papers} />
-      </div>
-    </Content>
+      <PapersList items={papers} />
+    </>
   );
 };
 
