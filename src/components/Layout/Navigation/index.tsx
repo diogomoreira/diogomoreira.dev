@@ -1,29 +1,27 @@
 import React, { useRef, useState } from "react";
-import { useAppConfig, useLocaleConfig } from "@/config";
+import { useAppConfig } from "@/config";
 import Link from "next/link";
 
-import { FiMenu } from "react-icons/fi";
-import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import ThemeToggler from "@/components/ThemeToggle";
 
 const Navigation = () => {
   const { menu } = useAppConfig();
-  const locales = useLocaleConfig();
+  // const locales = useLocaleConfig();
   const { t } = useTranslation();
   const [showMenu, setShowMenu] = useState(false);
-  const router = useRouter();
+  // const router = useRouter();
 
-  const menuRef = useRef(null);
+  const menuRef = useRef<HTMLUListElement | null>(null);
 
-  const changeLanguageHandler = async (lang: string) => {
-    await router
-      .push(router.route, router.route, { locale: lang })
-      .then(() => router.reload())
-      .then(() => setShowMenu(false));
-  };
+  // const changeLanguageHandler = async (lang: string) => {
+  //   await router
+  //     .push(router.route, router.route, { locale: lang })
+  //     .then(() => router.reload())
+  //     .then(() => setShowMenu(false));
+  // };
 
   const toggleMenu = () => {
     menuRef?.current?.classList?.toggle("hidden");

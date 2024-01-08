@@ -2,18 +2,11 @@ import React from "react";
 import { useAppConfig } from "@/config";
 import capitalize from "lodash/capitalize";
 import { v4 as uuidv4 } from "uuid";
-import {
-  RiMastodonFill,
-  RiKeyFill,
-  RiLinkedinBoxFill,
-  RiTwitterFill,
-  RiGithubFill,
-  RiInstagramFill,
-} from "react-icons/ri";
+import { RiMastodonFill, RiLinkedinBoxFill, RiTwitterFill, RiGithubFill, RiInstagramFill } from "react-icons/ri";
 
 const SocialIcons = () => {
   const {
-    author: { instagram, github, twitter, linkedin, keybase, mastodon },
+    author: { instagram, github, twitter, linkedin, mastodon },
   } = useAppConfig();
 
   const social = [

@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Trans as Translation, useTranslation } from "next-i18next";
-import Section from "@/components/Section";
 import SocialIcons from "@/components/SocialIcons";
 import { useAppConfig } from "@/config";
 

@@ -1,5 +1,4 @@
 import React from "react";
-import Section from "@/components/Section";
 import { useAppConfig } from "@/config";
 import { getPublicationEntriesSorted } from "@/lib/content";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
