@@ -1,20 +1,20 @@
 import React from "react";
-import { Button } from "../Button";
+import { ExternalLinkButton } from "../Button";
 
 type LinksPageItemProps = {
-  icon: string;
+  icon: string | React.ReactNode;
   description: string;
   href: string;
 };
 
 const LinksPageItem: React.FC<LinksPageItemProps> = ({ icon, description, href }: LinksPageItemProps) => {
   return (
-    <a href={href}>
-      <Button>
+    <ExternalLinkButton href={href}>
+      <div className="flex p-2 items-center gap-4 text-lg">
         <span>{icon}</span>
         <span>{description}</span>
-      </Button>
-    </a>
+      </div>
+    </ExternalLinkButton>
   );
 };
 
