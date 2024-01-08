@@ -45,7 +45,7 @@ const BookmarksPage: NextPage<BookmarksPageProps> = ({ links }: BookmarksPagePro
         <Tags>
           {categories.map(tag => (
             <Button
-              className={tag === currentCategory ? "bg-slate-800" : ""}
+              className={tag === currentCategory ? "dark:bg-slate-800 bg-slate-400" : ""}
               onClick={() => filterCategory(tag)}
               onKeyDown={() => filterCategory(tag)}
               key={uuidv4()}
