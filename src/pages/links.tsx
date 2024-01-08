@@ -1,5 +1,3 @@
-import { Content } from "@/components/Layout/Content";
-
 import LinksPageItem from "@/components/LinksPageItem";
 import { useAppConfig } from "@/config";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";

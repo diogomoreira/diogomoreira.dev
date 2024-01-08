@@ -26,7 +26,7 @@ const Navigation = () => {
   };
 
   const toggleMenu = () => {
-    menuRef.current.classList.toggle("hidden");
+    menuRef?.current?.classList?.toggle("hidden");
     setShowMenu(!showMenu);
   };
 
