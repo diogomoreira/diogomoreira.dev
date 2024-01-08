@@ -1,7 +1,5 @@
-import { Content } from "@/components/Layout/Content";
 import PostsList from "@/components/PostsList";
 import { PostItem, getAllPosts } from "@/lib/content";
-import styles from "@/styles/pages/notes.module.scss";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -25,15 +23,15 @@ const BlogPage: NextPage<BlogPageProps> = () => {
   }, []);
   const { t } = useTranslation("blog");
   return (
-    <Content>
-      <h1>🪴 {t("title")}</h1>
-      <p>
+    <>
+      <h1 className="text-4xl mb-6 font-bold">🪴 {t("title")}</h1>
+      <p className="leading-loose mb-6">
         <Translation t={t} i18nKey="intro"></Translation>
       </p>
-      <div className={styles.contentContainer}>
+      <div>
         <PostsList posts={posts} />
       </div>
-    </Content>
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 import { PaperItem } from "@/lib/content";
 import React from "react";
-import styles from "@/styles/components/paperitem.module.scss";
+import { ExternalLinkButton } from "../Button";
 
 type PaperItemDisplayProps = {
   item: PaperItem;
@@ -8,17 +8,13 @@ type PaperItemDisplayProps = {
 
 const PaperItemDisplay: React.FC<PaperItemDisplayProps> = ({ item }: PaperItemDisplayProps) => {
   return (
-    <details key={item.id} className={styles.paperElement}>
-      <summary className={styles.paperTitle}>
-        <h2>{item.title}</h2>
-        <div>{item.media}</div>
-      </summary>
-      <p>{item.abstract}</p>
-      <div className={styles.paperDetails}>
-        <span className={styles.paperAuthor}>{item.author.join(", ")}</span>
-        <a href={`https://www.doi.org/${item.doi}`} target="_blank" rel="noreferrer">
-          Download
-        </a>
+    <details className="rounded-md shadow-md bg-slate-200 dark:bg-slate-800 border dark:border-slate-700" key={item.id}>
+      <summary className="font-semibold line-clamp-1 p-4">{item.title}</summary>
+      <div className="text-slate-600 dark:text-slate-400 px-4">{item.media}</div>
+      <p className="text-sm leading-relaxed p-4">{item.abstract}</p>
+      <div className="flex items-center justify-between bg-slate-300 dark:bg-slate-900 px-4 py-2 text-sm">
+        <span>{item.author.join(", ")}</span>
+        <ExternalLinkButton href={`https://www.doi.org/${item.doi}`}>Download</ExternalLinkButton>
       </div>
     </details>
   );

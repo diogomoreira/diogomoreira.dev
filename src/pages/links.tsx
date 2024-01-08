@@ -6,7 +6,7 @@ import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import React from "react";
 import styles from "@/styles/pages/links.module.scss";
 import Image from "next/image";
-import SocialIcons from "@/components/Layout/Footer/SocialIcons";
+import SocialIcons from "@/components/SocialIcons";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 
@@ -25,7 +25,7 @@ const LinksPage: NextPage<LinksPageProps> = () => {
   const { t } = useTranslation(["links", "common"]);
   const { author, siteUrl } = useAppConfig();
   return (
-    <Content>
+    <>
       <div className={styles.profilePhotoContainer}>
         <Image src={author.image} width={175} height={175} alt={author.name} className={styles.profilePhoto} />
       </div>
@@ -39,7 +39,7 @@ const LinksPage: NextPage<LinksPageProps> = () => {
         <LinksPageItem icon="🔗" description={t("website")} href={`${siteUrl}`} />
         <LinksPageItem icon="🛠️" description={t("uses")} href={`${siteUrl}/uses`} />
       </div>
-    </Content>
+    </>
   );
 };
 

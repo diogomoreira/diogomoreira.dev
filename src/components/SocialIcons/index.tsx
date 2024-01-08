@@ -1,7 +1,6 @@
 import React from "react";
 import { useAppConfig } from "@/config";
 import capitalize from "lodash/capitalize";
-import styles from "@/styles/components/socialicons.module.scss";
 import { v4 as uuidv4 } from "uuid";
 import {
   RiMastodonFill,
@@ -22,12 +21,11 @@ const SocialIcons = () => {
     { key: "github", link: `https://github.com/${github}`, icon: RiGithubFill },
     { key: "twitter", link: `https://twitter.com/${twitter}`, icon: RiTwitterFill },
     { key: "linkedin", link: `https://linkedin.com/in/${linkedin}`, icon: RiLinkedinBoxFill },
-    { key: "keybase", link: `https://keybase.io/${keybase}`, icon: RiKeyFill },
     { key: "mastodon", link: `https://mastodon.social/@${mastodon}`, icon: RiMastodonFill },
   ];
 
   return (
-    <div className={styles.socialIconsContainer}>
+    <div className="flex w-full gap-2 text-3xl text-slate-600 dark:text-slate-300 md:text-2xl justify-center md:justify-start">
       {social.map(socialItem => {
         const SocialIcon = socialItem.icon;
         return (
