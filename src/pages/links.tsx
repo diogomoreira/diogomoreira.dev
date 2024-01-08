@@ -2,7 +2,6 @@ import LinksPageItem from "@/components/LinksPageItem";
 import { useAppConfig } from "@/config";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import React from "react";
-import styles from "@/styles/pages/links.module.scss";
 import Image from "next/image";
 import SocialIcons from "@/components/SocialIcons";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
