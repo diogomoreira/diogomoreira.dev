@@ -4,7 +4,7 @@ import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useTranslation } from "next-i18next";
 import { Card, CardBody, CardFooter, CardImage, CardTitle } from "../Card";
-import { BulletTag, Tag, Tags } from "../Tag";
+import { BulletTag, Tags } from "../Tag";
 
 type ProjectItemDisplayProps = {
   item: ProjectItem;
