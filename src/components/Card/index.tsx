@@ -36,7 +36,9 @@ const CardBody: React.FC<CardProps> = ({ children }: CardProps) => (
   <div className="p-4 flex flex-col gap-4">{children}</div>
 );
 const CardFooter: React.FC<CardProps> = ({ children }: CardProps) => (
-  <div className="p-4 pt-0 text-slate-600 dark:text-slate-200 text-xs font-medium flex justify-between">{children}</div>
+  <div className="p-4 pt-0 text-slate-600 dark:text-slate-200 text-sm font-medium flex justify-between items-center">
+    {children}
+  </div>
 );
 
 export { Card, CardImage, CardTitle, CardBody, CardFooter };

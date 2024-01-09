@@ -4,6 +4,7 @@ import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
 import { Card, CardBody, CardImage, CardTitle } from "../Card";
 import { Tag, Tags } from "../Tag";
+import { useTranslation } from "next-i18next";
 
 type BookmarkItemDisplayProps = { item: BookmarkItem };
 
@@ -20,6 +21,7 @@ const icons: Record<string, string> = {
 };
 
 const BookmarkItemDisplay: React.FC<BookmarkItemDisplayProps> = ({ item }: BookmarkItemDisplayProps) => {
+  const { t } = useTranslation();
   const icon: string = icons[item.type];
   return (
     <Card>
@@ -34,6 +36,16 @@ const BookmarkItemDisplay: React.FC<BookmarkItemDisplayProps> = ({ item }: Bookm
       </CardImage>
       <CardBody>
         <CardTitle title={item.title} url={item.link} icon={icon} />
+        <div className="text-xs text-slate-500 dark:text-slate-300">
+          <time>
+            {t("{{val, datetime}}", {
+              val: new Date(item.timestamp),
+              formatParams: {
+                val: { year: "numeric", month: "long", day: "numeric" },
+              },
+            })}
+          </time>
+        </div>
         <p className="text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: item.description }}></p>
         <Tags>
           {item.tags.map(stackItem => (
