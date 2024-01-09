@@ -11,6 +11,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     props: {
       ...(await serverSideTranslations(currentLocale, ["blog", "common"])),
     },
+    revalidate: 3,
   };
 };
 
@@ -25,9 +26,11 @@ const BlogPage: NextPage<BlogPageProps> = () => {
   return (
     <>
       <h1 className="text-4xl mb-6 font-bold">🪴 {t("title")}</h1>
-      <p className="leading-loose mb-6">
-        <Translation t={t} i18nKey="intro"></Translation>
-      </p>
+      <div className="mt-2 text-slate-500 dark:text-slate-300">
+        <p className="leading-loose mb-6">
+          <Translation t={t} i18nKey="intro"></Translation>
+        </p>
+      </div>
       <div>
         <PostsList posts={posts} />
       </div>

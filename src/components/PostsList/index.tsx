@@ -1,7 +1,7 @@
 import React from "react";
 import { PostItem } from "@/lib/content";
 import PostItemDisplay from "../PostItemDisplay";
-import EmptyState, { EmptyContentType } from "../EmptyState";
+import EmptyState, { EmptyContentType } from "../Layout/EmptyState";
 
 type PostsListProps = {
   posts: PostItem[];

@@ -7,6 +7,16 @@ import { useAppConfig } from "@/config";
 import Link from "next/link";
 import { Trans as Translation, useTranslation } from "next-i18next";
 
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const currentLocale = locale || "en";
+  return {
+    props: {
+      ...(await serverSideTranslations(currentLocale, ["about", "common"])),
+    },
+    revalidate: 5,
+  };
+};
+
 type AboutPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const AboutPage: NextPage<AboutPageProps> = () => {
@@ -22,7 +32,7 @@ const AboutPage: NextPage<AboutPageProps> = () => {
       <figure className="relative w-full h-96 prose-img:rounded-md shadow-md">
         <Image className="object-cover" src={"/images/pages/about/cover.jpg"} fill alt={name} />
       </figure>
-      <article className="mt-8 prose prose-slate mx-auto lg:prose-lg dark:prose-invert">
+      <article className="mt-8 prose prose-slate mx-auto dark:prose-invert md:px-0">
         <p>
           <Translation t={t} i18nKey="intro"></Translation>
         </p>
@@ -45,38 +55,9 @@ const AboutPage: NextPage<AboutPageProps> = () => {
         <p>
           <Translation t={t} i18nKey="end"></Translation>
         </p>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto, deleniti minima laboriosam ratione a et
-          aliquid est? Mollitia doloremque inventore, debitis saepe odit corporis animi iusto totam illum nam aliquam.
-        </p>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto, deleniti minima laboriosam ratione a et
-          aliquid est? Mollitia doloremque inventore, debitis saepe odit corporis animi iusto totam illum nam aliquam.
-        </p>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto, deleniti minima laboriosam ratione a et
-          aliquid est? Mollitia doloremque inventore, debitis saepe odit corporis animi iusto totam illum nam aliquam.
-        </p>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto, deleniti minima laboriosam ratione a et
-          aliquid est? Mollitia doloremque inventore, debitis saepe odit corporis animi iusto totam illum nam aliquam.
-        </p>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto, deleniti minima laboriosam ratione a et
-          aliquid est? Mollitia doloremque inventore, debitis saepe odit corporis animi iusto totam illum nam aliquam.
-        </p>
       </article>
     </>
   );
-};
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const currentLocale = locale || "en";
-  return {
-    props: {
-      ...(await serverSideTranslations(currentLocale, ["about", "common"])),
-    },
-  };
 };
 
 export default AboutPage;

@@ -4,6 +4,7 @@ import React from "react";
 import { useTranslation } from "next-i18next";
 import { Card, CardBody, CardFooter, CardImage, CardTitle } from "../Card";
 import { Tag, Tags } from "../Tag";
+import { FaDev } from "react-icons/fa6";
 
 type PostProps = { post: PostItem };
 
@@ -24,9 +25,15 @@ const PostItemDisplay: React.FC<PostProps> = ({ post }: PostProps) => {
           </Tags>
         </CardBody>
         <CardFooter>
+          <span className="text-xl">
+            <FaDev />
+          </span>
           <time>
             {t("{{val, datetime}}", {
               val: new Date(post.published_at),
+              formatParams: {
+                val: { year: "numeric", month: "long", day: "numeric" },
+              },
             })}
           </time>
           <span>

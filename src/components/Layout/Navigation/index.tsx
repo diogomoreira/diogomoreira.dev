@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 // import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import ThemeToggler from "@/components/ThemeToggle";
+import Logo from "../Logo";
 
 const Navigation = () => {
   const { menu } = useAppConfig();
@@ -32,27 +33,7 @@ const Navigation = () => {
     <nav className="bg-white dark:bg-slate-700 text-gray-800 dark:text-gray-100">
       <div className="flex flex-col md:flex-row justify-between md:p-6 items-center max-w-5xl container mx-auto border-b border-slate-200 dark:border-slate-600">
         <div className="flex flex-1 w-full justify-between">
-          <h1 className="text-xl p-6 md:p-0 flex gap-x-2 items-center tracking-tight font-bold">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"
-              />
-            </svg>
-            <div>
-              <span className="font-medium">diogo</span>
-              <span className="font-light">dmoreira</span>
-              <span className="font-medium">.com</span>
-            </div>
-          </h1>
+          <Logo />
           <div className="flex md:hidden">
             <ThemeToggler />
             <button
@@ -73,6 +54,7 @@ const Navigation = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
               </svg>
             </button>
+            L
           </div>
         </div>
 

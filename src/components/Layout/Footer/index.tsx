@@ -12,9 +12,10 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
     <footer className="bg-slate-200 dark:bg-slate-800">
-      <div className="flex justify-between px-10 py-4 items-center max-w-5xl container mx-auto text-sm">
+      <div className="flex flex-col md:flex-row justify-between px-10 py-4 items-center max-w-5xl container mx-auto text-sm">
         <div>
-          <span>Copyright © 2013 - {currentYear}</span>. <span className="font-semibold">{name}</span>
+          <span>© 2013 - {currentYear}</span>. <span className="font-semibold">{name}</span>.{" "}
+          <span>All rights reserved.</span>
         </div>
         <div>
           {t("footer.currentVersion")} <b>{siteVersion}</b>.{" "}
@@ -23,7 +24,6 @@ const Footer = () => {
             i18nKey={"footer.sourceCode"}
             components={[<a className="underline" key={"source-code-repository"} href={repository} />]}
           ></Translation>
-          .
         </div>
       </div>
     </footer>
