@@ -11,9 +11,9 @@ import { v4 as uuid } from "uuid";
 import { useTranslation } from "next-i18next";
 import { MDXRemote } from "next-mdx-remote";
 import { mdxToHtml } from "@/lib/content/markdown.api";
-import { Tag, Tags } from "@/components/Tag";
+import { HashTag, Tag, Tags } from "@/components/Tag";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import PageProse from "@/components/PageProse";
+import { differenceInDays } from "date-fns";
 
 export async function getStaticProps({ params, locale }) {
   const { slug } = params;
@@ -40,11 +40,10 @@ export async function getStaticPaths() {
 type BlogPostPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const BlogPostPage: NextPage<BlogPostPageProps> = ({ post, content }: BlogPostPageProps) => {
-  const { siteUrl } = useAppConfig();
+  const { author, title, siteUrl } = useAppConfig();
   const { t } = useTranslation();
-
   const postUrl = `${siteUrl}/blog/${post.url}`;
-
+  const postDate = new Date(post.publishedAt);
   return (
     <>
       <NextSeo title={post.title} description={post.description} />
@@ -56,47 +55,53 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post, content }: BlogPostPa
         images={[`${siteUrl}/${post.coverImage || logo.src}`]}
         {...articleJsonLd}
       />
-      <h1 className="text-center md:text-left text-4xl md:text-6xl mb-4 font-bold">{post.title}</h1>
-      <p className="text-center md:text-left text-slate-500 mb-4 dark:text-slate-300">{post.description}</p>
-      <div className="flex gap-2 flex-col md:flex-row items-center">
-        <div className="flex gap-2 text-xs">
-          <span>📅</span>
-          <time className="text-slate-600 dark:text-slate-400">
+      <h1 className="post-page-title">{post.title}</h1>
+      <p className="post-page-description">{post.description}</p>
+      <div className="post-page-meta">
+        <div className="post-page-author-container">
+          <Image className="post-page-author-image" src={author.image} width={175} height={175} alt={title} />
+          <span>{author.name}</span>
+        </div>
+        <time className="post-page-meta-timestamp">
+          <span>
             {t("{{val, datetime}}", {
-              val: new Date(post.publishedAt),
+              val: postDate,
               formatParams: {
                 val: { year: "numeric", month: "long", day: "numeric" },
               },
             })}
-          </time>
-        </div>
-        <div>
-          <Tags>
-            {post.tags.map(tag => (
-              <Tag key={uuid()}>{tag}</Tag>
-            ))}
-          </Tags>
-        </div>
+          </span>
+          <span>
+            (
+            {t("{{val, relativetime}}", {
+              val: differenceInDays(postDate, new Date()),
+            })}
+            )
+          </span>
+        </time>
+        <Tags>
+          {post.tags.map(tag => (
+            <HashTag key={uuid()}>{tag}</HashTag>
+          ))}
+        </Tags>
       </div>
-      <PageProse>
-        <article>
-          {post.coverImage && (
-            <figure className="relative shadow-md my-6">
-              <Image
-                className="object-cover"
-                width={1920}
-                height={1080}
-                src={`${ContentPath.POSTS_COVER_IMAGES}/${post.coverImage}`}
-                alt={post.title}
-              />
-            </figure>
-          )}
-          <MDXRemote {...content} />
-          <aside className="mt-8">
-            <Comments />
-          </aside>
-        </article>
-      </PageProse>
+      <article className="post-page-article">
+        {post.coverImage && (
+          <figure className="page-page-figure">
+            <Image
+              className="object-cover"
+              width={1920}
+              height={1080}
+              src={`${ContentPath.POSTS_COVER_IMAGES}/${post.coverImage}`}
+              alt={post.title}
+            />
+          </figure>
+        )}
+        <MDXRemote {...content} />
+        <aside className="post-comments">
+          <Comments />
+        </aside>
+      </article>
     </>
   );
 };

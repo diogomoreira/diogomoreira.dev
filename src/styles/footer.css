@@ -1,0 +1,15 @@
+footer {
+  @apply bg-black text-white;
+}
+
+footer > div {
+  @apply flex flex-col justify-between px-10 py-4 items-center container mx-auto max-w-5xl text-sm gap-1;
+}
+
+.footer-author-name {
+  @apply font-semibold;
+}
+
+.footer-source-code {
+  @apply underline;
+}

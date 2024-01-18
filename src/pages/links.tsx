@@ -32,15 +32,13 @@ const LinksPage: NextPage<LinksPageProps> = () => {
     { key: "mastodon", link: `https://mastodon.social/@${mastodon}`, icon: RiMastodonFill },
   ];
   return (
-    <div className="flex flex-col gap-6 w-full items-center">
-      <div className="">
-        <Image className="rounded-full" src={author.image} width={175} height={175} alt={author.name} />
-      </div>
-      <h1 className="text-4xl font-bold">{author.name}</h1>
-      <h2 className="text-xl font-light text-slate-800 dark:text-slate-400">
+    <div className="links-container">
+      <Image className="links-avatar" src={author.image} width={175} height={175} alt={author.name} />
+      <h1 className="links-title">{author.name}</h1>
+      <h2 className="links-presentation">
         <Translation t={t} ns={"index"} i18nKey="titles"></Translation>
       </h2>
-      <div className="flex flex-col w-full gap-2 md:w-3/4">
+      <div className="links-items">
         <LinksPageItem icon={<FaLink />} description={t("website")} href={`${siteUrl}`} />
         {social.map(socialItem => {
           const SocialIcon = socialItem.icon;

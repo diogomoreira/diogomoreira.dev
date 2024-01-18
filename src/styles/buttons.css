@@ -1,0 +1,5 @@
+.button,
+.link-button,
+.external-button {
+  @apply rounded-md flex items-center bg-gray-50 px-4 py-2 text-sm font-medium bg-spring-wood-200 text-spring-wood-900 dark:bg-gray-800 dark:text-gray-200 hover:dark:bg-gray-950 hover:bg-spring-wood-300;
+}

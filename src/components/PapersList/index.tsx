@@ -12,16 +12,16 @@ const PapersList: React.FC<PapersListProps> = ({ items }: PapersListProps) => {
   return (
     <>
       {itemsPerYear.map(year => (
-        <div key={year}>
-          <h3 className="font-bold text-xl py-4">{year}</h3>
-          <div className="flex flex-col gap-2">
+        <section key={year}>
+          <h1 className="paper-year">{year}</h1>
+          <div className="paper-year-list">
             {items
               .filter(item => item.year === year)
               .map((paper: PaperItem) => (
                 <PaperItemDisplay key={uuidv4()} item={paper} />
               ))}
           </div>
-        </div>
+        </section>
       ))}
     </>
   );

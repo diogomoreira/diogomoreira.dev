@@ -2,64 +2,64 @@ import { ContentPath, PostItem } from "@/lib/content";
 import Image from "next/image";
 import React from "react";
 import { useTranslation } from "next-i18next";
-import { Card } from "../Card";
 import { Tag, Tags } from "../Tag";
 import ExternalLink from "../Link/ExternalLink";
 import Link from "next/link";
 import { FaDev } from "react-icons/fa6";
+import { differenceInDays } from "date-fns";
 
 type PostProps = { post: PostItem };
 
 const PostItemDisplay: React.FC<PostProps> = ({ post }: PostProps) => {
   const { t } = useTranslation();
+  const postDate = new Date(post.publishedAt);
   return (
-    <Card>
-      <article className="flex flex-row">
-        <a href={post.url} title={post.title} target="_blank" rel="noopener noreferrer">
-          <div className="shadow-sm w-40 h-full">
-            {post.origin === "md" ? (
-              <Image
-                className="object-cover h-full"
-                width={241}
-                height={136}
-                src={`${ContentPath.POSTS_COVER_IMAGES}/${post.coverImage}`}
-                alt={post.title}
-              />
-            ) : (
-              <Image className="object-cover h-full" width={241} height={136} src={post.coverImage} alt={post.title} />
-            )}
-          </div>
-        </a>
-        <div className="p-4 flex flex-col gap-2">
-          <div>
-            <h1 className="text-lg font-bold">
-              {post.origin === "md" ? (
-                <Link href={post.url}>{post.title}</Link>
-              ) : (
-                <ExternalLink url={post.url} title={post.title}>
-                  <span className="flex gap-4 items-center">
-                    {post.title} {post.origin === "dev.to" ? <FaDev className="text-2xl" /> : ""}
-                  </span>
-                </ExternalLink>
-              )}
-            </h1>
-          </div>
-          <time className="text-sm text-slate-500 dark:text-slate-300">
+    <article className="post-card">
+      <a href={post.url} title={post.title} target="_blank" rel="noopener noreferrer">
+        <div className="post-card-cover-container">
+          <Image
+            className="post-card-cover"
+            width={241}
+            height={136}
+            src={post.origin === "md" ? `${ContentPath.POSTS_COVER_IMAGES}/${post.coverImage}` : post.coverImage}
+            alt={post.title}
+          />
+        </div>
+      </a>
+      <div className="post-card-info">
+        <h1 className="post-card-title">
+          {post.origin === "md" ? (
+            <Link href={post.url}>{post.title}</Link>
+          ) : (
+            <a href={post.url} title={post.title} target="_blank" rel="noopener noreferrer">
+              {post.title}
+            </a>
+          )}
+        </h1>
+        <time className="post-card-meta-timestamp">
+          <span>
             {t("{{val, datetime}}", {
-              val: new Date(post.publishedAt),
+              val: postDate,
               formatParams: {
                 val: { year: "numeric", month: "long", day: "numeric" },
               },
             })}
-          </time>
-          <Tags>
-            {post.tags.map(tag => (
-              <Tag key={tag}>{tag}</Tag>
-            ))}
-          </Tags>
-        </div>
-      </article>
-    </Card>
+          </span>
+          <span>
+            (
+            {t("{{val, relativetime}}", {
+              val: differenceInDays(postDate, new Date()),
+            })}
+            )
+          </span>
+        </time>
+        <Tags>
+          {post.tags.map(tag => (
+            <Tag key={tag}>{tag}</Tag>
+          ))}
+        </Tags>
+      </div>
+    </article>
   );
 };
 

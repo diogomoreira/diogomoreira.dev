@@ -28,7 +28,7 @@ const appConfig: ApplicationConfig = {
   repository: "https://github.com/diogomoreira/diogodmoreira.com",
   author: {
     name: "Diogo Moreira",
-    image: "/images/profile_photo.jpg",
+    image: "/images/profile.jpg",
     email: "diogo.dmoreira@gmail.com",
     academicEmail: "diogo.moreira@ifpb.edu.br",
     github: "diogomoreira",

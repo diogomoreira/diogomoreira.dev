@@ -2,7 +2,7 @@ import React from "react";
 import { BookmarkItem } from "@/lib/content";
 import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
-import { Card, CardBody, CardImage, CardTitle } from "../Card";
+import { Card, CardBody, CardImage, CardTitle, CardTitleIcon } from "../Card";
 import { Tag, Tags } from "../Tag";
 import { useTranslation } from "next-i18next";
 
@@ -25,7 +25,7 @@ const BookmarkItemDisplay: React.FC<BookmarkItemDisplayProps> = ({ item }: Bookm
   const icon: string = icons[item.type];
   return (
     <Card>
-      <CardImage title={item.title} url={item.link}>
+      <a href={item.link} title={item.title} target="_blank" rel="noopener noreferrer">
         <Image
           className="object-contain"
           alt={item.title}
@@ -33,10 +33,10 @@ const BookmarkItemDisplay: React.FC<BookmarkItemDisplayProps> = ({ item }: Bookm
           width={1920}
           height={1080}
         />
-      </CardImage>
+      </a>
       <CardBody>
-        <CardTitle title={item.title} url={item.link} icon={icon} />
-        <div className="text-xs text-slate-500 dark:text-slate-300">
+        <CardTitleIcon title={item.title} url={item.link} icon={icon} />
+        <div className="card-meta">
           <time>
             {t("{{val, datetime}}", {
               val: new Date(item.timestamp),
@@ -46,7 +46,7 @@ const BookmarkItemDisplay: React.FC<BookmarkItemDisplayProps> = ({ item }: Bookm
             })}
           </time>
         </div>
-        <p className="text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: item.description }}></p>
+        <p className="card-text" dangerouslySetInnerHTML={{ __html: item.description }}></p>
         <Tags>
           {item.tags.map(stackItem => (
             <Tag key={uuidv4()}>{stackItem}</Tag>

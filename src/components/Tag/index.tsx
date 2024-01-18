@@ -5,28 +5,33 @@ type TagProps = {
 };
 
 const Tags: React.FC<TagProps> = ({ children }: TagProps) => {
-  return <div className="flex gap-1 flex-wrap">{children}</div>;
+  return <div className="tags-container">{children}</div>;
 };
 
 const Tag: React.FC<TagProps> = ({ children }: TagProps) => {
+  return <span className="tag">{children}</span>;
+};
+
+const HashTag: React.FC<TagProps> = ({ children }: TagProps) => {
   return (
-    <span className="inline-flex items-center bg-slate-100 dark:bg-slate-800 px-2 py-1 text-xs font-medium text-slate-600 dark:text-slate-200 ring-1 ring-inset ring-slate-500/10">
-      {children}
-    </span>
+    <Tag>
+      <span className="tag-hash">#</span>
+      <span>{children}</span>
+    </Tag>
   );
 };
 
 const BulletTag: React.FC<TagProps> = ({ children }: TagProps) => {
   return (
-    <span className="inline-flex items-center bg-slate-100 dark:bg-slate-800 px-2 py-1 text-xs font-medium text-slate-600 dark:text-slate-200 ring-1 ring-inset ring-slate-500/10">
+    <Tag>
       <span>
-        <svg className="mr-1.5 h-2 w-2 text-gray-400 dark:text-slate-600" fill="currentColor" viewBox="0 0 8 8">
+        <svg className="tag-bullet" fill="currentColor" viewBox="0 0 8 8">
           <circle cx="4" cy="4" r="3"></circle>
         </svg>
       </span>
       <span>{children}</span>
-    </span>
+    </Tag>
   );
 };
 
-export { Tags, Tag, BulletTag };
+export { Tags, Tag, BulletTag, HashTag };

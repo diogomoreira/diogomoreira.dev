@@ -1,0 +1,27 @@
+.paper-year {
+  @apply text-xl font-bold py-2 mt-2;
+}
+
+.paper-year-list {
+  @apply flex flex-col gap-2;
+}
+
+.paper-details {
+  @apply shadow-md overflow-hidden rounded-md bg-spring-wood-100 dark:bg-gray-800 border border-spring-wood-200 dark:border-gray-600;
+}
+
+.paper-summary {
+  @apply font-semibold line-clamp-1 p-4;
+}
+
+.paper-media {
+  @apply text-spring-wood-600 dark:text-gray-400 px-4 mb-2;
+}
+
+.paper-abstract {
+  @apply bg-spring-wood-50 dark:bg-gray-700 text-sm leading-relaxed p-4;
+}
+
+.paper-meta {
+  @apply flex items-center justify-between bg-spring-wood-300 dark:bg-gray-900 px-4 py-2 text-sm;
+}

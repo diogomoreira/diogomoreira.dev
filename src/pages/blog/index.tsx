@@ -1,5 +1,3 @@
-import PageDescription from "@/components/PageDescription";
-import PageTitle from "@/components/PageTitle";
 import PostsList from "@/components/PostsList";
 import { PostItem } from "@/lib/content";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
@@ -29,10 +27,10 @@ const BlogPage: NextPage<BlogPageProps> = () => {
   const { t } = useTranslation("blog");
   return (
     <>
-      <PageTitle>🪴 {t("title")}</PageTitle>
-      <PageDescription>
+      <h1 className="page-title">🪴 {t("title")}</h1>
+      <p className="page-description">
         <Translation t={t} i18nKey="intro"></Translation>
-      </PageDescription>
+      </p>
       <PostsList posts={posts} />
     </>
   );

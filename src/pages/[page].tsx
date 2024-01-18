@@ -10,10 +10,6 @@ import { MDXRemote } from "next-mdx-remote";
 import { mdxToHtml } from "@/lib/content/markdown.api";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { getPageByPath, getPagesSlugs } from "@/lib/content/pages.api";
-import PageTitle from "@/components/PageTitle";
-import PageDescription from "@/components/PageDescription";
-import PageProse from "@/components/PageProse";
-import PageFigure from "@/components/PageFigure";
 
 type PageStaticProps = {
   locale: string | null;
@@ -61,24 +57,22 @@ const Page: NextPage<PageProps> = ({ page, content }: PageProps) => {
         images={[`${siteUrl}/${page.coverImage || logo.src}`]}
         {...articleJsonLd}
       />
-      <PageTitle>
+      <h1 className="page-title">
         {page.icon} {page.title}
-      </PageTitle>
-      <PageDescription>{page.description}</PageDescription>
+      </h1>
+      <p className="page-description">{page.description}</p>
       {page.coverImage && (
-        <PageFigure>
+        <figure className="page-figure">
           <Image
-            className="object-cover"
+            className="object-cover rounded-md"
             fill
             src={`${ContentPath.PAGES_COVER_IMAGES}/${page.slug}/${page.coverImage}`}
             alt={page.title}
           />
-        </PageFigure>
+        </figure>
       )}
-      <article>
-        <PageProse>
-          <MDXRemote {...content} />
-        </PageProse>
+      <article className="page-article">
+        <MDXRemote {...content} />
       </article>
     </>
   );

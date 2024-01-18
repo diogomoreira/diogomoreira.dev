@@ -1,0 +1,31 @@
+.card {
+  @apply border rounded-md shadow-lg border-spring-wood-200 dark:border-gray-600 overflow-hidden;
+}
+
+.card-image {
+  @apply shadow-sm w-full relative;
+}
+
+.card-title {
+  @apply text-lg font-bold;
+}
+
+.card-title span {
+  @apply mr-2;
+}
+
+.card-body {
+  @apply p-4 flex flex-col gap-2;
+}
+
+.card-meta {
+  @apply text-xs text-spring-wood-500 dark:text-gray-300;
+}
+
+.card-text {
+  @apply text-sm leading-relaxed;
+}
+
+.card-footer {
+  @apply p-4 pt-0 text-spring-wood-600 dark:text-spring-wood-200 text-sm font-medium flex justify-between items-center;
+}
