@@ -32,38 +32,34 @@ const AboutPage: NextPage<AboutPageProps> = () => {
   return (
     <>
       <NextSeo title="About me" description="A little more about me" />
-      <PageTitle>👋🏻 {t("title")}</PageTitle>
-      <PageDescription>A little bit about myself</PageDescription>
-      <PageFigure>
-        <Image className="object-cover" src={"/images/pages/about/cover.jpg"} fill alt={name} />
-      </PageFigure>
-      <article>
-        <PageProse>
-          <p>
-            <Translation t={t} i18nKey="intro"></Translation>
-          </p>
-          <p>
-            <Translation t={t} i18nKey="hobbies" components={[<Link key={"link"} href={"/bookmarks"} />]}></Translation>
-          </p>
-          <p>
-            <Translation t={t} i18nKey="sport"></Translation>
-          </p>
-          <p>
-            <Translation t={t} i18nKey="freetime"></Translation>
-          </p>
-          <p>
-            <Translation
-              t={t}
-              i18nKey="education"
-              components={[
-                <a key={"link-ifpb"} href="https://ifpb.edu.br" target="_blank" rel="noopener noreferrer" />,
-              ]}
-            ></Translation>
-          </p>
-          <p>
-            <Translation t={t} i18nKey="end"></Translation>
-          </p>
-        </PageProse>
+      <h1 className="page-title">👋🏻 {t("title")}</h1>
+      <p className="page-description">A little bit about myself</p>
+      <figure className="page-figure">
+        <Image className="object-cover rounded-md" src={"/images/pages/about/cover.jpg"} fill alt={name} />
+      </figure>
+      <article className="page-article">
+        <p>
+          <Translation t={t} i18nKey="intro"></Translation>
+        </p>
+        <p>
+          <Translation t={t} i18nKey="hobbies" components={[<Link key={"link"} href={"/bookmarks"} />]}></Translation>
+        </p>
+        <p>
+          <Translation t={t} i18nKey="sport"></Translation>
+        </p>
+        <p>
+          <Translation t={t} i18nKey="freetime"></Translation>
+        </p>
+        <p>
+          <Translation
+            t={t}
+            i18nKey="education"
+            components={[<a key={"link-ifpb"} href="https://ifpb.edu.br" target="_blank" rel="noopener noreferrer" />]}
+          ></Translation>
+        </p>
+        <p>
+          <Translation t={t} i18nKey="end"></Translation>
+        </p>
       </article>
     </>
   );

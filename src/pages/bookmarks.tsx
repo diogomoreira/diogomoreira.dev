@@ -9,8 +9,6 @@ import BookmarksList from "@/components/BookmarksList";
 import { useTranslation } from "next-i18next";
 import { Tags } from "@/components/Tag";
 import { Button } from "@/components/Button";
-import PageTitle from "@/components/PageTitle";
-import PageDescription from "@/components/PageDescription";
 
 export const getStaticProps: GetStaticProps<{ links: BookmarkItem[] }> = async ({ locale }) => {
   const currentLocale = locale || "en";
@@ -41,19 +39,12 @@ const BookmarksPage: NextPage<BookmarksPageProps> = ({ links }: BookmarksPagePro
   return (
     <>
       <NextSeo title="Links" description="Some links of things i'm enjoying lately" />
-      <PageTitle>🏷️ {t("title")}</PageTitle>
-      <PageDescription>{t("intro")}</PageDescription>
+      <h1 className="page-title">🏷️ {t("title")}</h1>
+      <p className="page-description">{t("intro")}</p>
       <div className="mb-6">
         <Tags>
           {categories.map(tag => (
-            <Button
-              className={
-                tag === currentCategory ? "bg-slate-600 text-slate-200 dark:bg-slate-200 dark:text-slate-600" : ""
-              }
-              onClick={() => filterCategory(tag)}
-              onKeyDown={() => filterCategory(tag)}
-              key={uuidv4()}
-            >
+            <Button onClick={() => filterCategory(tag)} onKeyDown={() => filterCategory(tag)} key={uuidv4()}>
               {tag}
             </Button>
           ))}

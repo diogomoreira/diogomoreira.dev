@@ -15,12 +15,12 @@ const ProjectItemDisplay: React.FC<ProjectItemDisplayProps> = ({ item }: Project
 
   return (
     <Card>
-      <CardImage url={item.url} title={item.title}>
+      <a href={item.link} title={item.title} target="_blank" rel="noopener noreferrer">
         <Image className="object-contain" alt={item.title} src={item.image} width={1920} height={1080} />
-      </CardImage>
+      </a>
       <CardBody>
         <CardTitle url={item.url} title={item.title} />
-        <p className="text-sm leading-relaxed">{item.description}</p>
+        <p className="card-text">{item.description}</p>
         <Tags>
           {item.stack.map(stackItem => (
             <BulletTag key={uuidv4()}>{stackItem}</BulletTag>
@@ -28,7 +28,7 @@ const ProjectItemDisplay: React.FC<ProjectItemDisplayProps> = ({ item }: Project
         </Tags>
       </CardBody>
       <CardFooter>
-        <time>
+        <time className="card-meta">
           {t("{{val, datetime}}", {
             val: new Date(item.timestamp),
             formatParams: {

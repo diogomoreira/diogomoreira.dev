@@ -1,0 +1,69 @@
+.post-card-container {
+  @apply grid grid-flow-row gap-4;
+}
+
+.post-card {
+  @apply flex flex-col md:flex-row;
+}
+
+.post-card:not(:last-child) {
+  @apply pb-4 border-b border-spring-wood-100 dark:border-gray-700;
+}
+
+.post-card-cover-container {
+  @apply shadow-sm w-full md:w-40 h-40 md:h-full;
+}
+
+.post-card-cover {
+  @apply object-cover h-full w-full rounded-md border border-spring-wood-200 dark:border-gray-800 shadow-xl;
+}
+
+.post-card-info {
+  @apply p-4 flex flex-1 flex-col gap-2;
+}
+
+.post-card-title {
+  @apply text-xl font-bold;
+}
+
+.post-card-meta-timestamp {
+  @apply flex gap-2 text-xs text-gray-500 dark:text-gray-300;
+}
+
+/* Post Pages */
+
+.post-page-title {
+  @apply text-center text-4xl md:text-6xl mb-4 font-bold;
+}
+
+.post-page-description {
+  @apply text-center text-spring-wood-500 mb-4 dark:text-gray-300;
+}
+
+.post-page-author-container {
+  @apply flex items-center gap-2;
+}
+
+.post-page-author-image {
+  @apply rounded-full w-10;
+}
+
+.post-page-meta {
+  @apply flex flex-col md:flex-row gap-2 justify-center mb-4 items-center text-sm text-spring-wood-700 dark:text-gray-200;
+}
+
+.post-page-meta > *:not(:first-child) {
+  @apply md:border-l md:pl-2 md:dark:border-gray-700;
+}
+
+.post-page-meta-timestamp {
+  @apply flex gap-2;
+}
+
+.post-page-article {
+  @apply mt-8 prose max-w-none prose-gray mx-auto dark:prose-invert md:px-0 dark:prose-a:text-gray-200;
+}
+
+.post-page-comments {
+  @apply mt-8;
+}

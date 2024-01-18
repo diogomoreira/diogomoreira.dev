@@ -7,8 +7,6 @@ import { NextSeo } from "next-seo";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import ProjectsList from "@/components/ProjectsList";
 import { useTranslation } from "next-i18next";
-import PageTitle from "@/components/PageTitle";
-import PageDescription from "@/components/PageDescription";
 
 export const getStaticProps: GetStaticProps<{ items: ProjectItem[] }> = async ({ locale }) => {
   const currentLocale = locale || "en";
@@ -28,8 +26,8 @@ const LabsPage: NextPage<LabsPageProps> = ({ items }: LabsPageProps) => {
   return (
     <>
       <NextSeo title="Labs" description="Some projects i've been working on" />
-      <PageTitle>💻 {t("title")}</PageTitle>
-      <PageDescription>{t("intro")}</PageDescription>
+      <h1 className="page-title">💻 {t("title")}</h1>
+      <p className="page-description">{t("intro")}</p>
       <ResponsiveMasonry columnsCountBreakPoints={ThreeColumnsMaxBreakpoints}>
         <Masonry gutter="1rem">
           <ProjectsList items={items} />

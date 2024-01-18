@@ -10,7 +10,7 @@ type LinksPageItemProps = {
 const LinksPageItem: React.FC<LinksPageItemProps> = ({ icon, description, href }: LinksPageItemProps) => {
   return (
     <ExternalLinkButton href={href}>
-      <div className="flex p-2 items-center gap-4 text-lg">
+      <div className="links-item">
         <span>{icon}</span>
         <span>{description}</span>
       </div>

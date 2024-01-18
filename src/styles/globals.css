@@ -2,15 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "layout.css";
+@import "footer.css";
+@import "pages.css";
+@import "navigation.css";
+@import "buttons.css";
+@import "card.css";
+@import "papers.css";
+@import "posts.css";
+@import "tags.css";
+@import "author.css";
+@import "social.css";
+@import "links.css";
+@import "typography.css";
+
 body {
+  @apply bg-spring-wood-50 dark:bg-gray-900;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
     "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-feature-settings: "cv11", "salt", "ss01", "ss03", "cv01", "cv02", "cv03", "cv04", "cv05", "cv06", "cv09", "cv10";
-}
-
-p a {
-  @apply relative inline-block bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-500 px-1.5 underline text-slate-800 dark:text-slate-200;
 }

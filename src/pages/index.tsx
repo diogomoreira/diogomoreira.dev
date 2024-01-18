@@ -34,16 +34,14 @@ const IndexPage: NextPage<IndexPageProps> = () => {
   return (
     <>
       <NextSeo title="Home Page" description={description} />
-      <div className="flex flex-col gap-6">
-        <Author />
-        <h2 className="text-2xl tracking-tight font-bold flex justify-between border-b border-slate-200 dark:border-slate-600 mb-4">
-          <Translation t={t} ns={"index"} i18nKey="latest"></Translation>
-          <LinkButton href={"/blog"}>
-            <Translation t={t} ns={"common"} i18nKey="common.seemore"></Translation>
-          </LinkButton>
-        </h2>
-        <PostsList posts={posts} />
-      </div>
+      <Author />
+      <h2 className="page-section">
+        <Translation t={t} ns={"index"} i18nKey="latest"></Translation>
+        <LinkButton href={"/blog"}>
+          <Translation t={t} ns={"common"} i18nKey="common.seemore"></Translation>
+        </LinkButton>
+      </h2>
+      <PostsList posts={posts} />
     </>
   );
 };
