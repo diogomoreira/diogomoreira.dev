@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useTranslation } from "next-i18next";
 import ThemeToggler from "@/components/ThemeToggle";
 import Logo from "../Logo";
+import LanguageToggle from "@/components/LanguageToggle";
 
 const Navigation = () => {
   const { menu } = useAppConfig();
@@ -39,6 +40,7 @@ const Navigation = () => {
             <button
               type="button"
               title="Show Menu"
+              onKeyDown={() => toggleMenu()}
               onClick={() => toggleMenu()}
               className="p-4 block md:hidden active:bg-slate-200 dark:active:bg-slate-800"
             >
@@ -54,7 +56,6 @@ const Navigation = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
               </svg>
             </button>
-            L
           </div>
         </div>
 
@@ -66,6 +67,8 @@ const Navigation = () => {
           {menu.map(item => (
             <li
               key={uuidv4()}
+              role="listitem"
+              onKeyDown={() => toggleMenu()}
               onClick={() => toggleMenu()}
               className="px-6 py-2 active:bg-slate-300 dark:active:bg-slate-900 md:active:bg-transparent dark:md:active:bg-transparent md:p-0 font-semibold lowercase md:bg-transparent text-left"
             >
@@ -75,6 +78,7 @@ const Navigation = () => {
         </ul>
         <div className="hidden md:flex">
           <ThemeToggler />
+          <LanguageToggle />
         </div>
       </div>
     </nav>

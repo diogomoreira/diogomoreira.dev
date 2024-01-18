@@ -13,6 +13,9 @@ type ResponseData = {
  * @param res
  */
 export default async function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
-  const postsFromDEVto = await getAllPosts();
-  res.status(200).json({ posts: postsFromDEVto });
+  const posts = await getAllPosts().then((posts) => {
+
+    return posts.sort((firstPostDate, secondPostDate) => firstPostDate.publishedAt > secondPostDate.publishedAt ? -1 : 1);
+  });
+  res.status(200).json({ posts });
 }

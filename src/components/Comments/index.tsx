@@ -1,8 +1,10 @@
-import { useTheme } from "@/lib/hooks";
+import { useTheme } from "next-themes";
 import Giscus, { GiscusProps, Repo } from "@giscus/react";
 import React from "react";
 
 const Comments = () => {
+  const { theme } = useTheme();
+
   const giscusConfig: GiscusProps = {
     repo: process.env.NEXT_PUBLIC_GISCUS_REPO as Repo,
     repoId: process.env.NEXT_PUBLIC_GISCUS_REPO_ID as string,
@@ -16,7 +18,6 @@ const Comments = () => {
     lang: "en",
     loading: "lazy",
   };
-  const theme = useTheme();
 
   return (
     <>

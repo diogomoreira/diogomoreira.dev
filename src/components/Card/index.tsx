@@ -12,7 +12,7 @@ type CardTitleProps = {
 };
 
 const Card: React.FC<CardProps> = ({ children }: CardProps) => (
-  <div className="border shadow-md border-slate-200 dark:border-slate-800 rounded-md overflow-hidden">{children}</div>
+  <div className="border shadow-md border-slate-200 dark:border-slate-800 overflow-hidden">{children}</div>
 );
 
 const CardImage: React.FC<CardProps & CardTitleProps> = ({ children, url, title }: CardProps & CardTitleProps) => (
@@ -24,7 +24,7 @@ const CardImage: React.FC<CardProps & CardTitleProps> = ({ children, url, title 
 const CardTitle: React.FC<CardTitleProps> = ({ url, title, icon }: CardTitleProps) => (
   <div>
     <h1 className="text-lg font-bold">
-      {icon}{" "}
+      <span>{icon}</span>{" "}
       <ExternalLink url={url} title={title}>
         {title}
       </ExternalLink>

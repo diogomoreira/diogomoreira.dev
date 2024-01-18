@@ -6,6 +6,10 @@ import Image from "next/image";
 import { useAppConfig } from "@/config";
 import Link from "next/link";
 import { Trans as Translation, useTranslation } from "next-i18next";
+import PageTitle from "@/components/PageTitle";
+import PageProse from "@/components/PageProse";
+import PageFigure from "@/components/PageFigure";
+import PageDescription from "@/components/PageDescription";
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const currentLocale = locale || "en";
@@ -28,33 +32,38 @@ const AboutPage: NextPage<AboutPageProps> = () => {
   return (
     <>
       <NextSeo title="About me" description="A little more about me" />
-      <h1 className="text-4xl mb-6 font-bold">👋🏻 {t("title")}</h1>
-      <figure className="relative w-full h-96 prose-img:rounded-md shadow-md">
+      <PageTitle>👋🏻 {t("title")}</PageTitle>
+      <PageDescription>A little bit about myself</PageDescription>
+      <PageFigure>
         <Image className="object-cover" src={"/images/pages/about/cover.jpg"} fill alt={name} />
-      </figure>
-      <article className="mt-8 prose prose-slate mx-auto dark:prose-invert md:px-0">
-        <p>
-          <Translation t={t} i18nKey="intro"></Translation>
-        </p>
-        <p>
-          <Translation t={t} i18nKey="hobbies" components={[<Link key={"link"} href={"/bookmarks"} />]}></Translation>
-        </p>
-        <p>
-          <Translation t={t} i18nKey="sport"></Translation>
-        </p>
-        <p>
-          <Translation t={t} i18nKey="freetime"></Translation>
-        </p>
-        <p>
-          <Translation
-            t={t}
-            i18nKey="education"
-            components={[<a key={"link-ifpb"} href="https://ifpb.edu.br" target="_blank" rel="noopener noreferrer" />]}
-          ></Translation>
-        </p>
-        <p>
-          <Translation t={t} i18nKey="end"></Translation>
-        </p>
+      </PageFigure>
+      <article>
+        <PageProse>
+          <p>
+            <Translation t={t} i18nKey="intro"></Translation>
+          </p>
+          <p>
+            <Translation t={t} i18nKey="hobbies" components={[<Link key={"link"} href={"/bookmarks"} />]}></Translation>
+          </p>
+          <p>
+            <Translation t={t} i18nKey="sport"></Translation>
+          </p>
+          <p>
+            <Translation t={t} i18nKey="freetime"></Translation>
+          </p>
+          <p>
+            <Translation
+              t={t}
+              i18nKey="education"
+              components={[
+                <a key={"link-ifpb"} href="https://ifpb.edu.br" target="_blank" rel="noopener noreferrer" />,
+              ]}
+            ></Translation>
+          </p>
+          <p>
+            <Translation t={t} i18nKey="end"></Translation>
+          </p>
+        </PageProse>
       </article>
     </>
   );

@@ -1,20 +1,24 @@
+export type PageItem = {
+  icon: string;
+  title: string;
+  description: string;
+  slug: string;
+  content: string;
+  coverImage: string;
+  publishedAt: string;
+  updatedAt: string;
+}
+
 export type PostItem = {
   id: string;
-  body: string;
   title: string;
   description: string;
   url: string;
-  comments_count: number;
-  public_reactions_count: number;
-  positive_reactions_count: number;
-  cover_image: string;
-  social_image: string;
-  canonical_url: string;
-  created_at: string;
-  published_at: string;
-  edited_at: string;
-  reading_time_minutes: number;
-  tag_list: string[];
+  content: string;
+  coverImage: string;
+  publishedAt: string;
+  tags: string[];
+  origin: string;
 };
 
 export type ProjectItem = {

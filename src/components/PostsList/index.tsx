@@ -11,7 +11,7 @@ const PostsList: React.FC<PostsListProps> = ({ posts }: PostsListProps) => {
   return (
     <>
       {posts.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-flow-row gap-2">
           {posts?.map(note => (
             <div key={note.id}>
               <PostItemDisplay post={note} />

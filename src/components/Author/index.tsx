@@ -26,14 +26,14 @@ const Author = () => {
           <h2 className="font-light">
             <Translation t={t} i18nKey="titles"></Translation>
           </h2>
-          <p className="text-slate-600 dark:text-slate-400 font-semibold">
+          <div className="text-slate-600 dark:text-slate-400 font-semibold">
             <Translation
               t={t}
               ns={"common"}
               i18nKey="common.readmore"
               components={[<Link key="read-more-link" href={"/about"} />]}
             ></Translation>
-          </p>
+          </div>
           <SocialIcons />
         </div>
       </div>
