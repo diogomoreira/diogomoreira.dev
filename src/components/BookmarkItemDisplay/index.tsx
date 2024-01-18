@@ -2,7 +2,7 @@ import React from "react";
 import { BookmarkItem } from "@/lib/content";
 import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
-import { Card, CardBody, CardImage, CardTitle, CardTitleIcon } from "../Card";
+import { Card, CardBody, CardTitleIcon } from "../Card";
 import { Tag, Tags } from "../Tag";
 import { useTranslation } from "next-i18next";
 

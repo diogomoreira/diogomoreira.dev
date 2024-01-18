@@ -11,7 +11,7 @@ import { v4 as uuid } from "uuid";
 import { useTranslation } from "next-i18next";
 import { MDXRemote } from "next-mdx-remote";
 import { mdxToHtml } from "@/lib/content/markdown.api";
-import { HashTag, Tag, Tags } from "@/components/Tag";
+import { HashTag, Tags } from "@/components/Tag";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { differenceInDays } from "date-fns";
 

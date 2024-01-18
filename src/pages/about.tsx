@@ -6,10 +6,6 @@ import Image from "next/image";
 import { useAppConfig } from "@/config";
 import Link from "next/link";
 import { Trans as Translation, useTranslation } from "next-i18next";
-import PageTitle from "@/components/PageTitle";
-import PageProse from "@/components/PageProse";
-import PageFigure from "@/components/PageFigure";
-import PageDescription from "@/components/PageDescription";
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const currentLocale = locale || "en";

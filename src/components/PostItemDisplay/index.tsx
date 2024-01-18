@@ -3,9 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { useTranslation } from "next-i18next";
 import { Tag, Tags } from "../Tag";
-import ExternalLink from "../Link/ExternalLink";
 import Link from "next/link";
-import { FaDev } from "react-icons/fa6";
 import { differenceInDays } from "date-fns";
 
 type PostProps = { post: PostItem };
