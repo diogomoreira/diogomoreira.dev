@@ -3,11 +3,9 @@ import { useAppConfig, useLocaleConfig } from "@/config";
 import Link from "next/link";
 
 import { v4 as uuidv4 } from "uuid";
-// import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import ThemeToggler from "@/components/ThemeToggle";
 import Logo from "../Logo";
-import LanguageToggle from "@/components/LanguageToggle";
 import { useRouter } from "next/router";
 
 const Navigation = () => {

@@ -11,20 +11,22 @@ async function getPageByPath(slug: string): Promise<PageItem> {
   const fullPath = join(pagesDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { content, data } = matter(fileContents);
-  const {
+  const { title, icon, description, cover, published, updated } = data;
+  return {
     title,
     icon,
     description,
-    cover,
-    published,
-    updated
-  } = data;
-  return { title, icon, description, slug, content, coverImage: cover, publishedAt: published, updatedAt: updated } as PageItem;
+    slug,
+    content,
+    coverImage: cover,
+    publishedAt: published,
+    updatedAt: updated,
+  } as PageItem;
 }
 
 async function getPagesSlugs(): Promise<string[]> {
   const files = await readdir(pagesDirectory);
-  return files.map((value) => value.split(".md")[0]);
+  return files.map(value => value.split(".md")[0]);
 }
 
 export { getPagesSlugs, getPageByPath };

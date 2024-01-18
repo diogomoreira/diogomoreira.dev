@@ -1,5 +1,4 @@
 import React from "react";
-import a from "../Link/a";
 
 type CardProps = {
   children: React.ReactNode;
@@ -11,16 +10,16 @@ type CardTitleProps = {
 };
 
 type CardTitleIconProps = CardTitleProps & {
-  icon?: string;
+  icon: string;
 };
 
 const Card: React.FC<CardProps> = ({ children }: CardProps) => <div className="card">{children}</div>;
 
-const CardImage: React.FC<CardProps & CardTitleProps> = ({ children, url, title }: CardProps & CardTitleProps) => (
+const CardImage: React.FC<CardProps & CardTitleProps> = ({ children }: CardProps & CardTitleProps) => (
   <div className="card-figure">{children}</div>
 );
 
-const CardTitle: React.FC<CardTitleProps> = ({ url, title, icon }: CardTitleProps) => (
+const CardTitle: React.FC<CardTitleProps> = ({ url, title }: CardTitleProps) => (
   <h1 className="card-title">
     <a href={url} title={title} target="_blank" rel="noopener noreferrer">
       {title}
@@ -28,7 +27,7 @@ const CardTitle: React.FC<CardTitleProps> = ({ url, title, icon }: CardTitleProp
   </h1>
 );
 
-const CardTitleIcon: React.FC<CardTitleIconProps> = ({ url, title, icon }: CardTitleProps) => (
+const CardTitleIcon: React.FC<CardTitleIconProps> = ({ url, title, icon }: CardTitleIconProps) => (
   <h1 className="card-title">
     <span>{icon}</span>
     <a href={url} title={title} target="_blank" rel="noopener noreferrer">

@@ -7,7 +7,7 @@ export type PageItem = {
   coverImage: string;
   publishedAt: string;
   updatedAt: string;
-}
+};
 
 export type PostItem = {
   id: string;
