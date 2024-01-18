@@ -10,3 +10,7 @@ body {
   text-rendering: optimizeLegibility;
   font-feature-settings: "cv11", "salt", "ss01", "ss03", "cv01", "cv02", "cv03", "cv04", "cv05", "cv06", "cv09", "cv10";
 }
+
+p a {
+  @apply relative inline-block bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-500 px-1.5 underline text-slate-800 dark:text-slate-200;
+}

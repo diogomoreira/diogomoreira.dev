@@ -6,7 +6,7 @@ import { NextSeo } from "next-seo";
 
 import PostsList from "@/components/PostsList";
 import { useAppConfig } from "@/config";
-import { PostItem, getAllPosts } from "@/lib/content";
+import { PostItem } from "@/lib/content";
 import Author from "@/components/Author";
 import { LinkButton } from "@/components/Button";
 
@@ -24,7 +24,9 @@ type IndexPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 const IndexPage: NextPage<IndexPageProps> = () => {
   const [posts, setPosts] = useState<PostItem[]>([]);
   useEffect(() => {
-    getAllPosts().then(posts => setPosts(posts));
+    fetch("/api/posts")
+      .then(response => response.json())
+      .then(({ posts }) => setPosts(posts));
   }, []);
   const { description } = useAppConfig();
   const { t } = useTranslation(["index", "common"]);

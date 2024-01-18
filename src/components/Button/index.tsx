@@ -17,7 +17,7 @@ const styleClasses =
 
 const Button: React.FC<ButtonProps> = ({ children, className, onClick, onKeyDown }: ButtonProps) => {
   return (
-    <button onClick={onClick} onKeyDown={onKeyDown} className={styleClasses.concat(" ").concat(className || "")}>
+    <button onClick={onClick} onKeyDown={onKeyDown} className={styleClasses.concat(" ").concat(className ?? "")}>
       {children}
     </button>
   );

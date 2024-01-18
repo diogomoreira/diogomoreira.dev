@@ -6,6 +6,7 @@ import { Trans as Translation, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import PapersList from "@/components/PapersList";
 import { NextSeo } from "next-seo";
+import PageTitle from "@/components/PageTitle";
 
 type AcademicProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -17,7 +18,7 @@ const AcademicPage: NextPage<AcademicProps> = ({ papers }: AcademicProps) => {
   return (
     <>
       <NextSeo title="Academic" description="My academic profile" />
-      <h1 className="text-4xl mb-6 font-bold">🎓 {t("title")}</h1>
+      <PageTitle>🎓 {t("title")}</PageTitle>
       <p className="leading-loose mb-4">
         <Translation
           i18nKey="teaching.intro"

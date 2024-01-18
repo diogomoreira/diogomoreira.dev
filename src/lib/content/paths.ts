@@ -1,6 +1,8 @@
 export enum ContentPath {
-  NOTES = "/content/notes",
-  NOTES_COVER_IMAGES = "/images/notes/cover",
+  PAGES = "/content/pages",
+  PAGES_COVER_IMAGES = "/images/pages",
+  POSTS = "/content/posts",
+  POSTS_COVER_IMAGES = "/images/posts/cover",
   PAPERS = "/content/academic",
   BOOKMARKS = "/content/bookmarks",
   IMAGES = "/images/",

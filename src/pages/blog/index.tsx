@@ -1,5 +1,7 @@
+import PageDescription from "@/components/PageDescription";
+import PageTitle from "@/components/PageTitle";
 import PostsList from "@/components/PostsList";
-import { PostItem, getAllPosts } from "@/lib/content";
+import { PostItem } from "@/lib/content";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -20,20 +22,18 @@ type BlogPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 const BlogPage: NextPage<BlogPageProps> = () => {
   const [posts, setPosts] = useState<PostItem[]>([]);
   useEffect(() => {
-    getAllPosts().then(posts => setPosts(posts));
+    fetch("/api/posts")
+      .then(response => response.json())
+      .then(({ posts }) => setPosts(posts));
   }, []);
   const { t } = useTranslation("blog");
   return (
     <>
-      <h1 className="text-4xl mb-6 font-bold">🪴 {t("title")}</h1>
-      <div className="mt-2 text-slate-500 dark:text-slate-300">
-        <p className="leading-loose mb-6">
-          <Translation t={t} i18nKey="intro"></Translation>
-        </p>
-      </div>
-      <div>
-        <PostsList posts={posts} />
-      </div>
+      <PageTitle>🪴 {t("title")}</PageTitle>
+      <PageDescription>
+        <Translation t={t} i18nKey="intro"></Translation>
+      </PageDescription>
+      <PostsList posts={posts} />
     </>
   );
 };
