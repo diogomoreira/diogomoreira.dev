@@ -1,9 +1,10 @@
 import { ProjectItem } from "@/lib/content";
-import styles from "@/styles/components/labitem.module.scss";
 import Image from "next/image";
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useTranslation } from "next-i18next";
+import { Card, CardBody, CardFooter, CardTitle } from "../Card";
+import { BulletTag, Tags } from "../Tag";
 
 type ProjectItemDisplayProps = {
   item: ProjectItem;
@@ -13,35 +14,30 @@ const ProjectItemDisplay: React.FC<ProjectItemDisplayProps> = ({ item }: Project
   const { t } = useTranslation();
 
   return (
-    <div className={styles.labItemContainer}>
-      <div className={styles.labItemImageContainer}>
-        <a href={item.url} title={item.title} target="_blank" rel="noreferrer">
-          <Image alt={item.title} src={item.image} fill={true} />
-        </a>
-      </div>
-      <div className={styles.labItemDetails}>
-        <h1>
-          <a href={item.url} title={item.title} target="_blank" rel="noreferrer">
-            {item.title}
-          </a>
-        </h1>
-        <div>
-          <time>
-            {t("{{val, datetime}}", {
-              val: new Date(item.timestamp),
-            })}
-          </time>
-        </div>
-        <p>{item.description}</p>
-        <footer>
-          <div>
-            {item.stack.map(stackItem => (
-              <span key={uuidv4()}>{stackItem}</span>
-            ))}
-          </div>
-        </footer>
-      </div>
-    </div>
+    <Card>
+      <a href={item.url} title={item.title} target="_blank" rel="noopener noreferrer">
+        <Image className="object-contain" alt={item.title} src={item.image} width={1920} height={1080} />
+      </a>
+      <CardBody>
+        <CardTitle url={item.url} title={item.title} />
+        <p className="card-text">{item.description}</p>
+        <Tags>
+          {item.stack.map(stackItem => (
+            <BulletTag key={uuidv4()}>{stackItem}</BulletTag>
+          ))}
+        </Tags>
+      </CardBody>
+      <CardFooter>
+        <time className="card-meta">
+          {t("{{val, datetime}}", {
+            val: new Date(item.timestamp),
+            formatParams: {
+              val: { year: "numeric", month: "long", day: "numeric" },
+            },
+          })}
+        </time>
+      </CardFooter>
+    </Card>
   );
 };
 

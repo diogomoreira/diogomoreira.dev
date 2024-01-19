@@ -1,0 +1,7 @@
+.layout-container {
+  @apply flex flex-col h-screen mx-auto;
+}
+
+main {
+  @apply px-6 py-10 flex-1 max-w-5xl container mx-auto;
+}

@@ -2,13 +2,20 @@ import React from "react";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
-import styles from "@/styles/pages/about.module.scss";
-import contentStyle from "@/styles/pages/post.module.scss";
 import Image from "next/image";
 import { useAppConfig } from "@/config";
 import Link from "next/link";
-import { Content } from "@/components/Layout/Content";
 import { Trans as Translation, useTranslation } from "next-i18next";
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const currentLocale = locale || "en";
+  return {
+    props: {
+      ...(await serverSideTranslations(currentLocale, ["about", "common"])),
+    },
+    revalidate: 5,
+  };
+};
 
 type AboutPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -19,13 +26,14 @@ const AboutPage: NextPage<AboutPageProps> = () => {
   const { t } = useTranslation("about");
 
   return (
-    <Content>
+    <>
       <NextSeo title="About me" description="A little more about me" />
-      <h1>👋🏻 {t("title")}</h1>
-      <div className={styles.cover}>
-        <Image src={"/images/pages/about/cover.jpg"} fill alt={name} />
-      </div>
-      <div className={contentStyle.content}>
+      <h1 className="page-title">👋🏻 {t("title")}</h1>
+      <p className="page-description">A little bit about myself</p>
+      <figure className="page-figure">
+        <Image className="object-cover rounded-md" src={"/images/pages/about/cover.jpg"} fill alt={name} />
+      </figure>
+      <article className="page-article">
         <p>
           <Translation t={t} i18nKey="intro"></Translation>
         </p>
@@ -48,18 +56,9 @@ const AboutPage: NextPage<AboutPageProps> = () => {
         <p>
           <Translation t={t} i18nKey="end"></Translation>
         </p>
-      </div>
-    </Content>
+      </article>
+    </>
   );
-};
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const currentLocale = locale || "en";
-  return {
-    props: {
-      ...(await serverSideTranslations(currentLocale, ["about", "common"])),
-    },
-  };
 };
 
 export default AboutPage;

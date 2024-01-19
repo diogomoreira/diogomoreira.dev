@@ -1,6 +1,0 @@
-@import "@/styles/mixins";
-.cover {
-  @include article-image();
-  @include border();
-  @include border-radius();
-}
