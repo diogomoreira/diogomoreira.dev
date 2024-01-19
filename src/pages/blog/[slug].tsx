@@ -15,7 +15,14 @@ import { HashTag, Tags } from "@/components/Tag";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { differenceInDays } from "date-fns";
 
-export async function getStaticProps({ params, locale }) {
+type PostPageStaticProps = {
+  locale: string | null;
+  params: {
+    slug: string;
+  };
+};
+
+export async function getStaticProps({ params, locale }: PostPageStaticProps) {
   const { slug } = params;
   const post = await getPostByPath(slug);
   const content = await mdxToHtml(post);
