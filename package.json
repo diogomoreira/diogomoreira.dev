@@ -22,6 +22,7 @@
     "@tailwindcss/forms": "0.5.7",
     "@tailwindcss/typography": "0.5.10",
     "@vercel/analytics": "1.1.1",
+    "@vercel/speed-insights": "^1.0.5",
     "bibtex": "0.9.0",
     "contentful": "10.6.16",
     "date-fns": "2.29.3",
