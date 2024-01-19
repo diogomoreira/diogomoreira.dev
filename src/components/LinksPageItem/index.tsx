@@ -1,20 +1,20 @@
 import React from "react";
-import styles from "@/styles/components/linkitem.module.scss";
+import { ExternalLinkButton } from "../Button";
 
 type LinksPageItemProps = {
-  icon: string;
+  icon: string | React.ReactNode;
   description: string;
   href: string;
 };
 
 const LinksPageItem: React.FC<LinksPageItemProps> = ({ icon, description, href }: LinksPageItemProps) => {
   return (
-    <a href={href}>
-      <button className={styles.linkContainer}>
+    <ExternalLinkButton href={href}>
+      <div className="links-item">
         <span>{icon}</span>
         <span>{description}</span>
-      </button>
-    </a>
+      </div>
+    </ExternalLinkButton>
   );
 };
 

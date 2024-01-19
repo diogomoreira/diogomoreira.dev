@@ -1,62 +1,61 @@
-import { PostItem } from "@/lib/content";
-import styles from "@/styles/components/postlist.module.scss";
+import { ContentPath, PostItem } from "@/lib/content";
 import Image from "next/image";
 import React from "react";
 import { useTranslation } from "next-i18next";
-import { FaComments, FaRegThumbsUp } from "react-icons/fa6";
+import { Tag, Tags } from "../Tag";
+import Link from "next/link";
+import { differenceInDays } from "date-fns";
 
 type PostProps = { post: PostItem };
 
 const PostItemDisplay: React.FC<PostProps> = ({ post }: PostProps) => {
   const { t } = useTranslation();
+  const postDate = new Date(post.publishedAt);
   return (
-    <article className={styles.post}>
-      <a href={post.url} target="_blank" rel="noopener noreferrer">
-        <div className={styles.cover}>
+    <article className="post-card">
+      <a href={post.url} title={post.title} target="_blank" rel="noopener noreferrer">
+        <div className="post-card-cover-container">
           <Image
-            src={post.cover_image}
-            fill
+            className="post-card-cover"
+            width={241}
+            height={136}
+            src={post.origin === "md" ? `${ContentPath.POSTS_COVER_IMAGES}/${post.coverImage}` : post.coverImage}
             alt={post.title}
-            sizes="33vw"
-            style={{
-              objectFit: "cover", // cover, contain, none
-            }}
           />
         </div>
       </a>
-      <div className={styles.postTags}>
-        {post.tag_list.map(tag => (
-          <span className={styles.postTag} key={tag}>
-            {tag}
-          </span>
-        ))}
-      </div>
-      <a href={post.url} target="_blank" rel="noopener noreferrer">
-        <div className={styles.postItem}>
-          <h1>{post.title}</h1>
-        </div>
-      </a>
-
-      <div className={styles.postMetadata}>
-        <div>
-          <span>{t("common.publishedAt")}</span>
-          <time>
+      <div className="post-card-info">
+        <h1 className="post-card-title">
+          {post.origin === "md" ? (
+            <Link href={post.url}>{post.title}</Link>
+          ) : (
+            <a href={post.url} title={post.title} target="_blank" rel="noopener noreferrer">
+              {post.title}
+            </a>
+          )}
+        </h1>
+        <time className="post-card-meta-timestamp">
+          <span>
             {t("{{val, datetime}}", {
-              val: new Date(post.published_at),
+              val: postDate,
+              formatParams: {
+                val: { year: "numeric", month: "long", day: "numeric" },
+              },
             })}
-          </time>
-        </div>
-        <div>
-          <span>
-            {post.reading_time_minutes} {t("common.minutes")}
           </span>
           <span>
-            <FaComments /> {post.comments_count}
+            (
+            {t("{{val, relativetime}}", {
+              val: differenceInDays(postDate, new Date()),
+            })}
+            )
           </span>
-          <span>
-            <FaRegThumbsUp /> {post.public_reactions_count}
-          </span>
-        </div>
+        </time>
+        <Tags>
+          {post.tags.map(tag => (
+            <Tag key={tag}>{tag}</Tag>
+          ))}
+        </Tags>
       </div>
     </article>
   );

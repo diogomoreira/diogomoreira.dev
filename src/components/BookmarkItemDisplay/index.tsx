@@ -1,8 +1,10 @@
 import React from "react";
 import { BookmarkItem } from "@/lib/content";
-import styles from "@/styles/components/bookmark.module.scss";
 import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
+import { Card, CardBody, CardTitleIcon } from "../Card";
+import { Tag, Tags } from "../Tag";
+import { useTranslation } from "next-i18next";
 
 type BookmarkItemDisplayProps = { item: BookmarkItem };
 
@@ -19,30 +21,39 @@ const icons: Record<string, string> = {
 };
 
 const BookmarkItemDisplay: React.FC<BookmarkItemDisplayProps> = ({ item }: BookmarkItemDisplayProps) => {
+  const { t } = useTranslation();
   const icon: string = icons[item.type];
   return (
-    <div className={styles.bookmarkItemContainer}>
-      <a href={item.link} target="_blank" rel="noreferrer">
-        <div className={styles.bookmarkItemImageContainer}>
-          <Image alt={item.title} src={`/images/bookmarks/${item.image}`} fill className={styles.bookmarkItemImage} />
-        </div>
+    <Card>
+      <a href={item.link} title={item.title} target="_blank" rel="noopener noreferrer">
+        <Image
+          className="object-contain"
+          alt={item.title}
+          src={`/images/bookmarks/${item.image}`}
+          width={1920}
+          height={1080}
+        />
       </a>
-      <div className={styles.bookmarkItemDetails}>
-        <h1>
-          <a href={item.link} target="_blank" rel="noreferrer">
-            <span>{icon}</span> {item.title}
-          </a>
-        </h1>
-        <p dangerouslySetInnerHTML={{ __html: item.description }}></p>
-        <div className={styles.bookmarkItemInfo}>
-          <div className={styles.bookmarkItemTags}>
-            {item.tags.map(stackItem => (
-              <span key={uuidv4()}>{stackItem}</span>
-            ))}
-          </div>
+      <CardBody>
+        <CardTitleIcon title={item.title} url={item.link} icon={icon} />
+        <div className="card-meta">
+          <time>
+            {t("{{val, datetime}}", {
+              val: new Date(item.timestamp),
+              formatParams: {
+                val: { year: "numeric", month: "long", day: "numeric" },
+              },
+            })}
+          </time>
         </div>
-      </div>
-    </div>
+        <p className="card-text" dangerouslySetInnerHTML={{ __html: item.description }}></p>
+        <Tags>
+          {item.tags.map(stackItem => (
+            <Tag key={uuidv4()}>{stackItem}</Tag>
+          ))}
+        </Tags>
+      </CardBody>
+    </Card>
   );
 };
 

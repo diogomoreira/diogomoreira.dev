@@ -1,0 +1,58 @@
+const colors = require("tailwindcss/colors");
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  darkMode: "class",
+  theme: {
+    extend: {},
+    colors: {
+      transparent: "transparent",
+      current: "currentColor",
+      black: colors.black,
+      white: colors.white,
+      gray: colors.gray,
+      slate: colors.slate,
+      "spring-wood": {
+        50: "#f8f7f3",
+        100: "#f0eee4",
+        200: "#dfdac9",
+        300: "#cbc2a6",
+        400: "#b5a582",
+        500: "#a5906a",
+        600: "#98805e",
+        700: "#7f694f",
+        800: "#685644",
+        900: "#554739",
+        950: "#2d251d",
+      },
+      casablanca: {
+        50: "#fff8eb",
+        100: "#ffeac6",
+        200: "#fed489",
+        300: "#feb546",
+        400: "#fd9c22",
+        500: "#f87808",
+        600: "#db5404",
+        700: "#b63707",
+        800: "#942a0c",
+        900: "#79240e",
+        950: "#460f02",
+      },
+      victoria: {
+        50: "#f4fbf7",
+        100: "#e5f5f1",
+        200: "#ceeee8",
+        300: "#ade1e1",
+        400: "#88c5d3",
+        500: "#6ba1c7",
+        600: "#5678b8",
+        700: "#4c57a9",
+        800: "#4c4794",
+        900: "#44396f",
+        950: "#322645",
+      },
+    },
+  },
+  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/aspect-ratio"), require("@tailwindcss/typography")],
+};

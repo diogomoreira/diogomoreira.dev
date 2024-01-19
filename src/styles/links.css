@@ -1,0 +1,23 @@
+.links-container {
+  @apply flex flex-col gap-6 w-full items-center;
+}
+
+.links-avatar {
+  @apply rounded-full;
+}
+
+.links-title {
+  @apply text-4xl md:text-6xl font-bold text-center;
+}
+
+.links-presentation {
+  @apply text-xl text-center font-light text-spring-wood-800 dark:text-gray-400;
+}
+
+.links-items {
+  @apply flex flex-col w-full gap-2 md:w-3/4;
+}
+
+.links-item {
+  @apply flex p-2 items-center gap-4 text-lg;
+}

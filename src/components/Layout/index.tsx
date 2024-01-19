@@ -1,18 +1,16 @@
 import Navigation from "./Navigation";
-import styles from "@/styles/components/layout.module.scss";
 import React from "react";
 import Footer from "./Footer";
 
 type LayoutProps = {
   children: React.ReactNode;
-  className?: string;
 };
 
-const Layout: React.FC<LayoutProps> = ({ children, className }: LayoutProps) => {
+const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
   return (
-    <div className={`${styles.layoutContainer} ${className}`}>
+    <div className="layout-container">
       <Navigation />
-      <div>{children}</div>
+      <main>{children}</main>
       <Footer />
     </div>
   );

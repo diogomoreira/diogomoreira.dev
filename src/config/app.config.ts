@@ -1,6 +1,6 @@
 import packageJson from "package.json";
 import { IconType } from "react-icons";
-import { FaHouseChimney, FaUser, FaPenNib, FaGraduationCap, FaFlask, FaBookmark } from "react-icons/fa6";
+import { FaHouseChimney, FaUser, FaPenNib, FaGraduationCap, FaFlask, FaBookmark, FaComputer } from "react-icons/fa6";
 
 type ApplicationConfig = {
   title: string;
@@ -28,14 +28,13 @@ const appConfig: ApplicationConfig = {
   repository: "https://github.com/diogomoreira/diogodmoreira.com",
   author: {
     name: "Diogo Moreira",
-    image: "/images/profile_photo.jpg",
+    image: "/images/profile.jpg",
     email: "diogo.dmoreira@gmail.com",
     academicEmail: "diogo.moreira@ifpb.edu.br",
     github: "diogomoreira",
     twitter: "diogodmoreira",
     linkedin: "diogodmoreira",
     instagram: "diogo.dmoreira",
-    keybase: "diogomoreira",
     mastodon: "diogomoreira",
     googleScholar: "DlSdlvEAAAAJ",
     researchGate: "Diogo_Moreira4",
@@ -50,6 +49,11 @@ const appConfig: ApplicationConfig = {
       name: "menu.academic",
       link: "/academic",
       icon: FaGraduationCap,
+    },
+    {
+      name: "menu.uses",
+      link: "/uses",
+      icon: FaComputer,
     },
     { name: "menu.labs", link: "/labs", icon: FaFlask },
     { name: "menu.bookmarks", link: "/bookmarks", icon: FaBookmark },
