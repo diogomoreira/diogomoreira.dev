@@ -3,12 +3,12 @@ import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
-
 import PostsList from "@/components/PostsList";
 import { useAppConfig } from "@/config";
 import { PostItem } from "@/lib/content";
 import Author from "@/components/Author";
 import { LinkButton } from "@/components/Button";
+import LoadingState from "@/components/Layout/LoadingState";
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const currentLocale = locale || "en";
@@ -23,10 +23,14 @@ type IndexPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const IndexPage: NextPage<IndexPageProps> = () => {
   const [posts, setPosts] = useState<PostItem[]>([]);
+  const [loadingPosts, setLoadingPosts] = useState(true);
   useEffect(() => {
     fetch("/api/posts")
       .then(response => response.json())
-      .then(({ posts }) => setPosts(posts));
+      .then(({ posts }) => {
+        setPosts(posts);
+        setLoadingPosts(false);
+      });
   }, []);
   const { description } = useAppConfig();
   const { t } = useTranslation(["index", "common"]);
@@ -41,7 +45,7 @@ const IndexPage: NextPage<IndexPageProps> = () => {
           <Translation t={t} ns={"common"} i18nKey="common.seemore"></Translation>
         </LinkButton>
       </h2>
-      <PostsList posts={posts} />
+      {loadingPosts ? <LoadingState /> : <PostsList posts={posts} />}
     </>
   );
 };

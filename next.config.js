@@ -9,7 +9,7 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ["res.cloudinary.com", "images.ctfassets.net"],
+    domains: ["res.cloudinary.com", "images.ctfassets.net", "media.dev.to"],
   },
 };
 

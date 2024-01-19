@@ -15,6 +15,7 @@
 @import "social.css";
 @import "links.css";
 @import "typography.css";
+@import "loading.css";
 
 body {
   @apply bg-spring-wood-50 dark:bg-gray-900;
