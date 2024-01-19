@@ -12,7 +12,11 @@ export type EmptyStateProps = {
 };
 
 const EmptyState: React.FC<EmptyStateProps> = ({ type }: EmptyStateProps) => {
-  return <div>No {type} found.</div>;
+  return (
+    <div className="loader-container">
+      <span>No {type} found.</span>
+    </div>
+  );
 };
 
 export default EmptyState;

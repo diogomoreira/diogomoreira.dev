@@ -1,3 +1,4 @@
+import LoadingState from "@/components/Layout/LoadingState";
 import PostsList from "@/components/PostsList";
 import { PostItem } from "@/lib/content";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
@@ -19,10 +20,14 @@ type BlogPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const BlogPage: NextPage<BlogPageProps> = () => {
   const [posts, setPosts] = useState<PostItem[]>([]);
+  const [loadingPosts, setLoadingPosts] = useState(true);
   useEffect(() => {
     fetch("/api/posts")
       .then(response => response.json())
-      .then(({ posts }) => setPosts(posts));
+      .then(({ posts }) => {
+        setPosts(posts);
+        setLoadingPosts(false);
+      });
   }, []);
   const { t } = useTranslation("blog");
   return (
@@ -31,7 +36,7 @@ const BlogPage: NextPage<BlogPageProps> = () => {
       <p className="page-description">
         <Translation t={t} i18nKey="intro"></Translation>
       </p>
-      <PostsList posts={posts} />
+      {loadingPosts ? <LoadingState /> : <PostsList posts={posts} />}
     </>
   );
 };
