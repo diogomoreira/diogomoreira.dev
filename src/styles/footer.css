@@ -3,7 +3,7 @@ footer {
 }
 
 footer > div {
-  @apply flex flex-col justify-between px-10 py-4 items-center container mx-auto max-w-5xl text-sm gap-1;
+  @apply flex flex-col md:flex-row justify-between md:px-10 py-4 items-center container mx-auto max-w-5xl text-sm gap-1;
 }
 
 .footer-author-name {
@@ -12,4 +12,12 @@ footer > div {
 
 .footer-source-code {
   @apply underline;
+}
+
+.footer-meta {
+  @apply flex flex-col md:flex-row md:gap-2 text-center;
+}
+
+.language-toggler-link {
+  @apply flex gap-2 items-center;
 }

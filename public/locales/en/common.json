@@ -18,7 +18,8 @@
     "minutes": "min."
   },
   "footer": {
+    "license": "This work is licensed under",
     "sourceCode": "<0>Source code</0>",
-    "currentVersion": "Current version"
+    "currentVersion": "v"
   }
 }

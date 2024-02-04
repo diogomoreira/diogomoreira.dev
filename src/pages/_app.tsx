@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import React, { useEffect } from "react";
 import "prism-themes/themes/prism-nord.css";
+import "flag-icons/css/flag-icons.min.css";
 
 import { appWithTranslation } from "next-i18next";
 import type { AppProps } from "next/app";
