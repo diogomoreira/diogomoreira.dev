@@ -5,6 +5,7 @@ import { useTranslation } from "next-i18next";
 import { Tag, Tags } from "../Tag";
 import Link from "next/link";
 import { differenceInDays } from "date-fns";
+import { Button } from "../Button";
 
 type PostProps = { post: PostItem };
 

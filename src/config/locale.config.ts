@@ -1,6 +1,6 @@
 export const locales = {
-  pt: { locale: "pt", icon: "🇧🇷", name: "Português" },
-  en: { locale: "en", icon: "🇺🇸", name: "English" },
+  pt: { locale: "pt", name: "Português" },
+  en: { locale: "en", name: "English" },
 };
 
 export const defaultLocale = "en";

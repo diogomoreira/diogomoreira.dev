@@ -15,6 +15,7 @@ type ApplicationConfig = {
     name: string;
     link: string;
     icon: IconType;
+    locale: string | false | undefined;
   }[];
 };
 
@@ -42,21 +43,23 @@ const appConfig: ApplicationConfig = {
     lattes: "2745996619940977",
   },
   menu: [
-    { name: "menu.home", link: "/", icon: FaHouseChimney },
-    { name: "menu.about", link: "/about", icon: FaUser },
-    { name: "menu.blog", link: "/blog", icon: FaPenNib },
+    { name: "menu.home", link: "/", icon: FaHouseChimney, locale: undefined },
+    { name: "menu.about", link: "/about", icon: FaUser, locale: undefined },
+    { name: "menu.blog", link: "/blog", icon: FaPenNib, locale: undefined },
     {
       name: "menu.academic",
       link: "/academic",
       icon: FaGraduationCap,
+      locale: undefined
     },
     {
       name: "menu.uses",
       link: "/uses",
       icon: FaComputer,
+      locale: false
     },
-    { name: "menu.labs", link: "/labs", icon: FaFlask },
-    { name: "menu.bookmarks", link: "/bookmarks", icon: FaBookmark },
+    { name: "menu.labs", link: "/labs", icon: FaFlask, locale: undefined },
+    { name: "menu.bookmarks", link: "/bookmarks", icon: FaBookmark, locale: undefined },
   ],
 };
 

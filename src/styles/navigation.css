@@ -45,14 +45,3 @@ nav#site-nav > #site-logo {
 #items-menu > li#item-menu-toggler {
   @apply hidden md:flex;
 }
-
-#language-toggler {
-  @apply bg-spring-wood-300;
-}
-
-.language-toggler-flag {
-  @apply hidden md:inline-block;
-}
-.language-toggler-button {
-  @apply md:hidden;
-}
