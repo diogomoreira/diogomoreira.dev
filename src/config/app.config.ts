@@ -50,13 +50,13 @@ const appConfig: ApplicationConfig = {
       name: "menu.academic",
       link: "/academic",
       icon: FaGraduationCap,
-      locale: undefined
+      locale: undefined,
     },
     {
       name: "menu.uses",
       link: "/uses",
       icon: FaComputer,
-      locale: false
+      locale: false,
     },
     { name: "menu.labs", link: "/labs", icon: FaFlask, locale: undefined },
     { name: "menu.bookmarks", link: "/bookmarks", icon: FaBookmark, locale: undefined },
