@@ -1,4 +1,4 @@
-# ![](public/images/banner.png)
+# diogomoreira.dev
 
 This is the data for my blog and personal website, where I post some thoughts
 about software development, games, photography, life and so forth. I also post some things related to my academic experience, some projects and links for cool stuff I've been really into lately.
@@ -7,19 +7,7 @@ about software development, games, photography, life and so forth. I also post s
 
 - React + Next.js
 - Typescript
-- CSS Modules + SASS
-
-## Project overview (TODO)
-
-```
-- src
-  - components/*
-  - content/*
-  - lib/*
-  - pages/*
-  - styles/*
-  - utils/*
-```
+- TailwindCSS
 
 ## How to run
 
