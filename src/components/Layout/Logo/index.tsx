@@ -14,8 +14,8 @@ const Logo = () => {
       <Link href={"/"}>
         <div id="logo-text">
           <span>diogo</span>
-          <span>dmoreira</span>
-          <span>.com</span>
+          <span>moreira</span>
+          <span>.dev</span>
         </div>
       </Link>
     </h1>
