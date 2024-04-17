@@ -28,7 +28,9 @@ const PostItemDisplay: React.FC<PostProps> = ({ post }: PostProps) => {
       <div className="post-card-info">
         <h1 className="post-card-title">
           {post.origin === "md" ? (
-            <Link href={post.url}>{post.title}</Link>
+            <Link locale={false} href={post.url}>
+              {post.title}
+            </Link>
           ) : (
             <a href={post.url} title={post.title} target="_blank" rel="noopener noreferrer">
               {post.title}
