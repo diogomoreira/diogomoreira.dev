@@ -1,15 +1,14 @@
-import React from "react";
 import { useAppConfig } from "@/config";
 import capitalize from "lodash/capitalize";
-import { v4 as uuidv4 } from "uuid";
 import {
-  RiMastodonFill,
-  RiLinkedinBoxFill,
-  RiTwitterFill,
   RiGithubFill,
   RiInstagramFill,
+  RiLinkedinBoxFill,
   RiMailFill,
+  RiMastodonFill,
+  RiTwitterFill,
 } from "react-icons/ri";
+import { v4 as uuidv4 } from "uuid";
 
 const SocialIcons = () => {
   const {
@@ -26,7 +25,7 @@ const SocialIcons = () => {
   ];
 
   return (
-    <div className="social">
+    <div className="flex w-full gap-2 text-3xl text-spring-wood-600 dark:text-neutral-300 md:text-2xl justify-center md:justify-start">
       {social.map(socialItem => {
         const SocialIcon = socialItem.icon;
         return (

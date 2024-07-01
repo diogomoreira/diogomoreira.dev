@@ -1,8 +1,7 @@
 import { useAppConfig, useLocaleConfig } from "@/config";
-import { Trans as Translation, useTranslation } from "next-i18next";
+import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
 
 const Footer = () => {
   const {
@@ -16,22 +15,21 @@ const Footer = () => {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
   return (
-    <footer>
-      <div>
+    <footer className="bg-spring-wood-200 dark:bg-black text-xs">
+      <div className="flex flex-col md:flex-row justify-between md:px-10 py-4 items-center container mx-auto max-w-5xl gap-1">
         <div>
-          <span>© 2013 - {currentYear}</span>. <span className="footer-author-name">{name}.</span>
+          <span>© 2013 - {currentYear}</span>. <span className="font-semibold">{name}.</span>
         </div>
-
-        <div className="footer-meta">
+        <div className="flex flex-col md:flex-row md:gap-2 text-center">
           <div>
-            <a className="footer-source-code" href={repository}>
+            <a className="underline" href={repository}>
               {t("footer.currentVersion")}
               <b>{siteVersion}</b>
             </a>
           </div>
           <div>
             <Link
-              className="language-toggler-link"
+              className="flex gap-2 items-center"
               href="/"
               locale={router.locale === locales.en.locale ? locales.pt.locale : locales.en.locale}
             >

@@ -1,6 +1,6 @@
 import packageJson from "package.json";
 import { IconType } from "react-icons";
-import { FaHouseChimney, FaUser, FaPenNib, FaGraduationCap, FaFlask, FaBookmark, FaComputer } from "react-icons/fa6";
+import { FaBookmark, FaComputer, FaFlask, FaGraduationCap, FaHouseChimney, FaPenNib, FaUser } from "react-icons/fa6";
 
 type ApplicationConfig = {
   title: string;
@@ -26,10 +26,10 @@ const appConfig: ApplicationConfig = {
   siteUrl: "https://diogodmoreira.com/",
   siteLocale: "en",
   siteVersion: packageJson.version,
-  repository: "https://github.com/diogomoreira/diogodmoreira.com",
+  repository: "https://github.com/diogomoreira/diogomoreira.dev",
   author: {
     name: "Diogo Moreira",
-    image: "/images/profile.jpg",
+    image: "/images/profile_new.jpg",
     email: "diogo.dmoreira@gmail.com",
     academicEmail: "diogo.moreira@ifpb.edu.br",
     github: "diogomoreira",

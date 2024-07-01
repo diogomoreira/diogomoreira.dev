@@ -1,13 +1,12 @@
 import LinksPageItem from "@/components/LinksPageItem";
 import { useAppConfig } from "@/config";
-import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
-import React from "react";
-import Image from "next/image";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { Trans as Translation, useTranslation } from "next-i18next";
-import { RiMastodonFill, RiLinkedinBoxFill, RiTwitterFill, RiGithubFill, RiInstagramFill } from "react-icons/ri";
 import { capitalize } from "lodash";
+import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
+import { Trans as Translation, useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Image from "next/image";
 import { FaLink } from "react-icons/fa6";
+import { RiGithubFill, RiInstagramFill, RiLinkedinBoxFill, RiMastodonFill, RiTwitterFill } from "react-icons/ri";
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const currentLocale = locale || "en";
@@ -32,13 +31,13 @@ const LinksPage: NextPage<LinksPageProps> = () => {
     { key: "mastodon", link: `https://mastodon.social/@${mastodon}`, icon: RiMastodonFill },
   ];
   return (
-    <div className="links-container">
-      <Image className="links-avatar" src={author.image} width={175} height={175} alt={author.name} />
-      <h1 className="links-title">{author.name}</h1>
-      <h2 className="links-presentation">
+    <div className="flex flex-col gap-6 w-full items-center">
+      <Image className="rounded-full" src={author.image} width={175} height={175} alt={author.name} />
+      <h1 className="text-4xl md:text-6xl font-bold text-center">{author.name}</h1>
+      <h2 className="text-xl text-center font-light text-spring-wood-800 dark:text-gray-400">
         <Translation t={t} ns={"index"} i18nKey="titles"></Translation>
       </h2>
-      <div className="links-items">
+      <div className="flex flex-col w-full gap-2 md:w-3/4">
         <LinksPageItem icon={<FaLink />} description={t("website")} href={`${siteUrl}`} />
         {social.map(socialItem => {
           const SocialIcon = socialItem.icon;
