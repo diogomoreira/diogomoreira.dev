@@ -1,19 +1,18 @@
-import { articleJsonLd, useAppConfig } from "@/config";
-import { NextPage } from "next";
-import React from "react";
-import { InferGetStaticPropsType } from "next";
-import { ArticleJsonLd, NextSeo } from "next-seo";
 import Comments from "@/components/Comments";
-import logo from "public/images/logo.png";
-import { ContentPath, getPostByPath, getPostsSlugs } from "@/lib/content";
-import Image from "next/image";
-import { v4 as uuid } from "uuid";
-import { useTranslation } from "next-i18next";
-import { MDXRemote } from "next-mdx-remote";
-import { mdxToHtml } from "@/lib/content/markdown.api";
+import PageTitle from "@/components/PageTitle";
 import { HashTag, Tags } from "@/components/Tag";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { articleJsonLd, useAppConfig } from "@/config";
+import { ContentPath, getPostByPath, getPostsSlugs } from "@/lib/content";
+import { mdxToHtml } from "@/lib/content/markdown.api";
 import { differenceInDays } from "date-fns";
+import { InferGetStaticPropsType, NextPage } from "next";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { MDXRemote } from "next-mdx-remote";
+import { ArticleJsonLd, NextSeo } from "next-seo";
+import Image from "next/image";
+import logo from "public/images/logo.png";
+import { v4 as uuid } from "uuid";
 
 type PostPageStaticProps = {
   locale: string | null;
@@ -62,14 +61,14 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post, content }: BlogPostPa
         images={[`${siteUrl}/${post.coverImage || logo.src}`]}
         {...articleJsonLd}
       />
-      <h1 className="post-page-title">{post.title}</h1>
-      <p className="post-page-description">{post.description}</p>
-      <div className="post-page-meta">
-        <div className="post-page-author-container">
-          <Image className="post-page-author-image" src={author.image} width={175} height={175} alt={title} />
+      <PageTitle>{post.title}</PageTitle>
+      <p className="text-center text-spring-wood-500 mb-4 dark:text-gray-300">{post.description}</p>
+      <div className="flex flex-col md:flex-row gap-2 justify-center mb-4 items-center text-sm text-spring-wood-700 dark:text-gray-200">
+        <div className="flex items-center gap-2">
+          <Image className="rounded-full w-10" src={author.image} width={175} height={175} alt={title} />
           <span>{author.name}</span>
         </div>
-        <time className="post-page-meta-timestamp">
+        <time className="flex gap-2">
           <span>
             {t("{{val, datetime}}", {
               val: postDate,
@@ -92,9 +91,9 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post, content }: BlogPostPa
           ))}
         </Tags>
       </div>
-      <article className="post-page-article">
+      <article className="mt-8 prose max-w-none mx-auto dark:prose-invert md:px-0 dark:prose-a:text-gray-200 prose-strong:font-semibold">
         {post.coverImage && (
-          <figure className="page-page-figure">
+          <figure className="relative w-full h-96 shadow-lg">
             <Image
               className="object-cover"
               width={1920}
@@ -105,7 +104,7 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post, content }: BlogPostPa
           </figure>
         )}
         <MDXRemote {...content} />
-        <aside className="post-comments">
+        <aside className="mt-8">
           <Comments />
         </aside>
       </article>

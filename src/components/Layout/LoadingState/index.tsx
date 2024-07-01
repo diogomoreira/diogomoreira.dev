@@ -3,7 +3,7 @@ import { Rings } from "react-loader-spinner";
 
 const LoadingState: React.FC = () => {
   return (
-    <div className="loader-container">
+    <div className="flex justify-center items-center w-full h-10">
       <Rings
         visible={true}
         height="100"

@@ -1,8 +1,8 @@
 import { ProjectItem } from "@/lib/content";
+import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useTranslation } from "next-i18next";
 import { Card, CardBody, CardFooter, CardTitle } from "../Card";
 import { BulletTag, Tags } from "../Tag";
 
@@ -20,7 +20,7 @@ const ProjectItemDisplay: React.FC<ProjectItemDisplayProps> = ({ item }: Project
       </a>
       <CardBody>
         <CardTitle url={item.url} title={item.title} />
-        <p className="card-text">{item.description}</p>
+        <p className="text-sm leading-relaxed">{item.description}</p>
         <Tags>
           {item.stack.map(stackItem => (
             <BulletTag key={uuidv4()}>{stackItem}</BulletTag>
@@ -28,7 +28,7 @@ const ProjectItemDisplay: React.FC<ProjectItemDisplayProps> = ({ item }: Project
         </Tags>
       </CardBody>
       <CardFooter>
-        <time className="card-meta">
+        <time className="text-xs text-spring-wood-500 dark:text-gray-300">
           {t("{{val, datetime}}", {
             val: new Date(item.timestamp),
             formatParams: {

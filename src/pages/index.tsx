@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import Author from "@/components/Author";
+import LoadingState from "@/components/Layout/LoadingState";
+import PostsList from "@/components/PostsList";
+import { useAppConfig } from "@/config";
+import { PostItem } from "@/lib/content";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
-import PostsList from "@/components/PostsList";
-import { useAppConfig } from "@/config";
-import { PostItem } from "@/lib/content";
-import Author from "@/components/Author";
-import { LinkButton } from "@/components/Button";
-import LoadingState from "@/components/Layout/LoadingState";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const currentLocale = locale || "en";
@@ -39,12 +39,14 @@ const IndexPage: NextPage<IndexPageProps> = () => {
     <>
       <NextSeo title="Home Page" description={description} />
       <Author />
-      <h2 className="page-section">
-        <Translation t={t} ns={"index"} i18nKey="latest"></Translation>
-        <LinkButton href={"/blog"}>
+      <div className="pb-2 my-6 flex items-center justify-between border-b border-spring-wood-200 dark:border-gray-600">
+        <h2 className="text-xl tracking-tight font-semibold">
+          <Translation t={t} ns={"index"} i18nKey="latest"></Translation>
+        </h2>
+        <Link href={"/blog"} className="text-sm">
           <Translation t={t} ns={"common"} i18nKey="common.seemore"></Translation>
-        </LinkButton>
-      </h2>
+        </Link>
+      </div>
       {loadingPosts ? <LoadingState /> : <PostsList posts={posts} />}
     </>
   );

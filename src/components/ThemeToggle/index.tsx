@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 const ThemeToggler = () => {
   const [mounted, setMounted] = useState(false);
@@ -12,7 +12,12 @@ const ThemeToggler = () => {
       aria-label="Toggle Dark Mode"
       onClick={() => setTheme(theme === "dark" || resolvedTheme === "dark" ? "light" : "dark")}
     >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        className="h-6 w-6 flex items-center justify-center text-gray-900 dark:text-gray-100"
+      >
         {mounted && (theme === "dark" || resolvedTheme === "dark") ? (
           <path
             fillRule="evenodd"

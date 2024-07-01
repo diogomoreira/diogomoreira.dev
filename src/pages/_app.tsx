@@ -1,20 +1,36 @@
 import Layout from "@/components/Layout";
-import React, { useEffect } from "react";
-import "prism-themes/themes/prism-nord.css";
 import "flag-icons/css/flag-icons.min.css";
+import "prism-themes/themes/prism-nord.css";
+import { useEffect } from "react";
 
-import { appWithTranslation } from "next-i18next";
-import type { AppProps } from "next/app";
-import { ThemeProvider } from "next-themes";
-import NProgress from "nprogress";
 import { defaultSeo } from "@/config/seo.config";
 import "@/styles/globals.css";
 import "@/styles/nprogress.css";
+import { cn } from "@/utils/cn";
 import { Analytics } from "@vercel/analytics/react";
+import { appWithTranslation } from "next-i18next";
 import { DefaultSeo } from "next-seo";
-import { GoogleAnalytics } from "nextjs-google-analytics";
+import { ThemeProvider } from "next-themes";
+import type { AppProps } from "next/app";
+import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { useRouter } from "next/router";
-import { AnimatePresence } from "framer-motion";
+import { GoogleAnalytics } from "nextjs-google-analytics";
+import NProgress from "nprogress";
+
+const hubot = localFont({
+  src: "../../public/fonts/HubotSans/Hubot-Sans.woff2",
+  preload: true,
+  display: "swap",
+  variable: "--font-hubot",
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+  subsets: ["latin"],
+});
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
@@ -24,21 +40,19 @@ const App = ({ Component, pageProps }: AppProps) => {
     router.events.on("routeChangeError", () => NProgress.done());
   }, []);
   return (
-    <AnimatePresence mode="wait" initial={false}>
-      <ThemeProvider attribute="class">
-        <Layout>
-          <GoogleAnalytics trackPageViews />
-          <DefaultSeo
-            {...defaultSeo}
-            // don't let search engines index branch/deploy previews
-            dangerouslySetAllPagesToNoIndex={process.env.NEXT_PUBLIC_CONTEXT !== "production"}
-            dangerouslySetAllPagesToNoFollow={process.env.NEXT_PUBLIC_CONTEXT !== "production"}
-          />
-          <Component {...pageProps} />
-          <Analytics />
-        </Layout>
-      </ThemeProvider>
-    </AnimatePresence>
+    <ThemeProvider attribute="class">
+      <Layout className={cn(hubot.variable, inter.variable, "font-sans")}>
+        <GoogleAnalytics trackPageViews />
+        <DefaultSeo
+          {...defaultSeo}
+          // don't let search engines index branch/deploy previews
+          dangerouslySetAllPagesToNoIndex={process.env.NEXT_PUBLIC_CONTEXT !== "production"}
+          dangerouslySetAllPagesToNoFollow={process.env.NEXT_PUBLIC_CONTEXT !== "production"}
+        />
+        <Component {...pageProps} />
+        <Analytics />
+      </Layout>
+    </ThemeProvider>
   );
 };
 

@@ -1,9 +1,7 @@
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { Trans as Translation, useTranslation } from "next-i18next";
-import SocialIcons from "@/components/SocialIcons";
 import { useAppConfig } from "@/config";
+import { Trans as Translation, useTranslation } from "next-i18next";
+import Image from "next/image";
+import Link from "next/link";
 
 const Author = () => {
   const { author, title } = useAppConfig();
@@ -11,28 +9,25 @@ const Author = () => {
 
   return (
     <>
-      <div className="author-container">
-        <Image className="author-image" src={author.image} width={175} height={175} alt={title} />
-        <div className="author-presentation">
-          <h1 className="author-title">
+      <div className="flex flex-col gap-6 items-center">
+        <Image
+          className="border-2 dark:border-gray-700 mx-auto rounded-md brightness-100 contrast-100 grayscale"
+          src={author.image}
+          width={175}
+          height={175}
+          alt={title}
+        />
+        <div className="flex-1 flex flex-col gap-2 text-center">
+          <h1 className="text-4xl">
             <Translation t={t} i18nKey="me" components={[<strong key="name" />]}></Translation>
           </h1>
-          <h2 className="author-subtitle">
+          <h2 className="font-light">
             <Translation t={t} i18nKey="titles"></Translation>
           </h2>
-          <div className="author-readmore">
-            <Translation
-              t={t}
-              ns={"common"}
-              i18nKey="common.readmore"
-              components={[<Link key="read-more-link" href={"/about"} />]}
-            ></Translation>
-          </div>
-          <SocialIcons />
         </div>
       </div>
       <div>
-        <p className="page-description">
+        <p className="mx-auto md:px-0 mt-2 leading-loose mb-6">
           <Translation
             t={t}
             i18nKey="presentation"
