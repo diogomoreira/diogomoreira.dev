@@ -7,7 +7,6 @@ import { defaultSeo } from "@/config/seo.config";
 import "@/styles/globals.css";
 import "@/styles/nprogress.css";
 import { cn } from "@/utils/cn";
-import { Analytics } from "@vercel/analytics/react";
 import { appWithTranslation } from "next-i18next";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
@@ -41,7 +40,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   }, []);
   return (
     <ThemeProvider attribute="class">
-      <Layout className={cn(hubot.variable, inter.variable, "font-sans")}>
+      <Layout className={cn(hubot.variable, inter.variable, "font-sans", "duration-200", "transition-colors")}>
         <GoogleAnalytics trackPageViews />
         <DefaultSeo
           {...defaultSeo}
@@ -50,7 +49,6 @@ const App = ({ Component, pageProps }: AppProps) => {
           dangerouslySetAllPagesToNoFollow={process.env.NEXT_PUBLIC_CONTEXT !== "production"}
         />
         <Component {...pageProps} />
-        <Analytics />
       </Layout>
     </ThemeProvider>
   );
