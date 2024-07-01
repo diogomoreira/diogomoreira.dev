@@ -1,3 +1,5 @@
+import React from "react";
+
 import PageTitle from "@/components/PageTitle";
 import ProjectsList from "@/components/ProjectsList";
 import { ProjectItem, getProjects } from "@/lib/content";

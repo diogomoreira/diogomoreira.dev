@@ -1,3 +1,5 @@
+import React from "react";
+
 import Comments from "@/components/Comments";
 import PageTitle from "@/components/PageTitle";
 import { HashTag, Tags } from "@/components/Tag";

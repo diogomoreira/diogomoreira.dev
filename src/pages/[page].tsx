@@ -1,3 +1,5 @@
+import React from "react";
+
 import PageTitle from "@/components/PageTitle";
 import { articleJsonLd, useAppConfig } from "@/config";
 import { ContentPath } from "@/lib/content";

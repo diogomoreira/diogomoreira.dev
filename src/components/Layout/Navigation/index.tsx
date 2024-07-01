@@ -1,3 +1,5 @@
+import React from "react";
+
 import { useAppConfig } from "@/config";
 import Link from "next/link";
 import { useRef, useState } from "react";

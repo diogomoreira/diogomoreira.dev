@@ -1,13 +1,11 @@
 import { PostItem } from "@/lib/content";
 import { format } from "date-fns";
-import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import React from "react";
 
 type PostProps = { post: PostItem };
 
 const PostItemDisplay: React.FC<PostProps> = ({ post }: PostProps) => {
-  const { t } = useTranslation();
   const postDate = new Date(post.publishedAt);
   return (
     <article className="flex flex-col md:flex-row justify-between">

@@ -1,3 +1,5 @@
+import React from "react";
+
 import PageTitle from "@/components/PageTitle";
 import PapersList from "@/components/PapersList";
 import { useAppConfig } from "@/config";

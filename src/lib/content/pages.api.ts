@@ -11,7 +11,7 @@ async function getPageByPath(slug: string): Promise<PageItem> {
   const fullPath = join(pagesDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { content, data } = matter(fileContents);
-  const { title, icon, description, cover, published, updated } = data;
+  const { title, description, cover, published, updated } = data;
   return {
     title,
     description,

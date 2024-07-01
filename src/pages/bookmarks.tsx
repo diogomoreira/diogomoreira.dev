@@ -1,3 +1,5 @@
+import React from "react";
+
 import { useState } from "react";
 
 import BookmarksList from "@/components/BookmarksList";

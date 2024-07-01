@@ -1,3 +1,5 @@
+import React from "react";
+
 import { useAppConfig } from "@/config";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import Image from "next/image";

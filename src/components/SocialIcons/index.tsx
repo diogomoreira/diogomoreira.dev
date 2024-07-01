@@ -1,3 +1,4 @@
+import React from "react";
 import { useAppConfig } from "@/config";
 import capitalize from "lodash/capitalize";
 import {
