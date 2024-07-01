@@ -1,6 +1,5 @@
 ---
 title: My setup
-icon: ⌨️
 description: Elements of my setup that have enhanced my productivity and efficiency, from hardware to software.
 published: "2023-07-09"
 updated: "2024-01-12"
