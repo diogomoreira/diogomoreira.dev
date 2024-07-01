@@ -1,3 +1,5 @@
+import React from "react";
+
 import LoadingState from "@/components/Layout/LoadingState";
 import PageTitle from "@/components/PageTitle";
 import PostsList from "@/components/PostsList";

@@ -1,3 +1,5 @@
+import React from "react";
+
 import { useAppConfig, useLocaleConfig } from "@/config";
 import { useTranslation } from "next-i18next";
 import Link from "next/link";

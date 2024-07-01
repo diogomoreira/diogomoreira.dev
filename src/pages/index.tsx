@@ -1,3 +1,5 @@
+import React from "react";
+
 import Author from "@/components/Author";
 import LoadingState from "@/components/Layout/LoadingState";
 import PostsList from "@/components/PostsList";

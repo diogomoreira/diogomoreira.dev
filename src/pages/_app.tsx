@@ -1,3 +1,5 @@
+import React from "react";
+
 import Layout from "@/components/Layout";
 import "flag-icons/css/flag-icons.min.css";
 import "prism-themes/themes/prism-nord.css";
