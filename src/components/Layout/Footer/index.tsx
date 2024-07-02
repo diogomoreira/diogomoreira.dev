@@ -30,7 +30,7 @@ const Footer = () => {
             </a>
           </div>
           <div>
-            <Link
+            {/* <Link
               className="flex gap-2 items-center"
               href="/"
               locale={router.locale === locales.en.locale ? locales.pt.locale : locales.en.locale}
@@ -43,7 +43,7 @@ const Footer = () => {
                   <span className="fi fi-us"></span>
                 )}
               </span>
-            </Link>
+            </Link> */}
           </div>
         </div>
         <div className="footer-meta">
