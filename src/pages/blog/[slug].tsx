@@ -15,6 +15,7 @@ import { ArticleJsonLd, NextSeo } from "next-seo";
 import Image from "next/image";
 import logo from "public/images/logo.png";
 import { v4 as uuid } from "uuid";
+import PostTitle from "@/components/PostTitle";
 
 type PostPageStaticProps = {
   locale: string | null;
@@ -63,7 +64,7 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post, content }: BlogPostPa
         images={[`${siteUrl}/${post.coverImage || logo.src}`]}
         {...articleJsonLd}
       />
-      <PageTitle>{post.title}</PageTitle>
+      <PostTitle>{post.title}</PostTitle>
       <p className="text-center text-spring-wood-500 mb-4 dark:text-gray-300">{post.description}</p>
       <div className="flex flex-col md:flex-row gap-2 justify-center mb-4 items-center text-sm text-spring-wood-700 dark:text-gray-200">
         <div className="flex items-center gap-2">
