@@ -96,7 +96,7 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post, content }: BlogPostPa
       </div>
       <article className="mt-8 prose max-w-none mx-auto dark:prose-invert md:px-0 dark:prose-a:text-gray-200 prose-strong:font-semibold">
         {post.coverImage && (
-          <figure className="relative w-full h-96 shadow-lg">
+          <figure className="relative w-full shadow-lg">
             <Image
               className="object-cover"
               width={1920}
