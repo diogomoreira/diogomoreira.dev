@@ -1,7 +1,7 @@
 import { PaperItem } from "@/lib/content";
 import React from "react";
-import PaperItemDisplay from "../PaperItemDisplay";
 import { v4 as uuidv4 } from "uuid";
+import PaperItemDisplay from "../PaperItemDisplay";
 
 type PapersListProps = {
   items: PaperItem[];
@@ -13,8 +13,8 @@ const PapersList: React.FC<PapersListProps> = ({ items }: PapersListProps) => {
     <>
       {itemsPerYear.map(year => (
         <section key={year}>
-          <h1 className="paper-year">{year}</h1>
-          <div className="paper-year-list">
+          <h1 className="text-xl font-bold py-2 mt-2">{year}</h1>
+          <div className="flex flex-col gap-2">
             {items
               .filter(item => item.year === year)
               .map((paper: PaperItem) => (

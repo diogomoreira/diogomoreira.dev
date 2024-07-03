@@ -1,15 +1,16 @@
-import { articleJsonLd, useAppConfig } from "@/config";
-import { NextPage } from "next";
 import React from "react";
-import { InferGetStaticPropsType } from "next";
-import { ArticleJsonLd, NextSeo } from "next-seo";
-import logo from "public/images/logo.png";
+
+import PageTitle from "@/components/PageTitle";
+import { articleJsonLd, useAppConfig } from "@/config";
 import { ContentPath } from "@/lib/content";
-import Image from "next/image";
-import { MDXRemote } from "next-mdx-remote";
 import { mdxToHtml } from "@/lib/content/markdown.api";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { getPageByPath, getPagesSlugs } from "@/lib/content/pages.api";
+import { InferGetStaticPropsType, NextPage } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { MDXRemote } from "next-mdx-remote";
+import { ArticleJsonLd, NextSeo } from "next-seo";
+import Image from "next/image";
+import logo from "public/images/logo.png";
 
 type PageStaticProps = {
   locale: string | null;
@@ -57,12 +58,10 @@ const Page: NextPage<PageProps> = ({ page, content }: PageProps) => {
         images={[`${siteUrl}/${page.coverImage || logo.src}`]}
         {...articleJsonLd}
       />
-      <h1 className="page-title">
-        {page.icon} {page.title}
-      </h1>
-      <p className="page-description">{page.description}</p>
+      <PageTitle>{page.title}</PageTitle>
+      <p className="mx-auto md:px-0 mt-2 leading-loose mb-6">{page.description}</p>
       {page.coverImage && (
-        <figure className="page-figure">
+        <figure className="relative w-full h-96 shadow-lg">
           <Image
             className="object-cover rounded-md"
             fill
@@ -71,7 +70,7 @@ const Page: NextPage<PageProps> = ({ page, content }: PageProps) => {
           />
         </figure>
       )}
-      <article className="page-article">
+      <article className="mt-8 prose max-w-none mx-auto dark:prose-invert md:px-0 dark:prose-a:text-gray-200 prose-strong:font-semibold">
         <MDXRemote {...content} />
       </article>
     </>
