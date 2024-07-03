@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React from "react";
 
 type ButtonProps = {
@@ -7,30 +6,25 @@ type ButtonProps = {
   onKeyDown?: () => void;
 };
 
+const baseClasses =
+  "bg-spring-wood-200 hover:bg-spring-wood-300 duration-200 hover:duration-200 dark:bg-neutral-950 dark:hover:bg-black py-2 px-4 rounded-md shadow-sm font-medium";
+
 type LinkButtonProps = ButtonProps & {
   href: string;
 };
 
 const Button: React.FC<ButtonProps> = ({ children, onClick, onKeyDown }: ButtonProps) => {
   return (
-    <button onClick={onClick} onKeyDown={onKeyDown} className="button">
+    <button type="button" onClick={onClick} onKeyDown={onKeyDown} className={baseClasses}>
       {children}
     </button>
   );
 };
 
-const LinkButton: React.FC<LinkButtonProps> = ({ children, href }: LinkButtonProps) => {
-  return (
-    <Link href={href}>
-      <button className="link-button">{children}</button>
-    </Link>
-  );
-};
-
 const ExternalLinkButton: React.FC<LinkButtonProps> = ({ children, href }: LinkButtonProps) => (
-  <a className="external-button" href={href} target="_blank" rel="noreferrer">
+  <a className={baseClasses} href={href} target="_blank" rel="noreferrer">
     {children}
   </a>
 );
 
-export { Button, LinkButton, ExternalLinkButton };
+export { Button, ExternalLinkButton };

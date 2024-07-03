@@ -1,10 +1,12 @@
 import React from "react";
+
+import PageTitle from "@/components/PageTitle";
+import PapersList from "@/components/PapersList";
 import { useAppConfig } from "@/config";
 import { getPublicationEntriesSorted } from "@/lib/content";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import PapersList from "@/components/PapersList";
 import { NextSeo } from "next-seo";
 
 type AcademicProps = InferGetStaticPropsType<typeof getStaticProps>;
@@ -17,8 +19,8 @@ const AcademicPage: NextPage<AcademicProps> = ({ papers }: AcademicProps) => {
   return (
     <>
       <NextSeo title="Academic" description="My academic profile" />
-      <h1 className="page-title">🎓 {t("title")}</h1>
-      <article className="page-article">
+      <PageTitle>{t("title")}</PageTitle>
+      <article className="prose max-w-none prose-gray mx-auto dark:prose-invert md:px-0 dark:prose-a:text-gray-200 prose-h1:my-6 prose-h2:my-6">
         <p>
           <Translation
             i18nKey="teaching.intro"
@@ -26,7 +28,9 @@ const AcademicPage: NextPage<AcademicProps> = ({ papers }: AcademicProps) => {
             components={[<strong key={"se"} />, <strong key={"stq"} />, <strong key={"dp"} />]}
           ></Translation>
         </p>
-        <h2 className="page-section">{t("researching.title")}</h2>
+        <h2 className="text-2xl pb-2 my-6 tracking-tight font-bold flex justify-between border-b border-spring-wood-200 dark:border-gray-600">
+          {t("researching.title")}
+        </h2>
         <p>
           <Translation
             i18nKey="researching.intro"

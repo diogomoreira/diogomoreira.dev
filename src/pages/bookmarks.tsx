@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 
+import { useState } from "react";
+
+import BookmarksList from "@/components/BookmarksList";
+import { Button } from "@/components/Button";
+import PageTitle from "@/components/PageTitle";
+import { Tags } from "@/components/Tag";
 import { BookmarkItem, getBookmarks } from "@/lib/content";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
 import { v4 as uuidv4 } from "uuid";
-import BookmarksList from "@/components/BookmarksList";
-import { useTranslation } from "next-i18next";
-import { Tags } from "@/components/Tag";
-import { Button } from "@/components/Button";
 
 export const getStaticProps: GetStaticProps<{ links: BookmarkItem[] }> = async ({ locale }) => {
   const currentLocale = locale || "en";
@@ -39,8 +42,8 @@ const BookmarksPage: NextPage<BookmarksPageProps> = ({ links }: BookmarksPagePro
   return (
     <>
       <NextSeo title="Links" description="Some links of things i'm enjoying lately" />
-      <h1 className="page-title">🏷️ {t("title")}</h1>
-      <p className="page-description">{t("intro")}</p>
+      <PageTitle>{t("title")}</PageTitle>
+      <p className="mx-auto md:px-0 mt-2 leading-loose mb-6">{t("intro")}</p>
       <div className="mb-6">
         <Tags>
           {categories.map(tag => (

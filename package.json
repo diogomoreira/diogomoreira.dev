@@ -1,6 +1,6 @@
 {
   "name": "diogodmoreira.com",
-  "version": "3.1.1",
+  "version": "3.2",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,23 +11,17 @@
     "lint:fix": "next lint --fix",
     "format": "prettier src --check",
     "format:fix": "prettier src --write",
-    "test-all": "npm run format:fix && npm run lint:fix && npm run check-types && npm run build",
-    "prepare": "husky install"
+    "test-all": "npm run format:fix && npm run lint:fix && npm run check-types && npm run build"
   },
   "dependencies": {
     "@giscus/react": "2.3.0",
-    "@headlessui/react": "1.7.17",
-    "@heroicons/react": "2.1.1",
     "@tailwindcss/aspect-ratio": "0.4.2",
     "@tailwindcss/forms": "0.5.7",
     "@tailwindcss/typography": "0.5.10",
-    "@vercel/analytics": "1.1.1",
-    "@vercel/speed-insights": "^1.0.5",
     "bibtex": "0.9.0",
-    "contentful": "10.6.16",
+    "clsx": "2.1.1",
     "date-fns": "2.29.3",
-    "flag-icons": "^7.1.0",
-    "framer-motion": "10.17.9",
+    "flag-icons": "7.1.0",
     "gray-matter": "4.0.3",
     "i18next": "23.7.6",
     "lodash": "4.17.21",
@@ -43,19 +37,22 @@
     "react-dom": "18.2.0",
     "react-i18next": "13.5.0",
     "react-icons": "4.11.0",
-    "react-loader-spinner": "^6.1.6",
+    "react-loader-spinner": "6.1.6",
     "react-responsive-masonry": "2.1.6",
     "rehype-code-titles": "1.2.0",
     "rehype-prism-plus": "1.5.1",
     "rehype-slug": "5.1.0",
     "remark-gfm": "3.0.1",
     "sass": "1.62.1",
-    "sharp": "^0.33.2",
+    "sharp": "0.33.4",
+    "tailwind-merge": "2.3.0",
     "typescript": "5.0.4",
-    "unified": "10.1.2",
     "uuid": "9.0.0"
   },
   "devDependencies": {
+    "autoprefixer": "10.4.16",
+    "postcss": "8.4.33",
+    "cssnano": "6.1.2",
     "@next/eslint-plugin-next": "13.3.1",
     "@types/lodash": "4.14.194",
     "@types/node": "18.16.2",
@@ -65,24 +62,10 @@
     "@types/uuid": "9.0.1",
     "@typescript-eslint/eslint-plugin": "5.13.0",
     "@typescript-eslint/parser": "5.0.0",
-    "autoprefixer": "10.4.16",
-    "cssnano": "^6.0.3",
     "eslint": "8.2.0",
-    "eslint-config-airbnb": "19.0.4",
-    "eslint-config-airbnb-typescript": "17.0.0",
     "eslint-config-prettier": "8.8.0",
-    "eslint-plugin-import": "2.25.3",
-    "eslint-plugin-jsx-a11y": "6.5.1",
     "eslint-plugin-react": "7.28.0",
-    "eslint-plugin-react-hooks": "4.3.0",
-    "husky": "8.0.0",
-    "postcss": "8.4.33",
     "prettier": "2.8.8",
     "tailwindcss": "3.4.1"
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run format:fix && npm run lint:fix"
-    }
   }
 }

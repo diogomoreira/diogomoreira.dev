@@ -1,10 +1,10 @@
-import React from "react";
 import { BookmarkItem } from "@/lib/content";
+import { useTranslation } from "next-i18next";
 import Image from "next/image";
+import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Card, CardBody, CardTitleIcon } from "../Card";
 import { Tag, Tags } from "../Tag";
-import { useTranslation } from "next-i18next";
 
 type BookmarkItemDisplayProps = { item: BookmarkItem };
 
@@ -36,7 +36,7 @@ const BookmarkItemDisplay: React.FC<BookmarkItemDisplayProps> = ({ item }: Bookm
       </a>
       <CardBody>
         <CardTitleIcon title={item.title} url={item.link} icon={icon} />
-        <div className="card-meta">
+        <div className="text-xs text-spring-wood-500 dark:text-gray-300">
           <time>
             {t("{{val, datetime}}", {
               val: new Date(item.timestamp),
@@ -46,7 +46,7 @@ const BookmarkItemDisplay: React.FC<BookmarkItemDisplayProps> = ({ item }: Bookm
             })}
           </time>
         </div>
-        <p className="card-text" dangerouslySetInnerHTML={{ __html: item.description }}></p>
+        <p className="text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: item.description }}></p>
         <Tags>
           {item.tags.map(stackItem => (
             <Tag key={uuidv4()}>{stackItem}</Tag>

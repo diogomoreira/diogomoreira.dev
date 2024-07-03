@@ -1,9 +1,9 @@
-import { readdir } from "fs/promises";
-import { ContentPath } from "./paths";
 import fs from "fs";
-import { join } from "path";
+import { readdir } from "fs/promises";
 import matter from "gray-matter";
+import { join } from "path";
 import { PageItem } from "./content.types";
+import { ContentPath } from "./paths";
 
 const pagesDirectory = join(process.cwd(), ContentPath.PAGES);
 
@@ -11,10 +11,9 @@ async function getPageByPath(slug: string): Promise<PageItem> {
   const fullPath = join(pagesDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { content, data } = matter(fileContents);
-  const { title, icon, description, cover, published, updated } = data;
+  const { title, description, cover, published, updated } = data;
   return {
     title,
-    icon,
     description,
     slug,
     content,
@@ -29,4 +28,4 @@ async function getPagesSlugs(): Promise<string[]> {
   return files.map(value => value.split(".md")[0]);
 }
 
-export { getPagesSlugs, getPageByPath };
+export { getPageByPath, getPagesSlugs };
