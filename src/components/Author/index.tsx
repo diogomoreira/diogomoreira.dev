@@ -1,12 +1,12 @@
 import React from "react";
 
-import { useAppConfig } from "@/config";
+import { appConfig } from "@/config";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import Image from "next/image";
 import Link from "next/link";
 
 const Author = () => {
-  const { author, title } = useAppConfig();
+  const { author, title } = appConfig;
   const { t } = useTranslation(["index", "common"]);
 
   return (

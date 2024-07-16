@@ -1,24 +1,20 @@
-import { PostItem } from "@/lib/content";
 import React from "react";
 import EmptyState, { EmptyContentType } from "../Layout/EmptyState";
 import PostItemDisplay from "../PostItemDisplay";
+import { Post } from "@/models/post.model";
 
 type PostsListProps = {
-  posts: PostItem[];
+  posts: Post[];
 };
 
 const PostsList: React.FC<PostsListProps> = ({ posts }: PostsListProps) => {
   return (
     <>
-      {posts.length > 0 ? (
-        <div className="grid grid-flow-row gap-4">
-          {posts?.map(note => (
-            <PostItemDisplay key={note.id} post={note} />
-          ))}
-        </div>
-      ) : (
-        <EmptyState type={EmptyContentType.POSTS} />
-      )}
+      <div className="grid grid-flow-row gap-4">
+        {posts?.map(note => (
+          <PostItemDisplay key={note.path} post={note} />
+        ))}
+      </div>
     </>
   );
 };

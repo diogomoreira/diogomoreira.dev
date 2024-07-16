@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useAppConfig, useLocaleConfig } from "@/config";
+import { locales, appConfig } from "@/config";
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -10,8 +10,7 @@ const Footer = () => {
     repository,
     siteVersion,
     author: { name },
-  } = useAppConfig();
-  const locales = useLocaleConfig();
+  } = appConfig;
 
   const router = useRouter();
   const { t } = useTranslation();

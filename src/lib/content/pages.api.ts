@@ -7,7 +7,7 @@ import { ContentPath } from "./paths";
 
 const pagesDirectory = join(process.cwd(), ContentPath.PAGES);
 
-async function getPageByPath(slug: string): Promise<PageItem> {
+async function getPageByPath(slug: string) {
   const fullPath = join(pagesDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { content, data } = matter(fileContents);
@@ -23,7 +23,7 @@ async function getPageByPath(slug: string): Promise<PageItem> {
   } as PageItem;
 }
 
-async function getPagesSlugs(): Promise<string[]> {
+async function getPagesSlugs() {
   const files = await readdir(pagesDirectory);
   return files.map(value => value.split(".md")[0]);
 }

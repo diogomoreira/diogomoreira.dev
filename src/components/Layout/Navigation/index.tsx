@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useAppConfig } from "@/config";
+import { appConfig } from "@/config";
 import Link from "next/link";
 import { useRef, useState } from "react";
 
@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from "uuid";
 import Logo from "../Logo";
 
 const Navigation = () => {
-  const { menu } = useAppConfig();
+  const { menu } = appConfig;
   const { t } = useTranslation();
   const [showMenu, setShowMenu] = useState(false);
 
