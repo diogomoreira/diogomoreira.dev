@@ -1,9 +1,8 @@
 import React from "react";
 
 import Comments from "@/components/Comments";
-import PageTitle from "@/components/PageTitle";
 import { HashTag, Tags } from "@/components/Tag";
-import { articleJsonLd, useAppConfig } from "@/config";
+import { articleJsonLd, appConfig } from "@/config";
 import { ContentPath, getPostByPath, getPostsSlugs } from "@/lib/content";
 import { mdxToHtml } from "@/lib/content/markdown.api";
 import { differenceInDays } from "date-fns";
@@ -26,7 +25,7 @@ type PostPageStaticProps = {
 
 export async function getStaticProps({ params, locale }: PostPageStaticProps) {
   const { slug } = params;
-  const post = await getPostByPath(slug);
+  const post = getPostByPath(slug);
   const content = await mdxToHtml(post);
   const currentLocale = locale || "en";
   return {
@@ -39,9 +38,9 @@ export async function getStaticProps({ params, locale }: PostPageStaticProps) {
 }
 
 export async function getStaticPaths() {
-  const notes = await getPostsSlugs();
+  const slugs = getPostsSlugs();
   return {
-    paths: notes.map(({ slug }) => ({ params: { slug } })),
+    paths: slugs.map(({ slug }) => ({ params: { slug } })),
     fallback: false,
   };
 }
@@ -49,10 +48,10 @@ export async function getStaticPaths() {
 type BlogPostPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const BlogPostPage: NextPage<BlogPostPageProps> = ({ post, content }: BlogPostPageProps) => {
-  const { author, title, siteUrl } = useAppConfig();
+  const { author, title, siteUrl } = appConfig;
   const { t } = useTranslation();
   const postUrl = `${siteUrl}/blog/${post.url}`;
-  const postDate = new Date(post.publishedAt);
+  const postDate = new Date(post.date);
   return (
     <>
       <NextSeo title={post.title} description={post.description} />
@@ -60,8 +59,8 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post, content }: BlogPostPa
         url={postUrl}
         title={post.title}
         description={post.description}
-        datePublished={post.publishedAt}
-        images={[`${siteUrl}/${post.coverImage || logo.src}`]}
+        datePublished={post.date}
+        images={[`${siteUrl}/${post.cover || logo.src}`]}
         {...articleJsonLd}
       />
       <PostTitle>{post.title}</PostTitle>
@@ -95,13 +94,13 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post, content }: BlogPostPa
         </Tags>
       </div>
       <article className="mt-8 prose max-w-none mx-auto dark:prose-invert md:px-0 dark:prose-a:text-gray-200 prose-strong:font-semibold">
-        {post.coverImage && (
+        {post.cover && (
           <figure className="relative w-full shadow-lg">
             <Image
               className="object-cover"
               width={1920}
               height={1080}
-              src={`${ContentPath.POSTS_COVER_IMAGES}/${post.coverImage}`}
+              src={`${ContentPath.POSTS_COVER_IMAGES}/${post.cover}`}
               alt={post.title}
             />
           </figure>

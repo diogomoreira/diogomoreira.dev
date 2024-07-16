@@ -3,16 +3,16 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { v4 as uuidv4 } from "uuid";
 import { ThreeColumnsMaxBreakpoints } from "@/utils/masonry.columns";
 import BookmarkItemDisplay from "../BookmarkItemDisplay";
-import { BookmarkItem } from "@/lib/content";
+import { Bookmark } from "@/models/bookmark.model";
 
 type BookmarksListProps = {
-  links: BookmarkItem[];
+  links: Bookmark[];
 };
 
 const BookmarksList: React.FC<BookmarksListProps> = ({ links }: BookmarksListProps) => {
   return (
     <ResponsiveMasonry columnsCountBreakPoints={ThreeColumnsMaxBreakpoints}>
-      <Masonry gutter="1rem">
+      <Masonry gutter="0.75rem">
         {links.map(item => (
           <BookmarkItemDisplay key={uuidv4()} item={item} />
         ))}

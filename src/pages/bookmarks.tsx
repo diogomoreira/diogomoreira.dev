@@ -6,19 +6,20 @@ import BookmarksList from "@/components/BookmarksList";
 import { Button } from "@/components/Button";
 import PageTitle from "@/components/PageTitle";
 import { Tags } from "@/components/Tag";
-import { BookmarkItem, getBookmarks } from "@/lib/content";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
 import { v4 as uuidv4 } from "uuid";
+import { getBookmarks } from "@/lib/content/bookmarks";
+import { Bookmark } from "@/models/bookmark.model";
 
-export const getStaticProps: GetStaticProps<{ links: BookmarkItem[] }> = async ({ locale }) => {
+export const getStaticProps: GetStaticProps<{ bookmarks: Bookmark[] }> = async ({ locale }) => {
   const currentLocale = locale || "en";
-  const links = getBookmarks(currentLocale);
+  const bookmarks = getBookmarks();
   return {
     props: {
-      links: links,
+      bookmarks,
       ...(await serverSideTranslations(currentLocale, ["bookmarks", "common"])),
     },
   };
@@ -26,7 +27,7 @@ export const getStaticProps: GetStaticProps<{ links: BookmarkItem[] }> = async (
 
 type BookmarksPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-const BookmarksPage: NextPage<BookmarksPageProps> = ({ links }: BookmarksPageProps) => {
+const BookmarksPage: NextPage<BookmarksPageProps> = ({ bookmarks: links }: BookmarksPageProps) => {
   const [displayLinks, setDisplayLinks] = useState(links);
   const categories = Array.from(new Set(links.flatMap(link => link.type)));
   const [currentCategory, setCurrentCategory] = useState<string | null>(null);

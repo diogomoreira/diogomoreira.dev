@@ -17,5 +17,5 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 p a {
-  @apply relative inline-block bg-spring-wood-200 hover:bg-spring-wood-300/70 dark:bg-emerald-900 dark:hover:bg-emerald-700 px-1.5 hover:underline text-spring-wood-900 dark:text-neutral-200 duration-200 hover:duration-200;
+  @apply relative inline-block bg-spring-wood-200 hover:bg-spring-wood-300/70 dark:bg-emerald-900 dark:hover:bg-emerald-700 px-1.5 no-underline hover:underline text-spring-wood-900 dark:text-neutral-200 duration-200 hover:duration-200;
 }

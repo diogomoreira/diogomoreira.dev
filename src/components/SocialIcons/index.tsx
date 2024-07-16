@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppConfig } from "@/config";
+import { appConfig } from "@/config";
 import capitalize from "lodash/capitalize";
 import {
   RiGithubFill,
@@ -14,7 +14,7 @@ import { v4 as uuidv4 } from "uuid";
 const SocialIcons = () => {
   const {
     author: { instagram, github, twitter, linkedin, mastodon, email },
-  } = useAppConfig();
+  } = appConfig;
 
   const social = [
     { key: "instagram", link: `https://instagram.com/${instagram}`, icon: RiInstagramFill },

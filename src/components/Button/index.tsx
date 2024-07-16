@@ -7,7 +7,7 @@ type ButtonProps = {
 };
 
 const baseClasses =
-  "bg-spring-wood-200 hover:bg-spring-wood-300 duration-200 hover:duration-200 dark:bg-neutral-950 dark:hover:bg-black py-2 px-4 rounded-md shadow-sm font-medium";
+  "bg-spring-wood-200 hover:bg-spring-wood-300 duration-200 hover:duration-200 dark:bg-neutral-950 dark:hover:bg-black py-2 px-4 rounded-md shadow-sm font-medium text-sm";
 
 type LinkButtonProps = ButtonProps & {
   href: string;

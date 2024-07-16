@@ -4,9 +4,10 @@ import rehypeCodeTitles from "rehype-code-titles";
 import rehypePrism from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
-import { PageItem, PostItem } from "@/lib/content";
+import { PageItem } from "@/lib/content";
+import { Post } from "@/models/post.model";
 
-async function mdxToHtml(data: PostItem | PageItem) {
+async function mdxToHtml(data: Post | PageItem) {
   return serialize(data.content, {
     mdxOptions: {
       remarkPlugins: [remarkGfm],

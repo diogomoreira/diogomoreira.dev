@@ -1,6 +1,6 @@
-import packageJson from "package.json";
 import { IconType } from "react-icons";
 import { FaBookmark, FaComputer, FaFlask, FaGraduationCap, FaHouseChimney, FaPenNib, FaUser } from "react-icons/fa6";
+import { locales } from "./locale.config";
 
 type ApplicationConfig = {
   title: string;
@@ -15,7 +15,6 @@ type ApplicationConfig = {
     name: string;
     link: string;
     icon: IconType;
-    locale: string | false | undefined;
   }[];
 };
 
@@ -23,9 +22,9 @@ const appConfig: ApplicationConfig = {
   title: "Diogo Moreira",
   description: "My thoughts about life, software development, games, music and so forth",
   keywords: ["software development", "teaching"],
-  siteUrl: "https://diogodmoreira.com/",
-  siteLocale: "en",
-  siteVersion: packageJson.version,
+  siteUrl: "https://diogomoreira.dev/",
+  siteLocale: locales.en.code,
+  siteVersion: "3.2",
   repository: "https://github.com/diogomoreira/diogomoreira.dev",
   author: {
     name: "Diogo Moreira",
@@ -43,28 +42,22 @@ const appConfig: ApplicationConfig = {
     lattes: "2745996619940977",
   },
   menu: [
-    { name: "menu.home", link: "/", icon: FaHouseChimney, locale: undefined },
-    { name: "menu.about", link: "/about", icon: FaUser, locale: undefined },
-    { name: "menu.blog", link: "/blog", icon: FaPenNib, locale: undefined },
+    { name: "menu.home", link: "/", icon: FaHouseChimney },
+    { name: "menu.about", link: "/about", icon: FaUser },
+    { name: "menu.blog", link: "/blog", icon: FaPenNib },
     {
       name: "menu.academic",
       link: "/academic",
       icon: FaGraduationCap,
-      locale: undefined,
     },
     {
       name: "menu.uses",
       link: "/uses",
       icon: FaComputer,
-      locale: false,
     },
-    { name: "menu.labs", link: "/labs", icon: FaFlask, locale: undefined },
-    { name: "menu.bookmarks", link: "/bookmarks", icon: FaBookmark, locale: undefined },
+    { name: "menu.labs", link: "/labs", icon: FaFlask },
+    { name: "menu.bookmarks", link: "/bookmarks", icon: FaBookmark },
   ],
 };
 
-const useAppConfig = () => {
-  return appConfig;
-};
-
-export { appConfig, useAppConfig };
+export { appConfig };
