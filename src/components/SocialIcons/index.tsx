@@ -21,7 +21,7 @@ const SocialIcons = () => {
     { key: "github", link: `https://github.com/${github}`, icon: RiGithubFill },
     { key: "twitter", link: `https://twitter.com/${twitter}`, icon: RiTwitterFill },
     { key: "linkedin", link: `https://linkedin.com/in/${linkedin}`, icon: RiLinkedinBoxFill },
-    { key: "mastodon", link: `https://mastodon.social/@${mastodon}`, icon: RiMastodonFill },
+    { key: "mastodon", link: `https://hachyderm.io/@${mastodon}`, icon: RiMastodonFill },
     { key: "email", link: `mailto:${email}`, icon: RiMailFill },
   ];
 
