@@ -36,13 +36,18 @@ body {
   font-feature-settings: "cv11", "salt", "ss01", "ss03", "cv01", "cv02", "cv03", "cv04", "cv05", "cv06", "cv09", "cv10";
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-hubot);
   @apply text-neutral-700 dark:text-neutral-50 tracking-tight;
 }
 
-main>p,
-details>p {
+main > p,
+details > p {
   @apply leading-loose my-6;
 }
 p a {
