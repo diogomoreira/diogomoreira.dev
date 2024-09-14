@@ -2,176 +2,154 @@
   {
     "title": "Bleachers - Gone Now",
     "type": "music",
-    "link": "https://open.spotify.com/album/10HKbC9lKDHGQvndGck6XJ?si=HOCCXI02Ro6VeJ2mylxGgg",
-    "description": {
-      "en": "Gone Now is a diverse and introspective pop-rock album by Bleachers (Jack Antonoff's band). The album delves into themes of loss, nostalgia, and growing up, resulting in an anthemic and personal musical experience."
-    },
-    "image": "gone-now.jpg",
-    "publishDate": "2008-04-16",
-    "tags": ["music", "indie pop"]
+    "url": "https://open.spotify.com/album/10HKbC9lKDHGQvndGck6XJ?si=HOCCXI02Ro6VeJ2mylxGgg",
+    "description": "Gone Now is a diverse and introspective pop-rock album by Bleachers (Jack Antonoff's band). The album delves into themes of loss, nostalgia, and growing up, resulting in an anthemic and personal musical experience.",
+    "image": "/images/bookmarks/gone-now.jpg",
+    "bookmarkedOn": "2018-04-16",
+    "tags": ["indie pop"]
   },
   {
     "title": "Alvvays - Antisocialites",
     "type": "music",
-    "link": "https://open.spotify.com/album/7CCwkPweMxKq8yWkVerH6T?si=Plxrkxi4RuaJAX2GIDNOUw",
-    "description": {
-      "en": "From a song appearing in the random (<b>Dreams Tonite</b>), the band has already captivated me at the first moment and the whole album brings several of the elements I appreciate, from indie to dream pop. Highlight for the <b>Forget About Life</b> track, which is easily among one of my favorites among the 2020 findings."
-    },
-    "image": "antisocialites.jpg",
-    "publishDate": "2020-11-10",
-    "tags": ["music", "dream pop"]
+    "url": "https://open.spotify.com/album/7CCwkPweMxKq8yWkVerH6T?si=Plxrkxi4RuaJAX2GIDNOUw",
+    "description": "From a song appearing in the random (<b>Dreams Tonite</b>), the band has already captivated me at the first moment and the whole album brings several of the elements I appreciate, from indie to dream pop. Highlight for the <b>Forget About Life</b> track, which is easily among one of my favorites among the 2020 findings.",
+    "image": "/images/bookmarks/antisocialites.jpg",
+    "bookmarkedOn": "2020-11-10",
+    "tags": ["dream pop"]
   },
   {
     "title": "The Flaming Lips - Yoshimi Battles the Pink Robots",
     "type": "music",
-    "link": "https://open.spotify.com/album/49LA20VMk65fQyEaIzYdvf?si=7v8MynKoSn-SRtUKuu-_cg",
-    "description": {
-      "en": "The album explores themes of the human condition, mortality, and love, resulting in a unique and unforgettable musical experience. Highlights for <b>Fight Test</b> (the opening track) and <b>Do you realize?</b>"
-    },
-    "image": "yoshimi-battles-the-pink-robots.jpg",
-    "publishDate": "2021-02-18",
-    "tags": ["music", "indie rock"]
+    "url": "https://open.spotify.com/album/49LA20VMk65fQyEaIzYdvf?si=7v8MynKoSn-SRtUKuu-_cg",
+    "description": "The album explores themes of the human condition, mortality, and love, resulting in a unique and unforgettable musical experience. Highlights for <b>Fight Test</b> (the opening track) and <b>Do you realize?</b>",
+    "image": "/images/bookmarks/yoshimi-battles-the-pink-robots.jpg",
+    "bookmarkedOn": "2021-02-18",
+    "tags": ["indie rock"]
   },
   {
     "title": "Foundation Trilogy",
     "type": "book",
-    "link": "https://amzn.to/2Hqyknh",
-    "description": {
-      "en": "In a distant future, a mathematician named Hari Seldon created a new science called <b>psychohistory</b> that allows him to predict the future of large populations. Using his predictions, Seldon establishes a foundation to preserve human knowledge and culture as the galactic empire begins to crumble. The series explores themes such as politics, power, and the nature of humanity."
-    },
-    "image": "foundation.jpeg",
-    "publishDate": "2021-04-16",
-    "tags": ["livro", "science fiction"]
+    "url": "https://amzn.to/2Hqyknh",
+    "description": "In a distant future, a mathematician named Hari Seldon created a new science called <b>psychohistory</b> that allows him to predict the future of large populations. Using his predictions, Seldon establishes a foundation to preserve human knowledge and culture as the galactic empire begins to crumble. The series explores themes such as politics, power, and the nature of humanity.",
+    "image": "/images/bookmarks/foundation.jpeg",
+    "bookmarkedOn": "2021-04-16",
+    "tags": ["science fiction"]
   },
   {
     "title": "NieR: Automata",
     "type": "game",
-    "link": "https://amzn.to/3cC30xj",
-    "description": {
-      "en": "An action RPG developed by PlatinumGames and published by Square Enix. The game takes place in a post-apocalyptic world where players control androids, 2B and 9S, as they fight to reclaim Earth from alien machines."
-    },
-    "image": "nier-automata.jpg",
-    "publishDate": "2021-04-17",
-    "tags": ["rpg", "dystopia", "action"]
+    "url": "https://amzn.to/3cC30xj",
+    "description": "An action RPG developed by PlatinumGames and published by Square Enix. The game takes place in a post-apocalyptic world where players control androids, 2B and 9S, as they fight to reclaim Earth from alien machines.",
+    "image": "/images/bookmarks/nier-automata.jpg",
+    "bookmarkedOn": "2021-04-17",
+    "tags": ["rpg", "science fiction", "action"]
   },
   {
     "title": "Nujabes - Luv(sic) Hexalogy",
     "type": "music",
-    "link": "https://open.spotify.com/album/4oT4YRVe43ESrT9rx2LKCM?si=6m6eJkYNTsarpF5PEmvtoA",
-    "description": {
-      "en": "Luv (sic) brings a series of songs released by musician Nujabes that talk about love and music"
-    },
-    "image": "luv-sic.jpg",
-    "publishDate": "2021-04-24",
-    "tags": ["music", "lofi", "hip-hop"]
+    "url": "https://open.spotify.com/album/4oT4YRVe43ESrT9rx2LKCM?si=6m6eJkYNTsarpF5PEmvtoA",
+    "description": "Luv (sic) brings a series of songs released by musician Nujabes that talk about love and music",
+    "image": "/images/bookmarks/luv-sic.jpg",
+    "bookmarkedOn": "2021-04-24",
+    "tags": ["lofi", "hip-hop"]
   },
   {
     "title": "Discoteca Básica",
     "type": "podcast",
-    "link": "https://open.spotify.com/show/1TycD4CePdMhOIfG1JAzJ3?si=81783ddd4f4d4d26",
-    "description": {
-      "en": "Stories and curiosities behind the albums and songs that changed pop culture, presented by Ricardo Alexandre (<a href='https://twitter.com/ralexandredb' target='_blank'>@ralexandredb</a>). Highlight for the episodes: <a href='https://open.spotify.com/episode/5UxyY2m3ivQiCbHTiCmL7e?si=56aaed806b5c4bd1' target='_blank'>Is This It</a> from Strokes and <a href='https://open.spotify.com/episode/0tovZE5376tQBqUWxkRCfA?si=1b80462d7f52461c' target='_blank'>Pet Sounds</a> from Beach Boys. (Only in Portuguese, Brazil)",
-      "pt": "Histórias e curiosidades por trás dos discos e músicas que mudaram a cultura pop, apresentadas por Ricardo Alexandre (<a href='https://twitter.com/ralexandredb' target='_blank'>@ralexandredb</a>). Destaque para os episódios: <a href='https://open.spotify.com/episode/5UxyY2m3ivQiCbHTiCmL7e?si=56aaed806b5c4bd1' target='_blank'>Is This It</a> de Strokes e <a href='https ://open.spotify.com/episode/0tovZE5376tQBqUWxkRCfA?si=1b80462d7f52461c' target='_blank'>Pet Sounds</a> dos Beach Boys. (Somente em português, Brasil)"
-    },
-    "image": "discoteca-basica.jpg",
-    "publishDate": "2021-06-20",
-    "tags": ["podcast", "pop culture", "music"]
+    "url": "https://open.spotify.com/show/1TycD4CePdMhOIfG1JAzJ3?si=81783ddd4f4d4d26",
+    "description": "Stories and curiosities behind the albums and songs that changed pop culture, presented by Ricardo Alexandre (<a href='https://twitter.com/ralexandredb' target='_blank'>@ralexandredb</a>). Highlight for the episodes: <a href='https://open.spotify.com/episode/5UxyY2m3ivQiCbHTiCmL7e?si=56aaed806b5c4bd1' target='_blank'>Is This It</a> from Strokes and <a href='https://open.spotify.com/episode/0tovZE5376tQBqUWxkRCfA?si=1b80462d7f52461c' target='_blank'>Pet Sounds</a> from Beach Boys. (Only in Portuguese, Brazil)",
+    "image": "/images/bookmarks/discoteca-basica.jpg",
+    "bookmarkedOn": "2021-06-20",
+    "tags": ["pop culture", "music"]
   },
   {
     "title": "Molchat Doma - с крыш наших домов (From our houses' rooftops)",
     "type": "music",
-    "link": "https://open.spotify.com/album/5JLoR1neszuPXlDwOSffYh?si=m-5kV8QKTQCxlrXtfGUsgA",
-    "description": {
-      "en": "The album features a dark and atmospheric sound that draws inspiration from Soviet-era Russian rock music. The lyrics explore themes of nostalgia, alienation, and the search for meaning in a changing world."
-    },
-    "image": "molchat-doma-houses-rooftop.webp",
-    "publishDate": "2022-10-09",
-    "tags": ["music", "post-punk", "russian"]
+    "url": "https://open.spotify.com/album/5JLoR1neszuPXlDwOSffYh?si=m-5kV8QKTQCxlrXtfGUsgA",
+    "description": "The album features a dark and atmospheric sound that draws inspiration from Soviet-era Russian rock music. The lyrics explore themes of nostalgia, alienation, and the search for meaning in a changing world.",
+    "image": "/images/bookmarks/molchat-doma-houses-rooftop.webp",
+    "bookmarkedOn": "2022-10-09",
+    "tags": ["post-punk", "russian"]
   },
   {
     "title": "Kid Cudi - Man On the Moon: The End of the Day",
     "type": "music",
-    "link": "https://open.spotify.com/album/6oPPKtAwNNlkW4wwHfQDfM?si=bRBnXLJsSG6brNo2lhbZ9Q",
-    "description": {
-      "en": " The album is a concept album that follows the story of a character struggling with fame and mental health. Highlights for <b>Pursuit of Happiness</b> and <b>Day N' Nite</b>"
-    },
-    "image": "kid-cudi-man-on-the-moon.webp",
-    "publishDate": "2023-01-31",
-    "tags": ["music", "hip-hop"]
+    "url": "https://open.spotify.com/album/6oPPKtAwNNlkW4wwHfQDfM?si=bRBnXLJsSG6brNo2lhbZ9Q",
+    "description": "The album is a concept album that follows the story of a character struggling with fame and mental health. Highlights for <b>Pursuit of Happiness</b> and <b>Day N' Nite</b>",
+    "image": "/images/bookmarks/kid-cudi-man-on-the-moon.webp",
+    "bookmarkedOn": "2023-01-31",
+    "tags": ["hip-hop"]
   },
   {
     "title": "FLCL",
     "type": "tvseries",
-    "link": "https://www.adultswim.com/videos/flcl",
-    "description": {
-      "en": "Naota Nandaba is an ordinary sixth grader living in a city where nothing amazing ever seems to happen. After his brother Tasuku leaves town to play baseball in America, Naota takes it upon himself to look after everything Tasuku left behind. Little does Naota know, however, that his mundane existence is on the verge of being changed forever."
-    },
-    "image": "flcl.jpeg",
-    "publishDate": "2023-06-04",
+    "url": "https://www.adultswim.com/videos/flcl",
+    "description": "Naota Nandaba is an ordinary sixth grader living in a city where nothing amazing ever seems to happen. After his brother Tasuku leaves town to play baseball in America, Naota takes it upon himself to look after everything Tasuku left behind. Little does Naota know, however, that his mundane existence is on the verge of being changed forever.",
+    "image": "/images/bookmarks/flcl.jpeg",
+    "bookmarkedOn": "2023-06-04",
     "tags": ["anime", "ova", "comedy"]
   },
   {
     "title": "Phoebe Bridgers - Punisher",
     "type": "music",
-    "link": "https://open.spotify.com/album/6Pp6qGEywDdofgFC1oFbSH?si=WZktdFvAQNGVHrbM_maTAw",
-    "description": {
-      "en": "Punisher is the second studio album by American singer-songwriter Phoebe Bridgers. Released in 2020, the album showcases Bridgers' introspective and emotionally charged songwriting, delving into themes of love, loss, and existential musings."
-    },
-    "image": "punisher_album_cover.jpg",
-    "publishDate": "2023-05-10",
-    "tags": ["indie", "folk", "rock", "singer-songwriter"]
+    "url": "https://open.spotify.com/album/6Pp6qGEywDdofgFC1oFbSH?si=WZktdFvAQNGVHrbM_maTAw",
+    "description": "Punisher is the second studio album by American singer-songwriter Phoebe Bridgers. Released in 2020, the album showcases Bridgers' introspective and emotionally charged songwriting, delving into themes of love, loss, and existential musings.",
+    "image": "/images/bookmarks/punisher_album_cover.jpg",
+    "bookmarkedOn": "2023-05-10",
+    "tags": ["indie", "folk", "rock"]
   },
   {
     "title": "Final Fantasy XV",
     "type": "game",
-    "link": "https://www.amazon.com.br/Final-Fantasy-XV-Royal-PlayStation/dp/B0792HGXB7/ref=sr_1_1?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=16VRJIETGFPIB&keywords=final+fantasy+xv&qid=1689553101&sprefix=final+fantasy+xv%2Caps%2C174&sr=8-1&ufe=app_do%3Aamzn1.fos.6d798eae-cadf-45de-946a-f477d47705b9",
-    "description": {
-      "en": "The story follows Prince Noctis and his friends as he embarks on a journey to reclaim his kingdom that has been invaded by the empire of Niflheim. He discovers he is on a quest to combat the powers of darkness with the powers of light only the Lucian lineage of kings can wield. This is one of my favorites in the series and I've been waiting for this game since 2007 when the first trailers were released (under the FF Versus XIII name)."
-    },
-    "image": "final-fantasy-xv.jpeg",
-    "publishDate": "2023-06-21",
-    "tags": ["rpg", "fantasy", "final-fantasy", "action"]
+    "url": "https://www.amazon.com.br/Final-Fantasy-XV-Royal-PlayStation/dp/B0792HGXB7/ref=sr_1_1?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=16VRJIETGFPIB&keywords=final+fantasy+xv&qid=1689553101&sprefix=final+fantasy+xv%2Caps%2C174&sr=8-1&ufe=app_do%3Aamzn1.fos.6d798eae-cadf-45de-946a-f477d47705b9",
+    "description": "The story follows Prince Noctis and his friends as he embarks on a journey to reclaim his kingdom that has been invaded by the empire of Niflheim. He discovers he is on a quest to combat the powers of darkness with the powers of light only the Lucian lineage of kings can wield. This is one of my favorites in the series and I've been waiting for this game since 2007 when the first trailers were released (under the FF Versus XIII name).",
+    "image": "/images/bookmarks/final-fantasy-xv.jpeg",
+    "bookmarkedOn": "2023-06-21",
+    "tags": ["rpg", "japanese", "action"]
   },
   {
     "title": "Persona 5",
     "type": "game",
-    "link": "https://www.amazon.com.br/Sega-PS-22026-7-Persona-Royal-PlayStation/dp/B085PS9F4H/ref=sr_1_3?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=1VF0A73DNSXK5&keywords=persona+5&qid=1689553083&sprefix=persona+5%2Caps%2C209&sr=8-3&ufe=app_do%3Aamzn1.fos.6121c6c4-c969-43ae-92f7-cc248fc6181d",
-    "description": {
-      "en": "A group of high school students create a vigilante group to expose the crimes of corrupt adults but soon find themselves in the midst of a worldwide conspiracy and targeted by powerful individuals who would do anything to silence them. This is one of my favorite games that I played in Playstation 4. It took me more than 85 hours to finish but it totally worth it."
-    },
-    "image": "persona5.jpeg",
-    "publishDate": "2023-06-21",
+    "url": "https://www.amazon.com.br/Sega-PS-22026-7-Persona-Royal-PlayStation/dp/B085PS9F4H/ref=sr_1_3?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=1VF0A73DNSXK5&keywords=persona+5&qid=1689553083&sprefix=persona+5%2Caps%2C209&sr=8-3&ufe=app_do%3Aamzn1.fos.6121c6c4-c969-43ae-92f7-cc248fc6181d",
+    "description": "A group of high school students create a vigilante group to expose the crimes of corrupt adults but soon find themselves in the midst of a worldwide conspiracy and targeted by powerful individuals who would do anything to silence them. This is one of my favorite games that I played in Playstation 4. It took me more than 85 hours to finish but it totally worth it.",
+    "image": "/images/bookmarks/persona5.jpeg",
+    "bookmarkedOn": "2023-06-21",
     "tags": ["rpg", "japanese", "turn-based"]
   },
   {
     "title": "Final Fantasy VII (Remake)",
     "type": "game",
-    "link": "https://www.amazon.com.br/Final-Fantasy-VII-Remake-PlayStation/dp/B00ZS80PC2/ref=sr_1_1?adgrpid=1144592297642983&hvadid=71537182391657&hvbmt=be&hvdev=c&hvlocphy=677&hvnetw=o&hvqmt=e&hvtargid=kwd-71537546014528%3Aloc-20&hydadcr=5683_13210321&keywords=final+fantasy+vii+remake+amazon&qid=1689553066&sr=8-1&ufe=app_do%3Aamzn1.fos.db68964d-7c0e-4bb2-a95c-e5cb9e32eb12",
-    "description": {
-      "en": "Re-imagining of Final Fantasy VII (1997). A former soldier joins an eco-terrorist group in a mission against the electric power company he used to work for in order to protect the planet and all who reside on it. This game totally lives up to the fame of Final Fantasy VII from PS1, it's a must play for all JRPG fans"
-    },
-    "image": "final-fantasy-vii.webp",
-    "publishDate": "2023-06-21",
-    "tags": ["rpg", "japanese", "final-fantasy", "action"]
-  },
-  {
-    "title": "Immersive Van Gogh: Why Art is in Crisis",
-    "type": "video",
-    "link": "https://www.youtube.com/watch?v=cOFBAJStuk8&ab_channel=BroeyDeschanel",
-    "description": { "en": "" },
-    "image": "immersive-van-gogh.jpeg",
-    "publishDate": "2023-07-16",
-    "tags": ["art", "video essay"]
+    "url": "https://www.amazon.com.br/Final-Fantasy-VII-Remake-PlayStation/dp/B00ZS80PC2/ref=sr_1_1?adgrpid=1144592297642983&hvadid=71537182391657&hvbmt=be&hvdev=c&hvlocphy=677&hvnetw=o&hvqmt=e&hvtargid=kwd-71537546014528%3Aloc-20&hydadcr=5683_13210321&keywords=final+fantasy+vii+remake+amazon&qid=1689553066&sr=8-1&ufe=app_do%3Aamzn1.fos.db68964d-7c0e-4bb2-a95c-e5cb9e32eb12",
+    "description": "Re-imagining of Final Fantasy VII (1997). A former soldier joins an eco-terrorist group in a mission against the electric power company he used to work for in order to protect the planet and all who reside on it. This game totally lives up to the fame of Final Fantasy VII from PS1, it's a must play for all JRPG fans",
+    "image": "/images/bookmarks/final-fantasy-vii.webp",
+    "bookmarkedOn": "2023-06-21",
+    "tags": ["rpg", "japanese", "action"]
   },
   {
     "title": "Severance",
     "type": "tvseries",
-    "link": "https://tv.apple.com/br/show/severance/umc.cmc.1srk2goyh2q2zdxcx605w8vtx?ctx_brand=tvs.sbd.4000",
-    "description": {
-      "en": "Mark leads a team of office workers whose memories have been surgically divided between their work and personal lives. When a mysterious colleague appears outside of work, it begins a journey to discover the truth about their jobs."
-    },
-    "image": "severance.jpeg",
-    "publishDate": "2023-09-02",
-    "tags": ["tvseries", "science fiction", "drama"]
+    "url": "https://tv.apple.com/br/show/severance/umc.cmc.1srk2goyh2q2zdxcx605w8vtx?ctx_brand=tvs.sbd.4000",
+    "description": "Mark leads a team of office workers whose memories have been surgically divided between their work and personal lives. When a mysterious colleague appears outside of work, it begins a journey to discover the truth about their jobs.",
+    "image": "/images/bookmarks/severance.jpeg",
+    "bookmarkedOn": "2023-09-02",
+    "tags": ["science fiction", "drama"]
+  },
+  {
+    "title": "Do Androids Dream of Electric Sheep?",
+    "type": "book",
+    "url": "https://www.amazon.com.br/Andr%C3%B3ides-sonham-com-ovelhas-el%C3%A9tricas/dp/8576573849",
+    "description": "Rick Deckard, a bounty hunter, sees a chance to change his life when he is called to kill six androids who murdered their masters and are now refugees. But Deckard's convictions may change when he realizes that the line between the real and the manufactured is no longer as clear as he believed.",
+    "image": "/images/bookmarks/androids.jpg",
+    "bookmarkedOn": "2023-10-21",
+    "tags": ["science fiction"]
+  },
+  {
+    "title": "Paprika (2006)",
+    "type": "movie",
+    "url": "https://www.imdb.com/title/tt0851578/",
+    "description": "When a machine that allows therapists to enter their patient’s dreams is stolen, all hell breaks loose. Only a young female therapist can stop it and recover it before damage is done: Paprika.",
+    "image": "/images/bookmarks/paprika.jpg",
+    "bookmarkedOn": "2024-09-14",
+    "tags": ["anime", "science fiction"]
   }
 ]
