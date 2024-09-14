@@ -1,9 +1,10 @@
 export enum ContentPath {
+  ARTICLES = "/content/articles",
+  EDUCATION = "/content/about/education.json",
+  IMAGES = "/images",
   PAGES = "/content/pages",
-  PAGES_COVER_IMAGES = "/images/pages",
-  POSTS = "/content/posts",
-  POSTS_COVER_IMAGES = "/images/posts/cover",
-  PAPERS = "/content/papers",
-  BOOKMARKS = "/content/bookmarks",
-  IMAGES = "/images/",
+  PAPERS = "/content/papers/papers.bib",
+  PROJECTS = "/content/about/work/projects.json",
+  WORK_EXPERIENCE = "/content/about/work/experience.json",
+  BOOKMARKS = "/content/bookmarks/bookmarks.json",
 }

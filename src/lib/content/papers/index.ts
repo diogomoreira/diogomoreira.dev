@@ -1,11 +1,10 @@
 import { BibEntry, parseBibFile } from "bibtex";
 import { readFileSync } from "fs";
-import path, { join } from "path";
-import { ContentPath } from "./paths";
+import path from "path";
+import { ContentPath } from "../paths";
 import { Paper, PaperSchema } from "@/models/paper.model";
 
-const papersDirectory = path.join(process.cwd(), ContentPath.PAPERS);
-const papersFile = join(papersDirectory, "papers.bib");
+const papersFile = path.join(process.cwd(), ContentPath.PAPERS);
 
 export function getPublicationEntries(): Paper[] {
   const papersBibFile = readFileSync(papersFile, "utf-8");
