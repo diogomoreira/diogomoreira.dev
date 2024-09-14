@@ -39,7 +39,7 @@ const LinksPage: NextPage<LinksPageProps> = () => {
       <h2 className="text-xl text-center font-light text-spring-wood-800 dark:text-gray-400">
         <Translation t={t} ns={"index"} i18nKey="titles"></Translation>
       </h2>
-      <div className="flex flex-col w-full gap-2 md:w-3/4">
+      <div className="flex flex-col w-full gap-6 md:w-3/4">
         <LinksPageItem icon={<FaLink />} description={t("website")} href={`${siteUrl}`} />
         {social.map(socialItem => {
           const SocialIcon = socialItem.icon;
