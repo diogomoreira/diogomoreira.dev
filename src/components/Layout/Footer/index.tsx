@@ -17,11 +17,11 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
     <footer className="bg-spring-wood-200 dark:bg-black text-xs">
-      <div className="flex flex-col md:flex-row justify-between md:px-10 py-4 items-center container mx-auto max-w-5xl gap-1">
+      <div className="flex flex-col md:flex-row justify-between md:px-10 py-4 items-center container mx-auto max-w-5xl">
         <div>
           <span>© 2013 - {currentYear}</span>. <span className="font-semibold">{name}.</span>
         </div>
-        <div className="flex flex-col md:flex-row md:gap-2 text-center">
+        <div className="flex flex-col md:flex-row md:gap-6 text-center">
           <div>
             <a className="underline" href={repository}>
               {t("footer.currentVersion")}
@@ -30,7 +30,7 @@ const Footer = () => {
           </div>
           <div>
             {/* <Link
-              className="flex gap-2 items-center"
+              className="flex gap-6 items-center"
               href="/"
               locale={router.locale === locales.en.locale ? locales.pt.locale : locales.en.locale}
             >

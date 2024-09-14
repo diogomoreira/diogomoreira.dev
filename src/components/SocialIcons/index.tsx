@@ -26,7 +26,7 @@ const SocialIcons = () => {
   ];
 
   return (
-    <div className="flex w-full gap-2 text-3xl text-spring-wood-600 dark:text-neutral-300 md:text-2xl justify-center md:justify-start">
+    <div className="flex w-full gap-6 text-3xl text-spring-wood-600 dark:text-neutral-300 md:text-2xl justify-center md:justify-start">
       {social.map(socialItem => {
         const SocialIcon = socialItem.icon;
         return (

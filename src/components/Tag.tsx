@@ -10,7 +10,7 @@ const Tags: React.FC<TagProps> = ({ children }: TagProps) => {
 
 const Tag: React.FC<TagProps> = ({ children }: TagProps) => {
   return (
-    <span className="inline-flex items-center bg-spring-wood-100 dark:bg-neutral-950 px-2 py-1 text-xs font-medium text-spring-wood-600 dark:text-gray-200 ring-1 ring-inset ring-spring-wood-500/10">
+    <span className="inline-flex items-center rounded-lg bg-spring-wood-100 dark:bg-neutral-950 px-4 py-2 text-xs font-medium text-spring-wood-600 dark:text-gray-200 ring-1 ring-inset ring-spring-wood-500/10">
       {children}
     </span>
   );

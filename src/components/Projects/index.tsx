@@ -1,16 +1,30 @@
-import { ProjectItem } from "@/lib/content";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import React from "react";
-import { v4 as uuidv4 } from "uuid";
-import { Card, CardBody, CardFooter, CardTitle } from "../Card";
+import { Card, CardBody, CardFooter, CardParagraph, CardTitle } from "../Card";
 import { BulletTag, Tags } from "../Tag";
+import { Project } from "@/models/project.model";
+import { generateUUID } from "@/utils/uuid";
 
-type ProjectItemDisplayProps = {
-  item: ProjectItem;
+type ProjectsListProps = {
+  items: Project[];
 };
 
-const ProjectItemDisplay: React.FC<ProjectItemDisplayProps> = ({ item }: ProjectItemDisplayProps) => {
+const ProjectsList: React.FC<ProjectsListProps> = ({ items }: ProjectsListProps) => {
+  return (
+    <div className="masonry sm:masonry-sm md:masonry-md">
+      {items.map(item => (
+        <ProjectItem key={generateUUID()} item={item} />
+      ))}
+    </div>
+  );
+};
+
+type ProjectItemDisplayProps = {
+  item: Project;
+};
+
+const ProjectItem: React.FC<ProjectItemDisplayProps> = ({ item }: ProjectItemDisplayProps) => {
   const { t } = useTranslation();
 
   return (
@@ -20,17 +34,17 @@ const ProjectItemDisplay: React.FC<ProjectItemDisplayProps> = ({ item }: Project
       </a>
       <CardBody>
         <CardTitle url={item.url} title={item.title} />
-        <p className="text-sm leading-relaxed">{item.description}</p>
+        <CardParagraph>{item.description}</CardParagraph>
         <Tags>
           {item.stack.map(stackItem => (
-            <BulletTag key={uuidv4()}>{stackItem}</BulletTag>
+            <BulletTag key={generateUUID()}>{stackItem}</BulletTag>
           ))}
         </Tags>
       </CardBody>
       <CardFooter>
         <time className="text-xs text-spring-wood-500 dark:text-gray-300">
           {t("{{val, datetime}}", {
-            val: new Date(item.timestamp),
+            val: new Date(item.lastUpdate),
             formatParams: {
               val: { year: "numeric", month: "long", day: "numeric" },
             },
@@ -41,4 +55,4 @@ const ProjectItemDisplay: React.FC<ProjectItemDisplayProps> = ({ item }: Project
   );
 };
 
-export default ProjectItemDisplay;
+export { ProjectsList, ProjectItem };

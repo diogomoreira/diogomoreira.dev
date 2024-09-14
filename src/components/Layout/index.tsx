@@ -8,13 +8,13 @@ type LayoutProps = {
   className: string;
 };
 
-const baseClasses = "flex flex-col h-screen mx-auto";
+const baseClasses = "flex flex-col h-screen";
 
 const Layout: React.FC<LayoutProps> = ({ children, className }: LayoutProps) => {
   return (
     <div className={cn(baseClasses, className)}>
       <svg
-        className="pointer-events-none fixed isolate z-50 opacity-70 mix-blend-soft-light"
+        className="pointer-events-none fixed isolate z-50 opacity-30 mix-blend-soft-light"
         width="100%"
         height="100%"
       >
@@ -23,7 +23,9 @@ const Layout: React.FC<LayoutProps> = ({ children, className }: LayoutProps) => 
         </filter>
         <rect width="100%" height="100%" filter="url(#grain)"></rect>
       </svg>
-      <Navigation />
+      <div className="border-b border-spring-wood-200 dark:border-neutral-800">
+        <Navigation />
+      </div>
       <main className="px-6 py-10 flex-1 max-w-5xl container mx-auto">{children}</main>
       <Footer />
     </div>

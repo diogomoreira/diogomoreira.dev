@@ -1,12 +1,10 @@
 import React from "react";
-
-import { appConfig } from "@/config";
 import Link from "next/link";
+import { appConfig } from "@/config";
 import { useRef, useState } from "react";
-
-import ThemeToggler from "@/components/ThemeToggle";
 import { useTranslation } from "next-i18next";
-import { v4 as uuidv4 } from "uuid";
+import { generateUUID } from "@/utils/uuid";
+import ThemeToggler from "@/components/ThemeToggle";
 import Logo from "../Logo";
 
 const Navigation = () => {
@@ -24,11 +22,11 @@ const Navigation = () => {
   return (
     <nav
       id="site-nav"
-      className="flex flex-col md:flex-row justify-between md:py-4 items-center max-w-5xl container mx-auto border-b border-spring-wood-200 dark:border-neutral-800"
+      className="flex flex-col md:flex-row justify-between md:py-4 items-center max-w-5xl container mx-auto"
     >
       <div id="site-logo" className="px-6 py-6 md:py-0 flex flex-1 w-full justify-between">
         <Logo />
-        <div id="togglers" className="flex gap-2 md:hidden">
+        <div id="togglers" className="flex gap-6 md:hidden">
           <ThemeToggler />
           <button
             type="button"
@@ -60,20 +58,24 @@ const Navigation = () => {
         className="hidden md:px-6 md:flex bg-spring-wood-200 dark:bg-neutral-900 dark:md:bg-transparent md:bg-transparent w-full md:w-auto flex-col md:flex-row md:items-center md:gap-2"
       >
         {menu.map(item => (
-          <li
-            key={uuidv4()}
-            role="listitem"
-            onKeyDown={() => toggleMenu()}
-            onClick={() => toggleMenu()}
-            className="px-6 py-3 border-b border-b-spring-wood-300 dark:border-b-neutral-800 active:bg-spring-wood-300 dark:active:bg-neutral-900 md:active:bg-transparent dark:md:active:bg-transparent md:p-2 md:border-0 font-normal tracking-tighter lowercase md:bg-transparent text-left hover:underline"
-          >
-            <Link href={item.link} locale={item.locale}>
-              {" "}
+          <Link href={item.link} key={generateUUID()}>
+            <li
+              role="menuitem"
+              onKeyDown={() => toggleMenu()}
+              onClick={() => toggleMenu()}
+              className="px-6 py-3 border-b border-b-spring-wood-300 dark:border-b-neutral-800 active:bg-spring-wood-300 dark:active:bg-neutral-900 md:active:bg-transparent dark:md:active:bg-transparent md:p-2 md:border-0 font-normal tracking-tighter lowercase md:bg-transparent text-left hover:underline"
+            >
               {t(item.name)}
-            </Link>
-          </li>
+            </li>
+          </Link>
         ))}
-        <li id="item-menu-toggler" key={uuidv4()} role="listitem" className="hidden md:flex">
+        <li
+          id="item-menu-toggler"
+          key={generateUUID()}
+          role="to"
+          title={t("common.changeTheme")}
+          className="hidden md:flex"
+        >
           <ThemeToggler />
         </li>
       </ul>
