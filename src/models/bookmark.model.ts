@@ -1,19 +1,28 @@
 import { z } from "zod";
 
-const BookmarkType = z.enum(["book", "podcast", "tvseries", "article", "app", "movie", "game", "music", "video"]);
+export enum BookmarkType {
+  BOOK = "book",
+  PODCAST = "podcast",
+  TVSERIES = "tvseries",
+  ARTICLE = "article",
+  APP = "app",
+  MOVIE = "movie",
+  GAME = "game",
+  MUSIC = "music",
+  VIDEO = "video",
+}
 
 const BookmarkSchema = z.object({
-  description: z.string(),
-  image: z.string(),
-  link: z.string(),
+  title: z.string({ required_error: "Title is required" }),
+  type: z.nativeEnum(BookmarkType),
+  bookmarkedOn: z.string().date(),
+  description: z.string({ required_error: "Description is required" }),
   tags: z.array(z.string()),
-  date: z.string().date(),
-  title: z.string(),
-  type: BookmarkType,
+  image: z.string(),
+  url: z.string().url(),
 });
 
-type BookmarkType = z.infer<typeof BookmarkType>;
 type Bookmark = z.infer<typeof BookmarkSchema>;
 const BookmarkArraySchema = z.array(BookmarkSchema);
 
-export { type Bookmark, type BookmarkType, BookmarkSchema, BookmarkArraySchema };
+export { type Bookmark, BookmarkSchema, BookmarkArraySchema };

@@ -1,13 +1,14 @@
-import { Bookmark, BookmarkArraySchema } from "@/models/bookmark.model";
-import { readFileSync } from "fs";
-import { join } from "path";
+import path from "path";
 import { ContentPath } from "../paths";
+import { readFileSync } from "fs";
+import { Bookmark, BookmarkArraySchema } from "../../../models/bookmark.model";
+import { isAfter } from "date-fns";
 
-const bookmarkDirectory = join(process.cwd(), ContentPath.BOOKMARKS);
-const bookmarkFile = join(bookmarkDirectory, "bookmarks.json");
+const bookmarksFile = path.join(process.cwd(), ContentPath.BOOKMARKS);
 
-export function getBookmarks(): Bookmark[] {
-  return BookmarkArraySchema.parse(JSON.parse(readFileSync(bookmarkFile, { encoding: "utf-8" }))).sort((link1, link2) =>
-    Date.parse(link1.date) < Date.parse(link2.date) ? 1 : -1,
-  );
+function getBookmarks(): Bookmark[] {
+  const bookmarks = BookmarkArraySchema.parse(JSON.parse(readFileSync(bookmarksFile, "utf-8")));
+  return bookmarks.sort((bm1, bm2) => (isAfter(bm1.bookmarkedOn, bm2.bookmarkedOn) ? -1 : 1));
 }
+
+export { getBookmarks };
