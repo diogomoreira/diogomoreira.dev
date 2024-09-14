@@ -4,7 +4,7 @@
     "about": "About",
     "blog": "Blog",
     "academic": "Academic",
-    "labs": "Labs",
+    "projects": "Projects",
     "uses": "Uses",
     "bookmarks": "Bookmarks",
     "cv": "CV"
@@ -13,6 +13,7 @@
     "readmore": "<0>Read more about me</0>",
     "seemore": "See more +",
     "changeLanguage": "Change language",
+    "changeTheme": "Change Theme",
     "publishedAt": "Published:",
     "lastUpdated": "Last updated:",
     "minutes": "min."
