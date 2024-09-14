@@ -2,7 +2,7 @@
 title: Versioning .dotfiles
 description: Why versioning dotfiles?
 slug: dotfiles
-lang: en-us
+lang: en
 date: "2023-04-28"
 cover: dotfiles.jpeg
 comments: true
