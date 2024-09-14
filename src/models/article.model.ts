@@ -1,7 +1,7 @@
 import { locales } from "@/config";
 import { z } from "zod";
 
-const PostSchema = z.object({
+const ArticleSchema = z.object({
   title: z.string({ required_error: "Title is required" }),
   description: z.string({ required_error: "Description is required" }),
   path: z.string(),
@@ -13,7 +13,7 @@ const PostSchema = z.object({
   tags: z.array(z.string({ required_error: "Tags is required" })),
 });
 
-type Post = z.infer<typeof PostSchema>;
-const PostArraySchema = z.array(PostSchema);
+type Article = z.infer<typeof ArticleSchema>;
+const ArticleArraySchema = z.array(ArticleSchema);
 
-export { type Post, PostSchema, PostArraySchema };
+export { type Article, ArticleSchema, ArticleArraySchema };
