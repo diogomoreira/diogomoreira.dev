@@ -2,7 +2,6 @@ import React from "react";
 
 import Layout from "@/components/Layout";
 import "flag-icons/css/flag-icons.min.css";
-import "prism-themes/themes/prism-nord.css";
 import { useEffect } from "react";
 
 import { defaultSeo } from "@/config/seo.config";
@@ -13,7 +12,6 @@ import { appWithTranslation } from "next-i18next";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
 import type { AppProps } from "next/app";
-import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import { useRouter } from "next/router";
 import { GoogleAnalytics } from "nextjs-google-analytics";
@@ -26,11 +24,14 @@ const hubot = localFont({
   variable: "--font-hubot",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
-  weight: ["300", "400", "500", "600", "700"],
+const inter = localFont({
+  src: [
+    { path: "../../public/fonts/Inter/InterVariable.woff2", style: "normal" },
+    { path: "../../public/fonts/Inter/InterVariable-Italic.woff2", style: "italic" },
+  ],
+  preload: true,
   display: "swap",
-  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 const App = ({ Component, pageProps }: AppProps) => {

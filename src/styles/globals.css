@@ -2,6 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .masonry {
+    column-gap: 1.5em;
+    column-count: 1;
+  }
+
+  .masonry-sm {
+    column-gap: 1.5em;
+    column-count: 2;
+  }
+
+  .masonry-md {
+    column-gap: 1.5em;
+    column-count: 3;
+  }
+
+  .masonry-lg {
+    column-gap: 1.5em;
+    column-count: 4;
+  }
+
+  .break-inside {
+    break-inside: avoid;
+  }
+}
 
 body {
   @apply bg-spring-wood-50 dark:bg-neutral-900 text-gray-600 dark:text-gray-400;
@@ -16,6 +41,10 @@ h1,h2,h3,h4,h5,h6 {
   @apply text-neutral-700 dark:text-neutral-50 tracking-tight;
 }
 
+main>p,
+details>p {
+  @apply leading-loose my-6;
+}
 p a {
-  @apply relative inline-block bg-spring-wood-200 hover:bg-spring-wood-300/70 dark:bg-emerald-900 dark:hover:bg-emerald-700 px-1.5 no-underline hover:underline text-spring-wood-900 dark:text-neutral-200 duration-200 hover:duration-200;
+  @apply relative inline-block underline hover:no-underline text-spring-wood-900 dark:text-neutral-200 duration-200 hover:duration-200;
 }
