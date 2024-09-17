@@ -1,5 +1,5 @@
 import React from "react";
-import { format, formatISO, getYear } from "date-fns";
+import { format, formatISO } from "date-fns";
 import { Article } from "@/models/article.model";
 
 type ArticlesListProps = {

@@ -1,13 +1,10 @@
 import React from "react";
 
 import PageTitle from "@/components/PageTitle";
-import { ThreeColumnsMaxBreakpoints } from "@/utils/masonry.columns";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import PageParagraph from "@/components/PageParagraph";
 import { getProjects } from "@/lib/content/projects";
 import { Project } from "@/models/project.model";
 import { ProjectsList } from "@/components/Projects";
@@ -15,7 +12,7 @@ import { ProjectsList } from "@/components/Projects";
 type ProjectsPageStaticProps = { items: Project[] };
 
 export const getStaticProps: GetStaticProps<ProjectsPageStaticProps> = async ({ locale }) => {
-  const currentLocale = locale || "en";
+  const currentLocale = locale ?? "en";
   const items = getProjects();
   return {
     props: {

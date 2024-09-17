@@ -7,9 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-type AboutPageStaticProps = {};
-
-export const getStaticProps: GetStaticProps<AboutPageStaticProps> = async ({ locale }) => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const currentLocale = locale ?? "en";
   return {
     props: {

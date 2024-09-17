@@ -70,6 +70,8 @@
     "@types/uuid": "10.0.0",
     "autoprefixer": "10.4.20",
     "cssnano": "7.0.5",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.11",
     "globals": "^15.9.0",
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",

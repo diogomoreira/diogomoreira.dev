@@ -1,23 +1,22 @@
 import React from "react";
 
-import Author from "@/components/Author";
 import { appConfig } from "@/config";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
-import { Post } from "@/models/post.model";
 import { getAllArticles } from "@/lib/content/articles";
 import PageSection from "@/components/PageSection";
 import { ArticlesList } from "@/components/Posts";
 import Image from "next/image";
+import { Article } from "../models/article.model";
 
-type IndexPageStaticProps = { posts: Post[] };
+type IndexPageStaticProps = { posts: Article[] };
 
 export const getStaticProps: GetStaticProps<IndexPageStaticProps> = async ({ locale }) => {
-  const currentLocale = locale || "en";
-  const posts: Post[] = getAllArticles();
+  const currentLocale = locale ?? "en";
+  const posts: Article[] = getAllArticles();
   return {
     props: {
       posts,
