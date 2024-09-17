@@ -1,0 +1,54 @@
+[
+  {
+    "title": "Adjunct Professor",
+    "company": "Instituto Federal da Paraíba",
+    "startDate": "2014-10-13",
+    "description": "Lectures on Software Development / Software Engineering, covering topics such as: Web Development (with HTML, CSS, Javascript, Node and Express). Software Testing (with JUnit + Mockito, Jest, Cypress, Selenium and Testcontainers); Design Patterns with UML. Other subjects covering/using REST, Spring Boot, Git, Maven and Java EE",
+    "stack": [
+      "java",
+      "javascript",
+      "jest",
+      "selenium",
+      "cypress",
+      "html",
+      "css",
+      "java ee",
+      "spring boot",
+      "junit",
+      "mockito",
+      "node",
+      "express",
+      "git",
+      "maven"
+    ]
+  },
+  {
+    "title": "Senior Software Engineer",
+    "company": "Builder Prime",
+    "startDate": "2024-08-01",
+    "description": "",
+    "stack": []
+  },
+  {
+    "title": "Software Engineer",
+    "company": "Translucent Computing",
+    "startDate": "2021-06-09",
+    "endDate": "2023-12-31",
+    "description": "Implemented healthcare systems based on FHIR specs using Java with Spring Boot with Hibernate, inte- grated with Kafka, Keycloak, Redis, PostgreSQL and Elasticsearch / Opensearch; Developed microser- vices using NestJS (+ Express), integrated with Kafka, Redis, Elasticsearch, MySQL and ImmuDB. Made design decisions for data pipelines to process patient records from Google Cloud Healthcare API to other sources, such as DGraph and Elasticsearch. Built internal tools using OpenAI API. Involved in frontend tasks using React, Material UI and Redux. Worked on tasks using Terraform, Shell Script and Kubernetes.",
+    "stack": [
+      "java",
+      "spring boot",
+      "junit",
+      "kafka",
+      "python",
+      "kubernetes",
+      "nodejs",
+      "nestjs",
+      "typescript",
+      "postgres",
+      "jest",
+      "maven",
+      "git"
+    ]
+  }
+]

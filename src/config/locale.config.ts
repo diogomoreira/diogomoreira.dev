@@ -1,10 +1,8 @@
+import { enUS, ptBR } from "date-fns/locale";
+
 export const locales = {
-  pt: { locale: "pt", name: "Português" },
-  en: { locale: "en", name: "English" },
+  pt: { code: "pt", name: "Português", dateLocale: ptBR },
+  en: { code: "en", name: "English", dateLocale: enUS },
 };
 
-export const defaultLocale = "en";
-
-export const useLocaleConfig = () => {
-  return locales;
-};
+export const defaultLocale = [locales.en];

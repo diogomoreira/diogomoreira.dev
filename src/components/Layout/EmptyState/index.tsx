@@ -4,7 +4,7 @@ export enum EmptyContentType {
   POSTS = "posts",
   PAPERS = "papers",
   PROJECTS = "projects",
-  LINKS = "links",
+  BOOKMARKS = "bookmarks",
 }
 
 export type EmptyStateProps = {
@@ -13,7 +13,7 @@ export type EmptyStateProps = {
 
 const EmptyState: React.FC<EmptyStateProps> = ({ type }: EmptyStateProps) => {
   return (
-    <div className="flex justify-center items-center w-full h-10">
+    <div className="flex justify-center items-center w-full h-52">
       <span>No {type} found.</span>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 
 import LinksPageItem from "@/components/LinksPageItem";
-import { useAppConfig } from "@/config";
+import { appConfig } from "@/config";
 import { capitalize } from "lodash";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { Trans as Translation, useTranslation } from "next-i18next";
@@ -23,7 +23,7 @@ type LinksPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const LinksPage: NextPage<LinksPageProps> = () => {
   const { t } = useTranslation(["links", "index", "common"]);
-  const { author, siteUrl } = useAppConfig();
+  const { author, siteUrl } = appConfig;
   const { github, twitter, linkedin, instagram, mastodon } = author;
   const social = [
     { key: "instagram", link: `https://instagram.com/${instagram}`, icon: RiInstagramFill },
@@ -39,7 +39,7 @@ const LinksPage: NextPage<LinksPageProps> = () => {
       <h2 className="text-xl text-center font-light text-spring-wood-800 dark:text-gray-400">
         <Translation t={t} ns={"index"} i18nKey="titles"></Translation>
       </h2>
-      <div className="flex flex-col w-full gap-2 md:w-3/4">
+      <div className="flex flex-col w-full gap-6 md:w-3/4">
         <LinksPageItem icon={<FaLink />} description={t("website")} href={`${siteUrl}`} />
         {social.map(socialItem => {
           const SocialIcon = socialItem.icon;
