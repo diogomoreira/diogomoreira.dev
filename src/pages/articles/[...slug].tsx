@@ -4,7 +4,7 @@ import Comments from "@/components/Comments";
 import { HashTag, Tags } from "@/components/Tag";
 import { articleJsonLd, appConfig } from "@/config";
 import { differenceInDays } from "date-fns";
-import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
+import { GetStaticProps, GetStaticPropsContext, InferGetStaticPropsType, NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ArticleJsonLd, NextSeo } from "next-seo";
@@ -16,8 +16,8 @@ import { Article } from "@/models/article.model";
 import { ContentPath } from "@/lib/content/paths";
 import { parseMarkdown } from "@/lib/markdown.api";
 
-type ArticlePageGetStaticPropsParams = {
-  locale: string | null;
+type ArticlePageGetStaticPropsParams = GetStaticPropsContext & {
+  locale: string | undefined;
   params: {
     slug: string;
   };
@@ -28,11 +28,11 @@ type ArticleStaticProps = {
   content: string;
 };
 
-export const getStaticProps: GetStaticProps<ArticleStaticProps> = async ({
-  params,
-  locale,
-}: ArticlePageGetStaticPropsParams) => {
-  const { slug } = params;
+export const getStaticProps: GetStaticProps<ArticleStaticProps> = async (context: GetStaticPropsContext) => {
+  const {
+    locale,
+    params: { slug },
+  } = context.params as unknown as ArticlePageGetStaticPropsParams;
   const article = getArticleByPath(slug);
   const content = await parseMarkdown(article.content);
   const currentLocale = locale ?? "en";
