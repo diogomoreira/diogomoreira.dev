@@ -1,7 +1,5 @@
-import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import React from "react";
-import { Card, CardBody, CardFooter, CardParagraph, CardTitle } from "../Card";
 import { Tag, Tags } from "../Tag";
 import { generateUUID } from "@/utils/uuid";
 import { Bookmark } from "../../models/bookmark.model";
@@ -51,7 +49,6 @@ const BookmarkTypeIcon = new Map<string, IconType>([
 ]);
 
 const BookmarkItem: React.FC<BookmarkItemDisplayProps> = ({ item }: BookmarkItemDisplayProps) => {
-  const { t } = useTranslation();
   const bookmarkedOnAsDate = new Date(item.bookmarkedOn);
   const bookmarkItemDate = new Date(bookmarkedOnAsDate.valueOf() + bookmarkedOnAsDate.getTimezoneOffset() * 60 * 1000);
   const Icon = BookmarkTypeIcon.get(item.type) || FaCircleQuestion;
@@ -86,7 +83,6 @@ const BookmarkItem: React.FC<BookmarkItemDisplayProps> = ({ item }: BookmarkItem
           ))}
         </Tags>
       </div>
-      {/* <CardFooter></CardFooter> */}
     </article>
   );
 };

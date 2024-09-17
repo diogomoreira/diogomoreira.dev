@@ -40,7 +40,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     router.events.on("routeChangeStart", () => NProgress.start());
     router.events.on("routeChangeComplete", () => NProgress.done());
     router.events.on("routeChangeError", () => NProgress.done());
-  }, []);
+  }, [router.events]);
   return (
     <ThemeProvider attribute="class">
       <Layout className={cn(hubot.variable, inter.variable, "font-sans", "duration-200", "transition-colors")}>

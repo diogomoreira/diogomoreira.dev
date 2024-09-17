@@ -5,8 +5,6 @@ import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
-import { getProjects } from "@/lib/content/projects";
-import { Project } from "@/models/project.model";
 import { Bookmark, BookmarkType } from "../models/bookmark.model";
 import { BOOKMARKS_API_ENDPOINT } from "./api/bookmarks";
 import LoadingState from "../components/Layout/LoadingState";
@@ -16,14 +14,10 @@ import { Button } from "../components/ui/button";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import EmptyState, { EmptyContentType } from "../components/Layout/EmptyState";
 
-type BookmarksPageStaticProps = { items: Project[] };
-
-export const getStaticProps: GetStaticProps<BookmarksPageStaticProps> = async ({ locale }) => {
-  const currentLocale = locale || "en";
-  const items = getProjects();
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const currentLocale = locale ?? "en";
   return {
     props: {
-      items,
       ...(await serverSideTranslations(currentLocale, ["bookmarks", "common"])),
     },
   };
@@ -44,7 +38,7 @@ const BookmarkTypeOptions = [
   { label: "Video", value: BookmarkType.VIDEO },
 ];
 
-const BookmarksPage: NextPage<BookmarksPageProps> = ({ items }: Readonly<BookmarksPageStaticProps>) => {
+const BookmarksPage: NextPage<BookmarksPageProps> = () => {
   const { t } = useTranslation("bookmarks");
 
   const { siteUrl } = appConfig;
@@ -78,7 +72,7 @@ const BookmarksPage: NextPage<BookmarksPageProps> = ({ items }: Readonly<Bookmar
         setFetching(false);
       })
       .catch(err => {
-        setError("Error fetching bookmarks");
+        setError(`Error fetching bookmarks: ${err}`);
       });
   }, [page, pageSize, type]);
 
@@ -138,21 +132,23 @@ const BookmarksPage: NextPage<BookmarksPageProps> = ({ items }: Readonly<Bookmar
         </div>
       </div>
       <div>
-        {!fetching ? (
-          <BookmarkList items={bookmarks} />
-        ) : error ? (
-          <EmptyState type={EmptyContentType.BOOKMARKS} />
-        ) : (
-          <LoadingState />
-        )}
+        {(() => {
+          if (!fetching) {
+            return <BookmarkList items={bookmarks} />;
+          } else if (error) {
+            return <EmptyState type={EmptyContentType.BOOKMARKS} />;
+          } else {
+            return <LoadingState />;
+          }
+        })()}
       </div>
       <hr className="mb-6" />
       <div className="flex gap-4 justify-between">
-        <Button disabled={!enablePreviousPage()} onClick={e => handlePageChange(-1)} className="w-36 flex gap-2">
+        <Button disabled={!enablePreviousPage()} onClick={() => handlePageChange(-1)} className="w-36 flex gap-2">
           <FaArrowLeft />
           <span>Previous</span>
         </Button>
-        <Button disabled={!enableNextPage()} onClick={e => handlePageChange(+1)} className="w-36 flex gap-2">
+        <Button disabled={!enableNextPage()} onClick={() => handlePageChange(+1)} className="w-36 flex gap-2">
           <span>Next</span>
           <FaArrowRight />
         </Button>

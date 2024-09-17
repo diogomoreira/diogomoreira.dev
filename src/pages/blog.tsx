@@ -4,7 +4,6 @@ import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { getAllArticles } from "@/lib/content/articles";
-import PageParagraph from "@/components/PageParagraph";
 import { ArticlesList } from "@/components/Posts";
 import { Button } from "@/components/ui/button";
 import { FaDev } from "react-icons/fa6";

@@ -22,7 +22,7 @@ const externalLinks: Record<string, string> = {
   github: "https://github.com/diogomoreira",
   x: "https://x.com/diogodmoreira",
   linkedin: "https://linkedin.com/in/diogodmoreira",
-  mastodon: "https://mastodon.social/@diogomoreira",
+  mastodon: "https://hachyderm.io/@diogomoreira",
   googleScholar: "https://scholar.google.com.br/citations?hl=pt-BR&user=DlSdlvEAAAAJ",
   researchGate: "https://www.researchgate.net/profile/Diogo_Moreira4",
   orcid: "https://orcid.org/0000-0003-1803-6565",
