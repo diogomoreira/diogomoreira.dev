@@ -32,7 +32,7 @@ export const getStaticProps: GetStaticProps<ArticleStaticProps> = async (context
   const {
     locale,
     params: { slug },
-  } = context.params as unknown as ArticlePageGetStaticPropsParams;
+  } = context as unknown as ArticlePageGetStaticPropsParams;
   const article = getArticleByPath(slug);
   const content = await parseMarkdown(article.content);
   const currentLocale = locale ?? "en";
