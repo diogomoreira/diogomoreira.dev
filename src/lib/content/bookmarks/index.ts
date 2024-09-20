@@ -3,11 +3,8 @@ import { ContentPath } from "../paths";
 import { readFileSync } from "fs";
 import { Bookmark, BookmarkArraySchema } from "../../../models/bookmark.model";
 import { isAfter } from "date-fns";
-import getConfig from "next/config";
 
-const { serverRuntimeConfig } = getConfig();
-
-const bookmarksFile = path.join(serverRuntimeConfig.PROJECT_ROOT, ContentPath.BOOKMARKS);
+const bookmarksFile = path.join(process.cwd(), ContentPath.BOOKMARKS);
 
 function getBookmarks(): Bookmark[] {
   const bookmarks = BookmarkArraySchema.parse(JSON.parse(readFileSync(bookmarksFile, "utf-8")));
