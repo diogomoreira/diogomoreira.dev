@@ -26,11 +26,11 @@ const LinksPage: NextPage<LinksPageProps> = () => {
   const { author, siteUrl } = appConfig;
   const { github, twitter, linkedin, instagram, mastodon } = author;
   const social = [
-    { key: "instagram", link: `https://instagram.com/${instagram}`, icon: RiInstagramFill },
-    { key: "github", link: `https://github.com/${github}`, icon: RiGithubFill },
-    { key: "twitter", link: `https://twitter.com/${twitter}`, icon: RiTwitterFill },
-    { key: "linkedin", link: `https://linkedin.com/in/${linkedin}`, icon: RiLinkedinBoxFill },
-    { key: "mastodon", link: `https://mastodon.social/@${mastodon}`, icon: RiMastodonFill },
+    { key: "instagram", link: instagram, icon: RiInstagramFill },
+    { key: "github", link: github, icon: RiGithubFill },
+    { key: "twitter", link: twitter, icon: RiTwitterFill },
+    { key: "linkedin", link: linkedin, icon: RiLinkedinBoxFill },
+    { key: "mastodon", link: mastodon, icon: RiMastodonFill },
   ];
   return (
     <div className="flex flex-col gap-6 w-full items-center">
