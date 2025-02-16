@@ -14,7 +14,7 @@ about software development, games, photography, life and so forth. I also post s
 To run this project, you'll need [**NodeJS 14+**](https://nodejs.org/en) and [**Yarn**](https://classic.yarnpkg.com/en/docs/install).
 
 ```
-git clone git@github.com:diogomoreira/diogodmoreira.com.git
+git clone git@github.com:diogomoreira/diogomoreira.dev.git
 cd diogodmoreira.com
 yarn install
 yarn dev
