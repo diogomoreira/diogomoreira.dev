@@ -12,8 +12,7 @@ Hello there! In this post, I want to share with you the tools that I have been u
 
 - Macbook Pro 13-inch, M1, 2020, 16GB
 - LG 29UM69G Ultrawide
-- iPhone 11
-- Apple Watch Series 7
+- iPhone 15 Pro
 - Logitech MX Master 3
 - 8BitDo Retro Mechanical Keyboard
 - HyperX Quadcast
@@ -35,6 +34,7 @@ The **theme** I use in both IDEs is **Noctis Minimus**.
 The **editor font** I use is [JetBrains Mono](https://www.jetbrains.com/lp/mono/).
 
 ---
+
 ### Other applications I use daily
 
 **Spotify**. My main music app since 2014. I hate the podcast section inside the app but I still use it anyway. Check [my playlists](https://open.spotify.com/user/diogodmoreira?si=ec78266e7ccf4268).
@@ -72,5 +72,3 @@ There are also other applications I use daily, but I don't have any specific rea
 - Nintendo 3DS
 - Xbox Series S
 - R36S
-
-Currently playing: **Death Stranding** on Playstation 4.

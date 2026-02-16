@@ -1,10 +1,10 @@
+import { Project } from "@/models/project.model";
+import { generateUUID } from "@/utils/uuid";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import React from "react";
-import { Card, CardBody, CardFooter, CardParagraph, CardTitle } from "../Card";
-import { BulletTag, Tags } from "../Tag";
-import { Project } from "@/models/project.model";
-import { generateUUID } from "@/utils/uuid";
+import { Card, CardBody, CardFooter, CardParagraph, CardTitle } from "./Card";
+import { BulletTag, Tags } from "./Tag";
 
 type ProjectsListProps = {
   items: Project[];
@@ -55,4 +55,4 @@ const ProjectItem: React.FC<ProjectItemDisplayProps> = ({ item }: ProjectItemDis
   );
 };
 
-export { ProjectsList, ProjectItem };
+export { ProjectItem, ProjectsList };

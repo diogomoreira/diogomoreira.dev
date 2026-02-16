@@ -1,8 +1,6 @@
-import React from "react";
-
 import { appConfig } from "@/config";
 import { useTranslation } from "next-i18next";
-import SocialIcons from "../../SocialIcons";
+import SocialIcons from "./SocialIcons";
 
 const Footer = () => {
   const {

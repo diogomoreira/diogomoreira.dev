@@ -1,4 +1,3 @@
-import React from "react";
 import { appConfig } from "@/config";
 import capitalize from "lodash/capitalize";
 import {
@@ -9,7 +8,7 @@ import {
   RiMastodonFill,
   RiTwitterFill,
 } from "react-icons/ri";
-import { generateUUID } from "../../utils/uuid";
+import { generateUUID } from "../utils/uuid";
 
 const SocialIcons = () => {
   const {

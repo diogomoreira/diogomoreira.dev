@@ -1,11 +1,10 @@
-import React from "react";
-import Link from "next/link";
-import { appConfig } from "@/config";
-import { useRef, useState } from "react";
-import { useTranslation } from "next-i18next";
-import { generateUUID } from "@/utils/uuid";
 import ThemeToggler from "@/components/ThemeToggle";
-import Logo from "../Logo";
+import { appConfig } from "@/config";
+import { generateUUID } from "@/utils/uuid";
+import { useTranslation } from "next-i18next";
+import Link from "next/link";
+import { useRef, useState } from "react";
+import Logo from "./Logo";
 
 const Navigation = () => {
   const { menu } = appConfig;
@@ -53,29 +52,20 @@ const Navigation = () => {
 
       <ul
         ref={menuRef}
-        role="menu"
         id="items-menu"
         className="hidden md:px-6 md:flex bg-spring-wood-200 dark:bg-neutral-900 dark:md:bg-transparent md:bg-transparent w-full md:w-auto flex-col md:flex-row md:items-center md:gap-2"
       >
         {menu.map(item => (
-          <Link href={item.link} key={generateUUID()}>
-            <li
-              role="menuitem"
-              onKeyDown={() => toggleMenu()}
-              onClick={() => toggleMenu()}
-              className="px-6 py-3 border-b border-b-spring-wood-300 dark:border-b-neutral-800 active:bg-spring-wood-300 dark:active:bg-neutral-900 md:active:bg-transparent dark:md:active:bg-transparent md:p-2 md:border-0 font-normal tracking-tighter lowercase md:bg-transparent text-left hover:underline"
-            >
+          <li
+            key={generateUUID()}
+            className="px-6 py-3 border-b border-b-spring-wood-300 dark:border-b-neutral-800 active:bg-spring-wood-300 dark:active:bg-neutral-900 md:active:bg-transparent dark:md:active:bg-transparent md:p-2 md:border-0 font-normal tracking-tighter lowercase md:bg-transparent text-left hover:underline"
+          >
+            <Link href={item.link} tabIndex={0}>
               {t(item.name)}
-            </li>
-          </Link>
+            </Link>
+          </li>
         ))}
-        <li
-          id="item-menu-toggler"
-          key={generateUUID()}
-          role="to"
-          title={t("common.changeTheme")}
-          className="hidden md:flex"
-        >
+        <li id="item-menu-toggler" key={generateUUID()} title={t("common.changeTheme")} className="hidden md:flex">
           <ThemeToggler />
         </li>
       </ul>

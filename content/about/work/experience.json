@@ -26,8 +26,8 @@
     "title": "Senior Software Engineer",
     "company": "Builder Prime",
     "startDate": "2024-08-01",
-    "description": "",
-    "stack": []
+    "description": "Developing and maintaining robust features across the Builder Prime CRM platform. My role includes implementing backend services, fixing bugs, improving system performance, and delivering code that enhances the user experience. Builder Prime is a platform built specifically for home improvement companies and centralizes your CRM, text messaging, marketing automation, estimating, production management, payments, and reporting into one single source of truth.",
+    "stack": ["java", "spring boot", "junit", "typescript", "postgres", "angular", "angularjs", "maven", "git"]
   },
   {
     "title": "Software Engineer",
@@ -50,5 +50,21 @@
       "maven",
       "git"
     ]
+  },
+  {
+    "title": "Software Engineer",
+    "company": "Phoebus Tecnologia",
+    "startDate": "2013-01-07",
+    "endDate": "2014-10-10",
+    "description": "Enhanced backoffice financial transaction processing systems utilizing Java (Spring Framework, Maven, JPA/Hibernate), Adobe Flex, Eclipse BIRT reporting with Oracle and Microsoft SQL Server databases. Authored comprehensive systems documentation to streamline IT Help Desk deployment, updates, and rollbacks.",
+    "stack": ["java", "spring framework", "oracle database", "microsoft sql server", "shell scripting", "maven", "cvs"]
+  },
+  {
+    "title": "Software Developer",
+    "company": "Indra Company",
+    "startDate": "2012-07-02",
+    "endDate": "2013-01-04",
+    "description": "Contributed to the development of court management systems for the Paraíba State Court of Justice, including a tool to assist with writing and compilation of Justice Diary, using Java technologies such as JSF 2.0 with Richfaces & Primefaces, JPA, Maven, and front-end development (HTML, CSS, XML, jQuery).",
+    "stack": ["java", "spring framework", "svn", "java server faces", "jquery"]
   }
 ]

@@ -1,6 +1,7 @@
 {
   "title": "About me",
-  "intro": "Hello! I'm Diogo Moreira. I live in Brazil and currently making plans to see the world.",
-  "hobbies": "I enjoy playing video games, particularly role-playing games. I also enjoy reading, watching anime, TV series and movies, especially drama and those related to science fiction and fantasy themes. Take a look at some of the things I'm into lately <linkBookmarks>here</linkBookmarks>. I'm a soccer fan and <strong>São Paulo FC</strong> supporter. Lately I've been enjoying Formula 1 as well. I also love traveling, experiencing new cultures, trying new things, and most importantly, spending time with friends and family while enjoying a good beer 🍻.",
+  "intro": "Hello! I'm Diogo Moreira. I was born in ’89. I’m from Paraíba, and I currently live and work here. Currently making plans to see the world.",
+  "hobbies": "My hobbies include playing video games, watching drama and sci-fi movies and TV shows, drawing, and listening to and collecting music on physical media (specifically CDs and vinyl). I enjoy soccer and support <strong>São Paulo FC</strong>. I’ve also been following Formula 1 since 2021. Lately, I’ve been playing and trying to keep up with tennis tournaments as well. I’m a music lover across all genres, but I have a soft spot for Indie and Punk Rock.",
+  "work": "I have a degree in Systems Analysis and a master’s degree in Software Engineering. I currently work as a professor at the Federal Institute of Paraíba, where I teach courses related to Web Development and Software Engineering. I’m interested in anything involving technology, and I enjoy engaging in discussions about how it applies to our daily lives and how it shapes them—for better or worse. If you want to know more about my career, you can check <linkcv>my CV</linkcv>.",
   "end": "Gradually, I'll share more about my life and interests here."
 }
