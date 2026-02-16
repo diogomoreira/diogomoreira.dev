@@ -36,7 +36,7 @@ const appConfig: ApplicationConfig = {
   keywords: ["software development", "teaching"],
   siteUrl: process.env.NEXT_PUBLIC_CONTEXT === "production" ? "https://diogomoreira.dev/" : "http://localhost:3000",
   siteLocale: locales.en.code,
-  siteVersion: "3.3",
+  siteVersion: "3.4",
   repository: "https://github.com/diogomoreira/diogomoreira.dev",
   author: {
     name: "Diogo Moreira",

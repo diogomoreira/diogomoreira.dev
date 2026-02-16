@@ -9,7 +9,7 @@ type PaperItemProps = {
 const PaperItem: React.FC<PaperItemProps> = ({ item }: PaperItemProps) => {
   return (
     <details
-      className="text-sm shadow-lgoverflow-hidden rounded-lg bg-spring-wood-200 dark:bg-neutral-950 border-4 border-spring-wood-200/[.5] dark:border-neutral-800/[.5]"
+      className="text-sm shadow-lgoverflow-hidden rounded-lg bg-spring-wood-200 dark:bg-neutral-950 border-4 border-spring-wood-200/50 dark:border-neutral-800/50"
       key={item.id}
     >
       <summary className="font-semibold line-clamp-1 p-4 flex gap-4">

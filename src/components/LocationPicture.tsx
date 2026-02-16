@@ -19,7 +19,7 @@ const LocationPicture: React.FC<LocationPictureProps> = ({
   return (
     <figure>
       <Image
-        className="mx-auto rounded-lg border-4 border-spring-wood-200/[.5] dark:border-neutral-800/[.5] shadow-lg"
+        className="mx-auto rounded-lg border-4 border-spring-wood-200/50 dark:border-neutral-800/50 shadow-lg"
         src={src}
         width={width}
         height={height}
