@@ -51,7 +51,7 @@ export default function UsesPage({ page, content }: Readonly<UsesPageProps>) {
       <article className="mt-8 prose max-w-none mx-auto dark:prose-invert md:px-0 dark:prose-a:text-gray-200 prose-strong:font-semibold">
         <PageTitle>{page.title}</PageTitle>
         {page.cover && (
-          <figure className="relative w-full border-4 rounded-lg shadow-lg border-spring-wood-200/[.5] dark:border-neutral-800/[.5] overflow-hidden">
+          <figure className="relative w-full border-4 rounded-lg shadow-lg border-spring-wood-200/50 dark:border-neutral-800/50 overflow-hidden">
             <Image className="object-cover" width={1920} height={1080} src={articleCover} alt={page.title} />
           </figure>
         )}

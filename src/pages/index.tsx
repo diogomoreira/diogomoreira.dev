@@ -34,7 +34,7 @@ const IndexPage: NextPage<IndexPageProps> = ({ posts }: Readonly<IndexPageProps>
       <NextSeo title="Home Page" description={description} />
       <div className="flex flex-col md:flex-row gap-6 items-start">
         <Image
-          className="rounded-lg border-4 border-spring-wood-200/[.5] dark:border-neutral-800/[.5] shadow-lg brightness-100 contrast-100"
+          className="rounded-lg border-4 border-spring-wood-200/50 dark:border-neutral-800/50 shadow-lg brightness-100 contrast-100"
           src={author.image}
           width={300}
           height={300}

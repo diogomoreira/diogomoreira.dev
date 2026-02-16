@@ -24,7 +24,7 @@ type BookmarkListProps = {
 
 const BookmarkList: React.FC<BookmarkListProps> = ({ items }: BookmarkListProps) => {
   return (
-    <div className="grid grid-cols-1 gap-2 divide-y divide-spring-wood-200/[.5] dark:divide-neutral-800/[.5]">
+    <div className="grid grid-cols-1 gap-2 divide-y divide-spring-wood-200/50 dark:divide-neutral-800/50">
       {items.map(item => (
         <BookmarkItem key={generateUUID()} item={item} />
       ))}
@@ -57,7 +57,7 @@ const BookmarkItem: React.FC<BookmarkItemDisplayProps> = ({ item }: BookmarkItem
     <article className="flex flex-col md:flex-row items-center md:items-start gap-6 py-6">
       <a href={item.url} title={item.title} target="_blank" rel="noopener noreferrer">
         <div className="relative w-60 h-full">
-          <div className="absolute left-4 top-[2px] bg-neutral-950/[.95] p-2 rounded-lg rounded-tl-none rounded-tr-none text-neutral-100">
+          <div className="absolute left-4 top-[2px] bg-neutral-950/95 p-2 rounded-lg rounded-tl-none rounded-tr-none text-neutral-100">
             <Icon className="w-4 h-4" />
           </div>
           <Image

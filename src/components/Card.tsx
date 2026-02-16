@@ -10,7 +10,7 @@ type CardTitleProps = {
 };
 
 const Card: React.FC<CardProps> = ({ children }: CardProps) => (
-  <div className="border-4 rounded-lg shadow-lg border-spring-wood-200/[.5] dark:border-neutral-800/[.5] overflow-hidden">
+  <div className="border-4 rounded-lg shadow-lg border-spring-wood-200/50 dark:border-neutral-800/50 overflow-hidden">
     {children}
   </div>
 );
