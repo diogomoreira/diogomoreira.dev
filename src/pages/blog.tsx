@@ -1,13 +1,11 @@
 import PageTitle from "@/components/PageTitle";
 import { ArticlesList } from "@/components/Posts";
-import { Button } from "@/components/ui/button";
 import { appConfig } from "@/config";
 import { getAllArticles } from "@/lib/content/articles";
 import { Article } from "@/models/article.model";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { FaDev } from "react-icons/fa6";
 
 type BlogPageStaticProps = { articles: Article[] };
 
@@ -35,12 +33,9 @@ const BlogPage: NextPage<BlogPageProps> = ({ articles }: BlogPageProps) => {
         <Translation t={t} i18nKey="intro"></Translation>
       </p>
       <p>
-        <Button variant="default" asChild>
-          <a href={author.devto} target="_blank" rel="noreferrer">
-            <FaDev className="mr-2 h-4 w-4" />
-            <span>Dev.to</span>
-          </a>
-        </Button>
+        <a href={author.devto} target="_blank" rel="noreferrer">
+          <span>Dev.to</span>
+        </a>
       </p>
       <ArticlesList articles={articles} />
     </>
