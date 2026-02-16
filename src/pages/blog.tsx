@@ -1,14 +1,13 @@
-import React from "react";
 import PageTitle from "@/components/PageTitle";
+import { ArticlesList } from "@/components/Posts";
+import { Button } from "@/components/ui/button";
+import { appConfig } from "@/config";
+import { getAllArticles } from "@/lib/content/articles";
+import { Article } from "@/models/article.model";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { getAllArticles } from "@/lib/content/articles";
-import { ArticlesList } from "@/components/Posts";
-import { Button } from "@/components/ui/button";
 import { FaDev } from "react-icons/fa6";
-import { appConfig } from "@/config";
-import { Article } from "@/models/article.model";
 
 type BlogPageStaticProps = { articles: Article[] };
 

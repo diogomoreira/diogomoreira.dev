@@ -1,15 +1,13 @@
-import React from "react";
-
+import PageSection from "@/components/PageSection";
+import { ArticlesList } from "@/components/Posts";
 import { appConfig } from "@/config";
+import { getAllArticles } from "@/lib/content/articles";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
-import Link from "next/link";
-import { getAllArticles } from "@/lib/content/articles";
-import PageSection from "@/components/PageSection";
-import { ArticlesList } from "@/components/Posts";
 import Image from "next/image";
+import Link from "next/link";
 import { Article } from "../models/article.model";
 
 type IndexPageStaticProps = { posts: Article[] };
@@ -34,33 +32,33 @@ const IndexPage: NextPage<IndexPageProps> = ({ posts }: Readonly<IndexPageProps>
   return (
     <>
       <NextSeo title="Home Page" description={description} />
-      <div className="flex flex-col gap-6 items-center">
+      <div className="flex flex-col md:flex-row gap-6 items-start">
         <Image
           className="rounded-lg border-4 border-spring-wood-200/[.5] dark:border-neutral-800/[.5] shadow-lg brightness-100 contrast-100"
           src={author.image}
-          width={175}
-          height={175}
+          width={300}
+          height={300}
           alt={title}
         />
-        <div className="flex-1 flex flex-col gap-6 text-center">
-          <h1 className="text-4xl">
-            <Translation t={t} i18nKey="me" components={[<strong key="name" />]}></Translation>
+        <div className="flex flex-col gap-6">
+          <h1 className="text-4xl text-center md:text-left">
+            <Translation t={t} i18nKey="me" components={[<strong className="text-6xl" key="name" />]}></Translation>
           </h1>
-          <h2 className="font-light">
+          <p className="leading-loose">
             <Translation t={t} i18nKey="titles"></Translation>
-          </h2>
+          </p>
+          <p className="leading-loose">
+            <Translation
+              t={t}
+              i18nKey="presentation"
+              components={{
+                bold: <strong key={"bold"} />,
+                blog: <Link href={"/blog"} />,
+              }}
+            ></Translation>
+          </p>
         </div>
       </div>
-      <p>
-        <Translation
-          t={t}
-          i18nKey="presentation"
-          components={{
-            bold: <strong key={"bold"} />,
-            blog: <Link href={"/blog"} />,
-          }}
-        ></Translation>
-      </p>
       <PageSection>
         <Translation t={t} ns={"index"} i18nKey="latest"></Translation>
       </PageSection>

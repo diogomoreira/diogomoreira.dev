@@ -1,5 +1,3 @@
-import React from "react";
-
 import LinksPageItem from "@/components/LinksPageItem";
 import { appConfig } from "@/config";
 import { capitalize } from "lodash";

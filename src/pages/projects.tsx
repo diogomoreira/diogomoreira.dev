@@ -1,13 +1,11 @@
-import React from "react";
-
 import PageTitle from "@/components/PageTitle";
+import { ProjectsList } from "@/components/Projects";
+import { getProjects } from "@/lib/content/projects";
+import { Project } from "@/models/project.model";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
-import { getProjects } from "@/lib/content/projects";
-import { Project } from "@/models/project.model";
-import { ProjectsList } from "@/components/Projects";
 
 type ProjectsPageStaticProps = { items: Project[] };
 

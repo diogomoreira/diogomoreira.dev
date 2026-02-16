@@ -1,8 +1,7 @@
-import React from "react";
+import { useEffect } from "react";
 
 import Layout from "@/components/Layout";
 import "flag-icons/css/flag-icons.min.css";
-import { useEffect } from "react";
 
 import { defaultSeo } from "@/config/seo.config";
 import "@/styles/globals.css";

@@ -1,8 +1,10 @@
-import React from "react";
-
 import Comments from "@/components/Comments";
 import { HashTag, Tags } from "@/components/Tag";
-import { articleJsonLd, appConfig } from "@/config";
+import { appConfig, articleJsonLd } from "@/config";
+import { getArticleByPath, getSlugs } from "@/lib/content/articles";
+import { ContentPath } from "@/lib/content/paths";
+import { parseMarkdown } from "@/lib/markdown.api";
+import { Article } from "@/models/article.model";
 import { differenceInDays } from "date-fns";
 import { GetStaticProps, GetStaticPropsContext, InferGetStaticPropsType, NextPage } from "next";
 import { useTranslation } from "next-i18next";
@@ -11,10 +13,6 @@ import { ArticleJsonLd, NextSeo } from "next-seo";
 import Image from "next/image";
 import logo from "public/images/logo.png";
 import { v4 as uuid } from "uuid";
-import { getArticleByPath, getSlugs } from "@/lib/content/articles";
-import { Article } from "@/models/article.model";
-import { ContentPath } from "@/lib/content/paths";
-import { parseMarkdown } from "@/lib/markdown.api";
 
 type ArticlePageGetStaticPropsParams = GetStaticPropsContext & {
   locale: string | undefined;

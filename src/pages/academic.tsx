@@ -1,16 +1,14 @@
-import React from "react";
-
+import PageSection from "@/components/PageSection";
 import PageTitle from "@/components/PageTitle";
+import { PaperItem } from "@/components/Papers";
 import { appConfig } from "@/config";
+import { getPublicationEntries } from "@/lib/content/papers";
+import { Paper } from "@/models/paper.model";
+import { generateUUID } from "@/utils/uuid";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
-import PageSection from "@/components/PageSection";
-import { PaperItem } from "@/components/Papers";
-import { generateUUID } from "@/utils/uuid";
-import { Paper } from "@/models/paper.model";
-import { getPublicationEntries } from "@/lib/content/papers";
 
 type AcademicPageStaticProps = { papers: Paper[] };
 

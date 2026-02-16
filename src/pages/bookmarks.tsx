@@ -1,13 +1,11 @@
-import React from "react";
-
 import PageTitle from "@/components/PageTitle";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { NextSeo } from "next-seo";
-import { Bookmark } from "../models/bookmark.model";
 import { BookmarkList } from "../components/Bookmarks";
 import { getBookmarks } from "../lib/content/bookmarks";
+import { Bookmark } from "../models/bookmark.model";
 
 type BookmarksPageStaticProps = { items: Bookmark[] };
 

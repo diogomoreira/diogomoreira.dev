@@ -1,6 +1,6 @@
-import React from "react";
 import { Paper } from "@/models/paper.model";
-import { Button } from "../ui/button";
+import React from "react";
+import { Button } from "./ui/button";
 
 type PaperItemProps = {
   item: Paper;

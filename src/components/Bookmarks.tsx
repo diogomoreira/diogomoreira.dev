@@ -1,9 +1,8 @@
+import { generateUUID } from "@/utils/uuid";
+import { format } from "date-fns";
 import Image from "next/image";
 import React from "react";
-import { Tag, Tags } from "../Tag";
-import { generateUUID } from "@/utils/uuid";
-import { Bookmark } from "../../models/bookmark.model";
-import { format } from "date-fns";
+import { IconType } from "react-icons";
 import {
   FaBook,
   FaCircleQuestion,
@@ -16,7 +15,8 @@ import {
   FaTv,
   FaVideo,
 } from "react-icons/fa6";
-import { IconType } from "react-icons";
+import { Bookmark } from "../models/bookmark.model";
+import { Tag, Tags } from "./Tag";
 
 type BookmarkListProps = {
   items: Bookmark[];
@@ -87,4 +87,4 @@ const BookmarkItem: React.FC<BookmarkItemDisplayProps> = ({ item }: BookmarkItem
   );
 };
 
-export { BookmarkList, BookmarkItem };
+export { BookmarkItem, BookmarkList };
