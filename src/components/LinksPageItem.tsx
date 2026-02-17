@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "./ui/button";
+import Button from "./ui/Button";
 
 type LinksPageItemProps = {
   icon: string | React.ReactNode;
@@ -9,7 +9,7 @@ type LinksPageItemProps = {
 
 const LinksPageItem: React.FC<LinksPageItemProps> = ({ icon, description, href }: LinksPageItemProps) => {
   return (
-    <Button asChild>
+    <Button>
       <a href={href} target="_blank" rel="noreferrer">
         <div className="flex p-2 items-center gap-6 text-lg">
           <span>{icon}</span>

@@ -1,6 +1,6 @@
 import { Paper } from "@/models/paper.model";
 import React from "react";
-import { Button } from "./ui/button";
+import Button from "./ui/Button";
 
 type PaperItemProps = {
   item: Paper;
@@ -22,7 +22,7 @@ const PaperItem: React.FC<PaperItemProps> = ({ item }: PaperItemProps) => {
       <p className="bg-spring-wood-50 dark:bg-neutral-800 text-sm leading-relaxed p-4 my-0">{item.abstract}</p>
       <div className="flex items-center justify-between text-spring-wood-600 dark:text-neutral-200 bg-spring-wood-100 dark:bg-neutral-700 px-4 py-2 text-sm">
         <span>{item.author.join(", ")}</span>
-        <Button variant="default" asChild>
+        <Button>
           <a href={`https://www.doi.org/${item.doi}`} target="_blank" rel="noreferrer">
             Download
           </a>
