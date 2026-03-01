@@ -1,7 +1,7 @@
 import PageSection from "@/components/PageSection";
 import PageTitle from "@/components/PageTitle";
-import { PaperItem } from "@/components/Papers";
-import { appConfig } from "@/config";
+import PaperItem from "@/components/PaperItem";
+import { appConfig } from "@/config/app.config";
 import { getPublicationEntries } from "@/lib/content/papers";
 import { Paper } from "@/models/paper.model";
 import { generateUUID } from "@/utils/uuid";
@@ -28,7 +28,9 @@ type AcademicProps = InferGetStaticPropsType<typeof getStaticProps>;
 const AcademicPage: NextPage<AcademicProps> = ({ papers }: AcademicProps) => {
   const { t } = useTranslation("academic");
   const {
-    author: { researchGate, googleScholar, orcid, lattes, academicEmail },
+    author: {
+      externalLinks: { researchGate, googleScholar, orcid, lattes, academicEmail },
+    },
   } = appConfig;
   return (
     <>
@@ -69,11 +71,25 @@ const AcademicPage: NextPage<AcademicProps> = ({ papers }: AcademicProps) => {
           }}
         ></Translation>
       </p>
-      <div className="flex flex-col gap-2">
-        {papers.map(item => (
-          <PaperItem key={generateUUID()} item={item} />
+      {Object.entries(
+        papers.reduce<Record<string, Paper[]>>((acc, paper) => {
+          const year = paper.year?.toString() || "Unknown";
+          if (!acc[year]) acc[year] = [];
+          acc[year].push(paper);
+          return acc;
+        }, {}),
+      )
+        .sort(([aYear], [bYear]) => Number(bYear) - Number(aYear))
+        .map(([year, papersInYear]) => (
+          <div key={year} className="mb-6">
+            <h2 className="text-lg font-semibold mb-2">{year}</h2>
+            <div className="flex flex-col gap-2">
+              {papersInYear.map(item => (
+                <PaperItem key={generateUUID()} item={item} />
+              ))}
+            </div>
+          </div>
         ))}
-      </div>
     </>
   );
 };

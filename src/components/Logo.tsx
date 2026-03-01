@@ -1,6 +1,4 @@
-import React from "react";
-
-import { appConfig } from "@/config";
+import { appConfig } from "@/config/app.config";
 import Image from "next/image";
 import Link from "next/link";
 

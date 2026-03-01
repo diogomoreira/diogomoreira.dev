@@ -9,11 +9,10 @@ type PaperItemProps = {
 const PaperItem: React.FC<PaperItemProps> = ({ item }: PaperItemProps) => {
   return (
     <details
-      className="text-sm shadow-lgoverflow-hidden rounded-lg bg-spring-wood-200 dark:bg-neutral-950 border-4 border-spring-wood-200/50 dark:border-neutral-800/50"
+      className="text-sm shadow-lgoverflow-hidden rounded-lg dark:bg-neutral-950 border-4 border-spring-wood-200/50 dark:border-neutral-800/50"
       key={item.id}
     >
       <summary className="font-semibold line-clamp-1 p-4 flex gap-4">
-        <span className="font-mono">{item.year}</span>
         <span>{item.title}</span>
       </summary>
       <div className="bg-spring-wood-100 dark:bg-neutral-700 text-spring-wood-600 dark:text-neutral-200 p-4">
@@ -32,4 +31,4 @@ const PaperItem: React.FC<PaperItemProps> = ({ item }: PaperItemProps) => {
   );
 };
 
-export { PaperItem };
+export default PaperItem;

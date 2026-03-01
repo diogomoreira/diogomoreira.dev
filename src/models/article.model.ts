@@ -1,4 +1,4 @@
-import { locales } from "@/config";
+import { locales } from "@/config/locale.config";
 import { z } from "zod";
 
 const ArticleSchema = z.object({
@@ -16,4 +16,5 @@ const ArticleSchema = z.object({
 type Article = z.infer<typeof ArticleSchema>;
 const ArticleArraySchema = z.array(ArticleSchema);
 
-export { type Article, ArticleSchema, ArticleArraySchema };
+export { ArticleArraySchema, ArticleSchema, type Article };
+

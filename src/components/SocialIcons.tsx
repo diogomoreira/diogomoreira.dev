@@ -1,4 +1,4 @@
-import { appConfig } from "@/config";
+import { appConfig } from "@/config/app.config";
 import capitalize from "lodash/capitalize";
 import {
   RiGithubFill,
@@ -8,11 +8,12 @@ import {
   RiMastodonFill,
   RiTwitterFill,
 } from "react-icons/ri";
-import { generateUUID } from "../utils/uuid";
 
 const SocialIcons = () => {
   const {
-    author: { instagram, github, twitter, linkedin, mastodon, email },
+    author: {
+      externalLinks: { instagram, github, twitter, linkedin, mastodon, email },
+    },
   } = appConfig;
 
   const social = [
@@ -29,7 +30,7 @@ const SocialIcons = () => {
       {social.map(socialItem => {
         const SocialIcon = socialItem.icon;
         return (
-          <a key={generateUUID()} title={`Link for ${capitalize(socialItem.key)}`} href={socialItem.link} rel="me">
+          <a key={socialItem.key} title={`Link for ${capitalize(socialItem.key)}`} href={socialItem.link} rel="me">
             <SocialIcon />
           </a>
         );

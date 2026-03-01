@@ -1,5 +1,5 @@
 import ThemeToggler from "@/components/ThemeToggle";
-import { appConfig } from "@/config";
+import { appConfig } from "@/config/app.config";
 import { generateUUID } from "@/utils/uuid";
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
