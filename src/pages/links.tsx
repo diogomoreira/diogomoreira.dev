@@ -1,5 +1,5 @@
 import LinksPageItem from "@/components/LinksPageItem";
-import { appConfig } from "@/config";
+import { appConfig } from "@/config/app.config";
 import { capitalize } from "lodash";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { Trans as Translation, useTranslation } from "next-i18next";

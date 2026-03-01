@@ -12,7 +12,8 @@ type ProjectsListProps = {
 
 const ProjectsList: React.FC<ProjectsListProps> = ({ items }: ProjectsListProps) => {
   return (
-    <div className="masonry sm:masonry-sm md:masonry-md">
+    <div className="grid grid-cols-2">
+      {items.length === 0 && <p className="text-center col-span-2">No projects found.</p>}
       {items.map(item => (
         <ProjectItem key={generateUUID()} item={item} />
       ))}

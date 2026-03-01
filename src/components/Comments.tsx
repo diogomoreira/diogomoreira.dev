@@ -1,6 +1,5 @@
-import { useTheme } from "next-themes";
 import Giscus, { GiscusProps, Repo } from "@giscus/react";
-import React from "react";
+import { useTheme } from "next-themes";
 
 const Comments = () => {
   const { theme } = useTheme();
@@ -19,11 +18,7 @@ const Comments = () => {
     loading: "lazy",
   };
 
-  return (
-    <>
-      <Giscus {...giscusConfig} theme={theme} />
-    </>
-  );
+  return <Giscus {...giscusConfig} theme={theme} />;
 };
 
 export default Comments;

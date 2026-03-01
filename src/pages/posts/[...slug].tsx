@@ -1,10 +1,9 @@
 import Comments from "@/components/Comments";
 import { HashTag, Tags } from "@/components/Tag";
-import { appConfig, articleJsonLd } from "@/config";
-import { getArticleByPath, getSlugs } from "@/lib/content/articles";
-import { ContentPath } from "@/lib/content/paths";
+import { appConfig } from "@/config/app.config";
+import { articleJsonLd } from "@/config/seo.config";
+import { Content, getContentBySlug, getContentFromDirectory } from "@/lib/content";
 import { parseMarkdown } from "@/lib/markdown.api";
-import { Article } from "@/models/article.model";
 import { differenceInDays } from "date-fns";
 import { GetStaticProps, GetStaticPropsContext, InferGetStaticPropsType, NextPage } from "next";
 import { useTranslation } from "next-i18next";
@@ -14,54 +13,52 @@ import Image from "next/image";
 import logo from "public/images/logo.png";
 import { v4 as uuid } from "uuid";
 
-type ArticlePageGetStaticPropsParams = GetStaticPropsContext & {
-  locale: string | undefined;
-  params: {
-    slug: string;
+export const getStaticPaths = async () => {
+  const posts = getContentFromDirectory("posts");
+  const paths = posts.map((post: Content) => ({
+    params: { slug: post.slug.split("/") },
+  }));
+
+  return {
+    paths,
+    fallback: false,
   };
 };
 
-type ArticleStaticProps = {
-  article: Article;
-  content: string;
-};
+export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
+  const { params, locale = "en" } = context;
+  const slug = Array.isArray(params?.slug) ? params?.slug.join("/") : (params?.slug as string);
 
-export const getStaticProps: GetStaticProps<ArticleStaticProps> = async (context: GetStaticPropsContext) => {
-  const {
-    locale,
-    params: { slug },
-  } = context as unknown as ArticlePageGetStaticPropsParams;
-  const article = getArticleByPath(slug);
+  const article = getContentBySlug("posts", slug);
+
+  if (!article) {
+    return { notFound: true };
+  }
+
+  article.date = new Date(article.date).toISOString();
   const content = await parseMarkdown(article.content);
-  const currentLocale = locale ?? "en";
+
   return {
     props: {
+      ...(await serverSideTranslations(locale, ["common"])),
       article,
       content,
-      ...(await serverSideTranslations(currentLocale, ["blog", "common"])),
     },
   };
 };
 
-export async function getStaticPaths() {
-  const slugs = getSlugs();
-  return {
-    paths: slugs.map(({ slug }) => ({ params: { slug } })),
-    fallback: false,
-  };
-}
-
 type ArticlePageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const ArticlePage: NextPage<ArticlePageProps> = ({ article, content }: ArticlePageProps) => {
-  const { siteUrl } = appConfig;
+  const { siteUrl, author } = appConfig;
   const { t } = useTranslation();
   const articleUrl = `${siteUrl}/blog/${article.path}`;
   const articleDate = new Date(article.date);
-  const articleCover = `${ContentPath.IMAGES}/articles/cover/${article.cover}`;
+  const articleCover = article.cover;
+
   return (
     <>
-      <NextSeo title={article.title} description={article.description} />
+      <NextSeo title={article.title} description={article.description} additionalMetaTags={author.metaTags} />
       <ArticleJsonLd
         url={articleUrl}
         title={article.title}
@@ -70,9 +67,9 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article, content }: ArticlePa
         images={[`${siteUrl}/${article.cover || logo.src}`]}
         {...articleJsonLd}
       />
-      <h1 className="text-6xl text-center mb-6 font-bold">{article.title}</h1>
+      <h1 className="text-4xl text-center md:text-left mb-6 font-bold">{article.title}</h1>
       <p className="text-center italic text-spring-wood-500 mb-4 dark:text-gray-300">{article.description}</p>
-      <div className="flex flex-col md:flex-row gap-6 justify-center mb-4 items-center text-sm text-spring-wood-700 dark:text-gray-200">
+      <div className="flex flex-col md:flex-row gap-6 justify-center md:justify-start mb-4 items-center text-sm text-spring-wood-700 dark:text-gray-200">
         <time className="flex gap-6">
           <span>
             {t("{{val, datetime}}", {

@@ -1,20 +1,19 @@
 import PageTitle from "@/components/PageTitle";
-import { ArticlesList } from "@/components/Posts";
-import { appConfig } from "@/config";
-import { getAllArticles } from "@/lib/content/articles";
-import { Article } from "@/models/article.model";
+import PostList from "@/components/PostList";
+import { appConfig } from "@/config/app.config";
+import { Content, getContentFromDirectory } from "@/lib/content";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { Trans as Translation, useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-type BlogPageStaticProps = { articles: Article[] };
+type BlogPageStaticProps = { posts: Content[] };
 
 export const getStaticProps: GetStaticProps<BlogPageStaticProps> = async ({ locale }) => {
   const currentLocale = locale || "en";
-  const articles: Article[] = getAllArticles();
+  const posts: Content[] = getContentFromDirectory("posts");
   return {
     props: {
-      articles: articles,
+      posts,
       ...(await serverSideTranslations(currentLocale, ["blog", "common"])),
     },
     revalidate: 3,
@@ -23,7 +22,7 @@ export const getStaticProps: GetStaticProps<BlogPageStaticProps> = async ({ loca
 
 type BlogPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-const BlogPage: NextPage<BlogPageProps> = ({ articles }: BlogPageProps) => {
+const BlogPage: NextPage<BlogPageProps> = ({ posts: articles }: BlogPageProps) => {
   const { author } = appConfig;
   const { t } = useTranslation("blog");
   return (
@@ -32,12 +31,7 @@ const BlogPage: NextPage<BlogPageProps> = ({ articles }: BlogPageProps) => {
       <p>
         <Translation t={t} i18nKey="intro"></Translation>
       </p>
-      <p>
-        <a href={author.devto} target="_blank" rel="noreferrer">
-          <span>Dev.to</span>
-        </a>
-      </p>
-      <ArticlesList articles={articles} />
+      <PostList posts={articles} />
     </>
   );
 };

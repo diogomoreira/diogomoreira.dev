@@ -3,15 +3,15 @@ import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ArticleJsonLd, NextSeo } from "next-seo";
 import Image from "next/image";
-import React from "react";
 import { getPageBySlug } from "../lib/content/pages";
 import { parseMarkdown } from "../lib/markdown.api";
 
-import { appConfig, articleJsonLd } from "../config";
-import logo from "public/images/logo.png";
-import { Page } from "../models/page.model";
-import { ContentPath } from "../lib/content/paths";
+import { appConfig } from "@/config/app.config";
+import { articleJsonLd } from "@/config/seo.config";
 import { formatRFC3339 } from "date-fns";
+import logo from "public/images/logo.png";
+import { ContentPath } from "../lib/content/paths";
+import { Page } from "../models/page.model";
 
 type UsesPageStaticProps = { page: Page; content: string };
 

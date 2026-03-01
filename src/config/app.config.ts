@@ -1,19 +1,5 @@
+import { MetaTag } from "next-seo/lib/types";
 import { locales } from "./locale.config";
-
-type ApplicationConfig = {
-  title: string;
-  description: string;
-  keywords: string[];
-  siteUrl: string;
-  siteLocale: string;
-  siteVersion: string;
-  repository: string;
-  author: { [key: string]: string };
-  menu: {
-    name: string;
-    link: string;
-  }[];
-};
 
 const externalLinks: Record<string, string> = {
   email: "mailto:diogo.dmoreira@gmail.com",
@@ -30,7 +16,14 @@ const externalLinks: Record<string, string> = {
   lattes: "https://lattes.cnpq.br/2745996619940977",
 };
 
-const appConfig: ApplicationConfig = {
+const metaTags: MetaTag[] = [
+  {
+    name: "fediverse:creator",
+    content: "@diogomoreira@hachyderm.io",
+  },
+];
+
+const appConfig = {
   title: "Diogo Moreira",
   description: "My thoughts about life, software development, games, music and so forth",
   keywords: ["software development", "teaching"],
@@ -41,7 +34,8 @@ const appConfig: ApplicationConfig = {
   author: {
     name: "Diogo Moreira",
     image: "/images/profile/front.jpg",
-    ...externalLinks,
+    externalLinks: externalLinks,
+    metaTags: metaTags,
   },
   menu: [
     { name: "menu.home", link: "/" },

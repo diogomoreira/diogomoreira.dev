@@ -1,12 +1,16 @@
 ---
 title: Versioning .dotfiles
-description: Why versioning dotfiles?
-slug: dotfiles
-lang: en
+category: tech
 date: "2023-04-28"
-cover: dotfiles.jpeg
+description: Why versioning dotfiles?
+tags:
+  - dotfiles
+  - shell
+  - terminal
+  - linux
+  - macos
+cover: /images/uploads/dotfiles.jpeg
 comments: true
-tags: [dotfiles, shell, terminal, linux, macos]
 ---
 
 > 💡 **tl/dr**; You can set up a new system using **dotfiles** and an installation script in minutes. This post tries to explains some things about dotfiles and we will build a repository together

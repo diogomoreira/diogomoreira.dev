@@ -1,4 +1,4 @@
-import { appConfig } from "@/config";
+import { appConfig } from "@/config/app.config";
 import { useTranslation } from "next-i18next";
 import SocialIcons from "./SocialIcons";
 
