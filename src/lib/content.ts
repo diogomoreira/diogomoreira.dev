@@ -52,7 +52,7 @@ export function getContentFromDirectory(directory: string): Content[] {
       const fileContent = fs.readFileSync(filePath, "utf8");
       const { data, content } = matter(fileContent, {
         engines: {
-          yaml: s => yaml.load(s, { schema: yaml.JSON_SCHEMA }),
+          yaml: (s: string): object => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object,
         },
       });
 

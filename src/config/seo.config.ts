@@ -3,7 +3,9 @@ import logo from "public/images/logo.png";
 import { appConfig } from "./app.config";
 
 const { siteUrl, siteLocale, title, description, author } = appConfig;
-const authorTwitter = `@${author.twitter}`;
+const { externalLinks } = author;
+
+const authorTwitter = `@${externalLinks.twitter}`;
 const titleTemplate = `${title} | %s`;
 
 export const defaultSeo: DefaultSeoProps = {
@@ -36,11 +38,11 @@ export const socialProfileJsonLd: SocialProfileJsonLdProps = {
   url: siteUrl,
   sameAs: [
     `${siteUrl}/`,
-    `https://github.com/${author.github}`,
-    `https://keybase.io/${author.keybase}`,
-    `https://twitter.com/${author.twitter}`,
-    `https://www.linkedin.com/in/${author.linkedin}/`,
-    `https://www.instagram.com/${author.instagram}/`,
+    `https://github.com/${externalLinks.github}`,
+    `https://keybase.io/${externalLinks.keybase}`,
+    `https://twitter.com/${externalLinks.twitter}`,
+    `https://www.linkedin.com/in/${externalLinks.linkedin}/`,
+    `https://www.instagram.com/${externalLinks.instagram}/`,
   ],
 };
 
