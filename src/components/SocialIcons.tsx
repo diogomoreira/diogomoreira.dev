@@ -1,13 +1,6 @@
 import { appConfig } from "@/config/app.config";
 import capitalize from "lodash/capitalize";
-import {
-  RiGithubFill,
-  RiInstagramFill,
-  RiLinkedinBoxFill,
-  RiMailFill,
-  RiMastodonFill,
-  RiTwitterFill,
-} from "react-icons/ri";
+import { RiGithubFill, RiInstagramFill, RiLinkedinBoxFill, RiMailFill, RiMastodonFill } from "react-icons/ri";
 
 const SocialIcons = () => {
   const {
@@ -19,7 +12,6 @@ const SocialIcons = () => {
   const social = [
     { key: "instagram", link: instagram, icon: RiInstagramFill },
     { key: "github", link: github, icon: RiGithubFill },
-    { key: "twitter", link: twitter, icon: RiTwitterFill },
     { key: "linkedin", link: linkedin, icon: RiLinkedinBoxFill },
     { key: "mastodon", link: mastodon, icon: RiMastodonFill },
     { key: "email", link: email, icon: RiMailFill },

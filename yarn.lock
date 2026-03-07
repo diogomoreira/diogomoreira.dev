@@ -2079,6 +2079,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/js-yaml@npm:^4.0.9":
+  version: 4.0.9
+  resolution: "@types/js-yaml@npm:4.0.9"
+  checksum: 10c0/24de857aa8d61526bbfbbaa383aa538283ad17363fcd5bb5148e2c7f604547db36646440e739d78241ed008702a8920665d1add5618687b6743858fae00da211
+  languageName: node
+  linkType: hard
+
 "@types/jsdom@npm:^20.0.0":
   version: 20.0.1
   resolution: "@types/jsdom@npm:20.0.1"
@@ -3864,6 +3871,7 @@ __metadata:
     "@tailwindcss/typography": "npm:0.5.14"
     "@types/dompurify": "npm:3.0.5"
     "@types/jest": "npm:29.5.12"
+    "@types/js-yaml": "npm:^4.0.9"
     "@types/lodash": "npm:4.17.7"
     "@types/node": "npm:22.4.0"
     "@types/nprogress": "npm:0.2.3"

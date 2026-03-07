@@ -88,7 +88,7 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article, content }: ArticlePa
           </span>
         </time>
         <Tags>
-          {article.tags.map(tag => (
+          {article.tags.map((tag: string) => (
             <HashTag key={uuid()}>{tag}</HashTag>
           ))}
         </Tags>
