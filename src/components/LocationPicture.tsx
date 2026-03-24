@@ -1,5 +1,5 @@
 import { LucideMapPin } from "lucide-react";
-import Image from "next/image";
+import BorderedPicture from "./BorderedImage";
 
 type LocationPictureProps = {
   width: number;
@@ -18,14 +18,8 @@ const LocationPicture: React.FC<LocationPictureProps> = ({
 }: LocationPictureProps) => {
   return (
     <figure>
-      <Image
-        className="mx-auto rounded-lg border-4 border-spring-wood-200/50 dark:border-neutral-800/50 shadow-lg"
-        src={src}
-        width={width}
-        height={height}
-        alt={alt}
-      />
-      <figcaption className="flex gap-2 justify-center items-center text-center font-(family-name:--font-hubot) text-xs mt-2 text-gray-500 dark:text-gray-400">
+      <BorderedPicture src={src} width={width} height={height} alt={alt} />
+      <figcaption className="flex gap-2 justify-center items-center text-center font-(family-name:--font-hubot) text-xs mt-2 text-neutral-700 dark:text-gray-300">
         <LucideMapPin /> {location}
       </figcaption>
     </figure>

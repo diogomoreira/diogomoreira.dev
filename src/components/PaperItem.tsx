@@ -8,26 +8,26 @@ type PaperItemProps = {
 
 const PaperItem: React.FC<PaperItemProps> = ({ item }: PaperItemProps) => {
   return (
-    <details
-      className="text-sm shadow-lgoverflow-hidden rounded-lg dark:bg-neutral-950 border-4 border-spring-wood-200/50 dark:border-neutral-800/50"
-      key={item.id}
-    >
-      <summary className="font-semibold line-clamp-1 p-4 flex gap-4">
+    <div className="collapse collapse-arrow bg-base-200 border border-base-300" key={item.id}>
+      <input type="radio" name="paper-accordion" title="Expand/Collapse Paper Details" />
+      <div className="collapse-title font-semibold">
         <span>{item.title}</span>
-      </summary>
-      <div className="bg-spring-wood-100 dark:bg-neutral-700 text-spring-wood-600 dark:text-neutral-200 p-4">
-        {item.media}
       </div>
-      <p className="bg-spring-wood-50 dark:bg-neutral-800 text-sm leading-relaxed p-4 my-0">{item.abstract}</p>
-      <div className="flex items-center justify-between text-spring-wood-600 dark:text-neutral-200 bg-spring-wood-100 dark:bg-neutral-700 px-4 py-2 text-sm">
-        <span>{item.author.join(", ")}</span>
-        <Button>
-          <a href={`https://www.doi.org/${item.doi}`} target="_blank" rel="noreferrer">
-            Download
-          </a>
-        </Button>
+      <div className="collapse-content text-sm">
+        <div>{item.media}</div>
+        <p className="text-sm leading-relaxed my-0">{item.abstract}</p>
+        <div className="flex items-center justify-between text-sm">
+          <span>
+            <strong>Authors</strong>: {item.author.join(", ")}
+          </span>
+          <Button>
+            <a href={`https://www.doi.org/${item.doi}`} target="_blank" rel="noreferrer">
+              Download
+            </a>
+          </Button>
+        </div>
       </div>
-    </details>
+    </div>
   );
 };
 
