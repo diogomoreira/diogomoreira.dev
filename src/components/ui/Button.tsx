@@ -2,10 +2,7 @@ import React from "react";
 
 const Button = ({ children }: React.PropsWithChildren) => {
   return (
-    <button
-      type="button"
-      className="inline-block cursor-pointer items-center justify-center rounded-md bg-spring-wood-950 dark:bg-black px-5 py-3 font-medium text-slate-200 shadow-md transition-all duration-300 hover:shadow-xl"
-    >
+    <button type="button" className="btn">
       {children}
     </button>
   );

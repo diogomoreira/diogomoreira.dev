@@ -28,7 +28,9 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ items }: Readonly<ProjectsP
     <>
       <NextSeo title="Projects" description="Some projects i've been working on" />
       <PageTitle>{t("title")}</PageTitle>
-      <p>{t("intro")}</p>
+      <div className="prose max-w-none mb-8">
+        <p>{t("intro")}</p>
+      </div>
       <ProjectsList items={items} />
     </>
   );

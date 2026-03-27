@@ -5,21 +5,16 @@ type TagProps = {
 };
 
 const Tags: React.FC<TagProps> = ({ children }: TagProps) => {
-  return <div className="flex gap-1 flex-wrap">{children}</div>;
+  return <div className="flex gap-2 flex-wrap">{children}</div>;
 };
 
 const Tag: React.FC<TagProps> = ({ children }: TagProps) => {
-  return (
-    <span className="inline-flex items-center rounded-lg bg-spring-wood-100 dark:bg-neutral-950 px-2 py-1 text-xs font-medium text-spring-wood-600 dark:text-gray-200 ring-1 ring-inset ring-spring-wood-500/10">
-      {children}
-    </span>
-  );
+  return <span className="badge badge-accent font-bold text-shadow-sm text-xs">{children}</span>;
 };
 
 const HashTag: React.FC<TagProps> = ({ children }: TagProps) => {
   return (
     <Tag>
-      <span className="text-spring-wood-400 dark:text-gray-400">#</span>
       <span>{children}</span>
     </Tag>
   );
