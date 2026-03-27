@@ -19,7 +19,7 @@ const LocationPicture: React.FC<LocationPictureProps> = ({
   return (
     <figure>
       <BorderedPicture src={src} width={width} height={height} alt={alt} />
-      <figcaption className="flex gap-2 justify-center items-center text-center font-(family-name:--font-hubot) text-xs mt-2 text-neutral-700 dark:text-gray-300">
+      <figcaption className="flex gap-2 justify-center items-center text-center font-(family-name:--font-hubot) text-xs mt-2 text-base">
         <LucideMapPin /> {location}
       </figcaption>
     </figure>

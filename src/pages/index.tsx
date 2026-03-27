@@ -1,5 +1,6 @@
 import BorderedPicture from "@/components/BorderedImage";
 import PageSection from "@/components/PageSection";
+import SimplePostList from "@/components/SimplePostList";
 import { appConfig } from "@/config/app.config";
 import { Content, getContentFromDirectory } from "@/lib/content";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
@@ -30,36 +31,29 @@ const IndexPage: NextPage<IndexPageProps> = ({ posts }: Readonly<IndexPageProps>
   return (
     <>
       <NextSeo title="Home Page" description={description} />
-      <div id="info" className="flex flex-col md:flex-row gap-6 items-center md:items-start">
-        <div>
-          <BorderedPicture src={author.image} width={250} height={250} alt={title} />
-        </div>
-        <div className="flex-1">
+      <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
+        <BorderedPicture src={author.image} width={250} height={250} alt={title} />
+        <div id="info">
           <h1 className="mb-6 font-bold text-4xl lg:text-5xl text-center md:text-left">Diogo Moreira</h1>
-          <div className="relative text-lg flex items-center">
-            <span className="shrink text-base-content">Software Engineer. Professor.</span>
+          <div className="prose max-w-none">
+            <p className="leading-loose">
+              <Translation t={t} i18nKey="titles"></Translation>
+            </p>
+            <p className="leading-loose">
+              <Translation
+                t={t}
+                i18nKey="presentation"
+                components={{
+                  bold: <strong key={"bold"} />,
+                  blog: <Link href={"/blog"} />,
+                }}
+              ></Translation>
+            </p>
           </div>
         </div>
       </div>
-      <div id="latest" className="col-span-2">
-        <PageSection>A little bit about me</PageSection>
-        <div className="prose max-w-none">
-          <p className="leading-loose">
-            <Translation t={t} i18nKey="titles"></Translation>
-          </p>
-          <p className="leading-loose">
-            <Translation
-              t={t}
-              i18nKey="presentation"
-              components={{
-                bold: <strong key={"bold"} />,
-                blog: <Link href={"/blog"} />,
-              }}
-            ></Translation>
-          </p>
-        </div>
-        <PageSection>Academic</PageSection>
-      </div>
+      <PageSection>Latest posts</PageSection>
+      <SimplePostList posts={posts} />
     </>
   );
 };
