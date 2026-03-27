@@ -1,75 +1,78 @@
-import ThemeToggler from "@/components/ThemeToggle";
 import { appConfig } from "@/config/app.config";
-import { generateUUID } from "@/utils/uuid";
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useRouter } from "next/router";
 import Logo from "./Logo";
+import ThemeController from "./ThemeController";
 
 const Navigation = () => {
   const { menu } = appConfig;
   const { t } = useTranslation();
-  const [showMenu, setShowMenu] = useState(false);
-
-  const menuRef = useRef<HTMLUListElement | null>(null);
-
-  const toggleMenu = () => {
-    menuRef?.current?.classList?.toggle("hidden");
-    setShowMenu(!showMenu);
-  };
+  const router = useRouter();
 
   return (
-    <nav
-      id="site-nav"
-      className="flex flex-col md:flex-row justify-between md:py-4 items-center max-w-5xl container mx-auto"
-    >
-      <div id="site-logo" className="px-6 py-6 md:py-0 flex flex-1 w-full justify-between">
-        <Logo />
-        <div id="togglers" className="flex gap-6 md:hidden">
-          <ThemeToggler />
-          <button
-            type="button"
-            title="Show Menu"
-            onKeyDown={() => toggleMenu()}
-            onClick={() => toggleMenu()}
-            id="toggle-menu"
-            className="block md:hidden rounded-md active:bg-spring-wood-200 dark:active:bg-spring-wood-800"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6 rounded-full"
-              id="hamburger-menu-icon"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-          </button>
+    <div className="drawer bg-base-300">
+      <input id="nav-drawer" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content">
+        <div className="navbar max-w-5xl px-4 md:p-10 md:py-4 container mx-auto">
+          <div className="navbar-start">
+            {/* Hamburger button for mobile */}
+            <label htmlFor="nav-drawer" className="btn btn-square btn-ghost lg:hidden mr-2 drawer-button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </label>
+            <Logo />
+          </div>
+          <div className="navbar-center hidden lg:flex">
+            <ul className="menu menu-horizontal px-1">
+              {menu.map(item => {
+                const isActive = router.pathname === item.link;
+                return (
+                  <li key={item.name}>
+                    <Link
+                      href={item.link}
+                      className={`${isActive ? "menu-active" : ""} lowercase font-[Hubot_Sans] font-semibold`}
+                      tabIndex={0}
+                    >
+                      {t(item.name)}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <div className="navbar-end">
+            <ThemeController />
+          </div>
         </div>
       </div>
-
-      <ul
-        ref={menuRef}
-        id="items-menu"
-        className="hidden md:px-6 md:flex bg-spring-wood-200 dark:bg-neutral-900 dark:md:bg-transparent md:bg-transparent w-full md:w-auto flex-col md:flex-row md:items-center md:gap-2"
-      >
-        {menu.map(item => (
-          <li
-            key={generateUUID()}
-            className="px-6 py-3 border-b border-b-spring-wood-300 dark:border-b-neutral-800 active:bg-spring-wood-300 dark:active:bg-neutral-900 md:active:bg-transparent dark:md:active:bg-transparent md:p-2 md:border-0 font-normal tracking-tighter lowercase md:bg-transparent text-left hover:underline"
-          >
-            <Link href={item.link} tabIndex={0}>
-              {t(item.name)}
-            </Link>
-          </li>
-        ))}
-        <li id="item-menu-toggler" key={generateUUID()} title={t("common.changeTheme")} className="hidden md:flex">
-          <ThemeToggler />
-        </li>
-      </ul>
-    </nav>
+      <div className="drawer-side">
+        <label htmlFor="nav-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
+        <ul className="menu p-4 w-64 min-h-full bg-base-100 text-base-content">
+          {menu.map(item => {
+            const isActive = router.pathname === item.link;
+            return (
+              <li key={item.name}>
+                <Link
+                  href={item.link}
+                  className={`${isActive ? "menu-active" : ""} lowercase font-[Hubot_Sans] font-semibold`}
+                  tabIndex={0}
+                >
+                  {t(item.name)}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </div>
   );
 };
 

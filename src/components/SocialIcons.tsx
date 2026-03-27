@@ -5,7 +5,7 @@ import { RiGithubFill, RiInstagramFill, RiLinkedinBoxFill, RiMailFill, RiMastodo
 const SocialIcons = () => {
   const {
     author: {
-      externalLinks: { instagram, github, twitter, linkedin, mastodon, email },
+      externalLinks: { instagram, github, linkedin, mastodon, email },
     },
   } = appConfig;
 
@@ -18,7 +18,7 @@ const SocialIcons = () => {
   ];
 
   return (
-    <div className="flex w-full gap-2 text-xl text-spring-wood-600 dark:text-neutral-300 justify-center md:justify-start">
+    <div className="flex w-full gap-2 text-xl text-base-content justify-center md:justify-start">
       {social.map(socialItem => {
         const SocialIcon = socialItem.icon;
         return (

@@ -29,11 +29,11 @@ const appConfig = {
   keywords: ["software development", "teaching"],
   siteUrl: process.env.NEXT_PUBLIC_CONTEXT === "production" ? "https://diogomoreira.dev/" : "http://localhost:3000",
   siteLocale: locales.en.code,
-  siteVersion: "3.5.0",
+  siteVersion: "3.6.0",
   repository: "https://github.com/diogomoreira/diogomoreira.dev",
   author: {
     name: "Diogo Moreira",
-    image: "/images/profile/front.jpg",
+    image: "/images/profile/profile.jpg",
     externalLinks: externalLinks,
     metaTags: metaTags,
   },

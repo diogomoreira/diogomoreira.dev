@@ -26,7 +26,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   return (
     <ThemeProvider attribute="class">
-      <Layout className={cn(hubot.variable, sans.variable, "font-sans", "duration-200", "transition-colors")}>
+      <Layout className={cn(hubot.variable, sans.variable, "font-sans", "text-base-content")}>
         <GoogleAnalytics trackPageViews />
         <DefaultSeo
           {...defaultSeo}
