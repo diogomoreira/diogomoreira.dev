@@ -1,0 +1,102 @@
+baseURL = "https://diogomoreira.dev/"
+languageCode = "en-US"
+title = "Diogo Moreira"
+theme = ""
+
+[build]
+[build.buildStats]
+enable = true
+[[build.cachebusters]]
+source = 'assets/notwatching/hugo_stats\.json'
+target = 'css'
+[[build.cachebusters]]
+source = '(postcss|tailwind)\.config\.js'
+target = 'css'
+[module]
+[[module.mounts]]
+source = 'assets'
+target = 'assets'
+[[module.mounts]]
+disableWatch = true
+source = 'hugo_stats.json'
+target = 'assets/notwatching/hugo_stats.json'
+
+[markup]
+[markup.highlight]
+style = "github-dark" # or dracula, monokai, nord, etc.
+lineNos = true
+codeFences = true
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true # allows raw HTML in Markdown
+
+[outputs]
+home = ["HTML"]
+page = ["HTML"]
+section = ["HTML"]
+
+[taxonomies]
+tag = "tags"
+category = "categories"
+
+# Optional: set default params per section
+[params]
+version = "4.0.0"
+description = "My thoughts about life, software development, games, music and so forth."
+[params.blog]
+dateFormat = "January 2, 2006"
+
+[params.giscus]
+repo = "diogomoreira/diogomoreira.dev"
+repoId = "MDEwOlJlcG9zaXRvcnkzNjM3NTY5NTM="
+category = "General"
+categoryId = "DIC_kwDOFa59mc4CV9_B"
+mapping = "pathname"
+strict = "1"
+reactionsEnabled = "1"
+emitMetadata = "1"
+inputPosition = "bottom"
+lang = "en"
+
+[pagination]
+pagerSize = 5
+
+[[menus.main]]
+name = "About"
+url = "/about"
+weight = 1
+
+[[menus.main]]
+name = "Blog"
+url = "/blog"
+weight = 2
+
+[[menus.main]]
+name = "Academic"
+url = "/academic"
+weight = 3
+
+[[menus.main]]
+name = "Projects"
+url = "/projects"
+weight = 4
+
+[[menus.main]]
+name = "Uses"
+url = "/uses"
+weight = 5
+
+[[menus.main]]
+name = "Photos"
+url = "/photos"
+weight = 6
+
+[[menus.main]]
+name = "Snippets"
+url = "/snippets"
+weight = 7
+
+[[menus.main]]
+name = "Picks"
+url = "/picks"
+weight = 8

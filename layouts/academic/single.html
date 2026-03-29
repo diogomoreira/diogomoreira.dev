@@ -1,0 +1,24 @@
+{{ define "main" }}
+  <h1 class="text-4xl mb-6 font-semibold text-base-content">{{ .Title }}</h1>
+
+  <div class="prose max-w-4xl">
+    {{ .Content }}
+    <h2 class="text-lg">Latest publications</h2>
+
+    {{/* Pull papers from the papers section */}}
+    <ul>
+      {{ $papers := where .Site.RegularPages "Section" "papers" }}
+      {{ range ($papers.ByParam "year").Reverse }}
+        <li class="mb-4">
+          <a href="{{ .Params.link }}" class="link link-primary font-medium">
+            {{ .Title }}
+          </a>
+          {{ with .Params.year }}
+            <span class="badge badge-soft badge-primary badge-sm ml-2">{{ . }}</span>
+          {{ end }}
+        </li>
+        {{/* your paper card markup here */}}
+      {{ end }}
+    </ul>
+  </div>
+{{ end }}

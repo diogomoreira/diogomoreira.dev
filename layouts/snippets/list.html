@@ -1,0 +1,45 @@
+{{ define "main" }}
+  <header class="mb-10">
+    <h1 class="text-3xl font-semibold text-base-content" style="letter-spacing: -0.02em;">Snippets</h1>
+    {{ with .Content }}
+      <div class="mt-2 text-sm text-base-content/70">{{ . }}</div>
+    {{ end }}
+  </header>
+
+  {{ if .Pages }}
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {{ range .Pages.ByDate.Reverse }}
+        <a
+          href="{{ .RelPermalink }}"
+          class="group card bg-base-200 border border-base-300 hover:border-base-content/20 transition-colors overflow-hidden"
+        >
+          <div
+            class="px-4 pt-4 pb-3 font-mono text-xs leading-relaxed text-base-content/50 overflow-hidden"
+            style="max-height: 130px;
+                      border-bottom: 1px solid oklch(var(--b3));
+                      mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+                      -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);"
+          >
+            {{ .RawContent | truncate 300 | htmlEscape | safeHTML }}
+          </div>
+
+          <div class="card-body p-4 pt-3 flex-row items-center justify-between gap-2">
+            <div class="min-w-0">
+              <span class="block text-sm font-medium text-base-content truncate">
+                {{ .Title }}
+              </span>
+              {{ with .Params.description }}
+                <span class="block text-xs text-base-content/40 truncate mt-0.5">{{ . }}</span>
+              {{ end }}
+            </div>
+            {{ with .Params.language }}
+              <span class="badge badge-outline badge-sm font-mono shrink-0">{{ . }}</span>
+            {{ end }}
+          </div>
+        </a>
+      {{ end }}
+    </div>
+  {{ else }}
+    <p class="text-sm text-base-content/40">No snippets yet.</p>
+  {{ end }}
+{{ end }}

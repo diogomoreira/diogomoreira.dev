@@ -1,0 +1,60 @@
+{{ define "main" }}
+  <section class="mb-16">
+    <h1 class="text-4xl font-semibold text-base-content mb-6">
+      {{ .Title }}
+    </h1>
+    <div class="text-base leading-relaxed text-base-content/70">
+      {{ .Content }}
+    </div>
+  </section>
+
+  {{ $posts := where .Site.RegularPages "Section" "blog" }}
+  {{ if $posts }}
+    <section class="mb-14">
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="text-xs font-semibold uppercase tracking-widest text-base-content/40">Recent Posts</h2>
+        <a href="/blog" class="text-xs link link-primary">All posts →</a>
+      </div>
+      <ul class="list-none p-0 m-0">
+        {{ range first 3 $posts.ByDate.Reverse }}
+          <li class="border-b py-2 border-base-300">
+            <a href="{{ .RelPermalink }}" class="flex items-center justify-between group">
+              <span class="text-sm font-medium text-base-content group-hover:opacity-70 transition-opacity">
+                {{ .Title }}
+              </span>
+              <time class="mt-1 block text-xs text-base-content/40" datetime="{{ .Date.Format " 2006-01-02" }}">
+                {{ .Date.Format "January 2, 2006" }}
+              </time>
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    </section>
+  {{ end }}
+
+  {{ $picks := where .Site.RegularPages "Section" "picks" }}
+  {{ if $picks }}
+    <section>
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="text-xs font-semibold uppercase tracking-widest text-base-content/40">Latest Picks</h2>
+        <a href="/picks" class="text-xs link link-primary">All picks →</a>
+      </div>
+      <ul class="list-none p-0 m-0">
+        {{ range first 3 $picks.ByDate.Reverse }}
+          <li class="border-b py-2 border-base-300">
+            <a href="{{ .RelPermalink }}" class="group flex items-start gap-3">
+              <div>
+                <span class="text-sm font-medium text-base-content group-hover:opacity-70 transition-opacity">
+                  {{ .Title }}
+                </span>
+                {{ with .Params.medium }}
+                  <span class="ml-2 text-xs text-base-content/40">{{ . }}</span>
+                {{ end }}
+              </div>
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    </section>
+  {{ end }}
+{{ end }}

@@ -1,0 +1,148 @@
+{{ define "main" }}
+  <header class="mb-10">
+    <h1 class="text-3xl font-semibold text-base-content" style="letter-spacing: -0.02em;">Picks</h1>
+    {{ with .Content }}
+      <div class="mt-2 text-sm text-base-content/70">{{ . }}</div>
+    {{ end }}
+  </header>
+
+  {{ if .Pages }}
+
+    {{ $mediumColors := dict
+      "movie" "badge-primary"
+      "series" "badge-info"
+      "tvseries" "badge-info"
+      "music" "badge-secondary"
+      "book" "badge-warning"
+      "game" "badge-success"
+      "podcast" "badge-accent"
+      "other" "badge-ghost"
+    }}
+
+    {{ $paginator := .Paginate (.Pages.ByDate.Reverse) }}
+
+    {{/* Pagination status + controls — top */}}
+    <div class="flex items-center justify-between mb-4">
+      {{/* Status: "Showing 1–10 of 23" */}}
+      <p class="text-xs text-base-content/40">
+        {{ $first := add (mul (sub $paginator.PageNumber 1) $paginator.PagerSize) 1 }}
+        {{ $last := math.Min (mul $paginator.PageNumber $paginator.PagerSize) $paginator.TotalNumberOfElements }}
+        Showing {{ $first }}–{{ $last }} of
+        {{ $paginator.TotalNumberOfElements }}
+      </p>
+
+      {{ if gt $paginator.TotalPages 1 }}
+        <div class="join">
+          {{ if $paginator.HasPrev }}
+            <a href="{{ $paginator.Prev.URL }}" class="join-item btn btn-xs">«</a>
+          {{ else }}
+            <button class="join-item btn btn-xs btn-disabled">«</button>
+          {{ end }}
+
+          {{ range $paginator.Pagers }}
+            {{ if eq . $paginator }}
+              <button class="join-item btn btn-xs btn-active">{{ .PageNumber }}</button>
+            {{ else }}
+              <a href="{{ .URL }}" class="join-item btn btn-xs">{{ .PageNumber }}</a>
+            {{ end }}
+          {{ end }}
+
+          {{ if $paginator.HasNext }}
+            <a href="{{ $paginator.Next.URL }}" class="join-item btn btn-xs">»</a>
+          {{ else }}
+            <button class="join-item btn btn-xs btn-disabled">»</button>
+          {{ end }}
+        </div>
+      {{ end }}
+
+    </div>
+
+    {{/* List */}}
+    <ul class="list bg-base-100 shadow-sm border border-base-300">
+      {{ range $paginator.Pages }}
+        {{ $medium := .Params.medium | default "other" }}
+        {{ $badgeClass := index $mediumColors $medium | default "badge-ghost" }}
+
+
+        <li class="list-row items-start!">
+          {{/* Cover — fixed width, natural height */}}
+          <div class="shrink-0 w-36">
+            {{ with .Params.cover }}
+              <img src="{{ . }}" alt="{{ $.Title }}" class="w-36 border-2 border-base-200 shadow-md object-cover" />
+            {{ else }}
+              <div class="w-36 h-36 bg-base-200 flex items-center justify-center text-base-content/20">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                  <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                </svg>
+              </div>
+            {{ end }}
+          </div>
+
+          {{/* Title + badges */}}
+          <div class="list-col-grow min-w-0 space-y-2">
+            <div class="font-semibold text-xl text-base-content leading-snug flex items-center justify-between">
+              <span class="text-ellipsis">{{ .Title }}</span>
+            </div>
+            <span class="badge {{ $badgeClass }} badge-sm rounded-none">{{ $medium }}</span>
+            <div class="flex items-center text-neutral flex-wrap gap-2 mt-1">
+              {{ if not .Date.IsZero }}
+                <span
+                  >Added on
+                  <time datetime="{{ .Date.Format " 2006-01-02" }}">
+                    {{ .Date.Format "January 2, 2006" }}
+                  </time></span
+                >
+              {{ end }}
+            </div>
+            {{ with .Content }}
+              <div class="list-col-wrap text-base-content/60 leading-relaxed prose prose-sm max-w-none">
+                {{ . }}
+              </div>
+            {{ end }}
+          </div>
+        </li>
+      {{ end }}
+    </ul>
+
+    {{/* Pagination controls — bottom */}}
+    {{ if gt $paginator.TotalPages 1 }}
+      <div class="flex justify-center mt-8">
+        <div class="join">
+          {{ if $paginator.HasPrev }}
+            <a href="{{ $paginator.Prev.URL }}" class="join-item btn btn-sm">«</a>
+          {{ else }}
+            <button class="join-item btn btn-sm btn-disabled">«</button>
+          {{ end }}
+
+          {{ range $paginator.Pagers }}
+            {{ if eq . $paginator }}
+              <button class="join-item btn btn-sm btn-active">{{ .PageNumber }}</button>
+            {{ else }}
+              <a href="{{ .URL }}" class="join-item btn btn-sm">{{ .PageNumber }}</a>
+            {{ end }}
+          {{ end }}
+
+          {{ if $paginator.HasNext }}
+            <a href="{{ $paginator.Next.URL }}" class="join-item btn btn-sm">»</a>
+          {{ else }}
+            <button class="join-item btn btn-sm btn-disabled">»</button>
+          {{ end }}
+        </div>
+      </div>
+    {{ end }}
+
+  {{ else }}
+    <p class="text-sm text-base-content/40">No picks yet.</p>
+  {{ end }}
+{{ end }}

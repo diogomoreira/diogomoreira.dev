@@ -1,0 +1,52 @@
+{{ define "main" }}
+  <header class="mb-12">
+    <h1 class="text-4xl mb-6 font-semibold text-base-content">Blog</h1>
+    {{ with .Content }}
+      <div class="mt-2 text-sm text-base-content/70">{{ . }}</div>
+    {{ end }}
+  </header>
+
+  {{ if .Pages }}
+    {{ range (.Pages.ByDate.Reverse).GroupByDate "2006" }}
+      <section class="mb-10">
+        <h2 class="text-xs font-semibold uppercase tracking-widest mb-5 text-base-content/40">
+          {{ .Key }}
+        </h2>
+        <ul class="list-none p-0 m-0">
+          {{ range .Pages }}
+            <li class="flex items-baseline justify-between gap-4 py-3 border-b border-base-300">
+              <a
+                href="{{ .RelPermalink }}"
+                class="text-sm font-medium text-base-content hover:opacity-60 transition-opacity flex-1 min-w-0 truncate"
+              >
+                {{ .Title }}
+              </a>
+              <div class="flex items-center gap-3 shrink-0">
+                {{ with .Params.categories }}
+                  {{ range first 3 . }}
+                    <a
+                      href="{{ "/categories/" | relURL }}{{ . | urlize }}"
+                      class="badge badge-primary badge-sm hidden sm:inline-flex hover:opacity-70 transition-opacity"
+                    >
+                      {{ . }}
+                    </a>
+                  {{ end }}
+                {{ end }}
+                {{ with .Params.tags }}
+                  {{ range first 5 . }}
+                    <span class="badge badge-ghost badge-sm hidden sm:inline-flex">#{{ . }}</span>
+                  {{ end }}
+                {{ end }}
+                <time class="text-xs tabular-nums text-base-content/40" datetime="{{ .Date.Format " 2006-01-02" }}">
+                  {{ .Date.Format "Jan 02" }}
+                </time>
+              </div>
+            </li>
+          {{ end }}
+        </ul>
+      </section>
+    {{ end }}
+  {{ else }}
+    <p class="text-sm text-base-content/40">Nothing here yet.</p>
+  {{ end }}
+{{ end }}

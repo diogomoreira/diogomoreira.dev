@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="{{ .Site.LanguageCode }}" data-theme="sunrise">
+  <head>
+    {{ partial "head.html" . }}
+    {{ block "head" . }}{{ end }}
+  </head>
+
+  <body class="bg-base-100 min-h-screen lg:flex">
+    {{ partial "sidebar.html" . }}
+    {{ partial "grain-effect.html" . }}
+
+
+    <div class="flex-1 flex flex-col min-h-screen lg:ml-72">
+      <main class="flex-1 w-full max-w-4xl mx-auto px-6 py-12 md:py-16">
+        {{ block "main" . }}{{ end }}
+      </main>
+    </div>
+
+    {{ block "scripts" . }}{{ end }}
+    {{ partial "theme-toggle-script.html" . }}
+  </body>
+</html>

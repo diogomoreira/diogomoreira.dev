@@ -1,0 +1,52 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>{{ if .IsHome -}}{{ .Site.Title }}{{- else -}}{{ .Title }} — {{ .Site.Title }}{{- end }}</title>
+
+<meta
+  name="description"
+  content="{{ with .Description }}
+    {{ . }}
+  {{ else }}
+    {{ with .Site.Params.description }}{{ . }}{{ end }}
+  {{ end }}"
+/>
+
+{{/* Prevent flash of wrong theme */}}
+<script>
+  (function () {
+    const stored = localStorage.getItem("theme");
+    const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches ? "midnight" : "sunrise";
+    document.documentElement.setAttribute("data-theme", stored || preferred);
+  })();
+</script>
+
+{{ with (templates.Defer (dict "key" "global")) }}
+  {{ partial "css.html" . }}
+{{ end }}
+
+{{/* Favicon */}}
+{{ with resources.Get "images/logo.png" }}
+  <link rel="icon" type="image/png" href="{{ .RelPermalink }}" />
+{{ end }}
+{{/* Open Graph */}}
+
+{{/* Fonts */}}
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Hubot+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&display=swap"
+  rel="stylesheet"
+/>
+
+<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}" />
+<meta
+  property="og:description"
+  content="{{ with .Description }}
+    {{ . }}
+  {{ else }}
+    {{ .Site.Params.description }}
+  {{ end }}"
+/>
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
+<meta property="og:url" content="{{ .Permalink }}" />

@@ -1,0 +1,159 @@
+{{/* ── Mobile top bar ───────────────────────────────────── */}}
+<div class="lg:hidden flex items-center justify-between px-6 py-4 bg-neutral text-neutral-content">
+  <a href="/" class="font-[Hubot_Sans] font-semibold tracking-tight">
+    {{ .Site.Title }}
+  </a>
+  <div class="flex items-center gap-2">
+    <button
+      id="theme-toggle"
+      aria-label="Toggle dark mode"
+      class="btn btn-ghost btn-sm btn-square text-neutral-content"
+    >
+      {{ partial "icons/sun.html" . }}
+      {{ partial "icons/moon.html" . }}
+    </button>
+    <button id="sidebar-toggle" aria-label="Toggle menu" class="btn btn-ghost btn-sm btn-square text-neutral-content">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="4" x2="20" y1="6" y2="6" />
+        <line x1="4" x2="20" y1="12" y2="12" />
+        <line x1="4" x2="20" y1="18" y2="18" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+{{/* ── Sidebar ────────────────────────────────────────────── */}}
+<aside
+  id="sidebar"
+  aria-label="Menu sidebar"
+  class="hidden lg:flex flex-col fixed top-0 left-0 h-full w-72 z-40
+              bg-neutral text-neutral-content overflow-y-auto"
+>
+  <div class="flex flex-col flex-1 px-8 py-10">
+    {{/* Site identity */}}
+    <div class="mb-10 flex flex-col justify-center items-center">
+      <img
+        src="/images/profile/profile.jpg"
+        alt="{{ .Site.Title }}"
+        class="w-36 h-36 rounded-full object-cover mb-4 ring-4 shadow-md shadow-black ring-neutral-content"
+      />
+      <a
+        href="/"
+        class="block font-[Hubot_Sans] text-3xl font-bold tracking-tight text-neutral-content hover:opacity-80 transition-opacity"
+      >
+        {{ .Site.Title }}
+      </a>
+      {{ with .Site.Params.description }}
+        <p class="mt-2 text-sm text-neutral-content/60 leading-relaxed">{{ . }}</p>
+      {{ end }}
+    </div>
+
+    {{/* Navigation */}}
+    <nav class="flex-1">
+      <ul class="space-y-1 font-[Hubot_Sans] list-none p-0 m-0">
+        {{ range .Site.Menus.main }}
+          <li>
+            {{ $isActive := or ($.IsMenuCurrent `main` .) ($.HasMenuCurrent `main` .) (hasPrefix $.RelPermalink .URL) }}
+            <a
+              href="{{ .URL }}"
+              class="flex items-center gap-2 px-3 py-2 rounded-btn text-sm transition-colors
+                      {{ if $isActive }}
+                bg-neutral-content/10 text-neutral-content font-medium
+              {{ else }}
+                text-neutral-content/60 hover:text-neutral-content hover:bg-neutral-content/5
+              {{ end }}
+"
+            >
+              {{ .Name }}
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    </nav>
+
+    {{/* Bottom: theme toggle + copyright */}}
+    <div class="mt-10 pt-6 border-t border-neutral-content/10 flex items-center justify-between">
+      <div class="text-xs">
+        <div class="text-neutral-content">
+          <span class="">© {{ now.Year }} {{ .Site.Title }}</span>
+        </div>
+        <div class="text-neutral-content/40">
+          <strong>v{{ .Site.Params.Version }}</strong> Built with <a href="https://hugo.io">Hugo</a>
+        </div>
+      </div>
+      <button
+        id="theme-toggle-desktop"
+        aria-label="Toggle dark mode"
+        class="btn btn-ghost btn-sm btn-square text-neutral-content/60 hover:text-neutral-content"
+      >
+        {{ partial "icons/sun.html" . }}
+        {{ partial "icons/moon.html" . }}
+      </button>
+    </div>
+  </div>
+</aside>
+
+{{/* ── Mobile sidebar drawer ─────────────────────────────── */}}
+<div id="sidebar-drawer" class="lg:hidden hidden fixed inset-0 z-50">
+  {{/* Backdrop */}}
+  <div id="sidebar-backdrop" class="absolute inset-0 bg-black/40" onclick="closeSidebar()"></div>
+
+  {{/* Drawer panel */}}
+  <aside
+    class="absolute top-0 left-0 h-full w-72 bg-neutral text-neutral-content flex flex-col px-8 py-10 overflow-y-auto"
+  >
+    <a
+      href="/"
+      class="block font-[Hubot_Sans] text-2xl font-bold tracking-tight text-neutral-content mb-10 hover:opacity-80 transition-opacity"
+    >
+      {{ .Site.Title }}
+    </a>
+    <nav class="flex-1">
+      <ul class="space-y-1 font-[Hubot_Sans] list-none p-0 m-0">
+        {{ range .Site.Menus.main }}
+          <li>
+            {{ $isActive := or ($.IsMenuCurrent `main` .) ($.HasMenuCurrent `main` .) (hasPrefix $.RelPermalink .URL) }}
+            <a
+              href="{{ .URL }}"
+              class="flex items-center gap-2 px-3 py-2 rounded-btn text-sm transition-colors
+                      {{ if $isActive }}
+                bg-neutral-content/10 text-neutral-content font-medium
+              {{ else }}
+                text-neutral-content/60 hover:text-neutral-content hover:bg-neutral-content/5
+              {{ end }}"
+            >
+              {{ .Name }}
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    </nav>
+    <div class="mt-10 pt-6 border-t border-neutral-content/10 text-xs">
+      <div class="text-neutral-content">
+        <span class="">© {{ now.Year }} {{ .Site.Title }}</span>
+      </div>
+      <div class="text-neutral-content/40">
+        <strong>v{{ .Site.Params.Version }}</strong> Built with <a href="https://hugo.io">Hugo</a>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<script>
+  function closeSidebar() {
+    document.getElementById("sidebar-drawer").classList.add("hidden");
+  }
+  document.getElementById("sidebar-toggle").addEventListener("click", function () {
+    document.getElementById("sidebar-drawer").classList.remove("hidden");
+  });
+</script>
