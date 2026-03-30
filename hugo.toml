@@ -45,6 +45,36 @@ description = "My thoughts about life, software development, games, music and so
 [params.blog]
 dateFormat = "January 2, 2006"
 
+[[params.social]]
+name = "GitHub"
+url = "https://github.com/diogomoreira"
+icon = "github"
+
+[[params.social]]
+name = "LinkedIn"
+url = "https://linkedin.com/in/diogodmoreira"
+icon = "linkedin"
+
+[[params.social]]
+name = "Mastodon"
+url = "https://hachyderm.io/@diogomoreira"
+icon = "mastodon"
+
+[[params.social]]
+name = "Email"
+url = "mailto:diogo.dmoreira@gmail.com"
+icon = "email"
+
+[[params.social]]
+name = "Instagram"
+url = "https://instagram.com/diogo.dmoreira"
+icon = "instagram"
+
+[[params.social]]
+name = "RSS"
+url = "/index.xml"
+icon = "rss"
+
 [params.giscus]
 repo = "diogomoreira/diogomoreira.dev"
 repoId = "MDEwOlJlcG9zaXRvcnkzNjM3NTY5NTM="

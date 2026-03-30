@@ -41,7 +41,7 @@
 >
   <div class="flex flex-col flex-1 px-8 py-10">
     {{/* Site identity */}}
-    <div class="mb-10 flex flex-col justify-center items-center">
+    <div class="mb-6 flex flex-col justify-center items-center">
       <img
         src="/images/profile/profile.jpg"
         alt="{{ .Site.Title }}"
@@ -57,6 +57,7 @@
         <p class="mt-2 text-sm text-neutral-content/60 leading-relaxed">{{ . }}</p>
       {{ end }}
     </div>
+    {{ partial "social.html" . }}
 
     {{/* Navigation */}}
     <nav class="flex-1">
@@ -138,6 +139,7 @@
         {{ end }}
       </ul>
     </nav>
+    {{ partial "social.html" . }}
     <div class="mt-10 pt-6 border-t border-neutral-content/10 text-xs">
       <div class="text-neutral-content">
         <span class="">© {{ now.Year }} {{ .Site.Title }}</span>
