@@ -32,7 +32,7 @@ unsafe = true # allows raw HTML in Markdown
 [outputs]
 home = ["HTML"]
 page = ["HTML"]
-section = ["HTML"]
+section = ["HTML", "RSS"]
 
 [taxonomies]
 tag = "tags"
@@ -57,6 +57,7 @@ icon = "linkedin"
 
 [[params.social]]
 name = "Mastodon"
+handle = "@diogomoreira@hachyderm.io"
 url = "https://hachyderm.io/@diogomoreira"
 icon = "mastodon"
 
