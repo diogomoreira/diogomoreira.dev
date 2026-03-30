@@ -1,7 +1,6 @@
 baseURL = "https://diogomoreira.dev/"
 languageCode = "en-US"
 title = "Diogo Moreira"
-theme = ""
 
 [build]
 [build.buildStats]
