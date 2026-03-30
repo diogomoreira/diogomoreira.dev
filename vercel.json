@@ -1,0 +1,9 @@
+{
+  "buildCommand": "hugo --minify --baseURL $VERCEL_URL",
+  "outputDirectory": "public",
+  "installCommand": "npm install",
+  "framework": null,
+  "env": {
+    "HUGO_VERSION": "0.159.1"
+  }
+}
