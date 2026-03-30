@@ -57,6 +57,16 @@
 {{ end }}
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
 <meta property="og:url" content="{{ .Permalink }}" />
+{{/* og:image — page cover > site default */}}
+{{ $ogImage := .Site.Params.ogImage }}
+{{ with .Params.cover }}
+  {{ $ogImage = . }}
+{{ end }}
+{{ with $ogImage }}
+  <meta property="og:image" content="{{ . | absURL }}" />
+{{ end }}
+
+
 <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ " /index.xml" | absURL }}" />
 
 {{/* Per-section feed when inside a section */}}
