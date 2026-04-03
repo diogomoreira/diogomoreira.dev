@@ -22,7 +22,7 @@
 </script>
 
 {{ if not hugo.IsDevelopment }}
-  {{ $critical := resources.Get "css/critical.css" | resources.Minify | resources.ToCSS }}
+  {{ $critical := resources.Get "css/critical.css" | resources.Minify }}
   <style>{{ $critical.Content | safeCSS }}</style>
 {{ end }}
 {{ with (templates.Defer (dict "key" "global")) }}
