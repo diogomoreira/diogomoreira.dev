@@ -1,5 +1,6 @@
 ---
 title: Academic
+description: Academic background and publications
 ---
 
 I've majored in System Analysis and Development in 2012 at Instituto Federal da Paraíba. After this, i've made a specialization in Software Engineering between 2013~2014 at Estácio. Lastly, I did my master's in Software Engineer at CESAR School (Recife, Brazil) in 2019. I'm working as a Adjunct Professor since 2014 at Instituto Federal da Paraíba (in the same campus I did my major), where I lectured subjects related to **Software Engineering** topics, such as **Software Quality and Testing** and **Design Patterns**

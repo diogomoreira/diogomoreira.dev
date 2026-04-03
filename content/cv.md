@@ -1,8 +1,8 @@
 ---
-title: "CV"
+title: "Curriculum"
+description: "My professional journey, including academic background and publications."
 draft: false
 layout: "cv"
-description: "My work experience and background."
 ---
 
 I am a skilled professional with more than 13 years of combined expertise in teaching, researching, and crafting software solutions, primarily centered on the Java platform and Spring Framework. Worked on a variety of projects including solutions for financial services and healthcare providers. Self-motivated and always **eager to learn new technologies and to grow as a professional**. I value **collaboration**, **quality**, and **creativity** in my work.
