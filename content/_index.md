@@ -1,5 +1,6 @@
 ---
 title: "Diogo Moreira"
+cover: /images/profile/cover.jpg
 draft: false
 ---
 

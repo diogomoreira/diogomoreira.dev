@@ -2,7 +2,7 @@
 title: "Paprika (2006)"
 medium: "movie"
 link: "https://www.imdb.com/title/tt0851578/"
-cover: "/images/bookmarks/paprika.jpg"
+cover: "/images/picks/paprika.jpg"
 date: "2024-09-14"
 tags:
   - "anime"

@@ -10,12 +10,12 @@
     {{ partial "grain-effect.html" . }}
 
 
-    <div class="flex-1 flex flex-col min-h-screen lg:ml-72">
-      <main class="flex-1 w-full max-w-4xl mx-auto px-6 py-12 md:py-16">
+    <div class="flex-1 flex flex-col min-h-screen lg:ml-80">
+      <main class="flex-1 w-full max-w-3xl mx-auto px-6 py-12 md:py-16">
         {{ block "main" . }}{{ end }}
       </main>
     </div>
-
+    <img src="" alt="" />
     {{ block "scripts" . }}{{ end }}
     {{ partial "theme-toggle-script.html" . }}
   </body>

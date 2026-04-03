@@ -1,7 +1,7 @@
 {{ define "main" }}
   <h1 class="text-4xl mb-6 font-semibold text-base-content">{{ .Title }}</h1>
 
-  <div class="prose max-w-4xl">
+  <div class="prose max-w-3xl">
     {{ .Content }}
     <h2 class="text-lg">Latest publications</h2>
 
@@ -14,7 +14,7 @@
             {{ .Title }}
           </a>
           {{ with .Params.year }}
-            <span class="badge badge-soft badge-primary badge-sm ml-2">{{ . }}</span>
+            <span class="badge badge-accent badge-sm ml-2">{{ . }}</span>
           {{ end }}
         </li>
         {{/* your paper card markup here */}}

@@ -2,7 +2,7 @@
 title: "NieR: Automata"
 medium: "game"
 link: "https://amzn.to/3cC30xj"
-cover: "/images/bookmarks/nier-automata.jpg"
+cover: "/images/picks/nier-automata.jpg"
 date: "2021-04-17"
 tags:
   - "rpg"

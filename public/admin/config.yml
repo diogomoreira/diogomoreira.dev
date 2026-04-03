@@ -13,6 +13,8 @@ collections:
     folder: "content/blog"
     create: true
     slug: "{{year}}/{{month}}/{{slug}}"
+    media_folder: "assets/images/posts"
+    public_folder: "/images/posts"
     nested:
       depth: 3
     fields:
@@ -32,6 +34,8 @@ collections:
     folder: "content/photos"
     create: true
     slug: "{{year}}/{{month}}/{{slug}}"
+    media_folder: "assets/images/photos"
+    public_folder: "/images/photos"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }
@@ -56,6 +60,8 @@ collections:
     folder: "content/snippets"
     create: true
     slug: "{{slug}}"
+    media_folder: "assets/images/snippets"
+    public_folder: "/images/snippets"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }
@@ -70,6 +76,8 @@ collections:
     folder: "content/picks"
     create: true
     slug: "{{slug}}"
+    media_folder: "assets/images/picks"
+    public_folder: "/images/picks"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }

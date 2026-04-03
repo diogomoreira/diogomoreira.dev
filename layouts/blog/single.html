@@ -23,17 +23,38 @@
       {{ end }}
 
 
-      <div class="mt-4 flex items-center gap-4">
-        {{ if not .Date.IsZero }}
-          <time class="text-xs text-base-content/40" datetime="{{ .Date.Format " 2006-01-02" }}">
+      <div class="mt-4 flex items-center gap-2 text-xs">
+        {{ $hasDate := not .Date.IsZero }}
+        {{ $hasCategories := .Params.Categories }}
+        {{ $hasTags := .Params.tags }}
+
+        {{ if $hasDate }}
+          <time class="text-xs" datetime="{{ .Date.Format " 2006-01-02" }}">
             {{ .Date.Format "January 2, 2006" }}
           </time>
         {{ end }}
 
+        {{ if and $hasDate (or $hasCategories $hasTags) }}
+          <span class="mx-2 text-base-content/30">|</span>
+        {{ end }}
+
+        {{ with .Params.Categories }}
+          <div class="flex gap-1 flex-wrap items-center text-xs">
+            {{ range $i, $cat := . }}
+              <span class="badge badge-secondary badge-sm text-xs">{{ $cat }}</span>{{ if lt (add $i 1) (len .) }}
+              {{ end }}
+            {{ end }}
+          </div>
+        {{ end }}
+
+        {{ if and .Params.Categories .Params.tags }}
+          <span class="mx-2 text-base-content/30">|</span>
+        {{ end }}
+
         {{ with .Params.tags }}
-          <div class="flex gap-2 flex-wrap">
-            {{ range . }}
-              <span class="badge badge-ghost badge-sm">{{ . }}</span>
+          <div class="flex gap-1 flex-wrap items-center text-xs">
+            {{ range $i, $tag := . }}
+              <span class="badge badge-ghost badge-sm text-xs">#{{ $tag }}</span>{{ if lt (add $i 1) (len .) }}{{ end }}
             {{ end }}
           </div>
         {{ end }}
@@ -53,7 +74,7 @@
     {{ end }}
 
 
-    <div class="prose prose-base max-w-none">
+    <div class="prose prose-pre:my-0 prose-pre:p-2 max-w-none">
       {{ with .Params.disclaimer }}
         <div role="alert" class="alert alert-warning">
           <svg

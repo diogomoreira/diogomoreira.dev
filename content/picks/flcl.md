@@ -2,7 +2,7 @@
 title: "FLCL"
 medium: "tvseries"
 link: "https://www.adultswim.com/videos/flcl"
-cover: "/images/bookmarks/flcl.jpeg"
+cover: "/images/picks/flcl.jpeg"
 date: "2023-06-04"
 tags:
   - "anime"

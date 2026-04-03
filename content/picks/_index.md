@@ -1,0 +1,5 @@
+---
+title: "Picks"
+---
+
+This is where I share some things I've been really enjoying lately. From music, podcasts, books, etc. Take a look and see if anything catches your eye!

@@ -1,8 +1,10 @@
 {{ define "main" }}
   <header class="mb-10">
-    <h1 class="text-3xl font-semibold text-base-content" style="letter-spacing: -0.02em;">Snippets</h1>
+    <h1 class="text-4xl mb-6 font-semibold text-base-content">
+      {{ .Title }}
+    </h1>
     {{ with .Content }}
-      <div class="mt-2 text-sm text-base-content/70">{{ . }}</div>
+      <div class="prose max-w-3xl">{{ . }}</div>
     {{ end }}
   </header>
 
@@ -11,7 +13,7 @@
       {{ range .Pages.ByDate.Reverse }}
         <a
           href="{{ .RelPermalink }}"
-          class="group card bg-base-200 border border-base-300 hover:border-base-content/20 transition-colors overflow-hidden"
+          class="group card bg-base-100 border border-base-300 hover:border-base-content/20 transition-colors overflow-hidden"
         >
           <div
             class="px-4 pt-4 pb-3 font-mono text-xs leading-relaxed text-base-content/50 overflow-hidden"
@@ -33,7 +35,7 @@
               {{ end }}
             </div>
             {{ with .Params.language }}
-              <span class="badge badge-outline badge-sm font-mono shrink-0">{{ . }}</span>
+              <span class="badge badge-sm font-mono shrink-0">{{ . }}</span>
             {{ end }}
           </div>
         </a>

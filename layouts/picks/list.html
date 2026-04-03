@@ -1,8 +1,10 @@
 {{ define "main" }}
   <header class="mb-10">
-    <h1 class="text-3xl font-semibold text-base-content" style="letter-spacing: -0.02em;">Picks</h1>
+    <h1 class="text-4xl mb-6 font-semibold text-base-content">
+      {{ .Title }}
+    </h1>
     {{ with .Content }}
-      <div class="mt-2 text-sm text-base-content/70">{{ . }}</div>
+      <div class="prose max-w-3xl">{{ . }}</div>
     {{ end }}
   </header>
 
@@ -64,11 +66,25 @@
         {{ $badgeClass := index $mediumColors $medium | default "badge-ghost" }}
 
 
-        <li class="list-row items-start!">
-          {{/* Cover — fixed width, natural height */}}
-          <div class="shrink-0 w-36">
+        <li class="list-row flex flex-col sm:flex-row items-start">
+          {{/* Cover and title wrapped in a link using .Params.url if present */}}
+          {{ $itemLink := .Params.link | default .RelPermalink }}
+          <a
+            href="{{ $itemLink }}"
+            class="shrink-0 w-full flex justify-center sm:w-56 mb-4 sm:mb-0 group focus:outline-none focus:ring-2 focus:ring-primary"
+            {{ if .Params.link }}target="_blank" rel="noopener noreferrer"{{ end }}
+          >
             {{ with .Params.cover }}
-              <img src="{{ . }}" alt="{{ $.Title }}" class="w-36 border-2 border-base-200 shadow-md object-cover" />
+              {{ with resources.Get . }}
+                {{ $img := .Resize "240x" }}
+                {{ with $img }}
+                  <img
+                    src="{{ .RelPermalink }}"
+                    class="w-56 border-2 border-base-200 shadow-md object-cover group-hover:opacity-90 transition"
+                    alt="{{ $.Title }}"
+                  />
+                {{ end }}
+              {{ end }}
             {{ else }}
               <div class="w-36 h-36 bg-base-200 flex items-center justify-center text-base-content/20">
                 <svg
@@ -87,13 +103,16 @@
                 </svg>
               </div>
             {{ end }}
-          </div>
+          </a>
 
-          {{/* Title + badges */}}
-          <div class="list-col-grow min-w-0 space-y-2">
-            <div class="font-semibold text-xl text-base-content leading-snug flex items-center justify-between">
+          <div class="list-col-grow min-w-0 space-y-2 w-full">
+            <a
+              href="{{ $itemLink }}"
+              class="font-semibold text-xl text-base-content leading-snug flex items-center justify-between hover:underline focus:outline-none focus:ring-2 focus:ring-primary"
+              {{ if .Params.link }}target="_blank" rel="noopener noreferrer"{{ end }}
+            >
               <span class="text-ellipsis">{{ .Title }}</span>
-            </div>
+            </a>
             <span class="badge {{ $badgeClass }} badge-sm rounded-none">{{ $medium }}</span>
             <div class="flex items-center text-neutral flex-wrap gap-2 mt-1">
               {{ if not .Date.IsZero }}
@@ -108,6 +127,14 @@
             {{ with .Content }}
               <div class="list-col-wrap text-base-content/60 leading-relaxed prose prose-sm max-w-none">
                 {{ . }}
+              </div>
+            {{ end }}
+            <div class="border-b border-base-300 my-4"></div>
+            {{ with .Params.tags }}
+              <div class="flex flex-wrap gap-1 mt-1">
+                {{ range . }}
+                  <a href="/tags/{{ . | urlize }}/" class="badge badge-xs rounded-none hover:underline">#{{ . }}</a>
+                {{ end }}
               </div>
             {{ end }}
           </div>

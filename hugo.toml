@@ -1,6 +1,11 @@
 baseURL = "https://diogomoreira.dev/"
 languageCode = "en-US"
 title = "Diogo Moreira"
+cover = "cover.jpg"
+
+[params]
+version = "4.0.0"
+description = "My thoughts about life, software development, games, music and so forth."
 
 [build]
 [build.buildStats]
@@ -39,9 +44,6 @@ tag = "tags"
 category = "categories"
 
 # Optional: set default params per section
-[params]
-version = "4.0.0"
-description = "My thoughts about life, software development, games, music and so forth."
 [params.blog]
 dateFormat = "January 2, 2006"
 
@@ -71,11 +73,6 @@ name = "Instagram"
 url = "https://instagram.com/diogo.dmoreira"
 icon = "instagram"
 
-[[params.social]]
-name = "RSS"
-url = "/index.xml"
-icon = "rss"
-
 [params.giscus]
 repo = "diogomoreira/diogomoreira.dev"
 repoId = "MDEwOlJlcG9zaXRvcnkzNjM3NTY5NTM="
@@ -94,6 +91,11 @@ pagerSize = 5
 [[menus.main]]
 name = "About"
 url = "/about"
+weight = 1
+
+[[menus.main]]
+name = "CV"
+url = "/cv"
 weight = 1
 
 [[menus.main]]
@@ -130,3 +132,11 @@ weight = 7
 name = "Picks"
 url = "/picks"
 weight = 8
+
+[[cascade]]
+[cascade.build]
+render = "never"
+list = "always"
+[cascade.target]
+path = "/work/**"
+kind = "page"

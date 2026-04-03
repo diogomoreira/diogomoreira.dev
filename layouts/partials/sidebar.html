@@ -4,15 +4,11 @@
     {{ .Site.Title }}
   </a>
   <div class="flex items-center gap-2">
-    <button
-      id="theme-toggle"
-      aria-label="Toggle dark mode"
-      class="btn btn-ghost btn-sm btn-square text-neutral-content"
-    >
+    <button id="theme-toggle" aria-label="Toggle dark mode" class="btn btn-sm btn-square">
       {{ partial "icons/sun.html" . }}
       {{ partial "icons/moon.html" . }}
     </button>
-    <button id="sidebar-toggle" aria-label="Toggle menu" class="btn btn-ghost btn-sm btn-square text-neutral-content">
+    <button id="sidebar-toggle" aria-label="Toggle menu" class="btn btn-sm btn-square">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="18"
@@ -36,7 +32,7 @@
 <aside
   id="sidebar"
   aria-label="Menu sidebar"
-  class="hidden lg:flex flex-col fixed top-0 left-0 h-full w-72 z-40
+  class="hidden lg:flex flex-col fixed top-0 left-0 h-full w-80 z-40
               bg-neutral text-neutral-content overflow-y-auto"
 >
   <div class="flex flex-col flex-1 px-8 py-10">
@@ -92,11 +88,7 @@
           <strong>v{{ .Site.Params.Version }}</strong> Built with <a href="https://hugo.io">Hugo</a>
         </div>
       </div>
-      <button
-        id="theme-toggle-desktop"
-        aria-label="Toggle dark mode"
-        class="btn btn-ghost btn-sm btn-square text-neutral-content/60 hover:text-neutral-content"
-      >
+      <button id="theme-toggle-desktop" aria-label="Toggle dark mode" class="btn btn-sm btn-square">
         {{ partial "icons/sun.html" . }}
         {{ partial "icons/moon.html" . }}
       </button>

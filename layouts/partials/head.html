@@ -58,7 +58,7 @@
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
 <meta property="og:url" content="{{ .Permalink }}" />
 {{/* og:image — page cover > site default */}}
-{{ $ogImage := .Site.Params.ogImage }}
+{{ $ogImage := .Site.Params.cover }}
 {{ with .Params.cover }}
   {{ $ogImage = . }}
 {{ end }}

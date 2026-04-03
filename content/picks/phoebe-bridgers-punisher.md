@@ -2,7 +2,7 @@
 title: "Phoebe Bridgers - Punisher"
 medium: "music"
 link: "https://open.spotify.com/album/6Pp6qGEywDdofgFC1oFbSH?si=WZktdFvAQNGVHrbM_maTAw"
-cover: "/images/bookmarks/punisher_album_cover.jpg"
+cover: "/images/picks/punisher_album_cover.jpg"
 date: "2023-05-10"
 tags:
   - "indie"
