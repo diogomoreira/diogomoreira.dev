@@ -75,7 +75,7 @@
             {{ if .Params.link }}target="_blank" rel="noopener noreferrer"{{ end }}
           >
             {{ with .Params.cover }}
-              {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "w-56 border-2 border-base-200 shadow-md object-cover group-hover:opacity-90 transition" "sizes" "(min-width: 640px) 14rem, 100vw") }}
+              {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "w-56 border-2 border-base-300 shadow-md object-cover group-hover:opacity-90 transition" "sizes" "(min-width: 640px) 14rem, 100vw") }}
             {{ else }}
               <div class="w-36 h-36 bg-base-200 flex items-center justify-center text-accent">
                 <svg
@@ -105,7 +105,7 @@
               <span class="text-ellipsis">{{ .Title }}</span>
             </a>
             <span class="badge {{ $badgeClass }} badge-sm rounded-none">{{ $medium }}</span>
-            <div class="flex items-center text-neutral flex-wrap gap-2 mt-1">
+            <div class="flex items-center text-xs text-neutral-content flex-wrap gap-2 mt-1">
               {{ if not .Date.IsZero }}
                 <span
                   >Added on
@@ -116,7 +116,7 @@
               {{ end }}
             </div>
             {{ with .Content }}
-              <div class="list-col-wrap text-primary leading-relaxed prose prose-sm max-w-none">
+              <div class="list-col-wrap text-base-content leading-relaxed prose prose-sm max-w-none">
                 {{ . }}
               </div>
             {{ end }}
@@ -124,7 +124,7 @@
             {{ with .Params.tags }}
               <div class="flex flex-wrap gap-1 mt-1">
                 {{ range . }}
-                  <a href="/tags/{{ . | urlize }}/" class="badge badge-xs rounded-none hover:underline">#{{ . }}</a>
+                  <span class="badge badge-sm p-3 rounded-none">#{{ . }}</span>
                 {{ end }}
               </div>
             {{ end }}

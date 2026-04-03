@@ -38,11 +38,18 @@
   <div class="flex flex-col flex-1 px-8 py-10">
     {{/* Site identity */}}
     <div class="mb-6 flex flex-col justify-center items-center">
-      <img
-        src="/images/profile/profile.jpg"
-        alt="{{ .Site.Title }}"
-        class="w-36 h-36 rounded-full object-cover mb-4 ring-4 shadow-md shadow-black ring-neutral-content"
-      />
+      {{ $profile := resources.Get "images/profile/profile.jpg" }}
+      {{ with $profile }}
+        {{ $resized := .Fit "288x288" }}
+        <img
+          src="{{ $resized.RelPermalink }}"
+          width="{{ $resized.Width }}"
+          height="{{ $resized.Height }}"
+          alt="{{ $.Site.Title }}"
+          class="w-36 h-36 rounded-full object-cover mb-4 ring-4 shadow-md shadow-black ring-neutral-content"
+          loading="lazy"
+        />
+      {{ end }}
       <a
         href="/"
         class="block font-[Hubot_Sans] text-3xl font-bold tracking-tight text-neutral-content hover:opacity-80 transition-opacity"
