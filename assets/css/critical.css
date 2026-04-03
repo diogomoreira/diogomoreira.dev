@@ -1,0 +1,24 @@
+/* Critical CSS: Add only above-the-fold styles here. Example below. */
+body {
+  background: var(--color-base-100, #fff);
+  min-height: 100vh;
+}
+header {
+  border-bottom: 1px solid var(--color-base-300, #e5e7eb);
+  background: var(--color-base-100, #fff);
+}
+.w-8 {
+  width: 2rem;
+}
+.h-8 {
+  height: 2rem;
+}
+.text-4xl {
+  font-size: 2.25rem;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.text-base-content {
+  color: var(--color-base-content, #222);
+}

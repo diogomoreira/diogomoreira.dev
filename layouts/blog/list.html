@@ -8,7 +8,7 @@
         href="/blog/index.xml"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-base-content/40 hover:text-base-content transition-colors flex items-center gap-1"
+        class="text-secondary hover:text-secondary transition-colors flex items-center gap-1"
       >
         <span class="w-6">
           {{ partial "icons/social/rss.html" . }}
@@ -25,7 +25,7 @@
 
     {{ range (.Pages.ByDate.Reverse).GroupByDate "2006" }}
       <section class="mb-10">
-        <h2 class="text-xs font-semibold uppercase tracking-widest mb-5 text-base-content/40">
+        <h2 class="text-xs font-semibold uppercase tracking-widest mb-5 text-secondary">
           {{ .Key }}
         </h2>
         <ul class="list-none p-0 m-0">
@@ -55,7 +55,7 @@
                     </a>
                   {{ end }}
                 {{ end }}
-                <time class="text-xs tabular-nums text-base-content/40" datetime="{{ .Date.Format " 2006-01-02" }}">
+                <time class="text-xs tabular-nums text-secondary" datetime="{{ .Date.Format " 2006-01-02" }}">
                   {{ .Date.Format "Jan 02" }}
                 </time>
               </div>
@@ -66,6 +66,6 @@
     {{ end }}
 
   {{ else }}
-    <p class="text-sm text-base-content/40">Nothing here yet.</p>
+    <p class="text-sm text-secondary">Nothing here yet.</p>
   {{ end }}
 {{ end }}

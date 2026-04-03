@@ -5,12 +5,12 @@
         href="{{ .url }}"
         target="{{ if not (hasPrefix .url " /") }}_blank{{ end }}"
         rel="noopener noreferrer"
-        class="flex items-center text-neutral-content/40 hover:text-neutral-content transition-colors"
+        class="flex items-center text-neutral-content hover:text-neutral-content transition-colors"
       >
         <span class="w-6 h-6">
           {{ partial (printf "icons/social/%s.html" .icon) $ }}
         </span>
-        {{/*  <span class="sr-only md:not-sr-only">{{ .name }}</span>  */}}
+        <span class="sr-only">{{ .name }}</span>
       </a>
     {{ end }}
   </div>

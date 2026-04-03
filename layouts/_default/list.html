@@ -17,9 +17,9 @@
               {{ .Title }}
             </span>
             {{ with .Description }}
-              <p class="mt-1 text-sm text-base-content/70">{{ . }}</p>
+              <p class="mt-1 text-sm text-primary">{{ . }}</p>
             {{ end }}
-            <time class="mt-2 block text-xs text-base-content/40" datetime="{{ .Date.Format " 2006-01-02" }}">
+            <time class="mt-2 block text-xs text-secondary" datetime="{{ .Date.Format " 2006-01-02" }}">
               {{ .Date.Format "January 2, 2006" }}
             </time>
           </a>
@@ -27,6 +27,6 @@
       {{ end }}
     </ul>
   {{ else }}
-    <p class="text-sm text-base-content/40">Nothing here yet.</p>
+    <p class="text-sm text-secondary">Nothing here yet.</p>
   {{ end }}
 {{ end }}

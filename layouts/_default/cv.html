@@ -6,7 +6,7 @@
         {{ .Title }}
       </h1>
       {{ with .Description }}
-        <p class="mt-2 text-base text-base-content/60">{{ . }}</p>
+        <p class="mt-2 text-base text-primary">{{ . }}</p>
       {{ end }}
       {{ with .Content }}
         <div class="mt-4 prose prose-base max-w-none">{{ . }}</div>
@@ -17,7 +17,7 @@
     {{ $work := where .Site.RegularPages "Section" "work" }}
     {{ if $work }}
       <section class="mb-14">
-        <h2 class="text-xs font-semibold uppercase tracking-widest text-base-content/40 mb-8">Work Experience</h2>
+        <h2 class="text-xs font-semibold uppercase tracking-widest text-secondary mb-8">Work Experience</h2>
 
         <ul class="timeline timeline-vertical timeline-compact">
           {{ $sorted := sort $work ".Params.endDate" "desc" }}
@@ -59,7 +59,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-5 w-5 text-base-content/30"
+                    class="h-5 w-5 text-accent"
                   >
                     <path
                       fill-rule="evenodd"
@@ -81,11 +81,11 @@
                     {{ $e.Params.company }}
                   {{ end }}
                   {{ with $e.Params.location }}
-                    <span class="text-base-content/30 mx-1">·</span>{{ . }}
+                    <span class="text-accent mx-1">·</span>{{ . }}
                   {{ end }}
                 </p>
                 {{ with $e.Content }}
-                  <div class="mt-3 mb-6 text-sm text-base-content/60 leading-relaxed prose prose-sm max-w-none">
+                  <div class="mt-3 mb-6 text-sm text-primary leading-relaxed prose prose-sm max-w-none">
                     {{ . }}
                   </div>
                 {{ end }}
@@ -109,7 +109,7 @@
     {{ $education := where .Site.RegularPages "Section" "education" }}
     {{ if $education }}
       <section class="mb-14">
-        <h2 class="text-xs font-semibold uppercase tracking-widest text-base-content/40 mb-8">Education</h2>
+        <h2 class="text-xs font-semibold uppercase tracking-widest text-secondary mb-8">Education</h2>
 
         <ul class="timeline timeline-vertical timeline-compact">
           {{ $sorted := sort $education ".Params.endDate" "desc" }}
@@ -151,7 +151,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-5 w-5 text-base-content/30"
+                    class="h-5 w-5 text-accent"
                   >
                     <path
                       fill-rule="evenodd"
@@ -173,11 +173,11 @@
                     {{ $e.Params.institution }}
                   {{ end }}
                   {{ with $e.Params.location }}
-                    <span class="text-base-content/30 mx-1">·</span>{{ . }}
+                    <span class="text-accent mx-1">·</span>{{ . }}
                   {{ end }}
                 </p>
                 {{ with $e.Content }}
-                  <div class="mt-3 mb-6 text-sm text-base-content/60 leading-relaxed prose prose-sm max-w-none">
+                  <div class="mt-3 mb-6 text-sm text-primary leading-relaxed prose prose-sm max-w-none">
                     {{ . }}
                   </div>
                 {{ end }}

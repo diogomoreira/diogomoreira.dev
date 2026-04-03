@@ -26,7 +26,7 @@
     {{/* Pagination status + controls — top */}}
     <div class="flex items-center justify-between mb-4">
       {{/* Status: "Showing 1–10 of 23" */}}
-      <p class="text-xs text-base-content/40">
+      <p class="text-xs text-secondary">
         {{ $first := add (mul (sub $paginator.PageNumber 1) $paginator.PagerSize) 1 }}
         {{ $last := math.Min (mul $paginator.PageNumber $paginator.PagerSize) $paginator.TotalNumberOfElements }}
         Showing {{ $first }}–{{ $last }} of
@@ -75,18 +75,9 @@
             {{ if .Params.link }}target="_blank" rel="noopener noreferrer"{{ end }}
           >
             {{ with .Params.cover }}
-              {{ with resources.Get . }}
-                {{ $img := .Resize "240x" }}
-                {{ with $img }}
-                  <img
-                    src="{{ .RelPermalink }}"
-                    class="w-56 border-2 border-base-200 shadow-md object-cover group-hover:opacity-90 transition"
-                    alt="{{ $.Title }}"
-                  />
-                {{ end }}
-              {{ end }}
+              {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "w-56 border-2 border-base-200 shadow-md object-cover group-hover:opacity-90 transition" "sizes" "(min-width: 640px) 14rem, 100vw") }}
             {{ else }}
-              <div class="w-36 h-36 bg-base-200 flex items-center justify-center text-base-content/20">
+              <div class="w-36 h-36 bg-base-200 flex items-center justify-center text-accent">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -125,7 +116,7 @@
               {{ end }}
             </div>
             {{ with .Content }}
-              <div class="list-col-wrap text-base-content/60 leading-relaxed prose prose-sm max-w-none">
+              <div class="list-col-wrap text-primary leading-relaxed prose prose-sm max-w-none">
                 {{ . }}
               </div>
             {{ end }}
@@ -170,6 +161,6 @@
     {{ end }}
 
   {{ else }}
-    <p class="text-sm text-base-content/40">No picks yet.</p>
+    <p class="text-sm text-secondary">No picks yet.</p>
   {{ end }}
 {{ end }}

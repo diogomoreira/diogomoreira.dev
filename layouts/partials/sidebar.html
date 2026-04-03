@@ -84,7 +84,7 @@
         <div class="text-neutral-content">
           <span class="">© {{ now.Year }} {{ .Site.Title }}</span>
         </div>
-        <div class="text-neutral-content/40">
+        <div class="text-neutral-content">
           <strong>v{{ .Site.Params.Version }}</strong> Built with <a href="https://hugo.io">Hugo</a>
         </div>
       </div>
@@ -99,7 +99,7 @@
 {{/* ── Mobile sidebar drawer ─────────────────────────────── */}}
 <div id="sidebar-drawer" class="lg:hidden hidden fixed inset-0 z-50">
   {{/* Backdrop */}}
-  <div id="sidebar-backdrop" class="absolute inset-0 bg-black/40" onclick="closeSidebar()"></div>
+  <div id="sidebar-backdrop" class="absolute inset-0 bg-black" onclick="closeSidebar()"></div>
 
   {{/* Drawer panel */}}
   <aside
@@ -136,7 +136,7 @@
       <div class="text-neutral-content">
         <span class="">© {{ now.Year }} {{ .Site.Title }}</span>
       </div>
-      <div class="text-neutral-content/40">
+      <div class="text-neutral-content">
         <strong>v{{ .Site.Params.Version }}</strong> Built with <a href="https://hugo.io">Hugo</a>
       </div>
     </div>

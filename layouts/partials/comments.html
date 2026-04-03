@@ -1,12 +1,12 @@
 {{ if and .Site.Params.giscus.repo (.Params.comments | default false) }}
   {{ $g := .Site.Params.giscus }}
   <section class="mt-16 pt-8 border-t border-base-300">
-    <h2 class="text-sm font-semibold text-base-content/40 uppercase tracking-widest mb-6">Comments</h2>
+    <h2 class="text-sm font-semibold text-secondary uppercase tracking-widest mb-6">Comments</h2>
     <div class="giscus-container"></div>
   <script>
     (function () {
       const stored = localStorage.getItem("theme");
-      const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches ? "midnight" : "sunrise";
+      const preferred = globalThis.matchMedia("(prefers-color-scheme: dark)").matches ? "midnight" : "sunrise";
       const current = stored || preferred;
       const giscusTheme = current === "midnight" ? "dark" : "light";
 
@@ -25,6 +25,7 @@
       script.dataset.lang = "{{ $g.lang }}";
       script.setAttribute("crossorigin", "anonymous");
       script.async = true;
+      script.defer = true;
 
       document.querySelector(".giscus-container").appendChild(script);
     })();

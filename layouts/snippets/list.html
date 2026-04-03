@@ -13,10 +13,10 @@
       {{ range .Pages.ByDate.Reverse }}
         <a
           href="{{ .RelPermalink }}"
-          class="group card bg-base-100 border border-base-300 hover:border-base-content/20 transition-colors overflow-hidden"
+          class="group card bg-base-100 border border-base-300 hover:border-primary transition-colors overflow-hidden"
         >
           <div
-            class="px-4 pt-4 pb-3 font-mono text-xs leading-relaxed text-base-content/50 overflow-hidden"
+            class="px-4 pt-4 pb-3 font-mono text-xs leading-relaxed text-primary overflow-hidden"
             style="max-height: 130px;
                       border-bottom: 1px solid oklch(var(--b3));
                       mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
@@ -31,7 +31,7 @@
                 {{ .Title }}
               </span>
               {{ with .Params.description }}
-                <span class="block text-xs text-base-content/40 truncate mt-0.5">{{ . }}</span>
+                <span class="block text-xs text-secondary truncate mt-0.5">{{ . }}</span>
               {{ end }}
             </div>
             {{ with .Params.language }}
@@ -42,6 +42,6 @@
       {{ end }}
     </div>
   {{ else }}
-    <p class="text-sm text-base-content/40">No snippets yet.</p>
+    <p class="text-sm text-secondary">No snippets yet.</p>
   {{ end }}
 {{ end }}

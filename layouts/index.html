@@ -7,9 +7,9 @@
 
     {{ with .Params.cover }}
       <figure class="mb-10">
-        <img src="{{ . }}" alt="{{ $.Title }}" class="w-full border-4 border-base-200 shadow-md object-cover" />
+        {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "w-full border-4 border-base-200 shadow-md object-cover" "sizes" "100vw") }}
         {{ with $.Params.coverCaption }}
-          <figcaption class="mt-2 text-xs text-center text-base-content/40">
+          <figcaption class="mt-2 text-xs text-center text-secondary">
             {{ . }}
           </figcaption>
         {{ end }}
@@ -17,7 +17,7 @@
     {{ end }}
 
 
-    <div class="text-base leading-relaxed text-base-content/70">
+    <div class="text-base leading-relaxed text-primary">
       {{ .Content }}
     </div>
   </section>
@@ -36,7 +36,7 @@
               <span class="text-sm font-medium text-base-content group-hover:opacity-70 transition-opacity">
                 {{ .Title }}
               </span>
-              <time class="mt-1 block text-xs text-base-content/40" datetime="{{ .Date.Format " 2006-01-02" }}">
+              <time class="mt-1 block text-xs text-secondary" datetime="{{ .Date.Format " 2006-01-02" }}">
                 {{ .Date.Format "January 2, 2006" }}
               </time>
             </a>

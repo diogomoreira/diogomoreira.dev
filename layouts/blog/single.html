@@ -5,7 +5,7 @@
         {{ if not .IsHome }}
           <a
             href="{{ .RelPermalink }}"
-            class="inline-flex items-center gap-1 text-xs mb-6 text-base-content/40 hover:text-base-content transition-colors"
+            class="inline-flex items-center gap-1 text-xs mb-6 text-secondary hover:text-secondary transition-colors"
           >
             ←
             {{ .Title }}
@@ -19,7 +19,7 @@
       </h1>
 
       {{ with .Description }}
-        <p class="mt-3 text-base text-base-content/70">{{ . }}</p>
+        <p class="mt-3 text-base text-primary">{{ . }}</p>
       {{ end }}
 
 
@@ -35,7 +35,7 @@
         {{ end }}
 
         {{ if and $hasDate (or $hasCategories $hasTags) }}
-          <span class="mx-2 text-base-content/30">|</span>
+          <span class="mx-2 text-accent">|</span>
         {{ end }}
 
         {{ with .Params.Categories }}
@@ -48,7 +48,7 @@
         {{ end }}
 
         {{ if and .Params.Categories .Params.tags }}
-          <span class="mx-2 text-base-content/30">|</span>
+          <span class="mx-2 text-accent">|</span>
         {{ end }}
 
         {{ with .Params.tags }}
@@ -62,11 +62,12 @@
     </header>
 
     {{/* Optional cover image — add `cover: "/path/to/image.jpg"` to front matter */}}
+
     {{ with .Params.cover }}
       <figure class="mb-10">
-        <img src="{{ . }}" alt="{{ $.Title }}" class="w-full border-4 border-base-200 shadow-md object-cover" />
+        {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "w-full border-4 border-base-200 shadow-md object-cover" "sizes" "100vw") }}
         {{ with $.Params.coverCaption }}
-          <figcaption class="mt-2 text-xs text-center text-base-content/40">
+          <figcaption class="mt-2 text-xs text-center text-secondary">
             {{ . }}
           </figcaption>
         {{ end }}

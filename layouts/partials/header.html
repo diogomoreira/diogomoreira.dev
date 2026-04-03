@@ -2,12 +2,7 @@
   <div class="w-full max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
     <a href="/" class="text-sm font-semibold tracking-tight text-base-content hover:opacity-70 transition-opacity">
       <div class="flex items-center gap-6">
-        {{ with resources.Get "images/logo.png" }}
-          {{ with .Resize "32x" }}
-            <img class="w-8 h-8" src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" />
-          {{ end }}
-
-        {{ end }}
+        {{ partial "responsive-image.html" (dict "src" "images/logo.png" "alt" .Site.Title "class" "w-8 h-8" "sizes" "32px") }}
 
 
         <span class="font-[Hubot_Sans]">{{ .Site.Title }}</span>
@@ -21,7 +16,7 @@
             <li>
               <a
                 href="{{ .URL }}"
-                class="text-sm text-base-content/60 hover:text-base-content transition-colors
+                class="text-sm text-primary hover:text-primary transition-colors
                         {{ if $.IsMenuCurrent `main` . }}!text-base-content font-medium{{ end }}"
               >
                 {{ .Name }}
