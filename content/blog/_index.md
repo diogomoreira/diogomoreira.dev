@@ -1,6 +1,5 @@
 ---
 title: "Blog"
 draft: false
+description: "Thoughts about software development, open source, games and music."
 ---
-
-My blog about a lot of different things. Expect some thoughts about software development, open source, games and music. The posts here are always a 'work in progress' and can change over time. Feel free to comment and to give feedback.

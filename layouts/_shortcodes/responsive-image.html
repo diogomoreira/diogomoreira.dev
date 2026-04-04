@@ -1,0 +1,5 @@
+{{ $src := resources.Get (.Get "src") }}
+{{ if $src }}
+  {{ $img := $src.Resize (printf "%s webp" (.Get "width" | default "800x")) }}
+  <img src="{{ $img.RelPermalink }}" alt="{{ .Get "alt" }}" {{ with .Get "class" }}class="{{ . }}"{{ end }} />
+{{ end }}

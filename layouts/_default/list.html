@@ -1,12 +1,14 @@
 {{ define "main" }}
   <header class="mb-10">
-    <h1 class="text-4xl mb-6 font-semibold text-base-content">
-      {{ .Title }}
+    <h1 class="text-4xl font-semibold text-base-content">
+      {{ .Title | title }}
     </h1>
-    {{ with .Content }}
-      <div class="prose max-w-3xl">{{ . }}</div>
-    {{ end }}
+    {{ with .Description }}<p class="mt-3 text-xs text-base-content">{{ . }}</p>{{ end }}
   </header>
+
+  {{ with .Content }}
+    <div class="prose max-w-3xl">{{ . }}</div>
+  {{ end }}
 
   {{ if .Pages }}
     <ul class="space-y-6 list-none p-0 m-0">

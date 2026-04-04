@@ -1,6 +1,6 @@
 {{ define "main" }}
   <article>
-    <header class="mb-8">
+    <header class="mb-10">
       {{ with .CurrentSection }}
         {{ if not .IsHome }}
           <a
@@ -15,7 +15,7 @@
 
 
       <h1 class="text-4xl font-semibold text-base-content">
-        {{ .Title }}
+        {{ .Title | title }}
       </h1>
 
       {{ with .Description }}

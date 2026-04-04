@@ -1,15 +1,16 @@
 {{ define "main" }}
   <article>
     {{/* Page header */}}
-    <header class="mb-12">
+    <header class="mb-10">
       <h1 class="text-3xl font-semibold text-base-content" style="letter-spacing: -0.02em;">
-        {{ .Title }}
+        {{ .Title | title }}
       </h1>
       {{ with .Description }}<p class="mt-3 text-xs text-base-content">{{ . }}</p>{{ end }}
-      {{ with .Content }}
-        <div class="mt-4 prose prose-base max-w-none">{{ . }}</div>
-      {{ end }}
     </header>
+
+    {{ with .Content }}
+      <div class="mt-4 prose prose-base max-w-none">{{ . }}</div>
+    {{ end }}
 
     {{/* Work experience */}}
     {{ $work := where .Site.RegularPages "Section" "work" }}

@@ -1,0 +1,25 @@
+{{ define "main" }}
+  <article>
+    {{/* Page header */}}
+    <header class="mb-10">
+      <h1 class="text-4xl font-semibold text-base-content">
+        {{ .Title | title }}
+        {{ with .Params.updated }}
+          (<span class="font-light text-accent">{{ . | time.Format "January/2006" }}</span>)
+        {{ end }}
+      </h1>
+    {{ with .Description }}<p class="mt-3 text-xs text-base-content">{{ . }} Inspired by
+        <a class="underline" href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer"
+          >Derek Sivers' Now</a
+        ></p>{{ end }}
+    </header>
+      {{ with .Content }}
+        <div
+          class="prose prose-base prose-img:w-full prose-img:border-4 prose-img:border-base-200 prose-img:shadow-md max-w-none"
+        >
+          {{ . }}
+        </div>
+      {{ end }}
+    </header>
+  </article>
+{{ end }}

@@ -2,7 +2,7 @@
 title: My setup
 description: Elements of my setup that have enhanced my productivity and efficiency, from hardware to software.
 published: "2023-07-09"
-updated: "2024-01-12"
+updated: "2026-04-01"
 cover: /images/pages/uses.jpg
 coverCaption: "My setup"
 ---
@@ -12,7 +12,7 @@ Hello there! In this post, I want to share with you the tools that I have been u
 ## Hardware 💻
 
 - Macbook Pro 13-inch, M1, 2020, 16GB
-- LG 29UM69G Ultrawide
+- LG UltraGear 34" 34GP63A-B, UltraWide, 160Hz
 - iPhone 15 Pro
 - Logitech MX Master 3
 - 8BitDo Retro Mechanical Keyboard
@@ -38,7 +38,7 @@ The **editor font** I use is [JetBrains Mono](https://www.jetbrains.com/lp/mono/
 
 ### Other applications I use daily
 
-**Spotify**. My main music app since 2014. I hate the podcast section inside the app but I still use it anyway. Check [my playlists](https://open.spotify.com/user/diogodmoreira?si=ec78266e7ccf4268).
+**Apple Music**. Since last year, I've changed from Spotify to Apple Music, and I don't regret it at all. I don't have any specific reason to change except for the price when it's included with other Apple Family Subscriptions. I like the organization for the music library but I don't really like that it doesn't have something to change where the music is playing like Spotify Connect. But in the overall experience I'm liking it.
 
 [**Homebrew**](https://brew.sh/). Homebrew is a free and open-source software package management system that simplifies software installation on macOS. There isn't much to talk about this, everyone that happens to use a Linux system before couldn't live without a package manager.
 
@@ -47,8 +47,6 @@ The **editor font** I use is [JetBrains Mono](https://www.jetbrains.com/lp/mono/
 [**Obsidian**](https://obsidian.md/). I dropped Notion some time because I really want to have control of my notes/files. Obsidian can work offline and even if it dies tomorrow, I have all my files and can edit them in any other Markdown Editor of my choice. Also it is highly extensible in a way that Notion could never be.
 
 [**Magnet**](https://apps.apple.com/br/app/magnet/id441258766?mt=12). I don't know if these days, MacOS has a solution similar to that one, but since I bought that app in the past and I'm very used to it, here's my recommendation of an app to window arrangement. It's very useful, specially when working with more than one monitor.
-
-[**DBeaver**](https://github.com/dbeaver/dbeaver). It works with a lot of different database engines, and when you're working with a lot of different databases, dealing with different clients tied to a specific DB could be annoying sometimes.
 
 There are also other applications I use daily, but I don't have any specific reason to use them (besides work): **Slack**, **Google Chrome**, **Postman**, **1Password**.
 
@@ -73,3 +71,5 @@ There are also other applications I use daily, but I don't have any specific rea
 - Nintendo 3DS
 - Xbox Series S
 - R36S
+
+Check what I'm currently playing in my [Now Page](/now#current-playing).
