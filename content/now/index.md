@@ -35,3 +35,4 @@ _**"I, Robot"**_ ("Eu, Robô" since I'm reading the Portuguese version) by Isaac
 ## Currently playing
 
 - **Resident Evil 4**. I had stopped for a while, but now I'm trying to resume and finish this one.
+- **Balatro**.
