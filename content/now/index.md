@@ -9,7 +9,7 @@ Hi everyone, this past March was a really good month.
 
 My boyfriend and I went to **Lollapalooza Brazil** (São Paulo - SP), especially for the concerts by **Sabrina Carpenter**, **Chappell Roan**, and **Lorde**, but I enjoyed other performances as well, such as **Addison Rae** and **Doechii**. This was my third time at Lollapalooza, and I really enjoy the experience—it gets better every year.
 
-<img src="lollapalooza-2026.jpg" alt="Lollapalooza Brazil 2026" class="w-full border-4 border-base-200 shadow-md object-cover">
+<img src="/now/lollapalooza-2026.jpg" alt="Lollapalooza Brazil 2026" class="w-full border-4 border-base-200 shadow-md object-cover">
 
 ## What I'm thinking about lately
 
