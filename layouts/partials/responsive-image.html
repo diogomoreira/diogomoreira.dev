@@ -1,0 +1,18 @@
+{{/* Usage: {{ partial "responsive-image.html" (dict "src" .Params.cover "alt" .Title "class" "w-full border-4 border-base-200 shadow-md object-cover" "sizes" "100vw") }}
+This partial generates a responsive picture element with WebP and JPEG fallback, width/height, and lazy loading. */}}
+{{ $img := resources.Get .src }}
+{{ if $img }}
+  {{ $webp := $img.Resize "800x webp" }}
+  {{ $jpeg := $img.Resize "800x jpg" }}
+  <picture>
+    <source srcset="{{ $webp.RelPermalink }}" type="image/webp" />
+    <img
+      src="{{ $jpeg.RelPermalink }}"
+      alt="{{ .alt }}"
+      width="{{ $jpeg.Width }}"
+      height="{{ $jpeg.Height }}"
+      class="{{ .class }}"
+      loading="lazy"
+    />
+  </picture>
+{{ end }}
