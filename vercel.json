@@ -1,0 +1,9 @@
+{
+  "buildCommand": "hugo --minify",
+  "outputDirectory": "public",
+  "installCommand": "npm install",
+  "framework": "hugo",
+  "env": {
+    "HUGO_VERSION": "0.159.1"
+  }
+}

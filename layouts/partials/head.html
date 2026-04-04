@@ -1,0 +1,109 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>{{ if .IsHome -}}{{ .Site.Title }}{{- else -}}{{ .Title }} — {{ .Site.Title }}{{- end }}</title>
+
+<meta
+  name="description"
+  content="{{ with .Description }}
+    {{ . }}
+  {{ else }}
+    {{ with .Site.Params.description }}{{ . }}{{ end }}
+  {{ end }}"
+/>
+
+{{/* Prevent flash of wrong theme */}}
+<script>
+  (function () {
+    const stored = localStorage.getItem("theme");
+    const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches ? "midnight" : "sunrise";
+    document.documentElement.setAttribute("data-theme", stored || preferred);
+  })();
+</script>
+
+{{ if not hugo.IsDevelopment }}
+  {{ $critical := resources.Get "css/critical.css" | resources.Minify }}
+  <style>{{ $critical.Content | safeCSS }}</style>
+{{ end }}
+{{ with (templates.Defer (dict "key" "global")) }}
+  {{ partial "css.html" . }}
+{{ end }}
+
+{{/* Favicon */}}
+{{ with resources.Get "images/logo.png" }}
+  <link rel="icon" type="image/png" href="{{ .RelPermalink }}" />
+{{ end }}
+{{/* Open Graph */}}
+
+{{/* Fonts */}}
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+/>
+<link
+  href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+  rel="stylesheet"
+  media="print"
+  onload="this.media='all'"
+/>
+<noscript>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+    rel="stylesheet"
+  />
+</noscript>
+
+<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}" />
+<meta
+  property="og:description"
+  content="{{ with .Description }}
+    {{ . }}
+  {{ else }}
+    {{ .Site.Params.description }}
+  {{ end }}"
+/>
+{{ range .Site.Params.social }}
+  {{ if eq .icon "mastodon" }}
+    {{ with .handle }}
+      <meta property="fediverse:creator" content="{{ . }}" />
+    {{ end }}
+  {{ end }}
+{{ end }}
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+{{ $cover := .Params.cover }}
+{{ if or (and $cover (ne $cover "")) .Site.Params.cover }}
+  {{ $coverToUse := cond (and $cover (ne $cover "")) $cover .Site.Params.cover }}
+  {{ $img := resources.Get $coverToUse }}
+  {{ if and $img (not (eq $img nil)) }}
+    {{ $jpeg := $img.Resize "800x jpg" }}
+    <link
+      rel="preload"
+      as="image"
+      href="{{ $jpeg.RelPermalink }}"
+      imagesrcset="{{ $jpeg.RelPermalink }} 800w"
+      imagesizes="100vw"
+    />
+    <meta property="og:image" content="{{ $jpeg.RelPermalink | absURL }}" />
+  {{ end }}
+{{ end }}
+
+
+<link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ " /index.xml" | absURL }}" />
+
+{{/* Per-section feed when inside a section */}}
+{{ with .OutputFormats.Get "RSS" }}
+  {{ if not $.IsHome }}
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="{{ $.Site.Title }} — {{ $.Title }}"
+      href="{{ .Permalink }}"
+    />
+  {{ end }}
+{{ end }}

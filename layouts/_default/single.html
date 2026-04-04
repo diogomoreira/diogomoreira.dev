@@ -1,0 +1,102 @@
+{{ define "main" }}
+  <article>
+    <header class="mb-10">
+      {{ with .CurrentSection }}
+        {{ if not .IsHome }}
+          <a
+            href="{{ .RelPermalink }}"
+            class="inline-flex items-center gap-1 text-xs mb-6 text-secondary hover:text-secondary transition-colors"
+          >
+            ←
+            {{ .Title }}
+          </a>
+        {{ end }}
+      {{ end }}
+
+
+      <h1 class="text-4xl font-semibold text-base-content">
+        {{ .Title | title }}
+      </h1>
+
+      {{ with .Description }}<p class="mt-3 text-xs text-base-content">{{ . }}</p>{{ end }}
+
+
+      <div class="mt-4 flex items-center gap-4">
+        {{ with .Params.updated }}
+          {{ $updated := time.AsTime . }}
+          {{ $now := now }}
+          {{ $days := math.Round (div ($now.Sub $updated).Hours 24) }}
+
+          {{ $relative := "" }}
+          {{ if lt $days 1 }}
+            {{ $relative = "today" }}
+          {{ else if eq $days 1 }}
+            {{ $relative = "yesterday" }}
+          {{ else if lt $days 7 }}
+            {{ $relative = printf "%d days ago" (int $days) }}
+          {{ else if lt $days 14 }}
+            {{ $relative = "last week" }}
+          {{ else if lt $days 30 }}
+            {{ $relative = printf "%d weeks ago" (int (math.Round (div $days 7))) }}
+          {{ else if lt $days 60 }}
+            {{ $relative = "last month" }}
+          {{ else if lt $days 365 }}
+            {{ $relative = printf "%d months ago" (int (math.Round (div $days 30))) }}
+          {{ else if lt $days 730 }}
+            {{ $relative = "more than a year ago" }}
+          {{ else }}
+            {{ $relative = printf "%d years ago" (int (math.Round (div $days 365))) }}
+          {{ end }}
+          <span class="text-xs text-secondary" title="Updated {{ $updated.Format "January 2, 2006" }}">
+            Updated
+            {{ $relative }}
+          </span>
+        {{ end }}
+
+        {{ with .Params.tags }}
+          <div class="flex gap-2 flex-wrap">
+            {{ range . }}
+              <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="badge badge-ghost badge-sm">#{{ . }}</a>
+            {{ end }}
+          </div>
+        {{ end }}
+      </div>
+    </header>
+
+    {{/* Optional cover image — add `cover: "/path/to/image.jpg"` to front matter */}}
+
+    {{ with .Params.cover }}
+      <figure class="mb-10">
+        {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "w-full border-4 border-base-200 shadow-md object-cover" "sizes" "100vw") }}
+        {{ with $.Params.coverCaption }}
+          <figcaption class="mt-2 text-xs text-center text-secondary">
+            {{ . }}
+          </figcaption>
+        {{ end }}
+      </figure>
+    {{ end }}
+
+
+    <div class="prose prose-base max-w-none">
+      {{ with .Params.disclaimer }}
+        <div role="alert" class="alert alert-warning">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 shrink-0 stroke-current"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+            />
+          </svg>
+          <span class="font-semibold">{{ . }}</span>
+        </div>
+      {{ end }}
+      {{ .Content }}
+    </div>
+  </article>
+{{ end }}
