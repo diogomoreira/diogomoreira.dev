@@ -76,12 +76,22 @@
 {{ end }}
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
 <meta property="og:url" content="{{ .Permalink }}" />
+
 {{ $cover := .Params.cover }}
+
 {{ if or (and $cover (ne $cover "")) .Site.Params.cover }}
   {{ $coverToUse := cond (and $cover (ne $cover "")) $cover .Site.Params.cover }}
-  {{ $img := resources.Get $coverToUse }}
-  {{ if and $img (not (eq $img nil)) }}
-    {{ $jpeg := $img.Resize "800x jpg" }}
+
+  {{/* Try page resource first */}}
+  {{ $img := .Resources.GetMatch $coverToUse }}
+
+  {{/* Fallback to global assets if not found */}}
+  {{ if not $img }}
+    {{ $img = resources.Get $coverToUse }}
+  {{ end }}
+
+  {{ with $img }}
+    {{ $jpeg := .Resize "800x jpg" }}
     <link
       rel="preload"
       as="image"

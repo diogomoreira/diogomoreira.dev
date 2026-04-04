@@ -61,17 +61,30 @@
       </div>
     </header>
 
-    {{/* Optional cover image — add `cover: "/path/to/image.jpg"` to front matter */}}
-
     {{ with .Params.cover }}
-      <figure class="mb-10">
-        {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "w-full border-4 border-base-200 shadow-md object-cover" "sizes" "100vw") }}
-        {{ with $.Params.coverCaption }}
-          <figcaption class="mt-2 text-xs text-center text-secondary">
-            {{ . }}
-          </figcaption>
-        {{ end }}
-      </figure>
+      {{ $img := $.Resources.GetMatch . }}
+      {{ with $img }}
+        <figure class="mb-10">
+          {{ $webp := $img.Resize "800x webp" }}
+          {{ $jpeg := $img.Resize "800x jpg" }}
+          <picture>
+            <source srcset="{{ $webp.RelPermalink }}" type="image/webp" />
+            <img
+              src="{{ $jpeg.RelPermalink }}"
+              alt="{{ $.Title }}"
+              width="{{ $jpeg.Width }}"
+              height="{{ $jpeg.Height }}"
+              class="w-full border-4 border-base-200 shadow-md object-cover"
+              loading="lazy"
+            />
+          </picture>
+          {{ with $.Params.coverCaption }}
+            <figcaption class="mt-2 text-xs text-center text-secondary">
+              {{ . }}
+            </figcaption>
+          {{ end }}
+        </figure>
+      {{ end }}
     {{ end }}
 
 

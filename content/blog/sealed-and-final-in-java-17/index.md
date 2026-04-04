@@ -9,7 +9,7 @@ tags:
   - oop
   - programming
   - learning
-cover: /images/posts/java-sealed-final.webp
+cover: java-sealed-final.webp
 comments: true
 ---
 

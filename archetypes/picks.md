@@ -1,12 +1,12 @@
 ---
 title: "{{ replace .File.ContentBaseName "-" " " | title }}"
-date: {{ .Date }}
-draft: true
-medium: ""        # movie, music, series, book, game...
-creator: ""       # director, artist, author...
-year: ""
+medium: ""
+link: ""
 cover: ""
-description: ""
-tags: [],
-linK: ""
+date: {{ .Date }}
+tags: []
+build:
+  render: never
+  list: always
+draft: true
 ---
