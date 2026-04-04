@@ -8,9 +8,9 @@ description: Checking if the card you bought was indeed delivering what was
 tags:
   - hardware
   - flashcard
-cover: /images/posts/flash-cards-f3.jpg
+cover: flash-cards-f3.jpg
 comments: true
-credits: Photo by <a
+coverCredits: Photo by <a
   href="https://unsplash.com/@markuswinkler?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Markus
   Winkler</a> on <a
   href="https://unsplash.com/photos/black-and-white-plastic-containers-cV9-hOgoaok?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>

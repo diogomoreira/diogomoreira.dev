@@ -10,7 +10,7 @@ tags:
   - terminal
   - linux
   - macos
-cover: /images/posts/dotfiles.jpeg
+cover: dotfiles.jpeg
 comments: true
 ---
 
