@@ -1,11 +1,11 @@
 baseURL = "https://diogomoreira.dev/"
 languageCode = "en-US"
 title = "Diogo Moreira"
-cover = "cover.jpg"
 
 [params]
 version = "4.0.0"
 description = "My thoughts about life, software development, games, music and so forth."
+cover = "images/default-cover.png"
 
 [build]
 [build.buildStats]
