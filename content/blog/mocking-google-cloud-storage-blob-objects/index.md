@@ -12,6 +12,7 @@ tags:
 cover: mocking-gcloud-objects.jpg
 coverCredits: Photo by <a href="https://unsplash.com/@loganvoss?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Logan Voss</a> on <a href="https://unsplash.com/photos/abstract-lavender-colored-spheres-with-white-accents-N41lVlml4SQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 comments: true
+language: en
 ---
 
 Google Cloud Storage is widely used as a cloud storage service to allow users to store and retrieve objects. When working with it, it's essential to write efficient unit tests to ensure the application behaves as expected.

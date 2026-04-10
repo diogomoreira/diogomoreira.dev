@@ -15,6 +15,7 @@ coverCredits: Photo by <a
   Winkler</a> on <a
   href="https://unsplash.com/photos/black-and-white-plastic-containers-cV9-hOgoaok?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 disclaimer: This article requires some commands to be run. Do it at your own risk.
+language: en
 ---
 
 Hi everyone, this is a quick post just to open this section on my website where I'll share some things I learned along the way.

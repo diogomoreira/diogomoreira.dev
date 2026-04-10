@@ -1,6 +1,6 @@
 {{/* ── Mobile top bar ───────────────────────────────────── */}}
 <div class="lg:hidden flex items-center justify-between px-6 py-4 bg-neutral text-neutral-content">
-  <a href="/" class="font-[PP_Mori] font-semibold tracking-tight">
+  <a href="/" class="font-sans font-semibold tracking-tight">
     {{ .Site.Title }}
   </a>
   <div class="flex items-center gap-2">
@@ -52,7 +52,7 @@
       {{ end }}
       <a
         href="/"
-        class="block font-[PP_Mori] text-3xl font-bold tracking-tight text-neutral-content hover:opacity-80 transition-opacity"
+        class="block font-sans text-3xl font-bold tracking-tight text-neutral-content hover:opacity-80 transition-opacity"
       >
         {{ .Site.Title }}
       </a>
@@ -64,7 +64,7 @@
 
     {{/* Navigation */}}
     <nav class="flex-1">
-      <ul class="space-y-1 font-[PP_Mori] list-none p-0 m-0">
+      <ul class="space-y-1 font-sans list-none p-0 m-0">
         {{ range .Site.Menus.main }}
           <li>
             {{ $isActive := or ($.IsMenuCurrent `main` .) ($.HasMenuCurrent `main` .) (hasPrefix $.RelPermalink .URL) }}
@@ -114,12 +114,12 @@
   >
     <a
       href="/"
-      class="block font-[PP_Mori] text-2xl font-bold tracking-tight text-neutral-content mb-10 hover:opacity-80 transition-opacity"
+      class="block font-sans text-2xl font-bold tracking-tight text-neutral-content mb-10 hover:opacity-80 transition-opacity"
     >
       {{ .Site.Title }}
     </a>
     <nav class="flex-1">
-      <ul class="space-y-1 font-[PP_Mori] list-none p-0 m-0">
+      <ul class="space-y-1 font-sans list-none p-0 m-0">
         {{ range .Site.Menus.main }}
           <li>
             {{ $isActive := or ($.IsMenuCurrent `main` .) ($.HasMenuCurrent `main` .) (hasPrefix $.RelPermalink .URL) }}
