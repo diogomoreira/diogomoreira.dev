@@ -1,6 +1,7 @@
 baseURL = "https://diogomoreira.dev/"
 languageCode = "en-US"
 title = "Diogo Moreira"
+titleCaseStyle = "none"
 
 [params]
 version = "4.0.0"

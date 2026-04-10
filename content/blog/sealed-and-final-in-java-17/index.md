@@ -11,6 +11,7 @@ tags:
   - learning
 cover: java-sealed-final.webp
 comments: true
+language: en
 ---
 
 Java 17 brought the **Sealed Classes** feature, which allows greater control over how to structure a project's class hierarchy. In this post, we'll discuss this feature that permits classes and interfaces to have more control over their allowed subtypes.
