@@ -4,17 +4,14 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "static/images/uploads"
-public_folder: "/images/uploads"
-
 collections:
   - name: "blog"
     label: "Blog Post"
     folder: "content/blog"
     create: true
     slug: "{{year}}/{{month}}/{{slug}}"
-    media_folder: "assets/images/posts"
-    public_folder: "/images/posts"
+    media_folder: "assets/images/posts/{{year}}/{{month}}/{{slug}}"
+    public_folder: "/images/posts/{{year}}/{{month}}/{{slug}}"
     nested:
       depth: 3
     fields:
@@ -34,8 +31,8 @@ collections:
     folder: "content/photos"
     create: true
     slug: "{{year}}/{{month}}/{{slug}}"
-    media_folder: "assets/images/photos"
-    public_folder: "/images/photos"
+    media_folder: "assets/images/photos/{{year}}/{{month}}/{{slug}}"
+    public_folder: "/images/photos/{{year}}/{{month}}/{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }
@@ -60,8 +57,8 @@ collections:
     folder: "content/snippets"
     create: true
     slug: "{{slug}}"
-    media_folder: "assets/images/snippets"
-    public_folder: "/images/snippets"
+    media_folder: "assets/images/snippets/{{slug}}"
+    public_folder: "/images/snippets/{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }
@@ -76,8 +73,8 @@ collections:
     folder: "content/picks"
     create: true
     slug: "{{slug}}"
-    media_folder: "assets/images/picks"
-    public_folder: "/images/picks"
+    media_folder: "assets/images/picks/{{slug}}"
+    public_folder: "/images/picks/{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }
