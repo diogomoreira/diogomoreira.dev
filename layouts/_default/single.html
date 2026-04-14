@@ -77,7 +77,9 @@
     {{ end }}
 
 
-    <div class="prose prose-base max-w-none">
+    <div
+      class="prose prose-base prose-img:w-full prose-img:border-4 prose-img:border-base-200 prose-img:shadow-md max-w-none"
+    >
       {{ with .Params.disclaimer }}
         <div role="alert" class="alert alert-warning">
           <svg
