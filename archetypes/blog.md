@@ -5,7 +5,6 @@ date: {{ .Date }}
 description: ""
 tags: []
 cover: ""
-comments: false
 credits: ""
 disclaimer: ""
 draft: true

@@ -10,6 +10,12 @@
 
 @source "hugo_stats.json";
 
+@layer utilities {
+  .oklch {
+    color: unset;
+  }
+}
+
 @plugin "daisyui/theme" {
   name: "sunrise";
   default: true;

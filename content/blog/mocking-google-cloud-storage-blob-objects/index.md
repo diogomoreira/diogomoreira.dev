@@ -11,7 +11,6 @@ tags:
   - spring boot
 cover: mocking-gcloud-objects.jpg
 coverCredits: Photo by <a href="https://unsplash.com/@loganvoss?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Logan Voss</a> on <a href="https://unsplash.com/photos/abstract-lavender-colored-spheres-with-white-accents-N41lVlml4SQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-comments: true
 language: en
 ---
 
