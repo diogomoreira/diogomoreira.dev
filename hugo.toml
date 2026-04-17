@@ -30,6 +30,8 @@ target = 'assets/notwatching/hugo_stats.json'
 [markup.highlight]
 style = "github-dark" # or dracula, monokai, nord, etc.
 lineNos = true
+anchorLineNos = true
+
 codeFences = true
 [markup.goldmark]
 [markup.goldmark.renderer]
