@@ -25,7 +25,6 @@ collections:
       - { label: "Tags", name: "tags", widget: "list", required: false }
       - { label: "Cover", name: "cover", widget: "image", required: false }
       - { label: "Cover Image Credits", name: "credits", widget: "string", required: false }
-      - { label: "Comments", name: "comments", widget: "boolean", required: false }
       - { label: "Disclaimer", name: "disclaimer", widget: "string", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
 

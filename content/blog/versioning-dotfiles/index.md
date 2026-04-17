@@ -11,7 +11,6 @@ tags:
   - linux
   - macos
 cover: dotfiles.jpeg
-comments: true
 language: en
 ---
 

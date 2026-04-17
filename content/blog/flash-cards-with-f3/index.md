@@ -9,7 +9,6 @@ tags:
   - hardware
   - flashcard
 cover: flash-cards-f3.jpg
-comments: true
 coverCredits: Photo by <a
   href="https://unsplash.com/@markuswinkler?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Markus
   Winkler</a> on <a

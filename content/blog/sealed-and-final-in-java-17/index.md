@@ -10,7 +10,6 @@ tags:
   - programming
   - learning
 cover: java-sealed-final.webp
-comments: true
 language: en
 ---
 
