@@ -83,7 +83,9 @@ Storage storage = LocalStorageHelper.getOptions().getService();
 From now on, we can keep using storage to create the files inside the buckets and download them in the same way we'll do in the production code.
 
 ```java
-BlobInfo blobInfo = BlobInfo.newBuilder(BlobId.of("my-mock-bucket", "my-mock-object")).build();
+BlobInfo blobInfo = BlobInfo.newBuilder(
+  BlobId.of("my-mock-bucket", "my-mock-object")
+).build();
 storage.create(blobInfo, "A file text".getBytes());
 
 // Later, we can 'download' this file to do
@@ -102,7 +104,9 @@ public class CloudStorageConfiguration {
   @Bean
   public Storage createMockStorage() throws IOException {
     Storage storage = LocalStorageHelper.getOptions().getService();
-    BlobInfo blobInfo = BlobInfo.newBuilder(BlobId.of("my-mock-bucket", "my-mock-object")).build();
+    BlobInfo blobInfo = BlobInfo.newBuilder(
+      BlobId.of("my-mock-bucket", "my-mock-object")
+    ).build();
     // Create some file that you want to use and reflect the
     // one you expect from your Cloud Storage bucket
     Path path = Path.of("src", "test", "resources", "test-resource.txt");
