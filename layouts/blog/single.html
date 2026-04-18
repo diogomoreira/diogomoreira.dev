@@ -80,7 +80,7 @@
           </picture>
           {{ with $.Params.coverCaption }}
             <figcaption class="mt-2 text-xs text-center text-secondary">
-              {{ . }}
+              {{ .  | markdownify }}
             </figcaption>
           {{ end }}
         </figure>
