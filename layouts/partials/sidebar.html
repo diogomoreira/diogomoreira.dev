@@ -37,7 +37,7 @@
 >
   <div class="flex flex-col flex-1 px-8 py-10">
     {{/* Site identity */}}
-    <div class="mb-6 flex flex-col justify-center items-center">
+    <div class="h-card mb-6 flex flex-col justify-center items-center">
       {{ $profile := resources.Get "images/profile/profile.jpg" }}
       {{ with $profile }}
         {{ $resized := .Fit "288x288" }}
@@ -46,18 +46,19 @@
           width="{{ $resized.Width }}"
           height="{{ $resized.Height }}"
           alt="{{ $.Site.Title }}"
-          class="w-36 h-36 rounded-full object-cover mb-4 ring-4 shadow-md shadow-black ring-neutral-content"
+          class="u-photo w-36 h-36 rounded-full object-cover mb-4 ring-4 shadow-md shadow-black ring-neutral-content"
           loading="lazy"
         />
       {{ end }}
       <a
         href="/"
-        class="block font-sans text-3xl font-bold tracking-tight text-neutral-content hover:opacity-80 transition-opacity"
+        class="p-name u-url block font-sans text-3xl font-bold tracking-tight text-neutral-content hover:opacity-80 transition-opacity"
+        rel="me"
       >
         {{ .Site.Title }}
       </a>
       {{ with .Site.Params.description }}
-        <p class="mt-2 text-sm text-neutral-content/60 leading-relaxed">{{ . }}</p>
+        <p class="p-note mt-2 text-sm text-neutral-content/60 leading-relaxed">{{ . }}</p>
       {{ end }}
     </div>
     {{ partial "social.html" . }}
