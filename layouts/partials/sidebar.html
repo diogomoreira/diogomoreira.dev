@@ -84,9 +84,9 @@
         {{ end }}
       </ul>
     </nav>
-
+    {{ partial "webring.html" }}
     {{/* Bottom: theme toggle + copyright */}}
-    <div class="mt-10 pt-6 border-t border-neutral-content/10 flex items-center justify-between">
+    <div class="mt-6 pt-6 border-t border-neutral-content/10 flex items-center justify-between">
       <div class="text-xs">
         <div class="text-neutral-content">
           <span class="">© {{ now.Year }} {{ .Site.Title }}</span>
@@ -139,11 +139,12 @@
       </ul>
     </nav>
     {{ partial "social.html" . }}
-    <div class="mt-10 pt-6 border-t border-neutral-content/10 text-xs">
-      <div class="text-neutral-content">
+    {{ partial "webring.html" }}
+    <div class="mt-6 pt-6 border-t border-neutral-content/10 text-xs">
+      <div class="text-center text-neutral-content">
         <span class="">© {{ now.Year }} {{ .Site.Title }}</span>
       </div>
-      <div class="text-neutral-content">
+      <div class="text-center text-neutral-content">
         <strong>v{{ .Site.Params.Version }}</strong> Built with <a href="https://hugo.io">Hugo</a>
       </div>
     </div>
