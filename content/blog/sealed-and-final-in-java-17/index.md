@@ -3,7 +3,7 @@ title: "Sealed and Final in Java 17+"
 categories:
   - Tech
 date: "2024-02-18"
-description: Exploring sealed classes feature in Java+ 17.
+description: Exploring sealed classes feature in Java 17+.
 tags:
   - java
   - oop
