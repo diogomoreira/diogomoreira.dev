@@ -55,5 +55,3 @@ Apart from the differences presented above, the `final` keyword in Java is used 
 Furthermore, `sealed` aims to allow the author of a class or interface to control which code is responsible for implementing it and provide a more declarative way than access modifiers (such as `public` or `protected`...) to restrict the use of a superclass.
 
 This is mainly useful for building libraries in a more secure way without worrying about overwriting definitions by clients.
-
-If you found this content relevant, follow me on [Twitter/X](https://x.com/diogodmoreira) and on [Github](https://github.com/diogomoreira)
