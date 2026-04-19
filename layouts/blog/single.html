@@ -110,6 +110,35 @@
         </div>
       {{ end }}
       {{ .Content }}
+      {{ partial "blog-footer.html" }}
     </div>
   </article>
+  <div class="border-t-2 border-base-300">
+    {{ $prev := .PrevInSection }}
+    {{ $next := .NextInSection }}
+    {{ if or $prev $next }}
+      <nav class="mt-8 flex justify-between w-full text-sm">
+        <div class="w-1/2 p-4">
+          {{ if $prev }}
+            <a href="{{ $prev.RelPermalink }}" class="text-primary flex flex-col">
+              <span class="text-xs">← Previous</span>
+              <span class="text-secondary hover:text-primary text-lg py-2 font-semibold">
+                {{ $prev.Title }}
+              </span>
+            </a>
+          {{ end }}
+        </div>
+        <div class="w-1/2 p-4">
+          {{ if $next }}
+            <a href="{{ $next.RelPermalink }}" class="text-primary flex flex-col items-end">
+              <span class="text-xs">Next →</span>
+              <span class="text-secondary hover:text-primary text-lg py-2 font-semibold text-right">
+                {{ $next.Title }}
+              </span>
+            </a>
+          {{ end }}
+        </div>
+      </nav>
+    {{ end }}
+  </div>
 {{ end }}
