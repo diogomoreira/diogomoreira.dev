@@ -110,7 +110,32 @@
         </div>
       {{ end }}
       {{ .Content }}
-      {{ partial "blog-footer.html" }}
+      <footer class="mt-6 flex items-center gap-4 p-8 border-t-2 border-base-200 bg-base-200 h-card">
+        {{ $profile := resources.Get "images/profile/profile.jpg" }}
+        {{ with $profile }}
+          {{ $resized := .Fit "96x96" }}
+          <img
+            src="{{ $resized.RelPermalink }}"
+            width="{{ $resized.Width }}"
+            height="{{ $resized.Height }}"
+            alt="{{ $.Site.Title }}"
+            class="u-photo not-prose w-24 h-24 rounded-full ring-2 shadow-sm shadow-black ring-neutral-content"
+            loading="lazy"
+          />
+        {{ end }}
+        <div>
+          {{ $lang := .Params.language | default $.Site.Language.Lang }}
+          {{ if eq $lang "pt" }}
+            <div class="text-base">Escrito por <span class="font-bold p-name">Diogo Moreira</span></div>
+            <div class="text-xs text-base-content p-note">Ideias, sistemas e coisas que valem a pena entender.</div>
+          {{ else }}
+            <div class="text-base">Written by <span class="font-bold p-name">Diogo Moreira</span></div>
+            <div class="text-xs text-base-content p-note">
+              Occasional writing on ideas, systems, and things worth understanding.
+            </div>
+          {{ end }}
+        </div>
+      </footer>
     </div>
   </article>
   <div class="border-t-2 border-base-300">
