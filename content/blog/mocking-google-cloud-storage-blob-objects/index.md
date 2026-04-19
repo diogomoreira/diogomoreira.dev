@@ -10,7 +10,7 @@ tags:
   - java
   - spring boot
 cover: mocking-gcloud-objects.jpg
-coverCredits: Photo by <a href="https://unsplash.com/@loganvoss?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Logan Voss</a> on <a href="https://unsplash.com/photos/abstract-lavender-colored-spheres-with-white-accents-N41lVlml4SQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+coverCaption: Photo by <a href="https://unsplash.com/@loganvoss?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Logan Voss</a> on <a href="https://unsplash.com/photos/abstract-lavender-colored-spheres-with-white-accents-N41lVlml4SQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 language: en
 ---
 
@@ -121,5 +121,3 @@ public class CloudStorageConfiguration {
 And that's it. Hope this short post added value to your learning and helped you with testing your Java application that has some integration with **Google Cloud Storage**.
 
 Any feedback or suggestions are welcome.
-
-If you found this content relevant, follow me on [Twitter/X](https://x.com/diogodmoreira) and on [Github](https://github.com/diogomoreira)
