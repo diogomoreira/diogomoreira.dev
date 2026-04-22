@@ -4,7 +4,7 @@ categories:
   - Hobbies
   - Living Posts
 date: "2026-04-10"
-description: Um pouco sobre como é colecionar música vinil e algumas dicas para quem quer começar
+description: Um pouco sobre como é colecionar música em vinil e algumas dicas para quem quer começar
 tags:
   - vinyl
   - music
@@ -112,5 +112,3 @@ Para limpar com a escova anti-estática, coloque o disco no tocador e a acione o
 </figure>
 
 Na minha experiência que tenho comprado vinis mais novos, limpar no momento de escutar um vinil já é o suficiente uma vez que você mantenha as dicas anteriores de guardar num plástico de proteção e anti estático.
-
----

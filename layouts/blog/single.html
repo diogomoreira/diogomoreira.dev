@@ -13,52 +13,23 @@
         {{ end }}
       {{ end }}
 
+      {{ $hasDate := not .Date.IsZero }}
+      {{ if $hasDate }}
+        <div class="mb-2">
+          <time class="text-xs" datetime="{{ .Date.Format " 2006-01-02" }}">
+            {{ .Date.Format "January 2, 2006" }}
+          </time>
+        </div>
+      {{ end }}
+
 
       <h1 class="text-4xl font-semibold text-base-content">
         {{ .Title | title }}
       </h1>
 
       {{ with .Description }}
-        <p class="mt-3 text-xs text-neutral-content">{{ . }}</p>
+        <p class="mt-3 text-xs text-accent">{{ . }}</p>
       {{ end }}
-
-
-      <div class="mt-4 flex items-center gap-2 text-xs">
-        {{ $hasDate := not .Date.IsZero }}
-        {{ $hasCategories := .Params.Categories }}
-        {{ $hasTags := .Params.tags }}
-
-        {{ if $hasDate }}
-          <time class="text-xs" datetime="{{ .Date.Format " 2006-01-02" }}">
-            {{ .Date.Format "January 2, 2006" }}
-          </time>
-        {{ end }}
-
-        {{ if and $hasDate (or $hasCategories $hasTags) }}
-          <span class="mx-2 text-accent">|</span>
-        {{ end }}
-
-        {{ with .Params.Categories }}
-          <div class="flex gap-1 flex-wrap items-center text-xs">
-            {{ range $i, $cat := . }}
-              <span class="badge badge-secondary badge-sm text-xs">{{ $cat }}</span>{{ if lt (add $i 1) (len .) }}
-              {{ end }}
-            {{ end }}
-          </div>
-        {{ end }}
-
-        {{ if and .Params.Categories .Params.tags }}
-          <span class="mx-2 text-accent">|</span>
-        {{ end }}
-
-        {{ with .Params.tags }}
-          <div class="flex gap-1 flex-wrap items-center text-xs">
-            {{ range $i, $tag := . }}
-              <span class="badge badge-ghost badge-sm text-xs">#{{ $tag }}</span>{{ if lt (add $i 1) (len .) }}{{ end }}
-            {{ end }}
-          </div>
-        {{ end }}
-      </div>
     </header>
 
     {{ with .Params.cover }}
@@ -110,35 +81,64 @@
         </div>
       {{ end }}
       {{ .Content }}
-      <footer class="mt-6 flex items-center gap-4 p-8 border-t-2 border-base-200 bg-base-200 h-card">
-        {{ $profile := resources.Get "images/profile/profile.jpg" }}
-        {{ with $profile }}
-          {{ $resized := .Fit "96x96" }}
-          <img
-            src="{{ $resized.RelPermalink }}"
-            width="{{ $resized.Width }}"
-            height="{{ $resized.Height }}"
-            alt="{{ $.Site.Title }}"
-            class="u-photo not-prose w-24 h-24 rounded-full ring-2 shadow-sm shadow-black ring-neutral-content"
-            loading="lazy"
-          />
-        {{ end }}
-        <div>
-          {{ $lang := .Params.language | default $.Site.Language.Lang }}
-          {{ if eq $lang "pt" }}
-            <div class="text-base">Escrito por <span class="font-bold p-name">Diogo Moreira</span></div>
-            <div class="text-xs text-base-content p-note">Ideias, sistemas e coisas que valem a pena entender.</div>
-          {{ else }}
-            <div class="text-base">Written by <span class="font-bold p-name">Diogo Moreira</span></div>
-            <div class="text-xs text-base-content p-note">
-              Occasional writing on ideas, systems, and things worth understanding.
-            </div>
-          {{ end }}
-        </div>
-      </footer>
     </div>
   </article>
-  <div class="border-t-2 border-base-300">
+  <hr class="my-4 border-base-200" />
+  <div class="mt-4 flex flex-col text-xs">
+    {{ $hasCategories := .Params.Categories }}
+    {{ $hasTags := .Params.tags }}
+
+    {{ with .Params.Categories }}
+      <div class="flex py-2 gap-1 flex-wrap items-center text-xs">
+        <span class="w-2/12">Categories</span>
+        {{ $num := len . }}
+        {{ range $i, $cat := . }}
+          <a href="{{ "/categories/" | relLangURL }}{{ $cat | urlize }}/" class="text-secondary hover:text-primary"
+            >{{ $cat }}</a
+          >{{ if lt (add $i 1) $num }}<span class="mx-1">·</span>{{ end }}
+        {{ end }}
+      </div>
+    {{ end }}
+
+    {{ with .Params.tags }}
+      <div class="flex py-2 gap-1 flex-wrap items-center text-xs">
+        <span class="w-2/12">Tags</span>
+        {{ $num := len . }}
+        {{ range $i, $tag := . }}
+          <a href="{{ "/tags/" | relLangURL }}{{ $tag | urlize }}/" class="text-secondary hover:text-primary"
+            >#{{ $tag }}</a
+          >{{ if lt (add $i 1) $num }}<span class="mx-1">·</span>{{ end }}
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+  <footer class="mt-6 flex items-center gap-4 p-8 border-t-4 border-base-300 bg-base-200 h-card">
+    {{ $profile := resources.Get "images/profile/profile.jpg" }}
+    {{ with $profile }}
+      {{ $resized := .Fit "96x96" }}
+      <img
+        src="{{ $resized.RelPermalink }}"
+        width="{{ $resized.Width }}"
+        height="{{ $resized.Height }}"
+        alt="{{ $.Site.Title }}"
+        class="u-photo not-prose w-24 h-24 rounded-full ring-2 shadow-sm shadow-black ring-neutral-content"
+        loading="lazy"
+      />
+    {{ end }}
+    <div>
+      {{ $lang := .Params.language | default $.Site.Language.Lang }}
+      {{ if eq $lang "pt" }}
+        <div class="text-base">Escrito por <span class="font-bold p-name">Diogo Moreira</span></div>
+        <div class="text-xs text-base-content p-note">Ideias, sistemas e coisas que valem a pena entender.</div>
+      {{ else }}
+        <div class="text-base">Written by <span class="font-bold p-name">Diogo Moreira</span></div>
+        <div class="text-xs text-base-content p-note">
+          Occasional writing on ideas, systems, and things worth understanding.
+        </div>
+      {{ end }}
+    </div>
+  </footer>
+  <footer class="border-t-4 border-base-300">
     {{ $prev := .PrevInSection }}
     {{ $next := .NextInSection }}
     {{ if or $prev $next }}
@@ -165,5 +165,5 @@
         </div>
       </nav>
     {{ end }}
-  </div>
+  </footer>
 {{ end }}
