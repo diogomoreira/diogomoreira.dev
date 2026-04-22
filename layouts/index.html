@@ -63,7 +63,7 @@
           >
             {{ with .Params.cover }}
               <div class="aspect-3/4 w-full overflow-hidden rounded-t">
-                {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "object-cover w-full h-full transition" "sizes" "160px") }}
+                {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "object-cover w-full h-full transition" "sizes" "180px" "width" "160") }}
               </div>
             {{ end }}
             <div class="card-body p-2">

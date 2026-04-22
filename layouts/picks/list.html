@@ -77,7 +77,7 @@
             {{ if .Params.link }}target="_blank" rel="noopener noreferrer"{{ end }}
           >
             {{ with .Params.cover }}
-              {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "w-56 border-2 border-base-300 shadow-md object-cover group-hover:opacity-90 transition" "sizes" "(min-width: 640px) 14rem, 100vw") }}
+              {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "w-56 border-2 border-base-300 shadow-md object-cover group-hover:opacity-90 transition" "sizes" "(min-width: 640px) 14rem, 100vw" "width" "225") }}
             {{ else }}
               <div class="w-36 h-36 bg-base-200 flex items-center justify-center text-accent">
                 <svg

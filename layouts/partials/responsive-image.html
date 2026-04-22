@@ -2,8 +2,9 @@
 This partial generates a responsive picture element with WebP and JPEG fallback, width/height, and lazy loading. */}}
 {{ $img := resources.Get .src }}
 {{ if $img }}
-  {{ $webp := $img.Resize "800x webp" }}
-  {{ $jpeg := $img.Resize "800x jpg" }}
+  {{ $width := .width | default "800" }}
+  {{ $webp := $img.Resize (printf "%sx webp" $width) }}
+  {{ $jpeg := $img.Resize (printf "%sx jpg" $width) }}
   <picture>
     <source srcset="{{ $webp.RelPermalink }}" type="image/webp" />
     <img
