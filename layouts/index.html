@@ -30,7 +30,7 @@
         <a href="/blog" class="text-xs link link-primary">All posts →</a>
       </div>
       <ul class="list-none p-0 m-0">
-        {{ range first 3 $posts.ByDate.Reverse }}
+        {{ range first 5 $posts.ByDate.Reverse }}
           <li class="border-b py-2 border-base-300">
             <a href="{{ .RelPermalink }}" class="flex items-center justify-between group">
               <span class="text-sm font-medium text-base-content group-hover:opacity-70 transition-opacity">
@@ -43,6 +43,35 @@
           </li>
         {{ end }}
       </ul>
+    </section>
+  {{ end }}
+
+  {{ $picks := where .Site.RegularPages "Section" "picks" }}
+  {{ if $picks }}
+    <section class="mb-14">
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="text-xs font-semibold uppercase tracking-widest">Latest Picks</h2>
+        <a href="/picks" class="text-xs link link-primary">All picks →</a>
+      </div>
+      <div class="flex gap-4 justify-between overflow-x-auto pb-2">
+        {{ range first 4 $picks.ByDate.Reverse }}
+          {{ $itemLink := .Params.link | default .RelPermalink }}
+          <a
+            href="{{ $itemLink }}"
+            class="card w-40 bg-base-100 shrink-0 group"
+            {{ if .Params.link }}target="_blank" rel="noopener noreferrer"{{ end }}
+          >
+            {{ with .Params.cover }}
+              <div class="aspect-3/4 w-full overflow-hidden rounded-t">
+                {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "object-cover w-full h-full transition" "sizes" "160px") }}
+              </div>
+            {{ end }}
+            <div class="card-body p-2">
+              <h3 class="card-title text-xs font-semibold text-base-content text-center">{{ .Title }}</h3>
+            </div>
+          </a>
+        {{ end }}
+      </div>
     </section>
   {{ end }}
 
