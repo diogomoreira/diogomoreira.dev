@@ -4,7 +4,8 @@
   "description": "This is the data for my blog and personal website, where I post some thoughts about software development, games, photography, life and so forth. I also post some things related to my academic experience, some projects and links for cool stuff I've been really into lately.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "hugo --minify && npx pagefind --site public",
+    "dev": "hugo server -D"
   },
   "repository": {
     "type": "git",
