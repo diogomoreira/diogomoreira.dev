@@ -32,10 +32,6 @@
   })();
 </script>
 
-{{ if not hugo.IsDevelopment }}
-  {{ $critical := resources.Get "css/critical.css" | resources.Minify }}
-  <style>{{ $critical.Content | safeCSS }}</style>
-{{ end }}
 {{ with (templates.Defer (dict "key" "global")) }}
   {{ partial "css.html" . }}
 {{ end }}
@@ -94,6 +90,7 @@
 
 
 <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ " /index.xml" | absURL }}" />
+<link href="/pagefind/pagefind-component-ui.css" rel="stylesheet" />
 
 {{/* Per-section feed when inside a section */}}
 {{ with .OutputFormats.Get "RSS" }}
