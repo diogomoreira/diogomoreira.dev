@@ -93,7 +93,10 @@
         <span class="w-2/12">Categories</span>
         {{ $num := len . }}
         {{ range $i, $cat := . }}
-          <a href="{{ "/categories/" | relLangURL }}{{ $cat | urlize }}/" class="text-secondary hover:text-primary"
+          <a
+            href="{{ "/categories/" | relLangURL }}{{ $cat | urlize }}/"
+            data-pagefind-filter="category"
+            class="text-secondary hover:text-primary"
             >{{ $cat }}</a
           >{{ if lt (add $i 1) $num }}<span class="mx-1">·</span>{{ end }}
         {{ end }}
@@ -105,7 +108,10 @@
         <span class="w-2/12">Tags</span>
         {{ $num := len . }}
         {{ range $i, $tag := . }}
-          <a href="{{ "/tags/" | relLangURL }}{{ $tag | urlize }}/" class="text-secondary hover:text-primary"
+          <a
+            href="{{ "/tags/" | relLangURL }}{{ $tag | urlize }}/"
+            data-pagefind-filter="tag"
+            class="text-secondary hover:text-primary"
             >#{{ $tag }}</a
           >{{ if lt (add $i 1) $num }}<span class="mx-1">·</span>{{ end }}
         {{ end }}
