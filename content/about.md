@@ -1,24 +1,26 @@
 ---
 title: About me
-published: "2026-03-29"
+updated: "2026-03-29"
 description: "A little bit about me, my hobbies and my career as a software developer."
 cover: "/images/pages/about.jpg"
 coverCaption: "@ Pavilhão Japonês, Ibirapuera Park - São Paulo - SP"
 ---
 
-Hello! I'm **Diogo Moreira**. I was born in 1989. I’m from Paraíba, Brazil and I currently live and work here.
+Hello! I'm **Diogo Moreira**, born in 1989 in Paraíba, Brazil, where I still live and work today.
 
-**I enjoy playing video games**, specially RPGs and racing games. Some of my favorite games are the **Final Fantasy** series. Check out some of the games I've played in [this list](https://backloggd.com/u/diogodmoreira/games/).
+## Some things that catches my attention
 
-When it comes to movies and TV shows, **I like to watch drama and sci-fi**. Check out some [movies I've watched lately](https://letterboxd.com/diogodmoreira/) and what I'm currently watching [here](https://app.trakt.tv/profile/diogomoreira).
+I'm passionate about **video games**, especially RPGs and racing games. The **Final Fantasy** series is among my favorites. You can see some of the games I've played in [this list](https://backloggd.com/u/diogodmoreira/games/).
 
-Even though I don't read as much as I would like, I enjoy reading science fiction books. **Foundation** series by Isaac Asimov is one of my favorites. Check some of the books I've read in [this list](https://www.goodreads.com/review/list/122984698-diogo-moreira?shelf=read).
+When it comes to movies and TV shows, I enjoy watching drama and sci-fi. If you're curious, check out [movies I've watched lately](https://letterboxd.com/diogodmoreira/) or see what I'm currently watching [here](https://app.trakt.tv/profile/diogomoreira).
 
-I used to **draw** a lot when I was a kid, but I haven't done it in a while. I want to get back to it someday.
+Although I don't read as much as I'd like, I have a soft spot for science fiction books. The **Foundation** series by Isaac Asimov is a personal favorite. You can find some of the books I've read in [this list](https://www.goodreads.com/review/list/122984698-diogo-moreira?shelf=read).
 
-**I collect music on physical media** (specifically CDs and vinyl). Check out [my collection](https://www.discogs.com/user/diogodmoreira/collection). Collecting music is a hobby that I really enjoy, and I have a pretty diverse collection. I also like to discover new artists and genres, and I often find myself adding new albums to my collection, but I have a soft spot for Indie and Punk Rock. I went to [more than 100 concerts](https://www.setlist.fm/user/diogodmoreira) and I'm aiming for 200. Music festivals and concerts are definitely something that makes me feel alive. I often recommend some albums I enjoy in the [picks](/picks) section, but you can also check out my [recent listens](https://music.apple.com/br/profile/diogomoreira) for more.
+As a kid, I used to **draw** a lot, though it's been a while since I last picked up a pencil. I hope to get back to it someday.
 
-When it comes to sports, I’m a big fan of soccer. I support **São Paulo FC**, but I also enjoy watching other teams and leagues. I've been following Formula 1 since 2021 and lately, I've been trying to keep up with tennis tournaments as well.
+Talking about music, I'm also a collector of **music on physical media** — mainly CDs and vinyl. You can browse [my collection](https://www.discogs.com/user/diogodmoreira/collection). Discovering new artists and genres is something I really enjoy, and my collection is always growing, though I have a particular love for _Indie_ and _Punk Rock_. I've attended [over 100 concerts](https://www.setlist.fm/user/diogodmoreira) and am aiming for 200. Music festivals and concerts are experiences that truly make me feel alive. I often share album recommendations in the [picks](/picks) section, and you can also check out my [recent listens](https://music.apple.com/br/profile/diogomoreira).
+
+When it comes to sports, I'm a big soccer fan and support **São Paulo FC**, but I also enjoy following other teams and leagues. Since 2021, I've been into Formula 1, and lately, I've been keeping up with tennis tournaments as well.
 
 ---
 

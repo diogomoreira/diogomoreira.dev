@@ -1,0 +1,38 @@
+{{ define "main" }}
+  <article>
+    {{ partial "header.html" . }}
+
+
+    <div class="prose prose-headings:font-display prose-base max-w-none">
+      {{ .Content }}
+    </div>
+
+    {{/* Prev/Next */}}
+    {{ if or .PrevInSection .NextInSection }}
+      <nav class="mt-12 pt-8 border-t border-base-300 grid grid-cols-2 gap-4">
+        {{ if .PrevInSection }}
+          <a href="{{ .PrevInSection.RelPermalink }}" class="group flex flex-col gap-1">
+            <span class="text-xs text-base-content/40 uppercase tracking-widest">← Older</span>
+            <span class="text-sm font-medium text-base-content group-hover:opacity-60 ">
+              {{ .PrevInSection.Title }}
+            </span>
+          </a>
+        {{ else }}
+          <div></div>
+        {{ end }}
+
+        {{ if .NextInSection }}
+          <a href="{{ .NextInSection.RelPermalink }}" class="group flex flex-col gap-1 text-right">
+            <span class="text-xs text-base-content/40 uppercase tracking-widest">Newer →</span>
+            <span class="text-sm font-medium text-base-content group-hover:opacity-60 ">
+              {{ .NextInSection.Title }}
+            </span>
+          </a>
+        {{ else }}
+          <div></div>
+        {{ end }}
+      </nav>
+    {{ end }}
+
+  </article>
+{{ end }}

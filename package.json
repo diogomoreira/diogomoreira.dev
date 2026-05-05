@@ -1,6 +1,6 @@
 {
   "name": "diogomoreira.dev",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "This is the data for my blog and personal website, where I post some thoughts about software development, games, photography, life and so forth. I also post some things related to my academic experience, some projects and links for cool stuff I've been really into lately.",
   "main": "index.js",
   "scripts": {

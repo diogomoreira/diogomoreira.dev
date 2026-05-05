@@ -1,0 +1,39 @@
+{{ define "main" }}
+  <article data-pagefind-ignore>
+    {{ partial "header.html" . }}
+
+    {{ with .Content }}
+      <div class="prose prose-headings:font-display max-w-3xl">{{ . }}</div>
+    {{ end }}
+
+    {{ if .Pages }}
+      <ul class="space-y-6 list-none p-0 m-0">
+        {{ range .Pages.ByDate.Reverse }}
+          {{ $term := . }}
+          <li class="border-b border-base-300 pb-6">
+            <a href="{{ $term.Page.Permalink }}" class="group block">
+              <span class="text-base font-medium text-base-content group-hover:opacity-70 ">
+                {{ $term.Page.Title }}
+              </span>
+
+              {{ with $term.Page.Description }}
+                <p class="mt-1 leading-relaxed text-sm text-primary">{{ . | markdownify }}</p>
+              {{ end }}
+
+              {{ with $term.Pages.ByDate.Reverse | first 1 }}
+                <div class="">
+                  <span class="text-xs">Last updated:</span>
+                  <time class="mt-2 text-xs text-secondary" datetime="{{ (index . 0).Date.Format "2006-01-02" }}">
+                    {{ (index . 0).Date | time.Format "Jan 2, 2006" }}
+                  </time>
+                </div>
+              {{ end }}
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    {{ else }}
+      <p class="text-sm text-secondary">Nothing here yet.</p>
+    {{ end }}
+  </article>
+{{ end }}

@@ -1,0 +1,30 @@
+{{ define "main" }}
+
+  {{ partial "header.html" . }}
+  {{ $pages := .Pages }}
+  {{ if not $pages }}
+    {{ $pages = .Data.Pages }}
+  {{ end }}
+
+  {{ if $pages }}
+    <ul class="posts-list">
+      {{ range $pages.ByDate.Reverse }}
+        <li class="border-b w-full mt-6 border-base-300 pb-6">
+          <a href="{{ .Permalink }}">
+            <h2 class="text-base font-semibold">
+              {{ .Title }}
+            </h2>
+            {{ with .Description }}
+              <p class="mt-1 text-sm text-primary">{{ . | markdownify }}</p>
+            {{ end }}
+            <time class="mt-2 block text-xs text-secondary" datetime="{{ .Date.Format " 2006-01-02" }}">
+              {{ .Date.Format "January 2, 2006" }}
+            </time>
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+  {{ else }}
+    <p>No posts found.</p>
+  {{ end }}
+{{ end }}

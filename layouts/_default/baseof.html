@@ -5,17 +5,18 @@
     {{ block "head" . }}{{ end }}
   </head>
 
-  <body class="bg-base-100 min-h-screen lg:flex">
+  <body class="lg:max-w-7xl min-h-screen lg:flex">
     {{ partial "sidebar.html" . }}
-    {{ partial "grain-effect.html" . }}
 
 
-    <div class="flex-1 flex flex-col min-h-screen lg:ml-80">
-      <main class="flex-1 w-full max-w-3xl mx-auto px-6 py-12 md:py-16">
+    <div class="lg:ml-80 flex-1 flex flex-col min-h-screen">
+      <main class="w-full mx-auto p-8 md:p-12">
         {{ block "main" . }}{{ end }}
       </main>
     </div>
-    {{ block "scripts" . }}{{ end }}
+    {{ block "scripts" . }}
+      <script src="/pagefind/pagefind-component-ui.js" type="module"></script>
+    {{ end }}
     {{ partial "theme-toggle-script.html" . }}
   </body>
 </html>

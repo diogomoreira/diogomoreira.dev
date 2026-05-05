@@ -1,0 +1,75 @@
+{{/* ── Sidebar ────────────────────────────────────────────── */}}
+<aside
+  id="sidebar"
+  aria-label="Menu sidebar"
+  class="hidden lg:flex flex-col h-screen fixed w-80 z-40 border-r bg-base-200 border-neutral-content/10"
+>
+  <div class="flex flex-col flex-1 px-8 py-10">
+    {{/* Site identity */}}
+    <div class="h-card mb-6 flex flex-col justify-center items-center">
+      {{ $profile := resources.Get "images/profile/profile.jpg" }}
+      {{ with $profile }}
+        {{ $resized := .Fit "288x288" }}
+        <img
+          src="{{ $resized.RelPermalink }}"
+          width="{{ $resized.Width }}"
+          height="{{ $resized.Height }}"
+          alt="{{ $.Site.Title }}"
+          class="u-photo w-36 h-36 rounded-full object-cover mb-4 ring-4 shadow-md shadow-black ring-neutral-content"
+          loading="lazy"
+        />
+      {{ end }}
+      <a
+        href="/"
+        class="u-url flex gap-4 items-center justify-center text-3xl font-semibold tracking-tight text-content hover:opacity-80 "
+        rel="me"
+      >
+        <span class="p-name">{{ .Site.Title }}</span>
+      </a>
+      {{ with .Site.Params.description }}
+        <p class="p-note text-center mt-2 text-sm text-content/60 leading-relaxed">{{ . }}</p>
+      {{ end }}
+    </div>
+    {{ partial "social.html" . }}
+    {{ partial "search.html" . }}
+
+    {{/* Navigation */}}
+    <nav class="flex-1" aria-label="Main navigation">
+      <ul class="space-y-1 font-sans list-none p-0 m-0">
+        {{ range .Site.Menus.main }}
+          <li>
+            {{ $isActive := or ($.IsMenuCurrent `main` .) ($.HasMenuCurrent `main` .) (hasPrefix $.RelPermalink .URL) }}
+            <a
+              href="{{ .URL }}"
+              class="flex items-center gap-2 px-3 py-2 rounded-btn text-sm
+                      {{ if $isActive }}
+                bg-base-300 text-base-content font-medium
+              {{ else }}
+                text-base-content/60 hover:text-base-content hover:bg-base-content/5
+              {{ end }}
+"
+            >
+              {{ .Name }}
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    </nav>
+    {{ partial "webring.html" }}
+    {{/* Bottom: theme toggle + copyright */}}
+    <div class="mt-6 pt-6 border-t border-neutral/10 flex items-center justify-between">
+      <div class="text-xs">
+        <div class="text-content">
+          <span class="">© {{ now.Year }} {{ .Site.Title }}</span>
+        </div>
+        <div class="text-content">
+          <strong class="font-mono">v{{ .Site.Params.Version }}</strong> — Built with <a href="https://hugo.io">Hugo</a>
+        </div>
+      </div>
+      <button id="theme-toggle-desktop" aria-label="Toggle dark mode" class="btn btn-sm btn-square">
+        {{ partial "icons/sun.html" . }}
+        {{ partial "icons/moon.html" . }}
+      </button>
+    </div>
+  </div>
+</aside>

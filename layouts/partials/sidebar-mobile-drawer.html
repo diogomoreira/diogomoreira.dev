@@ -1,0 +1,53 @@
+{{/* ── Mobile sidebar drawer ─────────────────────────────── */}}
+<div id="sidebar-drawer" class="lg:hidden hidden fixed inset-0 z-50">
+  {{/* Backdrop */}}
+  <div id="sidebar-backdrop" class="absolute inset-0 bg-black/70" onclick="closeSidebar()"></div>
+
+  {{/* Drawer panel */}}
+  <aside
+    class="absolute top-0 left-0 h-full w-72 bg-base-200 text-base-content flex flex-col px-8 py-10 overflow-y-auto"
+  >
+    <a href="/" class="block font-sans text-2xl font-bold tracking-tight text-base-content mb-10 hover:opacity-80 ">
+      {{ .Site.Title }}
+    </a>
+    <nav class="flex-1">
+      <ul class="space-y-1 font-sans list-none p-0 m-0">
+        {{ range .Site.Menus.main }}
+          <li>
+            {{ $isActive := or ($.IsMenuCurrent `main` .) ($.HasMenuCurrent `main` .) (hasPrefix $.RelPermalink .URL) }}
+            <a
+              href="{{ .URL }}"
+              class="flex items-center gap-2 px-3 py-2 rounded-btn text-sm
+                      {{ if $isActive }}
+                bg-neutral-content/10 text-neutral-content font-medium
+              {{ else }}
+                text-neutral-content/60 hover:text-neutral-content hover:bg-neutral-content/5
+              {{ end }}"
+            >
+              {{ .Name }}
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    </nav>
+    {{ partial "social.html" . }}
+    {{ partial "webring.html" }}
+    <div class="mt-6 pt-6 border-t border-neutral-content/10 text-xs">
+      <div class="text-center text-neutral-content">
+        <span class="">© {{ now.Year }} {{ .Site.Title }}</span>
+      </div>
+      <div class="text-center text-neutral-content">
+        <strong>v{{ .Site.Params.Version }}</strong> Built with <a href="https://hugo.io">Hugo</a>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<script>
+  function closeSidebar() {
+    document.getElementById("sidebar-drawer").classList.add("hidden");
+  }
+  document.getElementById("sidebar-toggle").addEventListener("click", function () {
+    document.getElementById("sidebar-drawer").classList.remove("hidden");
+  });
+</script>

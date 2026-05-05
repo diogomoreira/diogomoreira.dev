@@ -1,6 +1,7 @@
 ---
 title: "Curriculum"
 description: "My professional journey, including academic background and publications."
+updated: 2026-04-01
 draft: false
 layout: "cv"
 ---

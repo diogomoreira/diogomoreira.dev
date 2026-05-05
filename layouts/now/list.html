@@ -1,0 +1,36 @@
+{{ define "main" }}
+  {{ $entries := .Pages.ByDate.Reverse }}
+  {{ $latest  := index $entries 0 }}
+  {{ $history := after 1 $entries }}
+
+  {{ partial "header.html" . }}
+
+  {{/* Latest entry — full content */}}
+  {{ with $latest }}
+    <article class="mb-16">
+      <div class="prose prose-headings:font-display prose-base leading-loose max-w-none">
+        {{ .Content }}
+      </div>
+    </article>
+  {{ end }}
+
+  {{/* Previous entries list */}}
+  {{ if $history }}
+    <section class="border-t border-base-300 pt-10">
+      <h2 class="font-display text-xs font-semibold uppercase tracking-widest text-base-content/40 mb-6">Previously</h2>
+      <ul class="list-none p-0 m-0">
+        {{ range $history }}
+          <li class="flex items-baseline justify-between gap-4 py-3 border-b border-base-300">
+            <a href="{{ .RelPermalink }}" class="text-sm font-medium text-base-content hover:opacity-60 ">
+              {{ .Title }}
+            </a>
+            <time class="text-xs tabular-nums text-base-content/40 shrink-0" datetime="{{ .Date.Format "2006-01-02" }}">
+              {{ .Date.Format "January 2006" }}
+            </time>
+          </li>
+        {{ end }}
+      </ul>
+    </section>
+  {{ end }}
+
+{{ end }}

@@ -1,20 +1,12 @@
 {{ define "main" }}
-  <header class="mb-10">
-    <h1 class="text-4xl font-semibold text-base-content">
-      {{ .Title | title }}
-    </h1>
-    {{ with .Description }}<p class="mt-3 text-xs text-base-content">{{ . }}</p>{{ end }}
-    {{ with .Content }}
-      <div class="prose max-w-3xl">{{ . }}</div>
-    {{ end }}
-  </header>
+  {{ partial "header.html" . }}
 
   {{ if .Pages }}
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {{ range .Pages.ByDate.Reverse }}
         <a
           href="{{ .RelPermalink }}"
-          class="group card bg-base-100 border border-base-300 hover:border-primary transition-colors overflow-hidden"
+          class="group card bg-base-100 border border-base-300 hover:border-primary  overflow-hidden"
         >
           <div class="card-body p-4 flex-row items-center justify-between gap-2">
             <div class="min-w-0">
@@ -33,6 +25,6 @@
       {{ end }}
     </div>
   {{ else }}
-    <p class="text-sm text-secondary">No snippets yet.</p>
+    <p class="bg-base-200 p-10 text-center text-sm text-secondary">Nothing here yet.</p>
   {{ end }}
 {{ end }}

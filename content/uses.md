@@ -5,6 +5,7 @@ published: "2023-07-09"
 updated: "2026-04-01"
 cover: /images/pages/uses.jpg
 coverCaption: "My setup"
+tags: [uses, setup, tools]
 ---
 
 Hello there! In this post, I want to share with you the tools that I have been using on my workflow and helped me become more productive and efficient. This is a always evolving page, so I'll try to keep track of what has changed through the years and why. Inspired by [Wes Bos's **uses.tech**](https://uses.tech/).
