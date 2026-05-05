@@ -1,6 +1,6 @@
 {{ define "main" }}
-  <section class="mb-16">
-    <h1 class="text-4xl font-semibold text-base-content mb-6">
+  <section data-pagefind-body class="mb-16">
+    <h1 class="font-display text-4xl font-semibold text-base-content mb-6">
       Hi! I'm
       <span class="font-bold">{{ .Title }}</span>
     </h1>
@@ -17,7 +17,7 @@
     {{ end }}
 
 
-    <div class="text-base leading-relaxed text-base-content">
+    <div class="prose max-w-none! leading-loose">
       {{ .Content }}
     </div>
   </section>
@@ -26,18 +26,18 @@
   {{ if $posts }}
     <section class="mb-14">
       <div class="flex items-center justify-between mb-5">
-        <h2 class="text-xs font-semibold uppercase tracking-widest">Recent Posts</h2>
+        <h2 class="font-display text-xs font-semibold uppercase tracking-widest">Recent Posts</h2>
         <a href="/blog" class="text-xs link link-primary">All posts →</a>
       </div>
       <ul class="list-none p-0 m-0">
         {{ range first 5 $posts.ByDate.Reverse }}
           <li class="border-b py-2 border-base-300">
             <a href="{{ .RelPermalink }}" class="flex items-center justify-between group">
-              <span class="text-sm font-medium text-base-content group-hover:opacity-70 transition-opacity">
+              <span class="text-sm font-medium text-base-content group-hover:opacity-70 ">
                 {{ .Title }}
               </span>
-              <time class="mt-1 block text-xs text-secondary" datetime="{{ .Date.Format " 2006-01-02" }}">
-                {{ .Date.Format "January 2, 2006" }}
+              <time class="mt-1 block text-xs font-mono text-secondary" datetime="{{ .Date.Format " 2006-01-02" }}">
+                {{ .Date.Format "2006-01-02" }}
               </time>
             </a>
           </li>
@@ -50,7 +50,7 @@
   {{ if $picks }}
     <section class="mb-14">
       <div class="flex items-center justify-between mb-5">
-        <h2 class="text-xs font-semibold uppercase tracking-widest">Latest Picks</h2>
+        <h2 class="font-display text-xs font-semibold uppercase tracking-widest">Latest Picks</h2>
         <a href="/picks" class="text-xs link link-primary">All picks →</a>
       </div>
       <div class="flex gap-4 justify-between overflow-x-auto pb-2">
@@ -63,11 +63,11 @@
           >
             {{ with .Params.cover }}
               <div class="aspect-3/4 w-full overflow-hidden rounded-t">
-                {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "object-cover w-full h-full transition" "sizes" "180px" "width" "160") }}
+                {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "object-cover w-full h-full" "sizes" "180px" "width" "160") }}
               </div>
             {{ end }}
             <div class="card-body p-2">
-              <h3 class="card-title text-xs font-semibold text-base-content text-center">{{ .Title }}</h3>
+              <h3 class="font-display card-title text-xs font-semibold text-base-content text-center">{{ .Title }}</h3>
             </div>
           </a>
         {{ end }}

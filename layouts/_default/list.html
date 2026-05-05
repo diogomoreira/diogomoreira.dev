@@ -1,13 +1,8 @@
 {{ define "main" }}
-  <header class="mb-10">
-    <h1 class="text-4xl font-semibold text-base-content">
-      {{ .Title | title }}
-    </h1>
-    {{ with .Description }}<p class="mt-3 text-xs text-base-content">{{ . }}</p>{{ end }}
-  </header>
+  {{ partial "header.html" . }}
 
   {{ with .Content }}
-    <div class="prose max-w-3xl">{{ . }}</div>
+    <div class="prose prose-headings:font-display max-w-3xl">{{ . }}</div>
   {{ end }}
 
   {{ if .Pages }}
@@ -15,7 +10,7 @@
       {{ range .Pages.ByDate.Reverse }}
         <li class="border-b border-base-300 pb-6">
           <a href="{{ .RelPermalink }}" class="group block">
-            <span class="text-base font-medium text-base-content group-hover:opacity-70 transition-opacity">
+            <span class="text-base font-medium text-base-content group-hover:opacity-70 ">
               {{ .Title }}
             </span>
             {{ with .Description }}
@@ -29,6 +24,6 @@
       {{ end }}
     </ul>
   {{ else }}
-    <p class="text-sm text-secondary">Nothing here yet.</p>
+    <p class="bg-base-200 p-10 text-center text-sm text-secondary">Nothing here yet.</p>
   {{ end }}
 {{ end }}

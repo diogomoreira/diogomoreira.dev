@@ -4,8 +4,8 @@ title = "Diogo Moreira"
 titleCaseStyle = "none"
 
 [params]
-version = "4.0.0"
-description = "My thoughts about life, software development, games, music and so forth."
+version = "4.1.0"
+description = "My thoughts about life, software development, music and so forth."
 cover = "images/default-cover.png"
 
 [build]

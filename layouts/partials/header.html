@@ -1,0 +1,28 @@
+<header class="mb-10">
+  <h1 class="font-display text-4xl font-semibold text-base-content">
+    {{ .Title | title }}
+  </h1>
+
+  {{ with .Description }}
+    <p class="mt-3 text-sm text-accent-content prose max-w-none!">{{ . | markdownify }}</p>
+  {{ end }}
+
+
+  <div class="mt-4 flex items-center gap-4">
+    {{ with .Params.updated }}
+      {{ $updated := time.AsTime . }}
+      <span class="text-xs text-secondary font-mono" title="Updated {{ $updated.Format "January 2, 2006" }}">
+        Last Updated
+        {{ $updated.Format "January 2, 2006" }}
+      </span>
+    {{ end }}
+
+    {{ with .Params.tags }}
+      <div class="flex gap-2 flex-wrap">
+        {{ range . }}
+          <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="badge badge-ghost badge-sm">#{{ . }}</a>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</header>

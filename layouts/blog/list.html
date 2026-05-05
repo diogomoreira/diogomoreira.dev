@@ -2,16 +2,36 @@
   <header class="mb-10">
     <div class="flex items-center justify-between">
       <div>
-        <h1 class="text-4xl font-semibold text-base-content">
+        <h1 class="font-display text-4xl font-semibold text-base-content">
           {{ .Title | title }}
         </h1>
-        {{ with .Description }}<p class="mt-3 text-xs text-base-content">{{ . }}</p>{{ end }}
+
+        {{ with .Description }}<p class="mt-3 text-sm text-accent-content">{{ . | markdownify }}</p>{{ end }}
+
+
+        <div class="mt-4 flex items-center gap-4">
+          {{ with .Params.updated }}
+            {{ $updated := time.AsTime . }}
+            <span class="text-xs text-secondary font-mono" title="Updated {{ $updated.Format "January 2, 2006" }}">
+              Last Updated
+              {{ $updated.Format "January 2, 2006" }}
+            </span>
+          {{ end }}
+
+          {{ with .Params.tags }}
+            <div class="flex gap-2 flex-wrap">
+              {{ range . }}
+                <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="badge badge-ghost badge-sm">#{{ . }}</a>
+              {{ end }}
+            </div>
+          {{ end }}
+        </div>
       </div>
       <a
         href="/blog/index.xml"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-secondary hover:text-secondary transition-colors flex items-center gap-1"
+        class="text-secondary hover:text-secondary  flex items-center gap-1"
       >
         <span class="w-6">
           {{ partial "icons/social/rss.html" . }}
@@ -22,32 +42,32 @@
   </header>
 
   {{ with .Content }}
-    <div class="prose max-w-3xl mb-10">{{ . }}</div>
+    <div class="prose leading-loose prose-headings:font-display max-w-3xl mb-10">{{ . }}</div>
   {{ end }}
 
   {{ if .Pages }}
 
     {{ range (.Pages.ByDate.Reverse).GroupByDate "2006" }}
       <section class="mb-10">
-        <h2 class="text-xs font-semibold uppercase tracking-widest mb-5 text-secondary">
+        <h2 class="font-display text-xs font-semibold uppercase tracking-widest mb-5 text-secondary">
           {{ .Key }}
         </h2>
         <ul class="list-none p-0 m-0">
           {{ range .Pages }}
             <li
-              class="flex flex-col hover:bg-secondary/10 transition-colors duration-200 gap-1 py-8 md:p-8 border-b border-secondary/20 border-dashed"
+              class="flex flex-col hover:bg-secondary/10  duration-200 gap-1 py-8 md:p-8 border-b border-secondary/20 border-dashed"
             >
               <div class="flex items-center justify-between gap-4 min-w-0">
                 <h2>
-                  <a
-                    href="{{ .RelPermalink }}"
-                    class="text-lg font-semibold text-base-content hover:opacity-60 transition-opacity"
-                  >
+                  <a href="{{ .RelPermalink }}" class="text-lg font-semibold text-base-content hover:opacity-60 ">
                     {{ .Title }}
                   </a>
                 </h2>
-                <time class="text-xs tabular-nums text-secondary shrink-0" datetime="{{ .Date.Format "2006-01-02" }}">
-                  {{ .Date.Format "Jan 02" }}
+                <time
+                  class="text-xs font-mono tabular-nums text-secondary shrink-0"
+                  datetime="{{ .Date.Format "2006-01-02" }}"
+                >
+                  {{ .Date.Format "2006-02-01" }}
                 </time>
               </div>
               {{/* Excerpt/Summary */}}
@@ -59,7 +79,7 @@
                   {{ with .Params.categories }}
                     {{ range . }}
                       <a href="{{ "/categories/" | relURL }}{{ . | urlize }}">
-                        <span class="badge badge-primary badge-sm hover:opacity-70 transition-opacity">{{ . }}</span>
+                        <span class="badge badge-accent badge-sm hover:opacity-70 ">{{ . }}</span>
                       </a>
                     {{ end }}
                   {{ end }}

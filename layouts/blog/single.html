@@ -1,11 +1,12 @@
 {{ define "main" }}
-  <article>
+  <article data-pagefind-body>
     <header class="mb-10">
       {{ with .CurrentSection }}
         {{ if not .IsHome }}
           <a
+            data-pagefind-ignore
             href="{{ .RelPermalink }}"
-            class="inline-flex items-center gap-1 text-xs mb-6 text-secondary hover:text-secondary transition-colors"
+            class="inline-flex items-center gap-1 text-xs mb-6 text-secondary hover:text-secondary "
           >
             ←
             {{ .Title }}
@@ -23,7 +24,7 @@
       {{ end }}
 
 
-      <h1 class="text-4xl font-semibold text-base-content">
+      <h1 class="font-display text-4xl font-semibold text-base-content">
         {{ .Title | title }}
       </h1>
 
@@ -60,7 +61,7 @@
 
 
     <div
-      class="prose prose-pre:my-0 prose-pre:p-2 prose-img:mx-auto prose-img:border-4 prose-img:border-base-200 prose-figure:text-center prose-img:shadow-md max-w-none"
+      class="prose prose-headings:font-display prose-pre:my-0 prose-pre:p-2 prose-img:mx-auto prose-img:border-4 prose-img:border-base-200 prose-figure:text-center prose-img:shadow-md max-w-none"
     >
       {{ with .Params.disclaimer }}
         <div role="alert" class="alert alert-warning">
@@ -118,7 +119,7 @@
       </div>
     {{ end }}
   </div>
-  <footer class="mt-6 flex items-center gap-4 p-8 border-t-4 border-base-300 bg-base-200 h-card">
+  <footer data-pagefind-ignore class="mt-6 flex items-center gap-4 p-8 border-t-4 border-base-300 bg-base-200 h-card">
     {{ $profile := resources.Get "images/profile/profile.jpg" }}
     {{ with $profile }}
       {{ $resized := .Fit "96x96" }}
@@ -144,7 +145,7 @@
       {{ end }}
     </div>
   </footer>
-  <footer class="border-t-4 border-base-300">
+  <footer data-pagefind-ignore class="border-t-4 border-base-300">
     {{ $prev := .PrevInSection }}
     {{ $next := .NextInSection }}
     {{ if or $prev $next }}

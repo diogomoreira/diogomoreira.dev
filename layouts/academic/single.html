@@ -1,43 +1,27 @@
 {{ define "main" }}
-  <header class="mb-10">
-    {{ with .CurrentSection }}
-      {{ if not .IsHome }}
-        <a
-          href="{{ .RelPermalink }}"
-          class="inline-flex items-center gap-1 text-xs mb-6 text-secondary hover:text-secondary transition-colors"
-        >
-          ←
-          {{ .Title }}
-        </a>
-      {{ end }}
-    {{ end }}
+  <article data-pagefind-body>
+    {{ partial "header.html" . }}
 
 
-    <h1 class="text-4xl font-semibold text-base-content">
-      {{ .Title | title }}
-    </h1>
+    <div class="prose prose-headings:font-display prose-base max-w-none leading-loose">
+      {{ .Content }}
+      <h2 class="font-display text-lg">Latest publications</h2>
 
-    {{ with .Description }}<p class="mt-3 text-xs text-base-content">{{ . }}</p>{{ end }}
-  </header>
-
-  <div class="prose prose-base max-w-none">
-    {{ .Content }}
-    <h2 class="text-lg">Latest publications</h2>
-
-    {{/* Pull papers from the papers section */}}
-    <ul>
-      {{ $papers := where .Site.RegularPages "Section" "papers" }}
-      {{ range ($papers.ByParam "year").Reverse }}
-        <li class="mb-4">
-          <a href="{{ .Params.link }}" class="link link-primary font-medium">
-            {{ .Title }}
-          </a>
-          {{ with .Params.year }}
-            <span class="badge badge-accent badge-sm ml-2">{{ . }}</span>
-          {{ end }}
-        </li>
-        {{/* your paper card markup here */}}
-      {{ end }}
-    </ul>
-  </div>
+      {{/* Pull papers from the papers section */}}
+      <ul>
+        {{ $papers := where .Site.RegularPages "Section" "papers" }}
+        {{ range ($papers.ByParam "year").Reverse }}
+          <li class="mb-4">
+            <a href="{{ .Params.link }}" class="link link-primary font-medium">
+              {{ .Title }}
+            </a>
+            {{ with .Params.year }}
+              <span class="badge badge-accent badge-sm ml-2">{{ . }}</span>
+            {{ end }}
+          </li>
+          {{/* your paper card markup here */}}
+        {{ end }}
+      </ul>
+    </div>
+  </article>
 {{ end }}

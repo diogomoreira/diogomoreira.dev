@@ -1,0 +1,30 @@
+{{/* ── Mobile top bar ───────────────────────────────────── */}}
+<div class="lg:hidden flex items-center justify-between px-6 py-4 bg-base-200 text-base-content">
+  <a href="/" class="font-sans font-semibold tracking-tight flex gap-2 items-center">
+    <img src="/logo.png" alt="{{ .Site.Title }}" class="w-8 h-8 inline-block mr-2" />
+    {{ .Site.Title }}
+  </a>
+  <div class="flex items-center gap-2">
+    <button id="theme-toggle" aria-label="Toggle dark mode" class="btn btn-sm btn-square">
+      {{ partial "icons/sun.html" . }}
+      {{ partial "icons/moon.html" . }}
+    </button>
+    <button id="sidebar-toggle" aria-label="Toggle menu" class="btn btn-sm btn-square">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="4" x2="20" y1="6" y2="6" />
+        <line x1="4" x2="20" y1="12" y2="12" />
+        <line x1="4" x2="20" y1="18" y2="18" />
+      </svg>
+    </button>
+  </div>
+</div>
