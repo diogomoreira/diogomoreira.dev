@@ -4,7 +4,7 @@
     {{ partial "header.html" . }}
 
     {{ with .Content }}
-      <div class="mb-10 prose prose-base leading-loose max-w-none">{{ . }}</div>
+      <div class="mb-10 prose prose-base max-w-none">{{ . }}</div>
     {{ end }}
 
     {{/* Work experience */}}
@@ -42,7 +42,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="h-5 w-5 text-primary"
+                    class="h-5 w-5 text-secondary"
                   >
                     <path
                       fill-rule="evenodd"
@@ -77,11 +77,11 @@
                     {{ $e.Params.company }}
                   {{ end }}
                   {{ with $e.Params.location }}
-                    <span class="text-accent mx-1">·</span>{{ . }}
+                    <span class="text-neutral mx-1">·</span>{{ . }}
                   {{ end }}
                 </p>
                 {{ with $e.Content }}
-                  <div class="mt-3 mb-6 text-sm text-base-content leading-loose prose prose-sm max-w-none">
+                  <div class="mt-3 mb-6 text-sm text-base-content leading-relaxed prose prose-sm max-w-none">
                     {{ . }}
                   </div>
                 {{ end }}
@@ -170,11 +170,11 @@
                     {{ $e.Params.institution }}
                   {{ end }}
                   {{ with $e.Params.location }}
-                    <span class="text-accent mx-1">·</span>{{ . }}
+                    <span class="text-neutral mx-1">·</span>{{ . }}
                   {{ end }}
                 </p>
                 {{ with $e.Content }}
-                  <div class="mt-3 mb-6 text-sm text-base-content leading-loose prose prose-sm max-w-none">
+                  <div class="mt-3 mb-6 text-sm text-base-content leading-relaxed prose prose-sm max-w-none">
                     {{ . }}
                   </div>
                 {{ end }}

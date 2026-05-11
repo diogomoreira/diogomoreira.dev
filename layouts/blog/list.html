@@ -42,7 +42,7 @@
   </header>
 
   {{ with .Content }}
-    <div class="prose leading-loose prose-headings:font-display max-w-3xl mb-10">{{ . }}</div>
+    <div class="prose prose-headings:font-display max-w-3xl mb-10">{{ . }}</div>
   {{ end }}
 
   {{ if .Pages }}
@@ -79,7 +79,7 @@
                   {{ with .Params.categories }}
                     {{ range . }}
                       <a href="{{ "/categories/" | relURL }}{{ . | urlize }}">
-                        <span class="badge badge-accent badge-sm hover:opacity-70 ">{{ . }}</span>
+                        <span class="badge badge-primary badge-sm hover:opacity-70 ">{{ . }}</span>
                       </a>
                     {{ end }}
                   {{ end }}

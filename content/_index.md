@@ -1,6 +1,7 @@
 ---
 title: "Diogo Moreira"
 cover: /images/profile/cover.jpg
+coverCaption: "@ Escadaria Selarón - Rio de Janeiro - RJ, Brazil"
 draft: false
 ---
 

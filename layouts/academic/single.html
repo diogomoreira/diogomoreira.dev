@@ -3,7 +3,7 @@
     {{ partial "header.html" . }}
 
 
-    <div class="prose prose-headings:font-display prose-base max-w-none leading-loose">
+    <div class="prose prose-headings:font-display prose-base max-w-none">
       {{ .Content }}
       <h2 class="font-display text-lg">Latest publications</h2>
 
@@ -16,7 +16,7 @@
               {{ .Title }}
             </a>
             {{ with .Params.year }}
-              <span class="badge badge-accent badge-sm ml-2">{{ . }}</span>
+              <span class="badge badge-secondary badge-sm ml-2">{{ . }}</span>
             {{ end }}
           </li>
           {{/* your paper card markup here */}}
