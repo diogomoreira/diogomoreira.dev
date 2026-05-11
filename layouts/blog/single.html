@@ -85,19 +85,19 @@
     </div>
   </article>
   <hr class="my-4 border-base-200" />
-  <div class="mt-4 flex flex-col text-xs">
+  <div class="mt-4 flex flex-col text-sm">
     {{ $hasCategories := .Params.Categories }}
     {{ $hasTags := .Params.tags }}
 
     {{ with .Params.Categories }}
-      <div class="flex py-2 gap-1 flex-wrap items-center text-xs">
-        <span class="w-2/12">Categories</span>
+      <div class="flex py-2 gap-1 flex-wrap items-center">
+        <span class="p-2">Categories</span>
         {{ $num := len . }}
         {{ range $i, $cat := . }}
           <a
             href="{{ "/categories/" | relLangURL }}{{ $cat | urlize }}/"
             data-pagefind-filter="category"
-            class="text-secondary hover:text-primary"
+            class="badge badge-primary"
             >{{ $cat }}</a
           >{{ if lt (add $i 1) $num }}<span class="mx-1">·</span>{{ end }}
         {{ end }}
@@ -105,47 +105,18 @@
     {{ end }}
 
     {{ with .Params.tags }}
-      <div class="flex py-2 gap-1 flex-wrap items-center text-xs">
-        <span class="w-2/12">Tags</span>
+      <div class="flex py-2 gap-1 flex-wrap items-center">
+        <span class="p-2">Tags</span>
         {{ $num := len . }}
         {{ range $i, $tag := . }}
-          <a
-            href="{{ "/tags/" | relLangURL }}{{ $tag | urlize }}/"
-            data-pagefind-filter="tag"
-            class="text-secondary hover:text-primary"
+          <a href="{{ "/tags/" | relLangURL }}{{ $tag | urlize }}/" data-pagefind-filter="tag" class="badge badge-ghost"
             >#{{ $tag }}</a
           >{{ if lt (add $i 1) $num }}<span class="mx-1">·</span>{{ end }}
         {{ end }}
       </div>
     {{ end }}
   </div>
-  <footer data-pagefind-ignore class="mt-6 flex items-center gap-4 p-8 border-t-4 border-base-300 bg-base-200 h-card">
-    {{ $profile := resources.Get "images/profile/profile.jpg" }}
-    {{ with $profile }}
-      {{ $resized := .Fit "96x96" }}
-      <img
-        src="{{ $resized.RelPermalink }}"
-        width="{{ $resized.Width }}"
-        height="{{ $resized.Height }}"
-        alt="{{ $.Site.Title }}"
-        class="u-photo not-prose w-24 h-24 rounded-full ring-2 shadow-sm shadow-black ring-neutral-content"
-        loading="lazy"
-      />
-    {{ end }}
-    <div>
-      {{ $lang := .Params.language | default $.Site.Language.Lang }}
-      {{ if eq $lang "pt" }}
-        <div class="text-base">Escrito por <span class="font-bold p-name">Diogo Moreira</span></div>
-        <div class="text-xs text-base-content p-note">Ideias, sistemas e coisas que valem a pena entender.</div>
-      {{ else }}
-        <div class="text-base">Written by <span class="font-bold p-name">Diogo Moreira</span></div>
-        <div class="text-xs text-base-content p-note">
-          Occasional writing on ideas, systems, and things worth understanding.
-        </div>
-      {{ end }}
-    </div>
-  </footer>
-  <footer data-pagefind-ignore class="border-t-4 border-base-300">
+  <footer data-pagefind-ignore class="mt-6 border-t-4 border-base-300">
     {{ $prev := .PrevInSection }}
     {{ $next := .NextInSection }}
     {{ if or $prev $next }}

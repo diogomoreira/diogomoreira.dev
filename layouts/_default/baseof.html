@@ -18,5 +18,17 @@
       <script src="/pagefind/pagefind-component-ui.js" type="module"></script>
     {{ end }}
     {{ partial "theme-toggle-script.html" . }}
+    {{ $lightbox := resources.Get "photoswipe/photoswipe-lightbox.esm.min.js" | fingerprint }}
+    {{ $pswp := resources.Get "photoswipe/photoswipe.esm.min.js" | fingerprint }}
+
+    <script type="module">
+      import PhotoSwipeLightbox from '{{ $lightbox.RelPermalink }}';
+      const lightbox = new PhotoSwipeLightbox({
+        gallery: '#my-gallery',
+        children: 'a',
+        pswpModule: () => import('{{ $pswp.RelPermalink }}'),
+      });
+      lightbox.init();
+    </script>
   </body>
 </html>
