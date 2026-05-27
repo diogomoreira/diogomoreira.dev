@@ -4,6 +4,7 @@
   "description": "This is the data for my blog and personal website, where I post some thoughts about software development, games, photography, life and so forth. I also post some things related to my academic experience, some projects and links for cool stuff I've been really into lately.",
   "main": "index.js",
   "scripts": {
+    "prebuild": "mkdir -p assets/photoswipe && cp node_modules/photoswipe/dist/photoswipe.css assets/photoswipe/ && cp node_modules/photoswipe/dist/photoswipe-lightbox.esm.min.js assets/photoswipe/ && cp node_modules/photoswipe/dist/photoswipe.esm.min.js assets/photoswipe/",
     "build": "hugo --minify && npx pagefind --site public",
     "dev": "hugo server -D"
   },
@@ -21,12 +22,13 @@
   "homepage": "https://github.com/diogomoreira/diogomoreira.dev#readme",
   "dependencies": {
     "@tailwindcss/cli": "^4.2.2",
+    "photoswipe": "^5.4.4",
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.19",
-    "pagefind": "^1.5.2",
     "daisyui": "^5.5.19",
+    "pagefind": "^1.5.2",
     "prettier": "^3.8.1",
     "prettier-plugin-go-template": "^0.0.15"
   }
