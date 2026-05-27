@@ -25,6 +25,9 @@ target = 'assets'
 disableWatch = true
 source = 'hugo_stats.json'
 target = 'assets/notwatching/hugo_stats.json'
+[[module.mounts]]
+source = "node_modules/photoswipe/dist"
+target = "assets/photoswipe"
 
 [markup]
 [markup.highlight]

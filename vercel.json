@@ -1,5 +1,5 @@
 {
-  "buildCommand": "hugo --minify",
+  "buildCommand": "npm run build",
   "outputDirectory": "public",
   "installCommand": "npm install",
   "framework": "hugo",
