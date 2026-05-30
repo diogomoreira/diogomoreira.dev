@@ -5,18 +5,6 @@
       <span class="font-bold">{{ .Title }}</span>
     </h1>
 
-    {{ with .Params.cover }}
-      <figure class="mb-10">
-        {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "w-full border-4 border-base-200 shadow-md object-cover" "sizes" "100vw") }}
-        {{ with $.Params.coverCaption }}
-          <figcaption class="mt-2 text-xs text-center text-secondary">
-            {{ . }}
-          </figcaption>
-        {{ end }}
-      </figure>
-    {{ end }}
-
-
     <div class="prose max-w-none!">
       {{ .Content }}
     </div>
@@ -32,11 +20,14 @@
       <ul class="list-none p-0 m-0">
         {{ range first 5 $posts.ByDate.Reverse }}
           <li class="border-b py-2 border-base-300">
-            <a href="{{ .RelPermalink }}" class="flex items-center justify-between group">
-              <span class="text-sm font-medium text-base-content group-hover:opacity-70 ">
+            <a
+              href="{{ .RelPermalink }}"
+              class="flex flex-col md:flex-row md:items-center md:justify-between w-full group"
+            >
+              <span class="text-sm font-medium text-base-content group-hover:opacity-70">
                 {{ .Title }}
               </span>
-              <time class="mt-1 block text-xs font-mono text-secondary" datetime="{{ .Date.Format " 2006-01-02" }}">
+              <time class="mt-1 sm:mt-0 text-xs font-mono text-secondary" datetime="{{ .Date.Format " 2006-01-02" }}">
                 {{ .Date.Format "2006-01-02" }}
               </time>
             </a>
