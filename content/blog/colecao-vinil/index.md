@@ -20,7 +20,7 @@ Não houve um motivo específico pelo qual eu decidi começar que não fosse sim
 
 Nesse pouco tempo que estou nesse hobby eu aprendi algumas coisas e gostaria de ir compartilhando nesse post. Como (quase) tudo nesse blog, esse post pode ir evoluindo ao longo do tempo e ganhando novas atualizações/melhorias.
 
-Antes de começar, queria pontuar algumas coisas que eu gostaria de ter conhecimento antes de começar, mas que não comprometem o meu ânimo com esse hobby
+Antes de começar, queria pontuar algumas coisas que eu gostaria de ter conhecimento antes de começar, mas que não comprometem o meu ânimo com esse hobby:
 
 ## O som do vinil é **melhor**?
 
@@ -112,3 +112,13 @@ Para limpar com a escova anti-estática, coloque o disco no tocador e a acione o
 </figure>
 
 Na minha experiência que tenho comprado vinis mais novos, limpar no momento de escutar um vinil já é o suficiente uma vez que você mantenha as dicas anteriores de guardar num plástico de proteção e anti estático.
+
+No fim do dia, o mais importante é aproveitar a experiência de escutar um álbum em vinil, seja ele um lançamento ou um disco antigo. O processo de colocar o disco para tocar, ler as letras, observar a arte da capa e se envolver com a música de uma forma mais imersiva é o que torna esse hobby tão especial pra mim.
+
+Espero que pra você também seja.
+
+---
+
+Esse post não busca ser definitivo e está mais para um "eterno rascunho", sempre evoluindo e sendo atualizado com mais dicas e informações ao longo do tempo.
+
+Se você tem alguma dica ou sugestão, fique à vontade para me mandar uma mensagem ou deixar um comentário aqui.
