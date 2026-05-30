@@ -1,8 +1,8 @@
 ---
 title: "Diogo Moreira"
-cover: /images/profile/cover.jpg
-coverCaption: "@ Escadaria Selarón - Rio de Janeiro - RJ, Brazil"
 draft: false
 ---
+
+Born and living in Brazil 🇧🇷. I'm a software developer and professor with a passion for technology, music, video games.
 
 Welcome to my personal website. This space has a simple purpose - to **share the evolution of my ideas and thoughts**. Consider this a public workspace where I dedicate time on my blog to cultivate and nurture new concepts through posts that serve as a tool for my personal growth, learning and creativity. Explore the other sections here and leave a comment if you like. I'll be happy to answer 😄

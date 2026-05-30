@@ -2,7 +2,7 @@
 title: About me
 updated: "2026-03-29"
 description: "A little bit about me, my hobbies and my career as a software developer."
-cover: "/images/pages/about.jpg"
+cover: "/images/profile/cover.jpg"
 coverCaption: "@ Pavilhão Japonês, Ibirapuera Park - São Paulo - SP"
 ---
 
