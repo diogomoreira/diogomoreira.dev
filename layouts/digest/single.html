@@ -1,0 +1,63 @@
+{{ define "main" }}
+  <article data-pagefind-body>
+    <header class="mb-10">
+      <a
+        data-pagefind-ignore
+        href="{{ .CurrentSection.RelPermalink }}"
+        class="inline-flex items-center gap-1 text-xs mb-6 text-secondary hover:text-secondary"
+      >
+        ← {{ .CurrentSection.Title }}
+      </a>
+
+      <div class="flex items-center gap-3 mb-2">
+        {{ with .Params.issue }}
+          <span class="badge badge-primary">#{{ . }}</span>
+        {{ end }}
+        <time class="text-xs font-mono" datetime="{{ .Date.Format "2006-01-02" }}">
+          {{ .Date.Format "January 2, 2006" }}
+        </time>
+      </div>
+
+      <h1 class="font-display text-4xl font-semibold text-base-content">
+        {{ .Title | title }}
+      </h1>
+
+      {{ with .Description }}
+        <p class="mt-3 text-xs text-accent">{{ . }}</p>
+      {{ end }}
+    </header>
+
+    <div class="prose prose-headings:font-display max-w-none">
+      {{ .Content }}
+    </div>
+  </article>
+
+  <footer data-pagefind-ignore class="mt-6 border-t-4 border-base-300">
+    {{ $prev := .PrevInSection }}
+    {{ $next := .NextInSection }}
+    {{ if or $prev $next }}
+      <nav class="mt-8 flex justify-between w-full text-sm">
+        <div class="w-1/2 p-4">
+          {{ if $prev }}
+            <a href="{{ $prev.RelPermalink }}" class="text-primary flex flex-col">
+              <span class="text-xs">← Previous</span>
+              <span class="text-secondary hover:text-primary text-lg py-2 font-semibold">
+                {{ $prev.Title }}
+              </span>
+            </a>
+          {{ end }}
+        </div>
+        <div class="w-1/2 p-4">
+          {{ if $next }}
+            <a href="{{ $next.RelPermalink }}" class="text-primary flex flex-col items-end">
+              <span class="text-xs">Next →</span>
+              <span class="text-secondary hover:text-primary text-lg py-2 font-semibold text-right">
+                {{ $next.Title }}
+              </span>
+            </a>
+          {{ end }}
+        </div>
+      </nav>
+    {{ end }}
+  </footer>
+{{ end }}
