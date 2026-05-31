@@ -4,7 +4,7 @@ title = "Diogo Moreira"
 titleCaseStyle = "none"
 
 [params]
-version = "4.1.0"
+version = "4.2.0"
 description = "My thoughts about life, software development, music and so forth."
 cover = "images/default-cover.png"
 
@@ -143,6 +143,11 @@ weight = 9
 name = "Photos"
 url = "/photos"
 weight = 10
+
+[[menus.main]]
+name = "Digest"
+url = "/digest"
+weight = 11
 
 [[cascade]]
 [cascade.build]
