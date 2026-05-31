@@ -2,7 +2,7 @@
 <aside
   id="sidebar"
   aria-label="Menu sidebar"
-  class="hidden lg:flex flex-col h-screen fixed overflow-y-auto w-80 z-40 border-r bg-base-200 border-neutral-content/10"
+  class="hidden lg:flex flex-col h-screen sticky top-0 overflow-y-auto w-80 z-40 shrink-0"
 >
   <div class="flex flex-col flex-1 px-8 py-10">
     {{/* Site identity */}}
@@ -21,13 +21,13 @@
       {{ end }}
       <a
         href="/"
-        class="u-url flex gap-4 items-center justify-center text-3xl font-semibold tracking-tight text-content hover:opacity-80 "
+        class="u-url flex gap-4 items-center justify-center text-3xl font-semibold tracking-tight text-base-content hover:opacity-80 "
         rel="me"
       >
         <span class="p-name">{{ .Site.Title }}</span>
       </a>
       {{ with .Site.Params.description }}
-        <p class="p-note text-center mt-2 text-sm text-content/60 leading-relaxed">{{ . }}</p>
+        <p class="p-note text-center mt-2 text-sm text-base-content/60 leading-relaxed">{{ . }}</p>
       {{ end }}
     </div>
     {{ partial "social.html" . }}
@@ -59,10 +59,10 @@
     {{/* Bottom: theme toggle + copyright */}}
     <div class="mt-6 pt-6 border-t border-neutral/10 flex items-center justify-between">
       <div class="text-xs">
-        <div class="text-content">
+        <div class="text-base-content">
           <span class="">© {{ now.Year }} {{ .Site.Title }}</span>
         </div>
-        <div class="text-content">
+        <div class="text-base-content">
           <strong class="font-mono">v{{ .Site.Params.Version }}</strong> — Built with <a href="https://hugo.io">Hugo</a>
         </div>
       </div>

@@ -15,26 +15,26 @@
   default: true;
   prefersdark: false;
   color-scheme: "light";
-  --color-base-100: oklch(100% 0 0);
-  --color-base-200: oklch(97.466% 0.011 259.822);
-  --color-base-300: oklch(93.268% 0.016 262.751);
-  --color-base-content: oklch(26.2% 0.053 255.824);
-  --color-primary: hsl(211 80.2% 42.9%);
-  --color-primary-content: oklch(91.372% 0.051 257.57);
-  --color-secondary: oklch(42.551% 0.161 282.339);
-  --color-secondary-content: oklch(88.51% 0.032 282.339);
-  --color-accent: oklch(59.939% 0.191 335.171);
-  --color-accent-content: oklch(11.988% 0.038 335.171);
-  --color-neutral: oklch(19.616% 0.063 257.651);
-  --color-neutral-content: oklch(83.923% 0.012 257.651);
-  --color-info: oklch(88.127% 0.085 214.515);
-  --color-info-content: oklch(17.625% 0.017 214.515);
-  --color-success: oklch(80.494% 0.077 197.823);
-  --color-success-content: oklch(16.098% 0.015 197.823);
-  --color-warning: oklch(89.172% 0.045 71.47);
-  --color-warning-content: oklch(17.834% 0.009 71.47);
-  --color-error: oklch(73.092% 0.11 20.076);
-  --color-error-content: oklch(14.618% 0.022 20.076);
+  --color-base-100: oklch(94% 0.010 85);
+  --color-base-200: oklch(90% 0.012 85);
+  --color-base-300: oklch(85% 0.015 85);
+  --color-base-content: oklch(17% 0.060 145);
+  --color-primary: oklch(28% 0.085 145);
+  --color-primary-content: oklch(94% 0.010 85);
+  --color-secondary: oklch(36% 0.080 130);
+  --color-secondary-content: oklch(90% 0.010 85);
+  --color-accent: oklch(72% 0.055 75);
+  --color-accent-content: oklch(17% 0.040 75);
+  --color-neutral: oklch(28% 0.065 145);
+  --color-neutral-content: oklch(90% 0.010 85);
+  --color-info: oklch(68% 0.050 200);
+  --color-info-content: oklch(20% 0.020 200);
+  --color-success: oklch(65% 0.120 150);
+  --color-success-content: oklch(20% 0.040 150);
+  --color-warning: oklch(80% 0.080 80);
+  --color-warning-content: oklch(20% 0.020 80);
+  --color-error: oklch(60% 0.120 25);
+  --color-error-content: oklch(20% 0.040 25);
   --radius-selector: 0rem;
   --radius-field: 0rem;
   --radius-box: 0rem;
@@ -50,26 +50,26 @@
   default: false;
   prefersdark: true;
   color-scheme: "dark";
-  --color-base-100: #282828;
-  --color-base-200: #1d2021;
-  --color-base-300: #3c3836;
-  --color-base-content: oklch(98% 0.016 73.684);
-  --color-primary: #458588;
-  --color-primary-content: oklch(97% 0.014 254.604);
-  --color-secondary: oklch(83% 0.128 66.29);
-  --color-secondary-content: oklch(20% 0 0);
-  --color-accent: oklch(39% 0.141 25.723);
-  --color-accent-content: oklch(97% 0.014 254.604);
-  --color-neutral: #d65d0e;
-  --color-neutral-content: oklch(98% 0.026 102.212);
-  --color-info: #83a598;
-  --color-info-content: oklch(29% 0.066 243.157);
-  --color-success: oklch(76% 0.177 163.223);
-  --color-success-content: oklch(26% 0.051 172.552);
-  --color-warning: #fabd2f;
-  --color-warning-content: oklch(28% 0.066 53.813);
-  --color-error: #fb4954;
-  --color-error-content: oklch(25% 0.092 26.042);
+  --color-base-100: oklch(15% 0.035 145);
+  --color-base-200: oklch(11% 0.025 145);
+  --color-base-300: oklch(21% 0.040 145);
+  --color-base-content: oklch(92% 0.012 85);
+  --color-primary: oklch(55% 0.100 145);
+  --color-primary-content: oklch(92% 0.012 85);
+  --color-secondary: oklch(65% 0.060 80);
+  --color-secondary-content: oklch(15% 0.035 145);
+  --color-accent: oklch(72% 0.055 75);
+  --color-accent-content: oklch(15% 0.035 145);
+  --color-neutral: oklch(28% 0.050 145);
+  --color-neutral-content: oklch(85% 0.012 85);
+  --color-info: oklch(65% 0.060 200);
+  --color-info-content: oklch(15% 0.020 200);
+  --color-success: oklch(62% 0.130 150);
+  --color-success-content: oklch(15% 0.040 150);
+  --color-warning: oklch(78% 0.090 80);
+  --color-warning-content: oklch(15% 0.020 80);
+  --color-error: oklch(58% 0.130 25);
+  --color-error-content: oklch(15% 0.040 25);
   --radius-selector: 0rem;
   --radius-field: 0rem;
   --radius-box: 0rem;
@@ -88,6 +88,18 @@
 }
 
 @layer base {
+  html {
+    background-color: var(--color-base-100);
+
+    @media (min-width: 1024px) {
+      background-image: linear-gradient(
+        to right,
+        var(--color-base-200) max(320px, calc(50% - 320px)),
+        var(--color-base-100) max(320px, calc(50% - 320px))
+      );
+    }
+  }
+
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
