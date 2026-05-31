@@ -92,6 +92,7 @@
 {{ $pswpCSS := resources.Get "photoswipe/photoswipe.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $pswpCSS.RelPermalink }}" integrity="{{ $pswpCSS.Data.Integrity }}" />
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link

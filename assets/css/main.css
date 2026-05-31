@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 @plugin "@tailwindcss/typography";
 @plugin "daisyui" {
   themes:
