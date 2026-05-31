@@ -19,9 +19,9 @@
               href="{{ .URL }}"
               class="flex items-center gap-2 px-3 py-2 rounded-btn text-sm
                       {{ if $isActive }}
-                bg-neutral-content/10 text-neutral-content font-medium
+                bg-base-content/10 text-base-content font-medium
               {{ else }}
-                text-neutral-content/60 hover:text-neutral-content hover:bg-neutral-content/5
+                text-base-content/60 hover:text-base-content hover:bg-base-content/5
               {{ end }}"
             >
               {{ .Name }}
@@ -32,11 +32,11 @@
     </nav>
     {{ partial "social.html" . }}
     {{ partial "webring.html" }}
-    <div class="mt-6 pt-6 border-t border-neutral-content/10 text-xs">
-      <div class="text-center text-neutral-content">
+    <div class="mt-6 pt-6 border-t border-base-content/10 text-xs">
+      <div class="text-center text-base-content">
         <span class="">© {{ now.Year }} {{ .Site.Title }}</span>
       </div>
-      <div class="text-center text-neutral-content">
+      <div class="text-center text-base-content">
         <strong>v{{ .Site.Params.Version }}</strong> Built with <a href="https://hugo.io">Hugo</a>
       </div>
     </div>
