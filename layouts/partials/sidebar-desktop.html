@@ -15,7 +15,7 @@
           width="{{ $resized.Width }}"
           height="{{ $resized.Height }}"
           alt="{{ $.Site.Title }}"
-          class="u-photo w-36 h-36 rounded-full object-cover mb-4 ring-4 shadow-md shadow-black ring-neutral-content"
+          class="u-photo w-36 h-36 rounded-full object-cover mb-4 ring-4 shadow-md shadow-black/50 ring-neutral-content"
           loading="lazy"
         />
       {{ end }}
@@ -49,6 +49,7 @@
               {{ end }}
 "
             >
+              {{ with .Params.icon }}<i class="{{ . }} w-4 text-center"></i>{{ end }}
               {{ .Name }}
             </a>
           </li>
