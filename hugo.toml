@@ -99,77 +99,77 @@ name = "About"
 url = "/about"
 weight = 1
 [menus.main.params]
-icon = "fa-solid fa-user"
+icon = "user"
 
 [[menus.main]]
 name = "CV"
 url = "/cv"
 weight = 2
 [menus.main.params]
-icon = "fa-solid fa-file-lines"
+icon = "cv"
 
 [[menus.main]]
 name = "Blog"
 url = "/blog"
 weight = 3
 [menus.main.params]
-icon = "fa-solid fa-pen-nib"
+icon = "blog"
 
 [[menus.main]]
 name = "Now"
 url = "/now"
 weight = 4
 [menus.main.params]
-icon = "fa-solid fa-clock"
+icon = "now"
 
 [[menus.main]]
 name = "Academic"
 url = "/academic"
 weight = 5
 [menus.main.params]
-icon = "fa-solid fa-graduation-cap"
+icon = "academic"
 
 [[menus.main]]
 name = "Projects"
 url = "/projects"
 weight = 6
 [menus.main.params]
-icon = "fa-solid fa-code-branch"
+icon = "projects"
 
 [[menus.main]]
 name = "Uses"
 url = "/uses"
 weight = 7
 [menus.main.params]
-icon = "fa-solid fa-toolbox"
+icon = "uses"
 
 [[menus.main]]
 name = "Snippets"
 url = "/snippets"
 weight = 8
 [menus.main.params]
-icon = "fa-solid fa-code"
+icon = "snippets"
 
 [[menus.main]]
 name = "Picks"
 url = "/picks"
 weight = 9
 [menus.main.params]
-icon = "fa-solid fa-heart"
+icon = "picks"
 
 [[menus.main]]
 name = "Photos"
 url = "/photos"
 weight = 10
 [menus.main.params]
-icon = "fa-solid fa-camera"
+icon = "photos"
 
 [[menus.main]]
 name = "Digest"
 url = "/digest"
 weight = 11
 [menus.main.params]
-icon = "fa-solid fa-book-open"
+icon = "digest"
 
 [[cascade]]
 [cascade.build]

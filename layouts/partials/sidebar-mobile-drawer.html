@@ -24,7 +24,7 @@
                 text-base-content/60 hover:text-base-content hover:bg-base-content/5
               {{ end }}"
             >
-              {{ with .Params.icon }}<i class="{{ . }} w-4 text-center"></i>{{ end }}
+              {{ with .Params.icon }}{{ partial (printf "icons/nav/%s.html" .) $ }}{{ end }}
               {{ .Name }}
             </a>
           </li>
