@@ -58,7 +58,7 @@ html {
   --color-base-200: oklch(11% 0.025 145);
   --color-base-300: oklch(21% 0.040 145);
   --color-base-content: oklch(92% 0.012 85);
-  --color-primary: oklch(55% 0.100 145);
+  --color-primary: oklch(58% 0.100 145);
   --color-primary-content: oklch(92% 0.012 85);
   --color-secondary: oklch(65% 0.060 80);
   --color-secondary-content: oklch(15% 0.035 145);
