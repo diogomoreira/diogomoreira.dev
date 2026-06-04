@@ -116,6 +116,9 @@
       </div>
     {{ end }}
   </div>
+  <section data-pagefind-ignore class="mt-8 border-t-4 border-base-300 pt-8">
+    {{ partial "disqus.html" . }}
+  </section>
   <footer data-pagefind-ignore class="mt-6 border-t-4 border-base-300">
     {{ $prev := .PrevInSection }}
     {{ $next := .NextInSection }}
