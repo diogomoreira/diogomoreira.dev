@@ -1,4 +1,5 @@
 {{ define "main" }}
+  {{/* ── Header ─────────────────────────────────────────── */}}
   <header class="mb-10">
     <div class="flex items-center justify-between">
       <div>
@@ -45,67 +46,76 @@
     <div class="prose prose-headings:font-sans max-w-3xl mb-10">{{ . }}</div>
   {{ end }}
 
-  {{ if .Pages }}
+  {{ $posts := .Pages.ByDate.Reverse }}
 
-    {{ range (.Pages.ByDate.Reverse).GroupByDate "2006" }}
-      <section class="mb-10">
-        <h2 class="font-sans text-xs font-semibold uppercase tracking-widest mb-5 text-secondary">
+  {{/* ── Featured: latest post ───────────────────────────── */}}
+  {{ with index $posts 0 }}
+    <section class="mb-10 pb-10 border-b-4 border-base-300">
+      <h2 class="font-sans text-xs font-semibold uppercase tracking-widest text-secondary mb-6">Latest</h2>
+      <div class="flex items-center gap-2 text-xs font-mono text-secondary mb-3">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+        <span>·</span>
+        <span>{{ .ReadingTime }} min read</span>
+      </div>
+      <h2 class="font-sans text-2xl font-semibold text-base-content mb-3">
+        <a href="{{ .RelPermalink }}" class="hover:opacity-70 transition-opacity">{{ .Title }}</a>
+      </h2>
+      <p class="text-sm text-base-content/70 leading-relaxed mb-4">
+        {{ with .Description }}{{ . }}{{ else }}{{ .Plain | truncate 200 }}{{ end }}
+      </p>
+      <a href="{{ .RelPermalink }}" class="text-sm link link-primary">Keep reading →</a>
+    </section>
+  {{ end }}
+
+  {{/* ── Categories ────────────────────────────────────────── */}}
+  {{ $cats := slice }}
+  {{ range $posts }}
+    {{ range .Params.categories }}
+      {{ $cats = $cats | append . }}
+    {{ end }}
+  {{ end }}
+  {{ $cats = $cats | uniq | sort }}
+
+  {{ with $cats }}
+    <section class="mb-10">
+      <h2 class="font-sans text-xs font-semibold uppercase tracking-widest text-secondary mb-4">Categories</h2>
+      <div class="flex flex-wrap gap-2">
+        {{ range . }}
+          <a
+            href="{{ "/categories/" | relURL }}{{ . | urlize }}/"
+            class="badge badge-ghost text-xs hover:badge-primary transition-colors"
+            >{{ . }}</a
+          >
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
+
+  {{/* ── Archive ─────────────────────────────────────────── */}}
+  {{ $rest := after 1 $posts }}
+  {{ if $rest }}
+    <h2 class="font-sans text-xs font-semibold uppercase tracking-widest text-secondary mb-6">All posts</h2>
+    {{ range $rest.GroupByDate "2006" }}
+      <section class="mb-8">
+        <h3 class="font-mono text-xs font-semibold text-secondary uppercase tracking-widest mb-3">
           {{ .Key }}
-        </h2>
+        </h3>
         <ul class="list-none p-0 m-0">
           {{ range .Pages }}
-            <li
-              class="flex flex-col hover:bg-secondary/10  duration-200 gap-1 py-8 md:p-8 border-b border-secondary/20 border-dashed"
-            >
-              <div class="flex items-center justify-between gap-4 min-w-0">
-                <h2>
-                  <a href="{{ .RelPermalink }}" class="text-lg font-semibold text-base-content hover:opacity-60 ">
-                    {{ .Title }}
-                  </a>
-                </h2>
-                <time
-                  class="text-xs font-mono tabular-nums text-secondary shrink-0"
-                  datetime="{{ .Date.Format "2006-01-02" }}"
-                >
-                  {{ .Date.Format "2006-02-01" }}
-                </time>
-              </div>
-              {{/* Excerpt/Summary */}}
-              <div class="text-sm text-base-content/70 line-clamp-2">
-                {{ with .Description }}{{ . | plainify }}{{ else }}{{ .Plain | truncate 120 }}{{ end }}
-              </div>
-              <div class="flex flex-col md:flex-row md:items-center gap-2 mt-1">
-                <div class="flex flex-wrap gap-2">
-                  {{ with .Params.categories }}
-                    {{ range . }}
-                      <a href="{{ "/categories/" | relURL }}{{ . | urlize }}">
-                        <span class="badge badge-primary badge-sm hover:opacity-70 ">{{ . }}</span>
-                      </a>
-                    {{ end }}
-                  {{ end }}
-                  {{ with .Params.tags }}
-                    {{ range . }}
-                      <a href="{{ "/tags/" | relURL }}{{ . | urlize }}">
-                        <span class="badge badge-ghost badge-sm">#{{ . }}</span>
-                      </a>
-                    {{ end }}
-                  {{ end }}
-                </div>
-                <div>
-                  {{/* Flag emoji by language */}}
-                  {{ $lang := .Params.language | default "en" }}
-                  <span class="badge badge-soft badge-sm"
-                    >{{ if eq $lang "pt" }}Portuguese (🇧🇷){{ else }}English (🇺🇸){{ end }}
-                  </span>
-                </div>
-              </div>
+            <li class="flex items-baseline gap-4 border-b border-base-300/60 py-2">
+              <time
+                class="font-mono text-xs text-secondary shrink-0 tabular-nums"
+                datetime="{{ .Date.Format "2006-01-02" }}"
+                >{{ .Date.Format "2006-01-02" }}</time
+              >
+              <a href="{{ .RelPermalink }}" class="text-sm text-base-content hover:opacity-60 transition-opacity">
+                {{ .Title }}
+              </a>
             </li>
           {{ end }}
         </ul>
       </section>
     {{ end }}
-
-  {{ else }}
-    <p class="text-sm text-secondary">Nothing here yet.</p>
   {{ end }}
+
 {{ end }}
