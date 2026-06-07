@@ -2,7 +2,7 @@
   <header class="mb-10">
     <div class="flex items-center justify-between">
       <div>
-        <h1 class="font-display text-4xl font-semibold text-base-content">
+        <h1 class="font-sans text-4xl font-semibold text-base-content">
           {{ .Title | title }}
         </h1>
 
@@ -42,14 +42,14 @@
   </header>
 
   {{ with .Content }}
-    <div class="prose prose-headings:font-display max-w-3xl mb-10">{{ . }}</div>
+    <div class="prose prose-headings:font-sans max-w-3xl mb-10">{{ . }}</div>
   {{ end }}
 
   {{ if .Pages }}
 
     {{ range (.Pages.ByDate.Reverse).GroupByDate "2006" }}
       <section class="mb-10">
-        <h2 class="font-display text-xs font-semibold uppercase tracking-widest mb-5 text-secondary">
+        <h2 class="font-sans text-xs font-semibold uppercase tracking-widest mb-5 text-secondary">
           {{ .Key }}
         </h2>
         <ul class="list-none p-0 m-0">
