@@ -44,17 +44,17 @@
         <h2 class="font-sans text-xs font-semibold uppercase tracking-widest">Latest Picks</h2>
         <a href="/picks" class="text-xs link link-primary">All picks →</a>
       </div>
-      <div class="flex gap-4 justify-between overflow-x-auto pb-2">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {{ range first 4 $picks.ByDate.Reverse }}
           {{ $itemLink := .Params.link | default .RelPermalink }}
           <a
             href="{{ $itemLink }}"
-            class="card w-40 bg-base-100 shrink-0 group"
+            class="card bg-base-100 group"
             {{ if .Params.link }}target="_blank" rel="noopener noreferrer"{{ end }}
           >
             {{ with .Params.cover }}
               <div class="aspect-3/4 w-full overflow-hidden rounded-t">
-                {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "object-cover w-full h-full" "sizes" "180px" "width" "160") }}
+                {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "object-cover w-full h-full" "sizes" "(min-width: 640px) 25vw, 50vw" "width" "200") }}
               </div>
             {{ end }}
             <div class="card-body p-2">
