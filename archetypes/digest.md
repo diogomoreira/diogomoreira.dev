@@ -1,8 +1,7 @@
 ---
 title: "Digest #{{ .File.ContentBaseName }}"
 issue: 1
-date: {{ .Date }}
-description: ""
+date: { { .Date } }
 draft: true
 ---
 
