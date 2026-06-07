@@ -10,7 +10,7 @@ label = 'English'
 locale = 'en-US'
 
 [params]
-version = "4.2.0"
+version = "4.3.0"
 description = "My thoughts about life, software development, music and so forth."
 cover = "images/default-cover.png"
 
