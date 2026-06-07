@@ -6,7 +6,8 @@
         href="{{ .CurrentSection.RelPermalink }}"
         class="inline-flex items-center gap-1 text-xs mb-6 text-secondary hover:text-secondary"
       >
-        ← {{ .CurrentSection.Title }}
+        ←
+        {{ .CurrentSection.Title }}
       </a>
 
       <div class="flex items-center gap-3 mb-2">
@@ -18,7 +19,7 @@
         </time>
       </div>
 
-      <h1 class="font-display text-4xl font-semibold text-base-content">
+      <h1 class="font-sans text-4xl font-semibold text-base-content">
         {{ .Title | title }}
       </h1>
 
@@ -27,7 +28,7 @@
       {{ end }}
     </header>
 
-    <div class="prose prose-headings:font-display max-w-none">
+    <div class="prose prose-headings:font-sans max-w-none">
       {{ .Content }}
     </div>
   </article>

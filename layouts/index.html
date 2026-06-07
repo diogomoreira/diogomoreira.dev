@@ -1,6 +1,6 @@
 {{ define "main" }}
   <section data-pagefind-body class="mb-16">
-    <h1 class="font-display text-4xl font-semibold text-base-content mb-6">
+    <h1 class="font-sans text-4xl font-semibold text-base-content mb-6">
       Hi! I'm
       <span class="font-bold">{{ .Title }}</span>
     </h1>
@@ -14,7 +14,7 @@
   {{ if $posts }}
     <section class="mb-14">
       <div class="flex items-center justify-between mb-5">
-        <h2 class="font-display text-xs font-semibold uppercase tracking-widest">Recent Posts</h2>
+        <h2 class="font-sans text-xs font-semibold uppercase tracking-widest">Recent Posts</h2>
         <a href="/blog" class="text-xs link link-primary">All posts →</a>
       </div>
       <ul class="list-none p-0 m-0">
@@ -41,7 +41,7 @@
   {{ if $picks }}
     <section class="mb-14">
       <div class="flex items-center justify-between mb-5">
-        <h2 class="font-display text-xs font-semibold uppercase tracking-widest">Latest Picks</h2>
+        <h2 class="font-sans text-xs font-semibold uppercase tracking-widest">Latest Picks</h2>
         <a href="/picks" class="text-xs link link-primary">All picks →</a>
       </div>
       <div class="flex gap-4 justify-between overflow-x-auto pb-2">
@@ -58,7 +58,7 @@
               </div>
             {{ end }}
             <div class="card-body p-2">
-              <h3 class="font-display card-title text-xs font-semibold text-base-content text-center">{{ .Title }}</h3>
+              <h3 class="font-sans card-title text-xs font-semibold text-base-content text-center">{{ .Title }}</h3>
             </div>
           </a>
         {{ end }}

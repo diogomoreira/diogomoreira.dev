@@ -1,7 +1,13 @@
 baseURL = "https://diogomoreira.dev/"
-languageCode = "en-US"
+defaultContentLanguage = 'en'
 title = "Diogo Moreira"
 titleCaseStyle = "none"
+
+[languages]
+[languages.en]
+disabled = false
+label = 'English'
+locale = 'en-US'
 
 [params]
 version = "4.2.0"

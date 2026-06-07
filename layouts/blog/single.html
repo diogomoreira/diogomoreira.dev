@@ -24,7 +24,7 @@
       {{ end }}
 
 
-      <h1 class="font-display text-4xl font-semibold text-base-content">
+      <h1 class="font-sans text-4xl font-semibold text-base-content">
         {{ .Title | title }}
       </h1>
 
@@ -36,7 +36,7 @@
     {{ with .Params.cover }}
       {{ $img := $.Resources.GetMatch . }}
       {{ with $img }}
-        <figure class="mb-10">
+        <figure class="mb-10 w-full">
           {{ $webp := $img.Resize "800x webp" }}
           {{ $jpeg := $img.Resize "800x jpg" }}
           <picture>
@@ -61,7 +61,7 @@
 
 
     <div
-      class="prose prose-headings:font-display prose-pre:my-0 prose-pre:p-2 prose-img:mx-auto prose-img:border-4 prose-img:border-base-200 prose-figure:text-center prose-img:shadow-md max-w-none"
+      class="prose prose-headings:font-sans prose-pre:my-0 prose-pre:p-2 prose-img:mx-auto prose-img:border-4 prose-img:border-base-200 prose-figure:text-center prose-img:shadow-md max-w-full"
     >
       {{ with .Params.disclaimer }}
         <div role="alert" class="alert alert-warning">
