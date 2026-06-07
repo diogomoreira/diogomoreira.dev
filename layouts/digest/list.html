@@ -1,4 +1,8 @@
 {{ define "main" }}
+  {{ $entries := .Pages.ByDate.Reverse }}
+  {{ $latest  := index $entries 0 }}
+  {{ $archive := after 1 $entries }}
+
   <header class="mb-10">
     <div class="flex items-center justify-between">
       <div>
@@ -13,45 +17,44 @@
         rel="noopener noreferrer"
         class="text-secondary hover:text-secondary flex items-center gap-1"
       >
-        <span class="w-6">
-          {{ partial "icons/social/rss.html" . }}
-        </span>
+        <span class="w-6">{{ partial "icons/social/rss.html" . }}</span>
         <span class="sr-only">RSS Feed</span>
       </a>
     </div>
   </header>
 
-  {{ if .Pages }}
-    <ul class="list-none p-0 m-0">
-      {{ range .Pages.ByDate.Reverse }}
-        <li
-          class="flex flex-col hover:bg-secondary/10 duration-200 gap-1 py-8 md:p-8 border-b border-secondary/20 border-dashed"
-        >
-          <div class="flex items-center justify-between gap-4 min-w-0">
-            <div class="flex items-center gap-3 min-w-0">
-              {{ with .Params.issue }}
-                <span class="badge badge-primary badge-sm shrink-0">#{{ . }}</span>
-              {{ end }}
-              <h2>
-                <a href="{{ .RelPermalink }}" class="text-lg font-semibold text-base-content hover:opacity-60">
-                  {{ .Title }}
-                </a>
-              </h2>
-            </div>
-            <time
-              class="text-xs font-mono tabular-nums text-secondary shrink-0"
-              datetime="{{ .Date.Format "2006-01-02" }}"
-            >
-              {{ .Date.Format "January 2006" }}
-            </time>
-          </div>
-          {{ with .Description }}
-            <p class="text-sm text-base-content/70">{{ . }}</p>
-          {{ end }}
-        </li>
-      {{ end }}
-    </ul>
-  {{ else }}
-    <p class="text-sm text-secondary">Nothing here yet.</p>
+  {{/* Latest entry — full content */}}
+  {{ with $latest }}
+    <article class="mb-16">
+      <div class="flex items-center gap-2 text-xs font-mono text-secondary mb-3">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+        <span>·</span>
+        <span>{{ .Title }}</span>
+      </div>
+      <div class="prose prose-headings:font-sans max-w-none">
+        {{ .Content }}
+      </div>
+    </article>
   {{ end }}
+
+  {{/* Archive */}}
+  {{ with $archive }}
+    <section class="border-t border-base-300 pt-10">
+      <h2 class="font-sans text-xs font-semibold uppercase tracking-widest text-secondary mb-6">Previous issues</h2>
+      <ul class="list-none p-0 m-0">
+        {{ range . }}
+          <li class="flex items-baseline gap-4 border-b border-base-300/60 py-2">
+            <time
+              class="font-mono text-xs text-secondary shrink-0 tabular-nums"
+              datetime="{{ .Date.Format "2006-01-02" }}"
+            >{{ .Date.Format "2006-01-02" }}</time>
+            <a href="{{ .RelPermalink }}" class="text-sm text-base-content hover:opacity-60 transition-opacity">
+              {{ .Title }}
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    </section>
+  {{ end }}
+
 {{ end }}
