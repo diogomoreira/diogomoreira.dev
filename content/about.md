@@ -3,7 +3,7 @@ title: About me
 updated: "2026-03-29"
 description: "A little bit about me, my hobbies and my career as a software developer."
 cover: "/images/profile/cover.jpg"
-coverCaption: "@ Pavilhão Japonês, Ibirapuera Park - São Paulo - SP"
+coverCaption: "@ Escadaria Selarón - Rio de Janeiro, RJ, Brazil"
 ---
 
 Hello! I'm **Diogo Moreira**, born in 1989 in Paraíba, Brazil, where I still live and work today.
