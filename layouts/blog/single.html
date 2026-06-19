@@ -24,12 +24,12 @@
       {{ end }}
 
 
-      <h1 class="font-sans text-4xl font-semibold text-base-content">
+      <h1 class="font-sans text-4xl font-medium text-base-content">
         {{ .Title | title }}
       </h1>
 
       {{ with .Description }}
-        <p class="mt-3 text-xs text-accent">{{ . }}</p>
+        <p class="mt-3 text-sm text-base-content/80">{{ . }}</p>
       {{ end }}
     </header>
 
@@ -61,7 +61,7 @@
 
 
     <div
-      class="prose prose-headings:font-sans prose-pre:my-0 prose-pre:p-2 prose-img:mx-auto prose-img:border-4 prose-img:border-base-200 prose-figure:text-center prose-img:shadow-md max-w-full"
+      class="prose prose-headings:font-sans prose-pre:my-0 prose-pre:p-2 prose-img:mx-auto prose-img:border-4 prose-img:border-base-200 prose-figure:text-center prose-img:shadow-md max-w-prose"
     >
       {{ with .Params.disclaimer }}
         <div role="alert" class="alert alert-warning">

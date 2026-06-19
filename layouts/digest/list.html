@@ -6,7 +6,7 @@
   <header class="mb-10">
     <div class="flex items-center justify-between">
       <div>
-        <h1 class="font-sans text-4xl font-semibold text-base-content">
+        <h1 class="font-sans text-4xl font-medium text-base-content">
           {{ .Title | title }}
         </h1>
         {{ with .Description }}<p class="mt-3 text-sm text-base-content/70">{{ . | markdownify }}</p>{{ end }}
@@ -31,7 +31,7 @@
         <span>·</span>
         <span>{{ .Title }}</span>
       </div>
-      <div class="prose prose-headings:font-sans max-w-none">
+      <div class="prose prose-headings:font-sans max-w-prose">
         {{ .Content }}
       </div>
     </article>

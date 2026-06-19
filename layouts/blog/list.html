@@ -3,7 +3,7 @@
   <header class="mb-10">
     <div class="flex items-center justify-between">
       <div>
-        <h1 class="font-sans text-4xl font-semibold text-base-content">
+        <h1 class="font-sans text-4xl font-medium text-base-content">
           {{ .Title | title }}
         </h1>
 
@@ -43,7 +43,7 @@
   </header>
 
   {{ with .Content }}
-    <div class="prose prose-headings:font-sans max-w-3xl mb-10">{{ . }}</div>
+    <div class="prose prose-headings:font-sans max-w-prose mb-10">{{ . }}</div>
   {{ end }}
 
   {{ $posts := .Pages.ByDate.Reverse }}
