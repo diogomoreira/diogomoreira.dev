@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 @plugin "@tailwindcss/typography";
@@ -19,26 +21,26 @@ html {
   default: true;
   prefersdark: false;
   color-scheme: "light";
-  --color-base-100: #eeebe4;
-  --color-base-200: #e2ded5;
-  --color-base-300: #d2cdc3;
-  --color-base-content: #001600;
-  --color-primary: #023309;
-  --color-primary-content: #eeebe4;
-  --color-secondary: #2f4513;
-  --color-secondary-content: #e1ded7;
-  --color-accent: #b9a07e;
-  --color-accent-content: #190c00;
-  --color-neutral: #113113;
-  --color-neutral-content: #e1ded7;
-  --color-info: #74a2a4;
-  --color-info-content: #0a191a;
-  --color-success: #53a367;
-  --color-success-content: #071b0c;
-  --color-warning: #d9b982;
-  --color-warning-content: #1b150b;
-  --color-error: #bd615b;
-  --color-error-content: #250e0d;
+  --color-base-100: #fffcf0;
+  --color-base-200: #f2f0e5;
+  --color-base-300: #e6e4d9;
+  --color-base-content: #100f0f;
+  --color-primary: #24837b;
+  --color-primary-content: #fffcf0;
+  --color-secondary: #6f6e69;
+  --color-secondary-content: #fffcf0;
+  --color-accent: #bc5215;
+  --color-accent-content: #ffe7ce;
+  --color-neutral: #282726;
+  --color-neutral-content: #e6e4d9;
+  --color-info: #205ea6;
+  --color-info-content: #e1eceb;
+  --color-success: #66800b;
+  --color-success-content: #edeecf;
+  --color-warning: #ad8301;
+  --color-warning-content: #faeec6;
+  --color-error: #af3029;
+  --color-error-content: #ffe1d5;
   --radius-selector: 0rem;
   --radius-field: 0rem;
   --radius-box: 0rem;
@@ -54,26 +56,26 @@ html {
   default: false;
   prefersdark: true;
   color-scheme: "dark";
-  --color-base-100: #030f03;
-  --color-base-200: #010601;
-  --color-base-300: #0b1d0c;
-  --color-base-content: #e8e4dc;
-  --color-primary: #528a54;
-  --color-primary-content: #e8e4dc;
-  --color-secondary: #a38c65;
-  --color-secondary-content: #030f03;
-  --color-accent: #b9a07e;
-  --color-accent-content: #030f03;
-  --color-neutral: #182f19;
-  --color-neutral-content: #d1cdc5;
-  --color-info: #619b9e;
-  --color-info-content: #020e0e;
-  --color-success: #429c5a;
-  --color-success-content: #001003;
-  --color-warning: #d6b174;
-  --color-warning-content: #100a03;
-  --color-error: #bb5752;
-  --color-error-content: #190404;
+  --color-base-100: #100f0f;
+  --color-base-200: #1c1b1a;
+  --color-base-300: #282726;
+  --color-base-content: #cecdc3;
+  --color-primary: #3aa99f;
+  --color-primary-content: #101f1d;
+  --color-secondary: #878580;
+  --color-secondary-content: #100f0f;
+  --color-accent: #da702c;
+  --color-accent-content: #27180e;
+  --color-neutral: #343331;
+  --color-neutral-content: #cecdc3;
+  --color-info: #4385be;
+  --color-info-content: #101a24;
+  --color-success: #879a39;
+  --color-success-content: #1a1e0c;
+  --color-warning: #d0a215;
+  --color-warning-content: #241e08;
+  --color-error: #d14d41;
+  --color-error-content: #261312;
   --radius-selector: 0rem;
   --radius-field: 0rem;
   --radius-box: 0rem;
@@ -86,29 +88,89 @@ html {
 
 @theme {
   --font-sans:
-    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
-    "Helvetica Neue", sans-serif;
-  --font-mono: "IBM Plex Mono", monospace;
-  --pf-font: "Instrument Sans", sans-serif;
+    -apple-system, BlinkMacSystemFont, "Inter", "IBM Plex Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-body: var(--font-sans);
+  --font-mono:
+    ui-monospace, SFMono-Regular, "Cascadia Code", "IBM Plex Mono", "Roboto Mono", "DejaVu Sans Mono",
+    "Liberation Mono", Menlo, Monaco, Consolas, "Source Code Pro", monospace;
+  --pf-font: var(--font-sans);
 }
 
 @layer base {
   body {
+    font-family: var(--font-body);
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    font-smooth: always;
-    font-feature-settings: "liga", "kern";
-    font-variant-ligatures: common-ligatures discretionary-ligatures historical-ligatures contextual;
     -webkit-text-size-adjust: 100%;
+  }
+
+  h1 {
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+
+  .prose h2 {
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+    text-wrap: balance;
+  }
+
+  .prose h3 {
+    font-weight: 500;
+    line-height: 1.3;
+    text-wrap: balance;
+  }
+
+  .prose h4 {
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .prose p {
+    text-wrap: pretty;
+  }
+
+  .prose blockquote {
+    font-style: normal;
+    quotes: none;
+  }
+
+  .prose a {
+    color: var(--color-base-content);
+  }
+
+  .prose a:hover {
+    color: var(--color-primary);
+  }
+
+  .prose {
+    --tw-prose-body: var(--color-base-content);
+    --tw-prose-headings: var(--color-base-content);
+    --tw-prose-lead: var(--color-base-content);
+    --tw-prose-links: var(--color-base-content);
+    --tw-prose-bold: var(--color-base-content);
+    --tw-prose-counters: var(--color-base-content);
+    --tw-prose-bullets: var(--color-base-300);
+    --tw-prose-hr: var(--color-base-300);
+    --tw-prose-quotes: var(--color-base-content);
+    --tw-prose-quote-borders: var(--color-base-content);
+    --tw-prose-captions: var(--color-base-content);
+    --tw-prose-kbd: var(--color-base-content);
+    --tw-prose-kbd-shadows: var(--color-base-300);
+    --tw-prose-code: var(--color-base-content);
+    --tw-prose-pre-code: var(--color-base-content);
+    --tw-prose-pre-bg: var(--color-base-200);
+    --tw-prose-th-borders: var(--color-base-300);
+    --tw-prose-td-borders: var(--color-base-300);
   }
 
   .prose .highlight {
     overflow-x: auto;
     max-width: 100%;
   }
-}
-
-:root {
-  --pf-font: "Atkinson Hyperlegible Next", sans-serif;
 }

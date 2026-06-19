@@ -4,6 +4,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
+> **Note for Claude Code:** The user runs the dev server themselves. Don't start `hugo server -D` automatically — check if one is already running first, or ask the user to start it.
+
 ```bash
 # Development server (drafts included)
 hugo server -D
