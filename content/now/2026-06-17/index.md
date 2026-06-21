@@ -21,7 +21,7 @@ A lot has happened since the last update.
 - Finished **Hacks** and the finale was incredible. That's easily one of the top 10 TV series I've watched in the last 10 years. **Highly recommended**!
 - Started **Twin Peaks**.
 
-## Listening (Top 3)
+## Listening
 
 **2993 minutes** in May. Top 3 was:
 

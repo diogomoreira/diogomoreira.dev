@@ -3,7 +3,8 @@
   {{ $latest  := index $entries 0 }}
   {{ $history := after 1 $entries }}
 
-  {{ partial "header.html" . }}
+  {{ $params := merge .Params (dict "updated" $latest.Date) }}
+  {{ partial "header.html" (dict "Title" .Title "Description" .Description "Params" $params) }}
 
   {{/* Latest entry — full content */}}
   {{ with $latest }}
