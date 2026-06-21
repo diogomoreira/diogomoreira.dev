@@ -18,19 +18,19 @@ Google Cloud Storage is widely used as a cloud storage service to allow users to
 
 ## Introduction
 
-One common challenge in unit testing is dealing with external dependencies, that's when we use [_mocks_](https://stackoverflow.com/questions/2665812/what-is-mocking) such as Blob Objects from Google Cloud Storage, which may not be readily available during testing or needs to be mocked due to _pricing restrictions_. This blog post will explore how to mock Blob Objects from **Google Cloud Storage** for efficient unit testing.
+One common challenge in unit testing is dealing with external dependencies; that's when we use [_mocks_](https://stackoverflow.com/questions/2665812/what-is-mocking), such as Blob Objects from Google Cloud Storage, which may not be readily available during testing or need to be mocked due to _pricing restrictions_. This blog post will explore how to mock Blob Objects from **Google Cloud Storage** for efficient unit testing.
 
 ## A note about mocks
 
 **Mocks** are objects that **simulate the behavior of real objects,** allowing developers to isolate and test specific components of their code.
 
-Suppose you have a class with many dependencies (references to other classes). When you're writing a test for that specific class, you want to make sure that every time this test fails, the feedback should say something about problems in the class in question. That's why we use mocks, by substituting real dependencies with mock objects, developers can control the behavior and responses of these dependencies, making it easier to create focused and reliable tests
+Suppose you have a class with many dependencies (references to other classes). When you're writing a test for that specific class, you want to make sure that every time this test fails, the feedback should say something about problems in the class in question. That's why we use mocks: by substituting real dependencies with mock objects, developers can control the behavior and responses of these dependencies, making it easier to create focused and reliable tests.
 
-Mocks are particularly useful when testing interactions between different parts of a system, as they help identify and fix bugs or design flaws early on. Additionally, mocks facilitate testing in complex scenarios where certain dependencies may be unavailable or difficult to set up, that's the case in this article.
+Mocks are particularly useful when testing interactions between different parts of a system, as they help identify and fix bugs or design flaws early on. Additionally, mocks facilitate testing in complex scenarios where certain dependencies may be unavailable or difficult to set up, which is the case in this article.
 
 ## Understand Google Cloud Storage objects
 
-Google Cloud Storage offers storage classes and objects for managing data in the cloud. In **Java**, you can use the Google Cloud Storage client library to interact with these features. Here's a brief example of some of them
+Google Cloud Storage offers storage classes and objects for managing data in the cloud. In **Java**, you can use the Google Cloud Storage client library to interact with these features. Here's a brief example of some of them:
 
 ```java
 // Create a storage client
@@ -58,7 +58,7 @@ So far, we can see that the `storage` object is the one that does most of the jo
 
 ## Using Google Cloud NIO to mock storage
 
-Google has an in-memory emulator you can use from the Google Cloud NIO. First, we must add the dependency in our `pom.xml`. Bear in mind that a newer version can be available by the time you're reading this post.
+Google has an in-memory emulator available through Google Cloud NIO. First, we must add the dependency in our `pom.xml`. Bear in mind that a newer version can be available by the time you're reading this post.
 
 ```xml
 <dependency>
@@ -95,7 +95,7 @@ byte[] content = blob.getContent();
 System.out.println(new String(content));
 ```
 
-If you're writing an application on top of Spring Boot, for example, you can also create a configuration class for your tests to "overwrite" the default **Storage** object that is created by default.
+If you're writing an application on top of Spring Boot, for example, you can also create a configuration class for your tests to "overwrite" the **Storage** object that Spring Boot creates by default.
 
 ```java
 @TestConfiguration
@@ -118,6 +118,6 @@ public class CloudStorageConfiguration {
 }
 ```
 
-And that's it. Hope this short post added value to your learning and helped you with testing your Java application that has some integration with **Google Cloud Storage**.
+And that's it. I hope this short post added value to your learning and helped you with testing your Java application that has some integration with **Google Cloud Storage**.
 
 Any feedback or suggestions are welcome.

@@ -27,4 +27,4 @@ build:
   list: always
 ---
 
-Lectures on Software Development / Software Engineering, covering topics such as: Web Development (with HTML, CSS, Javascript, Node and Express). Software Testing (with JUnit + Mockito, Jest, Cypress, Selenium and Testcontainers); Design Patterns with UML. Other subjects covering/using REST, Spring Boot, Git, Maven and Java EE
+Lecturing on Software Development / Software Engineering, covering topics such as: Web Development (with HTML, CSS, JavaScript, Node and Express); Software Testing (with JUnit + Mockito, Jest, Cypress, Selenium and Testcontainers); Design Patterns with UML. Other subjects covering/using REST, Spring Boot, Git, Maven and Java EE.

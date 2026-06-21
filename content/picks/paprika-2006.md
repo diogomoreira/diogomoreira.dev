@@ -12,4 +12,4 @@ build:
   list: always
 ---
 
-When a machine that allows therapists to enter their patient’s dreams is stolen, all hell breaks loose. Only a young female therapist can stop it and recover it before damage is done: Paprika.
+When a machine that allows therapists to enter their patients’ dreams is stolen, all hell breaks loose. Only a young female therapist can stop it and recover it before damage is done: Paprika.

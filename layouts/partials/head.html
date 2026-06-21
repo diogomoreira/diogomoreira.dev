@@ -12,6 +12,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+{{/* Google Fonts: DM Mono */}}
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+  rel="stylesheet"
+/>
+
 <title>{{ if .IsHome -}}{{ .Site.Title }}{{- else -}}{{ .Title }} — {{ .Site.Title }}{{- end }}</title>
 
 <meta
@@ -92,7 +100,7 @@
 {{ $pswpCSS := resources.Get "photoswipe/photoswipe.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $pswpCSS.RelPermalink }}" integrity="{{ $pswpCSS.Data.Integrity }}" />
 
-<link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ " /index.xml" | absURL }}" />
+<link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ "/index.xml" | absURL }}" />
 
 {{/* Per-section feed when inside a section */}}
 {{ with .OutputFormats.Get "RSS" }}

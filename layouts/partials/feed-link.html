@@ -1,0 +1,5 @@
+{{/* Usage: {{ partial "feed-link.html" "/blog/index.xml" }} */}}
+<a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-secondary flex items-center gap-1">
+  <span class="w-6">{{ partial "icons/social/rss.html" . }}</span>
+  <span class="sr-only">RSS Feed</span>
+</a>

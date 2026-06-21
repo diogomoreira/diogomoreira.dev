@@ -25,6 +25,6 @@
       {{ end }}
     </div>
   {{ else }}
-    <p class="bg-base-200 p-10 text-center text-sm text-secondary">Nothing here yet.</p>
+    {{ partial "empty-state.html" "Nothing here yet." }}
   {{ end }}
 {{ end }}

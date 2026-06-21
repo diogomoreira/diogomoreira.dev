@@ -1,0 +1,18 @@
+{{/* Usage: {{ partial "page-list.html" .Pages }} — renders a "title + optional description + date" card list */}}
+<ul class="space-y-6 list-none p-0 m-0">
+  {{ range .ByDate.Reverse }}
+    <li class="border-b border-base-300 pb-6">
+      <a href="{{ .RelPermalink }}" class="group block">
+        <span class="text-base font-medium text-base-content group-hover:opacity-70 ">
+          {{ .Title }}
+        </span>
+        {{ with .Description }}
+          <p class="mt-1 text-sm text-primary">{{ . | markdownify }}</p>
+        {{ end }}
+        <time class="mt-2 block text-xs text-secondary" datetime="{{ .Date.Format "2006-01-02" }}">
+          {{ .Date.Format "January 2, 2006" }}
+        </time>
+      </a>
+    </li>
+  {{ end }}
+</ul>

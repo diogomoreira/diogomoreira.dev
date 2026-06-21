@@ -1,15 +1,15 @@
 {{ define "main" }}
-  <article data-pagefind-body>
+  <article data-pagefind-body class="max-w-prose">
     {{ partial "header.html" . }}
 
     {{/* Optional cover image — add `cover: "/path/to/image.jpg"` to front matter */}}
 
     {{ with .Params.cover }}
       <figure class="mb-10 md:px-10">
-        {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "w-full border-4 border-base-200 shadow-md object-cover" "sizes" "100vw") }}
+        {{ partial "responsive-image.html" (dict "page" $ "src" . "alt" $.Title "class" "w-full border-4 border-base-200 shadow-md object-cover" "width" "800") }}
         {{ with $.Params.coverCaption }}
           <figcaption class="mt-2 text-xs text-center text-secondary">
-            {{ . }}
+            {{ . | markdownify }}
           </figcaption>
         {{ end }}
       </figure>
@@ -19,24 +19,7 @@
     <div
       class="prose prose-headings:font-sans prose-headings:font-semibold prose-base prose-img:w-full prose-img:border-4 prose-img:border-base-200 prose-img:shadow-md max-w-none"
     >
-      {{ with .Params.disclaimer }}
-        <div role="alert" class="alert alert-warning">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6 shrink-0 stroke-current"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-            />
-          </svg>
-          <span class="font-semibold">{{ . }}</span>
-        </div>
-      {{ end }}
+      {{ partial "disclaimer-alert.html" . }}
       {{ .Content }}
     </div>
   </article>

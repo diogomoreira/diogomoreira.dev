@@ -5,10 +5,7 @@
     {{ .Site.Title }}
   </a>
   <div class="flex items-center gap-2">
-    <button id="theme-toggle" aria-label="Toggle dark mode" class="btn btn-sm btn-square">
-      {{ partial "icons/sun.html" . }}
-      {{ partial "icons/moon.html" . }}
-    </button>
+    {{ partial "theme-toggle-button.html" "theme-toggle" }}
     <button id="sidebar-toggle" aria-label="Toggle menu" class="btn btn-sm btn-square">
       <svg
         xmlns="http://www.w3.org/2000/svg"

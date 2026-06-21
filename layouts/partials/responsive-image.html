@@ -1,6 +1,13 @@
-{{/* Usage: {{ partial "responsive-image.html" (dict "src" .Params.cover "alt" .Title "class" "w-full border-4 border-base-200 shadow-md object-cover" "sizes" "100vw") }}
-This partial generates a responsive picture element with WebP and JPEG fallback, width/height, and lazy loading. */}}
-{{ $img := resources.Get .src }}
+{{/* Usage: {{ partial "responsive-image.html" (dict "page" . "src" .Params.cover "alt" .Title "class" "w-full border-4 border-base-200 shadow-md object-cover" "width" "800") }}
+Resolves src against the page's own bundle resources first, falling back to site-wide assets.
+Generates a responsive picture element with WebP and JPEG fallback, width/height, and lazy loading. */}}
+{{ $img := "" }}
+{{ with .page }}
+  {{ $img = .Resources.GetMatch $.src }}
+{{ end }}
+{{ if not $img }}
+  {{ $img = resources.Get .src }}
+{{ end }}
 {{ if $img }}
   {{ $width := .width | default "800" }}
   {{ $webp := $img.Resize (printf "%sx webp" $width) }}

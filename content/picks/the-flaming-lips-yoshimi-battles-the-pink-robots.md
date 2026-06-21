@@ -11,4 +11,4 @@ build:
   list: always
 ---
 
-The album explores themes of the human condition, mortality, and love, resulting in a unique and unforgettable musical experience. Highlights for <b>Fight Test</b> (the opening track) and <b>Do you realize?</b>
+The album explores themes of the human condition, mortality, and love, resulting in a unique and unforgettable musical experience. Highlights for <b>Fight Test</b> (the opening track) and <b>Do You Realize??</b>

@@ -8,7 +8,7 @@ coverCaption: "@ Escadaria Selarón - Rio de Janeiro, RJ, Brazil"
 
 Hello! I'm **Diogo Moreira**, born in 1989 in Paraíba, Brazil, where I still live and work today.
 
-## Some things that catches my attention
+## Some things that catch my attention
 
 - **Video games**, especially RPGs and racing games. The **Final Fantasy** series is among my favorites. You can see some of the games I've played in [this list](https://backloggd.com/u/diogodmoreira/games/).
 - **Drama/sci-fi movies and TV shows**. If you're curious, check out [movies I've watched lately](https://letterboxd.com/diogodmoreira/) or see what I'm currently watching [here](https://app.trakt.tv/profile/diogomoreira).
@@ -22,13 +22,13 @@ Hello! I'm **Diogo Moreira**, born in 1989 in Paraíba, Brazil, where I still li
 
 ## As software developer/professor
 
-Since I was a kid I was fascinated by technology and specially computers. I got my first PC at home when I was 6 and since then, I spent most of my days doing something in front of it.
+Since I was a kid I was fascinated by technology and especially computers. I got my first PC at home when I was 6 and since then, I've spent most of my days doing something in front of it.
 
-Eventually, I started to become curious about how computers work and specially how the webpages were built, which led me to build my very first website when I was 13 (using `<table>` and without CSS 🙃) and I guess it was at this moment that I decided this would be my [career](/cv). I've learned the very basics of PHP and MySQL by myself and started to work as a freelancer when I was around 16~17. At that time, I had the chance to work with some personal pages and small businesses websites.
+Eventually, I started to become curious about how computers work and especially how webpages were built, which led me to build my very first website when I was 13 (using `<table>` and without CSS 🙃) and I guess it was at this moment that I decided this would be my [career](/cv). I've learned the very basics of PHP and MySQL by myself and started to work as a freelancer when I was around 16–17. At that time, I had the chance to work with some personal pages and small businesses websites.
 
-Later, I've decided to start my undergraduation in **System Analysis and Development** a kickoff my professional career as software developer. But I'm pretty sure I wouldn't make this decision if it wasn't my previous experience and my curiosity about computers throughout these years.
+Later, I've decided to start my undergraduate degree in **System Analysis and Development** to kick off my professional career as a software developer. But I'm pretty sure I wouldn't make this decision if it weren't for my previous experience and my curiosity about computers throughout these years.
 
-Two years after my graduation (2014), I started working as professor and honestly, this is one of the things that I'm most proud of during my career. It's good to be in the classroom and I feel it really pushes me to be a better person and professional every day. You can see my [academic](/academic) achievements in [this page](/academic).
+Two years after my graduation (2014), I started working as a professor and honestly, this is one of the things that I'm most proud of during my career. It's good to be in the classroom and I feel it really pushes me to be a better person and professional every day. You can see my [academic](/academic) achievements here.
 
 ---
 

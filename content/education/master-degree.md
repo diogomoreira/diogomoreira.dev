@@ -11,4 +11,4 @@ build:
   list: always
 ---
 
-**Master thesis**: Testing acoustic scene classification systems using metamorphic relations. Mestrado profissional em Engenharia de Software, Centro de Estudos e Sistemas Avançados do Recife (Cesar School), Recife - PE, Brasil. 2019. Advisor: Ana Paula Carvalho Cavalcanti Furtado.
+**Master's thesis**: Testing acoustic scene classification systems using metamorphic relations. Mestrado profissional em Engenharia de Software, Centro de Estudos e Sistemas Avançados do Recife (Cesar School), Recife - PE, Brasil. 2019. Advisor: Ana Paula Carvalho Cavalcanti Furtado.

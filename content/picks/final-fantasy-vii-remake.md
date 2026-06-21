@@ -13,4 +13,4 @@ build:
   list: always
 ---
 
-Re-imagining of Final Fantasy VII (1997). A former soldier joins an eco-terrorist group in a mission against the electric power company he used to work for in order to protect the planet and all who reside on it. This game totally lives up to the fame of Final Fantasy VII from PS1, it's a must play for all JRPG fans
+Re-imagining of Final Fantasy VII (1997). A former soldier joins an eco-terrorist group in a mission against the electric power company he used to work for in order to protect the planet and all who reside on it. This game totally lives up to the fame of Final Fantasy VII from PS1 — it's a must-play for all JRPG fans.

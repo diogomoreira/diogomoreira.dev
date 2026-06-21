@@ -11,4 +11,4 @@ build:
   list: always
 ---
 
-An excellent album, mixing dream pop and ambient pop with elements of psychedelia, experimental, and electronic textures. Heaven or Las Vegas has been recognised as one of Cocteau Twins' most influential works and as a landmark in dream pop. Highlights for "**Fifty-Fifty Clown**", "**Heaven or Las Vegas**" and "**Frou-Frou Foxes in Midsummer Fires**".
+An excellent album, mixing dream pop and ambient pop with elements of psychedelia, experimental, and electronic textures. Heaven or Las Vegas has been recognized as one of Cocteau Twins' most influential works and as a landmark in dream pop. Highlights for "**Fifty-Fifty Clown**", "**Heaven or Las Vegas**" and "**Frou-Frou Foxes in Midsummer Fires**".

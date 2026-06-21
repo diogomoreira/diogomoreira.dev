@@ -11,15 +11,7 @@
         </h1>
         {{ with .Description }}<p class="mt-3 text-sm text-base-content/70">{{ . | markdownify }}</p>{{ end }}
       </div>
-      <a
-        href="/digest/index.xml"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-secondary hover:text-secondary flex items-center gap-1"
-      >
-        <span class="w-6">{{ partial "icons/social/rss.html" . }}</span>
-        <span class="sr-only">RSS Feed</span>
-      </a>
+      {{ partial "feed-link.html" "/digest/index.xml" }}
     </div>
   </header>
 
@@ -40,18 +32,10 @@
   {{/* Archive */}}
   {{ with $archive }}
     <section class="border-t border-base-300 pt-10">
-      <h2 class="font-sans text-xs font-semibold uppercase tracking-widest text-secondary mb-6">Previous issues</h2>
+      {{ partial "section-label.html" (dict "text" "Previous issues") }}
       <ul class="list-none p-0 m-0">
         {{ range . }}
-          <li class="flex items-baseline gap-4 border-b border-base-300/60 py-2">
-            <time
-              class="font-mono text-xs text-secondary shrink-0 tabular-nums"
-              datetime="{{ .Date.Format "2006-01-02" }}"
-            >{{ .Date.Format "2006-01-02" }}</time>
-            <a href="{{ .RelPermalink }}" class="text-sm text-base-content hover:opacity-60 transition-opacity">
-              {{ .Title }}
-            </a>
-          </li>
+          {{ partial "dated-list-item.html" . }}
         {{ end }}
       </ul>
     </section>
