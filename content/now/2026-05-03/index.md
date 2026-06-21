@@ -20,14 +20,6 @@ Still trying to finish _**"I, Robot"**_ book.
 - "**Euphoria**" (HBO)
 - "**Hacks**" (HBO), trying to be caught up for the last season.
 
-## Listening
-
-**2826 minutes** in April. Top 3 was:
-
-1. **Blur**
-2. **Panic! At the Disco**
-3. **Gorillaz**.
-
 ## Playing
 
 - **Balatro**. You just can't stop playing this game.
