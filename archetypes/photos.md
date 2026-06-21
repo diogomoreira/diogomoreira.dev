@@ -4,7 +4,7 @@ date: {{ .Date }}
 draft: true
 location: ""
 camera: ""
-photo: ""
+cover: ""
 description: ""
 tags: []
 ---

@@ -100,6 +100,9 @@
 {{ $pswpCSS := resources.Get "photoswipe/photoswipe.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $pswpCSS.RelPermalink }}" integrity="{{ $pswpCSS.Data.Integrity }}" />
 
+{{ $pswpCaptionCSS := resources.Get "photoswipe/photoswipe-dynamic-caption-plugin.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $pswpCaptionCSS.RelPermalink }}" integrity="{{ $pswpCaptionCSS.Data.Integrity }}" />
+
 <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ "/index.xml" | absURL }}" />
 
 {{/* Per-section feed when inside a section */}}

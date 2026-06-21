@@ -1,0 +1,146 @@
+{{ $username := .Site.Params.lastfm.username }}
+{{ $lastfmKey := .Site.Params.lastfm.apikey }}
+{{ $audiodbKey := .Site.Params.theaudiodb.apikey }}
+
+{{ if and $username $lastfmKey $audiodbKey }}
+  <section
+    id="now-top-artists"
+    class="border-t border-base-300 pt-10 mb-16"
+    data-lastfm-username="{{ $username }}"
+    data-lastfm-key="{{ $lastfmKey }}"
+    data-audiodb-key="{{ $audiodbKey }}"
+  >
+    <h2 class="font-sans text-xs font-semibold uppercase tracking-widest text-base-content/70 mb-6">
+      Top Artists This Month
+    </h2>
+
+    <div id="now-top-artists-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      {{ range seq 8 }}
+        <a class="now-top-artists-cell card bg-base-100 group" target="_blank" rel="noopener noreferrer">
+          <div class="aspect-square w-full overflow-hidden rounded-t relative bg-base-200">
+            <div class="now-top-artists-skeleton skeleton absolute inset-0 w-full h-full rounded-none"></div>
+            <img class="now-top-artists-img hidden absolute inset-0 w-full h-full object-cover group-hover:opacity-90" alt="" />
+            <div
+              class="now-top-artists-fallback hidden absolute inset-0 w-full h-full items-center justify-center bg-base-200 text-base-content/50 font-sans text-2xl font-semibold"
+            ></div>
+            <span class="now-top-artists-rank badge badge-sm badge-neutral absolute top-1 left-1"></span>
+          </div>
+          <div class="card-body p-2">
+            <h3 class="now-top-artists-name font-sans card-title text-xs font-semibold text-base-content truncate"></h3>
+            <p class="now-top-artists-plays text-xs text-base-content/70"></p>
+          </div>
+        </a>
+      {{ end }}
+    </div>
+
+    <p id="now-top-artists-error" class="hidden text-xs text-base-content/70">Couldn't load top artists right now.</p>
+  </section>
+
+  <script>
+    (function () {
+      const section = document.getElementById("now-top-artists");
+      const grid = document.getElementById("now-top-artists-grid");
+      const errorEl = document.getElementById("now-top-artists-error");
+      const cells = Array.from(grid.querySelectorAll(".now-top-artists-cell"));
+
+      const username = section.dataset.lastfmUsername;
+      const lastfmKey = section.dataset.lastfmKey;
+      const audiodbKey = section.dataset.audiodbKey;
+
+      function showError() {
+        grid.classList.add("hidden");
+        errorEl.classList.remove("hidden");
+      }
+
+      function useFallback(cell, artist) {
+        const img = cell.querySelector(".now-top-artists-img");
+        const fallback = cell.querySelector(".now-top-artists-fallback");
+        img.classList.add("hidden");
+        fallback.classList.remove("hidden");
+        fallback.classList.add("flex");
+        fallback.textContent = artist.name.charAt(0).toUpperCase();
+      }
+
+      function renderCell(cell, artist, photoUrl) {
+        const skeleton = cell.querySelector(".now-top-artists-skeleton");
+        const img = cell.querySelector(".now-top-artists-img");
+        const rank = cell.querySelector(".now-top-artists-rank");
+        const name = cell.querySelector(".now-top-artists-name");
+        const plays = cell.querySelector(".now-top-artists-plays");
+
+        cell.href = artist.url;
+        rank.textContent = "#" + artist.rank;
+        name.textContent = artist.name;
+        name.title = artist.name;
+        plays.textContent = artist.playcount + " plays";
+
+        skeleton.remove();
+
+        if (photoUrl) {
+          img.addEventListener("error", () => useFallback(cell, artist), { once: true });
+          img.addEventListener("load", () => img.classList.remove("hidden"), { once: true });
+          img.alt = artist.name;
+          img.src = photoUrl;
+        } else {
+          useFallback(cell, artist);
+        }
+      }
+
+      async function fetchTopArtists() {
+        const url =
+          "https://ws.audioscrobbler.com/2.0/?method=user.gettopartists" +
+          "&user=" + encodeURIComponent(username) +
+          "&period=1month&limit=8&api_key=" + encodeURIComponent(lastfmKey) +
+          "&format=json";
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("Last.fm request failed: " + res.status);
+        const data = await res.json();
+        const artists = data && data.topartists && data.topartists.artist;
+        if (!artists || !artists.length) throw new Error("No artist data");
+        return artists.map(a => ({
+          name: a.name,
+          url: a.url,
+          playcount: a.playcount,
+          rank: a["@attr"] && a["@attr"].rank,
+        }));
+      }
+
+      async function fetchArtistPhoto(name) {
+        const url =
+          "https://www.theaudiodb.com/api/v1/json/" + audiodbKey +
+          "/search.php?s=" + encodeURIComponent(name);
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("TheAudioDB request failed: " + res.status);
+        const data = await res.json();
+        const match = data && data.artists && data.artists[0];
+        return (match && match.strArtistThumb) || null;
+      }
+
+      async function init() {
+        let artists;
+        try {
+          artists = await fetchTopArtists();
+        } catch (err) {
+          showError();
+          return;
+        }
+
+        const photoResults = await Promise.allSettled(artists.map(a => fetchArtistPhoto(a.name)));
+
+        artists.forEach((artist, i) => {
+          const cell = cells[i];
+          if (!cell) return;
+          const result = photoResults[i];
+          const photoUrl = result.status === "fulfilled" ? result.value : null;
+          renderCell(cell, artist, photoUrl);
+        });
+
+        for (let i = artists.length; i < cells.length; i++) {
+          cells[i].classList.add("hidden");
+        }
+      }
+
+      init();
+    })();
+  </script>
+{{ end }}

@@ -22,14 +22,21 @@
     {{ partial "theme-toggle-script.html" . }}
     {{ $lightbox := resources.Get "photoswipe/photoswipe-lightbox.esm.min.js" | fingerprint }}
     {{ $pswp := resources.Get "photoswipe/photoswipe.esm.min.js" | fingerprint }}
+    {{ $pswpCaption := resources.Get "photoswipe/photoswipe-dynamic-caption-plugin.esm.min.js" | fingerprint }}
 
     <script type="module">
       import PhotoSwipeLightbox from '{{ $lightbox.RelPermalink }}';
+      import PhotoSwipeDynamicCaption from '{{ $pswpCaption.RelPermalink }}';
       const lightbox = new PhotoSwipeLightbox({
         gallery: '#my-gallery',
         children: 'a',
         pswpModule: () => import('{{ $pswp.RelPermalink }}'),
       });
+
+      new PhotoSwipeDynamicCaption(lightbox, {
+        type: 'auto',
+      });
+
       lightbox.init();
     </script>
   </body>

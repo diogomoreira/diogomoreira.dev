@@ -10,7 +10,7 @@ label = 'English'
 locale = 'en-US'
 
 [params]
-version = "4.4.0"
+version = "4.5.0"
 description = "My thoughts about life, software development, music and so forth."
 cover = "images/default-cover.png"
 
@@ -34,6 +34,13 @@ target = 'assets/notwatching/hugo_stats.json'
 [[module.mounts]]
 source = "node_modules/photoswipe/dist"
 target = "assets/photoswipe"
+[[module.mounts]]
+source = "node_modules/photoswipe-dynamic-caption-plugin/dist"
+target = "assets/photoswipe"
+[[module.mounts]]
+source = "node_modules/photoswipe-dynamic-caption-plugin"
+target = "assets/photoswipe"
+includeFiles = ["/photoswipe-dynamic-caption-plugin.css"]
 
 [markup]
 [markup.highlight]
@@ -84,6 +91,13 @@ icon = "email"
 name = "Instagram"
 url = "https://instagram.com/diogo.dmoreira"
 icon = "instagram"
+
+[params.lastfm]
+username = ""
+apikey = ""
+
+[params.theaudiodb]
+apikey = ""
 
 [params.giscus]
 repo = "diogomoreira/diogomoreira.dev"
@@ -171,7 +185,7 @@ url = "/photos"
 weight = 10
 [menus.main.params]
 icon = "photos"
-hidden = true
+hidden = false
 
 [[menus.main]]
 name = "Digest"
