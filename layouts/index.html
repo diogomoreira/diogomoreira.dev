@@ -27,7 +27,7 @@
               <span class="text-sm font-medium text-base-content group-hover:opacity-70">
                 {{ .Title }}
               </span>
-              <time class="mt-1 sm:mt-0 text-xs font-mono text-secondary" datetime="{{ .Date.Format " 2006-01-02" }}">
+              <time class="mt-1 sm:mt-0 text-xs font-mono text-secondary" datetime="{{ .Date.Format "2006-01-02" }}">
                 {{ .Date.Format "2006-01-02" }}
               </time>
             </a>
@@ -46,6 +46,7 @@
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {{ range first 4 $picks.ByDate.Reverse }}
+          {{ $pick := . }}
           {{ $itemLink := .Params.link | default .RelPermalink }}
           <a
             href="{{ $itemLink }}"
@@ -54,7 +55,7 @@
           >
             {{ with .Params.cover }}
               <div class="aspect-3/4 w-full overflow-hidden rounded-t">
-                {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "object-cover w-full h-full" "sizes" "(min-width: 640px) 25vw, 50vw" "width" "200") }}
+                {{ partial "responsive-image.html" (dict "page" $pick "src" . "alt" $pick.Title "class" "object-cover w-full h-full" "width" "200") }}
               </div>
             {{ end }}
             <div class="card-body p-2">

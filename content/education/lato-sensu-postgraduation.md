@@ -3,7 +3,7 @@ title: "Lato Sensu Postgraduation in Software Engineering"
 institution: "Estácio iDez"
 location: "João Pessoa - PB, Brazil"
 startDate: "2013"
-endDate: "2014"
+endDate: "2015"
 link: "https://estacio.br"
 draft: false
 build:

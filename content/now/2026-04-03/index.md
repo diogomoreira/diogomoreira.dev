@@ -12,7 +12,7 @@ My boyfriend and I went to **Lollapalooza Brazil** (São Paulo - SP), especially
 
 ## What I'm thinking about lately
 
-I've been trying to stay away from social media for a while over the last few months. Last year, I deleted my X/Twitter account, but I recently recreated it just to keep my username and prevent impersonation. I've moved to the [Fediverse](https://hachyderm.io/@diogomoreira), and I feel it's a better way to use social media, especially because there are no recommendation algorithms. [Give it a try](https://jointhefediverse.net/?lang=en-us) if you want.
+I've been trying to stay away from social media over the last few months. Last year, I deleted my X/Twitter account, but I recently recreated it just to keep my username and prevent impersonation. I've moved to the [Fediverse](https://hachyderm.io/@diogomoreira), and I feel it's a better way to use social media, especially because there are no recommendation algorithms. [Give it a try](https://jointhefediverse.net/?lang=en-us) if you want.
 
 Right now, I'm also trying to reduce my Instagram usage.
 

@@ -1,5 +1,9 @@
 {{ define "main" }}
-  <article data-pagefind-body>
+  <div class="max-w-prose">
+  <article
+    data-pagefind-body
+    class="prose prose-headings:font-sans prose-pre:my-0 prose-pre:p-2 prose-img:mx-auto prose-img:border-4 prose-img:border-base-200 prose-figure:text-center prose-img:shadow-md max-w-none"
+  >
     <header class="mb-10">
       {{ with .CurrentSection }}
         {{ if not .IsHome }}
@@ -17,14 +21,14 @@
       {{ $hasDate := not .Date.IsZero }}
       {{ if $hasDate }}
         <div class="mb-2">
-          <time class="text-xs" datetime="{{ .Date.Format " 2006-01-02" }}">
+          <time class="text-xs" datetime="{{ .Date.Format "2006-01-02" }}">
             {{ .Date.Format "January 2, 2006" }}
           </time>
         </div>
       {{ end }}
 
 
-      <h1 class="font-sans text-4xl font-medium text-base-content">
+      <h1 class="font-sans text-4xl lg:text-5xl font-extrabold tracking-tight text-base-content">
         {{ .Title | title }}
       </h1>
 
@@ -34,53 +38,19 @@
     </header>
 
     {{ with .Params.cover }}
-      {{ $img := $.Resources.GetMatch . }}
-      {{ with $img }}
-        <figure class="mb-10 w-full">
-          {{ $webp := $img.Resize "800x webp" }}
-          {{ $jpeg := $img.Resize "800x jpg" }}
-          <picture>
-            <source srcset="{{ $webp.RelPermalink }}" type="image/webp" />
-            <img
-              src="{{ $jpeg.RelPermalink }}"
-              alt="{{ $.Title }}"
-              width="{{ $jpeg.Width }}"
-              height="{{ $jpeg.Height }}"
-              class="w-full border-4 border-base-200 shadow-md object-cover"
-              loading="lazy"
-            />
-          </picture>
-          {{ with $.Params.coverCaption }}
-            <figcaption class="mt-2 text-xs text-center text-secondary">
-              {{ .  | markdownify }}
-            </figcaption>
-          {{ end }}
-        </figure>
-      {{ end }}
+      <figure class="mb-10 w-full">
+        {{ partial "responsive-image.html" (dict "page" $ "src" . "alt" $.Title "class" "w-full border-4 border-base-200 shadow-md object-cover" "width" "800") }}
+        {{ with $.Params.coverCaption }}
+          <figcaption class="mt-2 text-xs text-center text-secondary">
+            {{ . | markdownify }}
+          </figcaption>
+        {{ end }}
+      </figure>
     {{ end }}
 
 
-    <div
-      class="prose prose-headings:font-sans prose-pre:my-0 prose-pre:p-2 prose-img:mx-auto prose-img:border-4 prose-img:border-base-200 prose-figure:text-center prose-img:shadow-md max-w-prose"
-    >
-      {{ with .Params.disclaimer }}
-        <div role="alert" class="alert alert-warning">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6 shrink-0 stroke-current"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-            />
-          </svg>
-          <span class="font-semibold">{{ . }}</span>
-        </div>
-      {{ end }}
+    <div>
+      {{ partial "disclaimer-alert.html" . }}
       {{ .Content }}
     </div>
   </article>
@@ -120,31 +90,7 @@
     {{ partial "disqus.html" . }}
   </section>
   <footer data-pagefind-ignore class="mt-6 border-t-4 border-base-300">
-    {{ $prev := .PrevInSection }}
-    {{ $next := .NextInSection }}
-    {{ if or $prev $next }}
-      <nav class="mt-8 flex justify-between w-full text-sm">
-        <div class="w-1/2 p-4">
-          {{ if $prev }}
-            <a href="{{ $prev.RelPermalink }}" class="text-primary flex flex-col">
-              <span class="text-xs">← Previous</span>
-              <span class="text-secondary hover:text-primary text-lg py-2 font-semibold">
-                {{ $prev.Title }}
-              </span>
-            </a>
-          {{ end }}
-        </div>
-        <div class="w-1/2 p-4">
-          {{ if $next }}
-            <a href="{{ $next.RelPermalink }}" class="text-primary flex flex-col items-end">
-              <span class="text-xs">Next →</span>
-              <span class="text-secondary hover:text-primary text-lg py-2 font-semibold text-right">
-                {{ $next.Title }}
-              </span>
-            </a>
-          {{ end }}
-        </div>
-      </nav>
-    {{ end }}
+    {{ partial "prev-next-nav.html" . }}
   </footer>
+  </div>
 {{ end }}

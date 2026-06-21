@@ -11,4 +11,4 @@ build:
   list: always
 ---
 
-From a song appearing in the random (<b>Dreams Tonite</b>), the band has already captivated me at the first moment and the whole album brings several of the elements I appreciate, from indie to dream pop. Highlight for the <b>Forget About Life</b> track, which is easily among one of my favorites among the 2020 findings.
+From a song appearing on random shuffle (<b>Dreams Tonite</b>), the band has already captivated me from the first moment and the whole album brings several of the elements I appreciate, from indie to dream pop. Highlight for the <b>Forget About Life</b> track, which is easily one of my favorites from the 2020 findings.

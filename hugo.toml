@@ -10,7 +10,7 @@ label = 'English'
 locale = 'en-US'
 
 [params]
-version = "4.3.0"
+version = "4.4.0"
 description = "My thoughts about life, software development, music and so forth."
 cover = "images/default-cover.png"
 
@@ -141,6 +141,7 @@ url = "/projects"
 weight = 6
 [menus.main.params]
 icon = "projects"
+hidden = true
 
 [[menus.main]]
 name = "Uses"
@@ -155,6 +156,7 @@ url = "/snippets"
 weight = 8
 [menus.main.params]
 icon = "snippets"
+hidden = true
 
 [[menus.main]]
 name = "Picks"
@@ -169,6 +171,7 @@ url = "/photos"
 weight = 10
 [menus.main.params]
 icon = "photos"
+hidden = true
 
 [[menus.main]]
 name = "Digest"

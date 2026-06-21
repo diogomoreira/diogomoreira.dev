@@ -3,7 +3,7 @@
     {{ partial "header.html" . }}
 
     {{ with .Content }}
-      <div class="prose prose-headings:font-sans max-w-3xl">{{ . }}</div>
+      <div class="prose prose-headings:font-sans max-w-prose">{{ . }}</div>
     {{ end }}
 
     {{ if .Pages }}
@@ -32,27 +32,7 @@
         </p>
 
         {{ if gt $paginator.TotalPages 1 }}
-          <div class="join">
-            {{ if $paginator.HasPrev }}
-              <a href="{{ $paginator.Prev.URL }}" class="join-item btn btn-xs">«</a>
-            {{ else }}
-              <button class="join-item btn btn-xs btn-disabled">«</button>
-            {{ end }}
-
-            {{ range $paginator.Pagers }}
-              {{ if eq . $paginator }}
-                <button class="join-item btn btn-xs btn-active">{{ .PageNumber }}</button>
-              {{ else }}
-                <a href="{{ .URL }}" class="join-item btn btn-xs">{{ .PageNumber }}</a>
-              {{ end }}
-            {{ end }}
-
-            {{ if $paginator.HasNext }}
-              <a href="{{ $paginator.Next.URL }}" class="join-item btn btn-xs">»</a>
-            {{ else }}
-              <button class="join-item btn btn-xs btn-disabled">»</button>
-            {{ end }}
-          </div>
+          {{ partial "pagination-controls.html" (dict "paginator" $paginator "size" "xs") }}
         {{ end }}
 
       </div>
@@ -60,6 +40,7 @@
       {{/* List */}}
       <ul class="list bg-base-100 shadow-sm border border-base-300">
         {{ range $paginator.Pages }}
+          {{ $item := . }}
           {{ $medium := .Params.medium | default "other" }}
           {{ $badgeClass := index $mediumColors $medium | default "badge-ghost" }}
 
@@ -73,7 +54,7 @@
               {{ if .Params.link }}target="_blank" rel="noopener noreferrer"{{ end }}
             >
               {{ with .Params.cover }}
-                {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "w-56 border-2 border-base-300 shadow-md object-cover group-hover:opacity-90" "sizes" "(min-width: 640px) 14rem, 100vw" "width" "225") }}
+                {{ partial "responsive-image.html" (dict "page" $item "src" . "alt" $item.Title "class" "w-56 border-2 border-base-300 shadow-md object-cover group-hover:opacity-90" "width" "225") }}
               {{ else }}
                 <div class="w-36 h-36 bg-base-200 flex items-center justify-center text-accent">
                   <svg
@@ -107,7 +88,7 @@
                 {{ if not .Date.IsZero }}
                   <span
                     >Added on
-                    <time datetime="{{ .Date.Format " 2006-01-02" }}">
+                    <time datetime="{{ .Date.Format "2006-01-02" }}">
                       {{ .Date.Format "January 2, 2006" }}
                     </time></span
                   >
@@ -134,32 +115,12 @@
       {{/* Pagination controls — bottom */}}
       {{ if gt $paginator.TotalPages 1 }}
         <div class="flex justify-center mt-8">
-          <div class="join">
-            {{ if $paginator.HasPrev }}
-              <a href="{{ $paginator.Prev.URL }}" class="join-item btn btn-sm">«</a>
-            {{ else }}
-              <button class="join-item btn btn-sm btn-disabled">«</button>
-            {{ end }}
-
-            {{ range $paginator.Pagers }}
-              {{ if eq . $paginator }}
-                <button class="join-item btn btn-sm btn-active">{{ .PageNumber }}</button>
-              {{ else }}
-                <a href="{{ .URL }}" class="join-item btn btn-sm">{{ .PageNumber }}</a>
-              {{ end }}
-            {{ end }}
-
-            {{ if $paginator.HasNext }}
-              <a href="{{ $paginator.Next.URL }}" class="join-item btn btn-sm">»</a>
-            {{ else }}
-              <button class="join-item btn btn-sm btn-disabled">»</button>
-            {{ end }}
-          </div>
+          {{ partial "pagination-controls.html" (dict "paginator" $paginator "size" "sm") }}
         </div>
       {{ end }}
 
     {{ else }}
-      <p class="bg-base-200 p-10 text-center text-sm text-secondary">Nothing here yet.</p>
+      {{ partial "empty-state.html" "Nothing here yet." }}
     {{ end }}
   </div>
 {{ end }}

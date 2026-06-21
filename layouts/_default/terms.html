@@ -3,7 +3,7 @@
     {{ partial "header.html" . }}
 
     {{ with .Content }}
-      <div class="prose prose-headings:font-sans max-w-3xl">{{ . }}</div>
+      <div class="prose prose-headings:font-sans max-w-prose">{{ . }}</div>
     {{ end }}
 
     {{ if .Pages }}
@@ -33,7 +33,7 @@
         {{ end }}
       </ul>
     {{ else }}
-      <p class="text-sm text-secondary">Nothing here yet.</p>
+      {{ partial "empty-state.html" "Nothing here yet." }}
     {{ end }}
   </article>
 {{ end }}

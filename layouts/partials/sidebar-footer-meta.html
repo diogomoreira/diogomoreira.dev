@@ -1,0 +1,9 @@
+{{/* Usage: {{ partial "sidebar-footer-meta.html" (dict "page" . "variant" "desktop") }} — variant is "desktop" or "mobile" */}}
+{{ $desktop := eq .variant "desktop" }}
+<div class="{{ if not $desktop }}text-center {{ end }}text-base-content">
+  <span>© {{ now.Year }} {{ .page.Site.Title }}</span>
+</div>
+<div class="{{ if not $desktop }}text-center {{ end }}text-base-content">
+  <strong{{ if $desktop }} class="font-mono"{{ end }}>v{{ .page.Site.Params.Version }}</strong>{{ if $desktop }} —{{ end }}
+  Built with <a href="https://hugo.io">Hugo</a>
+</div>

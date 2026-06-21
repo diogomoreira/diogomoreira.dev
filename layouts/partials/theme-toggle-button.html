@@ -1,0 +1,5 @@
+{{/* Usage: {{ partial "theme-toggle-button.html" "theme-toggle-desktop" }} — id is read by theme-toggle-script.html */}}
+<button id="{{ . }}" aria-label="Toggle dark mode" class="btn btn-sm btn-square">
+  {{ partial "icons/sun.html" . }}
+  {{ partial "icons/moon.html" . }}
+</button>

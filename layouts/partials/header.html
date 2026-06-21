@@ -1,5 +1,5 @@
 <header class="mb-10">
-  <h1 class="font-sans text-4xl font-medium text-base-content">
+  <h1 class="font-sans text-4xl lg:text-5xl font-extrabold tracking-tight text-base-content">
     {{ .Title | title }}
   </h1>
 
@@ -11,7 +11,7 @@
   <div class="mt-4 flex items-center gap-4">
     {{ with .Params.updated }}
       {{ $updated := time.AsTime . }}
-      <span class="text-xs text-secondary font-mono" title="Updated {{ $updated.Format "January 2, 2006" }}">
+      <span class="text-xs text-secondary font-dm-mono" title="Updated {{ $updated.Format "January 2, 2006" }}">
         Last Updated
         {{ $updated.Format "January 2, 2006" }}
       </span>

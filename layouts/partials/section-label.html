@@ -1,0 +1,4 @@
+{{/* Usage: {{ partial "section-label.html" (dict "text" "Latest" "class" "mb-6") }} */}}
+<h2 class="font-sans text-xs font-semibold uppercase tracking-widest text-secondary {{ .class | default "mb-6" }}">
+  {{ .text }}
+</h2>

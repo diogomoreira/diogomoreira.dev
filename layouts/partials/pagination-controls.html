@@ -1,0 +1,25 @@
+{{/* Usage: {{ partial "pagination-controls.html" (dict "paginator" $paginator "size" "xs") }} */}}
+{{ $paginator := .paginator }}
+{{ $size := .size | default "xs" }}
+{{ $btn := printf "join-item btn btn-%s" $size }}
+<div class="join">
+  {{ if $paginator.HasPrev }}
+    <a href="{{ $paginator.Prev.URL }}" class="{{ $btn }}">«</a>
+  {{ else }}
+    <button class="{{ $btn }} btn-disabled">«</button>
+  {{ end }}
+
+  {{ range $paginator.Pagers }}
+    {{ if eq . $paginator }}
+      <button class="{{ $btn }} btn-active">{{ .PageNumber }}</button>
+    {{ else }}
+      <a href="{{ .URL }}" class="{{ $btn }}">{{ .PageNumber }}</a>
+    {{ end }}
+  {{ end }}
+
+  {{ if $paginator.HasNext }}
+    <a href="{{ $paginator.Next.URL }}" class="{{ $btn }}">»</a>
+  {{ else }}
+    <button class="{{ $btn }} btn-disabled">»</button>
+  {{ end }}
+</div>

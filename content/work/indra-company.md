@@ -17,4 +17,4 @@ build:
   list: always
 ---
 
-Contributed to the development of court management systems for the Paraíba State Court of Justice, including a tool to assist with writing and compilation of Justice Diary, using Java technologies such as JSF 2.0 with Richfaces & Primefaces, JPA, Maven, and front-end development (HTML, CSS, XML, jQuery).
+Contributed to the development of court management systems for the Paraíba State Court of Justice, including a tool to assist with writing and compiling the Justice Diary, using Java technologies such as JSF 2.0 with RichFaces & PrimeFaces, JPA, Maven, and front-end development (HTML, CSS, XML, jQuery).

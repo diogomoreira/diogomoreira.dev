@@ -12,4 +12,4 @@ build:
   list: always
 ---
 
-Luv (sic) brings a series of songs released by musician Nujabes that talk about love and music
+Luv(sic) brings a series of songs released by musician Nujabes that talk about love and music.

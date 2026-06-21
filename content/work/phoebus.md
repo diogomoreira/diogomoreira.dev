@@ -19,4 +19,4 @@ build:
   list: always
 ---
 
-Enhanced backoffice financial transaction processing systems utilizing Java (Spring Framework, Maven, JPA/Hibernate), Adobe Flex, Eclipse BIRT reporting with Oracle and Microsoft SQL Server databases. Authored comprehensive systems documentation to streamline IT Help Desk deployment, updates, and rollbacks.
+Enhanced backoffice financial transaction processing systems utilizing Java (Spring Framework, Maven, JPA/Hibernate), Adobe Flex, Eclipse BIRT reporting, with Oracle and Microsoft SQL Server databases. Authored comprehensive systems documentation to streamline IT Help Desk deployment, updates, and rollbacks.
