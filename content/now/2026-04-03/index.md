@@ -26,11 +26,6 @@ _**"I, Robot"**_ by Isaac Asimov. I also bought the sequels and prequels to the 
 - **TV Series**: I watched "**Radioactive Emergency**" recently, and it's really good. It narrates the events of the radioactive contamination accident that occurred in 1987 in Goiânia, Brazil, after an unsecured radiotherapy source was found at an abandoned hospital site in the city.
 - **Movies**: I tried to watch the Oscars' nominees, but ended up seeing just [Weapons](https://letterboxd.com/diogodmoreira/film/weapons-2025/), [Sinners](https://letterboxd.com/diogodmoreira/film/sinners-2025/), and [The Secret Agent](https://letterboxd.com/diogodmoreira/film/the-secret-agent-2025/).
 
-## Listening
-
-- [**Gorillaz - The Mountain**](https://music.apple.com/br/album/the-mountain/1837237742): A really good mix of the usual Gorillaz sound and Indian music/instruments.
-- [**Sabrina Carpenter - Short n' Sweet**](https://music.apple.com/br/album/short-n-sweet/1750307020?l=en-GB): I already liked her before Lollapalooza, but her live performance really grabbed me! I enjoyed it so much that I started listening to her music in the following days.
-
 ## Playing
 
 - **Resident Evil 4**. I had stopped for a while, but now I'm trying to resume and finish this one.
