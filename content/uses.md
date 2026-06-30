@@ -12,12 +12,11 @@ Hello there! In this post, I want to share with you the tools that I have been u
 
 ## Hardware 💻
 
-- Macbook Pro 13-inch, M1, 2020, 16GB
+- Macbook Pro 16-inch, M5 Pro, 48GB
 - LG UltraGear 34" 34GP63A-B, UltraWide, 160Hz
 - iPhone 15 Pro
 - Logitech MX Master 3
 - 8BitDo Retro Mechanical Keyboard
-- HyperX Quadcast
 
 ---
 
