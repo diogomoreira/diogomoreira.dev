@@ -1,8 +1,8 @@
-<li class="flex items-baseline gap-4 border-b border-base-300/60 py-2">
-  <time class="font-mono text-xs text-secondary shrink-0 tabular-nums" datetime="{{ .Date.Format "2006-01-02" }}"
-    >{{ .Date.Format "2006-01-02" }}</time
-  >
+<li class="flex justify-between items-baseline gap-4 border-b border-base-300/60 py-2">
   <a href="{{ .RelPermalink }}" class="text-sm text-base-content hover:opacity-60 transition-opacity">
     {{ .Title }}
   </a>
+  <time class="font-mono text-xs text-secondary shrink-0 tabular-nums" datetime="{{ .Date.Format "2006-01-02" }}"
+    >{{ partial "formatted-date-short.html" .Date }}</time
+  >
 </li>
