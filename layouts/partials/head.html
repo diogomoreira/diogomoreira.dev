@@ -71,6 +71,12 @@
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
 <meta property="og:url" content="{{ .Permalink }}" />
 
+<link rel="canonical" href="{{ .Permalink }}" />
+{{ range .AllTranslations }}
+  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" />
+{{ end }}
+<link rel="alternate" hreflang="x-default" href="{{ .Site.Home.Permalink }}" />
+
 {{ $cover := .Params.cover }}
 
 {{ if or (and $cover (ne $cover "")) .Site.Params.cover }}

@@ -10,7 +10,7 @@
           <p class="mt-1 text-sm text-primary">{{ . | markdownify }}</p>
         {{ end }}
         <time class="mt-2 block text-xs text-secondary" datetime="{{ .Date.Format "2006-01-02" }}">
-          {{ .Date.Format "January 2, 2006" }}
+          {{ partial "formatted-date.html" .Date }}
         </time>
       </a>
     </li>

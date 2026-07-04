@@ -13,22 +13,23 @@
         <div class="mt-4 flex items-center gap-4">
           {{ with .Params.updated }}
             {{ $updated := time.AsTime . }}
-            <span class="text-xs text-secondary font-mono" title="Updated {{ $updated.Format "January 2, 2006" }}">
-              Last Updated
-              {{ $updated.Format "January 2, 2006" }}
+            {{ $updatedStr := partial "formatted-date.html" $updated }}
+            <span class="text-xs text-secondary font-mono" title="{{ i18n "last_updated_label" }} {{ $updatedStr }}">
+              {{ i18n "last_updated_label" }}
+              {{ $updatedStr }}
             </span>
           {{ end }}
 
           {{ with .Params.tags }}
             <div class="flex gap-2 flex-wrap">
               {{ range . }}
-                <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="badge badge-ghost badge-sm">#{{ . }}</a>
+                <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="badge badge-ghost badge-sm">#{{ . }}</a>
               {{ end }}
             </div>
           {{ end }}
         </div>
       </div>
-      {{ partial "feed-link.html" "/blog/index.xml" }}
+      {{ with .OutputFormats.Get "RSS" }}{{ partial "feed-link.html" .RelPermalink }}{{ end }}
     </div>
   </header>
 
@@ -41,11 +42,11 @@
   {{/* ── Featured: latest post ───────────────────────────── */}}
   {{ with index $posts 0 }}
     <section class="mb-10 pb-10 border-b-4 border-base-300">
-      {{ partial "section-label.html" (dict "text" "Latest") }}
+      {{ partial "section-label.html" (dict "text" (i18n "blog_latest")) }}
       <div class="flex items-center gap-2 text-xs font-mono text-secondary mb-3">
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "formatted-date.html" .Date }}</time>
         <span>·</span>
-        <span>{{ .ReadingTime }} min read</span>
+        <span>{{ i18n "reading_time_minutes" (dict "Count" .ReadingTime) }}</span>
       </div>
       <h2 class="font-sans text-2xl font-semibold text-base-content mb-3">
         <a href="{{ .RelPermalink }}" class="hover:opacity-70 transition-opacity">{{ .Title }}</a>
@@ -53,7 +54,7 @@
       <p class="text-sm text-base-content/70 leading-relaxed mb-4">
         {{ with .Description }}{{ . }}{{ else }}{{ .Plain | truncate 200 }}{{ end }}
       </p>
-      <a href="{{ .RelPermalink }}" class="text-sm link link-primary">Keep reading →</a>
+      <a href="{{ .RelPermalink }}" class="text-sm link link-primary">{{ i18n "blog_keep_reading" }}</a>
     </section>
   {{ end }}
 
@@ -68,11 +69,11 @@
 
   {{ with $cats }}
     <section class="mb-10">
-      {{ partial "section-label.html" (dict "text" "Categories" "class" "mb-4") }}
+      {{ partial "section-label.html" (dict "text" (i18n "categories_label") "class" "mb-4") }}
       <div class="flex flex-wrap gap-2">
         {{ range . }}
           <a
-            href="{{ "/categories/" | relURL }}{{ . | urlize }}/"
+            href="{{ "/categories/" | relLangURL }}{{ . | urlize }}/"
             class="badge badge-ghost text-xs hover:badge-primary transition-colors"
             >{{ . }}</a
           >
@@ -84,7 +85,7 @@
   {{/* ── Archive ─────────────────────────────────────────── */}}
   {{ $rest := after 1 $posts }}
   {{ if $rest }}
-    {{ partial "section-label.html" (dict "text" "All posts") }}
+    {{ partial "section-label.html" (dict "text" (i18n "blog_all_posts")) }}
     {{ range $rest.GroupByDate "2006" }}
       <section class="mb-8">
         <h3 class="font-mono text-xs font-semibold text-secondary uppercase tracking-widest mb-3">

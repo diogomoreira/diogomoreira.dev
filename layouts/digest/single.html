@@ -16,7 +16,7 @@
           <span class="badge badge-primary">#{{ . }}</span>
         {{ end }}
         <time class="text-xs font-mono" datetime="{{ .Date.Format "2006-01-02" }}">
-          {{ .Date.Format "January 2, 2006" }}
+          {{ partial "formatted-date.html" .Date }}
         </time>
       </div>
 

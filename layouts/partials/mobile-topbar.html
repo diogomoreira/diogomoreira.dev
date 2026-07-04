@@ -1,12 +1,12 @@
 {{/* ── Mobile top bar ───────────────────────────────────── */}}
 <div class="lg:hidden flex items-center justify-between px-6 py-4 bg-base-200 text-base-content">
-  <a href="/" class="font-sans font-semibold tracking-tight flex gap-2 items-center">
+  <a href="{{ .Site.Home.RelPermalink }}" class="font-sans font-semibold tracking-tight flex gap-2 items-center">
     <img src="/logo.png" alt="{{ .Site.Title }}" class="w-8 h-8 inline-block mr-2" />
     {{ .Site.Title }}
   </a>
   <div class="flex items-center gap-2">
     {{ partial "theme-toggle-button.html" "theme-toggle" }}
-    <button id="sidebar-toggle" aria-label="Toggle menu" class="btn btn-sm btn-square">
+    <button id="sidebar-toggle" aria-label="{{ i18n "mobile_menu_toggle_aria" }}" class="btn btn-sm btn-square">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="18"

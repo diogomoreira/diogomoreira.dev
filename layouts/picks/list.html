@@ -27,8 +27,7 @@
         <p class="text-xs text-secondary">
           {{ $first := add (mul (sub $paginator.PageNumber 1) $paginator.PagerSize) 1 }}
           {{ $last := math.Min (mul $paginator.PageNumber $paginator.PagerSize) $paginator.TotalNumberOfElements }}
-          Showing {{ $first }}–{{ $last }} of
-          {{ $paginator.TotalNumberOfElements }}
+          {{ i18n "picks_showing_range" (dict "First" $first "Last" $last "Total" $paginator.TotalNumberOfElements) }}
         </p>
 
         {{ if gt $paginator.TotalPages 1 }}
@@ -87,9 +86,9 @@
               <div class="flex items-center text-xs text-base-content/70 flex-wrap gap-2 mt-1">
                 {{ if not .Date.IsZero }}
                   <span
-                    >Added on
+                    >{{ i18n "picks_added_on" }}
                     <time datetime="{{ .Date.Format "2006-01-02" }}">
-                      {{ .Date.Format "January 2, 2006" }}
+                      {{ partial "formatted-date.html" .Date }}
                     </time></span
                   >
                 {{ end }}
@@ -120,7 +119,7 @@
       {{ end }}
 
     {{ else }}
-      {{ partial "empty-state.html" "Nothing here yet." }}
+      {{ partial "empty-state.html" "" }}
     {{ end }}
   </div>
 {{ end }}

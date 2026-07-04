@@ -22,9 +22,9 @@
 
               {{ with $term.Pages.ByDate.Reverse | first 1 }}
                 <div class="">
-                  <span class="text-xs">Last updated:</span>
+                  <span class="text-xs">{{ i18n "terms_last_updated" }}</span>
                   <time class="mt-2 text-xs text-secondary" datetime="{{ (index . 0).Date.Format "2006-01-02" }}">
-                    {{ (index . 0).Date | time.Format "Jan 2, 2006" }}
+                    {{ partial "formatted-date.html" (index . 0).Date }}
                   </time>
                 </div>
               {{ end }}
@@ -33,7 +33,7 @@
         {{ end }}
       </ul>
     {{ else }}
-      {{ partial "empty-state.html" "Nothing here yet." }}
+      {{ partial "empty-state.html" "" }}
     {{ end }}
   </article>
 {{ end }}

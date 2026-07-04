@@ -1,7 +1,7 @@
 {{ define "main" }}
   <section data-pagefind-body class="mb-16">
     <h1 class="font-sans text-4xl font-medium text-base-content mb-6">
-      Hi! I'm
+      {{ i18n "home_greeting" }}
       <span class="font-bold">{{ .Title }}</span>
     </h1>
 
@@ -14,8 +14,8 @@
   {{ if $posts }}
     <section class="mb-14">
       <div class="flex items-center justify-between mb-5">
-        <h2 class="font-sans text-xs font-semibold uppercase tracking-widest">Recent Posts</h2>
-        <a href="/blog" class="text-xs link link-primary">All posts →</a>
+        <h2 class="font-sans text-xs font-semibold uppercase tracking-widest">{{ i18n "home_recent_posts" }}</h2>
+        <a href="{{ (.Site.GetPage "blog").RelPermalink }}" class="text-xs link link-primary">{{ i18n "home_all_posts" }}</a>
       </div>
       <ul class="list-none p-0 m-0">
         {{ range first 5 $posts.ByDate.Reverse }}
@@ -41,8 +41,8 @@
   {{ if $picks }}
     <section class="mb-14">
       <div class="flex items-center justify-between mb-5">
-        <h2 class="font-sans text-xs font-semibold uppercase tracking-widest">Latest Picks</h2>
-        <a href="/picks" class="text-xs link link-primary">All picks →</a>
+        <h2 class="font-sans text-xs font-semibold uppercase tracking-widest">{{ i18n "home_latest_picks" }}</h2>
+        <a href="{{ (.Site.GetPage "picks").RelPermalink }}" class="text-xs link link-primary">{{ i18n "home_all_picks" }}</a>
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {{ range first 4 $picks.ByDate.Reverse }}

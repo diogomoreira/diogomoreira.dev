@@ -1,0 +1,69 @@
+# Nav menu identifiers
+about = "About"
+cv = "CV"
+blog = "Blog"
+now = "Now"
+academic = "Academic"
+projects = "Projects"
+uses = "Uses"
+snippets = "Snippets"
+picks = "Picks"
+photos = "Photos"
+digest = "Digest"
+nav_aria_label = "Main navigation"
+
+# Homepage
+home_greeting = "Hi! I'm"
+home_recent_posts = "Recent Posts"
+home_all_posts = "All posts →"
+home_latest_picks = "Latest Picks"
+home_all_picks = "All picks →"
+
+# Academic / CV
+academic_latest_publications = "Latest publications"
+cv_work_experience = "Work Experience"
+cv_education = "Education"
+cv_now = "Now"
+stack_label = "Stack:"
+
+# Blog
+categories_label = "Categories"
+tags_label = "Tags"
+blog_latest = "Latest"
+reading_time_minutes = "{{ .Count }} min read"
+blog_keep_reading = "Keep reading →"
+blog_all_posts = "All posts"
+
+# Now
+now_previously = "Previously"
+nav_older = "← Older"
+nav_newer = "Newer →"
+
+# Prev/next nav
+nav_previous = "← Previous"
+nav_next = "Next →"
+
+# Empty state
+empty_state_default = "Nothing here yet."
+
+# Feed / search
+rss_feed_sr_label = "RSS Feed"
+search_placeholder = "Search..."
+
+# Header / footer
+last_updated_label = "Last Updated"
+built_with_label = "Built with"
+
+# Digest
+digest_previous_issues = "Previous issues"
+
+# Terms/taxonomy
+terms_last_updated = "Last updated:"
+
+# Picks
+picks_showing_range = "Showing {{ .First }}–{{ .Last }} of {{ .Total }}"
+picks_added_on = "Added on"
+
+# Accessibility
+mobile_menu_toggle_aria = "Toggle menu"
+theme_toggle_aria = "Toggle dark mode"

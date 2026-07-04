@@ -1,7 +1,7 @@
 {{/* Usage: {{ partial "nav-menu.html" (dict "page" . "variant" "desktop") }} — variant is "desktop" or "mobile" */}}
 {{ $page := .page }}
 {{ $desktop := eq .variant "desktop" }}
-<nav class="flex-1" {{ if $desktop }}aria-label="Main navigation"{{ end }}>
+<nav class="flex-1" {{ if $desktop }}aria-label="{{ i18n "nav_aria_label" }}"{{ end }}>
   <ul class="space-y-1 font-sans list-none p-0 m-0">
     {{ range $page.Site.Menus.main }}
       {{ if not .Params.hidden }}
@@ -19,7 +19,7 @@
 "
             >
               {{ with .Params.icon }}{{ partial (printf "icons/nav/%s.html" .) $page }}{{ end }}
-              {{ .Name }}
+              {{ i18n .Identifier }}
             </a>
           {{ else }}
             <a
@@ -32,7 +32,7 @@
               {{ end }}"
             >
               {{ with .Params.icon }}{{ partial (printf "icons/nav/%s.html" .) $page }}{{ end }}
-              {{ .Name }}
+              {{ i18n .Identifier }}
             </a>
           {{ end }}
         </li>

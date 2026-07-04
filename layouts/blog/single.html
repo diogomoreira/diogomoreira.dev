@@ -22,7 +22,7 @@
       {{ if $hasDate }}
         <div class="mb-2">
           <time class="text-xs" datetime="{{ .Date.Format "2006-01-02" }}">
-            {{ .Date.Format "January 2, 2006" }}
+            {{ partial "formatted-date.html" .Date }}
           </time>
         </div>
       {{ end }}
@@ -61,7 +61,7 @@
 
     {{ with .Params.Categories }}
       <div class="flex py-2 gap-1 flex-wrap items-center">
-        <span class="p-2">Categories</span>
+        <span class="p-2">{{ i18n "categories_label" }}</span>
         {{ $num := len . }}
         {{ range $i, $cat := . }}
           <a
@@ -76,7 +76,7 @@
 
     {{ with .Params.tags }}
       <div class="flex py-2 gap-1 flex-wrap items-center">
-        <span class="p-2">Tags</span>
+        <span class="p-2">{{ i18n "tags_label" }}</span>
         {{ $num := len . }}
         {{ range $i, $tag := . }}
           <a href="{{ "/tags/" | relLangURL }}{{ $tag | urlize }}/" data-pagefind-filter="tag" class="badge badge-ghost"

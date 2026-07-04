@@ -11,7 +11,7 @@
     {{ $work := where .Site.RegularPages "Section" "work" }}
     {{ if $work }}
       <section class="mb-14">
-        <h2 class="font-sans text-md font-semibold uppercase tracking-widest text-secondary mb-8">Work Experience</h2>
+        <h2 class="font-sans text-md font-semibold uppercase tracking-widest text-secondary mb-8">{{ i18n "cv_work_experience" }}</h2>
 
         <ul class="timeline timeline-vertical timeline-compact">
           {{ $sorted := sort $work ".Params.endDate" "desc" }}
@@ -27,7 +27,7 @@
                 <div>~</div>
                 <div class="font-medium">
                   {{ if eq $end "Present" }}
-                    <span class="text-base-content">Now</span>
+                    <span class="text-base-content">{{ i18n "cv_now" }}</span>
                   {{ else }}
                     {{ $end }}
                   {{ end }}
@@ -84,7 +84,7 @@
                   </div>
                 {{ end }}
                 {{ with $e.Params.tech }}
-                  <div class="font-semibold">Stack:</div>
+                  <div class="font-semibold">{{ i18n "stack_label" }}</div>
                   <div class="flex flex-wrap gap-1 mt-2">
                     {{ range . }}
                       <span class="badge badge-ghost badge-sm font-mono">{{ . }}</span>
@@ -104,7 +104,7 @@
     {{ $education := where .Site.RegularPages "Section" "education" }}
     {{ if $education }}
       <section class="mb-14">
-        <h2 class="font-sans text-md font-semibold uppercase tracking-widest text-secondary mb-8">Education</h2>
+        <h2 class="font-sans text-md font-semibold uppercase tracking-widest text-secondary mb-8">{{ i18n "cv_education" }}</h2>
 
         <ul class="timeline timeline-vertical timeline-compact">
           {{ $sorted := sort $education ".Params.endDate" "desc" }}
@@ -120,7 +120,7 @@
                 <div>~</div>
                 <div class="font-medium">
                   {{ if eq $end "Present" }}
-                    <span class="text-primary">Now</span>
+                    <span class="text-primary">{{ i18n "cv_now" }}</span>
                   {{ else }}
                     {{ $end }}
                   {{ end }}

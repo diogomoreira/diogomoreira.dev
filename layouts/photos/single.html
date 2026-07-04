@@ -16,7 +16,7 @@
       {{ if not .Date.IsZero }}
         <div class="mb-2">
           <time class="text-xs" datetime="{{ .Date.Format "2006-01-02" }}">
-            {{ .Date.Format "January 2, 2006" }}
+            {{ partial "formatted-date.html" .Date }}
           </time>
         </div>
       {{ end }}
