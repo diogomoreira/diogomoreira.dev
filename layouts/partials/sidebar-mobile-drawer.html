@@ -7,7 +7,7 @@
   <aside
     class="absolute top-0 left-0 h-full w-72 bg-base-200 text-base-content flex flex-col px-8 py-10 overflow-y-auto"
   >
-    <a href="/" class="block font-sans text-2xl font-bold tracking-tight text-base-content mb-10 hover:opacity-80 ">
+    <a href="{{ .Site.Home.RelPermalink }}" class="block font-sans text-2xl font-bold tracking-tight text-base-content mb-10 hover:opacity-80 ">
       {{ .Site.Title }}
     </a>
     {{ partial "nav-menu.html" (dict "page" . "variant" "mobile") }}
@@ -15,6 +15,9 @@
     {{ partial "webring.html" }}
     <div class="mt-6 pt-6 border-t border-base-content/10 text-xs">
       {{ partial "sidebar-footer-meta.html" (dict "page" . "variant" "mobile") }}
+    </div>
+    <div class="mt-4 flex justify-center">
+      {{ partial "language-switcher.html" . }}
     </div>
   </aside>
 </div>

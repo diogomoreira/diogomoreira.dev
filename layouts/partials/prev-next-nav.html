@@ -5,7 +5,7 @@
     <div class="w-1/2 p-4">
       {{ if $prev }}
         <a href="{{ $prev.RelPermalink }}" class="text-primary flex flex-col">
-          <span class="text-xs">← Previous</span>
+          <span class="text-xs">{{ i18n "nav_previous" }}</span>
           <span class="text-secondary hover:text-primary text-lg py-2 font-semibold">
             {{ $prev.Title }}
           </span>
@@ -15,7 +15,7 @@
     <div class="w-1/2 p-4">
       {{ if $next }}
         <a href="{{ $next.RelPermalink }}" class="text-primary flex flex-col items-end">
-          <span class="text-xs">Next →</span>
+          <span class="text-xs">{{ i18n "nav_next" }}</span>
           <span class="text-secondary hover:text-primary text-lg py-2 font-semibold text-right">
             {{ $next.Title }}
           </span>

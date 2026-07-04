@@ -20,7 +20,7 @@
         />
       {{ end }}
       <a
-        href="/"
+        href="{{ .Site.Home.RelPermalink }}"
         class="u-url flex gap-4 items-center justify-center text-3xl font-semibold tracking-tight text-base-content hover:opacity-80 "
         rel="me"
       >
@@ -41,7 +41,10 @@
       <div class="text-xs">
         {{ partial "sidebar-footer-meta.html" (dict "page" . "variant" "desktop") }}
       </div>
-      {{ partial "theme-toggle-button.html" "theme-toggle-desktop" }}
+      <div class="flex items-center gap-2">
+        {{ partial "language-switcher.html" . }}
+        {{ partial "theme-toggle-button.html" "theme-toggle-desktop" }}
+      </div>
     </div>
   </div>
 </aside>

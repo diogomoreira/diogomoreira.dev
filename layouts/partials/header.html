@@ -11,16 +11,17 @@
   <div class="mt-4 flex items-center gap-4">
     {{ with .Params.updated }}
       {{ $updated := time.AsTime . }}
-      <span class="text-xs text-secondary font-dm-mono" title="Updated {{ $updated.Format "January 2, 2006" }}">
-        Last Updated
-        {{ $updated.Format "January 2, 2006" }}
+      {{ $updatedStr := partial "formatted-date.html" $updated }}
+      <span class="text-xs text-secondary font-dm-mono" title="{{ i18n "last_updated_label" }} {{ $updatedStr }}">
+        {{ i18n "last_updated_label" }}
+        {{ $updatedStr }}
       </span>
     {{ end }}
 
     {{ with .Params.tags }}
       <div class="flex gap-2 flex-wrap">
         {{ range . }}
-          <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="badge badge-ghost badge-sm">#{{ . }}</a>
+          <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="badge badge-ghost badge-sm">#{{ . }}</a>
         {{ end }}
       </div>
     {{ end }}

@@ -11,7 +11,6 @@ tags:
   - linux
   - macos
 cover: dotfiles.jpeg
-language: en
 ---
 
 > 💡 **tl;dr:** You can set up a new system using **dotfiles** and an installation script in minutes. This post tries to explain some things about dotfiles and we will build a repository together.

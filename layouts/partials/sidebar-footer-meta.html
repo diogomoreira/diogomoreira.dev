@@ -5,5 +5,5 @@
 </div>
 <div class="{{ if not $desktop }}text-center {{ end }}text-base-content">
   <strong{{ if $desktop }} class="font-mono"{{ end }}>v{{ .page.Site.Params.Version }}</strong>{{ if $desktop }} —{{ end }}
-  Built with <a href="https://hugo.io">Hugo</a>
+  {{ i18n "built_with_label" }} <a href="https://hugo.io">Hugo</a>
 </div>

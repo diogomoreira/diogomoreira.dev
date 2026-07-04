@@ -8,6 +8,17 @@ titleCaseStyle = "none"
 disabled = false
 label = 'English'
 locale = 'en-US'
+weight = 1
+contentDir = 'content/en'
+[languages.pt-br]
+disabled = false
+label = 'Português (Brasil)'
+locale = 'pt-BR'
+weight = 2
+contentDir = 'content/pt-br'
+[languages.pt-br.params]
+[languages.pt-br.params.giscus]
+lang = "pt-BR"
 
 [params]
 version = "4.5.0"
@@ -62,10 +73,6 @@ section = ["HTML", "RSS"]
 tag = "tags"
 category = "categories"
 
-# Optional: set default params per section
-[params.blog]
-dateFormat = "January 2, 2006"
-
 [[params.social]]
 name = "GitHub"
 url = "https://github.com/diogomoreira"
@@ -115,42 +122,42 @@ lang = "en"
 pagerSize = 5
 
 [[menus.main]]
-name = "About"
+identifier = "about"
 url = "/about"
 weight = 1
 [menus.main.params]
 icon = "user"
 
 [[menus.main]]
-name = "CV"
+identifier = "cv"
 url = "/cv"
 weight = 2
 [menus.main.params]
 icon = "cv"
 
 [[menus.main]]
-name = "Blog"
+identifier = "blog"
 url = "/blog"
 weight = 3
 [menus.main.params]
 icon = "blog"
 
 [[menus.main]]
-name = "Now"
+identifier = "now"
 url = "/now"
 weight = 4
 [menus.main.params]
 icon = "now"
 
 [[menus.main]]
-name = "Academic"
+identifier = "academic"
 url = "/academic"
 weight = 5
 [menus.main.params]
 icon = "academic"
 
 [[menus.main]]
-name = "Projects"
+identifier = "projects"
 url = "/projects"
 weight = 6
 [menus.main.params]
@@ -158,14 +165,14 @@ icon = "projects"
 hidden = true
 
 [[menus.main]]
-name = "Uses"
+identifier = "uses"
 url = "/uses"
 weight = 7
 [menus.main.params]
 icon = "uses"
 
 [[menus.main]]
-name = "Snippets"
+identifier = "snippets"
 url = "/snippets"
 weight = 8
 [menus.main.params]
@@ -173,14 +180,14 @@ icon = "snippets"
 hidden = true
 
 [[menus.main]]
-name = "Picks"
+identifier = "picks"
 url = "/picks"
 weight = 9
 [menus.main.params]
 icon = "picks"
 
 [[menus.main]]
-name = "Photos"
+identifier = "photos"
 url = "/photos"
 weight = 10
 [menus.main.params]
@@ -188,7 +195,7 @@ icon = "photos"
 hidden = false
 
 [[menus.main]]
-name = "Digest"
+identifier = "digest"
 url = "/digest"
 weight = 11
 [menus.main.params]

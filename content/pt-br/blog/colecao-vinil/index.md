@@ -11,7 +11,6 @@ tags:
   - collections
 cover: blocks-T3mKJXfdims-unsplash.jpg
 coverCaption: <a href="/wiki/User:Franz_van_Duns" title="User:Franz van Duns">Franz van Duns</a>&nbsp;/&nbsp;<a href="/wiki/Main_Page" title="Main Page">Wikimedia Commons</a>
-language: pt
 ---
 
 Desde abril do ano passado tenho me engajado em um novo hobby: **colecionar vinil**.
