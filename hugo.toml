@@ -123,42 +123,42 @@ pagerSize = 5
 
 [[menus.main]]
 identifier = "about"
-url = "/about"
+pageRef = "/about"
 weight = 1
 [menus.main.params]
 icon = "user"
 
 [[menus.main]]
 identifier = "cv"
-url = "/cv"
+pageRef = "/cv"
 weight = 2
 [menus.main.params]
 icon = "cv"
 
 [[menus.main]]
 identifier = "blog"
-url = "/blog"
+pageRef = "/blog"
 weight = 3
 [menus.main.params]
 icon = "blog"
 
 [[menus.main]]
 identifier = "now"
-url = "/now"
+pageRef = "/now"
 weight = 4
 [menus.main.params]
 icon = "now"
 
 [[menus.main]]
 identifier = "academic"
-url = "/academic"
+pageRef = "/academic"
 weight = 5
 [menus.main.params]
 icon = "academic"
 
 [[menus.main]]
 identifier = "projects"
-url = "/projects"
+pageRef = "/projects"
 weight = 6
 [menus.main.params]
 icon = "projects"
@@ -166,14 +166,14 @@ hidden = true
 
 [[menus.main]]
 identifier = "uses"
-url = "/uses"
+pageRef = "/uses"
 weight = 7
 [menus.main.params]
 icon = "uses"
 
 [[menus.main]]
 identifier = "snippets"
-url = "/snippets"
+pageRef = "/snippets"
 weight = 8
 [menus.main.params]
 icon = "snippets"
@@ -181,14 +181,14 @@ hidden = true
 
 [[menus.main]]
 identifier = "picks"
-url = "/picks"
+pageRef = "/picks"
 weight = 9
 [menus.main.params]
 icon = "picks"
 
 [[menus.main]]
 identifier = "photos"
-url = "/photos"
+pageRef = "/photos"
 weight = 10
 [menus.main.params]
 icon = "photos"
@@ -196,7 +196,7 @@ hidden = false
 
 [[menus.main]]
 identifier = "digest"
-url = "/digest"
+pageRef = "/digest"
 weight = 11
 [menus.main.params]
 icon = "digest"
