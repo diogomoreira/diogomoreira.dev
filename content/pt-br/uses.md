@@ -1,75 +1,96 @@
 ---
-title: My setup
-description: Elements of my setup that have enhanced my productivity and efficiency, from hardware to software.
+title: Meu setup
+description: Elementos que aumentam minha produtividade e eficiência, de hardware a software.
 published: "2023-07-09"
-updated: "2026-04-01"
+updated: "2026-07-05"
 cover: /images/pages/uses.jpg
-coverCaption: "My setup"
-tags: [uses, setup, tools]
+coverCaption: "Meu setup"
+tags: [uses, setup, ferramentas]
+groups:
+  - name: Hardware
+    icon: hardware
+    items:
+      - name: MacBook Pro 16" (M5 Pro, 48GB)
+        link: https://www.apple.com/macbook-pro/
+        description: Meu equipamento principal para desenvolvimento e para tudo mais.
+      - name: LG UltraGear 34" 34GP63A-B
+        description: Monitor ultrawide curvo, 160Hz, para mais espaço de tela.
+      - name: Logitech MX Master 3
+        description: Mouse confortável e preciso para sessões longas de trabalho.
+      - name: 8BitDo Retro Mechanical Keyboard
+        description: Um teclado mecânico divertido com visual retrô.
+      - name: iPhone 15 Pro
+        link: https://www.apple.com/iphone-15-pro/
+        description: Meu celular do dia a dia.
+      - name: iPad Air 11" + Apple Pencil Pro
+        link: https://www.apple.com/ipad-air/
+        description: Para anotações e leitura.
+  - name: IDEs
+    icon: ides
+    items:
+      - name: IntelliJ IDEA Ultimate
+        link: https://www.jetbrains.com/idea/
+        description: Minha IDE para programar em Java e com Spring Boot.
+      - name: Visual Studio Code
+        link: https://code.visualstudio.com/
+        description: Editor principal para tudo, exceto Java — tema Noctis Minimus, fonte JetBrains Mono, além de Prettier, SonarLint e outras extensões.
+  - name: Aplicativos
+    icon: applications
+    items:
+      - name: Apple Music
+        link: https://music.apple.com/
+        description: Troquei o Spotify no ano passado e não me arrependo.
+      - name: Homebrew
+        link: https://brew.sh/
+        description: Gerenciador de pacotes para macOS — essencial.
+      - name: iTerm2
+        link: https://iterm2.com/
+        description: Terminal, rodando Zsh com Oh My Zsh e Powerlevel10k.
+      - name: Obsidian
+        link: https://obsidian.md/
+        description: Notas em markdown local-first, totalmente sob meu controle.
+      - name: Magnet
+        link: https://apps.apple.com/br/app/magnet/id441258766?mt=12
+        description: Organização de janelas, muito útil com dois monitores.
+      - name: Slack
+        link: https://slack.com/
+        description: Para o trabalho.
+      - name: Google Chrome
+        link: https://www.google.com/chrome/
+        description: Navegador principal.
+      - name: Postman
+        link: https://www.postman.com/
+        description: Testes de API.
+      - name: 1Password
+        link: https://1password.com/
+        description: Gerenciador de senhas.
+  - name: Acadêmico
+    icon: academic
+    items:
+      - name: MacTeX
+        link: https://www.tug.org/mactex/
+        description: Distribuição LaTeX para compilar meus materiais de aula.
+      - name: TeXStudio
+        link: https://www.texstudio.org/
+        description: Editor para meus arquivos LaTeX.
+      - name: Google Slides
+        link: https://workspace.google.com/products/slides/
+        description: Slides para as aulas — pretendo migrar para TeX + Beamer futuramente.
+      - name: Gitbook
+        link: https://gitbook.io
+        description: Hospeda parte do conteúdo das minhas aulas como um site simples e pesquisável.
+  - name: Jogos
+    icon: gaming
+    note: Veja o que estou jogando atualmente na minha [página Now](/now#current-playing).
+    items:
+      - name: Nintendo Switch
+      - name: PlayStation Portable
+      - name: PlayStation 3
+      - name: PlayStation 4
+      - name: Nintendo 3DS
+      - name: Xbox Series S
+      - name: R36S
+        description: Portátil retrô para emulação.
 ---
 
-Hello there! In this post, I want to share with you the tools that I have been using on my workflow and helped me become more productive and efficient. This is an always evolving page, so I'll try to keep track of what has changed through the years and why. Inspired by [Wes Bos's **uses.tech**](https://uses.tech/).
-
-## Hardware 💻
-
-- Macbook Pro 16-inch, M5 Pro, 48GB
-- LG UltraGear 34" 34GP63A-B, UltraWide, 160Hz
-- iPhone 15 Pro
-- Logitech MX Master 3
-- 8BitDo Retro Mechanical Keyboard
-
----
-
-## Applications ⌨️
-
-### IDEs
-
-Starting with my development-related applications, two are mandatory for me:
-
-**Intellij IDEA Ultimate**. Since I work as a professor, I have a license to use the Ultimate version of Intellij IDEA, and honestly, it's by far the best IDE to work with Java related technologies/frameworks such as Spring Boot.
-
-**Visual Studio Code**. My main app for software development and anything related, except Java code. My VSCode configuration in terms of extensions changes a lot depending on what I've been studying/doing lately. But in general, there are some I always have installed: [Auto Rename Tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag), [Change Case](https://marketplace.visualstudio.com/items?itemName=wmaurer.change-case), [CodeSnap](https://marketplace.visualstudio.com/items?itemName=adpyke.codesnap), [Import Cost](https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost), [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer), [Markdown All In One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one), [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode), [SonarLint](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode), [WakaTime](https://marketplace.visualstudio.com/items?itemName=WakaTime.vscode-wakatime).
-
-The **theme** I use in both IDEs is **Noctis Minimus**.
-
-The **editor font** I use is [JetBrains Mono](https://www.jetbrains.com/lp/mono/).
-
----
-
-### Other applications I use daily
-
-**Apple Music**. Since last year, I've changed from Spotify to Apple Music, and I don't regret it at all. I don't have any specific reason to change except for the price when it's included with other Apple Family Subscriptions. I like the organization for the music library but I don't really like that it doesn't have a way to change where the music is playing like Spotify Connect. But in the overall experience I'm liking it.
-
-[**Homebrew**](https://brew.sh/). Homebrew is a free and open-source software package management system that simplifies software installation on macOS. There isn't much to say about it — anyone who has used Linux before knows they can't live without a package manager.
-
-**iTerm2**. ZSH + **[Oh-my-ZSH](https://ohmyz.sh/)**. On top of this configuration, I'm using [Powerlevel10k](https://github.com/romkatv/powerlevel10k).
-
-[**Obsidian**](https://obsidian.md/). I dropped Notion some time ago because I really wanted to have control of my notes/files. Obsidian can work offline and even if it dies tomorrow, I have all my files and can edit them in any other markdown editor of my choice. Also, it is highly extensible in a way that Notion could never be.
-
-[**Magnet**](https://apps.apple.com/br/app/magnet/id441258766?mt=12). I don't know if these days, macOS has a solution similar to that one, but since I bought that app in the past and I'm very used to it, here's my recommendation of an app for window arrangement. It's very useful, especially when working with more than one monitor.
-
-There are also other applications I use daily, but I don't have any specific reason to use them (besides work): **Slack**, **Google Chrome**, **Postman**, **1Password**.
-
----
-
-## Academic Stuff 👨🏻‍🏫
-
-[**MacTeX**](https://www.tug.org/mactex/) to compile my LaTeX files edited on [**TeXStudio**](https://www.texstudio.org/).
-
-**Google Slides**. I use it to create and present my slides during my classes, but it's something I want to replace with TeX + Beamer.
-
-[**Gitbook**](https://gitbook.io). Some of my class content is posted as a dedicated website via Gitbook. It's pretty simple and can be very useful sometimes, especially because it provides some other features such as search.
-
----
-
-## Gaming 🕹️
-
-- Nintendo Switch
-- PlayStation Portable
-- PlayStation 3
-- PlayStation 4
-- Nintendo 3DS
-- Xbox Series S
-- R36S
-
-Check what I'm currently playing in my [Now Page](/now#current-playing).
+Olá! Neste texto, quero compartilhar as ferramentas que tenho usado no meu fluxo de trabalho e que me ajudam a ser mais produtivo e eficiente. Esta é uma página sempre em evolução, então vou tentar acompanhar o que mudou ao longo dos anos e por quê. Inspirado pelo [uses.tech do Wes Bos](https://uses.tech/).
