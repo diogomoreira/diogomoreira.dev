@@ -11,7 +11,7 @@
     {{ $work := where .Site.RegularPages "Section" "work" }}
     {{ if $work }}
       <section class="mb-14">
-        <h2 class="font-sans text-md font-semibold uppercase tracking-widest text-secondary mb-8">{{ i18n "cv_work_experience" }}</h2>
+        <h2 class="font-heading text-xs font-semibold uppercase tracking-widest text-secondary mb-8">{{ i18n "cv_work_experience" }}</h2>
 
         <ul class="timeline timeline-vertical timeline-compact">
           {{ $sorted := sort $work ".Params.endDate" "desc" }}
@@ -104,7 +104,7 @@
     {{ $education := where .Site.RegularPages "Section" "education" }}
     {{ if $education }}
       <section class="mb-14">
-        <h2 class="font-sans text-md font-semibold uppercase tracking-widest text-secondary mb-8">{{ i18n "cv_education" }}</h2>
+        <h2 class="font-heading text-xs font-semibold uppercase tracking-widest text-secondary mb-8">{{ i18n "cv_education" }}</h2>
 
         <ul class="timeline timeline-vertical timeline-compact">
           {{ $sorted := sort $education ".Params.endDate" "desc" }}

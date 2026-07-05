@@ -17,19 +17,22 @@
       </article>
     {{ end }}
 
-    {{ partial "now-top-artists.html" . }}
-
     {{/* Previous entries list */}}
     {{ if $history }}
       <section class="border-t border-base-300 pt-10">
-        <h2 class="font-sans text-xs font-semibold uppercase tracking-widest text-base-content/70 mb-6">{{ i18n "now_previously" }}</h2>
+        <h2 class="font-heading text-xs font-semibold uppercase tracking-widest text-base-content/70 mb-6">
+          {{ i18n "now_previously" }}
+        </h2>
         <ul class="list-none p-0 m-0">
           {{ range $history }}
             <li class="flex items-baseline justify-between gap-4 py-3 border-b border-base-300">
               <a href="{{ .RelPermalink }}" class="text-sm font-medium text-base-content hover:opacity-60 ">
                 {{ .Title }}
               </a>
-              <time class="text-xs tabular-nums text-base-content/70 shrink-0" datetime="{{ .Date.Format "2006-01-02" }}">
+              <time
+                class="text-xs tabular-nums text-base-content/70 shrink-0"
+                datetime="{{ .Date.Format "2006-01-02" }}"
+              >
                 {{ partial "formatted-date.html" .Date }}
               </time>
             </li>
@@ -42,4 +45,5 @@
     {{ partial "empty-state.html" "" }}
   {{ end }}
 
+  {{ partial "now-top-artists.html" . }}
 {{ end }}
