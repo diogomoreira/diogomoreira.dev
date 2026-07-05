@@ -1,0 +1,22 @@
+- title: "MSc. in Software Engineering"
+  institution: "CESAR School"
+  location: "Recife - PE, Brazil"
+  startDate: "2017"
+  endDate: "2019"
+  link: "https://cesar.school"
+  description: |
+    **Master's thesis**: Testing acoustic scene classification systems using metamorphic relations. Mestrado profissional em Engenharia de Software, Centro de Estudos e Sistemas Avançados do Recife (Cesar School), Recife - PE, Brasil. 2019. Advisor: Ana Paula Carvalho Cavalcanti Furtado.
+
+- title: "Lato Sensu Postgraduation in Software Engineering"
+  institution: "Estácio iDez"
+  location: "João Pessoa - PB, Brazil"
+  startDate: "2013"
+  endDate: "2015"
+  link: "https://estacio.br"
+
+- title: "Undergraduation in Software Analysis and Development"
+  institution: "Instituto Federal da Paraíba"
+  location: "Cajazeiras - PB, Brazil"
+  startDate: "2008"
+  endDate: "2012"
+  link: "https://ifpb.edu.br"
