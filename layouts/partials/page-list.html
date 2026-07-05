@@ -4,7 +4,7 @@
     <li class="border-b border-base-300 pb-6">
       <a href="{{ .RelPermalink }}" class="group block">
         <span class="text-base font-medium text-base-content group-hover:opacity-70 ">
-          {{ .Title }}
+          {{ partial "post-status-emoji.html" . }}{{ .Title }}
         </span>
         {{ with .Description }}
           <p class="mt-1 text-sm text-primary">{{ . | markdownify }}</p>

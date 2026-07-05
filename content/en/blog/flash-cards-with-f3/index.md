@@ -2,6 +2,7 @@
 title: "How to recognize poor quality Flash Memory Cards with F3"
 categories:
   - Tech
+status: archived
 date: "2026-02-21T11:25:00.000-03:00"
 description: Checking if the card you bought was indeed delivering what was
   promised and that it wasn't counterfeit

@@ -2,7 +2,7 @@
 title: "Sobre colecionar música em vinil"
 categories:
   - Hobbies
-  - Living Posts
+status: growing
 date: "2026-04-10"
 description: Um pouco sobre como é colecionar música em vinil e algumas dicas para quem quer começar
 tags:

@@ -37,6 +37,8 @@
     <div class="prose prose-headings:font-sans max-w-prose mb-10">{{ . }}</div>
   {{ end }}
 
+  {{ partial "post-status-legend.html" . }}
+
   {{ $posts := .Pages.ByDate.Reverse }}
 
   {{/* ── Featured: latest post ───────────────────────────── */}}
@@ -49,7 +51,9 @@
         <span>{{ i18n "reading_time_minutes" (dict "Count" .ReadingTime) }}</span>
       </div>
       <h2 class="font-sans text-2xl font-semibold text-base-content mb-3">
-        <a href="{{ .RelPermalink }}" class="hover:opacity-70 transition-opacity">{{ .Title }}</a>
+        <a href="{{ .RelPermalink }}" class="hover:opacity-70 transition-opacity"
+          >{{ partial "post-status-emoji.html" . }}{{ .Title }}</a
+        >
       </h2>
       <p class="text-sm text-base-content/70 leading-relaxed mb-4">
         {{ with .Description }}{{ . }}{{ else }}{{ .Plain | truncate 200 }}{{ end }}

@@ -2,6 +2,7 @@
 title: "Mocking Google Cloud Storage Objects with Java"
 categories:
   - Tech
+status: archived
 date: "2023-12-10"
 description: How to mock Google Cloud Storage objects in Java.
 tags:
