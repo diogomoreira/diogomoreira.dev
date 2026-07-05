@@ -8,18 +8,21 @@
   {{ end }}
 
 
-  <div class="mt-4 flex items-center gap-4">
+  <div class="mt-4">
     {{ with .Params.updated }}
       {{ $updated := time.AsTime . }}
       {{ $updatedStr := partial "formatted-date.html" $updated }}
-      <span class="text-xs text-secondary font-dm-mono" title="{{ i18n "last_updated_label" }} {{ $updatedStr }}">
+      <p
+        class="mb-4 border-l-4 border-accent pl-4 font-heading text-sm text-base-content"
+        title="{{ i18n "last_updated_label" }} {{ $updatedStr }}"
+      >
         {{ i18n "last_updated_label" }}
         {{ $updatedStr }}
-      </span>
+      </p>
     {{ end }}
 
     {{ with .Params.tags }}
-      <div class="flex gap-2 flex-wrap">
+      <div class="flex items-center gap-2 flex-wrap">
         {{ range . }}
           <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="badge badge-ghost badge-sm">#{{ . }}</a>
         {{ end }}

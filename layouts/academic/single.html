@@ -5,8 +5,7 @@
 
     <div class="prose prose-headings:font-sans prose-base max-w-none">
       {{ .Content }}
-      <h2 class="font-sans text-lg">{{ i18n "academic_latest_publications" }}</h2>
-
+      {{ partial "section-label.html" (dict "text" (i18n "academic_latest_publications")) }}
       {{/* Pull papers from the papers section */}}
       <ul>
         {{ $papers := where .Site.RegularPages "Section" "papers" }}

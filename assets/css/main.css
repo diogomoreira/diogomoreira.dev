@@ -92,7 +92,7 @@
   --font-mono:
     ui-monospace, SFMono-Regular, "Cascadia Code", "IBM Plex Mono", "Roboto Mono", "DejaVu Sans Mono",
     "Liberation Mono", Menlo, Monaco, Consolas, "Source Code Pro", monospace;
-  --font-dm-mono: "DM Mono", ui-monospace, monospace;
+  --font-heading: "Bricolage Grotesque", var(--font-sans);
   --pf-font: var(--font-sans);
 }
 
