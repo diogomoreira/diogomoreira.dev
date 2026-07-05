@@ -6,19 +6,18 @@
     <div class="prose prose-headings:font-sans prose-base max-w-none">
       {{ .Content }}
       {{ partial "section-label.html" (dict "text" (i18n "academic_latest_publications")) }}
-      {{/* Pull papers from the papers section */}}
+      {{/* Pull papers from data files */}}
       <ul>
-        {{ $papers := where .Site.RegularPages "Section" "papers" }}
-        {{ range ($papers.ByParam "year").Reverse }}
+        {{ $papers := index site.Data site.Language.Lang "papers" }}
+        {{ range sort $papers "year" "desc" }}
           <li class="mb-4">
-            <a href="{{ .Params.link }}" class="link link-primary font-medium">
-              {{ .Title }}
+            <a href="{{ .link }}" class="link link-primary font-medium">
+              {{ .title }}
             </a>
-            {{ with .Params.year }}
+            {{ with .year }}
               <span class="badge badge-secondary badge-sm ml-2">{{ . }}</span>
             {{ end }}
           </li>
-          {{/* your paper card markup here */}}
         {{ end }}
       </ul>
     </div>

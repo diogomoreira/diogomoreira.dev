@@ -194,14 +194,6 @@ weight = 10
 icon = "photos"
 hidden = true
 
-[[cascade]]
-[cascade.build]
-render = "never"
-list = "always"
-[cascade.target]
-path = "/work/**"
-kind = "page"
-
 [services]
 [services.disqus]
 shortname = 'diogomoreira'

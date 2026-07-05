@@ -8,13 +8,13 @@
     {{ end }}
 
     {{/* Work experience */}}
-    {{ $work := where .Site.RegularPages "Section" "work" }}
+    {{ $work := index site.Data site.Language.Lang "work" }}
     {{ if $work }}
       <section class="mb-14">
         <h2 class="font-heading text-xs font-semibold uppercase tracking-widest text-secondary mb-8">{{ i18n "cv_work_experience" }}</h2>
 
         <ul class="timeline timeline-vertical timeline-compact">
-          {{ $sorted := sort $work ".Params.endDate" "desc" }}
+          {{ $sorted := sort $work "endDate" "desc" }}
 
           {{ range $i, $e := $sorted }}
             <li>
@@ -22,8 +22,8 @@
 
 
               <div class="timeline-start font-mono text-sm tabular-nums flex gap-2">
-                {{ $end := $e.Params.endDate | default "Present" }}
-                <div>{{ $e.Params.startDate }}</div>
+                {{ $end := $e.endDate | default "Present" }}
+                <div>{{ $e.startDate }}</div>
                 <div>~</div>
                 <div class="font-medium">
                   {{ if eq $end "Present" }}
@@ -35,7 +35,7 @@
               </div>
 
               <div class="timeline-middle">
-                {{ if eq ($e.Params.endDate | default "Present") "Present" }}
+                {{ if eq ($e.endDate | default "Present") "Present" }}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
@@ -65,25 +65,25 @@
               </div>
 
               <div class="timeline-end timeline-box mb-6 p-6 w-full">
-                <p class="font-semibold font-sans text-lg text-base-content leading-snug">{{ $e.Title }}</p>
+                <p class="font-semibold font-sans text-lg text-base-content leading-snug">{{ $e.title }}</p>
                 <p class="text-sm text-base-content mt-0.5">
-                  {{ with $e.Params.link }}
+                  {{ with $e.link }}
                     <a href="{{ . }}" target="_blank" rel="noopener" class="hover:text-primary ">
-                      {{ $e.Params.company }}
+                      {{ $e.company }}
                     </a>
                   {{ else }}
-                    {{ $e.Params.company }}
+                    {{ $e.company }}
                   {{ end }}
-                  {{ with $e.Params.location }}
+                  {{ with $e.location }}
                     <span class="text-neutral mx-1">·</span>{{ . }}
                   {{ end }}
                 </p>
-                {{ with $e.Content }}
+                {{ with $e.description }}
                   <div class="mt-3 mb-6 text-sm text-base-content leading-relaxed prose prose-sm max-w-none">
-                    {{ . }}
+                    {{ . | markdownify }}
                   </div>
                 {{ end }}
-                {{ with $e.Params.tech }}
+                {{ with $e.tech }}
                   <div class="font-semibold">{{ i18n "stack_label" }}</div>
                   <div class="flex flex-wrap gap-1 mt-2">
                     {{ range . }}
@@ -101,13 +101,13 @@
     {{ end }}
 
     {{/* Education */}}
-    {{ $education := where .Site.RegularPages "Section" "education" }}
+    {{ $education := index site.Data site.Language.Lang "education" }}
     {{ if $education }}
       <section class="mb-14">
         <h2 class="font-heading text-xs font-semibold uppercase tracking-widest text-secondary mb-8">{{ i18n "cv_education" }}</h2>
 
         <ul class="timeline timeline-vertical timeline-compact">
-          {{ $sorted := sort $education ".Params.endDate" "desc" }}
+          {{ $sorted := sort $education "endDate" "desc" }}
 
           {{ range $i, $e := $sorted }}
             <li>
@@ -115,8 +115,8 @@
 
 
               <div class="timeline-start font-mono text-sm tabular-nums flex gap-2">
-                {{ $end := $e.Params.endDate | default "Present" }}
-                <div>{{ $e.Params.startDate }}</div>
+                {{ $end := $e.endDate | default "Present" }}
+                <div>{{ $e.startDate }}</div>
                 <div>~</div>
                 <div class="font-medium">
                   {{ if eq $end "Present" }}
@@ -128,7 +128,7 @@
               </div>
 
               <div class="timeline-middle">
-                {{ if eq ($e.Params.endDate | default "Present") "Present" }}
+                {{ if eq ($e.endDate | default "Present") "Present" }}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
@@ -158,25 +158,25 @@
               </div>
 
               <div class="timeline-end timeline-box mb-6 p-6 w-full">
-                <p class="font-semibold font-sans text-lg text-base-content leading-snug">{{ $e.Title }}</p>
+                <p class="font-semibold font-sans text-lg text-base-content leading-snug">{{ $e.title }}</p>
                 <p class="text-sm text-base-content mt-0.5">
-                  {{ with $e.Params.link }}
+                  {{ with $e.link }}
                     <a href="{{ . }}" target="_blank" rel="noopener" class="hover:text-primary ">
-                      {{ $e.Params.institution }}
+                      {{ $e.institution }}
                     </a>
                   {{ else }}
-                    {{ $e.Params.institution }}
+                    {{ $e.institution }}
                   {{ end }}
-                  {{ with $e.Params.location }}
+                  {{ with $e.location }}
                     <span class="text-neutral mx-1">·</span>{{ . }}
                   {{ end }}
                 </p>
-                {{ with $e.Content }}
+                {{ with $e.description }}
                   <div class="mt-3 mb-6 text-sm text-base-content leading-relaxed prose prose-sm max-w-none">
-                    {{ . }}
+                    {{ . | markdownify }}
                   </div>
                 {{ end }}
-                {{ with $e.Params.tech }}
+                {{ with $e.tech }}
                   <div class="flex flex-wrap gap-1 mt-2">
                     {{ range . }}
                       <span class="badge badge-ghost badge-sm font-mono">{{ . }}</span>
