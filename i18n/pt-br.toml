@@ -9,7 +9,6 @@ uses = "Uses"
 snippets = "Snippets"
 picks = "Picks"
 photos = "Fotos"
-digest = "Digest"
 nav_aria_label = "Navegação principal"
 
 # Homepage
@@ -53,9 +52,6 @@ search_placeholder = "Buscar..."
 # Header / footer
 last_updated_label = "Última Atualização"
 built_with_label = "Feito com"
-
-# Digest
-digest_previous_issues = "Edições anteriores"
 
 # Terms/taxonomy
 terms_last_updated = "Última atualização:"
