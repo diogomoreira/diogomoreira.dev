@@ -4,9 +4,20 @@
     <div class="prose prose-headings:font-sans max-w-prose">{{ . }}</div>
   {{ end }}
 
-  {{ if .Pages }}
+  {{ $galleryPages := .Pages }}
+  {{ if not site.IsDefault }}
+    {{ range hugo.Sites }}
+      {{ if .IsDefault }}
+        {{ with .GetPage "/photos" }}
+          {{ $galleryPages = .Pages }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ if $galleryPages }}
     <div id="my-gallery" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-      {{ range .Pages.ByDate.Reverse }}
+      {{ range $galleryPages.ByDate.Reverse }}
         {{ $page := . }}
         {{ $cover := "" }}
         {{ with $page.Params.cover }}
