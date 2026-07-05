@@ -192,14 +192,7 @@ pageRef = "/photos"
 weight = 10
 [menus.main.params]
 icon = "photos"
-hidden = false
-
-[[menus.main]]
-identifier = "digest"
-pageRef = "/digest"
-weight = 11
-[menus.main.params]
-icon = "digest"
+hidden = true
 
 [[cascade]]
 [cascade.build]

@@ -1,14 +1,24 @@
 ---
-title: "Digest #1"
-issue: 1
+title: "Web Finds #1"
 date: 2026-05-31
+categories:
+  - Web Finds
+status: archived
+tags:
+  - career
+  - ux
+  - renewable energy
 draft: false
 ---
 
 ## Articles
 
 - 📃 [Get your work recognized: write a brag document](https://jvns.ca/blog/brag-documents/).
-- 📃 [Quando pensamos com máquinas: o espelho cognitivo da inteligência artificial](https://drucillainsthub.substack.com/p/quando-pensamos-com-maquinas-o-espelho?triedRedirect=true) (In Portuguese, Brazil)
+
+## Interesting links
+
+- 📃 [40 questions to ask yourself every year](https://stephango.com/40-questions)
+- 📃 [40 questions to ask yourself every decade](https://stephango.com/40-questions-decade)
 
 ## Videos
 
