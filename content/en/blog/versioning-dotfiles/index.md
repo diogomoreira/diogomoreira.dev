@@ -2,6 +2,7 @@
 title: "Versioning .dotfiles"
 categories:
   - Tech
+status: growing
 date: "2023-04-28"
 description: Why versioning dotfiles?
 tags:

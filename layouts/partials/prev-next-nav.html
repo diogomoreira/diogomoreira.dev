@@ -7,7 +7,7 @@
         <a href="{{ $prev.RelPermalink }}" class="text-primary flex flex-col">
           <span class="text-xs">{{ i18n "nav_previous" }}</span>
           <span class="text-secondary hover:text-primary text-lg py-2 font-semibold">
-            {{ $prev.Title }}
+            {{ partial "post-status-emoji.html" $prev }}{{ $prev.Title }}
           </span>
         </a>
       {{ end }}
@@ -17,7 +17,7 @@
         <a href="{{ $next.RelPermalink }}" class="text-primary flex flex-col items-end">
           <span class="text-xs">{{ i18n "nav_next" }}</span>
           <span class="text-secondary hover:text-primary text-lg py-2 font-semibold text-right">
-            {{ $next.Title }}
+            {{ partial "post-status-emoji.html" $next }}{{ $next.Title }}
           </span>
         </a>
       {{ end }}

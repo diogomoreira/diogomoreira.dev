@@ -2,6 +2,7 @@
 title: "Sealed and Final in Java 17+"
 categories:
   - Tech
+status: archived
 date: "2024-02-18"
 description: Exploring sealed classes feature in Java 17+.
 tags:

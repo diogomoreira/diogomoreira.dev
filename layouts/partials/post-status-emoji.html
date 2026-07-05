@@ -1,0 +1,6 @@
+{{/* Usage: {{ partial "post-status-emoji.html" . }} — inline emoji prefix for a post title in list views */}}
+{{ $status := .Params.status }}
+{{ $icon := partial "post-status-icon.html" . }}
+{{ with $icon }}
+  <span role="img" aria-label="{{ i18n (printf "status_%s" $status) }}" title="{{ i18n (printf "status_%s" $status) }}" class="mr-1" data-pagefind-ignore>{{ . }}</span>
+{{ end }}

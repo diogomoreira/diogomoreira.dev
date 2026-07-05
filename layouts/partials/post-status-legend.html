@@ -1,0 +1,15 @@
+{{/* Usage: {{ partial "post-status-legend.html" . }} — explains what the post status emoji (🌱🌿🪴🍂) mean */}}
+<div class="mb-10 text-xs text-base-content/70">
+  {{ partial "section-label.html" (dict "text" (i18n "status_legend_title") "class" "mb-3") }}
+  <ul class="list-none p-0 m-0 flex flex-col gap-1.5">
+    {{ range slice "seed" "growing" "living" "archived" }}
+      {{ $status := . }}
+      {{ $icon := partial "post-status-icon.html" (dict "Params" (dict "status" $status)) }}
+      <li class="flex items-baseline gap-2">
+        <span role="img" aria-hidden="true">{{ $icon }}</span>
+        <span class="font-medium text-base-content">{{ i18n (printf "status_%s" $status) }}</span>
+        <span>— {{ i18n (printf "status_%s_description" $status) }}</span>
+      </li>
+    {{ end }}
+  </ul>
+</div>

@@ -20,10 +20,11 @@
 
       {{ $hasDate := not .Date.IsZero }}
       {{ if $hasDate }}
-        <div class="mb-2">
+        <div class="mb-2 flex items-center gap-2 flex-wrap">
           <time class="text-xs" datetime="{{ .Date.Format "2006-01-02" }}">
             {{ partial "formatted-date.html" .Date }}
           </time>
+          {{ partial "post-status-badge.html" . }}
         </div>
       {{ end }}
 
