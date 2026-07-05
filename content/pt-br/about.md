@@ -6,7 +6,7 @@ cover: "/images/profile/cover.jpg"
 coverCaption: "@ Escadaria Selarón - Rio de Janeiro, RJ, Brasil"
 ---
 
-Olá! Sou o **Diogo Moreira**, nascido em 1989 na Paraíba, Brasil, onde ainda vivo e trabalho hoje.
+Olá! Sou o **Diogo Moreira**, nascido em 1989 na Paraíba, Brasil, onde moro e trabalho hoje.
 
 ## Algumas coisas que chamam minha atenção
 

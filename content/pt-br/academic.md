@@ -1,14 +1,14 @@
 ---
-title: Academic
-description: Academic background and publications
+title: Acadêmico
+description: Minha vida acadêmica e publicações
 ---
 
-I've majored in System Analysis and Development in 2012 at Instituto Federal da Paraíba. After this, I've completed a specialization in Software Engineering in 2015 at Estácio. Lastly, I did my master's in Software Engineering at CESAR School (Recife, Brazil) in 2019. I have been working as an Adjunct Professor since 2014 at Instituto Federal da Paraíba (in the same campus I did my major), where I lectured subjects related to **Software Engineering** topics, such as **Software Quality and Testing** and **Design Patterns**.
+Sou graduado em Análise e Desenvolvimento de Sistemas pelo Instituto Federal da Paraíba (2012). Posteriormente, em 2015, concluí minha especialização em Engenharia de Software pela Estácio. Por fim, realizei meu mestrado em Engenharia de Software na CESAR School (Recife, Brasil), concluindo-o em 2019. Atuo como Professor Efetivo no Instituto Federal da Paraíba desde 2014 — no mesmo campus onde me graduei —, ministrando disciplinas como **Qualidade e Testes de Software**, **Padrões de Projeto** e **Desenvolvimento Web**.
 
 ---
 
-## Publications
+## Pesquisa
 
-My research interests are mainly related to **Software Engineering**, especially **Software Testing**, **Software Quality**, **Web Development** and **Design Patterns**. I am also a member of the _Software Engineering Research Group_ (GPES, IFPB, Brazil). If you wish, see my profile on [ResearchGate](https://www.researchgate.net/profile/Diogo_Moreira4), [Google Scholar](https://scholar.google.com.br/citations?hl=pt-BR&user=DlSdlvEAAAAJ), [ORCID](https://orcid.org/0000-0003-1803-6565) or [Lattes](https://lattes.cnpq.br/2745996619940977) (Portuguese only).
+Meus interesses de pesquisa estão relacionados principalmente à **Engenharia de Software**, com destaque para **Testes de Software**, **Qualidade de Software**, e **Padrões de Projeto**. Também sou membro do Grupo de Pesquisa em Engenharia de Software (GPES, IFPB, Brasil). Se desejar, confira meu perfil no [ResearchGate](https://www.researchgate.net/profile/Diogo_Moreira4), [Google Scholar](https://scholar.google.com.br/citations?hl=pt-BR&user=DlSdlvEAAAAJ), [ORCID](https://orcid.org/0000-0003-1803-6565) ou [Lattes](https://lattes.cnpq.br/2745996619940977).
 
-A list of my publications can be found below along with link to download the articles. Feel free to contact me at [diogo.moreira [at] ifpb.edu.br](mailto:diogo.moreira@ifpb.edu.br) if you would like to discuss any of the articles or request additional materials, I will be glad to help.
+Abaixo, uma lista das minhas publicações, acompanhada dos links para download dos artigos. Sinta-se à vontade para entrar em contato pelo e-mail [diogo.moreira [at] ifpb.edu.br](mailto:diogo.moreira@ifpb.edu.br) caso queira discutir algum dos artigos ou solicitar materiais adicionais; terei prazer em ajudar.
