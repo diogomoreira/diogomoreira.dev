@@ -15,7 +15,7 @@
           width="{{ $resized.Width }}"
           height="{{ $resized.Height }}"
           alt="{{ $.Site.Title }}"
-          class="u-photo w-36 h-36 rounded-full object-cover mb-4 ring-4 shadow-md shadow-black/50 ring-neutral-content"
+          class="u-photo w-32 h-32 rounded-sm object-cover mb-4 ring-2 shadow-md shadow-black/50 ring-neutral-content/20"
           loading="lazy"
         />
       {{ end }}
@@ -26,7 +26,7 @@
       >
         <span class="font-bold tracking-tighter p-name">{{ .Site.Title }}</span>
       </a>
-      <p class="p-note text-center mt-2 text-sm text-base-content/60 leading-relaxed">{{ i18n "site_description" }}</p>
+      <p class="p-note text-center mt-2 text-xs text-base-content/60 leading-relaxed">{{ i18n "site_description" }}</p>
     </div>
     {{ partial "social.html" . }}
     {{ partial "search.html" . }}

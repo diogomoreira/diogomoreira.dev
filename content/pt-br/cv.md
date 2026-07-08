@@ -1,11 +1,11 @@
 ---
 title: "Curriculum"
-description: "My professional journey, including academic background and publications."
+description: "Minha jornada profissional"
 updated: 2026-04-01
 draft: false
 layout: "cv"
 ---
 
-I am a skilled professional with more than 13 years of combined expertise in teaching, researching, and crafting software solutions, primarily centered on the Java platform and Spring Framework. I've worked on a variety of projects including solutions for financial services and healthcare providers. Self-motivated and always **eager to learn new technologies and to grow as a professional**. I value **collaboration**, **quality**, and **creativity** in my work.
+Sou um profissional com mais de 13 anos de experiência combinada em ensino, pesquisa e desenvolvimento de software, com foco principal na plataforma Java e no Spring Framework. Trabalhei em diversos projetos, incluindo soluções para serviços financeiros e o setor de saúde. Sou automotivado e estou sempre **em busca de aprender novas tecnologias e evoluir profissionalmente**. Valorizo ​​a **colaboração**, a **qualidade** e a **criatividade** em meu trabalho.
 
-I hold a degree in **System Analysis and Development** from the Federal Institute of Paraíba, where I later worked as an adjunct professor. I completed my specialization in **Software Engineering** in 2015 and my master's degree in the same field from 2017 to 2019, during which I discovered my passion for **Software Testing**. Currently, I teach subjects related to **Software Engineering, Software Testing, and Design Patterns**.
+Sou formado em **Análise e Desenvolvimento de Sistemas** pelo Instituto Federal da Paraíba (2012), onde posteriormente comecei a atuar como professor efetivo. Concluí minha especialização em **Engenharia de Software** (2015) e meu mestrado na mesma área em 2019; foi nesse período que descobri minha paixão por **Testes de Software**. Atualmente, ministro disciplinas relacionadas a **Engenharia de Software, Testes de Software e Padrões de Projeto**.

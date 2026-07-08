@@ -12,13 +12,13 @@ groups:
     items:
       - name: MacBook Pro 16" (M5 Pro, 48GB)
         link: https://www.apple.com/macbook-pro/
-        description: Meu equipamento principal para desenvolvimento e para tudo mais.
+        description: Meu equipamento principal para desenvolvimento.
       - name: LG UltraGear 34" 34GP63A-B
         description: Monitor ultrawide curvo, 160Hz, para mais espaço de tela.
       - name: Logitech MX Master 3
         description: Mouse confortável e preciso para sessões longas de trabalho.
       - name: 8BitDo Retro Mechanical Keyboard
-        description: Um teclado mecânico divertido com visual retrô.
+        description: Um teclado mecânico divertido com visual retrô do Commodore 64.
       - name: iPhone 15 Pro
         link: https://www.apple.com/iphone-15-pro/
         description: Meu celular do dia a dia.
@@ -39,7 +39,7 @@ groups:
     items:
       - name: Apple Music
         link: https://music.apple.com/
-        description: Troquei o Spotify no ano passado e não me arrependo.
+        description: Troquei o Spotify e não me arrependo.
       - name: Homebrew
         link: https://brew.sh/
         description: Gerenciador de pacotes para macOS — essencial.
@@ -93,4 +93,4 @@ groups:
         description: Portátil retrô para emulação.
 ---
 
-Olá! Neste texto, quero compartilhar as ferramentas que tenho usado no meu fluxo de trabalho e que me ajudam a ser mais produtivo e eficiente. Esta é uma página sempre em evolução, então vou tentar acompanhar o que mudou ao longo dos anos e por quê. Inspirado pelo [uses.tech do Wes Bos](https://uses.tech/).
+Esta é uma página sempre em evolução, então vou tentar acompanhar o que mudou ao longo dos anos e por quê. Inspirado pelo [uses.tech do Wes Bos](https://uses.tech/).
