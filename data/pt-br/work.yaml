@@ -1,6 +1,6 @@
-- title: "Senior Software Engineer"
+- title: "Engenheiro de Software Sênior"
   company: "Builder Prime"
-  location: "Remote"
+  location: "Remoto (US)"
   startDate: "2024-08"
   endDate: "Present"
   link: "https://builderprime.com"
@@ -15,11 +15,11 @@
     - maven
     - git
   description: |
-    Developing and maintaining robust features across the Builder Prime CRM platform. My role includes implementing backend services, fixing bugs, improving system performance, and delivering code that enhances the user experience. Builder Prime is a platform built specifically for home improvement companies and centralizes their CRM, text messaging, marketing automation, estimating, production management, payments, and reporting into one single source of truth.
+    Desenvolvimento e manutenção de funcionalidades robustas na plataforma de CRM Builder Prime. Minha atuação abrange a implementação de serviços de backend, correção de bugs, melhoria do desempenho do sistema e entrega de código que aprimora a experiência do usuário. A Builder Prime é uma plataforma desenvolvida especificamente para empresas do setor de reformas e melhorias residenciais, centralizando CRM, envio de mensagens de texto, automação de marketing, elaboração de orçamentos, gestão de produção, pagamentos e relatórios em uma única fonte de dados confiável.
 
-- title: "Adjunct Professor"
-  company: "Federal Institute of Paraíba"
-  location: "Paraíba, Brazil"
+- title: "Professor Efetivo"
+  company: "Instituto Federal da Paraíba"
+  location: "Paraíba, Brasil"
   startDate: "2014-10"
   endDate: "Present"
   link: "https://ifpb.edu.br"
@@ -40,11 +40,11 @@
     - git
     - maven
   description: |
-    Lecturing on Software Development / Software Engineering, covering topics such as: Web Development (with HTML, CSS, JavaScript, Node and Express); Software Testing (with JUnit + Mockito, Jest, Cypress, Selenium and Testcontainers); Design Patterns with UML. Other subjects covering/using REST, Spring Boot, Git, Maven and Java EE.
+    Ministro aulas sobre Desenvolvimento de Software / Engenharia de Software, abordando tópicos como: Desenvolvimento Web (com HTML, CSS, JavaScript, Node e Express); Testes de Software (com JUnit + Mockito, Jest, Cypress, Selenium e Testcontainers); e Padrões de Projeto com UML. Outros temas relacionados a REST, Spring Boot, Git, Maven e Java EE.
 
-- title: "Software Engineer"
+- title: "Engenheiro de Software"
   company: "Translucent Computing"
-  location: "Remote"
+  location: "Remoto (Canadá)"
   startDate: "2021-06"
   endDate: "2023-12"
   link: "https://translucentcomputing.com"
@@ -63,11 +63,11 @@
     - maven
     - git
   description: |
-    Implemented healthcare systems based on FHIR specs using Java with Spring Boot with Hibernate, integrated with Kafka, Keycloak, Redis, PostgreSQL and Elasticsearch / OpenSearch; Developed microservices using NestJS (+ Express), integrated with Kafka, Redis, Elasticsearch, MySQL and ImmuDB. Made design decisions for data pipelines to process patient records from Google Cloud Healthcare API to other sources, such as DGraph and Elasticsearch. Built internal tools using OpenAI API. Was involved in frontend tasks using React, Material UI and Redux. Worked on tasks using Terraform, shell scripting and Kubernetes.
+    Implementei sistemas para dados de saúde baseados nas especificações FHIR utilizando Java, Spring Boot e Hibernate, integrados a Kafka, Keycloak, Redis, PostgreSQL e Elasticsearch/OpenSearch. Desenvolvi microsserviços com NestJS (+ Express), integrados a Kafka, Redis, Elasticsearch, MySQL e ImmuDB. Estive envolvido em decisões de arquitetura para pipelines de dados destinados ao processamento de registros de pacientes provenientes da Google Cloud Healthcare API para outras fontes, como DGraph e Elasticsearch. Desenvolvi ferramentas internas utilizando a API da OpenAI. Atuei em tarefas de frontend com React, Material UI e Redux, além de trabalhar com Terraform, Shell Scripting e Kubernetes.
 
-- title: "Software Engineer"
+- title: "Engenheiro de Software"
   company: "Phoebus Tecnologia"
-  location: "João Pessoa - PB, Brazil"
+  location: "João Pessoa - PB, Brasil"
   startDate: "2013-01"
   endDate: "2014-10"
   link: "https://phoebus.com.br"
@@ -80,11 +80,11 @@
     - maven
     - cvs
   description: |
-    Enhanced backoffice financial transaction processing systems utilizing Java (Spring Framework, Maven, JPA/Hibernate), Adobe Flex, Eclipse BIRT reporting, with Oracle and Microsoft SQL Server databases. Authored comprehensive systems documentation to streamline IT Help Desk deployment, updates, and rollbacks.
+    Desenvolvimento de funcionalidades em sistemas de processamento de transações financeiras de *back-office* utilizando Java (Spring Framework, Maven, JPA/Hibernate), Adobe Flex e relatórios Eclipse BIRT, com bancos de dados Oracle e Microsoft SQL Server. Trabalhei com elaboração de documentação dos sistemas para otimizar a implementação, as atualizações e a reversão de versões (*rollbacks*) pelo suporte de TI (*Help Desk*).
 
-- title: "Software Developer"
+- title: "Desenvolvedor de Software"
   company: "Indra Company"
-  location: "João Pessoa - PB, Brazil"
+  location: "João Pessoa - PB, Brasil"
   startDate: "2012-07"
   endDate: "2013-01"
   link: "https://indracompany.com"
@@ -95,4 +95,4 @@
     - java server faces
     - jquery
   description: |
-    Contributed to the development of court management systems for the Paraíba State Court of Justice, including a tool to assist with writing and compiling the Justice Diary, using Java technologies such as JSF 2.0 with RichFaces & PrimeFaces, JPA, Maven, and front-end development (HTML, CSS, XML, jQuery).
+    Contribui para o desenvolvimento de sistemas de gestão judiciária para o Tribunal de Justiça do Estado da Paraíba, incluindo uma ferramenta de auxílio à redação e compilação do Diário da Justiça, utilizando tecnologias Java como JSF 2.0 (com RichFaces e PrimeFaces), JPA e Maven, além de desenvolvimento front-end (HTML, CSS, XML, jQuery).

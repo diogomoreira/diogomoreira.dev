@@ -108,4 +108,8 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
+
+  figcaption {
+    font-family: var(--font-heading);
+  }
 }
