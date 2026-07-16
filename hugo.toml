@@ -51,7 +51,7 @@ target = "assets/photoswipe"
 [[module.mounts]]
 source = "node_modules/photoswipe-dynamic-caption-plugin"
 target = "assets/photoswipe"
-includeFiles = ["/photoswipe-dynamic-caption-plugin.css"]
+files = ["/photoswipe-dynamic-caption-plugin.css"]
 
 [markup]
 [markup.highlight]

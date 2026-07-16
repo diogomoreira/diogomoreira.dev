@@ -1,0 +1,3 @@
+{{/* Usage: {{ partial "post-status-color.html" . }} — returns the DaisyUI color keyword (e.g. "primary") for a blog post's status param, or "" for archived/unset */}}
+{{ $color := dict "seed" "info" "growing" "success" "living" "primary" "archived" "" }}
+{{ with .Params.status }}{{ index $color . }}{{ end }}

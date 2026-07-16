@@ -1,7 +1,7 @@
 {{/* Usage: {{ partial "nav-menu.html" (dict "page" . "variant" "desktop") }} — variant is "desktop" or "mobile" */}}
 {{ $page := .page }}
 {{ $desktop := eq .variant "desktop" }}
-<nav class="flex-1" {{ if $desktop }}aria-label="{{ i18n "nav_aria_label" }}"{{ end }}>
+<nav {{ if $desktop }}aria-label="{{ i18n "nav_aria_label" }}"{{ end }}>
   <ul class="space-y-1 font-sans list-none p-0 m-0">
     {{ range $page.Site.Menus.main }}
       {{ if not .Params.hidden }}
@@ -12,7 +12,7 @@
               href="{{ .URL }}"
               class="flex text-xs items-center gap-2 px-4 py-2 rounded-btn font-medium
                       {{ if $isActive }}
-                bg-base-300 text-base-content
+                bg-base-300 text-primary
               {{ else }}
                 text-base-content/60 hover:text-base-content hover:bg-base-content/5
               {{ end }}
@@ -26,7 +26,7 @@
               href="{{ .URL }}"
               class="flex items-center gap-2 px-3 py-2 rounded-btn text-sm
                       {{ if $isActive }}
-                bg-base-content/10 text-base-content font-medium
+                bg-base-content/10 text-primary font-medium
               {{ else }}
                 text-base-content/60 hover:text-base-content hover:bg-base-content/5
               {{ end }}"

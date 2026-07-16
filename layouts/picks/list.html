@@ -8,17 +8,6 @@
 
     {{ if .Pages }}
 
-      {{ $mediumColors := dict
-        "movie" "badge-primary"
-        "series" "badge-info"
-        "tvseries" "badge-info"
-        "music" "badge-secondary"
-        "book" "badge-warning"
-        "game" "badge-success"
-        "podcast" "badge-accent"
-        "other" "badge-ghost"
-      }}
-
       {{ $paginator := .Paginate (.Pages.ByDate.Reverse) }}
 
       {{/* Pagination status + controls — top */}}
@@ -40,9 +29,6 @@
       <ul class="list bg-base-100 shadow-sm border border-base-300">
         {{ range $paginator.Pages }}
           {{ $item := . }}
-          {{ $medium := .Params.medium | default "other" }}
-          {{ $badgeClass := index $mediumColors $medium | default "badge-ghost" }}
-
 
           <li class="list-row flex flex-col sm:flex-row items-start">
             {{/* Cover and title wrapped in a link using .Params.url if present */}}
@@ -82,7 +68,7 @@
               >
                 <span class="text-ellipsis">{{ .Title }}</span>
               </a>
-              <span class="badge {{ $badgeClass }} badge-sm rounded-none">{{ $medium }}</span>
+              {{ partial "pick-medium-badge.html" . }}
               <div class="flex items-center text-xs text-base-content/70 flex-wrap gap-2 mt-1">
                 {{ if not .Date.IsZero }}
                   <span
@@ -102,7 +88,7 @@
               {{ with .Params.tags }}
                 <div class="flex flex-wrap gap-1 mt-1">
                   {{ range . }}
-                    <span class="badge badge-sm p-3 rounded-none">#{{ . }}</span>
+                    <span class="badge badge-outline badge-accent badge-sm p-3 rounded-none">#{{ . }}</span>
                   {{ end }}
                 </div>
               {{ end }}
