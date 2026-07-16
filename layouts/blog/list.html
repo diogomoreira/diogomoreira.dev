@@ -53,22 +53,35 @@
 
   {{/* ── Featured: latest post ───────────────────────────── */}}
   {{ with index $posts 0 }}
-    <section class="mb-10 pb-10 border-b-4 border-base-300">
+    {{ $post := . }}
+    <section class="mb-10">
       {{ partial "section-label.html" (dict "text" (i18n "blog_latest")) }}
-      <div class="flex items-center gap-2 text-xs font-mono text-secondary mb-3">
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "formatted-date.html" .Date }}</time>
-        <span>·</span>
-        <span>{{ i18n "reading_time_minutes" (dict "Count" .ReadingTime) }}</span>
-      </div>
-      <h2 class="font-heading text-2xl font-semibold text-base-content mb-3">
-        <a href="{{ .RelPermalink }}" class="hover:opacity-70 transition-opacity"
-          >{{ partial "post-status-emoji.html" . }}{{ .Title }}</a
-        >
-      </h2>
-      <p class="text-sm text-base-content/70 leading-relaxed mb-4">
-        {{ with .Description }}{{ . }}{{ else }}{{ .Plain | truncate 200 }}{{ end }}
-      </p>
-      <a href="{{ .RelPermalink }}" class="text-sm link link-primary">{{ i18n "blog_keep_reading" }}</a>
+      <a
+        href="{{ .RelPermalink }}"
+        class="group card lg:card-side bg-base-100 border border-base-300 hover:border-primary transition-colors overflow-hidden"
+      >
+        {{ with .Params.cover }}
+          <figure class="lg:w-2/5 shrink-0 overflow-hidden">
+            {{ partial "responsive-image.html" (dict "page" $post "src" . "alt" $post.Title "class" "w-full h-full object-cover" "width" "600") }}
+          </figure>
+        {{ end }}
+        <div class="card-body">
+          <div class="flex items-center gap-2 text-xs font-mono text-secondary">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "formatted-date.html" .Date }}</time>
+            <span>·</span>
+            <span>{{ i18n "reading_time_minutes" (dict "Count" .ReadingTime) }}</span>
+          </div>
+          <h2 class="card-title font-heading text-2xl font-semibold text-base-content group-hover:opacity-70 transition-opacity">
+            {{ partial "post-status-emoji.html" . }}{{ .Title }}
+          </h2>
+          <p class="text-sm text-base-content/70 leading-relaxed">
+            {{ with .Description }}{{ . }}{{ else }}{{ .Plain | truncate 200 }}{{ end }}
+          </p>
+          <div class="card-actions">
+            <span class="text-sm link link-primary">{{ i18n "blog_keep_reading" }}</span>
+          </div>
+        </div>
+      </a>
     </section>
   {{ end }}
 
