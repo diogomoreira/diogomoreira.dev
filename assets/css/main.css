@@ -88,7 +88,8 @@
 
 @theme {
   --font-sans:
-    "Geist", -apple-system, BlinkMacSystemFont, "Inter", "IBM Plex Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+    "Google Sans Flex", -apple-system, BlinkMacSystemFont, "Inter", "IBM Plex Sans", "Segoe UI", Helvetica, Arial,
+    sans-serif;
   --font-body: var(--font-sans);
   --font-mono:
     "JetBrains Mono", ui-monospace, SFMono-Regular, "Cascadia Code", "IBM Plex Mono", "Roboto Mono", "DejaVu Sans Mono",
@@ -99,7 +100,7 @@
 
 @layer base {
   html {
-    font-size: 18px;
+    /* font-size: 18px; */
   }
 
   body {
