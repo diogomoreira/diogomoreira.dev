@@ -1,38 +1,23 @@
 {{ define "main" }}
-  <article class="max-w-prose">
+  <article data-pagefind-body class="max-w-prose">
     {{ partial "header.html" . }}
 
-
-    <div class="prose prose-headings:font-sans prose-base max-w-none">
-      {{ .Content }}
-    </div>
-
-    {{/* Prev/Next */}}
-    {{ if or .PrevInSection .NextInSection }}
-      <nav class="mt-12 pt-8 border-t border-base-300 grid grid-cols-2 gap-4">
-        {{ if .PrevInSection }}
-          <a href="{{ .PrevInSection.RelPermalink }}" class="group flex flex-col gap-1">
-            <span class="text-xs text-base-content/70 uppercase tracking-widest">{{ i18n "nav_older" }}</span>
-            <span class="text-sm font-medium text-base-content group-hover:opacity-60 ">
-              {{ .PrevInSection.Title }}
-            </span>
-          </a>
-        {{ else }}
-          <div></div>
+    {{ with .Params.cover }}
+      <figure class="mb-10 md:px-10">
+        {{ partial "responsive-image.html" (dict "page" $ "src" . "alt" $.Title "class" "w-full border-4 border-base-200 shadow-md object-cover" "width" "800") }}
+        {{ with $.Params.coverCaption }}
+          <figcaption class="mt-2 text-xs text-center text-secondary">
+            {{ . | markdownify }}
+          </figcaption>
         {{ end }}
-
-        {{ if .NextInSection }}
-          <a href="{{ .NextInSection.RelPermalink }}" class="group flex flex-col gap-1 text-right">
-            <span class="text-xs text-base-content/70 uppercase tracking-widest">{{ i18n "nav_newer" }}</span>
-            <span class="text-sm font-medium text-base-content group-hover:opacity-60 ">
-              {{ .NextInSection.Title }}
-            </span>
-          </a>
-        {{ else }}
-          <div></div>
-        {{ end }}
-      </nav>
+      </figure>
     {{ end }}
 
+    <div class="prose prose-headings:font-sans prose-base max-w-none">
+      {{ partial "disclaimer-alert.html" . }}
+      {{ .Content }}
+    </div>
   </article>
+
+  {{ partial "now-top-artists.html" . }}
 {{ end }}

@@ -46,11 +46,6 @@ status_growing_description = "in progress"
 status_living_description = "mature, but continuously updated"
 status_archived_description = "finished or preserved"
 
-# Now
-now_previously = "Previously"
-nav_older = "← Older"
-nav_newer = "Newer →"
-
 # Prev/next nav
 nav_previous = "← Previous"
 nav_next = "Next →"

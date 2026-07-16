@@ -31,7 +31,6 @@ hugo new blog/my-post-slug/index.md
 hugo new picks/my-pick-slug.md
 hugo new photos/my-album-slug/index.md
 hugo new snippets/my-snippet-slug/index.md
-hugo new now/YYYY-MM-DD.md
 ```
 
 ## Architecture
@@ -74,7 +73,7 @@ All layouts use `{{ define "main" }}` blocks. The sidebar is split into `sidebar
 | `picks/`                         | Flat `.md` files. **Must** include `build: {render: never, list: always}` — pages are never rendered individually, only listed. Key params: `medium` (music/movie/series/game/book/podcast), `cover` (path under `/images/picks/`), `link`. |
 | `photos/`                        | Page bundles. Displayed as a masonry grid; individual albums use PhotoSwipe lightbox. Front matter: `cover`, `location`, `camera`.                                                                                                          |
 | `snippets/`                      | Page bundles. Front matter: `language`.                                                                                                                                                                                                     |
-| `now/`                           | Flat `.md` files, displayed as a timeline.                                                                                                                                                                                                  |
+| `now/`                           | Single hand-edited leaf bundle per language (`content/<lang>/now/index.md`) — no dated history, no `hugo new` archetype. Edit the file directly.                                                                                          |
 
 Work history, education, and papers are **not** content sections — they're Hugo data files under `data/en/` and `data/pt-br/` (`work.yaml`, `education.yaml`, `papers.yaml`), consumed by `content/cv.md` (via `layouts/_default/cv.html`) and `content/academic.md` (via `layouts/academic/single.html`) through `index site.Data site.Language.Lang "<name>"`. They were content page bundles until 2026-07; that caused a nil-map-index build failure once a section had no matching front matter param expected by a shared list partial (`post-status-icon.html`), since these sections had no dedicated list template and fell back to `layouts/_default/list.html`. Data files sidestep the whole page/list-template code path — add new entries as YAML list items, not `hugo new`.
 
