@@ -11,7 +11,7 @@
 
   {{ range $paginator.Pagers }}
     {{ if eq . $paginator }}
-      <button class="{{ $btn }} btn-active">{{ .PageNumber }}</button>
+      <button class="{{ $btn }} btn-primary btn-active">{{ .PageNumber }}</button>
     {{ else }}
       <a href="{{ .URL }}" class="{{ $btn }}">{{ .PageNumber }}</a>
     {{ end }}

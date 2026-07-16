@@ -5,9 +5,12 @@
     {{ range slice "seed" "growing" "living" "archived" }}
       {{ $status := . }}
       {{ $icon := partial "post-status-icon.html" (dict "Params" (dict "status" $status)) }}
+      {{ $color := partial "post-status-color.html" (dict "Params" (dict "status" $status)) }}
       <li class="flex items-baseline gap-2">
         <span role="img" aria-hidden="true">{{ $icon }}</span>
-        <span class="font-medium text-base-content">{{ i18n (printf "status_%s" $status) }}</span>
+        <span class="font-medium {{ if $color }}text-{{ $color }}{{ else }}text-base-content{{ end }}"
+          >{{ i18n (printf "status_%s" $status) }}</span
+        >
         <span>— {{ i18n (printf "status_%s_description" $status) }}</span>
       </li>
     {{ end }}

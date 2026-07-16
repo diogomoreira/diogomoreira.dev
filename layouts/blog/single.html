@@ -80,7 +80,10 @@
         <span class="p-2">{{ i18n "tags_label" }}</span>
         {{ $num := len . }}
         {{ range $i, $tag := . }}
-          <a href="{{ "/tags/" | relLangURL }}{{ $tag | urlize }}/" data-pagefind-filter="tag" class="badge badge-ghost"
+          <a
+            href="{{ "/tags/" | relLangURL }}{{ $tag | urlize }}/"
+            data-pagefind-filter="tag"
+            class="badge badge-outline badge-accent"
             >#{{ $tag }}</a
           >{{ if lt (add $i 1) $num }}<span class="mx-1">·</span>{{ end }}
         {{ end }}

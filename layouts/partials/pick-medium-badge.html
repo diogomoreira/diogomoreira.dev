@@ -1,0 +1,14 @@
+{{/* Usage: {{ partial "pick-medium-badge.html" . }} — colored badge for a picks page's `medium` param */}}
+{{ $mediumColors := dict
+  "movie" "badge-primary"
+  "series" "badge-info"
+  "tvseries" "badge-info"
+  "music" "badge-secondary"
+  "book" "badge-warning"
+  "game" "badge-success"
+  "podcast" "badge-accent"
+  "other" "badge-ghost"
+}}
+{{ $medium := .Params.medium | default "other" }}
+{{ $badgeClass := index $mediumColors $medium | default "badge-ghost" }}
+<span class="badge {{ $badgeClass }} badge-sm rounded-none">{{ $medium }}</span>

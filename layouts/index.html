@@ -58,8 +58,9 @@
                 {{ partial "responsive-image.html" (dict "page" $pick "src" . "alt" $pick.Title "class" "object-cover w-full h-full" "width" "200") }}
               </div>
             {{ end }}
-            <div class="card-body p-2">
+            <div class="card-body p-2 items-center">
               <h3 class="font-sans card-title text-xs font-semibold text-base-content text-center">{{ .Title }}</h3>
+              {{ partial "pick-medium-badge.html" . }}
             </div>
           </a>
         {{ end }}

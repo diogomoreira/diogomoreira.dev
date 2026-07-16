@@ -1,8 +1,12 @@
 {{/* Usage: {{ partial "post-status-badge.html" . }} — status badge (emoji + label) shown near the date on a blog post page */}}
 {{ $status := .Params.status }}
 {{ $icon := partial "post-status-icon.html" . }}
+{{ $color := partial "post-status-color.html" . }}
 {{ with $icon }}
-  <span class="badge badge-ghost badge-sm gap-1" title="{{ i18n (printf "status_%s" $status) }}">
+  <span
+    class="badge {{ if $color }}badge-{{ $color }}{{ else }}badge-ghost{{ end }} badge-sm gap-1"
+    title="{{ i18n (printf "status_%s" $status) }}"
+  >
     <span role="img" aria-hidden="true">{{ . }}</span>
     {{ i18n (printf "status_%s" $status) }}
   </span>

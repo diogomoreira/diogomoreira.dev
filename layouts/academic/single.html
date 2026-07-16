@@ -8,7 +8,7 @@
       {{ partial "section-label.html" (dict "text" (i18n "academic_latest_publications")) }}
       {{/* Pull papers from data files */}}
       <ul>
-        {{ $papers := index site.Data site.Language.Lang "papers" }}
+        {{ $papers := index hugo.Data site.Language.Lang "papers" }}
         {{ range sort $papers "year" "desc" }}
           <li class="mb-4">
             <a href="{{ .link }}" class="link link-primary font-medium">

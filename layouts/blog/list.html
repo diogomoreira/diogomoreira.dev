@@ -26,7 +26,9 @@
           {{ with .Params.tags }}
             <div class="flex items-center gap-2 flex-wrap">
               {{ range . }}
-                <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="badge badge-ghost badge-sm">#{{ . }}</a>
+                <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="badge badge-outline badge-accent badge-sm"
+                  >#{{ . }}</a
+                >
               {{ end }}
             </div>
           {{ end }}
@@ -39,6 +41,11 @@
   {{ with .Content }}
     <div class="prose prose-headings:font-sans max-w-prose mb-10">{{ . }}</div>
   {{ end }}
+
+
+  <div class="mb-10">
+    {{ partial "translation-link.html" . }}
+  </div>
 
   {{ partial "post-status-legend.html" . }}
 
@@ -79,11 +86,7 @@
       {{ partial "section-label.html" (dict "text" (i18n "categories_label") "class" "mb-4") }}
       <div class="flex flex-wrap gap-2">
         {{ range . }}
-          <a
-            href="{{ "/categories/" | relLangURL }}{{ . | urlize }}/"
-            class="badge badge-ghost text-xs hover:badge-primary transition-colors"
-            >{{ . }}</a
-          >
+          <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}/" class="badge badge-primary text-xs">{{ . }}</a>
         {{ end }}
       </div>
     </section>

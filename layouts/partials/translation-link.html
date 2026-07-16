@@ -1,0 +1,6 @@
+{{/* Usage: {{ partial "translation-link.html" . }} — links to translated version(s) of the current page, if any exist */}}
+{{ range .Translations }}
+  <a href="{{ .RelPermalink }}" hreflang="{{ .Language.Lang }}" class="text-sm link link-primary">
+    {{ i18n "blog_view_in_language" (dict "Language" .Language.Label) }}
+  </a>
+{{ end }}
