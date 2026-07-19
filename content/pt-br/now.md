@@ -67,6 +67,7 @@ Esse ano estou em uma missão para descobrir artistas e gêneros novos. Por muit
 - **Neutral Milk Hotel** - [In the Airplane Over the Sea](https://music.apple.com/br/album/in-the-aeroplane-over-the-sea/1839077554)
 - **Gorillaz** - [The Mountain](https://music.apple.com/br/album/the-mountain/1837237742)
 - **Joyce Manor** - [I Used to Go to This Bar](https://music.apple.com/br/album/i-used-to-go-to-this-bar/1839918836)
+- **Panic! At the Disco** - [Vices & Virtues](https://music.apple.com/br/album/vices-virtues-deluxe-edition/424480029?l=en-GB)
 
 Ao final dessa página, você consegue ver o que tenho escutado ultimamente.
 
