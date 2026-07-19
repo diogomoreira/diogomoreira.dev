@@ -56,13 +56,13 @@
     </div>
   </article>
   <hr class="my-4 border-base-200" />
-  <div class="mt-4 flex flex-col text-sm">
-    {{ $hasCategories := .Params.Categories }}
-    {{ $hasTags := .Params.tags }}
-
+  <div class="mt-4 flex flex-col gap-1 text-sm">
     {{ with .Params.Categories }}
-      <div class="flex py-2 gap-1 flex-wrap items-center">
-        <span class="p-2">{{ i18n "categories_label" }}</span>
+      <div class="flex py-1 gap-1.5 flex-wrap items-center">
+        <span class="inline-flex text-base-content/50" title="{{ i18n "categories_label" }}">
+          {{ partial "icons/folder.html" . }}
+          <span class="sr-only">{{ i18n "categories_label" }}</span>
+        </span>
         {{ $num := len . }}
         {{ range $i, $cat := . }}
           <a
@@ -76,8 +76,11 @@
     {{ end }}
 
     {{ with .Params.tags }}
-      <div class="flex py-2 gap-1 flex-wrap items-center">
-        <span class="p-2">{{ i18n "tags_label" }}</span>
+      <div class="flex py-1 gap-1.5 flex-wrap items-center">
+        <span class="inline-flex text-base-content/50" title="{{ i18n "tags_label" }}">
+          {{ partial "icons/tag.html" . }}
+          <span class="sr-only">{{ i18n "tags_label" }}</span>
+        </span>
         {{ $num := len . }}
         {{ range $i, $tag := . }}
           <a
