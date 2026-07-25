@@ -1,0 +1,25 @@
+{{- /* Hand-drawn annotation around a short phrase. Renders an inline SVG behind
+       the text, stretched to the phrase via preserveAspectRatio="none".
+       Params: shape (underline|circle|marker|box), color (accent|primary|secondary|warning|error). */ -}}
+{{- $shapes := dict
+  "underline" (dict
+    "viewBox" "0 0 100 10"
+    "path" "M1.5,7.5 C14,4.2 32,3.1 50,3.6 C68,4.1 86,5.9 98.5,4.2")
+  "circle" (dict
+    "viewBox" "0 0 100 40"
+    "path" "M88,7 C74,2.5 52,1 34,2.5 C14,4.2 3,11 3.5,20.5 C4,30 18,36.5 40,38 C62,39.5 84,35 92,27 C97.5,21.5 96.5,13 88,6.5 C82,3 72,1.5 62,1.8")
+  "box" (dict
+    "viewBox" "0 0 100 40"
+    "path" "M4,4 C28,2.5 62,2 96,3.5 M96.5,3 C97.5,14 97,27 96,37 M96.5,36.5 C70,38.5 32,38 4,36.5 M4.5,37 C3,26 3.2,13 4,3.5")
+  "marker" (dict
+    "viewBox" "0 0 100 30"
+    "path" "M1.5,5.5 C20,3 55,2.2 98.5,3.5 C99,12 98.6,20 98,26.5 C70,28.5 32,28 2,26 C1,19 1,12 1.5,5.5 Z")
+-}}
+{{- $shape := .Get "shape" | default "underline" -}}
+{{- if not (index $shapes $shape) -}}
+  {{- warnf "mark shortcode: unknown shape %q in %s, falling back to underline" $shape .Page.File.Filename -}}
+  {{- $shape = "underline" -}}
+{{- end -}}
+{{- $s := index $shapes $shape -}}
+{{- $color := .Get "color" | default "accent" -}}
+<span class="mark mark--{{ $shape }} mark--{{ $color }}"><svg class="mark__shape" viewBox="{{ $s.viewBox }}" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="{{ $s.path }}" /></svg><span class="mark__text">{{ .Inner | .Page.RenderString }}</span></span>

@@ -81,6 +81,17 @@ Work history, education, and papers are **not** content sections — they're Hug
 
 The `responsive-image` partial (`layouts/partials/responsive-image.html`) takes a `src` path, fetches it via `resources.Get`, and outputs a `<picture>` element with WebP + JPEG fallback at the requested width. Images for picks and page covers must live under `assets/images/` so Hugo's asset pipeline can process them.
 
+### Shortcodes
+
+Shortcodes live in `layouts/_shortcodes/` (the Hugo v0.146+ location — **not** `layouts/shortcodes/`).
+
+| Shortcode          | Notes                                                                                                                                                                                                                                                                                                                                                                     |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `responsive-image` | Params: `src`, `width` (default `800x`), `alt`, `class`. Weaker than the same-named partial — site-wide assets only, plain `<img>`. Prefer the partial in layouts.                                                                                                                                                                                                        |
+| `mark`             | Hand-drawn annotation behind a phrase. Params: `shape` (`underline` default \| `circle` \| `marker` \| `box`), `color` (`accent` default \| `primary` \| `secondary` \| `warning` \| `error`). Named `mark` because `highlight` is a reserved Hugo built-in.                                                                                                                |
+
+`mark` emits an inline SVG stretched to the phrase via `preserveAspectRatio="none"`, sitting behind the text. Shape paths live in a `dict` at the top of `layouts/_shortcodes/mark.html`; the styling is a `@layer components` block in `assets/css/main.css` (offsets in `em` so shapes scale with font size; colours come from DaisyUI theme tokens so both themes work). **Constraint:** the shape is absolutely positioned and cannot follow text across a line break, so `.mark` sets `white-space: nowrap` — use it on short phrases only.
+
 ### Hugo Module Mounts (`hugo.toml`)
 
 Three virtual filesystem mounts are configured under `[module]`:
