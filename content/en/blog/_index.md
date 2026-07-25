@@ -4,7 +4,7 @@ draft: false
 description: "Thoughts about software development, open source, games and music."
 ---
 
-Welcome to my **digital garden**!
+Welcome to my {{< mark >}}**digital garden**{{< /mark >}}!
 
 A "digital garden" is an online space that combines elements of a notebook and a blog. It is a place to share thoughts and ideas intended to be cultivated/evolved in public.
 

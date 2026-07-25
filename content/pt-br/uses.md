@@ -93,4 +93,4 @@ groups:
         description: Portátil retrô para emulação.
 ---
 
-Esta é uma página sempre em evolução, então vou tentar acompanhar o que mudou ao longo dos anos e por quê. Inspirado pelo [uses.tech do Wes Bos](https://uses.tech/).
+Esta é uma página sempre em evolução, então vou tentar acompanhar o que mudou ao longo dos anos e por quê. Inspirado pelo {{< mark >}}[uses.tech](https://uses.tech/) do Wes Bos{{< /mark >}}.

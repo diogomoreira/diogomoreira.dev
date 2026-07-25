@@ -90,4 +90,4 @@ groups:
         description: Retro handheld emulator.
 ---
 
-Hello there! In this post, I want to share with you the tools that I have been using on my workflow and helped me become more productive and efficient. This is an always evolving page, so I'll try to keep track of what has changed through the years and why. Inspired by [Wes Bos's **uses.tech**](https://uses.tech/).
+Hello there! In this post, I want to share with you the tools that I have been using on my workflow and helped me become more productive and efficient. This is an always evolving page, so I'll try to keep track of what has changed through the years and why. Inspired by {{< mark >}}Wes Bos's [**uses.tech**](https://uses.tech/){{< /mark >}}.
