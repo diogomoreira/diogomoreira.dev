@@ -4,7 +4,7 @@ draft: false
 description: "Reflexões sobre desenvolvimento de software, open source, jogos e música."
 ---
 
-Bem-vindo ao meu **jardim digital**!
+Bem-vindo ao meu {{< mark >}}**jardim digital**{{< /mark >}}!
 
 Um "_Digital Garden_" ou "Jardim Digital" é um espaço online que combina elementos de um caderno e um blog. Nele, compartilhamos pensamentos e ideias que são destinados a ser cultivados em público.
 
