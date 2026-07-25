@@ -6,13 +6,18 @@
   </head>
 
   <body class="min-h-screen">
-    <div class="lg:max-w-5xl lg:flex mx-auto">
+    <div class="lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl lg:flex mx-auto">
       {{ partial "sidebar.html" . }}
 
 
       <div id="main-content" class="border-x border-neutral/10 bg-base-100 flex-1 min-w-0 flex flex-col min-h-screen">
-        <main class="w-full mx-auto p-8 md:p-12 xl:p-16">
-          {{ block "main" . }}{{ end }}
+        <main class="w-full mx-auto p-6 sm:p-8 md:p-12">
+          {{/* Single content measure for the whole site — every page is 65ch, centred.
+            Lives here rather than on <main> so the padding sits outside the cap.
+          */}}
+          <div class="max-w-prose mx-auto">
+            {{ block "main" . }}{{ end }}
+          </div>
         </main>
       </div>
     </div>

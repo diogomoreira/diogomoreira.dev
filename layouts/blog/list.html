@@ -39,7 +39,7 @@
   </header>
 
   {{ with .Content }}
-    <div class="prose prose-headings:font-sans max-w-prose mb-10">{{ . }}</div>
+    <div class="prose prose-headings:font-sans max-w-none mb-10">{{ . }}</div>
   {{ end }}
 
 
@@ -58,10 +58,10 @@
       {{ partial "section-label.html" (dict "text" (i18n "blog_latest")) }}
       <a
         href="{{ .RelPermalink }}"
-        class="group card lg:card-side bg-base-100 border border-base-300 hover:border-primary transition-colors overflow-hidden"
+        class="group card bg-base-100 border border-base-300 hover:border-primary transition-colors overflow-hidden"
       >
         {{ with .Params.cover }}
-          <figure class="lg:w-2/5 shrink-0 overflow-hidden">
+          <figure class="shrink-0 overflow-hidden">
             {{ partial "responsive-image.html" (dict "page" $post "src" . "alt" $post.Title "class" "w-full h-full object-cover" "width" "600") }}
           </figure>
         {{ end }}

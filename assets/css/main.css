@@ -98,6 +98,94 @@
   --pf-font: var(--font-sans);
 }
 
+@layer components {
+  /* Hand-drawn annotations, emitted by the `mark` shortcode. The shape is an
+     inline SVG stretched to the phrase, sitting behind the text. Offsets are in
+     `em` so everything scales with the surrounding font size. */
+  .mark {
+    position: relative;
+    display: inline-block;
+    /* The shape is absolutely positioned, so it cannot follow text across a
+       line break — `mark` is for short phrases only. */
+    white-space: nowrap;
+  }
+
+  .mark__text {
+    position: relative;
+    z-index: 1;
+  }
+
+  .mark__shape {
+    position: absolute;
+    z-index: 0;
+    overflow: visible;
+    pointer-events: none;
+    color: var(--color-accent);
+  }
+
+  .mark__shape path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 0.09em;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    /* Keeps thickness uniform despite the non-uniform preserveAspectRatio="none"
+       stretch, which would otherwise thin out the near-vertical segments. */
+    vector-effect: non-scaling-stroke;
+  }
+
+  /* How far each shape's box extends past the text it wraps. */
+  .mark--underline .mark__shape {
+    left: -0.1em;
+    width: calc(100% + 0.2em);
+    bottom: -0.18em;
+    height: 0.34em;
+  }
+
+  .mark--circle .mark__shape {
+    left: -0.35em;
+    width: calc(100% + 0.7em);
+    top: -0.25em;
+    height: calc(100% + 0.5em);
+  }
+
+  .mark--box .mark__shape {
+    left: -0.3em;
+    width: calc(100% + 0.6em);
+    top: -0.2em;
+    height: calc(100% + 0.4em);
+  }
+
+  .mark--marker .mark__shape {
+    left: -0.15em;
+    width: calc(100% + 0.3em);
+    top: -0.05em;
+    height: calc(100% + 0.1em);
+  }
+
+  .mark--marker .mark__shape path {
+    fill: currentColor;
+    stroke: none;
+    opacity: 0.28;
+  }
+
+  .mark--primary .mark__shape {
+    color: var(--color-primary);
+  }
+
+  .mark--secondary .mark__shape {
+    color: var(--color-secondary);
+  }
+
+  .mark--warning .mark__shape {
+    color: var(--color-warning);
+  }
+
+  .mark--error .mark__shape {
+    color: var(--color-error);
+  }
+}
+
 @layer base {
   html {
     /* font-size: 18px; */
