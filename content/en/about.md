@@ -1,6 +1,6 @@
 ---
 title: About me
-updated: "2026-03-29"
+updated: "2026-08-02"
 description: "A little bit about me, my hobbies and my career as a software developer."
 cover: "/images/profile/cover.jpg"
 coverCaption: "@ Escadaria Selarón - Rio de Janeiro, RJ, Brazil"
@@ -20,16 +20,14 @@ Hello! I'm **Diogo Moreira**, born in 1989 in Paraíba, Brazil, where I still li
 
 ---
 
-## As software developer/professor
+## How I ended up in IT
 
 Since I was a kid I was fascinated by technology and especially computers. I got my first PC at home when I was 6 and since then, I've spent most of my days doing something in front of it.
 
-Eventually, I started to become curious about how computers work and especially how webpages were built, which led me to build my very first website when I was 13 (using `<table>` and without CSS 🙃) and I guess it was at this moment that I decided this would be my [career](/cv). I've learned the very basics of PHP and MySQL by myself and started to work as a freelancer when I was around 16–17. At that time, I had the chance to work with some personal pages and small businesses websites.
+Eventually, I started to become curious about how computers work and especially how webpages were built, which led me to build my very first website when I was 13 (using `<table>` and without CSS 🙃) and I guess it was at this moment that I decided this would be my career. I've learned the very basics of PHP and MySQL by myself and started to work as a freelancer when I was around 16–17. At that time, I had the chance to work with some personal pages and small businesses websites.
 
 Later, I've decided to start my undergraduate degree in **System Analysis and Development** to kick off my professional career as a software developer. But I'm pretty sure I wouldn't make this decision if it weren't for my previous experience and my curiosity about computers throughout these years.
 
-Two years after my graduation (2014), I started working as a professor and honestly, this is one of the things that I'm most proud of during my career. It's good to be in the classroom and I feel it really pushes me to be a better person and professional every day. You can see my [academic](/academic) achievements here.
-
 ---
 
-This is an overview of who I am. You can get to know me better through the [things I like](/picks) and [what I'm doing right now](/now). Feel free to drop me a message in any of my social media profiles, I'll be glad to reply.
+This is an overview of who I am. If you're after the professional side, see [work]({{< relref "work" >}}) and [academic]({{< relref "academic" >}}). You can also get to know me better through the [things I like]({{< relref "picks" >}}) and [what I'm doing right now]({{< relref "now" >}}). Feel free to drop me a message in any of my social media profiles, I'll be glad to reply.
