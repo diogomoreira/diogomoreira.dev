@@ -1,0 +1,19 @@
+{{/* Usage: {{ if partial "has-toc.html" . }} — true when the page has headings in
+  the range configured by `[markup.tableOfContents]` and hasn't opted out.
+
+  Single source of truth for three call sites that must agree: `toc.html` (render
+  or not), `rail-right.html` (row vs. column controls) and `baseof.html` (how wide
+  the right grid track is). `.Fragments.Headings` is the reliable check —
+  `.TableOfContents` returns an empty <nav><ul> wrapper rather than nothing.
+
+  `toc: false` in front matter suppresses the TOC on any single page. Written as
+  `ne .Params.toc false` because `with` treats `false` as empty and would skip the
+  opt-out entirely, and `| default true` substitutes on any falsy value — so
+  `false | default true` is `true`, the opposite of what's wanted. An unset param
+  is nil, which is `!= false`, so pages without the param behave as before.
+  `toc: true` is accepted but inert — it can't manufacture headings. */}}
+{{ $has := false }}
+{{ if and (eq .Kind "page") (ne .Params.toc false) }}
+  {{ $has = gt (len .Fragments.Headings) 0 }}
+{{ end }}
+{{ return $has }}

@@ -4,13 +4,12 @@
     const LIGHT = "sunrise";
     const DARK = "midnight";
 
-    // All toggle buttons (desktop sidebar + mobile bar)
-    const toggles = [document.getElementById("theme-toggle"), document.getElementById("theme-toggle-desktop")].filter(
-      Boolean,
-    );
+    // Every toggle button on the page (right rail + mobile top bar). Selected by
+    // attribute so adding another instance needs no change here.
+    const toggles = document.querySelectorAll("[data-theme-toggle]");
 
-    const suns = document.querySelectorAll("#icon-sun");
-    const moons = document.querySelectorAll("#icon-moon");
+    const suns = document.querySelectorAll(".icon-sun");
+    const moons = document.querySelectorAll(".icon-moon");
 
     function applyTheme(theme) {
       root.dataset.theme = theme;

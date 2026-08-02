@@ -1,5 +1,6 @@
-{{/* Usage: {{ partial "theme-toggle-button.html" "theme-toggle-desktop" }} — id is read by theme-toggle-script.html */}}
-<button id="{{ . }}" aria-label="{{ i18n "theme_toggle_aria" }}" class="btn btn-sm btn-square">
+{{/* Usage: {{ partial "theme-toggle-button.html" "theme-toggle-rail" }} — the id is
+  only for uniqueness; theme-toggle-script.html binds via [data-theme-toggle]. */}}
+<button id="{{ . }}" data-theme-toggle aria-label="{{ i18n "theme_toggle_aria" }}" class="btn btn-sm btn-square">
   {{ partial "icons/sun.html" . }}
   {{ partial "icons/moon.html" . }}
 </button>

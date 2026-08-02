@@ -1,10 +1,37 @@
 {{ define "main" }}
-  <section data-pagefind-body class="mb-16">
-    <h1 class="font-sans text-4xl font-medium text-base-content mb-6">
-      {{ i18n "home_greeting" }}
-      <span class="font-bold">{{ .Title }}</span>
-    </h1>
+  {{/* The representative h-card. It used to live in the desktop sidebar; the
+    homepage is the canonical IndieWeb spot for it, and the `rel="me"` links in
+    `social.html` need to be on the page Mastodon &co. verify against.
+  */}}
+  <header class="h-card mb-10 flex flex-col sm:flex-row sm:items-center gap-6">
+    {{ with resources.Get "images/profile/profile.jpg" }}
+      {{ $resized := .Fit "288x288" }}
+      <img
+        src="{{ $resized.RelPermalink }}"
+        width="{{ $resized.Width }}"
+        height="{{ $resized.Height }}"
+        alt="{{ $.Site.Title }}"
+        class="u-photo w-28 h-28 shrink-0 rounded-sm object-cover ring-2 shadow-md shadow-black/50 ring-neutral-content/20"
+      />
+    {{ end }}
 
+
+    <div class="min-w-0">
+      <h1 class="font-heading text-4xl font-medium text-heading">
+        {{ i18n "home_greeting" }}
+        <a href="{{ .Site.Home.RelPermalink }}" class="u-url font-bold no-underline hover:opacity-80" rel="me">
+          <span class="p-name">{{ .Title }}</span>
+        </a>
+      </h1>
+      <p class="p-note mt-2 text-sm text-base-content/70 leading-relaxed">{{ i18n "site_description" }}</p>
+      <div class="mt-4">
+        {{/* No margin — the `mt-4` wrapper above owns the spacing under the bio. */}}
+        {{ partial "social.html" (dict "page" . "class" "justify-start gap-4") }}
+      </div>
+    </div>
+  </header>
+
+  <section data-pagefind-body class="mb-16">
     <div class="prose max-w-none!">
       {{ .Content }}
     </div>
@@ -15,7 +42,9 @@
     <section class="mb-14">
       <div class="flex items-center justify-between mb-5">
         <h2 class="font-heading text-xs font-semibold uppercase tracking-widest">{{ i18n "home_recent_posts" }}</h2>
-        <a href="{{ (.Site.GetPage "blog").RelPermalink }}" class="text-xs link link-primary">{{ i18n "home_all_posts" }}</a>
+        <a href="{{ (.Site.GetPage "blog").RelPermalink }}" class="text-xs link link-primary"
+          >{{ i18n "home_all_posts" }}</a
+        >
       </div>
       <ul class="list-none p-0 m-0">
         {{ range first 5 $posts.ByDate.Reverse }}
@@ -42,7 +71,9 @@
     <section class="mb-14">
       <div class="flex items-center justify-between mb-5">
         <h2 class="font-heading text-xs font-semibold uppercase tracking-widest">{{ i18n "home_latest_picks" }}</h2>
-        <a href="{{ (.Site.GetPage "picks").RelPermalink }}" class="text-xs link link-primary">{{ i18n "home_all_picks" }}</a>
+        <a href="{{ (.Site.GetPage "picks").RelPermalink }}" class="text-xs link link-primary"
+          >{{ i18n "home_all_picks" }}</a
+        >
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {{ range first 4 $picks.ByDate.Reverse }}

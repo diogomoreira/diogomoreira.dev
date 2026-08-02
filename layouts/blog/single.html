@@ -49,6 +49,9 @@
     {{ end }}
 
 
+    {{/* The right rail is hidden below `lg`, so the TOC folds into the body there. */}}
+    {{ partial "toc.html" (dict "page" . "variant" "mobile") }}
+
     <div>
       {{ partial "disclaimer-alert.html" . }}
       {{ .Content }}

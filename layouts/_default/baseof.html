@@ -6,11 +6,16 @@
   </head>
 
   <body class="min-h-screen">
-    <div class="lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl lg:flex mx-auto">
-      {{ partial "sidebar.html" . }}
+    {{/* Mobile chrome sits outside the shell grid — it only shows below `lg`,
+      where `.site-shell` is a plain block anyway. */}}
+    {{ partial "mobile-topbar.html" . }}
+    {{ partial "sidebar-mobile-drawer.html" . }}
 
+    {{/* No TOC to hold, so the right track shrinks to the width of its buttons. */}}
+    <div class="site-shell{{ if not (partial "has-toc.html" .) }} site-shell--slim-right{{ end }}">
+      {{ partial "rail-left.html" . }}
 
-      <div id="main-content" class="border-x border-neutral/10 bg-base-100 flex-1 min-w-0 flex flex-col min-h-screen">
+      <div id="main-content" class="border-x border-base-300 bg-base-100 min-w-0 flex flex-col min-h-screen">
         <main class="w-full mx-auto p-6 sm:p-8 md:p-12">
           {{/* Single content measure for the whole site — every page is 65ch, centred.
             Lives here rather than on <main> so the padding sits outside the cap.
@@ -20,11 +25,14 @@
           </div>
         </main>
       </div>
+
+      {{ partial "rail-right.html" . }}
     </div>
     {{ block "scripts" . }}
       <script src="/pagefind/pagefind-component-ui.js" type="module"></script>
     {{ end }}
     {{ partial "theme-toggle-script.html" . }}
+    {{ partial "toc-script.html" . }}
     {{ $lightbox := resources.Get "photoswipe/photoswipe-lightbox.esm.min.js" | fingerprint }}
     {{ $pswp := resources.Get "photoswipe/photoswipe.esm.min.js" | fingerprint }}
     {{ $pswpCaption := resources.Get "photoswipe/photoswipe-dynamic-caption-plugin.esm.min.js" | fingerprint }}
