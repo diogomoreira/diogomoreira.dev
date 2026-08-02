@@ -10,5 +10,3 @@ build:
   render: never
   list: always
 ---
-
-Gone Now is a diverse and introspective pop-rock album by Bleachers (Jack Antonoff's band). The album delves into themes of loss, nostalgia, and growing up, resulting in an anthemic and personal musical experience.

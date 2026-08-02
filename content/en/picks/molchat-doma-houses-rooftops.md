@@ -11,5 +11,3 @@ build:
   render: never
   list: always
 ---
-
-The album features a dark and atmospheric sound that draws inspiration from Soviet-era Russian rock music. The lyrics explore themes of nostalgia, alienation, and the search for meaning in a changing world.

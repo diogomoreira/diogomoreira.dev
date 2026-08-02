@@ -1,0 +1,17 @@
+{{/* Usage: {{ $c := partial "pick-medium-color.html" "game" }} — returns the DaisyUI
+  badge class for a pick's `medium`, falling back to badge-ghost.
+
+  Split out of pick-medium-badge.html so the filter chips in layouts/picks/list.html
+  can colour themselves from the same map instead of keeping a second copy of it.
+  `series` and `tvseries` both map to badge-info; content only uses `tvseries`. */}}
+{{ $colors := dict
+  "movie" "badge-primary"
+  "series" "badge-info"
+  "tvseries" "badge-info"
+  "music" "badge-secondary"
+  "book" "badge-warning"
+  "game" "badge-success"
+  "podcast" "badge-accent"
+  "other" "badge-ghost"
+}}
+{{ return (index $colors . | default "badge-ghost") }}

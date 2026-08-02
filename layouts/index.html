@@ -65,7 +65,9 @@
     </section>
   {{ end }}
 
-  {{ $picks := where .Site.RegularPages "Section" "picks" }}
+  {{/* Both languages' picks, already newest-first — the pt-br home would otherwise
+    show the single print filed under content/pt-br/. */}}
+  {{ $picks := partial "picks-all.html" . }}
   {{ if $picks }}
     <section class="mb-14">
       <div class="flex items-center justify-between mb-5">
@@ -80,7 +82,7 @@
         partial would override both.
       */}}
       <div class="polaroid-group polaroid-group--grid not-prose">
-        {{ range first 4 $picks.ByDate.Reverse }}
+        {{ range first 4 $picks }}
           {{ $caption := printf `<span class="polaroid__title">%s</span>%s` (.Title | htmlEscape) (partial "pick-medium-badge.html" .) | safeHTML }}
           {{ partial "polaroid.html" (dict
             "page" .

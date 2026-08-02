@@ -19,8 +19,10 @@
         <main class="w-full mx-auto p-6 sm:p-8 md:p-12">
           {{/* Single content measure for the whole site — every page is 65ch, centred.
             Lives here rather than on <main> so the padding sits outside the cap.
+            `wide: true` in a page's front matter drops the cap so grids and galleries
+            can use the full centre rail (see the picks section indexes).
           */}}
-          <div class="max-w-prose mx-auto">
+          <div class="{{ if not .Params.wide }}max-w-prose {{ end }}mx-auto">
             {{ block "main" . }}{{ end }}
           </div>
         </main>
