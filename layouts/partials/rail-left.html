@@ -1,0 +1,36 @@
+{{/* ── Left rail ─────────────────────────────────────────────
+  Slim nav rail pinned to the left screen edge. Desktop only — below `lg`,
+  `.site-rail` hides and `mobile-topbar.html` + `sidebar-mobile-drawer.html`
+  take over. The h-card (avatar, bio, social) lives on the homepage instead.
+*/}}
+{{/* Not an <aside>/landmark itself — the <nav> from nav-menu.html inside already
+  carries the label, and nesting a second one just duplicates it.
+*/}}
+<div class="site-rail site-rail--left">
+  <a
+    href="{{ .Site.Home.RelPermalink }}"
+    class="flex items-center gap-2 mb-8 font-sans font-bold tracking-tight text-base-content justify-center hover:opacity-80"
+  >
+    <img src="/logo.png" alt="" class="w-7 h-7 shrink-0" />
+    <span class="font-heading tracking-tighter text-xl">{{ .Site.Title }}</span>
+  </a>
+
+  {{ partial "nav-menu.html" (dict "page" . "variant" "desktop") }}
+
+
+  <div class="mt-6">
+    {{ partial "search.html" . }}
+  </div>
+
+  {{/* Pinned to the bottom of the rail by `.site-rail--left`'s flex column. */}}
+  <div class="mt-auto">
+    {{/* Tighter than the default row: 5 icons at w-6/gap-4 overflow a 13rem rail.
+      No margin class — webring.html opens with its own `mt-6 … pt-6` rule.
+    */}}
+    {{ partial "social.html" (dict "page" . "class" "justify-center gap-3" "iconClass" "w-5 h-5") }}
+    {{ partial "webring.html" }}
+    <div class="mt-6 pt-6 border-t border-base-300 text-xs">
+      {{ partial "sidebar-footer-meta.html" (dict "page" . "variant" "desktop") }}
+    </div>
+  </div>
+</div>

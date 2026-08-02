@@ -68,6 +68,10 @@ terms_last_updated = "Last updated:"
 picks_showing_range = "Showing {{ .First }}–{{ .Last }} of {{ .Total }}"
 picks_added_on = "Added on"
 
+# Table of contents
+toc_label = "On this page"
+
 # Accessibility
 mobile_menu_toggle_aria = "Toggle menu"
 theme_toggle_aria = "Toggle dark mode"
+page_controls_aria = "Page controls"

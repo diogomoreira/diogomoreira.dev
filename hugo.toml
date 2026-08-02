@@ -64,6 +64,11 @@ codeFences = true
 [markup.goldmark.renderer]
 unsafe = true # allows raw HTML in Markdown
 
+[markup.tableOfContents]
+startLevel = 2
+endLevel = 3
+ordered = false
+
 [outputs]
 home = ["HTML"]
 page = ["HTML"]

@@ -1,0 +1,49 @@
+{{/* Scroll-spy for the right-rail table of contents. No-op on pages without one. */}}
+<script>
+  (function () {
+    const links = document.querySelectorAll('.toc a[href^="#"]');
+    if (!links.length) return;
+
+    const byId = new Map();
+    for (const link of links) {
+      byId.set(decodeURIComponent(link.hash.slice(1)), link);
+    }
+
+    const headings = [...document.querySelectorAll("#main-content :is(h1, h2, h3, h4)[id]")].filter((h) =>
+      byId.has(h.id),
+    );
+    if (!headings.length) return;
+
+    let active = null;
+    function setActive(heading) {
+      if (heading === active) return;
+      if (active) byId.get(active.id).classList.remove("is-active");
+      active = heading;
+      if (active) byId.get(active.id).classList.add("is-active");
+    }
+
+    // Track which headings are above the viewport's top quarter and highlight
+    // the last one — an intersection-ratio approach flickers on short sections.
+    const visible = new Set();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) visible.add(entry.target);
+          else visible.delete(entry.target);
+        }
+
+        const first = headings.find((h) => visible.has(h));
+        if (first) {
+          setActive(first);
+          return;
+        }
+        // Nothing in the band: fall back to the last heading scrolled past.
+        const passed = headings.filter((h) => h.getBoundingClientRect().top < 0);
+        setActive(passed.length ? passed[passed.length - 1] : headings[0]);
+      },
+      { rootMargin: "0px 0px -75% 0px", threshold: 0 },
+    );
+
+    headings.forEach((h) => observer.observe(h));
+  })();
+</script>

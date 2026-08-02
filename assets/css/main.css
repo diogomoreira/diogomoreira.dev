@@ -122,6 +122,110 @@ html[data-theme="midnight"] {
 }
 
 @layer components {
+  /* ── Page shell ───────────────────────────────────────────────────────────
+     Three tracks: a slim rail pinned to each screen edge, and a `1fr` middle
+     that soaks up everything left over. Both rails share `--rail-w` so the
+     capped prose column inside the middle still reads as centred.
+
+     Written as real CSS rather than Tailwind arbitrary values because Tailwind
+     v4 only emits classes it finds in `hugo_stats.json`.
+
+     Note: `rem` in a media query resolves against the *initial* 16px, not the
+     18px set on `html` below — so 64rem here is 1024px, matching Tailwind `lg`.
+     Rail widths do scale at 18px/rem (13rem = 234px). */
+  .site-shell {
+    display: block;
+    --rail-w: 13rem;
+    --rail-w-right: var(--rail-w);
+  }
+
+  /* Pages with no table of contents: the right rail only has to fit a column of
+     square icon buttons (see rail-right.html). A `btn-sm btn-square` is 2rem and
+     the rail pads 1.25rem a side, so 5rem leaves a little slack for focus rings. */
+  .site-shell--slim-right {
+    --rail-w-right: 5rem;
+  }
+
+  /* Rails are desktop-only; below `lg` the mobile topbar + drawer take over. */
+  .site-rail {
+    display: none;
+  }
+
+  @media (min-width: 64rem) {
+    .site-shell {
+      display: grid;
+      grid-template-columns: var(--rail-w) 1fr var(--rail-w-right);
+    }
+
+    .site-rail {
+      display: block;
+      position: sticky;
+      top: 0;
+      align-self: start;
+      max-height: 100vh;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding: 2rem 1.25rem;
+    }
+
+    .site-rail--left {
+      /* Pushes the webring + copyright block to the bottom of a tall rail. */
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+  }
+
+  @media (min-width: 80rem) {
+    .site-shell {
+      --rail-w: 15rem;
+    }
+  }
+
+  /* ── Table of contents ────────────────────────────────────────────────────
+     Hugo's `.TableOfContents` emits `nav#TableOfContents > ul > li > a` with no
+     hooks of its own, so it has to be styled from the outside. */
+  .toc ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* `nav > ul` is the top level only — nested lists are children of an <li>.
+     `base-300` rather than a mix of `neutral`: `neutral` is a dark surface in
+     midnight but near-black text in sunrise, so any hairline mixed from it
+     works in one theme and vanishes in the other. */
+  .toc nav > ul {
+    border-inline-start: 1px solid var(--color-base-300);
+  }
+
+  /* Nested levels (h3 under h2) step in one notch. */
+  .toc ul ul a {
+    padding-inline-start: 1.75rem;
+  }
+
+  .toc a {
+    display: block;
+    padding: 0.25rem 0 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    text-decoration: none;
+    border-inline-start: 2px solid transparent;
+    margin-inline-start: -1px;
+    /* 70% is the site-wide floor for muted text — below it the mix drops under
+       4.5:1 in one theme or the other. Same figure as `text-base-content/70`. */
+    color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  }
+
+  .toc a:hover {
+    color: var(--color-base-content);
+  }
+
+  .toc a.is-active {
+    color: var(--color-primary);
+    border-inline-start-color: var(--color-primary);
+  }
+
   /* Hand-drawn annotations, emitted by the `mark` shortcode. The shape is an
      inline SVG stretched to the phrase, sitting behind the text. Offsets are in
      `em` so everything scales with the surrounding font size. */

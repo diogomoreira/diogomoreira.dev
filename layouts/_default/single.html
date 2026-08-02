@@ -16,6 +16,9 @@
     {{ end }}
 
 
+    {{/* The right rail is hidden below `lg`, so the TOC folds into the body there. */}}
+    {{ partial "toc.html" (dict "page" . "variant" "mobile") }}
+
     <div
       class="prose prose-headings:font-heading prose-headings:font-semibold prose-base prose-img:w-full prose-img:border-4 prose-img:border-base-200 prose-img:shadow-md max-w-none"
     >

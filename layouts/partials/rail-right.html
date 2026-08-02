@@ -1,0 +1,16 @@
+{{/* ── Right rail ────────────────────────────────────────────
+  Theme + language controls, with the page's table of contents underneath.
+  Renders on every page (even with no TOC) so the shell keeps three tracks.
+
+  With no TOC there is nothing to be wide for: the track narrows to just the
+  buttons (`site-shell--slim-right`, set in baseof.html) and they stack.
+*/}}
+{{ $hasToc := partial "has-toc.html" . }}
+<div class="site-rail" data-pagefind-ignore>
+  <div class="flex items-center gap-2 mb-8 {{ if $hasToc }}flex-row{{ else }}flex-col{{ end }}">
+    {{ partial "theme-toggle-button.html" "theme-toggle-rail" }}
+    {{ partial "language-switcher.html" . }}
+  </div>
+
+  {{ partial "toc.html" (dict "page" . "variant" "rail") }}
+</div>
