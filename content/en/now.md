@@ -11,6 +11,8 @@ On this page, I share what I’ve been up to lately. The idea is to keep it cons
 
 I got [engaged](https://www.instagram.com/p/DYgJF_IDjL-FmgKJf0gQkHC0_s6TxVoxv6sF9g0/?igsh=NHdjdmJlOW5wOTc0) on May 16th in Cancún, Mexico. After 8 years and 4 months together, Bruno and I decided to take the next step in our journey.
 
+{{< polaroid src="/images/pages/engagement.jpg" alt="@ Cancún" width="300" tilt="left" caption="@ Cancún" >}}
+
 ## Social Media
 
 I’ve been _trying_ to adopt healthier habits regarding social media consumption this year and, consequently, stepping away from the world of Big Tech as much as possible.
