@@ -13,7 +13,7 @@
       </figure>
     {{ end }}
 
-    <div class="prose prose-headings:font-sans prose-base max-w-none mb-14">
+    <div class="prose prose-headings:font-heading prose-base max-w-none mb-14">
       {{ partial "disclaimer-alert.html" . }}
       {{ .Content }}
     </div>
@@ -37,7 +37,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {{ range .items }}
             <div class="card bg-base-100 border border-base-300 p-4">
-              <h3 class="font-sans font-semibold text-sm text-base-content">
+              <h3 class="font-heading font-semibold text-sm text-heading">
                 {{ if .link }}
                   <a href="{{ .link }}" target="_blank" rel="noopener noreferrer" class="link link-primary">{{ .name }}</a>
                 {{ else }}

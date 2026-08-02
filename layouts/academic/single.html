@@ -3,7 +3,7 @@
     {{ partial "header.html" . }}
 
 
-    <div class="prose prose-headings:font-sans prose-base max-w-none">
+    <div class="prose prose-headings:font-heading prose-base max-w-none">
       {{ .Content }}
       {{ partial "section-label.html" (dict "text" (i18n "academic_latest_publications")) }}
       {{/* Pull papers from data files */}}
