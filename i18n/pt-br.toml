@@ -11,9 +11,6 @@ picks = "Picks"
 photos = "Fotos"
 nav_aria_label = "Navegação principal"
 
-# Nav Menu text
-site_description = "Idéias sobre a vida, desenvolvimento de software, música, etc."
-
 # Homepage
 home_greeting = "Olá! Eu sou"
 home_recent_posts = "Posts Recentes"

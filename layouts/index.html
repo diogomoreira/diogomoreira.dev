@@ -3,27 +3,26 @@
     homepage is the canonical IndieWeb spot for it, and the `rel="me"` links in
     `social.html` need to be on the page Mastodon &co. verify against.
   */}}
-  <header class="h-card mb-10 flex flex-col sm:flex-row sm:items-center gap-6">
+  <header class="h-card mb-10 items-center flex flex-col sm:flex-row sm:items-center gap-6">
     {{ with resources.Get "images/profile/profile.jpg" }}
-      {{ $resized := .Fit "288x288" }}
+      {{ $resized := .Fit "300x300" }}
       <img
         src="{{ $resized.RelPermalink }}"
         width="{{ $resized.Width }}"
         height="{{ $resized.Height }}"
         alt="{{ $.Site.Title }}"
-        class="u-photo w-28 h-28 shrink-0 rounded-sm object-cover ring-2 shadow-md shadow-black/50 ring-neutral-content/20"
+        class="u-photo w-44 h-44 shrink-0 rounded-sm object-cover ring-2 shadow-md shadow-black/50 ring-neutral-content/20"
       />
     {{ end }}
 
 
     <div class="min-w-0">
-      <h1 class="font-heading text-4xl font-medium text-heading">
+      <h1 class="font-heading text-2xl font-medium text-heading">
         {{ i18n "home_greeting" }}
-        <a href="{{ .Site.Home.RelPermalink }}" class="u-url font-bold no-underline hover:opacity-80" rel="me">
-          <span class="p-name">{{ .Title }}</span>
+        <a href="{{ .Site.Home.RelPermalink }}" class="block u-url font-bold no-underline hover:opacity-80" rel="me">
+          <span class="tracking-tighter text-6xl p-name">{{ .Title }}</span>
         </a>
       </h1>
-      <p class="p-note mt-2 text-sm text-base-content/70 leading-relaxed">{{ i18n "site_description" }}</p>
       <div class="mt-4">
         {{/* No margin — the `mt-4` wrapper above owns the spacing under the bio. */}}
         {{ partial "social.html" (dict "page" . "class" "justify-start gap-4") }}
