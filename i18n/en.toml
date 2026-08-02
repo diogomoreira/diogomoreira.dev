@@ -1,6 +1,6 @@
 # Nav menu identifiers
 about = "About"
-cv = "CV"
+work = "Work"
 blog = "Blog"
 now = "Now"
 academic = "Academic"
@@ -26,7 +26,6 @@ academic_latest_publications = "Latest publications"
 cv_work_experience = "Work Experience"
 cv_education = "Education"
 cv_now = "Now"
-stack_label = "Stack:"
 
 # Blog
 categories_label = "Categories"

@@ -1,0 +1,53 @@
+{{/* Compact one-line-per-entry listing of a work/education data file.
+
+  Usage: {{ partial "cv-entries.html" (dict
+    "entries"  (index hugo.Data site.Language.Lang "work")
+    "orgField" "company"   // "institution" for education
+    "heading"  "Work Experience") }}   // pass "" to omit the heading
+
+  `not-prose` is load-bearing: this renders inside the `prose max-w-none`
+  wrapper of `_default/single.html`, which would otherwise put list markers on
+  the entries and prose link styling on the org names.
+
+  `sort … "endDate" "desc"` is a string sort, so the literal "Present" lands
+  above "2023-12" and current roles come first. That is the intended order.
+*/}}
+
+{{ $orgField := .orgField | default "company" }}
+
+{{ with .entries }}
+  <div class="not-prose my-8">
+    {{ with $.heading }}
+      <h3 class="font-heading text-xs font-semibold uppercase tracking-widest text-secondary mb-4">{{ . }}</h3>
+    {{ end }}
+
+    <ul class="list-none p-0 m-0 space-y-2">
+      {{ range sort . "endDate" "desc" }}
+        {{ $end := .endDate | default "Present" }}
+        <li class="flex flex-col sm:flex-row sm:items-baseline gap-x-4 gap-y-0.5 text-sm">
+          <span class="font-mono text-xs tabular-nums text-base-content/70 shrink-0 sm:w-36">
+            {{ .startDate }} ~
+            {{ if eq $end "Present" }}
+              <span class="text-primary">{{ i18n "cv_now" }}</span>
+            {{ else }}
+              {{ $end }}
+            {{ end }}
+          </span>
+          <span class="text-base-content">
+            <span class="font-semibold">{{ .title }}</span>
+            <span class="text-base-content/70"> @ </span>
+            {{ $org := index . $orgField }}
+            {{ with .link }}
+              <a href="{{ . }}" target="_blank" rel="noopener" class="hover:text-primary">{{ $org }}</a>
+            {{ else }}
+              {{ $org }}
+            {{ end }}
+            {{ with .location }}
+              <span class="text-base-content/70"> · {{ . }}</span>
+            {{ end }}
+          </span>
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+{{ end }}

@@ -133,12 +133,23 @@ weight = 1
 [menus.main.params]
 icon = "user"
 
+# Work and Academic are children of About in the menu only — their URLs stay at
+# the root. nav-menu.html reveals them when you are inside the group.
 [[menus.main]]
-identifier = "cv"
-pageRef = "/cv"
+identifier = "work"
+pageRef = "/work"
+parent = "about"
+weight = 1
+[menus.main.params]
+icon = "work"
+
+[[menus.main]]
+identifier = "academic"
+pageRef = "/academic"
+parent = "about"
 weight = 2
 [menus.main.params]
-icon = "cv"
+icon = "academic"
 
 [[menus.main]]
 identifier = "blog"
@@ -153,13 +164,6 @@ pageRef = "/now"
 weight = 4
 [menus.main.params]
 icon = "now"
-
-[[menus.main]]
-identifier = "academic"
-pageRef = "/academic"
-weight = 5
-[menus.main.params]
-icon = "academic"
 
 [[menus.main]]
 identifier = "projects"
