@@ -21,34 +21,39 @@
   default: true;
   prefersdark: false;
   color-scheme: "light";
-  --color-base-100: #fffcf0;
-  --color-base-200: #f2f0e5;
-  --color-base-300: #e6e4d9;
-  --color-base-content: #100f0f;
-  --color-primary: #24837b;
-  --color-primary-content: #fffcf0;
-  --color-secondary: #6f6e69;
-  --color-secondary-content: #fffcf0;
-  --color-accent: #bc5215;
-  --color-accent-content: #ffe7ce;
-  --color-neutral: #282726;
-  --color-neutral-content: #e6e4d9;
-  --color-info: #205ea6;
-  --color-info-content: #e1eceb;
-  --color-success: #66800b;
-  --color-success-content: #edeecf;
-  --color-warning: #ad8301;
-  --color-warning-content: #faeec6;
-  --color-error: #af3029;
-  --color-error-content: #ffe1d5;
-  --radius-selector: 0rem;
-  --radius-field: 0rem;
-  --radius-box: 0rem;
+  /* Warm paper, cool ink — the inverse of midnight's cool ground and warm text.
+     Every brand/semantic colour below carries its midnight counterpart's hue and
+     chroma, dropped in lightness until it clears 4.5:1 on `base-200`. In this
+     theme the colour is the *dark* member of the pair and `-content` is the
+     paper; midnight flips that. See the theming notes in CLAUDE.md. */
+  --color-base-100: #fbfaf7;
+  --color-base-200: #f3f1eb;
+  --color-base-300: #e5e2d9;
+  --color-base-content: #262430;
+  --color-primary: #556ba3;
+  --color-primary-content: #fbfaf7;
+  --color-secondary: #736d4c;
+  --color-secondary-content: #fbfaf7;
+  --color-accent: #5c7353;
+  --color-accent-content: #fbfaf7;
+  --color-neutral: #262430;
+  --color-neutral-content: #f3f1eb;
+  --color-info: #7a6298;
+  --color-info-content: #fbfaf7;
+  --color-success: #4f736e;
+  --color-success-content: #fbfaf7;
+  --color-warning: #83683f;
+  --color-warning-content: #fbfaf7;
+  --color-error: #cf292e;
+  --color-error-content: #fbfaf7;
+  --radius-selector: 1rem;
+  --radius-field: 2rem;
+  --radius-box: 0.25rem;
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
   --border: 2px;
   --depth: 1;
-  --noise: 1;
+  --noise: 0;
 }
 
 @plugin "daisyui/theme" {
@@ -56,45 +61,63 @@
   default: false;
   prefersdark: true;
   color-scheme: "dark";
-  --color-base-100: #100f0f;
-  --color-base-200: #1c1b1a;
-  --color-base-300: #282726;
-  --color-base-content: #cecdc3;
-  --color-primary: #3aa99f;
-  --color-primary-content: #101f1d;
-  --color-secondary: #878580;
-  --color-secondary-content: #100f0f;
-  --color-accent: #da702c;
-  --color-accent-content: #27180e;
-  --color-neutral: #343331;
-  --color-neutral-content: #cecdc3;
-  --color-info: #4385be;
-  --color-info-content: #101a24;
-  --color-success: #879a39;
-  --color-success-content: #1a1e0c;
-  --color-warning: #d0a215;
-  --color-warning-content: #241e08;
-  --color-error: #d14d41;
-  --color-error-content: #261312;
-  --radius-selector: 0rem;
-  --radius-field: 0rem;
-  --radius-box: 0rem;
+  /* Here the colour is the *light* member of each pair and `-content` is
+     near-black — the mirror of sunrise. A near-white `-content` on these
+     mid-tone chips is the trap: it looks fine in isolation but puts
+     `badge-warning` at 2.6:1. `base-300` has to stay a step above `base-200`,
+     or `border-base-300` — the site's only divider token — disappears. */
+  --color-base-100: #191823;
+  --color-base-200: #22212f;
+  --color-base-300: #2c2b3b;
+  --color-base-content: #b5b0a0;
+  --color-primary: #7a92cc;
+  --color-primary-content: #12172a;
+  --color-secondary: #bbb591;
+  --color-secondary-content: #1c1a12;
+  --color-accent: #7a9270;
+  --color-accent-content: #111710;
+  --color-neutral: #201f30;
+  --color-neutral-content: #f7f8fa;
+  --color-info: #9980b8;
+  --color-info-content: #17111f;
+  --color-success: #6c928c;
+  --color-success-content: #0f1614;
+  --color-warning: #b5996e;
+  --color-warning-content: #1a1408;
+  /* Chroma pulled back ~15% from the original #d02a2f while lifting the
+     lightness, so clearing 4.5:1 on `base-200` doesn't turn it neon. */
+  --color-error: #e65e58;
+  --color-error-content: #20100f;
+  --radius-selector: 1rem;
+  --radius-field: 2rem;
+  --radius-box: 0.25rem;
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
   --border: 2px;
   --depth: 1;
-  --noise: 1;
+  --noise: 0;
+}
+
+/* Headings pull away from body text in both themes — toward white over
+   midnight's softer copy, toward black under sunrise's lighter ink.
+   Scoped with `html[data-theme=…]` (0,1,1) rather than a bare attribute
+   selector (0,1,0), which would tie with the `:root` block Tailwind emits
+   `@theme` vars into and be decided by source order. */
+html[data-theme="sunrise"] {
+  --color-heading: #14131b;
+}
+html[data-theme="midnight"] {
+  --color-heading: #cecdc3;
 }
 
 @theme {
-  --font-sans:
-    "Google Sans Flex", -apple-system, BlinkMacSystemFont, "Inter", "IBM Plex Sans", "Segoe UI", Helvetica, Arial,
-    sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "IBM Plex Sans", "Segoe UI", Helvetica, Arial, sans-serif;
   --font-body: var(--font-sans);
   --font-mono:
     "JetBrains Mono", ui-monospace, SFMono-Regular, "Cascadia Code", "IBM Plex Mono", "Roboto Mono", "DejaVu Sans Mono",
     "Liberation Mono", Menlo, Monaco, Consolas, "Source Code Pro", monospace;
-  --font-heading: "Bricolage Grotesque", var(--font-sans);
+  --font-heading: "Geom", var(--font-sans);
+  --color-heading: var(--color-base-content);
   --pf-font: var(--font-sans);
 }
 
@@ -187,16 +210,22 @@
 }
 
 @layer base {
-  html {
-    font-size: 18px;
-  }
-
   body {
     font-family: var(--font-body);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    color: var(--color-heading);
   }
 
   figcaption {
@@ -209,5 +238,48 @@
    otherwise reset the color sub-property back to currentcolor. */
 a {
   text-decoration-color: var(--color-accent);
-  text-underline-offset: 2px;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* Unlayered on purpose: daisyUI sets `--tw-prose-headings` on `:root .prose`
+   from inside its own layer, so an unlayered rule wins regardless of
+   specificity. Retargets the variable @tailwindcss/typography colours every
+   content heading from, instead of touching each `.prose` wrapper. */
+.prose {
+  --tw-prose-headings: var(--color-heading);
+}
+
+/* External-link marker.
+   `http(s)` minus our own host = off-site. Internal links are always relative
+   (`/blog/…`), so they never match — including under `hugo server`, where
+   baseURL is localhost.
+   Excluded on purpose: anchors wrapping an image/svg (social icons, polaroid
+   frames, picks cards, CV icon links) and button/badge-shaped ones, where an
+   arrow would sit on top of artwork instead of after a phrase. `.no-ext-icon`
+   is the manual escape hatch.
+   The glyph is a mask, not `content:` text, so it inherits the link colour via
+   `currentColor` and renders identically in both themes with no font
+   dependency. `display: inline-block` makes it an atomic inline, which text
+   decoration does not propagate into — that is what keeps the dashed underline
+   from running beneath the arrow; the leading gap is padding (inside the
+   undecorated box) rather than margin (outside it, and underlined). */
+a[href^="http"]:not([href*="diogomoreira.dev"]):not(.no-ext-icon):not(.btn):not(.badge):not(
+    :has(img, svg, picture)
+  )::after {
+  content: "";
+  display: inline-block;
+  box-sizing: content-box;
+  inline-size: 0.72em;
+  block-size: 0.72em;
+  padding-inline-start: 0.18em;
+  vertical-align: -0.02em;
+  background-color: currentColor;
+  opacity: 0.7;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7'/%3E%3Cpath d='M8 7h9v9'/%3E%3C/svg%3E");
+  mask-origin: content-box;
+  mask-position: center;
+  mask-size: contain;
+  mask-repeat: no-repeat;
 }

@@ -1,4 +1,8 @@
-<div class="mt-6 border-t font-mono border-neutral/10 w-full pt-6 text-sm flex justify-center gap-4">
-  <a href="https://xn--sr8hvo.ws/previous">←</a><a href="https://xn--sr8hvo.ws">IndieWeb Webring</a
-  ><a href="https://xn--sr8hvo.ws/next">→</a>
+<div class="mt-6 border-t font-mono border-base-300 w-full pt-6 text-sm flex justify-center gap-4">
+  {{/* `no-ext-icon` opts these three out of the external-link arrow in main.css:
+       the ring is the point of the widget, so marking it as off-site is noise —
+       and on the ← / → anchors the arrow doubles up on the glyph itself. */}}
+  <a class="no-ext-icon" href="https://xn--sr8hvo.ws/previous">←</a
+  ><a class="no-ext-icon" href="https://xn--sr8hvo.ws">IndieWeb Webring</a
+  ><a class="no-ext-icon" href="https://xn--sr8hvo.ws/next">→</a>
 </div>

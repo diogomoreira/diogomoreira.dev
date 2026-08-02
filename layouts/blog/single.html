@@ -1,7 +1,7 @@
 {{ define "main" }}
   <article
     data-pagefind-body
-    class="prose prose-headings:font-sans prose-pre:my-0 prose-pre:p-2 prose-img:mx-auto prose-img:border-4 prose-img:border-base-200 prose-figure:text-center prose-img:shadow-md max-w-none"
+    class="prose prose-headings:font-heading prose-pre:my-0 prose-pre:p-2 prose-img:mx-auto prose-img:border-4 prose-img:border-base-200 prose-figure:text-center prose-img:shadow-md max-w-none"
   >
     <header class="mb-10">
       {{ with .CurrentSection }}
@@ -28,7 +28,7 @@
       {{ end }}
 
 
-      <h1 class="font-sans text-4xl lg:text-5xl font-extrabold tracking-tight text-base-content">
+      <h1 class="font-heading text-4xl lg:text-5xl font-extrabold tracking-tight text-heading">
         {{ .Title | title }}
       </h1>
 
@@ -58,7 +58,7 @@
   <div class="mt-4 flex flex-col gap-1 text-sm">
     {{ with .Params.Categories }}
       <div class="flex py-1 gap-1.5 flex-wrap items-center">
-        <span class="inline-flex text-base-content/50" title="{{ i18n "categories_label" }}">
+        <span class="inline-flex text-base-content/70" title="{{ i18n "categories_label" }}">
           {{ partial "icons/folder.html" . }}
           <span class="sr-only">{{ i18n "categories_label" }}</span>
         </span>
@@ -76,7 +76,7 @@
 
     {{ with .Params.tags }}
       <div class="flex py-1 gap-1.5 flex-wrap items-center">
-        <span class="inline-flex text-base-content/50" title="{{ i18n "tags_label" }}">
+        <span class="inline-flex text-base-content/70" title="{{ i18n "tags_label" }}">
           {{ partial "icons/tag.html" . }}
           <span class="sr-only">{{ i18n "tags_label" }}</span>
         </span>
