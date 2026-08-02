@@ -1,0 +1,14 @@
+{{- /* A handful of `polaroid` prints tossed on a table: they sit in a row,
+       overlap slightly, and alternate lean. Takes no params — the leans and the
+       smaller default width come from `.polaroid-group` rules in main.css.
+
+       Usage:
+         {{< polaroid-group >}}
+           {{< polaroid src="a.jpg" >}}
+           {{< polaroid src="b.jpg" >}}
+         {{< /polaroid-group >}}
+
+       `.Inner` is emitted as-is rather than through `.Page.RenderString`: the
+       nested shortcodes have already been expanded to HTML by this point, and
+       re-running markdown over that would risk stray `<p>` wrappers. */ -}}
+<div class="polaroid-group not-prose">{{ .Inner }}</div>

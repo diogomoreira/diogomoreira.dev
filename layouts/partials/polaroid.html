@@ -1,0 +1,124 @@
+{{- /* Photo dressed as a polaroid print. The `polaroid` shortcode is a thin
+       wrapper over this, so markdown and layouts share one implementation.
+
+       Usage:
+         {{ partial "polaroid.html" (dict "page" . "src" .Params.cover "alt" .Title) }}
+
+       Params (all but `src` optional):
+         page        — page whose bundle resources `src` is resolved against first
+         src         — bundle resource name, or a site-wide asset path. Required.
+         alt         — alt text. Defaults to empty (decorative).
+         caption     — content for the bottom strip. Emitted as-is, so callers
+                       pass safe HTML (`RenderString`/`safeHTML` output).
+         tilt        — left | right | none | any number of degrees ("-6", "4.5").
+                       Default: right.
+         align       — center | left | right. The last two float. Default: center.
+         ratio       — natural | square | portrait (4:5) | landscape (3:2).
+                       Anything but `natural` centre-crops. Default: natural.
+         width       — displayed frame width in px. Omit to inherit whatever the
+                       stylesheet sets (see the note on custom properties below).
+         resizeWidth — px width to resample the source to, when it should not be
+                       derived from `width` (e.g. a print sized in % by CSS).
+         link        — makes the frame an `<a>` instead of a `<figure>`.
+         external    — with `link`, adds target="_blank" and rel="noopener".
+         origin      — label used in warnings, to point at the offending caller. */ -}}
+
+{{- $tilts := dict "left" "-2.5" "right" "2.5" "none" "0" "0" "0" -}}
+{{- $ratios := slice "natural" "square" "portrait" "landscape" -}}
+{{- $aligns := slice "center" "left" "right" -}}
+{{- $origin := .origin | default "polaroid partial" -}}
+
+{{- if not .src -}}
+  {{- warnf "polaroid: missing required `src` in %s, skipping" $origin -}}
+{{- else -}}
+
+  {{- $tilt := .tilt | default "right" -}}
+  {{- $deg := index $tilts $tilt -}}
+  {{- if not $deg -}}
+    {{- if findRE `^-?[0-9]+(\.[0-9]+)?$` $tilt -}}
+      {{- $deg = $tilt -}}
+    {{- else -}}
+      {{- warnf "polaroid: invalid tilt %q in %s, falling back to right" $tilt $origin -}}
+      {{- $deg = index $tilts "right" -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $ratio := .ratio | default "natural" -}}
+  {{- if not (in $ratios $ratio) -}}
+    {{- warnf "polaroid: unknown ratio %q in %s, falling back to natural" $ratio $origin -}}
+    {{- $ratio = "natural" -}}
+  {{- end -}}
+
+  {{- $align := .align | default "center" -}}
+  {{- if not (in $aligns $align) -}}
+    {{- warnf "polaroid: unknown align %q in %s, falling back to center" $align $origin -}}
+    {{- $align = "center" -}}
+  {{- end -}}
+
+  {{- $width := .width -}}
+  {{- if and $width (not (findRE `^[0-9]+$` $width)) -}}
+    {{- warnf "polaroid: invalid width %q in %s, ignoring" $width $origin -}}
+    {{- $width = "" -}}
+  {{- end -}}
+
+  {{- /* 2× the displayed width for retina, capped so an oversized `width` can't
+         ask Hugo to resample a huge source needlessly. `resizeWidth` overrides
+         it for prints whose displayed size comes from CSS rather than `width`. */ -}}
+  {{- $resize := .resizeWidth -}}
+  {{- if not $resize -}}
+    {{- $resize = printf "%d" (int (math.Min 1400 (mul (int ($width | default "340")) 2))) -}}
+  {{- end -}}
+
+  {{- /* Only emit the custom properties the caller actually asked for: an inline
+         style beats any stylesheet rule, so always-emitting them would make the
+         `.polaroid-group` overrides in main.css dead code. */ -}}
+  {{- $vars := slice -}}
+  {{- with .tilt -}}
+    {{- $vars = $vars | append (printf "--polaroid-tilt:%sdeg;" $deg) -}}
+  {{- end -}}
+  {{- with $width -}}
+    {{- $vars = $vars | append (printf "--polaroid-w:%spx;" .) -}}
+  {{- end -}}
+  {{- $style := delimit $vars "" -}}
+
+  {{- $caption := .caption -}}
+  {{- $link := .link -}}
+  {{- /* The outer div owns layout (width, float, margins) and stays
+         axis-aligned; only the inner frame rotates. A floated element that is
+         itself rotated reserves an awkward box and its corners collide with the
+         text wrapping beside it. */ -}}
+  <div class="polaroid not-prose polaroid--{{ $align }}"{{ with $style }} style="{{ . | safeCSS }}"{{ end }}>
+    {{- /* A linked print is an `<a>`, not a `<figure>` — so the strip is only a
+           real `figcaption` in the unlinked case. */ -}}
+    {{- if $link }}
+      <a class="polaroid__frame" href="{{ $link }}"{{ if .external }} target="_blank" rel="noopener noreferrer"{{ end }}>
+    {{- else }}
+      <figure class="polaroid__frame">
+    {{- end }}
+      <div class="polaroid__window polaroid__window--{{ $ratio }}">
+        {{- partial "responsive-image.html" (dict
+          "page" .page
+          "src" .src
+          "alt" (.alt | default "")
+          "class" "polaroid__img"
+          "width" $resize)
+        -}}
+      </div>
+      {{- /* `figcaption` has to be a direct child of `figure`, so the strip is
+             the frame's last child. With no caption it degrades to a plain div —
+             the thick bottom border still needs to exist. */ -}}
+      {{- if and $caption (not $link) }}
+        <figcaption class="polaroid__strip">{{ $caption }}</figcaption>
+      {{- else if $caption }}
+        <div class="polaroid__strip">{{ $caption }}</div>
+      {{- else }}
+        <div class="polaroid__strip" aria-hidden="true"></div>
+      {{- end }}
+    {{- if $link }}
+      </a>
+    {{- else }}
+      </figure>
+    {{- end }}
+  </div>
+
+{{- end -}}
