@@ -1,6 +1,7 @@
 ---
 title: Academic
 description: Academic background and publications
+toc: false
 ---
 
 {{< education >}}

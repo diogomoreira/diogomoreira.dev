@@ -2,31 +2,43 @@
 title: About me
 updated: "2026-08-02"
 description: "A little bit about me, my hobbies and my career as a software developer."
-cover: "/images/profile/cover.jpg"
-coverCaption: "@ Escadaria Selarón - Rio de Janeiro, RJ, Brazil"
+toc: false
 ---
 
-Hello! I'm **Diogo Moreira**, born in 1989 in Paraíba, Brazil, where I still live and work today.
+{{< polaroid src="/images/profile/cover.jpg" alt="@ Escadaria Selarón - Rio de Janeiro, RJ, Brazil" width="600" tilt="left" caption="@ Escadaria Selarón - Rio de Janeiro, RJ, Brazil" >}}
 
-## Some things that catch my attention
+Hello! I'm **Diogo Dantas Moreira**, born in Cajazeiras/PB, Brazil, where I still live and work today.
 
-- **Video games**, especially RPGs and racing games. The **Final Fantasy** series is among my favorites. You can see some of the games I've played in [this list](https://backloggd.com/u/diogodmoreira/games/).
-- **Drama/sci-fi movies and TV shows**. If you're curious, check out [movies I've watched lately](https://letterboxd.com/diogodmoreira/) or see what I'm currently watching [here](https://app.trakt.tv/profile/diogomoreira).
-- **Science fiction books**. The **Foundation** series by Isaac Asimov is a personal favorite. You can find some of the books I've read in [this list](https://www.goodreads.com/review/list/122984698-diogo-moreira?shelf=read).
-- **Drawing**, though it's been a while since I last picked up a pencil. I hope to get back to it someday.
-- **Music**, I'm also a collector of **music on physical media** — mainly CDs and vinyl. You can browse [my collection](https://www.discogs.com/user/diogodmoreira/collection) to see some of the records I own. Discovering new artists and genres is something I really enjoy, and my collection is always growing, though I have a particular love for _Indie_ and _Punk Rock_.
-- **Concerts**. I've attended **over 110 concerts**, according to my [setlist.fm profile](https://www.setlist.fm/user/diogodmoreira), and am aiming for 200. Music festivals and concerts are experiences that truly make me feel alive. I often share album recommendations in the [picks](/picks) section, and you can also check out my [recent listens](https://music.apple.com/br/profile/diogomoreira).
-- **Sports**. When it comes to sports, I'm a big soccer fan and support **São Paulo FC**, but I also enjoy following other teams and leagues. Since 2021, I've been into Formula 1, and lately, I've been keeping up with tennis tournaments as well.
+I'm passionate about **music**. I'm always listening to something new and I try my best to stay open to new artists and genres. I recently started my [physical media](/pt-br/blog/colecao-vinil/) collection and it's been a fun hobby (even if a bit of an expensive one). I've been to over 100 concerts, and that's easily one of my favorite things to do.
 
----
+{{< polaroid-group >}}
+{{< polaroid src="/images/profile/lollapalooza.jpg" width="200" alt="Lollapalooza 2026" ratio="square" caption="Lollapalooza 2026" >}}
+{{< polaroid src="/images/profile/primavera-sound.jpg" width="200" alt="Primavera Sound 2023" ratio="square" caption="Primavera Sound 2023" >}}
+{{< polaroid src="/images/profile/rock-in-rio.jpg" width="200" alt="Rock in Rio 2022" ratio="square" caption="Rock in Rio 2022" >}}
+{{< /polaroid-group >}}
+
+I'm a **football** (soccer for my US visitor 😅) fan. I support **São Paulo FC**, and over the last few years I've been following other sports as well, like Formula 1 and tennis (which I've also been trying to play).
+
+I'm fascinated by **video games**. Even though I spend very little time on them these days, every now and then one shows up that catches my attention and keeps me hooked for weeks or months. Japanese RPGs are particularly my thing.
+
+I once thought about becoming an **artist**, since drawing was something I've enjoyed doing on and off in my free time since I was a kid, but it's been a while since I made time to practice.
+
+I like **reading science fiction**, though I admit I read far less than I'd like to.
+
+I enjoy a good conversation about anything, a beer every now and then, and above all, travelling.
 
 ## How I ended up in IT
 
-Since I was a kid I was fascinated by technology and especially computers. I got my first PC at home when I was 6 and since then, I've spent most of my days doing something in front of it.
+Since I was a kid I've always been fascinated by technology, and especially by computers. I got my first PC in 1996, a {{<mark shape="marker">}}Pentium II 233MHz with 8MB of RAM{{</mark>}}) and since then I've spent a good part of my days doing something in front of it and its successors.
 
-Eventually, I started to become curious about how computers work and especially how webpages were built, which led me to build my very first website when I was 13 (using `<table>` and without CSS 🙃) and I guess it was at this moment that I decided this would be my career. I've learned the very basics of PHP and MySQL by myself and started to work as a freelancer when I was around 16–17. At that time, I had the chance to work with some personal pages and small businesses websites.
+Over time, and with my first experiences on the internet, in 2001 I started getting curious about how things were built, which led me to two experiences during my teenage years that I consider relevant:
 
-Later, I've decided to start my undergraduate degree in **System Analysis and Development** to kick off my professional career as a software developer. But I'm pretty sure I wouldn't make this decision if it weren't for my previous experience and my curiosity about computers throughout these years.
+- Building my first website at 13, in the old [**Microsoft Frontpage**](https://en.wikipedia.org/wiki/Microsoft_FrontPage) (using `<table>` and without CSS 🙃). I learned the basics of **PHP** and **MySQL** from a few tutorials on the internet and started working as a freelancer around the age of 16–17. Back then, I had the chance to work on personal pages and small business websites, which was pretty common at the time.
+- Building a game in **RPG Maker 2000**. With the help of my older brother and some assets we grabbed from an RPG Maker CD-ROM of that era, we created a simple game with plenty of inspiration from some of the RPGs we were playing at the time. It was fun, and I got to learn a lot about algorithms.
+
+At the end of high school I wanted to study **Design**, but I ended up doing Advertising for 2 terms and Telecommunications for 1 term until I landed in **Systems Analysis and Development**, where I finally found my place.
+
+The rest of that story you can find on my [work]({{< relref "work" >}}) or [academic]({{< relref "academic" >}}) pages.
 
 ---
 
