@@ -11,5 +11,3 @@ build:
   render: never
   list: always
 ---
-
-Mark leads a team of office workers whose memories have been surgically divided between their work and personal lives. When a mysterious colleague appears outside of work, it begins a journey to discover the truth about their jobs.

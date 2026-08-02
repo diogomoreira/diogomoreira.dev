@@ -11,5 +11,3 @@ build:
   render: never
   list: always
 ---
-
-Histórias e curiosidades sobre álbuns que mudaram a cultura pop, apresentado por Ricardo Alexandre ([@ralexandredb](https://twitter.com/ralexandredb)). Destaque para os episódios: [Is This It](https://open.spotify.com/episode/5UxyY2m3ivQiCbHTiCmL7e?si=56aaed806b5c4bd1) dos **The Strokes** e [Pet Sounds](https://open.spotify.com/episode/0tovZE5376tQBqUWxkRCfA?si=1b80462d7f52461c) dos **Beach Boys**.

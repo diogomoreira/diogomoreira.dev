@@ -61,8 +61,18 @@ built_with_label = "Feito com"
 terms_last_updated = "Última atualização:"
 
 # Picks
-picks_showing_range = "Mostrando {{ .First }}–{{ .Last }} de {{ .Total }}"
 picks_added_on = "Adicionado em"
+picks_filter_all = "Todos"
+picks_filter_aria = "Filtrar picks por mídia"
+picks_lang_only = "Disponível apenas em {{ .Language }}"
+pick_medium_music = "música"
+pick_medium_movie = "filme"
+pick_medium_series = "série"
+pick_medium_tvseries = "série"
+pick_medium_book = "livro"
+pick_medium_game = "jogo"
+pick_medium_podcast = "podcast"
+pick_medium_other = "outro"
 
 # Table of contents
 toc_label = "Nesta página"

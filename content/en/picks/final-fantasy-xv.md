@@ -12,5 +12,3 @@ build:
   render: never
   list: always
 ---
-
-The story follows Prince Noctis and his friends as he embarks on a journey to reclaim his kingdom that has been invaded by the empire of Niflheim. He discovers he is on a quest to combat the powers of darkness with the powers of light only the Lucian lineage of kings can wield. This is one of my favorites in the series and I've been waiting for this game since 2007 when the first trailers were released (under the FF Versus XIII name).

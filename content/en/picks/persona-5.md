@@ -12,5 +12,3 @@ build:
   render: never
   list: always
 ---
-
-A group of high school students create a vigilante group to expose the crimes of corrupt adults but soon find themselves in the midst of a worldwide conspiracy and targeted by powerful individuals who would do anything to silence them. This is one of my favorite games that I played on PlayStation 4. It took me more than 85 hours to finish but it was totally worth it.

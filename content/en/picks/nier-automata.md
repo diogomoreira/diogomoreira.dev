@@ -12,5 +12,3 @@ build:
   render: never
   list: always
 ---
-
-An action RPG developed by PlatinumGames and published by Square Enix. The game takes place in a post-apocalyptic world where players control androids, 2B and 9S, as they fight to reclaim Earth from alien machines.

@@ -594,6 +594,166 @@ html[data-theme="midnight"] {
     flex: 1;
     align-content: center;
   }
+
+  /* ---- Picks wall -------------------------------------------------------
+     Hand-written for the same reason as `.polaroid` above: Tailwind v4 emits
+     only the classes it found in `hugo_stats.json`, which Hugo writes *during*
+     the build, so a first-use utility like `columns-4` or `break-inside-avoid`
+     would take two builds to exist.
+
+     Masonry via CSS multi-column rather than a JS grid: covers arrive at their
+     natural aspect ratio (the `responsive-image` partial resizes width-only),
+     nothing has to be measured after load, and cards hidden by the medium
+     filter let the columns reflow for free. The trade-off is reading order —
+     columns fill top-to-bottom, so newest-first runs down column one before
+     column two. */
+  .picks-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-block-end: 1.5rem;
+  }
+
+  .picks-chip {
+    cursor: pointer;
+  }
+
+  /* Column steps are picked against the *centre rail*, not the viewport: from
+     64rem up the two rails take 18rem out of the width (20rem past 80rem), which
+     is why 64rem adds no column — the track narrows there even as the screen
+     grows. Phones stay single-column so a cover is never postage-stamp sized. */
+  .picks-wall {
+    column-count: 1;
+    column-gap: 1rem;
+  }
+
+  @media (width >= 30rem) {
+    .picks-wall {
+      column-count: 2;
+    }
+  }
+
+  @media (width >= 48rem) {
+    .picks-wall {
+      column-count: 3;
+    }
+  }
+
+  @media (width >= 80rem) {
+    .picks-wall {
+      column-count: 4;
+    }
+  }
+
+  @media (width >= 96rem) {
+    .picks-wall {
+      column-count: 5;
+    }
+  }
+
+  @media (width >= 120rem) {
+    .picks-wall {
+      column-count: 6;
+    }
+  }
+
+  /* The whole card is one anchor, so it needs `display: block` twice over: an
+     inline box ignores `break-inside`, which would let the masonry split a card
+     across two columns.
+
+     `base-200` for the panel because `#main-content` is `base-100` — it lifts off
+     the page in both themes, and it is the surface this palette's 4.5:1 contrast
+     was measured against, so the muted 70% date line is safe on it by
+     construction. `base-300` for the hairline because it is the only token that
+     is a surface step in *both* themes; `neutral` inverts between them and would
+     vanish in one. */
+  .picks-card {
+    display: block;
+    break-inside: avoid;
+    margin: 0 0 1rem;
+    padding: 0.5rem;
+    background-color: var(--color-base-200);
+    border: 1px solid var(--color-base-300);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    transition: background-color 150ms ease;
+  }
+
+  .picks-card.is-filtered-out {
+    display: none;
+  }
+
+  /* Hover and keyboard focus get the same treatment — the card is a link and
+     should read as one. `base-300` keeps the step inside the same token family,
+     so it moves in the same direction in both themes instead of inverting. */
+  .picks-card:hover,
+  .picks-card:focus-visible {
+    background-color: var(--color-base-300);
+  }
+
+  .picks-card:hover .picks-card__title,
+  .picks-card:focus-visible .picks-card__title {
+    text-decoration: underline;
+  }
+
+  .picks-card:hover .picks-card__img,
+  .picks-card:focus-visible .picks-card__img {
+    opacity: 0.9;
+  }
+
+  .picks-card__cover {
+    display: block;
+  }
+
+  /* No shadow here — the card panel casts it now, and two nested shadows read as
+     an embossed edge rather than a print on a surface. */
+  .picks-card__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 2px solid var(--color-base-300);
+  }
+
+  /* `base-100` rather than `base-200`: the panel behind it is `base-200`, so the
+     placeholder would otherwise disappear into it. */
+  .picks-card__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 3 / 4;
+    border: 2px solid var(--color-base-300);
+    background-color: var(--color-base-100);
+    color: var(--color-accent);
+  }
+
+  .picks-card__caption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-block-start: 0.6rem;
+  }
+
+  .picks-card__title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-base-content);
+  }
+
+  .picks-card__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  /* 70% is the documented floor for muted text — `/50` and `/60` fall under
+     4.5:1 against `base-200` in one theme or the other. */
+  .picks-card__date {
+    font-size: 0.75rem;
+    color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  }
 }
 
 @layer base {

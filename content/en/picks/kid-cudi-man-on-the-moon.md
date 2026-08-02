@@ -10,5 +10,3 @@ build:
   render: never
   list: always
 ---
-
-This concept album follows the story of a character struggling with fame and mental health. Highlights for **Pursuit of Happiness** and **Day N' Nite**.

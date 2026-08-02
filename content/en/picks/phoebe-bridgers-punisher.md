@@ -12,5 +12,3 @@ build:
   render: never
   list: always
 ---
-
-Punisher is the second studio album by American singer-songwriter Phoebe Bridgers. Released in 2020, the album showcases Bridgers' introspective and emotionally charged songwriting, delving into themes of love, loss, and existential musings.

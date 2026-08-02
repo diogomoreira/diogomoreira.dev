@@ -9,5 +9,3 @@ build:
   render: never
   list: always
 ---
-
-A fantastic (yet very dynamic) turn-based RPG with unparalleled world and character building. The characters' journey is a harrowing and often melancholic death march into an abstract, beautiful, and surreal world. The story wrestles heavily with complex themes surrounding: morality, mortality, grief, love, and loss.
