@@ -1,0 +1,38 @@
+{{- /* Photo dressed as a polaroid print: framed, slightly rotated, with an
+       optional caption on the thick bottom strip.
+
+       Params:
+         src     — page-bundle resource name, or a site-wide asset path
+                   (e.g. "/images/picks/paprika.jpg"). Required.
+         alt     — alt text. Defaults to empty (decorative).
+         caption — text for the bottom strip. Rendered as markdown, so links
+                   and emphasis work.
+         tilt    — left | right | none | any number of degrees ("-6", "4.5").
+                   Default: right.
+         align   — center | left | right. The last two float, so body text
+                   wraps around the print. Default: center.
+         ratio   — natural | square | portrait (4:5) | landscape (3:2).
+                   Anything but `natural` centre-crops. Default: natural.
+         width   — displayed frame width in px. Default: 340.
+
+       All the real work — validation, sizing, markup — lives in
+       `layouts/partials/polaroid.html`, shared with the layouts that need
+       prints outside of markdown (see the picks row in `layouts/index.html`). */ -}}
+{{- $caption := "" -}}
+{{- with .Get "caption" -}}
+  {{- $caption = . | $.Page.RenderString -}}
+{{- end -}}
+{{- /* `width` is passed through unset rather than defaulted to 340, so an
+       inline `--polaroid-w` is only emitted when the author asked for one and
+       `.polaroid-group`'s narrower default still applies. */ -}}
+{{- partial "polaroid.html" (dict
+  "page" .Page
+  "src" (.Get "src")
+  "alt" (.Get "alt")
+  "caption" $caption
+  "tilt" (.Get "tilt")
+  "align" (.Get "align")
+  "ratio" (.Get "ratio")
+  "width" (.Get "width")
+  "origin" .Page.File.Filename)
+-}}

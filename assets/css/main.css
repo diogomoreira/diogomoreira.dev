@@ -358,6 +358,242 @@ html[data-theme="midnight"] {
   .mark--error .mark__shape {
     color: var(--color-error);
   }
+
+  /* ── Polaroid prints ──────────────────────────────────────────────────────
+     Emitted by the `polaroid` and `polaroid-group` shortcodes.
+
+     Real CSS rather than Tailwind utilities for the same reason as the shell
+     above, only more so: no `rotate-*` utility appears anywhere on this site
+     yet, and Tailwind v4 only emits classes it already found in
+     `hugo_stats.json` — which Hugo writes *during* the build, so a brand-new
+     `rotate-[-2.5deg]` would take two builds to show up.
+
+     The shortcode also puts `not-prose` on `.polaroid`. Without it the inner
+     `<img>` picks up `prose-img:border-4` and `prose-img:shadow-md` from the
+     page wrappers, doubling the frame's own border and shadow — and those land
+     in the utilities layer, which beats this one whatever the specificity. */
+  .polaroid {
+    --polaroid-tilt: 2.5deg;
+    --polaroid-w: 340px;
+    /* A print is a physical object: it stays light whatever the page behind it
+       is doing, so paper and ink are pinned rather than following the active
+       theme. `--polaroid-ink` is a fixed near-black and everything inside the
+       frame tints against it — reaching for `--color-base-content` is the trap,
+       since it inverts to `#b5b0a0` in midnight and would put a near-white
+       caption on white paper. The paper is a shade brighter than sunrise's
+       `base-100` (#fbfaf7) so the print still lifts off the page in light mode,
+       where the two sit close together — keep it above whatever `base-100` is. */
+    --polaroid-paper: #fffefa;
+    --polaroid-ink: #100f0f;
+    width: min(var(--polaroid-w), 100%);
+    margin-block: 2rem;
+  }
+
+  .polaroid--center {
+    margin-inline: auto;
+  }
+
+  .polaroid--left {
+    float: left;
+    margin: 0.5rem 1.75rem 1.5rem 0;
+  }
+
+  .polaroid--right {
+    float: right;
+    margin: 0.5rem 0 1.5rem 1.75rem;
+  }
+
+  /* The 65ch measure set in baseof.html leaves nothing worth wrapping beside a
+     floated print on a phone, so both floats become centred blocks. */
+  @media (width < 40rem) {
+    .polaroid--left,
+    .polaroid--right {
+      float: none;
+      margin-inline: auto;
+    }
+  }
+
+  /* Layout lives on `.polaroid` and rotation on `.polaroid__frame`, deliberately
+     split: a floated element that is itself rotated reserves an axis-aligned box
+     that no longer matches its corners, and the text wrapping beside it collides
+     with them. */
+  .polaroid__frame {
+    display: block;
+    background: var(--polaroid-paper);
+    /* Carries a little more weight than a hairline usually would: in sunrise the
+       paper and the page are close in tone, so the edge has to define itself. */
+    border: 1px solid color-mix(in oklab, var(--polaroid-ink) 14%, transparent);
+    /* No bottom padding — `.polaroid__strip` supplies the thick lower border. */
+    padding: 0.7rem 0.7rem 0;
+    box-shadow:
+      0 1px 2px color-mix(in oklab, var(--polaroid-ink) 18%, transparent),
+      0 8px 20px color-mix(in oklab, var(--polaroid-ink) 14%, transparent);
+    transform: rotate(var(--polaroid-tilt));
+  }
+
+  .polaroid__window {
+    overflow: hidden;
+    background: color-mix(in oklab, var(--polaroid-ink) 8%, transparent);
+  }
+
+  /* `--natural` needs no rule: the window takes the image's own ratio. */
+  .polaroid__window--square {
+    aspect-ratio: 1;
+  }
+
+  .polaroid__window--portrait {
+    aspect-ratio: 4 / 5;
+  }
+
+  .polaroid__window--landscape {
+    aspect-ratio: 3 / 2;
+  }
+
+  /* `responsive-image.html` wraps the img in `<picture class="contents">`, so
+     this really is the window's direct layout child. */
+  .polaroid__img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Only a forced ratio crops; `--natural` leaves `height: auto` alone. */
+  .polaroid__window--square .polaroid__img,
+  .polaroid__window--portrait .polaroid__img,
+  .polaroid__window--landscape .polaroid__img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .polaroid__strip {
+    display: grid;
+    place-items: center;
+    gap: 0.35rem;
+    /* Holds the bottom border open even when there is no caption. */
+    min-height: 3rem;
+    padding: 0.7rem 0.4rem 0.9rem;
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
+    line-height: 1.35;
+    text-align: center;
+    text-wrap: balance;
+    color: color-mix(in oklab, var(--polaroid-ink) 65%, transparent);
+  }
+
+  /* Optional caption sub-element: keeps a long title from making one print's
+     strip much taller than its neighbours' in a row. */
+  .polaroid__title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    color: var(--polaroid-ink);
+    font-weight: 600;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .polaroid__frame {
+      transition:
+        transform 200ms ease,
+        box-shadow 200ms ease;
+    }
+  }
+
+  /* Straighten and lift on hover — decorative, so it is skipped entirely on
+     touch, and the transition above is skipped under reduced motion. */
+  @media (hover: hover) {
+    .polaroid__frame:hover {
+      transform: rotate(0deg) translateY(-4px);
+      box-shadow:
+        0 2px 4px color-mix(in oklab, var(--polaroid-ink) 20%, transparent),
+        0 14px 32px color-mix(in oklab, var(--polaroid-ink) 20%, transparent);
+    }
+  }
+
+  .polaroid-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    margin-block: 2.5rem;
+  }
+
+  /* `margin-inline: 0` undoes `.polaroid--center`'s `auto`: on a flex item an
+     auto inline margin eats the free space, which would push the prints apart
+     and cancel the overlap below. */
+  .polaroid-group > .polaroid {
+    position: relative;
+    margin-block: 0.75rem;
+    margin-inline: 0;
+    --polaroid-w: 240px;
+  }
+
+  /* These overrides only bite because the shortcode omits the inline
+     `--polaroid-tilt` / `--polaroid-w` unless the author passed `tilt` / `width`
+     explicitly — an inline custom property would beat every rule here. Keep that
+     conditional in polaroid.html if you touch it. */
+  .polaroid-group > .polaroid:nth-child(odd) {
+    --polaroid-tilt: -3.5deg;
+  }
+
+  .polaroid-group > .polaroid:nth-child(even) {
+    --polaroid-tilt: 3deg;
+  }
+
+  .polaroid-group > .polaroid:nth-child(3n) {
+    --polaroid-tilt: -1.5deg;
+  }
+
+  .polaroid-group > .polaroid + .polaroid {
+    margin-inline-start: -1.5rem;
+  }
+
+  .polaroid-group > .polaroid:hover {
+    z-index: 2;
+  }
+
+  /* Fixed 2-up / 4-up variant, used by the picks row on the homepage. The flex
+     pile above would let an in-between container width land on three prints in
+     one row and a lonely fourth below; a grid can only ever break 2 or 4.
+     Everything else — position, lean, hover lift — still comes from the rules
+     above, since the element carries both classes. */
+  .polaroid-group--grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-items: center;
+    row-gap: 0.75rem;
+  }
+
+  @media (width >= 40rem) {
+    .polaroid-group--grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  /* Prints fill their track and spill a little over it, so neighbours overlap
+     the way they do in the flex pile. The second selector is there purely to
+     out-specify `.polaroid-group > .polaroid + .polaroid` above. */
+  .polaroid-group--grid > .polaroid,
+  .polaroid-group--grid > .polaroid + .polaroid {
+    --polaroid-w: 100%;
+    margin-inline: -0.3rem;
+    align-self: stretch;
+  }
+
+  /* Titles wrap to different line counts, so let every frame in the row fill
+     the tallest track and push its strip to the bottom. Without this the prints
+     would end at visibly different heights and read as sloppy rather than
+     deliberately scattered. */
+  .polaroid-group--grid .polaroid__frame {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .polaroid-group--grid .polaroid__strip {
+    flex: 1;
+    align-content: center;
+  }
 }
 
 @layer base {

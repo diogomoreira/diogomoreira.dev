@@ -75,25 +75,25 @@
           >{{ i18n "home_all_picks" }}</a
         >
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      {{/* Prints rather than cards. Neither `tilt` nor `width` is passed: the
+        `.polaroid-group--grid` rules in main.css supply the alternating lean and
+        size the prints to their track, and an inline custom property from the
+        partial would override both.
+      */}}
+      <div class="polaroid-group polaroid-group--grid not-prose">
         {{ range first 4 $picks.ByDate.Reverse }}
-          {{ $pick := . }}
-          {{ $itemLink := .Params.link | default .RelPermalink }}
-          <a
-            href="{{ $itemLink }}"
-            class="card bg-base-100 group"
-            {{ if .Params.link }}target="_blank" rel="noopener noreferrer"{{ end }}
-          >
-            {{ with .Params.cover }}
-              <div class="aspect-3/4 w-full overflow-hidden rounded-t">
-                {{ partial "responsive-image.html" (dict "page" $pick "src" . "alt" $pick.Title "class" "object-cover w-full h-full" "width" "200") }}
-              </div>
-            {{ end }}
-            <div class="card-body p-2 items-center">
-              <h3 class="font-sans card-title text-xs font-semibold text-base-content text-center">{{ .Title }}</h3>
-              {{ partial "pick-medium-badge.html" . }}
-            </div>
-          </a>
+          {{ $caption := printf `<span class="polaroid__title">%s</span>%s` (.Title | htmlEscape) (partial "pick-medium-badge.html" .) | safeHTML }}
+          {{ partial "polaroid.html" (dict
+            "page" .
+            "src" .Params.cover
+            "alt" .Title
+            "caption" $caption
+            "ratio" "square"
+            "resizeWidth" "360"
+            "link" (.Params.link | default .RelPermalink)
+            "external" (ne .Params.link nil)
+            "origin" "layouts/index.html picks row")
+          }}
         {{ end }}
       </div>
     </section>
