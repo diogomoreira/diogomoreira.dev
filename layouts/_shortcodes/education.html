@@ -1,0 +1,15 @@
+{{/* Education from data/<lang>/education.yaml, compact.
+
+  Params:
+    heading — omit for the default i18n heading, pass a string to override,
+              or pass "false" when the surrounding markdown already has one.
+*/}}
+
+{{ $heading := .Get "heading" | default (i18n "cv_education") }}
+{{ if eq (.Get "heading") "false" }}{{ $heading = "" }}{{ end }}
+
+{{ partial "cv-entries.html" (dict
+  "entries" (index hugo.Data site.Language.Lang "education")
+  "orgField" "institution"
+  "heading" $heading)
+}}

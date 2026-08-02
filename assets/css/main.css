@@ -226,6 +226,53 @@ html[data-theme="midnight"] {
     border-inline-start-color: var(--color-primary);
   }
 
+  /* ── Rail / drawer nav links ──────────────────────────────────────────────
+     Real CSS rather than Tailwind utilities — `bg-primary/10` and
+     `border-primary` are used nowhere else, and Tailwind v4 only emits classes
+     already present in `hugo_stats.json`, which Hugo writes *during* the build.
+     Same reason `.mark` and `.polaroid` are hand-written.
+
+     The transparent border sits on every link, active or not, so turning it on
+     does not shift the row's contents by 2px (same trick as `.toc a`). */
+  .nav-link {
+    border-inline-start: 2px solid transparent;
+    /* Square on the leading edge so the active bar reads as a bar, softened on
+       the trailing side. Logical props to match `border-inline-start` above. */
+    border-start-end-radius: 0.25rem;
+    border-end-end-radius: 0.25rem;
+  }
+
+  /* `color-mix` against `--color-primary` means the tint tracks each theme's own
+     accent (sunrise #556ba3, midnight #7a92cc) with no per-theme override. */
+  .nav-link--active {
+    background-color: color-mix(in oklab, var(--color-primary) 12%, transparent);
+    border-inline-start-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  /* Child entries (Work, Academic under About), revealed by nav-menu.html only
+     while you are inside that group. `base-300` for the guide line because it is
+     the one divider token that reads as a surface step in both themes —
+     `neutral` flips from dark surface to near-black text and would vanish in
+     one of them. The indent stays small: `--rail-w` is only 13rem. */
+  /* nav-link.html deliberately withholds the `p-*`, `m-*`, `text-sm` and
+     `font-*` utilities from children so these declarations actually land —
+     utilities beat `@layer components` regardless of specificity. Keep it that
+     way: adding any of them back to the template silently kills the indent. */
+  .nav-submenu {
+    list-style: none;
+    margin-block: 0.125rem 0;
+    margin-inline: 1rem 0;
+    padding: 0;
+    border-inline-start: 1px solid var(--color-base-300);
+  }
+
+  .nav-link--child {
+    font-size: 0.8125rem;
+    font-weight: 400;
+    padding-inline: 1.25rem 0.75rem;
+  }
+
   /* Hand-drawn annotations, emitted by the `mark` shortcode. The shape is an
      inline SVG stretched to the phrase, sitting behind the text. Offsets are in
      `em` so everything scales with the surrounding font size. */

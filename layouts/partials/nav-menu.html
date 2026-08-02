@@ -1,39 +1,58 @@
 {{/* Usage: {{ partial "nav-menu.html" (dict "page" . "variant" "desktop") }} — variant is "desktop" or "mobile" */}}
 {{ $page := .page }}
 {{ $desktop := eq .variant "desktop" }}
+
+{{/* Path the highlight matches against. Taxonomy listings (/tags/…,
+  /categories/…) only index blog posts, so they light up Blog rather than
+  nothing; every other kind matches on its own permalink. Resolved via GetPage
+  rather than hardcoded so the pt-br site gets /pt-br/blog/ for free.
+*/}}
+{{ $current := $page.RelPermalink }}
+{{ if in (slice "taxonomy" "term") $page.Kind }}
+  {{ with $page.Site.GetPage "/blog" }}{{ $current = .RelPermalink }}{{ end }}
+{{ end }}
+
+
 <nav {{ if $desktop }}aria-label="{{ i18n "nav_aria_label" }}"{{ end }}>
   <ul class="space-y-1 font-sans list-none p-0 m-0">
     {{ range $page.Site.Menus.main }}
       {{ if not .Params.hidden }}
         <li>
-          {{ $isActive := or ($page.IsMenuCurrent `main` .) ($page.HasMenuCurrent `main` .) (hasPrefix $page.RelPermalink .URL) }}
-          {{ if $desktop }}
-            <a
-              href="{{ .URL }}"
-              class="flex font-heading text-xs uppercase items-center gap-2 px-4 py-2 rounded-btn font-semibold
-                      {{ if $isActive }}
-                bg-base-300 text-primary
-              {{ else }}
-                text-base-content/60 hover:text-base-content hover:bg-base-content/5
+          {{/* The entry's own highlight. Deliberately leaves out HasMenuCurrent:
+            About must not read as the current page while you are on /work.
+            The `ne .URL` guard keeps a Home entry (URL `/`) from prefix-matching
+            every page and lighting up the whole menu.
+          */}}
+          {{ $isActive := or ($page.IsMenuCurrent `main` .) (and (ne .URL $page.Site.Home.RelPermalink) (hasPrefix $current .URL)) }}
+
+          {{/* Whether the group is revealed — a separate value from $isActive.
+            Has to be computed explicitly: /work and /academic are children of
+            About in the menu but not under it in the URL space, so the
+            hasPrefix fallback above can never match them from the parent.
+          */}}
+          {{ $childActive := false }}
+          {{ range .Children }}
+            {{ if eq $current .URL }}{{ $childActive = true }}{{ end }}
+          {{ end }}
+
+          {{ partial "nav-link.html" (dict "entry" . "page" $page "active" $isActive "desktop" $desktop "child" false) }}
+
+          {{/* Driven purely by the current page, so the mobile drawer gets the
+            same reveal with no JS.
+          */}}
+          {{ if and .HasChildren (or $isActive $childActive) }}
+            {{/* No `list-none p-0 m-0` here — those utilities would beat
+              `.nav-submenu`'s indent. main.css owns the box entirely.
+            */}}
+            <ul class="nav-submenu">
+              {{ range .Children }}
+                {{ if not .Params.hidden }}
+                  <li>
+                    {{ partial "nav-link.html" (dict "entry" . "page" $page "active" (eq $current .URL) "desktop" $desktop "child" true) }}
+                  </li>
+                {{ end }}
               {{ end }}
-"
-            >
-              {{ with .Params.icon }}{{ partial (printf "icons/nav/%s.html" .) $page }}{{ end }}
-              {{ i18n .Identifier }}
-            </a>
-          {{ else }}
-            <a
-              href="{{ .URL }}"
-              class="flex items-center gap-2 px-3 py-2 rounded-btn text-sm
-                      {{ if $isActive }}
-                bg-base-content/10 text-primary font-medium
-              {{ else }}
-                text-base-content/60 hover:text-base-content hover:bg-base-content/5
-              {{ end }}"
-            >
-              {{ with .Params.icon }}{{ partial (printf "icons/nav/%s.html" .) $page }}{{ end }}
-              {{ i18n .Identifier }}
-            </a>
+            </ul>
           {{ end }}
         </li>
       {{ end }}
