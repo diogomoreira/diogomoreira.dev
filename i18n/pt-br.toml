@@ -7,7 +7,7 @@ academic = "Acadêmico"
 projects = "Projetos"
 uses = "Setup"
 snippets = "Snippets"
-picks = "Picks"
+library = "Biblioteca"
 photos = "Fotos"
 nav_aria_label = "Navegação principal"
 
@@ -15,8 +15,8 @@ nav_aria_label = "Navegação principal"
 home_greeting = "Olá! Eu sou"
 home_recent_posts = "Posts Recentes"
 home_all_posts = "Todos os posts →"
-home_latest_picks = "Últimos Picks"
-home_all_picks = "Todos os picks →"
+home_recently_added = "Adicionados recentemente"
+home_browse_library = "Ver a biblioteca →"
 
 # Academic / CV
 academic_latest_publications = "Publicações recentes"
@@ -60,19 +60,27 @@ built_with_label = "Feito com"
 # Terms/taxonomy
 terms_last_updated = "Última atualização:"
 
-# Picks
-picks_added_on = "Adicionado em"
-picks_filter_all = "Todos"
-picks_filter_aria = "Filtrar picks por mídia"
-picks_lang_only = "Disponível apenas em {{ .Language }}"
-pick_medium_music = "música"
-pick_medium_movie = "filme"
-pick_medium_series = "série"
-pick_medium_tvseries = "série"
-pick_medium_book = "livro"
-pick_medium_game = "jogo"
-pick_medium_podcast = "podcast"
-pick_medium_other = "outro"
+# Biblioteca
+library_added_on = "Adicionado em"
+library_finished_on = "Terminado em"
+# Selo para entradas sem data numa categoria que rotula datas — ver
+# library-item-date.html. Todo `date_label` precisa de `_on` e `_in_progress`.
+library_finished_in_progress = "Lendo"
+library_lang_only = "Disponível apenas em {{ .Language }}"
+library_rating_label = "{{ .Rating }} de 5"
+# Uma chave por arquivo em data/library/ — sem a chave, o nome do arquivo aparece cru.
+library_category_albums = "Álbuns"
+library_category_articles = "Artigos"
+library_category_videos = "Vídeos"
+library_category_games = "Jogos"
+library_category_books = "Livros"
+library_category_movies = "Filmes"
+library_category_tv-shows = "Séries"
+library_category_podcasts = "Podcasts"
+library_category_websites = "Sites"
+library_category_apps = "Apps"
+library_category_hardware = "Hardware"
+library_category_people = "Pessoas que vale a pena seguir"
 
 # Table of contents
 toc_label = "Nesta página"

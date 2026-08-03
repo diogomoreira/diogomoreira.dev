@@ -1,0 +1,60 @@
+# Favorites → Albums. See CLAUDE.md for the shape; `weight` sets the section's
+# position on /library, `display` picks the card shape (poster | list).
+weight: 1
+display: poster
+items:
+  - title: "Heaven or Las Vegas"
+    creator: "Cocteau Twins"
+    link: "https://music.apple.com/br/album/heaven-or-las-vegas-remastered/258198881"
+    cover: "images/library/heaven-or-las-vegas.jpg"
+    rating: 5
+    date: 2026-04-21
+
+  - title: "Man On the Moon: The End of the Day"
+    creator: "Kid Cudi"
+    link: "https://open.spotify.com/album/6oPPKtAwNNlkW4wwHfQDfM?si=bRBnXLJsSG6brNo2lhbZ9Q"
+    cover: "images/library/kid-cudi-man-on-the-moon.webp"
+    rating: 5
+    date: 2023-01-31
+
+  - title: "Punisher"
+    creator: "Phoebe Bridgers"
+    link: "https://open.spotify.com/album/6Pp6qGEywDdofgFC1oFbSH?si=WZktdFvAQNGVHrbM_maTAw"
+    cover: "images/library/punisher_album_cover.jpg"
+    rating: 5
+    date: 2023-05-10
+
+  - title: "с крыш наших домов (From our houses' rooftops)"
+    creator: "Molchat Doma"
+    link: "https://open.spotify.com/album/5JLoR1neszuPXlDwOSffYh?si=m-5kV8QKTQCxlrXtfGUsgA"
+    cover: "images/library/molchat-doma-houses-rooftop.webp"
+    rating: 4
+    date: 2022-10-09
+
+  - title: "Luv(sic) Hexalogy"
+    creator: "Nujabes"
+    link: "https://open.spotify.com/album/4oT4YRVe43ESrT9rx2LKCM?si=6m6eJkYNTsarpF5PEmvtoA"
+    cover: "images/library/luv-sic.jpg"
+    rating: 5
+    date: 2021-04-24
+
+  - title: "Yoshimi Battles the Pink Robots"
+    creator: "The Flaming Lips"
+    link: "https://open.spotify.com/album/49LA20VMk65fQyEaIzYdvf?si=7v8MynKoSn-SRtUKuu-_cg"
+    cover: "images/library/yoshimi-battles-the-pink-robots.jpg"
+    rating: 5
+    date: 2021-02-18
+
+  - title: "Antisocialites"
+    creator: "Alvvays"
+    link: "https://open.spotify.com/album/7CCwkPweMxKq8yWkVerH6T?si=Plxrkxi4RuaJAX2GIDNOUw"
+    cover: "images/library/antisocialites.jpg"
+    rating: 5
+    date: 2020-11-10
+
+  - title: "Gone Now"
+    creator: "Bleachers"
+    link: "https://open.spotify.com/album/10HKbC9lKDHGQvndGck6XJ?si=HOCCXI02Ro6VeJ2mylxGgg"
+    cover: "images/library/gone-now.jpg"
+    rating: 5
+    date: 2018-04-16

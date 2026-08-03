@@ -1,4 +1,0 @@
-{{/* Usage: {{ partial "pick-medium-badge.html" . }} — colored badge for a picks page's `medium` param */}}
-{{ $medium := .Params.medium | default "other" }}
-{{ $badgeClass := partial "pick-medium-color.html" $medium }}
-<span class="badge {{ $badgeClass }} badge-sm rounded-none">{{ i18n (printf "pick_medium_%s" $medium) | default $medium }}</span>

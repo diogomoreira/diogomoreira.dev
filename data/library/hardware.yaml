@@ -1,0 +1,9 @@
+# Flip `display` to `poster` if you start adding product photos as `cover`.
+weight: 11
+display: list
+items: []
+# - title: "The thing"
+#   creator: "Who makes it"
+#   link: "https://…"
+#   rating: 5
+#   date: 2026-08-02

@@ -1,0 +1,12 @@
+weight: 8
+display: poster
+items:
+  # `lang` marks a work that only exists in one language — readers of the other
+  # language get a badge. Omit it for anything language-neutral (an album, a game).
+  - title: "Discoteca Básica"
+    creator: "Ricardo Alexandre"
+    link: "https://open.spotify.com/show/1TycD4CePdMhOIfG1JAzJ3?si=81783ddd4f4d4d26"
+    cover: "images/library/discoteca-basica.jpg"
+    rating: 5
+    lang: "pt-br"
+    date: 2021-06-20

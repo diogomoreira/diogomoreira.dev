@@ -1,0 +1,122 @@
+{{/* Binds to content/<lang>/library.md purely by its root-level content path
+  (Hugo ≥0.146 matches templates by path). Moving that file into a subdirectory
+  would silently fall back to _default/single.html and drop everything below. */}}
+{{ define "main" }}
+  <div data-pagefind-ignore>
+    {{ partial "header.html" . }}
+
+    {{ with .Content }}
+      <div class="prose prose-headings:font-heading max-w-none">{{ . }}</div>
+    {{ end }}
+
+    {{ range partial "library-categories.html" . }}
+      {{ $display := .display }}
+      {{/* Category-level, so every entry in a section labels its date the same
+        way — see library-item-date.html. Empty means no date is shown at all. */}}
+      {{ $dateLabel := .dateLabel }}
+      {{/* Cover shape, also category-level — see library-categories.html. */}}
+      {{ $coverRatio := .coverRatio }}
+
+      {{/* <details open>: collapsible with no JS, keyboard-operable for free, and
+        still expanded if CSS or JS never arrives. The <h2> stays inside the
+        <summary> — <summary> accepts heading content, and losing it would cost
+        screen-reader users the ability to jump between categories. */}}
+      <details class="library-section" open>
+        <summary class="library-section__summary">
+          <h2 class="library-section__heading">{{ i18n (printf "library_category_%s" .key) | default .key }}</h2>
+        </summary>
+
+        {{ if eq $display "poster" }}
+          <div class="library-grid">
+            {{ range .items }}
+              {{ $item := . }}
+              <a
+                href="{{ .link }}"
+                class="library-card library-card--{{ $coverRatio }} no-ext-icon"
+                {{ with .link }}target="_blank" rel="noopener noreferrer"{{ end }}
+              >
+                <span class="library-card__cover">
+                  {{ with .cover }}
+                    {{ partial "responsive-image.html" (dict "src" . "alt" $item.title "class" "library-card__img" "width" "400") }}
+                  {{ else }}
+                    <span class="library-card__placeholder">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                        <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                      </svg>
+                    </span>
+                  {{ end }}
+                </span>
+
+                <span class="library-card__body">
+                  <span class="library-card__title">{{ .title }}</span>
+                  {{ with .creator }}
+                    <span class="library-card__creator">{{ . }}</span>
+                  {{ end }}
+                  <span class="library-card__meta">
+                    {{ partial "rating-stars.html" .rating }}
+                    {{ partial "library-item-lang-badge.html" .lang }}
+                    {{ partial "library-item-date.html" (dict "date" .date "label" $dateLabel) }}
+                  </span>
+                  {{/* Most poster entries carry no note, so cards stay compact —
+                    but silently dropping one that does would be worse than a
+                    slightly taller card. Clamped to two lines by the CSS. */}}
+                  {{ partial "library-item-note.html" .note }}
+                </span>
+              </a>
+            {{ end }}
+          </div>
+        {{ else }}
+          <ul class="library-list">
+            {{ range .items }}
+              <li>
+                {{/* `no-ext-icon`: the whole row is the link, so the global ↗
+                  marker lands after the flex head and drops onto a line of its
+                  own. Rated rows were already exempt by accident — the rule
+                  skips anchors containing an svg, and the stars are svgs — which
+                  made the arrow appear on articles and videos only. */}}
+                {{/* `link` is optional: an imported book often has no URL worth
+                  pointing at. An unlinked row must not be an `<a href="">` —
+                  that is focusable, clickable, and navigates to the current
+                  page — so it degrades to a `<div>`, same switch the polaroid
+                  partial makes between `<a>` and `<figure>`. The hover cue is
+                  scoped to `a.library-row` in the CSS for the same reason. */}}
+                {{ if .link }}
+                  <a href="{{ .link }}" class="library-row no-ext-icon" target="_blank" rel="noopener noreferrer">
+                {{ else }}
+                  <div class="library-row">
+                {{ end }}
+                  <span class="library-row__head">
+                    <span class="library-row__title">
+                      {{ .title }}
+                      {{ with .creator }}<span class="library-row__creator">{{ . }}</span>{{ end }}
+                    </span>
+                    {{/* Stars first: they sit right against the title/creator,
+                      which is the point of not pushing this block to the far
+                      edge. The finished date is secondary and trails. */}}
+                    <span class="library-row__meta">
+                      {{ partial "rating-stars.html" .rating }}
+                      {{ partial "library-item-lang-badge.html" .lang }}
+                      {{ partial "library-item-date.html" (dict "date" .date "label" $dateLabel) }}
+                    </span>
+                  </span>
+                  {{ partial "library-item-note.html" .note }}
+                {{ if .link }}</a>{{ else }}</div>{{ end }}
+              </li>
+            {{ end }}
+          </ul>
+        {{ end }}
+      </details>
+    {{ end }}
+  </div>
+{{ end }}

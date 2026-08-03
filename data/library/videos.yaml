@@ -1,0 +1,11 @@
+# Unrated on purpose, same as articles.yaml — `rating` is optional everywhere.
+weight: 3
+display: list
+items:
+  - title: "You are being misled about renewable energy technology"
+    link: "https://www.youtube.com/watch?v=KtQ9nt2ZeGM"
+    date: 2026-05-31
+
+  - title: "Are we stuck with the same Desktop UX forever?"
+    link: "https://www.youtube.com/watch?v=1fZTOjd_bOQ"
+    date: 2026-05-31

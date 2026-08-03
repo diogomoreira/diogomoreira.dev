@@ -1,6 +1,6 @@
 {{/* Usage: {{ partial "responsive-image.html" (dict "page" . "src" .Params.cover "alt" .Title "class" "w-full border-4 border-base-200 shadow-md object-cover" "width" "800") }}
-Resolves src against the page's own bundle resources first, falling back to site-wide assets.
-Generates a responsive picture element with WebP and JPEG fallback, width/height, and lazy loading. */}}
+Resolves src against the page's own bundle resources first, falling back to site-wide assets. Generates a responsive
+picture element with WebP and JPEG fallback, width/height, and lazy loading. */}}
 {{ $img := "" }}
 {{ with .page }}
   {{ $img = .Resources.GetMatch $.src }}
@@ -9,12 +9,13 @@ Generates a responsive picture element with WebP and JPEG fallback, width/height
   {{ $img = resources.Get .src }}
 {{ end }}
 {{ if $img }}
-  {{ $width := .width | default "800" }}
+  {{ $width := .width | default "200" }}
   {{ $webp := $img.Resize (printf "%sx webp" $width) }}
   {{ $jpeg := $img.Resize (printf "%sx jpg" $width) }}
   {{/* `contents` removes the picture box so the img is laid out directly by the
-  parent — otherwise inside a flex/grid parent (e.g. daisyUI's `.card figure`)
-  the picture shrinks to the image's intrinsic width and `w-full` never applies. */}}
+    parent — otherwise inside a flex/grid parent (e.g. daisyUI's `.card figure`)
+    the picture shrinks to the image's intrinsic width and `w-full` never applies.
+  */}}
   <picture class="contents">
     <source srcset="{{ $webp.RelPermalink }}" type="image/webp" />
     <img

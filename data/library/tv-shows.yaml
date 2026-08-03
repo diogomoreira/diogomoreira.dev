@@ -1,0 +1,14 @@
+weight: 7
+display: poster
+items:
+  - title: "Severance"
+    link: "https://tv.apple.com/br/show/severance/umc.cmc.1srk2goyh2q2zdxcx605w8vtx"
+    cover: "images/library/severance.png"
+    rating: 5
+    date: 2023-09-02
+
+  - title: "FLCL"
+    link: "https://www.adultswim.com/videos/flcl"
+    cover: "images/library/flcl.jpg"
+    rating: 5
+    date: 2023-06-04

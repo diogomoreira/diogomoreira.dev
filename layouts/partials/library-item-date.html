@@ -1,0 +1,32 @@
+{{/* Usage: {{ partial "library-item-date.html" (dict "date" .date "label" $dateLabel) }}
+
+  Renders an entry's `date` under a category-chosen label — `date_label: finished`
+  on books gives "Finished <date>". There is no second date field: a book's `date`
+  *is* when you finished it, so a separate `finished` would only be another value
+  to keep in step with the sort key.
+
+  Nothing renders unless the category set `date_label`, because most categories
+  have no useful reading of the date — "Finished" under an album is nonsense.
+
+  An entry in such a category with *no* `date` is one you have not finished: a
+  book you are still reading. That renders as a badge instead of a date, keyed
+  `library_<label>_in_progress` — so a new `date_label` needs two keys in both
+  i18n files, `_on` and `_in_progress`. library-categories.html floats these
+  entries to the top of their category.
+
+  `time.AsTime` rather than trusting the YAML: an unquoted `2023-10-18` parses to
+  a time, but `"2023-10-18"` in quotes stays a string, and only one of those two
+  survives being handed to a date formatter. */}}
+{{ if .label }}
+  {{ if .date }}
+    {{ $when := time.AsTime .date }}
+    <span class="library-date">
+      {{ i18n (printf "library_%s_on" .label) | default .label }}
+      <time datetime="{{ $when.Format "2006-01-02" }}">{{ partial "formatted-date-short.html" $when }}</time>
+    </span>
+  {{ else }}
+    <span class="badge badge-tint badge-accent badge-sm rounded-none"
+      >{{ i18n (printf "library_%s_in_progress" .label) | default .label }}</span
+    >
+  {{ end }}
+{{ end }}
