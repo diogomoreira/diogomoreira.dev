@@ -9,7 +9,7 @@ picture element with WebP and JPEG fallback, width/height, and lazy loading. */}
   {{ $img = resources.Get .src }}
 {{ end }}
 {{ if $img }}
-  {{ $width := .width | default "200" }}
+  {{ $width := .width | default "800" }}
   {{ $webp := $img.Resize (printf "%sx webp" $width) }}
   {{ $jpeg := $img.Resize (printf "%sx jpg" $width) }}
   {{/* `contents` removes the picture box so the img is laid out directly by the
