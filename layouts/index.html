@@ -17,7 +17,7 @@
 
 
     <div class="min-w-0">
-      <h1 class="font-heading text-2xl font-medium text-heading">
+      <h1 class="font-heading text-center md:text-left text-2xl font-medium text-heading">
         {{ i18n "home_greeting" }}
         <a href="{{ .Site.Home.RelPermalink }}" class="block u-url font-bold no-underline hover:opacity-80" rel="me">
           <span class="tracking-tighter text-6xl p-name">{{ .Title }}</span>
@@ -25,7 +25,7 @@
       </h1>
       <div class="mt-4">
         {{/* No margin — the `mt-4` wrapper above owns the spacing under the bio. */}}
-        {{ partial "social.html" (dict "page" . "class" "justify-start gap-4") }}
+        {{ partial "social.html" (dict "page" . "class" "justify-center md:justify-start gap-4") }}
       </div>
     </div>
   </header>
@@ -65,38 +65,64 @@
     </section>
   {{ end }}
 
-  {{/* Both languages' picks, already newest-first — the pt-br home would otherwise
-    show the single print filed under content/pt-br/. */}}
-  {{ $picks := partial "picks-all.html" . }}
-  {{ if $picks }}
+  {{/* Newest library entries across every category, from data/library/*.yaml.
+    `merge` folds the category key into each item so `sort` still finds `date` at
+    the top level — wrapping them in a dict would nest the sort key out of reach.
+    No cover filter: this is a list, so entries without artwork belong here too,
+    and articles and videos are most of what gets added.
+
+    Dateless entries are skipped: a book still being read has no position in a
+    newest-first list, and including it would pin it to the top of "recently
+    added" until it is finished. It shows on the library page instead.
+  */}}
+  {{ $entries := slice }}
+  {{ range partial "library-categories.html" . }}
+    {{ $cat := .key }}
+    {{ range .items }}
+      {{ if .date }}
+        {{ $entries = $entries | append (merge . (dict "category" $cat)) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ $entries = first 8 (sort $entries "date" "desc") }}
+  {{ if $entries }}
     <section class="mb-14">
       <div class="flex items-center justify-between mb-5">
-        <h2 class="font-heading text-xs font-semibold uppercase tracking-widest">{{ i18n "home_latest_picks" }}</h2>
-        <a href="{{ (.Site.GetPage "picks").RelPermalink }}" class="text-xs link link-primary"
-          >{{ i18n "home_all_picks" }}</a
+        <h2 class="font-heading text-xs font-semibold uppercase tracking-widest">{{ i18n "home_recently_added" }}</h2>
+        <a href="{{ (.Site.GetPage "library").RelPermalink }}" class="text-xs link link-primary"
+          >{{ i18n "home_browse_library" }}</a
         >
       </div>
-      {{/* Prints rather than cards. Neither `tilt` nor `width` is passed: the
-        `.polaroid-group--grid` rules in main.css supply the alternating lean and
-        size the prints to their track, and an inline custom property from the
-        partial would override both.
+      {{/* Deliberately the same markup as the Recent Posts list above, so the two
+        homepage lists read as one system: title left, metadata right.
       */}}
-      <div class="polaroid-group polaroid-group--grid not-prose">
-        {{ range first 4 $picks }}
-          {{ $caption := printf `<span class="polaroid__title">%s</span>%s` (.Title | htmlEscape) (partial "pick-medium-badge.html" .) | safeHTML }}
-          {{ partial "polaroid.html" (dict
-            "page" .
-            "src" .Params.cover
-            "alt" .Title
-            "caption" $caption
-            "ratio" "square"
-            "resizeWidth" "360"
-            "link" (.Params.link | default .RelPermalink)
-            "external" (ne .Params.link nil)
-            "origin" "layouts/index.html picks row")
-          }}
+      <ul class="list-none p-0 m-0">
+        {{ range $entries }}
+          <li class="border-b py-2 border-base-300">
+            {{/* `no-ext-icon`: an external link whose only children are spans and
+              a badge is not covered by the global marker rule's exclusions, so
+              the ↗ would land after the flex container on a line of its own.
+            */}}
+            <a
+              href="{{ .link }}"
+              class="flex flex-col md:flex-row md:items-center md:justify-between w-full group no-ext-icon"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="text-sm font-medium text-base-content group-hover:opacity-70">
+                {{ .title }}
+                {{/* Reuses the library row's creator class rather than restyling
+                  with utilities — it owns the separator and the muted mix.
+                */}}
+                {{ with .creator }}<span class="library-row__creator">{{ . }}</span>{{ end }}
+              </span>
+              <span class="badge badge-tint badge-sm rounded-none shrink-0 mt-1 sm:mt-0">
+                {{ i18n (printf "library_category_%s" .category) | default .category }}
+              </span>
+            </a>
+          </li>
         {{ end }}
-      </div>
+      </ul>
     </section>
   {{ end }}
 

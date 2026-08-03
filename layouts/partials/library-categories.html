@@ -1,0 +1,48 @@
+{{/* Ordered, non-empty library categories. Usage: {{ range partial "library-categories.html" . }}
+
+  `hugo.Data.library` is a map keyed by filename, and Go templates walk maps in
+  key order — so ranging it directly would render Albums, Apps, Articles, Books…
+  alphabetically. Rebuilding it as a slice sorted by each file's own `weight` is
+  what keeps the section order editable from the YAML instead of the template.
+
+  Sorting the items happens here too, once, so this page and the homepage row
+  cannot disagree about what "newest" means. `sort`, not `.ByDate` — these are
+  plain maps, not pages. */}}
+{{/* A missing `date` means "in progress" — a book you are still reading, which
+  has no finish date yet. Those sort above everything dated, since they are the
+  most current thing in the category, and they keep their YAML order among
+  themselves. Splitting the slice before sorting is also what keeps `sort` away
+  from a nil key. See library-item-date.html for the badge they render. */}}
+{{ $cats := slice }}
+{{ range $key, $cat := hugo.Data.library }}
+  {{/* Skip categories with no entries: the eleven files all exist so the shape is
+    visible, but an empty heading is just noise on the page. */}}
+  {{ with $cat.items }}
+    {{ $dated := slice }}
+    {{ $undated := slice }}
+    {{ range . }}
+      {{ if .date }}
+        {{ $dated = $dated | append . }}
+      {{ else }}
+        {{ $undated = $undated | append . }}
+      {{ end }}
+    {{ end }}
+    {{/* `date_label` opts a category into showing each entry's `date`, using it
+      as the i18n suffix: `finished` on books renders "Finished <date>". Unset
+      means no date is shown, which is right for most categories — a date under
+      an album says nothing useful. */}}
+    {{/* `cover_ratio` is a category setting for the same reason `display` is:
+      every film in Movies has the same shape, and the shape is a property of the
+      medium, not of one entry. `square` (the default) suits album and podcast
+      art; `poster` is the 2:3 of a film poster or a game's vertical box art. */}}
+    {{ $cats = $cats | append (dict
+      "key" $key
+      "display" ($cat.display | default "list")
+      "weight" ($cat.weight | default 99)
+      "dateLabel" ($cat.date_label | default "")
+      "coverRatio" ($cat.cover_ratio | default "square")
+      "items" ($undated | append (sort $dated "date" "desc"))
+    ) }}
+  {{ end }}
+{{ end }}
+{{ return sort $cats "weight" }}

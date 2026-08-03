@@ -189,11 +189,11 @@ icon = "snippets"
 hidden = true
 
 [[menus.main]]
-identifier = "picks"
-pageRef = "/picks"
+identifier = "library"
+pageRef = "/library"
 weight = 9
 [menus.main.params]
-icon = "picks"
+icon = "library"
 
 [[menus.main]]
 identifier = "photos"

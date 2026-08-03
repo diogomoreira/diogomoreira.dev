@@ -7,7 +7,7 @@ academic = "Academic"
 projects = "Projects"
 uses = "Uses"
 snippets = "Snippets"
-picks = "Picks"
+library = "Library"
 photos = "Photos"
 nav_aria_label = "Main navigation"
 
@@ -15,8 +15,8 @@ nav_aria_label = "Main navigation"
 home_greeting = "Hi! I'm"
 home_recent_posts = "Recent Posts"
 home_all_posts = "All posts →"
-home_latest_picks = "Latest Picks"
-home_all_picks = "All picks →"
+home_recently_added = "Recently Added"
+home_browse_library = "Browse the library →"
 
 # Academic / CV
 academic_latest_publications = "Latest publications"
@@ -60,19 +60,27 @@ built_with_label = "Built with"
 # Terms/taxonomy
 terms_last_updated = "Last updated:"
 
-# Picks
-picks_added_on = "Added on"
-picks_filter_all = "All"
-picks_filter_aria = "Filter picks by medium"
-picks_lang_only = "Only available in {{ .Language }}"
-pick_medium_music = "music"
-pick_medium_movie = "movie"
-pick_medium_series = "series"
-pick_medium_tvseries = "series"
-pick_medium_book = "book"
-pick_medium_game = "game"
-pick_medium_podcast = "podcast"
-pick_medium_other = "other"
+# Library
+library_added_on = "Added on"
+library_finished_on = "Finished"
+# Badge for an entry with no date in a category that labels dates — see
+# library-item-date.html. Every `date_label` needs both `_on` and `_in_progress`.
+library_finished_in_progress = "Reading"
+library_lang_only = "Only available in {{ .Language }}"
+library_rating_label = "{{ .Rating }} out of 5"
+# One key per file in data/library/ — a missing key renders the raw filename.
+library_category_albums = "Albums"
+library_category_articles = "Articles"
+library_category_videos = "Videos"
+library_category_games = "Games"
+library_category_books = "Books"
+library_category_movies = "Movies"
+library_category_tv-shows = "TV Shows"
+library_category_podcasts = "Podcasts"
+library_category_websites = "Websites"
+library_category_apps = "Apps"
+library_category_hardware = "Hardware"
+library_category_people = "People worth following"
 
 # Table of contents
 toc_label = "On this page"

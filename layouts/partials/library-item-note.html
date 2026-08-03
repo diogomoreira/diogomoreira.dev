@@ -1,0 +1,18 @@
+{{/* Usage: {{ partial "library-item-note.html" .note }} — resolves a per-language note.
+
+  Notes are the one part of an entry that is prose, so they are the one part
+  that has to be translated: `note: {en: "…", pt-br: "…"}`. Falls back to `en`
+  when a translation is missing, so half-translated data still renders.
+
+  The `reflect.IsMap` guard is not paranoia — `index` on a plain string errors out
+  at build time, and writing `note: "…"` is the obvious mistake to make. */}}
+{{ if reflect.IsMap . }}
+  {{ $text := index . site.Language.Lang | default (index . "en") }}
+  {{ with $text }}
+    <span class="library-note">{{ . | markdownify }}</span>
+  {{ end }}
+{{ else }}
+  {{ with . }}
+    <span class="library-note">{{ . | markdownify }}</span>
+  {{ end }}
+{{ end }}

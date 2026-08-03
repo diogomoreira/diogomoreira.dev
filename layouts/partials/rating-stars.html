@@ -1,0 +1,28 @@
+{{/* Usage: {{ partial "rating-stars.html" .rating }} — five stars, the first N filled.
+
+  Inline SVG rather than ★/☆ text for the same reason the nav uses SVG icons:
+  the glyphs render at wildly different weights across platforms, and one of the
+  two is missing from some fonts entirely.
+
+  The whole run is a single `role="img"` with one label, so a screen reader says
+  "4 out of 5" instead of announcing five separate stars. Renders nothing when
+  `rating` is unset — an unrated entry should show no stars, not zero stars. */}}
+{{ $rating := . | default 0 }}
+{{ if gt $rating 0 }}
+  <span class="library-stars" role="img" aria-label="{{ i18n "library_rating_label" (dict "Rating" $rating) }}">
+    {{ range seq 5 }}
+      <svg
+        class="library-stars__star{{ if le . $rating }} library-stars__star--on{{ end }}"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="14"
+        height="14"
+        aria-hidden="true"
+      >
+        <path
+          d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2Z"
+        />
+      </svg>
+    {{ end }}
+  </span>
+{{ end }}

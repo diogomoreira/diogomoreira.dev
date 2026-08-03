@@ -1,0 +1,35 @@
+# `cover_ratio: poster` — 2:3, matching vertical box art and Steam's 600×900
+# library capsule. Sources that aren't 2:3 are centre-cropped to fit.
+weight: 4
+display: poster
+cover_ratio: poster
+items:
+  - title: "Clair Obscur: Expedition 33"
+    link: "https://store.steampowered.com/app/1903340/Clair_Obscur_Expedition_33"
+    cover: "images/library/clair-obscur.webp"
+    rating: 5
+    date: 2026-05-31
+
+  - title: "Final Fantasy VII (Remake)"
+    link: "https://www.amazon.com.br/Final-Fantasy-VII-Remake-PlayStation/dp/B00ZS80PC2"
+    cover: "images/library/final-fantasy-vii.webp"
+    rating: 5
+    date: 2023-06-21
+
+  - title: "Final Fantasy XV"
+    link: "https://www.amazon.com.br/Final-Fantasy-XV-Royal-PlayStation/dp/B0792HGXB7"
+    cover: "images/library/final-fantasy-xv.jpeg"
+    rating: 5
+    date: 2023-06-21
+
+  - title: "Persona 5"
+    link: "https://www.amazon.com.br/Sega-PS-22026-7-Persona-Royal-PlayStation/dp/B085PS9F4H"
+    cover: "images/library/persona5.jpg"
+    rating: 5
+    date: 2023-06-21
+
+  - title: "NieR: Automata"
+    link: "https://amzn.to/3cC30xj"
+    cover: "images/library/nier-automata.jpg"
+    rating: 5
+    date: 2021-04-17

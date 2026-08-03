@@ -42,4 +42,4 @@ The rest of that story you can find on my [work]({{< relref "work" >}}) or [acad
 
 ---
 
-This is an overview of who I am. If you're after the professional side, see [work]({{< relref "work" >}}) and [academic]({{< relref "academic" >}}). You can also get to know me better through the [things I like]({{< relref "picks" >}}) and [what I'm doing right now]({{< relref "now" >}}). Feel free to drop me a message in any of my social media profiles, I'll be glad to reply.
+This is an overview of who I am. If you're after the professional side, see [work]({{< relref "work" >}}) and [academic]({{< relref "academic" >}}). You can also get to know me better through the [things I like]({{< relref "library" >}}) and [what I'm doing right now]({{< relref "now" >}}). Feel free to drop me a message in any of my social media profiles, I'll be glad to reply.

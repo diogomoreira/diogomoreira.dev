@@ -1,0 +1,12 @@
+# `cover_ratio: poster` gives the 2:3 of a film poster. Sources that aren't 2:3
+# are centre-cropped to fit, so the grid still lines up.
+weight: 6
+display: poster
+cover_ratio: poster
+items:
+  - title: "Paprika (2006)"
+    creator: "Satoshi Kon"
+    link: "https://www.imdb.com/title/tt0851578/"
+    cover: "images/library/paprika.jpg"
+    rating: 5
+    date: 2024-09-14

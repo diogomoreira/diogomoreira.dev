@@ -1,0 +1,19 @@
+{{/* Usage: {{ partial "library-item-lang-badge.html" .lang }} — marks an entry whose
+  *work* is tied to one language: a Portuguese-only podcast, an untranslated book.
+
+  Explicit, not inferred. Favorites live in a single language-neutral data
+  directory now, so there is no content dir to read this off — which is the better
+  design anyway: you tag the handful of entries where language actually matters,
+  and nothing has to be exempted for being language-neutral in the first place. */}}
+{{ $lang := . }}
+{{ if and $lang (ne $lang site.Language.Lang) }}
+  {{ $label := $lang }}
+  {{ range hugo.Sites }}
+    {{ if eq .Language.Lang $lang }}{{ $label = .Language.Label }}{{ end }}
+  {{ end }}
+  <span
+    class="badge badge-tint badge-sm rounded-none font-mono"
+    title="{{ i18n "library_lang_only" (dict "Language" $label) }}"
+    >{{ upper (substr $lang 0 2) }}</span
+  >
+{{ end }}

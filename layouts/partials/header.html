@@ -24,7 +24,7 @@
     {{ with .Params.tags }}
       <div class="flex items-center gap-2 flex-wrap">
         {{ range . }}
-          <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="badge badge-outline badge-accent badge-sm"
+          <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="badge badge-tint badge-accent badge-sm"
             >#{{ . }}</a
           >
         {{ end }}

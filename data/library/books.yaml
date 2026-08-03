@@ -1,0 +1,136 @@
+# `date_label: finished` renders each entry's `date` as "Finished <date>" — for a
+# book, the date you added it and the date you finished it are the same thing, so
+# there is no second field to keep in step with the sort key. Any category can
+# opt in; leave it off and no date shows.
+#
+# Leave `date` off a book you are still reading: it sorts to the top of the
+# section and renders a "Reading" badge in place of the date.
+#
+# Most of the list below came out of a Goodreads export (the `read` shelf, 2026-08).
+# Entries marked "shelved date" had no Date Read there, only a Date Added, so the
+# "Finished" they render is really when the book was shelved — several were added
+# in one batch in Feb 2018. Correct them by hand as you remember the real dates —
+# don't just drop `date`, which now means "still reading".
+weight: 5
+display: list
+date_label: finished
+items:
+  - title: "Metropolis"
+    creator: "Thea von Harbou"
+
+  - title: "Você não merece ser feliz: Como conseguir mesmo assim"
+    creator: "Daniel Furlan"
+    lang: "pt-br"
+
+  - title: "I, Robot"
+    creator: "Isaac Asimov"
+    link: "https://link.amazon/B025yhM8Z"
+    rating: 5
+    date: 2026-06-23
+
+  - title: "The Metamorphosis"
+    creator: "Franz Kafka"
+    link: "https://link.amazon/B0iZql7AU"
+    rating: 4
+    date: 2026-02-01
+
+  - title: "Do Androids Dream of Electric Sheep?"
+    creator: "Philip K. Dick"
+    link: "https://link.amazon/B0hJYqDSZ"
+    rating: 5
+    date: 2023-10-21
+
+  - title: "O melhor que podíamos fazer"
+    creator: "Thi Bui"
+    link: "https://link.amazon/B07ePsABH"
+    rating: 5
+    date: 2023-04-22
+
+  - title: "Este livro não vai te deixar rico"
+    creator: "Startup da Real"
+    link: "https://link.amazon/B0hluXxD6"
+    rating: 4
+    date: 2021-12-01
+    lang: "pt-br"
+
+  - title: "The Second Foundation"
+    creator: "Isaac Asimov"
+    link: "https://link.amazon/B016PQANj"
+    rating: 4
+    date: 2021-04-16
+
+  - title: "Onde as Gaivotas Fazem Seus Ninhos"
+    creator: "Minna Miná"
+    rating: 5
+    date: 2021-04-05
+    lang: "pt-br"
+
+  - title: "Steal Like an Artist"
+    creator: "Austin Kleon"
+    link: "https://link.amazon/B0fEDzpgu"
+    rating: 4
+    date: 2021-03-30
+
+  - title: "King Lear"
+    creator: "William Shakespeare"
+    link: "https://link.amazon/B0cDAuRYX"
+    rating: 3
+    date: 2021-03-27
+
+  - title: "The Strange Case of Dr. Jekyll and Mr. Hyde"
+    creator: "Robert Louis Stevenson"
+    link: "https://link.amazon/B0gZGQBaj"
+    rating: 4
+    date: 2021-01-04
+
+  - title: "Foundation and Empire"
+    creator: "Isaac Asimov"
+    link: "https://link.amazon/B016PQANj"
+    rating: 5
+    date: 2020-01-30
+
+  - title: "Foundation"
+    creator: "Isaac Asimov"
+    link: "https://link.amazon/B016PQANj"
+    rating: 5
+    date: 2019-11-10
+
+  - title: "Return to the Little Kingdom"
+    creator: "Michael Moritz"
+    rating: 3
+    date: 2010-03-10
+
+  - title: "The Accidental Billionaires"
+    creator: "Ben Mezrich"
+    rating: 2
+    date: 2012-02-10
+
+  # Shelved date.
+  - title: "Outros jeitos de usar a boca"
+    creator: "Rupi Kaur"
+    rating: 2
+    date: 2017-05-16
+
+  # Shelved date.
+  - title: "The Kite Runner"
+    creator: "Khaled Hosseini"
+    rating: 4
+    date: 2008-09-17
+
+  - title: "O Preço de Ser Diferente"
+    creator: "Mônica de Castro"
+    rating: 3
+    date: 2018-01-01
+    lang: "pt-br"
+
+  - title: "The Outsiders"
+    creator: "S.E. Hinton"
+    rating: 4
+    date: 2015-08-12
+
+  - title: "Maioridade Penal"
+    creator: "Rogério Ceni"
+    link: "https://link.amazon/B02408R1K"
+    rating: 4
+    date: 2010-01-01
+    lang: "pt-br"

@@ -1,0 +1,19 @@
+# `rating` is optional everywhere and deliberately unused here — an article is
+# worth reading or it isn't, and a five-point scale on prose says very little.
+weight: 2
+display: list
+items:
+  - title: "Get your work recognized: write a brag document"
+    creator: "Julia Evans"
+    link: "https://jvns.ca/blog/brag-documents/"
+    date: 2026-05-31
+
+  - title: "40 questions to ask yourself every year"
+    creator: "Steph Ango"
+    link: "https://stephango.com/40-questions"
+    date: 2026-05-31
+
+  - title: "40 questions to ask yourself every decade"
+    creator: "Steph Ango"
+    link: "https://stephango.com/40-questions-decade"
+    date: 2026-05-31

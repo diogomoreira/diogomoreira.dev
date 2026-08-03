@@ -21,7 +21,8 @@
   default: true;
   prefersdark: false;
   color-scheme: "light";
-  /* Warm paper, cool ink — the inverse of midnight's cool ground and warm text.
+  /* Warm paper, cool ink — the inverse of midnight's warm ground and warm ink:
+     both themes sit in the same warm family, and only the ink flips.
      Every brand/semantic colour below carries its midnight counterpart's hue and
      chroma, dropped in lightness until it clears 4.5:1 on `base-200`. In this
      theme the colour is the *dark* member of the pair and `-content` is the
@@ -61,33 +62,52 @@
   default: false;
   prefersdark: true;
   color-scheme: "dark";
-  /* Here the colour is the *light* member of each pair and `-content` is
-     near-black — the mirror of sunrise. A near-white `-content` on these
-     mid-tone chips is the trap: it looks fine in isolation but puts
-     `badge-warning` at 2.6:1. `base-300` has to stay a step above `base-200`,
-     or `border-base-300` — the site's only divider token — disappears. */
-  --color-base-100: #191823;
-  --color-base-200: #22212f;
-  --color-base-300: #2c2b3b;
-  --color-base-content: #b5b0a0;
+  /* Warm near-black ground, warm ink — the mirror of sunrise's warm paper and
+     cool ink. Here the colour is the *light* member of each pair and `-content`
+     is near-black. A near-white `-content` on these mid-tone chips is the trap:
+     it looks fine in isolation but puts `badge-warning` at 2.6:1.
+
+     `base-200` is the given anchor (#141412) because `<html>` carries
+     `bg-base-200`: it is the page ground *and* the surface every ratio below is
+     measured against. `base-100` sits *below* it — the reading column is the
+     darkest surface in this theme, the inverse of sunrise, where it is the
+     lightest. Chroma climbs along the ramp (.003 → .004 → .008 in OKLCH), the
+     same shape as sunrise's (.004 → .008 → .0125), so the steps warm up as they
+     lighten instead of staying flatly grey.
+
+     `base-300` has to stay a step above `base-200`, or `border-base-300` — the
+     site's only divider token — disappears; it clears it by 1.145:1, matching
+     what this theme has always had. The column/ground step is softer (1.074:1)
+     because ratios compress this far down the scale, and that is fine: the
+     column's edge is drawn by `border-x border-base-300` in baseof.html, not by
+     the surface step alone. */
+  --color-base-100: #0a0a09;
+  --color-base-200: #141412;
+  --color-base-300: #22211d;
+  --color-base-content: #bbb6a6;
+  /* Every `-content` below is its own colour mixed 10% into `base-100`: a warm
+     near-black carrying a trace of the chip it sits on. Worst pair is 5.34:1. */
   --color-primary: #7a92cc;
-  --color-primary-content: #12172a;
-  --color-secondary: #bbb591;
-  --color-secondary-content: #1c1a12;
+  --color-primary-content: #131519;
+  /* Chroma raised from the previous #bbb591 (same hue) — as a khaki it sat
+     within 1.02:1 of `base-content` at nearly the same hue, so the library
+     section headings and `empty-state` read as body copy rather than a colour. */
+  --color-secondary: #b7ac6f;
+  --color-secondary-content: #181712;
   --color-accent: #7a9270;
-  --color-accent-content: #111710;
-  --color-neutral: #201f30;
-  --color-neutral-content: #f7f8fa;
+  --color-accent-content: #131512;
+  --color-neutral: #13120f;
+  --color-neutral-content: #f7f7f4;
   --color-info: #9980b8;
-  --color-info-content: #17111f;
+  --color-info-content: #161417;
   --color-success: #6c928c;
-  --color-success-content: #0f1614;
+  --color-success-content: #121514;
   --color-warning: #b5996e;
-  --color-warning-content: #1a1408;
+  --color-warning-content: #181612;
   /* Chroma pulled back ~15% from the original #d02a2f while lifting the
      lightness, so clearing 4.5:1 on `base-200` doesn't turn it neon. */
   --color-error: #e65e58;
-  --color-error-content: #20100f;
+  --color-error-content: #1c1210;
   --radius-selector: 1rem;
   --radius-field: 2rem;
   --radius-box: 0.25rem;
@@ -111,7 +131,9 @@ html[data-theme="midnight"] {
 }
 
 @theme {
-  --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "IBM Plex Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-sans:
+    "Instrument Sans", -apple-system, BlinkMacSystemFont, "Inter", "IBM Plex Sans", "Segoe UI", Helvetica, Arial,
+    sans-serif;
   --font-body: var(--font-sans);
   --font-mono:
     "JetBrains Mono", ui-monospace, SFMono-Regular, "Cascadia Code", "IBM Plex Mono", "Roboto Mono", "DejaVu Sans Mono",
@@ -359,6 +381,22 @@ html[data-theme="midnight"] {
     color: var(--color-error);
   }
 
+  /* ── Pagefind search box ──────────────────────────────────────────────────
+     Only the placeholder is stepped down; the input keeps Pagefind's 16px
+     (`--pf-input-font-size`), because anything under 16px makes iOS zoom the
+     page when the field takes focus. Shrinking the placeholder alone is safe —
+     the zoom heuristic reads the input's own font size.
+
+     No specificity fight despite Pagefind's `:is(*, #\#)` triple hammer: its
+     `::placeholder` rule sets `color` only, so the size it renders at is
+     *inherited* from the input, and any specified value outranks inheritance
+     whatever the layer. Don't add other properties here expecting them to
+     land — anything Pagefind also declares wins, since its sheet is unlayered
+     and this block is not. */
+  .pf-searchbox-input::placeholder {
+    font-size: 14px;
+  }
+
   /* ── Polaroid prints ──────────────────────────────────────────────────────
      Emitted by the `polaroid` and `polaroid-group` shortcodes.
 
@@ -379,7 +417,7 @@ html[data-theme="midnight"] {
        is doing, so paper and ink are pinned rather than following the active
        theme. `--polaroid-ink` is a fixed near-black and everything inside the
        frame tints against it — reaching for `--color-base-content` is the trap,
-       since it inverts to `#b5b0a0` in midnight and would put a near-white
+       since it inverts to `#bbb6a6` in midnight and would put a near-white
        caption on white paper. The paper is a shade brighter than sunrise's
        `base-100` (#fbfaf7) so the print still lifts off the page in light mode,
        where the two sit close together — keep it above whatever `base-100` is. */
@@ -552,125 +590,105 @@ html[data-theme="midnight"] {
     z-index: 2;
   }
 
-  /* Fixed 2-up / 4-up variant, used by the picks row on the homepage. The flex
-     pile above would let an in-between container width land on three prints in
-     one row and a lonely fourth below; a grid can only ever break 2 or 4.
-     Everything else — position, lean, hover lift — still comes from the rules
-     above, since the element carries both classes. */
-  .polaroid-group--grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    justify-items: center;
-    row-gap: 0.75rem;
-  }
-
-  @media (width >= 40rem) {
-    .polaroid-group--grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-  }
-
-  /* Prints fill their track and spill a little over it, so neighbours overlap
-     the way they do in the flex pile. The second selector is there purely to
-     out-specify `.polaroid-group > .polaroid + .polaroid` above. */
-  .polaroid-group--grid > .polaroid,
-  .polaroid-group--grid > .polaroid + .polaroid {
-    --polaroid-w: 100%;
-    margin-inline: -0.3rem;
-    align-self: stretch;
-  }
-
-  /* Titles wrap to different line counts, so let every frame in the row fill
-     the tallest track and push its strip to the bottom. Without this the prints
-     would end at visibly different heights and read as sloppy rather than
-     deliberately scattered. */
-  .polaroid-group--grid .polaroid__frame {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .polaroid-group--grid .polaroid__strip {
-    flex: 1;
-    align-content: center;
-  }
-
-  /* ---- Picks wall -------------------------------------------------------
+  /* ---- Library ----------------------------------------------------------
      Hand-written for the same reason as `.polaroid` above: Tailwind v4 emits
      only the classes it found in `hugo_stats.json`, which Hugo writes *during*
-     the build, so a first-use utility like `columns-4` or `break-inside-avoid`
-     would take two builds to exist.
+     the build, so a first-use utility would take two builds to exist.
 
-     Masonry via CSS multi-column rather than a JS grid: covers arrive at their
-     natural aspect ratio (the `responsive-image` partial resizes width-only),
-     nothing has to be measured after load, and cards hidden by the medium
-     filter let the columns reflow for free. The trade-off is reading order —
-     columns fill top-to-bottom, so newest-first runs down column one before
-     column two. */
-  .picks-filters {
+     Two card shapes, chosen per category by `display:` in data/library/*.yaml.
+     `poster` for things with cover art, `list` for things without — a person
+     worth following has no cover, and forcing one gives a wall of placeholders.
+
+     Both shapes share one surface treatment: a `base-200` panel on the
+     `base-100` main column, hairlined in `base-300` and stepping to `base-300`
+     on hover. Those two are the only safe tokens here — `base-200` is the
+     surface this palette's 4.5:1 contrast was measured against, and `base-300`
+     is the only divider that is a surface step in *both* themes (`neutral`
+     inverts between them and would vanish in one). */
+  /* Each section is a <details open>, so collapsing is native: no JS, keyboard
+     and screen-reader support for free, and the sections still render expanded
+     with CSS disabled. The <h2> stays inside the <summary> rather than being
+     replaced by it — <summary> accepts heading content, and dropping the heading
+     would cost screen-reader users the ability to navigate the page by section. */
+  .library-section {
+    margin-block-end: 3rem;
+  }
+
+  /* The summary carries the click target and the rule; the h2 inside carries the
+     type. `list-style: none` kills the marker in Firefox, the `::-webkit-` rule
+     does it in older WebKit, and `display: flex` covers the rest. */
+  .library-section__summary {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
     gap: 0.5rem;
-    margin-block-end: 1.5rem;
-  }
-
-  .picks-chip {
     cursor: pointer;
+    list-style: none;
+    color: var(--color-secondary);
+    padding-block-end: 0.5rem;
+    border-block-end: 1px solid var(--color-base-300);
   }
 
-  /* Column steps are picked against the *centre rail*, not the viewport: from
-     64rem up the two rails take 18rem out of the width (20rem past 80rem), which
-     is why 64rem adds no column — the track narrows there even as the screen
-     grows. Phones stay single-column so a cover is never postage-stamp sized. */
-  .picks-wall {
-    column-count: 1;
-    column-gap: 1rem;
+  .library-section__summary::-webkit-details-marker {
+    display: none;
   }
 
-  @media (width >= 30rem) {
-    .picks-wall {
-      column-count: 2;
-    }
+  .library-section__summary:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
   }
 
-  @media (width >= 48rem) {
-    .picks-wall {
-      column-count: 3;
-    }
+  /* Chevron built as a mask rather than a glyph, same technique as the
+     external-link marker below: it inherits the summary's colour through
+     `currentColor` and needs no font. Points right when collapsed, down when
+     open. `margin-inline-start: auto` parks it at the far end of the rule. */
+  .library-section__summary::after {
+    content: "";
+    inline-size: 0.7rem;
+    block-size: 0.7rem;
+    margin-inline-start: auto;
+    background-color: currentColor;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    transition: transform 150ms ease;
   }
 
-  @media (width >= 80rem) {
-    .picks-wall {
-      column-count: 4;
-    }
+  .library-section[open] > .library-section__summary::after {
+    transform: rotate(90deg);
   }
 
-  @media (width >= 96rem) {
-    .picks-wall {
-      column-count: 5;
-    }
+  .library-section__heading {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: inherit;
+    margin: 0;
   }
 
-  @media (width >= 120rem) {
-    .picks-wall {
-      column-count: 6;
-    }
+  /* Lives on the content, not the summary — a collapsed section would otherwise
+     keep a 1rem gap it no longer has anything to separate. */
+  .library-section__summary + * {
+    margin-block-start: 1rem;
   }
 
-  /* The whole card is one anchor, so it needs `display: block` twice over: an
-     inline box ignores `break-inside`, which would let the masonry split a card
-     across two columns.
+  /* `auto-fill` + `minmax` replaces the six breakpoints the old masonry wall
+     needed: grouping by category means fewer items per section and similar
+     aspect ratios within one, so a real grid beats a column count here. */
+  .library-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+    gap: 1rem;
+  }
 
-     `base-200` for the panel because `#main-content` is `base-100` — it lifts off
-     the page in both themes, and it is the surface this palette's 4.5:1 contrast
-     was measured against, so the muted 70% date line is safe on it by
-     construction. `base-300` for the hairline because it is the only token that
-     is a surface step in *both* themes; `neutral` inverts between them and would
-     vanish in one. */
-  .picks-card {
+  /* ---- Poster cards ----
+     A panel: cover art is an object, and a surface under it says so. Rows get
+     the opposite treatment (below) — the two shapes deliberately do not share
+     this, which is why the rules are no longer grouped. */
+  .library-card {
     display: block;
-    break-inside: avoid;
-    margin: 0 0 1rem;
     padding: 0.5rem;
     background-color: var(--color-base-200);
     border: 1px solid var(--color-base-300);
@@ -678,81 +696,245 @@ html[data-theme="midnight"] {
     transition: background-color 150ms ease;
   }
 
-  .picks-card.is-filtered-out {
-    display: none;
-  }
-
-  /* Hover and keyboard focus get the same treatment — the card is a link and
-     should read as one. `base-300` keeps the step inside the same token family,
-     so it moves in the same direction in both themes instead of inverting. */
-  .picks-card:hover,
-  .picks-card:focus-visible {
+  .library-card:hover,
+  .library-card:focus-visible {
     background-color: var(--color-base-300);
   }
 
-  .picks-card:hover .picks-card__title,
-  .picks-card:focus-visible .picks-card__title {
-    text-decoration: underline;
+  /* `text-decoration-line`, never the `text-decoration` shorthand — the shorthand
+     resets colour and style back to `currentColor`/`solid` and the dash is lost.
+     The longhands have to sit on the title itself rather than being inherited
+     from the `a`: `-color`, `-style` and `-thickness` are non-inherited
+     properties, so the site-wide `a` rule at the bottom of this file never
+     reaches a <span> nested inside the anchor. */
+  .library-card__title,
+  .library-row__title {
+    text-decoration-color: var(--color-accent);
+    text-decoration-style: dashed;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
   }
 
-  .picks-card:hover .picks-card__img,
-  .picks-card:focus-visible .picks-card__img {
+  .library-card:hover .library-card__title,
+  .library-card:focus-visible .library-card__title {
+    text-decoration-line: underline;
+  }
+
+  .library-card:hover .library-card__img,
+  .library-card:focus-visible .library-card__img {
     opacity: 0.9;
   }
 
-  .picks-card__cover {
+  .library-card__cover {
     display: block;
   }
 
-  /* No shadow here — the card panel casts it now, and two nested shadows read as
-     an embossed edge rather than a print on a surface. */
-  .picks-card__img {
+  /* No shadow here — the panel casts it. Two nested shadows read as an embossed
+     edge rather than a print sitting on a surface.
+
+     `aspect-ratio` + `object-fit: cover` rather than letting each cover keep its
+     natural shape: within a category the grid has to line up, and the source
+     images are whatever the store or label happened to publish. The ratio comes
+     from the category's `cover_ratio` (see below), so a mismatched source is
+     centre-cropped rather than breaking the row. */
+  .library-card__img {
     display: block;
     width: 100%;
     height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
     border: 2px solid var(--color-base-300);
   }
 
-  /* `base-100` rather than `base-200`: the panel behind it is `base-200`, so the
-     placeholder would otherwise disappear into it. */
-  .picks-card__placeholder {
+  /* Cover shapes, set per category by `cover_ratio` in data/library/*.yaml.
+     `square` is the default and needs no rule — it is the base above. `poster` is
+     the 2:3 of a film poster and a game's vertical box art (Steam's library
+     capsule is 600×900, the same shape). Adding a shape is one rule here plus one
+     `cover_ratio:` line in the YAML — no template edit. */
+  .library-card--poster .library-card__img,
+  .library-card--poster .library-card__placeholder {
+    aspect-ratio: 2 / 3;
+  }
+
+  /* `base-100` rather than `base-200`: the panel behind it is `base-200`, so a
+     matching placeholder would disappear into it. */
+  .library-card__placeholder {
     display: flex;
     align-items: center;
     justify-content: center;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 1 / 1;
     border: 2px solid var(--color-base-300);
     background-color: var(--color-base-100);
     color: var(--color-accent);
   }
 
-  .picks-card__caption {
+  .library-card__body {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
-    margin-block-start: 0.6rem;
+    gap: 0.2rem;
+    margin-block-start: 0.5rem;
   }
 
-  .picks-card__title {
+  .library-card__title {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    font-size: 0.8125rem;
     font-weight: 600;
     line-height: 1.3;
     color: var(--color-base-content);
   }
 
-  .picks-card__badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem;
-  }
-
-  /* 70% is the documented floor for muted text — `/50` and `/60` fall under
-     4.5:1 against `base-200` in one theme or the other. */
-  .picks-card__date {
+  /* Poster cards are ~8.5rem wide, so the creator drops a step to stay on one
+     line under the title. Rows have the room to keep both at the same size —
+     see `.library-row__creator` below, which deliberately does not. */
+  .library-card__creator {
     font-size: 0.75rem;
     color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  }
+
+  .library-card__meta,
+  .library-row__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  /* Shown only when the category sets `date_label` — see library-item-date.html. */
+  .library-date {
+    font-size: 0.7rem;
+    font-variant-numeric: tabular-nums;
+    color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  }
+
+  /* ---- List rows ----
+     No panel, no border, no shadow: an article or a video is a line of text, and
+     boxing each one turns a short list into a stack of heavy tiles. What separates
+     rows is a single `base-300` hairline — the same token the section headings
+     use, and the only divider that is a surface step in both themes. */
+  .library-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .library-list > li + li {
+    border-block-start: 1px solid var(--color-base-300);
+  }
+
+  .library-row {
+    display: block;
+    padding-block: 0.55rem;
+  }
+
+  /* The hover cue is the title underline plus a hairline of accent on the leading
+     edge — enough to show the row is a link without reintroducing a filled box.
+     `border-inline-start` is always present so the text does not shift on hover. */
+  .library-row {
+    border-inline-start: 2px solid transparent;
+    padding-inline-start: 0.6rem;
+    margin-inline-start: -0.6rem;
+    transition: border-color 150ms ease;
+  }
+
+  /* Anchor-scoped: a row whose entry has no `link` renders as a `<div>`, and an
+     accent edge plus an underline on something that cannot be clicked is a lie. */
+  a.library-row:hover,
+  a.library-row:focus-visible {
+    border-inline-start-color: var(--color-accent);
+  }
+
+  /* See the note on `.library-card__title` above: line-only, so the dashed
+     accent longhands survive. */
+  a.library-row:hover .library-row__title,
+  a.library-row:focus-visible .library-row__title {
+    text-decoration-line: underline;
+  }
+
+  /* Meta trails the title rather than being pushed to the far edge: with
+     `space-between` the stars ended up marooned across a gap of whitespace and
+     read as belonging to the row, not to the thing. Wrapping still lets a long
+     title take the line and drop its stars underneath. */
+  /* `center`, not `baseline`. The meta block's baseline is inherited from its
+     first item — the star run — and an SVG is a replaced element whose baseline
+     is its *bottom margin edge*. Baseline-aligning therefore hangs a 14px star
+     box off the text baseline, leaving it floating above the x-height. Centring
+     the flex line puts the stars level with the title instead. */
+  .library-row__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.2rem 0.5rem;
+  }
+
+  .library-row__title {
+    line-height: 1.5;
+    color: var(--color-base-content);
+  }
+
+  /* Same size as the title, not a step down: at 0.75rem the author read as a
+     cramped afterthought hanging off the end of the title. Separation comes from
+     colour instead, which is enough hierarchy on a single line. */
+  .library-row__creator {
+    font-size: inherit;
+    color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  }
+
+  .library-row__creator::before {
+    content: "·";
+    margin-inline: 0.4em;
+    /* Muted further than the name itself — it is punctuation, not content. */
+    color: color-mix(in oklab, var(--color-base-content) 45%, transparent);
+  }
+
+  .library-row .library-note {
+    font-size: 0.75rem;
+  }
+
+  .library-note {
+    display: block;
+    margin-block-start: 0.3rem;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  }
+
+  /* Poster cards are ~8.5rem wide, so an unclamped note would double a card's
+     height and break the grid's rhythm. Rows have the width to spare. */
+  .library-card .library-note {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: 0.75rem;
+  }
+
+  .library-note p {
+    margin: 0;
+  }
+
+  /* ---- Stars ---- */
+  .library-stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.05rem;
+    line-height: 1;
+  }
+
+  /* Empty stars are outlined rather than absent, so a 3/5 still reads as a
+     five-point scale. Filled ones use `warning`, the only brand token whose
+     hue survives both themes as "gold". */
+  .library-stars__star {
+    fill: none;
+    stroke: color-mix(in oklab, var(--color-base-content) 45%, transparent);
+    stroke-width: 2;
+  }
+
+  .library-stars__star--on {
+    fill: var(--color-warning);
+    stroke: var(--color-warning);
   }
 }
 
@@ -803,9 +985,12 @@ a {
    (`/blog/…`), so they never match — including under `hugo server`, where
    baseURL is localhost.
    Excluded on purpose: anchors wrapping an image/svg (social icons, polaroid
-   frames, picks cards, CV icon links) and button/badge-shaped ones, where an
-   arrow would sit on top of artwork instead of after a phrase. `.no-ext-icon`
-   is the manual escape hatch.
+   frames, CV icon links) and button/badge-shaped ones, where an arrow would sit
+   on top of artwork instead of after a phrase. `.no-ext-icon` is the manual
+   escape hatch, and `layouts/library/single.html` uses it on both card shapes:
+   the whole card is the link, so the arrow would land after the content rather
+   than after a phrase — and relying on the `:has(svg)` exclusion there is a
+   trap, since it silently depends on the entry having a star rating.
    The glyph is a mask, not `content:` text, so it inherits the link colour via
    `currentColor` and renders identically in both themes with no font
    dependency. `display: inline-block` makes it an atomic inline, which text
@@ -829,4 +1014,65 @@ a[href^="http"]:not([href*="diogomoreira.dev"]):not(.no-ext-icon):not(.btn):not(
   mask-position: center;
   mask-size: contain;
   mask-repeat: no-repeat;
+}
+
+/* Pastel chip fill — replaces `badge-outline` on the site's tag/label chips.
+
+   Unlayered on purpose: daisyUI compiles `.badge` into `@layer utilities` (as
+   `@layer daisyui.l1.l2.l3` nested inside it) and sets `background-color` there.
+   `@layer components` — where `.mark`, `.polaroid` and `.nav-link` live — loses
+   to the utilities layer regardless of specificity, the same trap flagged for
+   `not-prose` and `.nav-submenu`. Unlayered beats every layer.
+
+   Written against `--badge-color`, daisyUI's own per-badge token that
+   `badge-accent` & friends set, so one rule covers every colour variant —
+   including the uncoloured chips, which fall through to `base-content`.
+
+   Two numbers carry the weight, and both were measured rather than eyeballed:
+
+   - The fill mixes into `base-200`, not `base-100`. `<html>` carries
+     `bg-base-200` and cards sit on it, so that is the surface a chip actually
+     overlays — the same worst-case surface the theme blocks measure against.
+     (daisyUI's own `badge-soft` mixes 8% into `base-100`: wrong ground, and too
+     faint here.)
+   - The text is pulled 30% toward `base-content`, and the chip is unreadable
+     without it. Sunrise's brand colours clear 4.5:1 on `base-200` by only ~0.1,
+     so *any* fill behind pure-token text drops them to 3.75–4.16. Mixing toward
+     `base-content` fixes both themes with one declaration because of the
+     inverse-brightness pairing the themes are built on: it is near-black in
+     sunrise and light in midnight, so it pushes the text away from the fill in
+     whichever direction that theme needs. Worst case across all 8 variants ×
+     both themes is 4.59:1.
+
+   Hover steps the *border*, never the fill: raising the fill on hover drops
+   midnight to 4.12–4.24 in every variant. Both border colours are always-on
+   values on a border that is already 2px (`--border`), so nothing reflows. */
+.badge-tint {
+  --chip: var(--badge-color, var(--color-base-content));
+  color: color-mix(in oklab, var(--chip) 70%, var(--color-base-content));
+  background-color: color-mix(in oklab, var(--chip) 12%, var(--color-base-200));
+  border-color: color-mix(in oklab, var(--chip) 32%, var(--color-base-200));
+  background-image: none;
+}
+
+/* Every declaration above is a `color-mix`, and Lightning CSS wraps each one in
+   `@supports`, synthesising the *un-mixed* value as the fallback. That fallback
+   is `var(--chip)` for both `color` and `background-color` — the chip would be
+   its own text colour, i.e. invisible. Routing the fill through daisyUI's
+   `--badge-bg` hook does not dodge it; Lightning fills in custom properties too.
+   So the no-`color-mix` branch is neutralised by hand, back to the outline chip
+   this replaces. Only pre-2023 engines ever take it (`color-mix` has been
+   Baseline since Chrome 111 / Safari 16.2 / Firefox 113), but the failure mode
+   is unreadable text rather than an ugly chip, which is worth five lines. */
+@supports not (color: color-mix(in lab, red, red)) {
+  .badge-tint {
+    color: var(--chip);
+    background-color: #0000;
+    border-color: var(--chip);
+  }
+}
+
+a.badge-tint:hover,
+a.badge-tint:focus-visible {
+  border-color: color-mix(in oklab, var(--chip) 60%, var(--color-base-200));
 }

@@ -1,0 +1,15 @@
+{{/* Books on a shelf. Solid 24×24 with `fill="currentColor"` on the root, matching
+  the style the rest of the nav set uses — the child shapes inherit the fill, so
+  none of them declares its own.
+
+  Rects rather than hand-computed arc paths: at `w-4` (16px) the whole glyph is
+  ~16px tall, so the shapes have to be geometrically exact to stay legible, and a
+  rounded rect is exact by construction. Heights vary and the third book leans
+  against its neighbour, because three identical uprights read as a barcode at
+  this size. */}}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true">
+  <rect x="3.5" y="3.5" width="4" height="14.5" rx="1" />
+  <rect x="8.5" y="6" width="4" height="12" rx="1" />
+  <rect x="14" y="4.5" width="4" height="13.5" rx="1" transform="rotate(14 16 11.25)" />
+  <rect x="2" y="19" width="20" height="2" rx="1" />
+</svg>
