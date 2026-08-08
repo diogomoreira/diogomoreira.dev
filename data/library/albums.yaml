@@ -58,3 +58,24 @@ items:
     cover: "images/library/gone-now.jpg"
     rating: 5
     date: 2018-04-16
+
+  - title: "The Mountain"
+    creator: "Gorillaz"
+    link: "https://music.apple.com/br/album/the-mountain/1837237742"
+    cover: "images/library/gorillaz-the-mountain.jpg"
+    rating: 4
+    date: 2026-08-05
+
+  - title: "A Fever You Can't Sweat Out"
+    creator: "Panic! At the Disco"
+    link: "https://music.apple.com/br/album/a-fever-you-cant-sweat-out-20th-anniversary-deluxe/1846923403"
+    cover: "images/library/panic-fever.jpg"
+    rating: 5
+    date: 2026-08-05
+
+  - title: "Perfect Symmetry"
+    creator: "Keane"
+    link: "https://music.apple.com/br/album/perfect-symmetry-deluxe-edition/1445742936"
+    cover: "images/library/perfect-symmetry.jpg"
+    rating: 4
+    date: 2026-08-05

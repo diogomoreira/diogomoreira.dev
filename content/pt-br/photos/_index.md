@@ -1,4 +1,4 @@
 ---
 title: "Fotos"
-draft: false
+description: "Minha coleção de fotos."
 ---

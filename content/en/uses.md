@@ -1,7 +1,6 @@
 ---
 title: My setup
 description: Elements that have enhanced my productivity and efficiency, from hardware to software.
-published: "2023-07-09"
 updated: "2026-07-05"
 cover: /images/pages/uses.jpg
 coverCaption: "My setup"

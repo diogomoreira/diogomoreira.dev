@@ -12,3 +12,9 @@ items:
     cover: "images/library/flcl.jpg"
     rating: 5
     date: 2023-06-04
+
+  - title: "Hacks"
+    link: "https://www.hbomax.com/br/pt/shows/hacks/67e940b7-aab2-46ce-a62b-c7308cde9de7"
+    cover: "images/library/hacks.jpeg"
+    rating: 5
+    date: 2026-05-30

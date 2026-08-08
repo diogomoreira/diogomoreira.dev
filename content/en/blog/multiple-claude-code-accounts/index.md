@@ -6,7 +6,6 @@ date: 2026-06-19T17:13:08-03:00
 description: "Using aliases to run separate personal and professional Claude Code accounts from the same terminal."
 tags: ["learning", "claude code", "ai tools", "til"]
 cover: "cover.png"
-credits: ""
 disclaimer: ""
 draft: false
 ---
