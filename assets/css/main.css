@@ -16,6 +16,13 @@
 
 @source "hugo_stats.json";
 
+/* DaisyUI's alert variants are Tailwind-scanned like any other utility, and
+   hugo_stats.json only lists classes a build already rendered — the same two-build lag
+   that keeps .mark and .polaroid hand-written. `disclaimerType` (see
+   partials/disclaimer-alert.html) can name any of these on a page that has never been
+   built, so safelist all four rather than letting one ship unstyled. */
+@source inline("alert-{info,success,warning,error}");
+
 @plugin "daisyui/theme" {
   name: "sunrise";
   default: true;

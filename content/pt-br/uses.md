@@ -1,7 +1,6 @@
 ---
 title: Meu setup
 description: Elementos que aumentam minha produtividade e eficiência, de hardware a software.
-published: "2023-07-09"
 updated: "2026-07-05"
 cover: /images/pages/uses.jpg
 coverCaption: "Meu setup"

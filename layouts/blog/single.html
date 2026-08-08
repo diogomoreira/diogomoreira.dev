@@ -48,9 +48,9 @@
       </figure>
     {{ end }}
 
-
     {{/* The right rail is hidden below `lg`, so the TOC folds into the body there. */}}
     {{ partial "toc.html" (dict "page" . "variant" "mobile") }}
+
 
     <div>
       {{ partial "disclaimer-alert.html" . }}
@@ -70,7 +70,7 @@
           <a
             href="{{ "/categories/" | relLangURL }}{{ $cat | urlize }}/"
             data-pagefind-filter="category"
-            class="badge badge-primary"
+            class="badge font-semibold text-xs badge-primary"
             >{{ $cat }}</a
           >{{ if lt (add $i 1) $num }}<span class="mx-1">·</span>{{ end }}
         {{ end }}
@@ -88,7 +88,7 @@
           <a
             href="{{ "/tags/" | relLangURL }}{{ $tag | urlize }}/"
             data-pagefind-filter="tag"
-            class="badge badge-tint badge-accent"
+            class="badge text-xs badge-tint badge-accent"
             >#{{ $tag }}</a
           >{{ if lt (add $i 1) $num }}<span class="mx-1">·</span>{{ end }}
         {{ end }}

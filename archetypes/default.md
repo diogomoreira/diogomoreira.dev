@@ -1,8 +1,11 @@
 ---
 title: "{{ replace .File.ContentBaseName "-" " " | title }}"
-published: "{{ .Date }}"
+date: {{ .Date }}
+updated: ""
 description: ""
 cover: ""
 coverCaption: ""
+tags: []
+toc: true
 draft: true
 ---

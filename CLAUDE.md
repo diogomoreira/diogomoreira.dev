@@ -108,7 +108,7 @@ Sub-menu styling is hand-written CSS (`.nav-submenu`, `.nav-link--child`) next t
 
 | Section                          | Notes                                                                                                                                                                                                                                       |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `blog/`                          | Page bundles (`slug/index.md`). Front matter: `cover`, `tags`, `categories`, `credits`, `disclaimer`, `status` (`seed`/`growing`/`living`/`archived` — idea/project maturity, rendered as an emoji via `post-status-emoji.html`/`post-status-badge.html`), `toc`.                                                                                                                                       |
+| `blog/`                          | Page bundles (`slug/index.md`). Front matter: `cover`, `coverCaption`, `tags`, `categories`, `updated`, `disclaimer`, `disclaimerType` (`info`/`success`/`warning`/`error`, default `warning`), `status` (`seed`/`growing`/`living`/`archived` — idea/project maturity, rendered as an emoji via `post-status-emoji.html`/`post-status-badge.html`), `toc`.                                                                                                                                       |
 | `photos/`                        | Page bundles. Displayed as a masonry grid; individual albums use PhotoSwipe lightbox. Front matter: `cover`, `location`, `camera`.                                                                                                          |
 | `snippets/`                      | Page bundles. Front matter: `language`.                                                                                                                                                                                                     |
 | `now/`                           | Single hand-edited leaf bundle per language (`content/<lang>/now/index.md`) — no dated history, no `hugo new` archetype. Edit the file directly.                                                                                          |
@@ -141,6 +141,18 @@ Entry fields: `title`, optional `creator`, `link`, optional `cover` (under `asse
 **The two card shapes are styled in opposite directions, deliberately — do not re-group their CSS.** A poster card is a panel: `base-200` surface on the `base-100` main column, `base-300` hairline, shadow, stepping to `base-300` on `:hover`/`:focus-visible`. Cover art is an object and a surface under it says so. A list row is the opposite: no panel, no border, no shadow, rows separated by a single `base-300` hairline (`li + li`), because boxing each line of a text list turns a short list into a stack of heavy tiles. Its hover cue is a 2px accent `border-inline-start` that is always present but transparent, so the text does not shift on hover. Both shapes are a single card-wide `<a>`.
 
 Stars are `library-stars` — filled in `--color-warning`, empty ones outlined so a 3/5 still reads as a five-point scale, with one `role="img"` label on the run so a screen reader says "3 out of 5" rather than announcing five glyphs.
+
+### Disclaimer Alerts
+
+`layouts/partials/disclaimer-alert.html` renders the `disclaimer` front-matter string as a DaisyUI alert immediately above `.Content`. It is called from five single templates (`blog`, `_default`, `uses`, `now`, `photos`), each passing `.`, and the outer `{{ with }}` is what makes the archetype's `disclaimer: ""` a no-op. The body goes through `markdownify` — inline markdown only, so a link works but a shortcode or `relref` does not.
+
+`disclaimerType` picks the severity (`info`/`success`/`warning`/`error`, default `warning`). Three things bite:
+
+- **The type is validated before the icon lookup, and has to be.** The icon is resolved with `partial (printf "icons/alert/%s.html" $type)`, the same dynamic pattern as `nav-link.html` and `social.html` — and an unresolvable partial name is a hard build failure. Validating against the slice first turns a front-matter typo into a `warnf` plus a `warning` fallback, the same shape as `mark.html`'s unknown-shape handling.
+- **`icons/alert/` is stroke-style at `h-6 w-6`**, unlike every other icon group (`fill="currentColor"`, `w-4 h-4`). DaisyUI's alert layout expects a 24px outline glyph. Keep the four in step; don't "fix" them toward the other convention.
+- **The four `alert-*` classes are safelisted in `main.css`** via `@source inline(...)` next to `@source "hugo_stats.json"`. They are Tailwind-scanned utilities, and hugo_stats only lists classes an earlier build already rendered, so a page newly setting `disclaimerType: info` would otherwise ship unstyled. Adding a fifth severity means an icon file, a name in the partial's slice, **and** a name in that safelist.
+
+No i18n keys are involved — the alert carries no chrome text, only the author's own string.
 
 ### Image Handling
 
