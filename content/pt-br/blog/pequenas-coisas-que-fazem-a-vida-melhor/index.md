@@ -10,7 +10,7 @@ cover: "cover.jpg"
 coverCaption: "Photo by [Mohamed Nohassi](https://unsplash.com/@coopery?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/silhouette-of-person-standing-on-rock-surrounded-by-body-of-water-odxB5oIG_iA?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)"
 updated: "2026-08-08T14:53:42-03:00"
 toc: false
-draft: true
+draft: false
 ---
 
 Esse post foi inspirado por [**esse vídeo**](https://www.youtube.com/watch?v=s7ASoHd_zE4). A intenção é listar pequenas coisas do nosso dia-a-dia que tornam a vida melhor, e que na maioria do tempo passam despercebidas.
