@@ -18,3 +18,9 @@ items:
     cover: "images/library/hacks.jpeg"
     rating: 5
     date: 2026-05-30
+
+  - title: "Widow's Bay"
+    link: "https://tv.apple.com/br/show/o-segredo-de-widows-bay/umc.cmc.1zzly0vah46bnvnwf0qkrjhh2?ctx_agid=2797da03"
+    cover: "images/library/widows-bay.webp"
+    rating: 3
+    date: 2023-08-09

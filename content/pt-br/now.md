@@ -39,7 +39,6 @@ Esse ano refiz totalmente esse site e tenho tentado mantê-lo atualizado. Toda s
 
 - House of the Dragon (3ª temporada)
 - Twin Peaks (2ª temporada)
-- Widow's Bay (1ª temporada)
 
 **Finalizados esse ano**:
 

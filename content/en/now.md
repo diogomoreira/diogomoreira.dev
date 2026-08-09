@@ -38,7 +38,6 @@ I completely rebuilt this site this year and have been trying to keep it updated
 
 - House of the Dragon (Season 3)
 - Twin Peaks (Season 2)
-- Widow's Bay (Season 1)
 
 **Finished this year**:
 
