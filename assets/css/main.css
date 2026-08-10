@@ -137,6 +137,48 @@ html[data-theme="midnight"] {
   --color-heading: #cecdc3;
 }
 
+/* Four hues daisyUI does not ship, for the chip palette (see `.badge-tint` and
+   partials/chip-color.html). daisyUI gives eight variants, but `neutral` is
+   unusable as a chip — in midnight it is #13120f, *darker* than the #141412
+   ground, measuring 1.70:1 — and `error` is reserved for alert severity. Six
+   was not enough to give language, library category, tag topic and blog
+   category each a meaning.
+
+   Placed in the four widest gaps in the existing wheel (error 26°, warning 77°,
+   secondary 99°, accent 137°, success 185°, primary 267°, info 304°), so no new
+   hue lands within 24° of a neighbour — below about 20° these low chromas stop
+   being tellable apart at a 12% fill.
+
+   Built to the same rule as the theme blocks above: sunrise is the *dark*
+   member with the paper `-content`, midnight the *light* member with `-content`
+   mixed 10% into `base-100`. Measured, not eyeballed — against `base-200`, the
+   worst-case surface: ≥4.62 sunrise / ≥5.46 midnight as plain text, ≥5.53
+   through `.badge-tint`, ≥4.99 as a solid chip. Those clear the floors the
+   shipped tokens hold (≥4.61 / ≥5.36 plain, ≥5.55 tint).
+
+   Same `html[data-theme=…]` (0,1,1) scoping as `--color-heading` above, and for
+   the same reason: a bare attribute selector ties with Tailwind's `:root`. */
+html[data-theme="sunrise"] {
+  --color-orange: #926146;
+  --color-orange-content: #fbfaf7;
+  --color-sea: #4d7460;
+  --color-sea-content: #fbfaf7;
+  --color-azure: #35748c;
+  --color-azure-content: #fbfaf7;
+  --color-rose: #935b7b;
+  --color-rose-content: #fbfaf7;
+}
+html[data-theme="midnight"] {
+  --color-orange: #b48164;
+  --color-orange-content: #181411;
+  --color-sea: #6d9680;
+  --color-sea-content: #131513;
+  --color-azure: #5695ae;
+  --color-azure-content: #111516;
+  --color-rose: #b57a9b;
+  --color-rose-content: #181315;
+}
+
 @theme {
   --font-sans:
     "Instrument Sans", -apple-system, BlinkMacSystemFont, "Inter", "IBM Plex Sans", "Segoe UI", Helvetica, Arial,
@@ -1082,4 +1124,31 @@ a[href^="http"]:not([href*="diogomoreira.dev"]):not(.no-ext-icon):not(.btn):not(
 a.badge-tint:hover,
 a.badge-tint:focus-visible {
   border-color: color-mix(in oklab, var(--chip) 60%, var(--color-base-200));
+}
+
+/* Colour variants for the four hues daisyUI does not ship. daisyUI's own
+   `badge-primary` compiles to exactly these two declarations, so matching it
+   gives both chip shapes for free: with `.badge-tint` the rule above reads
+   `--badge-color` and tints it; without it, daisyUI's `.badge` base uses the
+   pair as a solid fill (which is what the blog category chips want).
+
+   Unlayered for the same reason as `.badge-tint` — `@layer components` loses to
+   daisyUI's utilities layer. Being hand-written CSS rather than Tailwind
+   utilities, they also sidestep the hugo_stats.json two-build lag that forces
+   the `@source inline(...)` safelist near the top of this file. */
+.badge-orange {
+  --badge-color: var(--color-orange);
+  --badge-fg: var(--color-orange-content);
+}
+.badge-sea {
+  --badge-color: var(--color-sea);
+  --badge-fg: var(--color-sea-content);
+}
+.badge-azure {
+  --badge-color: var(--color-azure);
+  --badge-fg: var(--color-azure-content);
+}
+.badge-rose {
+  --badge-color: var(--color-rose);
+  --badge-fg: var(--color-rose-content);
 }

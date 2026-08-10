@@ -25,7 +25,7 @@
       <time datetime="{{ $when.Format "2006-01-02" }}">{{ partial "formatted-date-short.html" $when }}</time>
     </span>
   {{ else }}
-    <span class="badge badge-tint badge-accent badge-sm rounded-none"
+    <span class="badge badge-tint badge-accent badge-sm"
       >{{ i18n (printf "library_%s_in_progress" .label) | default .label }}</span
     >
   {{ end }}

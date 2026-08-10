@@ -26,7 +26,10 @@
           {{ with .Params.tags }}
             <div class="flex items-center gap-2 flex-wrap">
               {{ range . }}
-                <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="badge badge-tint badge-accent badge-sm"
+                {{ $color := partial "chip-color.html" (dict "family" "tag" "key" (urlize .)) | default "accent" }}
+                <a
+                  href="{{ "/tags/" | relLangURL }}{{ . | urlize }}"
+                  class="badge badge-tint badge-{{ $color }} badge-sm"
                   >#{{ . }}</a
                 >
               {{ end }}
@@ -49,7 +52,10 @@
 
   {{ partial "post-status-legend.html" . }}
 
-  {{ $posts := .Pages.ByDate.Reverse }}
+  {{/* Every language's posts in one feed, newest first — not just `.Pages`. The
+    featured card, the category chips and the archive all read this, so they
+    cannot disagree about what the blog contains. */}}
+  {{ $posts := partial "blog-posts.html" . }}
 
   {{/* ── Featured: latest post ───────────────────────────── */}}
   {{ with index $posts 0 }}
@@ -70,6 +76,7 @@
             <time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "formatted-date.html" .Date }}</time>
             <span>·</span>
             <span>{{ i18n "reading_time_minutes" (dict "Count" .ReadingTime) }}</span>
+            {{ partial "post-lang-badge.html" . }}
           </div>
           <h2 class="card-title font-heading text-2xl font-semibold text-heading group-hover:opacity-70 transition-opacity">
             {{ partial "post-status-emoji.html" . }}{{ .Title }}
@@ -97,9 +104,16 @@
   {{ with $cats }}
     <section class="mb-10">
       {{ partial "section-label.html" (dict "text" (i18n "categories_label") "class" "mb-4") }}
+      {{/* The href is resolved rather than built with `relLangURL`: the list above
+        mixes languages, so a term used only by pt-br posts has no term page on
+        the EN site and a hand-built EN href would 404. */}}
       <div class="flex flex-wrap gap-2">
         {{ range . }}
-          <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}/" class="badge badge-primary text-xs">{{ . }}</a>
+          {{ $cat := . }}
+          {{ $color := partial "chip-color.html" (dict "family" "category" "key" (urlize $cat)) | default "primary" }}
+          {{ with partial "taxonomy-term-link.html" (dict "taxonomy" "categories" "term" $cat) }}
+            <a href="{{ . }}" class="badge badge-{{ $color }} text-xs">{{ $cat }}</a>
+          {{ end }}
         {{ end }}
       </div>
     </section>

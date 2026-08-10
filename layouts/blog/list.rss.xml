@@ -1,0 +1,48 @@
+{{- /* Overrides Hugo's internal RSS template for /blog only.
+
+  The internal one ranges `.Pages`, which is language-scoped, so each feed would
+  carry half the blog. This ranges blog-posts.html instead — the same merged,
+  newest-first set /blog and the homepage read — so both /blog/index.xml and
+  /pt-br/blog/index.xml carry every post.
+
+  The channel chrome stays in the feed's own language; only the items are mixed.
+  Each item's language is exposed twice: a `[PT]`/`[EN]` title suffix (the only
+  place a reader will surface it, mirroring the badge on the site) and a
+  machine-readable <category domain="language">. */ -}}
+{{- $posts := partial "blog-posts.html" . -}}
+{{- $limit := .Site.Config.Services.RSS.Limit -}}
+{{- if ge $limit 1 -}}
+  {{- $posts = $posts | first $limit -}}
+{{- end -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    {{- /* A separator, not "on" — the channel chrome is per-language and an
+      English preposition would leak into the pt-br feed. */}}
+    <title>{{ .Title }} · {{ .Site.Title }}</title>
+    <link>{{ .Permalink }}</link>
+    <description>{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}</description>
+    <generator>Hugo</generator>
+    {{- /* `.Locale`, not `.LanguageCode` — the latter was deprecated in v0.158. */}}
+    {{- with .Site.Language.Locale }}
+      <language>{{ . }}</language>
+    {{- end }}
+    {{- with $posts }}
+      <lastBuildDate>{{ (index . 0).Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+    {{- end }}
+    <atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml" />
+    {{- range $posts }}
+      <item>
+        <title>{{ .Title }} [{{ upper (substr .Language.Lang 0 2) }}]</title>
+        <link>{{ .Permalink }}</link>
+        <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+        <guid>{{ .Permalink }}</guid>
+        <category domain="language">{{ .Language.Lang }}</category>
+        {{- range .Params.categories }}
+          <category>{{ . }}</category>
+        {{- end }}
+        <description>{{ with .Description }}{{ . | html }}{{ else }}{{ .Summary | html }}{{ end }}</description>
+      </item>
+    {{- end }}
+  </channel>
+</rss>

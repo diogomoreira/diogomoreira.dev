@@ -11,8 +11,9 @@
   {{ range hugo.Sites }}
     {{ if eq .Language.Lang $lang }}{{ $label = .Language.Label }}{{ end }}
   {{ end }}
+  {{ $color := partial "chip-color.html" (dict "family" "lang" "key" $lang) }}
   <span
-    class="badge badge-tint badge-sm rounded-none font-mono"
+    class="badge badge-tint {{ with $color }}badge-{{ . }}{{ end }} badge-sm font-mono"
     title="{{ i18n "library_lang_only" (dict "Language" $label) }}"
     >{{ upper (substr $lang 0 2) }}</span
   >

@@ -1,0 +1,29 @@
+{{/* Usage: {{ $href := partial "taxonomy-term-link.html" (dict "taxonomy" "categories" "term" $cat) }}
+  — resolves a taxonomy term to the URL of the language site that actually builds
+  its term page. Returns "" when no site has it, so the caller can skip the link.
+
+  `relLangURL` is not enough once a list mixes languages: /blog shows pt-br posts
+  on the EN site, so a pt-br-only category ("Hobbies") would get an EN href
+  listing nothing.
+
+  Existence is not the test — `.Pages` is. Hugo builds the term node on *every*
+  language once any language uses the term, so site.GetPage "/categories/hobbies"
+  succeeds on the EN site and renders an empty-state page. Only a term page with
+  pages on it is worth linking to. */}}
+{{ $path := printf "/%s/%s" .taxonomy (urlize .term) }}
+{{ $href := "" }}
+{{ with site.GetPage $path }}
+  {{ $term := . }}
+  {{ with $term.Pages }}{{ $href = $term.RelPermalink }}{{ end }}
+{{ end }}
+{{ if not $href }}
+  {{ range hugo.Sites }}
+    {{ if not $href }}
+      {{ with .GetPage $path }}
+        {{ $term := . }}
+        {{ with $term.Pages }}{{ $href = $term.RelPermalink }}{{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ return $href }}

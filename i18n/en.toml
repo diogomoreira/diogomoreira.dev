@@ -32,6 +32,8 @@ reading_time_minutes = "{{ .Count }} min read"
 blog_keep_reading = "Keep reading →"
 blog_all_posts = "All posts"
 blog_view_in_language = "View in {{ .Language }}"
+# The blog feed mixes both languages — see blog-posts.html. Every row is badged.
+post_lang_written_in = "Written in {{ .Language }}"
 status_seed = "Seed"
 status_growing = "Growing"
 status_living = "Living"
