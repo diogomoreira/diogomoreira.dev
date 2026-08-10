@@ -67,10 +67,11 @@
         </span>
         {{ $num := len . }}
         {{ range $i, $cat := . }}
+          {{ $color := partial "chip-color.html" (dict "family" "category" "key" (urlize $cat)) | default "primary" }}
           <a
             href="{{ "/categories/" | relLangURL }}{{ $cat | urlize }}/"
             data-pagefind-filter="category"
-            class="badge font-semibold text-xs badge-primary"
+            class="badge font-semibold text-xs badge-{{ $color }}"
             >{{ $cat }}</a
           >{{ if lt (add $i 1) $num }}<span class="mx-1">·</span>{{ end }}
         {{ end }}
@@ -85,10 +86,11 @@
         </span>
         {{ $num := len . }}
         {{ range $i, $tag := . }}
+          {{ $color := partial "chip-color.html" (dict "family" "tag" "key" (urlize $tag)) | default "accent" }}
           <a
             href="{{ "/tags/" | relLangURL }}{{ $tag | urlize }}/"
             data-pagefind-filter="tag"
-            class="badge text-xs badge-tint badge-accent"
+            class="badge text-xs badge-tint badge-{{ $color }}"
             >#{{ $tag }}</a
           >{{ if lt (add $i 1) $num }}<span class="mx-1">·</span>{{ end }}
         {{ end }}

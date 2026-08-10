@@ -1,0 +1,82 @@
+{{/* Usage: {{ partial "chip-color.html" (dict "family" "tag" "key" "java") }}
+  — returns the DaisyUI colour keyword for a chip, or "" when unmapped.
+
+  The single place chip colour is decided. Same shape as post-status-color.html:
+  a dict lookup, no fallback logic in the callers beyond keeping their own
+  default when this returns "". A new tag is therefore never unstyled — it just
+  stays the colour it is today until someone maps it.
+
+  The palette is ten hues: DaisyUI's primary/secondary/accent/info/success/
+  warning plus orange/sea/azure/rose, defined near the top of main.css.
+  `neutral` and `error` are deliberately absent — neutral measures 1.70:1 as a
+  midnight chip, and error is reserved for alert severity.
+
+  Keys are lowercased; callers pass `urlize`d terms for tags and categories,
+  matching how their term URLs are already built. */}}
+
+{{ $family := .family }}
+{{ $key := lower .key }}
+
+{{/* Language of a post. */}}
+{{ $lang := dict
+  "en" "primary"
+  "pt-br" "accent"
+}}
+
+{{/* Library categories — one per data/library/*.yaml. Twelve categories over
+  ten hues, so two pairs share deliberately: things you listen to, and things
+  you watch on a screen. The chip carries its own label, so the pairing reads as
+  grouping rather than collision. */}}
+{{ $library := dict
+  "albums" "rose"
+  "podcasts" "rose"
+  "movies" "orange"
+  "tv-shows" "orange"
+  "books" "warning"
+  "articles" "secondary"
+  "videos" "sea"
+  "games" "info"
+  "apps" "azure"
+  "websites" "primary"
+  "hardware" "accent"
+  "people" "success"
+}}
+
+{{/* Blog categories. These render as *solid* chips, which is what keeps them
+  reading above tags now that both families carry colour. */}}
+{{ $category := dict
+  "tech" "primary"
+  "hobbies" "sea"
+  "pessoal" "rose"
+}}
+
+{{/* Tags, grouped by topic rather than colour-per-tag: a post tagged
+  java/oop/programming shows three chips in one hue and reads as a set, where
+  three different hues would read as noise. */}}
+{{ $tag := dict
+  "java" "info"
+  "oop" "info"
+  "programming" "info"
+  "spring-boot" "info"
+  "dotfiles" "secondary"
+  "shell" "secondary"
+  "terminal" "secondary"
+  "linux" "secondary"
+  "macos" "secondary"
+  "claude-code" "warning"
+  "ai-tools" "warning"
+  "til" "warning"
+  "learning" "warning"
+  "vinyl" "rose"
+  "music" "rose"
+  "collections" "rose"
+  "hardware" "accent"
+  "flashcard" "accent"
+  "google-cloud" "azure"
+  "testing" "success"
+  "pessoal" "orange"
+  "positividade" "orange"
+}}
+
+{{ $maps := dict "lang" $lang "library" $library "category" $category "tag" $tag }}
+{{ return index (index $maps $family | default dict) $key | default "" }}

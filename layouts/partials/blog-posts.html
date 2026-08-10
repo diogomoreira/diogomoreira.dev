@@ -1,0 +1,37 @@
+{{/* Usage: {{ $posts := partial "blog-posts.html" . }} — every blog post in every
+  language, newest first.
+
+  The blog feed is deliberately mixed: the EN and pt-br posts are different
+  writing, not translations of each other, so a language-scoped list hides half
+  of it. Each post keeps its own URL and its own language site; only the listing
+  is merged, and every row carries a language badge (post-lang-badge.html).
+
+  Built with `union`, which keeps the page.Pages type when both operands share
+  it — so .ByDate / .Reverse / .GroupByDate survive. `append` into a plain slice
+  would yield []page.Page and silently lose all three, and `site.AllRegularPages`
+  is not on the `site` wrapper type (only hugolib.Site has it).
+
+  Same shape as library-categories.html: one partial owns the ordering and every
+  surface reads it, so /blog, the homepage and the RSS feed cannot drift apart. */}}
+{{ $posts := where site.RegularPages "Section" "blog" }}
+{{ range hugo.Sites }}
+  {{ if ne .Language.Lang site.Language.Lang }}
+    {{ $posts = $posts | union (where .RegularPages "Section" "blog") }}
+  {{ end }}
+{{ end }}
+
+{{/* A post translated into both languages would otherwise appear twice. Keep the
+  current site's copy, drop the foreign one. No such pair exists today; this is
+  here so the first translated post does not silently duplicate. */}}
+{{ $dupes := slice }}
+{{ range $posts }}
+  {{ $p := . }}
+  {{ if ne $p.Language.Lang site.Language.Lang }}
+    {{ range $p.Translations }}
+      {{ if eq .Language.Lang site.Language.Lang }}{{ $dupes = $dupes | append $p }}{{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ with $dupes }}{{ $posts = complement . $posts }}{{ end }}
+
+{{ return $posts.ByDate.Reverse }}
