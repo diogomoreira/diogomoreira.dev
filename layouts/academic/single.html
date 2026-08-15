@@ -11,7 +11,11 @@
         {{ $papers := index hugo.Data site.Language.Lang "papers" }}
         {{ range sort $papers "year" "desc" }}
           <li class="mb-4">
-            <a href="{{ .link }}" class="link link-primary font-medium">
+            <a
+              href="{{ .link }}"
+              class="link link-primary font-medium"
+              {{- if partial "is-external-link.html" .link }} target="_blank" rel="noopener noreferrer"{{ end }}
+            >
               {{ .title }}
             </a>
             {{ with .year }}

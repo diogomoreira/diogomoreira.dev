@@ -1,0 +1,32 @@
+{{/* Markdown link render hook — gives every off-site `[text](https://…)` a new
+     tab. This is where the bulk of the site's external links live; the handful
+     emitted by templates carry the same two attributes at their own call sites.
+
+     `layouts/_markup/` is the Hugo v0.146+ hook location, *not*
+     `layouts/_default/_markup/` — the same relocation that moved shortcodes to
+     `layouts/_shortcodes/`.
+
+     Four things to know before editing:
+
+     - **`is-external-link.html` decides, not this file.** Scheme-gated, so
+       `mailto:`, `tel:`, relative links and `#anchor`s all render bare.
+     - **`.Title` has to be carried through.** It is what `[text](url "title")`
+       produces, and Goldmark's default renderer emits it; a hook that forgets
+       it drops those titles silently, with no build error to notice.
+     - **`.Text` is already `template.HTML`** in modern Hugo — it holds the
+       rendered inline markup of `[**bold** `code`](url)` — so it needs no
+       `safeHTML`, and adding one would be a no-op at best.
+     - **Defining this hook replaces Goldmark's default link rendering
+       site-wide**, including every `markdownify` / `RenderString` surface with
+       a page in context: library notes, disclaimer alerts, page descriptions,
+       `uses` notes and polaroid captions. That reach is the point, but it means
+       a mistake here is a mistake everywhere.
+
+     Raw HTML anchors written directly in content or front matter (`unsafe =
+     true` is on) bypass this hook entirely and must be written out by hand. */}}
+{{- $external := partial "is-external-link.html" .Destination -}}
+<a
+  href="{{ .Destination }}"
+  {{- with .Title }} title="{{ . }}"{{ end }}
+  {{- if $external }} target="_blank" rel="noopener noreferrer"{{ end -}}
+>{{ .Text }}</a>

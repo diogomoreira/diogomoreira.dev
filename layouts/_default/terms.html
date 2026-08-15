@@ -11,7 +11,13 @@
         {{ range .Pages.ByDate.Reverse }}
           {{ $term := . }}
           <li class="border-b border-base-300 pb-6">
-            <a href="{{ $term.Page.Permalink }}" class="group block">
+            {{/* `RelPermalink`, not `Permalink`: an absolute self-link is the
+              one shape that makes the site's two "is this off-site?" rules
+              disagree — `is-external-link.html` compares against baseURL (which
+              is localhost under `hugo server`), while the ↗ marker in main.css
+              hardcodes `diogomoreira.dev`. Every other internal link here is
+              relative; keep this one that way. */}}
+            <a href="{{ $term.Page.RelPermalink }}" class="group block">
               <span class="text-base font-medium text-base-content group-hover:opacity-70 ">
                 {{ $term.Page.Title }}
               </span>

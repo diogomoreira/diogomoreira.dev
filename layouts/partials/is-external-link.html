@@ -1,0 +1,33 @@
+{{/* Usage: {{ if partial "is-external-link.html" $url }}target="_blank" rel="noopener noreferrer"{{ end }}
+
+     The one place a link's off-site-ness is decided, the same
+     single-decision-point shape as `chip-color.html`. Takes a URL string,
+     returns "true" (truthy) when it is off-site and "" otherwise. Callers own
+     their own attributes, so `social.html` can keep its `rel="me"` and the
+     render hook can stay a plain `rel="noopener noreferrer"`.
+
+     Three things carry the logic:
+
+     - **It gates on the scheme, which is what excludes `mailto:` and `tel:`
+       for free.** `urls.Parse "mailto:x@y.com"` yields scheme `mailto` and an
+       empty Host, so it never reaches the host comparison — right, because
+       `target="_blank"` on a mailto strands an empty tab once the mail client
+       takes over. Relative links (`/blog/…`) and in-page anchors (`#section`)
+       have neither scheme nor host and fall out the same way.
+     - **The host comes from `baseURL`, not a hardcoded string.** The ↗ marker
+       rule in `main.css` has to hardcode `diogomoreira.dev` because CSS cannot
+       read Hugo config; this can, so it does. The two therefore disagree for an
+       *absolute self-link* under `hugo server`, where baseURL is localhost —
+       `https://diogomoreira.dev/blog/x` would open in a new tab in dev but not
+       in production. Nothing generates one today (`terms.html` was moved off
+       `.Permalink` to `.RelPermalink` for exactly this reason, and content has
+       no absolute self-links), so the divergence is theoretical — but write
+       internal links relative and it stays that way.
+     - **`$u.Host` carries the port**, e.g. `localhost:1313`. That is why this
+       compares two *parsed* hosts rather than running `strings.Contains` over
+       the raw baseURL string. */}}
+{{- $u := urls.Parse . -}}
+{{- $host := (urls.Parse site.BaseURL).Host -}}
+{{- if and (in (slice "http" "https") $u.Scheme) (ne $u.Host $host) -}}
+  true
+{{- end -}}

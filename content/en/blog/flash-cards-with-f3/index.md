@@ -11,9 +11,11 @@ tags:
   - flashcard
 cover: flash-cards-f3.jpg
 coverCaption: Photo by <a
-  href="https://unsplash.com/@markuswinkler?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Markus
+  href="https://unsplash.com/@markuswinkler?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+  target="_blank" rel="noopener noreferrer">Markus
   Winkler</a> on <a
-  href="https://unsplash.com/photos/black-and-white-plastic-containers-cV9-hOgoaok?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  href="https://unsplash.com/photos/black-and-white-plastic-containers-cV9-hOgoaok?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+  target="_blank" rel="noopener noreferrer">Unsplash</a>
 disclaimer: This article requires some commands to be run. Do it at your own risk.
 ---
 

@@ -49,6 +49,9 @@ status_seed_description = "an idea"
 status_growing_description = "in progress"
 status_living_description = "mature, but continuously updated"
 status_archived_description = "finished or preserved"
+# Compact inline "updated" marker in a post's meta row — see blog/single.html.
+# Distinct from `last_updated_label`, which is the longer accent-bar wording.
+post_updated_label = "Updated"
 
 # Prev/next nav
 nav_previous = "← Previous"

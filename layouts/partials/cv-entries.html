@@ -38,7 +38,11 @@
             <span class="text-base-content/70"> @ </span>
             {{ $org := index . $orgField }}
             {{ with .link }}
-              <a href="{{ . }}" target="_blank" rel="noopener" class="hover:text-primary">{{ $org }}</a>
+              <a
+                href="{{ . }}"
+                class="hover:text-primary"
+                {{- if partial "is-external-link.html" . }} target="_blank" rel="noopener noreferrer"{{ end }}
+              >{{ $org }}</a>
             {{ else }}
               {{ $org }}
             {{ end }}

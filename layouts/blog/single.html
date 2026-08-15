@@ -23,6 +23,23 @@
           <time class="text-xs" datetime="{{ .Date.Format "2006-01-02" }}">
             {{ partial "formatted-date.html" .Date }}
           </time>
+
+          {{/* Optional. Only shown when it lands on a *later day* than the published
+            date — see the note in CLAUDE.md. Compared as `2006-01-02` strings rather
+            than as instants because the row renders day granularity, and a date-only
+            `updated:` parses to UTC midnight, which `.After` would read as *earlier*
+            than a same-day `date:` carrying a -03:00 offset. */}}
+          {{ with .Params.updated }}
+            {{ $updated := time.AsTime . }}
+            {{ $updatedDay := $updated.Format "2006-01-02" }}
+            {{ if gt $updatedDay ($.Date.Format "2006-01-02") }}
+              <span class="text-xs text-base-content/70" aria-hidden="true">·</span>
+              <time class="text-xs text-base-content/70" datetime="{{ $updatedDay }}">
+                {{ i18n "post_updated_label" }} {{ partial "formatted-date.html" $updated }}
+              </time>
+            {{ end }}
+          {{ end }}
+
           {{ partial "post-status-badge.html" . }}
         </div>
       {{ end }}
