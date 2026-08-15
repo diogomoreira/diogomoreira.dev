@@ -49,6 +49,9 @@ status_seed_description = "uma ideia"
 status_growing_description = "em desenvolvimento"
 status_living_description = "maduro, mas atualizado continuamente"
 status_archived_description = "concluído ou preservado"
+# Marcador compacto de "atualizado" na linha de metadados do post — ver blog/single.html.
+# Diferente de `last_updated_label`, que é o texto mais longo da barra de destaque.
+post_updated_label = "Atualizado em"
 
 # Prev/next nav
 nav_previous = "← Anterior"

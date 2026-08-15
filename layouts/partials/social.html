@@ -2,31 +2,39 @@
 {{ partial "social.html" (dict "page" . "class" "justify-start" "iconClass" "w-5 h-5") }}. "class" replaces the row's
 alignment, gap and margin — everything positional, so a caller owns the spacing outright rather than fighting a
 hardcoded class it cannot cancel; "iconClass" sizes the icons — the icon partials are bare viewBox SVGs, so the wrapping
-<span>
-  is what gives them a size. */}}
-  {{ $page := . }}
-  {{ $class := "justify-center gap-4 my-8" }}
-  {{ $iconClass := "w-8 h-8" }}
-  {{ if reflect.IsMap . }}
-    {{ $page = .page }}
-    {{ $class = .class | default $class }}
-    {{ $iconClass = .iconClass | default $iconClass }}
-  {{ end }}
-  {{ with $page.Site.Params.social }}
-    <div class="flex {{ $class }} items-center text-content">
-      {{ range . }}
-        <a
-          href="{{ .url }}"
-          target="{{ if not (hasPrefix .url " /") }}_blank{{ end }}"
-          rel="me"
-          class="flex items-center text-content hover:text-content "
-        >
-          <span class="{{ $iconClass }}">
-            {{ partial (printf "icons/social/%s.html" .icon) $page }}
-          </span>
-          <span class="sr-only">{{ .name }}</span>
-        </a>
-      {{ end }}
-    </div>
-  {{ end }}</span
->
+`span` is what gives them a size.
+
+Note the backticks on that last word: written as a bare tag it sat alone on its own line, and prettier balanced it by
+appending a matching closing tag *after* the final `{{ end }}` — outside the comment, so the partial emitted an orphan
+`</span>` into every page that called it. Keep tag names in this comment quoted.
+
+The new-tab decision goes through `is-external-link.html`, which is scheme-gated: the `mailto:` entry in
+`[[params.social]]` stays in the current tab, where before it opened a blank one the mail client then abandoned. `rel`
+has to stay `me` for the IndieWeb/Mastodon verification links, so the external case appends to it rather than replacing
+it. */}}
+{{ $page := . }}
+{{ $class := "justify-center gap-4 my-8" }}
+{{ $iconClass := "w-8 h-8" }}
+{{ if reflect.IsMap . }}
+  {{ $page = .page }}
+  {{ $class = .class | default $class }}
+  {{ $iconClass = .iconClass | default $iconClass }}
+{{ end }}
+{{ with $page.Site.Params.social }}
+  <div class="flex {{ $class }} items-center text-content">
+    {{ range . }}
+      {{ $external := partial "is-external-link.html" .url }}
+      <a
+        href="{{ .url }}"
+        rel="{{ if $external }}me noopener noreferrer{{ else }}me{{ end }}"
+        {{- if $external }} target="_blank"{{ end }}
+        class="flex items-center text-content hover:text-content "
+      >
+        <span class="{{ $iconClass }}">
+          {{ partial (printf "icons/social/%s.html" .icon) $page }}
+        </span>
+        <span class="sr-only">{{ .name }}</span>
+      </a>
+    {{ end }}
+  </div>
+{{ end }}
