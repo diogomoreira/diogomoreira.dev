@@ -21,7 +21,7 @@ contentDir = 'content/pt-br'
 lang = "pt-BR"
 
 [params]
-version = "4.10.0"
+version = "4.11.0"
 description = "My thoughts about life, software development, music and so forth."
 cover = "images/default-cover.png"
 
@@ -93,6 +93,10 @@ name = "Mastodon"
 handle = "@diogomoreira@hachyderm.io"
 url = "https://hachyderm.io/@diogomoreira"
 icon = "mastodon"
+# Read by `mastodon-toots.html` on /now. Optional: without it the script falls
+# back to /api/v1/accounts/lookup, costing one extra request per visitor. The
+# host and username come from `handle`, so this is the only id to keep in sync.
+accountId = "113079595846784868"
 
 [[params.social]]
 name = "Email"

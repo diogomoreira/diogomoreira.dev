@@ -18,6 +18,12 @@ home_all_posts = "All posts →"
 home_recently_added = "Recently Added"
 home_browse_library = "Browse the library →"
 
+# Now page
+now_mastodon = "Recent Toots"
+now_mastodon_all = "See all toots →"
+now_mastodon_error = "Couldn't load toots right now."
+now_mastodon_sensitive = "Sensitive media — click to show"
+
 # Academic / CV
 academic_latest_publications = "Latest publications"
 cv_work_experience = "Work Experience"
