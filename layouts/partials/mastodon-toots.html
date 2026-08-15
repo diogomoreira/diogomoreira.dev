@@ -72,8 +72,17 @@
       >
         <span class="toot-profile__avatar-skeleton skeleton"></span>
         {{/* 88 = 2× the 44px display size, so the box is reserved before the
-          image lands and the avatar stays sharp on retina. */}}
-        <img class="toot-profile__avatar hidden" width="88" height="88" alt="" loading="lazy" decoding="async" />
+          image lands and the avatar stays sharp on retina.
+
+          `loading="lazy"` must stay off this one. It starts life `hidden`, and
+          that class wins — `.toot-profile__avatar` is in `@layer components`,
+          the utility is in `@layer utilities` — so the element is `display:none`
+          with no layout box, and a lazily-loaded image that has no box is never
+          fetched. No fetch, no `load` event, and the handler below that removes
+          the skeleton and unhides it is the only thing that ever would. The
+          attribute buys nothing anyway: there is no `src` until the fetch has
+          already resolved. */}}
+        <img class="toot-profile__avatar hidden" width="88" height="88" alt="" decoding="async" />
         <span class="toot-profile__id">
           <span class="toot-profile__name"></span>
           <span class="toot-profile__handle">@{{ $user }}@{{ $host }}</span>
