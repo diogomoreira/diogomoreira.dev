@@ -19,5 +19,8 @@
     </div>
   </article>
 
+  {{/* Toots first, artists last: the closing line of the page's prose points at
+    the music grid as the bottom of the page. */}}
+  {{ partial "mastodon-toots.html" . }}
   {{ partial "now-top-artists.html" . }}
 {{ end }}

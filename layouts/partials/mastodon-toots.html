@@ -1,0 +1,444 @@
+{{/* Latest original toots (no boosts, no replies) from the Mastodon account
+  configured in the `[[params.social]]` entry with `icon = "mastodon"` — the same
+  entry `head.html` reads for `fediverse:creator`, so the handle lives in one place.
+
+  Fetched client-side, like `now-top-artists.html` next to it on /now, so the list
+  stays current without a redeploy. Unlike that one these endpoints need no key,
+  so nothing secret is emitted into the page.
+
+  The markup below is rendered in full by Hugo and the script only fills in text,
+  `src`/`href` and the `hidden` toggle. That is deliberate: Tailwind v4 scans
+  `hugo_stats.json`, which only lists classes an actual build rendered, so a class
+  that exists solely inside the JS string below would ship unstyled. Anything the
+  script needs to *create* (toot bodies, media, CW) is styled by the hand-written
+  `.toot-*` rules in `main.css` instead.
+*/}}
+
+{{ $mastodon := "" }}
+{{ range .Site.Params.social }}
+  {{ if eq .icon "mastodon" }}
+    {{ $mastodon = . }}
+  {{ end }}
+{{ end }}
+
+{{ with $mastodon }}
+  {{/* `@user@host` → user, host. TrimPrefix first so the leading @ doesn't
+    produce an empty leading field. */}}
+  {{ $parts := split (strings.TrimPrefix "@" .handle) "@" }}
+  {{ $user := index $parts 0 }}
+  {{ $host := "" }}
+  {{ if ge (len $parts) 2 }}
+    {{ $host = index $parts 1 }}
+  {{ end }}
+
+  {{ if and $user $host }}
+    {{ $limit := 3 }}
+    <section
+      id="mastodon-toots"
+      class="border-t border-base-300 pt-10 mb-16"
+      data-host="{{ $host }}"
+      data-user="{{ $user }}"
+      data-account-id="{{ .accountId | default "" }}"
+      data-limit="{{ $limit }}"
+      data-locale="{{ site.Language.Lang }}"
+      data-sensitive-label="{{ i18n "now_mastodon_sensitive" }}"
+    >
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="font-heading text-xs font-semibold uppercase tracking-widest text-base-content/70">
+          {{ i18n "now_mastodon" }}
+        </h2>
+        {{/* `no-ext-icon`: the global external-link marker would otherwise stack
+          an arrow onto a link that already ends in one. */}}
+        <a
+          href="{{ .url }}"
+          class="text-xs link link-primary no-ext-icon"
+          target="_blank"
+          rel="me noopener noreferrer"
+          >{{ i18n "now_mastodon_all" }}</a
+        >
+      </div>
+
+      {{/* Identity block for the whole section rather than a per-toot byline —
+        every toot here is by the same person, so three copies of the same face
+        and name would be noise in a 65ch column. Filled from the `account`
+        object the statuses response already embeds, so it costs no extra
+        request. Hidden until then: a nameless avatar frame looks broken. */}}
+      <a
+        id="mastodon-toots-profile"
+        class="toot-profile no-ext-icon"
+        href="{{ .url }}"
+        target="_blank"
+        rel="me noopener noreferrer"
+      >
+        <span class="toot-profile__avatar-skeleton skeleton"></span>
+        {{/* 88 = 2× the 44px display size, so the box is reserved before the
+          image lands and the avatar stays sharp on retina. */}}
+        <img class="toot-profile__avatar hidden" width="88" height="88" alt="" loading="lazy" decoding="async" />
+        <span class="toot-profile__id">
+          <span class="toot-profile__name"></span>
+          <span class="toot-profile__handle">@{{ $user }}@{{ $host }}</span>
+        </span>
+      </a>
+
+      <ul id="mastodon-toots-list" class="toot-list">
+        {{ range seq $limit }}
+          <li class="toot">
+            <div class="toot__skeleton skeleton"></div>
+            <div class="toot__content hidden">
+              <div class="toot__cw hidden"></div>
+              <div class="toot__body"></div>
+              <div class="toot__media hidden"></div>
+            </div>
+            <a class="toot__permalink hidden no-ext-icon" target="_blank" rel="noopener noreferrer">
+              <time class="toot__date"></time>
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+
+      <p id="mastodon-toots-error" class="hidden toot__error">{{ i18n "now_mastodon_error" }}</p>
+    </section>
+
+    <script>
+      (function () {
+        const section = document.getElementById("mastodon-toots");
+        const list = document.getElementById("mastodon-toots-list");
+        const profile = document.getElementById("mastodon-toots-profile");
+        const errorEl = document.getElementById("mastodon-toots-error");
+        const items = Array.from(list.querySelectorAll(".toot"));
+
+        const host = section.dataset.host;
+        const user = section.dataset.user;
+        const limit = parseInt(section.dataset.limit, 10) || 3;
+        const locale = section.dataset.locale || "en";
+        const sensitiveLabel = section.dataset.sensitiveLabel;
+        const api = "https://" + host + "/api/v1";
+
+        /* `v2` because the cached shape gained an `account` field. Without the
+           bump, a visitor holding a v1 entry would render a headerless section
+           until the 15-minute TTL expired. */
+        const CACHE_KEY = "toots:v2:" + host + ":" + user;
+        const CACHE_TTL = 15 * 60 * 1000;
+
+        /* Mastodon returns `content` as HTML. Never hand that to innerHTML as-is:
+           rebuild it against an allowlist, unwrapping anything unknown to its text
+           so no wording is lost. */
+        const ALLOWED = new Set([
+          "P", "BR", "A", "SPAN", "EM", "STRONG", "B", "I",
+          "CODE", "PRE", "DEL", "UL", "OL", "LI", "BLOCKQUOTE",
+        ]);
+
+        function sanitize(html) {
+          const parsed = new DOMParser().parseFromString(html, "text/html");
+          const out = document.createDocumentFragment();
+          for (const node of Array.from(parsed.body.childNodes)) {
+            const clean = cleanNode(node);
+            if (clean) out.appendChild(clean);
+          }
+          return out;
+        }
+
+        function cleanNode(node) {
+          if (node.nodeType === Node.TEXT_NODE) {
+            return document.createTextNode(node.nodeValue);
+          }
+          if (node.nodeType !== Node.ELEMENT_NODE) return null;
+
+          /* Mastodon shortens long URLs with marker classes rather than by
+             editing the text: `invisible` spans hold the head and tail to hide,
+             `ellipsis` the visible middle. Since this rebuild drops classes, not
+             honouring them here would print the entire raw URL — so an Apple
+             Music link would render as its full query string instead of
+             "music.apple.com/br/album/lorel…". */
+          const cls = node.getAttribute("class") || "";
+          if (node.tagName === "SPAN" && /(^|\s)invisible(\s|$)/.test(cls)) return null;
+
+          const children = document.createDocumentFragment();
+          for (const child of Array.from(node.childNodes)) {
+            const clean = cleanNode(child);
+            if (clean) children.appendChild(clean);
+          }
+
+          if (node.tagName === "SPAN" && /(^|\s)ellipsis(\s|$)/.test(cls)) {
+            children.appendChild(document.createTextNode("…"));
+            return children;
+          }
+
+          if (!ALLOWED.has(node.tagName)) return children;
+
+          const el = document.createElement(node.tagName.toLowerCase());
+          if (node.tagName === "A") {
+            const href = node.getAttribute("href") || "";
+            /* Only absolute http(s) survives — this is what keeps `javascript:`
+               and `data:` out. */
+            if (/^https?:\/\//i.test(href)) {
+              el.setAttribute("href", href);
+              el.setAttribute("target", "_blank");
+              el.setAttribute("rel", "noopener noreferrer");
+            }
+            /* Without this every hashtag, mention and link inside a toot gets the
+               site's global ↗ marker stamped after it. */
+            el.setAttribute("class", "no-ext-icon");
+          }
+          el.appendChild(children);
+          return el;
+        }
+
+        /* Custom emoji arrive as `:shortcode:` in the text plus a lookup table.
+           Left alone they render as literal colons. */
+        function replaceEmoji(fragment, emojis) {
+          if (!emojis || !emojis.length) return fragment;
+          const byCode = new Map(emojis.map(e => [e.shortcode, e.static_url || e.url]));
+          const walker = document.createTreeWalker(fragment, NodeFilter.SHOW_TEXT);
+          const texts = [];
+          while (walker.nextNode()) texts.push(walker.currentNode);
+
+          for (const textNode of texts) {
+            if (!/:[a-zA-Z0-9_]+:/.test(textNode.nodeValue)) continue;
+            const parts = textNode.nodeValue.split(/(:[a-zA-Z0-9_]+:)/g);
+            const frag = document.createDocumentFragment();
+            for (const part of parts) {
+              const code = part.slice(1, -1);
+              if (part.startsWith(":") && part.endsWith(":") && byCode.has(code)) {
+                const img = document.createElement("img");
+                img.src = byCode.get(code);
+                img.alt = code;
+                img.title = part;
+                img.className = "toot__emoji";
+                img.loading = "lazy";
+                frag.appendChild(img);
+              } else if (part) {
+                frag.appendChild(document.createTextNode(part));
+              }
+            }
+            textNode.parentNode.replaceChild(frag, textNode);
+          }
+          return fragment;
+        }
+
+        function renderMedia(container, status) {
+          const attachments = (status.media_attachments || [])
+            .filter(m => ["image", "gifv", "video"].includes(m.type) && m.preview_url)
+            .slice(0, 4);
+          if (!attachments.length) return;
+
+          for (const m of attachments) {
+            const img = document.createElement("img");
+            img.src = m.preview_url;
+            img.alt = m.description || "";
+            img.loading = "lazy";
+            img.decoding = "async";
+            img.className = "toot__media-img";
+            container.appendChild(img);
+          }
+
+          if (status.sensitive) {
+            container.classList.add("toot__media--sensitive");
+            const reveal = document.createElement("button");
+            reveal.type = "button";
+            reveal.className = "toot__reveal";
+            reveal.textContent = sensitiveLabel;
+            reveal.addEventListener("click", () => {
+              container.classList.remove("toot__media--sensitive");
+              reveal.remove();
+            }, { once: true });
+            container.appendChild(reveal);
+          }
+
+          container.classList.remove("hidden");
+        }
+
+        function renderToot(li, status) {
+          const skeleton = li.querySelector(".toot__skeleton");
+          const content = li.querySelector(".toot__content");
+          const cw = li.querySelector(".toot__cw");
+          const body = li.querySelector(".toot__body");
+          const media = li.querySelector(".toot__media");
+          const permalink = li.querySelector(".toot__permalink");
+          const date = li.querySelector(".toot__date");
+
+          const rendered = replaceEmoji(sanitize(status.content || ""), status.emojis);
+
+          if (status.spoiler_text) {
+            /* A content warning stays collapsed. The body and any media go inside
+               it, so nothing behind the warning is visible until it is opened. */
+            const details = document.createElement("details");
+            const summary = document.createElement("summary");
+            summary.textContent = status.spoiler_text;
+            details.appendChild(summary);
+            const inner = document.createElement("div");
+            inner.className = "toot__cw-body";
+            inner.appendChild(rendered);
+            details.appendChild(inner);
+            cw.appendChild(details);
+            cw.classList.remove("hidden");
+            renderMedia(media, status);
+            inner.appendChild(media);
+          } else {
+            body.appendChild(rendered);
+            renderMedia(media, status);
+          }
+
+          const when = new Date(status.created_at);
+          date.dateTime = when.toISOString().slice(0, 10);
+          date.textContent = new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(when);
+          permalink.href = status.url;
+
+          skeleton.remove();
+          content.classList.remove("hidden");
+          permalink.classList.remove("hidden");
+        }
+
+        function renderProfile(account) {
+          /* Unreachable today — `account` is only null when there are no
+             statuses, and init() removes the section in that case. Hiding beats
+             returning early, which would leave the skeleton spinning forever. */
+          if (!account) {
+            profile.classList.add("hidden");
+            return;
+          }
+          const avatar = profile.querySelector(".toot-profile__avatar");
+          const skeleton = profile.querySelector(".toot-profile__avatar-skeleton");
+          const name = profile.querySelector(".toot-profile__name");
+
+          if (account.url) profile.href = account.url;
+
+          /* The display name can carry `:shortcode:` custom emoji just like a
+             toot body, so it goes through the same replacement. */
+          const label = account.display_name || user;
+          /* Wrapped in a fragment because replaceEmoji walks *descendants* — a
+             bare text node passed as the TreeWalker root is never visited. */
+          const labelFrag = document.createDocumentFragment();
+          labelFrag.appendChild(document.createTextNode(label));
+          name.appendChild(replaceEmoji(labelFrag, account.emojis));
+
+          if (account.avatar) {
+            avatar.addEventListener("load", () => {
+              skeleton.remove();
+              avatar.classList.remove("hidden");
+            }, { once: true });
+            /* A broken avatar leaves the skeleton in place rather than an empty
+               frame — the handle and name still identify the account. */
+            avatar.addEventListener("error", () => avatar.remove(), { once: true });
+            avatar.alt = label;
+            avatar.src = account.avatar;
+          } else {
+            skeleton.remove();
+          }
+        }
+
+        function render(account, statuses) {
+          renderProfile(account);
+          statuses.slice(0, items.length).forEach((status, i) => renderToot(items[i], status));
+          for (let i = statuses.length; i < items.length; i++) items[i].remove();
+        }
+
+        function showError() {
+          list.classList.add("hidden");
+          profile.classList.add("hidden");
+          errorEl.classList.remove("hidden");
+        }
+
+        function readCache() {
+          try {
+            const raw = localStorage.getItem(CACHE_KEY);
+            if (!raw) return null;
+            const parsed = JSON.parse(raw);
+            if (!parsed || !Array.isArray(parsed.data)) return null;
+            return Date.now() - parsed.t < CACHE_TTL ? parsed : null;
+          } catch (err) {
+            return null;
+          }
+        }
+
+        function writeCache(account, data) {
+          try {
+            localStorage.setItem(
+              CACHE_KEY,
+              JSON.stringify({ t: Date.now(), account: account, data: data })
+            );
+          } catch (err) {
+            /* Private mode or a full quota — the section still works, just uncached. */
+          }
+        }
+
+        async function resolveAccountId() {
+          if (section.dataset.accountId) return section.dataset.accountId;
+          const res = await fetch(api + "/accounts/lookup?acct=" + encodeURIComponent(user));
+          if (!res.ok) throw new Error("Account lookup failed: " + res.status);
+          const account = await res.json();
+          if (!account || !account.id) throw new Error("No account id");
+          return account.id;
+        }
+
+        async function fetchStatuses() {
+          const id = await resolveAccountId();
+          const url =
+            api + "/accounts/" + encodeURIComponent(id) + "/statuses" +
+            "?exclude_replies=true&exclude_reblogs=true&limit=" + limit;
+          const res = await fetch(url);
+          if (!res.ok) throw new Error("Mastodon request failed: " + res.status);
+          const statuses = await res.json();
+          if (!Array.isArray(statuses)) throw new Error("Unexpected response");
+
+          /* Every status embeds its author, so the profile header costs no extra
+             request — it is read off the first one. */
+          const author = statuses.length ? statuses[0].account : null;
+          const account = author && {
+            display_name: author.display_name,
+            url: author.url,
+            avatar: author.avatar_static || author.avatar,
+            emojis: (author.emojis || []).map(e => ({
+              shortcode: e.shortcode, url: e.url, static_url: e.static_url,
+            })),
+          };
+
+          /* Only the fields the renderer touches go to cache — a full status is
+             large and most of it is never read. */
+          const trimmed = statuses.map(s => ({
+            id: s.id,
+            url: s.url,
+            content: s.content,
+            created_at: s.created_at,
+            spoiler_text: s.spoiler_text,
+            sensitive: s.sensitive,
+            emojis: (s.emojis || []).map(e => ({
+              shortcode: e.shortcode, url: e.url, static_url: e.static_url,
+            })),
+            media_attachments: (s.media_attachments || []).map(m => ({
+              type: m.type, preview_url: m.preview_url, description: m.description,
+            })),
+          }));
+
+          return { account: account, data: trimmed };
+        }
+
+        async function init() {
+          const cached = readCache();
+          if (cached && cached.data.length) {
+            render(cached.account, cached.data);
+            return;
+          }
+
+          let result;
+          try {
+            result = await fetchStatuses();
+          } catch (err) {
+            showError();
+            return;
+          }
+
+          if (!result.data.length) {
+            section.remove();
+            return;
+          }
+
+          writeCache(result.account, result.data);
+          render(result.account, result.data);
+        }
+
+        init();
+      })();
+    </script>
+  {{ end }}
+{{ end }}

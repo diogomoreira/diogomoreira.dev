@@ -985,6 +985,230 @@ html[data-theme="midnight"] {
     fill: var(--color-warning);
     stroke: var(--color-warning);
   }
+
+  /* ---------------------------------------------------------------------------
+     Mastodon toots (/now)
+
+     Hand-written for the same reason as `.library-*` and `.polaroid`: the toot
+     body, media and CW are built by JS at runtime, so Tailwind — which only
+     emits classes it found in `hugo_stats.json` after Hugo rendered them — would
+     never see a utility used only there. Everything the script creates is styled
+     from here; everything Hugo renders can safely use utilities.
+
+     The section sits outside the page's `.prose` wrapper (like the artists grid
+     below it), so there is no typography-plugin specificity to fight.
+     --------------------------------------------------------------------------- */
+
+  /* One identity block for the section rather than a byline per toot — see the
+     partial for why. Sits above the list and is separated from it by the same
+     hairline the rows use, so the header reads as the head of one object. */
+  .toot-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-block-end: 0.9rem;
+    border-block-end: 1px solid var(--color-base-300);
+    text-decoration: none;
+  }
+
+  .toot-profile__avatar,
+  .toot-profile__avatar-skeleton {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 9999px;
+    flex-shrink: 0;
+  }
+
+  .toot-profile__avatar {
+    object-fit: cover;
+    border: 2px solid var(--color-base-300);
+    background-color: var(--color-base-200);
+  }
+
+  /* Fixed height on the text column so the block does not grow when the name
+     arrives — the handle alone is one line, name plus handle is two. */
+  .toot-profile__id {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.1rem;
+    min-height: 2.75rem;
+    min-width: 0;
+  }
+
+  .toot-profile__name {
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-heading);
+  }
+
+  .toot-profile__handle {
+    font-size: 0.75rem;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+    color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  }
+
+  .toot-profile:hover .toot-profile__name,
+  .toot-profile:focus-visible .toot-profile__name {
+    text-decoration-line: underline;
+    text-decoration-color: var(--color-accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  .toot-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Same hairline separator as the library list: rows, not boxed cards. Three
+     short posts boxed individually read as a stack of heavy tiles. */
+  .toot + .toot {
+    border-block-start: 1px solid var(--color-base-300);
+  }
+
+  /* Hover cue borrowed from `.library-row`: a 2px start border that is always
+     present but transparent, so colouring it on hover shifts nothing. The row
+     cannot be one big <a> — toot bodies contain their own links and nested
+     anchors are invalid — so this is what makes the whole row feel live. */
+  .toot {
+    padding-block: 0.85rem;
+    border-inline-start: 2px solid transparent;
+    padding-inline-start: 0.6rem;
+    margin-inline-start: -0.6rem;
+    transition: border-color 150ms ease;
+  }
+
+  .toot:hover {
+    border-inline-start-color: var(--color-accent);
+  }
+
+  /* Reserves roughly a two-line toot so the fetch doesn't jolt the artists grid
+     below it down the page. */
+  .toot__skeleton {
+    height: 3.5rem;
+    width: 100%;
+  }
+
+  /* `anywhere`, not `break-word`: these posts are link-heavy and Mastodon's
+     shortened link text is still one unbroken token, which overflows the 65ch
+     column at narrow widths without this. */
+  .toot__body {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+  }
+
+  .toot__body p + p {
+    margin-block-start: 0.6rem;
+  }
+
+  /* Longhands only, never the `text-decoration` shorthand — the unlayered `a`
+     rule at the bottom of this file sets colour/style/thickness separately and a
+     shorthand here would reset all three. */
+  .toot__body a {
+    text-decoration-color: var(--color-accent);
+    text-decoration-style: dashed;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  /* Custom emoji sit on the text baseline at cap height. */
+  .toot__emoji {
+    display: inline-block;
+    height: 1.2em;
+    width: auto;
+    vertical-align: text-bottom;
+    margin-inline: 0.05em;
+  }
+
+  .toot__cw > details > summary {
+    cursor: pointer;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-secondary);
+    padding-block: 0.25rem;
+  }
+
+  .toot__cw > details > summary:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+
+  .toot__cw-body {
+    margin-block-start: 0.5rem;
+  }
+
+  /* Grid rather than a wrapping flex row so two attachments share the width
+     evenly instead of leaving a ragged gap. Capped at 2 columns: at 4-up in a
+     65ch column each thumb is too small to read. */
+  .toot__media {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+    max-width: 22rem;
+    gap: 0.4rem;
+    margin-block-start: 0.6rem;
+    position: relative;
+  }
+
+  /* Fixed ratio + `cover`: attachments are whatever aspect the poster uploaded,
+     and a natural-height image would resize the row after it loads. */
+  .toot__media-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border: 2px solid var(--color-base-300);
+    background-color: var(--color-base-200);
+  }
+
+  .toot__media--sensitive .toot__media-img {
+    filter: blur(1.25rem);
+  }
+
+  .toot__reveal {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 0;
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 0.25rem;
+    background-color: color-mix(in oklab, var(--color-base-100) 80%, transparent);
+    color: var(--color-base-content);
+  }
+
+  .toot__permalink {
+    display: inline-block;
+    margin-block-start: 0.5rem;
+  }
+
+  /* 70% is the documented floor for muted text — /50 and /60 fall under 4.5:1 in
+     one theme or the other. */
+  .toot__date {
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  }
+
+  .toot__permalink:hover .toot__date,
+  .toot__permalink:focus-visible .toot__date {
+    color: var(--color-base-content);
+    text-decoration-line: underline;
+  }
+
+  .toot__error {
+    font-size: 0.75rem;
+    color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  }
 }
 
 @layer base {
