@@ -12,13 +12,13 @@ items:
 
   - title: "Final Fantasy VII (Remake)"
     link: "https://www.amazon.com.br/Final-Fantasy-VII-Remake-PlayStation/dp/B00ZS80PC2"
-    cover: "images/library/final-fantasy-vii.webp"
+    cover: "images/library/final-fantasy-vii.jpg"
     rating: 5
     date: 2023-06-21
 
   - title: "Final Fantasy XV"
     link: "https://www.amazon.com.br/Final-Fantasy-XV-Royal-PlayStation/dp/B0792HGXB7"
-    cover: "images/library/final-fantasy-xv.jpeg"
+    cover: "images/library/final-fantasy-xv.jpg"
     rating: 5
     date: 2023-06-21
 
@@ -33,3 +33,45 @@ items:
     cover: "images/library/nier-automata.jpg"
     rating: 5
     date: 2021-04-17
+
+  - title: "Omori"
+    link: "https://store.steampowered.com/app/1150690/OMORI/"
+    cover: "images/library/omori.jpg"
+    rating: 4
+    date: 2023-06-30
+
+  - title: "South Park: The Stick of Truth"
+    link: "https://store.steampowered.com/app/213670/South_Park_The_Stick_of_Truth/"
+    cover: "images/library/south-park-stick-of-truth.jpg"
+    rating: 3
+    date: 2020-09-30
+
+  - title: "Forza Horizon 5"
+    link: "https://store.steampowered.com/app/1551360/Forza_Horizon_5/"
+    cover: "images/library/forza-horizon-5.jpg"
+    rating: 4
+    date: 2022-12-30
+
+  - title: "Kingdom Hearts III"
+    link: "https://store.steampowered.com/app/2552450/KINGDOM_HEARTS_III__ReMind/"
+    cover: "images/library/kingdom-hearts-3.jpg"
+    rating: 5
+    date: 2019-02-15
+
+  - title: "Kingdom Hearts: Birth by Sleep"
+    link: "https://store.steampowered.com/app/1066780/Kingdom_Hearts_Birth_by_Sleep/"
+    cover: "images/library/kingdom-hearts-bbs.webp"
+    rating: 5
+    date: 2012-12-30
+
+  - title: "Kingdom Hearts II"
+    link: "https://store.steampowered.com/app/1066780/Kingdom_Hearts_II/"
+    cover: "images/library/kingdom-hearts-2.jpeg"
+    rating: 5
+    date: 2005-12-30
+
+  - title: "Kingdom Hearts"
+    link: "https://store.steampowered.com/app/1066780/Kingdom_Hearts/"
+    cover: "images/library/kingdom-hearts.webp"
+    rating: 3
+    date: 2005-12-30
