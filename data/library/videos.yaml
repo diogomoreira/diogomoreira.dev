@@ -1,6 +1,8 @@
 # Unrated on purpose, same as articles.yaml — `rating` is optional everywhere.
 weight: 3
 display: list
+# Bare dates, same as articles.yaml — see library-item-date.html.
+date_label: bare
 items:
   - title: "You are being misled about renewable energy technology"
     link: "https://www.youtube.com/watch?v=KtQ9nt2ZeGM"

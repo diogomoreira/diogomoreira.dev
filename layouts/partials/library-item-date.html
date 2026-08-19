@@ -8,11 +8,21 @@
   Nothing renders unless the category set `date_label`, because most categories
   have no useful reading of the date — "Finished" under an album is nonsense.
 
-  An entry in such a category with *no* `date` is one you have not finished: a
+  `date_label: bare` is the one label that is not a word: it shows the date with
+  no leading text, which is what Articles and Videos want. "Read"/"Watched" would
+  claim more than the data does — the date is when the entry was added — and a
+  list of one-line rows is dense enough that eleven repetitions of the same word
+  read as noise. Being a sentinel rather than an i18n suffix, it needs no keys in
+  either i18n file, and it has no in-progress state: an article is not something
+  you are part-way through in the way a book is.
+
+  An entry in a *labelled* category with no `date` is one you have not finished: a
   book you are still reading. That renders as a badge instead of a date, keyed
-  `library_<label>_in_progress` — so a new `date_label` needs two keys in both
-  i18n files, `_on` and `_in_progress`. library-categories.html floats these
-  entries to the top of their category.
+  `library_<label>_in_progress` — so a new worded `date_label` needs two keys in
+  both i18n files, `_on` and `_in_progress`. library-categories.html floats these
+  entries to the top of their category; under `bare` such an entry still floats
+  but renders nothing where the date would be, so leave `date` off a bare entry
+  only if you want it pinned to the top.
 
   `time.AsTime` rather than trusting the YAML: an unquoted `2023-10-18` parses to
   a time, but `"2023-10-18"` in quotes stays a string, and only one of those two
@@ -21,10 +31,12 @@
   {{ if .date }}
     {{ $when := time.AsTime .date }}
     <span class="library-date">
-      {{ i18n (printf "library_%s_on" .label) | default .label }}
+      {{ if ne .label "bare" }}
+        {{ i18n (printf "library_%s_on" .label) | default .label }}
+      {{ end }}
       <time datetime="{{ $when.Format "2006-01-02" }}">{{ partial "formatted-date-short.html" $when }}</time>
     </span>
-  {{ else }}
+  {{ else if ne .label "bare" }}
     <span class="badge badge-tint badge-accent badge-sm"
       >{{ i18n (printf "library_%s_in_progress" .label) | default .label }}</span
     >

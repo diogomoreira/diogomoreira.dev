@@ -874,7 +874,9 @@ html[data-theme="midnight"] {
     gap: 0.35rem;
   }
 
-  /* Shown only when the category sets `date_label` — see library-item-date.html. */
+  /* Shown only when the category sets `date_label` — see library-item-date.html.
+     Carries the label word too, except under `date_label: bare` (articles,
+     videos) where the date stands alone. */
   .library-date {
     font-size: 0.7rem;
     font-variant-numeric: tabular-nums;
