@@ -50,8 +50,11 @@
       {{/* Cards, via the same partial /blog and the term pages use — the three
         surfaces share one shape by construction.
 
-        `first 4`, not 5: this is a two-column grid, and an odd count leaves a
-        lonely card on its own row.
+        `first 3`, in a three-column grid, so the row is exactly one row: an
+        odd count in a two-column grid used to leave a lonely card below. The
+        grid is `sm:grid-cols-3` rather than a `lg:` step because
+        `sm:grid-cols-3` is already in `hugo_stats.json` (the photos gallery
+        uses it) and a newly-used utility takes two builds to be emitted.
 
         This list and the "Recently Added" library list below it used to be
         deliberately identical markup. That pairing is broken on purpose now:
@@ -59,8 +62,8 @@
         rows. The contrast is the point — a wall of placeholder-less poster cards
         was the thing the library list was designed to avoid in the first place.
       */}}
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {{ range first 4 $posts }}
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {{ range first 3 $posts }}
           {{ partial "post-card.html" (dict "page" .) }}
         {{ end }}
       </div>
