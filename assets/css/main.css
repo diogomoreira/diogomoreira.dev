@@ -931,16 +931,34 @@ html[data-theme="midnight"] {
      `space-between` the stars ended up marooned across a gap of whitespace and
      read as belonging to the row, not to the thing. Wrapping still lets a long
      title take the line and drop its stars underneath. */
-  /* `center`, not `baseline`. The meta block's baseline is inherited from its
-     first item — the star run — and an SVG is a replaced element whose baseline
-     is its *bottom margin edge*. Baseline-aligning therefore hangs a 14px star
-     box off the text baseline, leaving it floating above the x-height. Centring
-     the flex line puts the stars level with the title instead. */
+  /* `baseline`, not `center` — with the star run exempted back to `center` just
+     below. Centring aligns the *boxes*, and two boxes of different font sizes
+     centred on each other do not put their text on one line: the 0.7rem date
+     sat ~2px above the title's baseline and read as floating. Baseline
+     alignment is the fix for the text, and cannot be the fix for the stars —
+     an SVG is a replaced element whose baseline is its *bottom margin edge*, so
+     baseline-aligning hangs a 14px star box off the text baseline and leaves it
+     floating above the x-height. Text aligns on the baseline, boxes centre. */
   .library-row__head {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: baseline;
     gap: 0.2rem 0.5rem;
+  }
+
+  /* The row variant only — a card's meta sits on its own line under the title,
+     where there is no neighbouring text to align to and centring is right.
+     `baseline` here is also what makes the meta's *own* baseline usable by the
+     rule above: a flex container takes its baseline from its first
+     baseline-aligned item, and with everything centred there is none, so it
+     would be synthesised from the bottom margin edge. */
+  .library-row__meta {
+    align-items: baseline;
+  }
+
+  .library-row__meta .library-stars,
+  .library-row__meta .badge {
+    align-self: center;
   }
 
   .library-row__title {
