@@ -42,4 +42,4 @@ O resto dessa história você pode ver na minha página [carreira](/work) ou [ac
 
 ---
 
-Este é um panorama de quem eu sou. Se quiser o lado profissional, veja [carreira]({{< relref "work" >}}) e [acadêmico]({{< relref "academic" >}}). Você também pode me conhecer melhor através das [coisas que gosto]({{< relref "library" >}}) e do [que estou fazendo agora]({{< relref "now" >}}). Fique à vontade para me mandar uma mensagem em qualquer uma das minhas redes sociais, terei prazer em responder.
+Este é um panorama de quem eu sou. Se quiser saber sobre o meu lado profissional, veja [carreira]({{< relref "work" >}}) e [acadêmico]({{< relref "academic" >}}). Você também pode me conhecer melhor através das [coisas que gosto]({{< relref "library" >}}) e do [que estou fazendo agora]({{< relref "now" >}}). Fique à vontade para me mandar uma mensagem em qualquer uma das minhas redes sociais, terei prazer em responder.
