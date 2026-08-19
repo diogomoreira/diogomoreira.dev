@@ -181,7 +181,7 @@ html[data-theme="midnight"] {
 
 @theme {
   --font-sans:
-    "Instrument Sans", -apple-system, BlinkMacSystemFont, "Inter", "IBM Plex Sans", "Segoe UI", Helvetica, Arial,
+    "Raleway", -apple-system, BlinkMacSystemFont, "Inter", "IBM Plex Sans", "Segoe UI", Helvetica, Arial,
     sans-serif;
   --font-body: var(--font-sans);
   --font-mono:
@@ -575,7 +575,7 @@ html[data-theme="midnight"] {
     -webkit-line-clamp: 2;
     overflow: hidden;
     color: var(--polaroid-ink);
-    font-weight: 600;
+    font-weight: 500;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -710,7 +710,7 @@ html[data-theme="midnight"] {
   .library-section__heading {
     font-family: var(--font-heading);
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: inherit;
@@ -830,7 +830,7 @@ html[data-theme="midnight"] {
     -webkit-line-clamp: 2;
     overflow: hidden;
     font-size: 0.8125rem;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1.3;
     color: var(--color-base-content);
   }
@@ -1039,7 +1039,7 @@ html[data-theme="midnight"] {
   .toot-profile__name {
     font-family: var(--font-heading);
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1.3;
     color: var(--color-heading);
   }
@@ -1129,7 +1129,7 @@ html[data-theme="midnight"] {
   .toot__cw > details > summary {
     cursor: pointer;
     font-size: 0.8125rem;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--color-secondary);
     padding-block: 0.25rem;
   }
@@ -1179,7 +1179,7 @@ html[data-theme="midnight"] {
     border: 0;
     font-family: inherit;
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 500;
     text-align: center;
     padding: 0.25rem;
     background-color: color-mix(in oklab, var(--color-base-100) 80%, transparent);
@@ -1214,7 +1214,8 @@ html[data-theme="midnight"] {
 @layer base {
   body {
     font-family: var(--font-body);
-    line-height: 1.5;
+    font-weight: 400;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -1248,9 +1249,73 @@ a {
 /* Unlayered on purpose: daisyUI sets `--tw-prose-headings` on `:root .prose`
    from inside its own layer, so an unlayered rule wins regardless of
    specificity. Retargets the variable @tailwindcss/typography colours every
-   content heading from, instead of touching each `.prose` wrapper. */
+   content heading from, instead of touching each `.prose` wrapper.
+
+   `line-height` rides along for the same cascade reason, and is set here on the
+   wrapper rather than on `.prose p` on purpose: @tailwindcss/typography gives
+   paragraphs no line-height of their own, so 1.75 reaches them by inheritance
+   from `.prose` — and reaches list items, blockquotes and definition lists by
+   the same route. Pinning only `p` would leave those at 1.75 and put a visible
+   step between a paragraph and the list under it. This also has to be unlayered
+   to beat `prose-base`, the size modifier `_default/single.html` carries, which
+   re-declares 1.75 as a (0,1,0) utility of its own. Headings are unaffected —
+   the plugin gives h1–h4 explicit values. */
 .prose {
   --tw-prose-headings: var(--color-heading);
+  line-height: 1.7;
+}
+
+/* Weight scale, unlayered for the same cascade reason as the two rules above —
+   @tailwindcss/typography's `.prose :where(h1)` measures (0,1,0) because
+   `:where()` contributes nothing, so `.prose h1` outranks it even from a layer,
+   and there is no `--tw-prose-*` variable for weight the way there is for
+   colour.
+
+   The plugin ships an 800/700/600 heading ramp built for a 400 body, which is
+   also what the `body` rule in `@layer base` sets — but the top of that ramp is
+   unreachable here: `head.html` loads Raleway over `300..600`, so 800 and 700
+   both clamp to 600 and would render as one weight. The ramp is therefore
+   written to the ceiling instead — 800/700 → 600, 600 → 500 — which keeps each
+   level distinct and every declared value inside the loaded range. Asking for a
+   weight outside that range does not fail; the browser silently clamps to the
+   nearest end, which is how the site rendered `font-extrabold` as 700 for as
+   long as it requested `400..700`. */
+.prose h1 {
+  font-weight: 600;
+}
+
+.prose h2 {
+  font-weight: 600;
+}
+
+.prose h3,
+.prose h4,
+.prose code,
+.prose dt,
+.prose thead th {
+  font-weight: 500;
+}
+
+/* Emphasis is pulled a stop clear of the rest of the ramp. A heading has size
+   and `--font-heading` to set it apart, so 500 against the 400 body is enough;
+   an inline `<strong>` has nothing but weight, and one stop does not read as
+   emphasis in Raleway at body size. */
+.prose strong {
+  font-weight: 600;
+}
+
+.prose blockquote {
+  font-weight: 400;
+}
+
+/* Preflight sets `b, strong { font-weight: bolder }`, which is *relative*: against
+   the 400 body it computes to 700, which clamps to 600 in the loaded range and
+   so happens to land right — but only by accident, and it would compute to 400
+   (no emphasis at all) under any lighter parent. Pinned instead. Prose gets its
+   own rule above; this covers `<strong>` outside a `.prose` wrapper. */
+b,
+strong {
+  font-weight: 600;
 }
 
 /* External-link marker.

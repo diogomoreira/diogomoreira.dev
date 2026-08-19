@@ -11,6 +11,6 @@
   {{- end -}}
   <div role="alert" class="alert alert-{{ $type }}">
     {{ partial (printf "icons/alert/%s.html" $type) $ }}
-    <span class="font-semibold">{{ . | markdownify }}</span>
+    <span class="font-medium">{{ . | markdownify }}</span>
   </div>
 {{ end }}

@@ -18,7 +18,7 @@
 {{ with .entries }}
   <div class="not-prose my-8">
     {{ with $.heading }}
-      <h3 class="font-heading text-xs font-semibold uppercase tracking-widest text-secondary mb-4">{{ . }}</h3>
+      <h3 class="font-heading text-xs font-medium uppercase tracking-widest text-secondary mb-4">{{ . }}</h3>
     {{ end }}
 
     <ul class="list-none p-0 m-0 space-y-2">
@@ -34,7 +34,7 @@
             {{ end }}
           </span>
           <span class="text-base-content">
-            <span class="font-semibold">{{ .title }}</span>
+            <span class="font-medium">{{ .title }}</span>
             <span class="text-base-content/70"> @ </span>
             {{ $org := index . $orgField }}
             {{ with .link }}

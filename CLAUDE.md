@@ -94,6 +94,8 @@ All layouts use `{{ define "main" }}` blocks. Chrome is split by viewport: `rail
 
 **Every page is capped at `max-w-prose` (65ch) by a single wrapper inside `<main>` in `baseof.html`** — one measure for the whole site, sitting inside the padding rather than on `<main>` itself. `wide: true` in a page's front matter drops the cap so a grid or gallery can use the full centre rail; only `content/<lang>/library.md` uses it today. It is a page param, so a section list page needs it in its `_index.md`.
 
+**Body copy runs at `line-height: 1.7`**, set on `.prose` in the unlayered block at the bottom of `main.css` beside `--tw-prose-headings` (@tailwindcss/typography's own default is 1.75). It sits on the wrapper, not on `.prose p`: the plugin gives paragraphs no line-height of their own, so the value reaches them — and list items, blockquotes and definition lists — purely by inheritance, and pinning only `p` would put a visible step between a paragraph and the list under it. Unlayered is load-bearing here for a second reason beyond the usual one: `prose-base`, the size modifier `_default/single.html` carries, re-declares 1.75 as its own (0,1,0) utility.
+
 ### Nav Menu
 
 `layouts/partials/nav-menu.html` is the only template that reads `Site.Menus`; it is called twice — from `rail-left.html` (`variant "desktop"`) and `sidebar-mobile-drawer.html` (`variant "mobile"`). The two variants differ only in padding and font weight, so the anchor itself lives in `layouts/partials/nav-link.html` and both variants (and both nesting levels) render through it.
