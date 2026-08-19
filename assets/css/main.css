@@ -490,8 +490,8 @@ html[data-theme="midnight"] {
     margin: 0.5rem 0 1.5rem 1.75rem;
   }
 
-  /* The 65ch measure set in baseof.html leaves nothing worth wrapping beside a
-     floated print on a phone, so both floats become centred blocks. */
+  /* The content measure set in baseof.html leaves nothing worth wrapping beside
+     a floated print on a phone, so both floats become centred blocks. */
   @media (width < 40rem) {
     .polaroid--left,
     .polaroid--right {
@@ -1095,7 +1095,7 @@ html[data-theme="midnight"] {
   }
 
   /* `anywhere`, not `break-word`: these posts are link-heavy and Mastodon's
-     shortened link text is still one unbroken token, which overflows the 65ch
+     shortened link text is still one unbroken token, which overflows the content
      column at narrow widths without this. */
   .toot__body {
     font-size: 0.9375rem;
@@ -1144,8 +1144,8 @@ html[data-theme="midnight"] {
   }
 
   /* Grid rather than a wrapping flex row so two attachments share the width
-     evenly instead of leaving a ragged gap. Capped at 2 columns: at 4-up in a
-     65ch column each thumb is too small to read. */
+     evenly instead of leaving a ragged gap. Capped at 2 columns: at 4-up in the
+     content column each thumb is too small to read. */
   .toot__media {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));

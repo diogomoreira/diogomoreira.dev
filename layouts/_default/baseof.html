@@ -7,7 +7,8 @@
 
   <body class="min-h-screen">
     {{/* Mobile chrome sits outside the shell grid — it only shows below `lg`,
-      where `.site-shell` is a plain block anyway. */}}
+      where `.site-shell` is a plain block anyway.
+    */}}
     {{ partial "mobile-topbar.html" . }}
     {{ partial "sidebar-mobile-drawer.html" . }}
 
@@ -15,14 +16,24 @@
     <div class="site-shell{{ if not (partial "has-toc.html" .) }} site-shell--slim-right{{ end }}">
       {{ partial "rail-left.html" . }}
 
+
       <div id="main-content" class="border-x border-base-300 bg-base-100 min-w-0 flex flex-col min-h-screen">
         <main class="w-full mx-auto p-6 sm:p-8 md:p-12">
-          {{/* Single content measure for the whole site — every page is 65ch, centred.
-            Lives here rather than on <main> so the padding sits outside the cap.
-            `wide: true` in a page's front matter drops the cap so grids and galleries
-            can use the full centre rail (see the picks section indexes).
+          {{/* Single content measure for the whole site — every page is 56rem (896px),
+            centred. Lives here rather than on <main> so the padding sits outside the
+            cap. `wide: true` in a page's front matter drops the cap so grids and
+            galleries can use the full centre rail (see the picks section indexes).
+
+            Was `max-w-prose` (65ch ≈ 637px in Raleway at 16px) until 2026-08. The wider
+            measure is modelled on willianjusten.com.br, whose column runs 915px of text.
+            `max-w-4xl` is the closest step on Tailwind's container scale; `max-w-5xl`
+            (1024px) overshoots and `max-w-3xl` (768px) undershoots by four times as much.
+            Read as characters rather than pixels this is ~92ch, well past the classic
+            65–75 comfort band — the reference buys its width with a 20px body font,
+            which this site does not have. If lines start to feel long, the fix is to
+            step this down to `max-w-3xl` (~78ch), not to reach back for `max-w-prose`.
           */}}
-          <div class="{{ if not .Params.wide }}max-w-prose {{ end }}mx-auto">
+          <div class="{{ if not .Params.wide }}max-w-4xl {{ end }}mx-auto">
             {{ block "main" . }}{{ end }}
           </div>
         </main>
