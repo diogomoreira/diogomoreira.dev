@@ -25,6 +25,23 @@ version = "4.11.0"
 description = "My thoughts about life, software development, music and so forth."
 cover = "images/default-cover.png"
 
+# Hugo defaults to `Box` at quality 75, which leaves hard, brittle edges on a mild
+# downscale (the 600px library capsules landing at 400) and adds JPEG crunch around
+# high-contrast logo type.
+#
+# Measured on the South Park capsule, edge energy at the size a 2x display actually
+# paints (~314px): Box 8.28, MitchellNetravali 8.25, Gaussian 7.72, BSpline 7.39.
+# Mitchell is the obvious reach for "softer, no ringing" and is worth nothing here —
+# 0.4% off Box, indistinguishable at a glance. Gaussian is the first filter that
+# visibly softens; BSpline goes mushy and undoes the point of using sharp sources.
+# Don't reach for Lanczos or CatmullRom: both ring, and a ringing halo along an edge
+# is exactly what reads as over-sharpened.
+#
+# Site-wide by nature — this governs every processed image, photo albums included.
+[imaging]
+resampleFilter = "Gaussian"
+quality = 82
+
 [build]
 [build.buildStats]
 enable = true

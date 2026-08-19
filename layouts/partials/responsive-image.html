@@ -9,9 +9,16 @@ picture element with WebP and JPEG fallback, width/height, and lazy loading. */}
   {{ $img = resources.Get .src }}
 {{ end }}
 {{ if $img }}
-  {{ $width := .width | default "800" }}
-  {{ $webp := $img.Resize (printf "%sx webp" $width) }}
-  {{ $jpeg := $img.Resize (printf "%sx jpg" $width) }}
+  {{/* Never resize past the source's own width. `.Resize` happily upscales, and
+    an upscale adds no detail — only bytes and softness. Clamping means a caller
+    can ask for the size it actually renders at without having to know whether
+    every source is big enough. */}}
+  {{ $width := int (.width | default 800) }}
+  {{ if lt $img.Width $width }}
+    {{ $width = $img.Width }}
+  {{ end }}
+  {{ $webp := $img.Resize (printf "%dx webp" $width) }}
+  {{ $jpeg := $img.Resize (printf "%dx jpg" $width) }}
   {{/* `contents` removes the picture box so the img is laid out directly by the
     parent — otherwise inside a flex/grid parent (e.g. daisyUI's `.card figure`)
     the picture shrinks to the image's intrinsic width and `w-full` never applies.
