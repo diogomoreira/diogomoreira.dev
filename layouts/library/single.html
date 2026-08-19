@@ -37,6 +37,15 @@
               >
                 <span class="library-card__cover">
                   {{ with .cover }}
+                    {{/* `.library-grid` lands six ~157px columns in the wide centre
+                      rail, so a 2x display paints ~314px. 400 covers that with a
+                      little slack; going higher (480 was tried) only hands the
+                      browser a steeper downscale to do, and a browser's downscale
+                      of dense cover art is harder-edged than the one Hugo does
+                      under `[imaging]` in hugo.toml. Keep the resampling on our
+                      side of the wire. responsive-image clamps to the source, so a
+                      cover smaller than this is served at its own size, never
+                      stretched up to it. */}}
                     {{ partial "responsive-image.html" (dict "src" . "alt" $item.title "class" "library-card__img" "width" "400") }}
                   {{ else }}
                     <span class="library-card__placeholder">
