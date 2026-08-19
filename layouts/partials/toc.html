@@ -9,7 +9,7 @@
 {{ $page := .page }}
 {{ $rail := eq .variant "rail" }}
 {{ if partial "has-toc.html" $page }}
-  {{ $label := "font-heading text-xs font-semibold uppercase tracking-widest text-base-content/70" }}
+  {{ $label := "font-heading text-xs font-medium uppercase tracking-widest text-base-content/70" }}
   {{ if $rail }}
     <div class="toc" data-pagefind-ignore>
       <h2 class="{{ $label }} mb-3">{{ i18n "toc_label" }}</h2>

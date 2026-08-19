@@ -19,7 +19,7 @@
     <div class="min-w-0">
       <h1 class="font-heading text-center md:text-left text-2xl font-medium text-heading">
         {{ i18n "home_greeting" }}
-        <a href="{{ .Site.Home.RelPermalink }}" class="block u-url font-bold no-underline hover:opacity-80" rel="me">
+        <a href="{{ .Site.Home.RelPermalink }}" class="block u-url font-semibold no-underline hover:opacity-80" rel="me">
           <span class="tracking-tighter text-6xl p-name">{{ .Title }}</span>
         </a>
       </h1>
@@ -42,7 +42,7 @@
   {{ if $posts }}
     <section class="mb-14">
       <div class="flex items-center justify-between mb-5">
-        <h2 class="font-heading text-xs font-semibold uppercase tracking-widest">{{ i18n "home_recent_posts" }}</h2>
+        <h2 class="font-heading text-xs font-medium uppercase tracking-widest">{{ i18n "home_recent_posts" }}</h2>
         <a href="{{ (.Site.GetPage "blog").RelPermalink }}" class="text-xs link link-primary"
           >{{ i18n "home_all_posts" }}</a
         >
@@ -115,7 +115,7 @@
   {{ if $entries }}
     <section class="mb-14">
       <div class="flex items-center justify-between mb-5">
-        <h2 class="font-heading text-xs font-semibold uppercase tracking-widest">{{ i18n "home_recently_added" }}</h2>
+        <h2 class="font-heading text-xs font-medium uppercase tracking-widest">{{ i18n "home_recently_added" }}</h2>
         <a href="{{ (.Site.GetPage "library").RelPermalink }}" class="text-xs link link-primary"
           >{{ i18n "home_browse_library" }}</a
         >

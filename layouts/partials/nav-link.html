@@ -17,14 +17,14 @@
   {{/* Children emit NO inline-padding, font-size or font-weight utility, so that
     `.nav-link--child` can own all three. This is not a style preference — a
     Tailwind utility lives in the utilities layer and beats `@layer components`
-    whatever the specificity, so `px-4`/`text-sm`/`font-semibold` here would
+    whatever the specificity, so `px-4`/`text-sm`/`font-medium` here would
     silently make the matching declarations in main.css dead code.
   */}}
   class="nav-link flex font-heading items-center gap-2
     {{ if .child }}
       nav-link--child py-2
     {{ else if .desktop }}
-      text-sm px-4 py-2 font-semibold
+      text-sm px-4 py-2 font-medium
     {{ else }}
       text-sm px-3 py-2 font-medium
     {{ end }}

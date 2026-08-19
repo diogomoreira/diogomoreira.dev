@@ -45,7 +45,7 @@
       {{ end }}
 
 
-      <h1 class="font-heading text-4xl lg:text-5xl font-extrabold tracking-tight text-heading">
+      <h1 class="font-heading text-4xl lg:text-5xl font-semibold tracking-tight text-heading">
         {{ .Title | title }}
       </h1>
 
@@ -88,7 +88,7 @@
           <a
             href="{{ "/categories/" | relLangURL }}{{ $cat | urlize }}/"
             data-pagefind-filter="category"
-            class="badge font-semibold text-xs badge-{{ $color }}"
+            class="badge font-medium text-xs badge-{{ $color }}"
             >{{ $cat }}</a
           >{{ if lt (add $i 1) $num }}<span class="mx-1">·</span>{{ end }}
         {{ end }}
