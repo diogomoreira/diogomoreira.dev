@@ -16,8 +16,12 @@
 
     <div id="now-top-artists-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
       {{ range seq 8 }}
-        <a class="now-top-artists-cell card bg-base-100 group" target="_blank" rel="noopener noreferrer">
-          <div class="aspect-square w-full overflow-hidden rounded-t relative bg-base-200">
+        {{/* `overflow-hidden` on the card rather than a radius on the tile below:
+          the card already carries `--radius-box`, so clipping to it keeps the
+          artwork on the site's single radius without a second value to maintain.
+          The tile used to round only its own top corners. */}}
+        <a class="now-top-artists-cell card bg-base-100 group overflow-hidden" target="_blank" rel="noopener noreferrer">
+          <div class="aspect-square w-full overflow-hidden relative bg-base-200">
             <div class="now-top-artists-skeleton skeleton absolute inset-0 w-full h-full rounded-none"></div>
             <img class="now-top-artists-img hidden absolute inset-0 w-full h-full object-cover group-hover:opacity-90" alt="" />
             <div

@@ -54,9 +54,13 @@
   --color-warning-content: #fbfaf7;
   --color-error: #cf292e;
   --color-error-content: #fbfaf7;
-  --radius-selector: 1rem;
-  --radius-field: 2rem;
-  --radius-box: 0.25rem;
+  /* One radius for the whole site — see the shape-token note in CLAUDE.md.
+     daisyUI splits these three by component family (selector = badges/toggles,
+     field = buttons/inputs, box = cards/alerts/modals); holding them equal is
+     what stops a chip, a button and a card from each having their own corner. */
+  --radius-selector: 0.75rem;
+  --radius-field: 0.75rem;
+  --radius-box: 0.75rem;
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
   --border: 2px;
@@ -115,9 +119,10 @@
      lightness, so clearing 4.5:1 on `base-200` doesn't turn it neon. */
   --color-error: #e65e58;
   --color-error-content: #1c1210;
-  --radius-selector: 1rem;
-  --radius-field: 2rem;
-  --radius-box: 0.25rem;
+  /* Identical to sunrise's, like every other shape token. */
+  --radius-selector: 0.75rem;
+  --radius-field: 0.75rem;
+  --radius-box: 0.75rem;
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
   --border: 2px;
@@ -189,7 +194,6 @@ html[data-theme="midnight"] {
     "Liberation Mono", Menlo, Monaco, Consolas, "Source Code Pro", monospace;
   --font-heading: "Geom", var(--font-sans);
   --color-heading: var(--color-base-content);
-  --pf-font: var(--font-sans);
 }
 
 @layer components {
@@ -737,10 +741,18 @@ html[data-theme="midnight"] {
      the opposite treatment (below) — the two shapes deliberately do not share
      this, which is why the rules are no longer grouped. */
   .library-card {
+    /* The cover is inset by the padding and the border below, so it cannot
+       carry the panel's own radius and still look concentric — see the note on
+       `.library-card__img`. Keep this in step with those two values. */
+    --radius-inset: max(0px, calc(var(--radius-box) - 0.5rem - 1px));
     display: block;
     padding: 0.5rem;
     background-color: var(--color-base-200);
     border: 1px solid var(--color-base-300);
+    /* Corners come from `rounded-box` in `layouts/library/single.html`, same as
+       `.post-card` — a utility here would beat any `border-radius` declared in
+       this layer anyway. Hand-written panels get no radius for free, so a card
+       that forgets the class is square. */
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
     transition: background-color 150ms ease;
   }
@@ -785,7 +797,16 @@ html[data-theme="midnight"] {
      natural shape: within a category the grid has to line up, and the source
      images are whatever the store or label happened to publish. The ratio comes
      from the category's `cover_ratio` (see below), so a mismatched source is
-     centre-cropped rather than breaking the row. */
+     centre-cropped rather than breaking the row.
+
+     `--radius-inset`, not `rounded-box`: two nested boxes with the same radius
+     are not concentric. The panel's corner curves from its outer edge, so 9px
+     in — the padding plus its border — only a 3px corner is left, and a 12px
+     cover corner inside that makes the frame bulge from 9px along the edges to
+     12.7px at the diagonal. Subtracting the inset gives both curves one centre.
+     Same reasoning and same value as `.post-card__img`; this is the one place
+     the site's single radius is stepped, and it is stepped so that it still
+     reads as a single radius. */
   .library-card__img {
     display: block;
     width: 100%;
@@ -793,6 +814,7 @@ html[data-theme="midnight"] {
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border: 2px solid var(--color-base-300);
+    border-radius: var(--radius-inset);
   }
 
   /* Cover shapes, set per category by `cover_ratio` in data/library/*.yaml.
@@ -813,6 +835,7 @@ html[data-theme="midnight"] {
     justify-content: center;
     aspect-ratio: 1 / 1;
     border: 2px solid var(--color-base-300);
+    border-radius: var(--radius-inset);
     background-color: var(--color-base-100);
     color: var(--color-accent);
   }
@@ -1265,6 +1288,20 @@ a {
   line-height: 1.7;
 }
 
+/* @tailwindcss/typography hard-codes its own corners — `pre` at 0.375rem, `kbd`
+   at 0.3125rem — and unlike the heading colour above there is no
+   `--tw-prose-*` variable to retarget, so these have to be real declarations.
+   Code blocks are the most visible rounded thing on a post, and two of the
+   three radii on this site used to be theirs.
+
+   Unlayered for the same reason as the rule above; the plugin's
+   `.prose :where(pre)` also only measures (0,1,0), since `:where()` contributes
+   nothing, so `.prose pre` would win on specificity even in a layer. */
+.prose pre,
+.prose kbd {
+  border-radius: var(--radius-box);
+}
+
 /* Weight scale, unlayered for the same cascade reason as the two rules above —
    @tailwindcss/typography's `.prose :where(h1)` measures (0,1,0) because
    `:where()` contributes nothing, so `.prose h1` outranks it even from a layer,
@@ -1440,4 +1477,23 @@ a.badge-tint:focus-visible {
 .badge-rose {
   --badge-color: var(--color-rose);
   --badge-fg: var(--color-rose-content);
+}
+
+/* Pagefind's `<pagefind-searchbox>` overrides.
+
+   Unlayered, and at (0,1,1) rather than `:root`'s (0,1,0), for two compounding
+   reasons: `pagefind-component-ui.css` declares its own defaults on a plain
+   unlayered `:root`, so anything we put in a layer loses outright, and a
+   matching `:root` would then be decided by which stylesheet the browser sees
+   last. `html:root` settles both. Same trick, and the same reasoning, as the
+   `html[data-theme=…]` blocks near the top of this file.
+
+   These cannot live in the `@theme` block above: Tailwind v4 prunes theme
+   variables that no generated utility references, and nothing references
+   `--pf-*` — so a `--pf-font` declared there never reached Pagefind at all. */
+html:root {
+  --pf-font: var(--font-sans);
+  /* `--pf-border-radius`, not `--pagefind-ui-border-radius` — that one belongs
+     to the older `PagefindUI` widget, which this site does not use. */
+  --pf-border-radius: var(--radius-box);
 }
