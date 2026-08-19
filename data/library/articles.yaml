@@ -2,6 +2,10 @@
 # worth reading or it isn't, and a five-point scale on prose says very little.
 weight: 2
 display: list
+# `date_label: bare` shows each entry's `date` with no leading word — see
+# library-item-date.html. A label here would have to claim "Read", which is more
+# than the data knows: the date is when the link was added.
+date_label: bare
 items:
   - title: "Get your work recognized: write a brag document"
     creator: "Julia Evans"

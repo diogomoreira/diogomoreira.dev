@@ -30,7 +30,10 @@
     {{/* `date_label` opts a category into showing each entry's `date`, using it
       as the i18n suffix: `finished` on books renders "Finished <date>". Unset
       means no date is shown, which is right for most categories — a date under
-      an album says nothing useful. */}}
+      an album says nothing useful. The one non-word value is `bare`, which shows
+      the date with no label at all (articles, videos) — see
+      library-item-date.html; it also has no in-progress badge, so an undated
+      entry there floats to the top rendering nothing. */}}
     {{/* `cover_ratio` is a category setting for the same reason `display` is:
       every film in Movies has the same shape, and the shape is a property of the
       medium, not of one entry. `square` (the default) suits album and podcast
