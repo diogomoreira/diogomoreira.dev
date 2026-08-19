@@ -59,36 +59,9 @@
 
   {{/* ── Featured: latest post ───────────────────────────── */}}
   {{ with index $posts 0 }}
-    {{ $post := . }}
     <section class="mb-10">
       {{ partial "section-label.html" (dict "text" (i18n "blog_latest")) }}
-      <a
-        href="{{ .RelPermalink }}"
-        class="group card bg-base-100 border border-base-300 hover:border-primary transition-colors overflow-hidden"
-      >
-        {{ with .Params.cover }}
-          <figure class="shrink-0 overflow-hidden">
-            {{ partial "responsive-image.html" (dict "page" $post "src" . "alt" $post.Title "class" "w-full h-full object-cover" "width" "1200") }}
-          </figure>
-        {{ end }}
-        <div class="card-body">
-          <div class="flex items-center gap-2 text-xs font-mono text-secondary">
-            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "formatted-date.html" .Date }}</time>
-            <span>·</span>
-            <span>{{ i18n "reading_time_minutes" (dict "Count" .ReadingTime) }}</span>
-            {{ partial "post-lang-badge.html" . }}
-          </div>
-          <h2 class="card-title font-heading text-2xl font-semibold text-heading group-hover:opacity-70 transition-opacity">
-            {{ partial "post-status-emoji.html" . }}{{ .Title }}
-          </h2>
-          <p class="text-sm text-base-content/70 leading-relaxed">
-            {{ with .Description }}{{ . }}{{ else }}{{ .Plain | truncate 200 }}{{ end }}
-          </p>
-          <div class="card-actions">
-            <span class="text-sm link link-primary">{{ i18n "blog_keep_reading" }}</span>
-          </div>
-        </div>
-      </a>
+      {{ partial "post-card.html" (dict "page" . "featured" true) }}
     </section>
   {{ end }}
 
@@ -120,21 +93,18 @@
   {{ end }}
 
   {{/* ── Archive ─────────────────────────────────────────── */}}
+  {{/* One flat grid rather than the year-grouped rows this used to be: the cards
+    carry their own dates, and a heading every two or three cards chopped the
+    grid into fragments too short to read as one. `after 1` drops the post
+    already shown as the featured card above. */}}
   {{ $rest := after 1 $posts }}
   {{ if $rest }}
     {{ partial "section-label.html" (dict "text" (i18n "blog_all_posts")) }}
-    {{ range $rest.GroupByDate "2006" }}
-      <section class="mb-8">
-        <h3 class="font-heading text-xs font-semibold text-secondary uppercase tracking-widest mb-3">
-          {{ .Key }}
-        </h3>
-        <ul class="list-none p-0 m-0">
-          {{ range .Pages }}
-            {{ partial "dated-list-item.html" . }}
-          {{ end }}
-        </ul>
-      </section>
-    {{ end }}
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {{ range $rest }}
+        {{ partial "post-card.html" (dict "page" .) }}
+      {{ end }}
+    </div>
   {{ end }}
 
 {{ end }}

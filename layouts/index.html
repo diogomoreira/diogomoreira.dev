@@ -47,48 +47,23 @@
           >{{ i18n "home_all_posts" }}</a
         >
       </div>
-      <ul class="list-none p-0 m-0">
-        {{ range first 5 $posts }}
-          <li class="border-b py-2 border-base-300">
-            {{/* One row, two shapes. Desktop is a single line: date column,
-              title taking the slack, chip closing it. Narrow screens can't hold
-              that — the title alone eats the width — so it wraps to two lines,
-              title first with date and chip beneath it as a metadata line. The
-              library row below is built identically, so both lists share both
-              shapes.
+      {{/* Cards, via the same partial /blog and the term pages use — the three
+        surfaces share one shape by construction.
 
-              `order-first` + `w-full` is what lifts the title above the date on
-              mobile without reordering the DOM; `md:order-none md:w-auto` puts
-              it back. The whole row is a single <a>, one tab stop, so the visual
-              reorder can't desync focus order.
-            */}}
-            <a
-              href="{{ .RelPermalink }}"
-              class="flex flex-wrap items-center gap-x-3 gap-y-1 w-full group md:flex-nowrap"
-            >
-              {{/* `min-w`, not a fixed `w`: the column has to hold both locales
-                from one template, and pt-br's "19 de jun. de 2026" is half again
-                the width of "Jun 19, 2026". A fixed width sized for English
-                would overflow into the title; min-width still aligns every row
-                on a page, since they all share one format. `datetime` stays ISO.
-              */}}
-              <time
-                class="text-xs text-secondary shrink-0 whitespace-nowrap md:min-w-32"
-                datetime="{{ .Date.Format "2006-01-02" }}"
-                >{{ partial "formatted-date-short.html" .Date }}</time
-              >
-              <span
-                class="order-first w-full text-sm font-medium text-base-content group-hover:opacity-70 md:order-none md:w-auto md:flex-1"
-              >
-                {{ partial "post-status-emoji.html" . }}{{ .Title }}
-              </span>
-              {{/* `ms-auto` pins the chip to the right edge of the metadata line
-                on mobile; on desktop the title's `flex-1` already does it. */}}
-              <span class="ms-auto shrink-0 md:ms-0">{{ partial "post-lang-badge.html" . }}</span>
-            </a>
-          </li>
+        `first 4`, not 5: this is a two-column grid, and an odd count leaves a
+        lonely card on its own row.
+
+        This list and the "Recently Added" library list below it used to be
+        deliberately identical markup. That pairing is broken on purpose now:
+        posts have cover art and get cards, library entries mostly don't and stay
+        rows. The contrast is the point — a wall of placeholder-less poster cards
+        was the thing the library list was designed to avoid in the first place.
+      */}}
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {{ range first 4 $posts }}
+          {{ partial "post-card.html" (dict "page" .) }}
         {{ end }}
-      </ul>
+      </div>
     </section>
   {{ end }}
 
@@ -120,9 +95,12 @@
           >{{ i18n "home_browse_library" }}</a
         >
       </div>
-      {{/* Deliberately the same markup as the Recent Posts list above, so the two
-        homepage lists read as one system — including the mobile wrap: title on
-        its own line, date and chip beneath. Same `md:min-w-32` date column too.
+      {{/* Rows, not cards — deliberately unlike the Recent Posts grid above.
+        Most library entries are articles, videos and people, which have no cover
+        art, so a card grid here would be mostly placeholders. This is the same
+        row shape the /library page uses for its `display: list` categories, and
+        it keeps its own mobile wrap: title on its own line, date and chip
+        beneath, with a `md:min-w-32` date column.
       */}}
       <ul class="list-none p-0 m-0">
         {{ range $entries }}

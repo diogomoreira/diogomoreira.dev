@@ -1010,6 +1010,230 @@ html[data-theme="midnight"] {
   }
 
   /* ---------------------------------------------------------------------------
+     Blog post cards
+
+     Rendered by `layouts/partials/post-card.html`, which three surfaces call:
+     /blog (the "Latest" card and the archive grid), the homepage row, and the
+     tag/category term pages. The caller owns the grid; this owns the card.
+
+     Hand-written for the same reason as `.library-*`: the two line-clamps below
+     have no Tailwind equivalent that would survive, since Hugo writes
+     `hugo_stats.json` *during* the build and a newly-used utility takes two
+     builds to be emitted. The grid classes the callers use
+     (`grid grid-cols-1 sm:grid-cols-2 gap-4`) are already in the stats file via
+     `layouts/snippets/list.html`, which is why those can stay utilities.
+
+     Deliberately built on the same panel recipe as `.library-card` — cover art
+     is an object, and a surface under it says so. The reference design this
+     came from is a white card on a grey page; that does not translate directly,
+     because in sunrise `base-100` *is* the reading column, so a `base-100` card
+     would vanish into it. `base-200` on a `base-300` hairline is this site's
+     established "panel sitting on the column" step, in both themes.
+     --------------------------------------------------------------------------- */
+
+  /* The corners come from a `rounded-box` utility in the markup, not from here.
+     It resolves to the same `--radius-box`, and being a utility it also sits in
+     a layer that wins over this one — so a `border-radius` declared here would
+     be dead code that reads as the source of truth. `rounded-box` is the only
+     `rounded-*` safe to reach for; the rest of Tailwind's scale carries its own
+     values and would reintroduce a second radius (see CLAUDE.md). */
+  .post-card {
+    /* The cover is inset by the padding and the border, so it cannot carry the
+       same radius as the panel and still look right — see `--radius-inset` on
+       `.library-card`, which derives it the same way from the same two values.
+       Keep this in step with the `padding` and `border` below it. */
+    --radius-inset: max(0px, calc(var(--radius-box) - 0.5rem - 1px));
+    display: block;
+    padding: 0.5rem;
+    background-color: var(--color-base-200);
+    border: 1px solid var(--color-base-300);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    transition: background-color 150ms ease;
+  }
+
+  .post-card:hover,
+  .post-card:focus-visible {
+    background-color: var(--color-base-300);
+  }
+
+  /* The positioning context for the two overlay chips below. */
+  .post-card__cover {
+    position: relative;
+    display: block;
+  }
+
+  /* `aspect-ratio` + `object-fit` rather than each cover's natural shape: within
+     a grid the cards have to line up, and the covers are whatever Unsplash or a
+     screenshot happened to be. A mismatched source is centre-cropped.
+
+     Corners are `--radius-inset`, not `rounded-box`. Two nested boxes with the
+     same radius are not concentric: the panel's own corner curves from its
+     outer edge, so by the time it reaches the cover 9px in, the space left is a
+     3px corner — and a 12px cover corner inside it makes the frame bulge from
+     9px along the edges to 12.7px at the diagonal. Subtracting the inset gives
+     both curves one centre and a frame of even width. This is the one place the
+     site's single radius is stepped, and it is stepped to preserve the look of
+     a single radius rather than to introduce a second one. No shadow either;
+     the panel casts it, and two nested shadows read as an embossed edge. */
+  .post-card__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: var(--radius-inset);
+  }
+
+  .post-card--featured .post-card__img {
+    aspect-ratio: 16 / 9;
+  }
+
+  /* One row holding both chips, inset from the cover's edges. `inset-inline`
+     rather than a start/end pair, and logical properties throughout: the site
+     runs LTR today, but these cost nothing and the rest of the file is written
+     the same way. */
+  .post-card__cover-chips {
+    position: absolute;
+    inset-block-start: 0.5rem;
+    inset-inline: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* `margin-inline-start: auto` rather than `justify-content: space-between` on
+     the row: a post with no category renders no chip, and space-between would
+     then leave the language badge stranded at the left edge. An auto margin
+     pins it to the end whether it has a sibling or not.
+
+     `display: flex` on the wrapper matters too — it is what stops the badge
+     inside it from sitting in a line box and being nudged down off the
+     category chip's baseline, which is the whole reason these two did not line
+     up before. */
+  .post-card__lang {
+    display: flex;
+    flex-shrink: 0;
+    margin-inline-start: auto;
+  }
+
+  /* A long category can shrink; it must never squeeze the language badge. */
+  .post-card__chip {
+    min-width: 0;
+  }
+
+  .post-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.75rem 0.35rem 0.25rem;
+  }
+
+  /* Same hover cue as `.library-card`: the title picks up the dashed accent
+     underline. The `text-decoration-*` longhands sit here rather than on the
+     anchor because they are non-inherited, so the site-wide `a` rule never
+     reaches a heading nested inside the card. Never the `text-decoration`
+     shorthand — it resets colour and style back to `currentColor`/`solid`. */
+  .post-card__title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--color-heading);
+    text-decoration-color: var(--color-accent);
+    text-decoration-style: dashed;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  .post-card--featured .post-card__title {
+    font-size: 1.375rem;
+  }
+
+  /* 70% is the documented floor for muted text on this site — `/50` and `/60`
+     fall under 4.5:1 in one theme or the other. Same `color-mix` form as
+     `.toc a` and `.library-note`. */
+  .post-card__excerpt {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    margin: 0;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  }
+
+  .post-card--featured .post-card__excerpt {
+    -webkit-line-clamp: 3;
+    font-size: 0.875rem;
+  }
+
+  .post-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-block-start: 0.4rem;
+    font-size: 0.75rem;
+    color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  }
+
+  .post-card__meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    white-space: nowrap;
+  }
+
+  /* The icons carry no `w-4 h-4` — Tailwind sizing lands in `@layer utilities`
+     and would beat this rule regardless of specificity. See
+     `layouts/partials/icons/meta/calendar.html`. */
+  .post-card__meta svg {
+    width: 0.875rem;
+    height: 0.875rem;
+    flex-shrink: 0;
+    opacity: 0.75;
+  }
+
+  /* An emoji, not an icon, so `.post-card__meta svg` above doesn't reach it —
+     it renders at the row's 12px otherwise, which is too small to read as a
+     seedling. Kept a shade under the SVG icons' visual weight. */
+  .post-card__status-icon {
+    font-size: 0.8125rem;
+    line-height: 1;
+  }
+
+  /* Mixed from `base-content`, not `base-300`: the card's hover state *is*
+     `base-300`, so a `base-300` rule would disappear exactly when the card is
+     being pointed at. */
+  .post-card__sep {
+    width: 1px;
+    height: 0.75rem;
+    background-color: color-mix(in oklab, var(--color-base-content) 30%, transparent);
+  }
+
+  .post-card__more {
+    margin-block-start: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-primary);
+  }
+
+  .post-card:hover .post-card__title,
+  .post-card:focus-visible .post-card__title {
+    text-decoration-line: underline;
+  }
+
+  .post-card:hover .post-card__img,
+  .post-card:focus-visible .post-card__img {
+    opacity: 0.9;
+  }
+
+  /* ---------------------------------------------------------------------------
      Mastodon toots (/now)
 
      Hand-written for the same reason as `.library-*` and `.polaroid`: the toot
