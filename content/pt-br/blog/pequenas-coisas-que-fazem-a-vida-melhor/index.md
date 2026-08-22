@@ -8,7 +8,7 @@ description: "Coisas do cotidiano que fazem a vida melhor"
 tags: ["pessoal", "positividade"]
 cover: "cover.jpg"
 coverCaption: "Photo by [Mohamed Nohassi](https://unsplash.com/@coopery?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/silhouette-of-person-standing-on-rock-surrounded-by-body-of-water-odxB5oIG_iA?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)"
-updated: "2026-08-15"
+updated: "2026-08-22"
 toc: false
 draft: false
 ---
@@ -30,5 +30,6 @@ Esse post foi inspirado por [**esse vídeo**](https://www.youtube.com/watch?v=s7
 11. Planejar uma viagem
 12. Receber os amigos na sua casa
 13. Ser recebido na casa dos seus amigos
+14. Re-jogar um jogo antigo
 
 Essa lista provavelmente vai crescer indefinidamente. A intenção não é discutir profundamente sobre elas, mas apenas listá-las. Convido aos que gostaram da idéia a também fazer sua lista em seu espaço virtual.
