@@ -1,7 +1,7 @@
 ---
 title: "Pequenas coisas que fazem a vida melhor"
 categories:
-  - Pessoal
+  - Personal
 status: "seed"
 date: 2026-08-08T14:53:42-03:00
 description: "Coisas do cotidiano que fazem a vida melhor"
