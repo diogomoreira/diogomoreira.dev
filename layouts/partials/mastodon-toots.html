@@ -7,11 +7,25 @@
   so nothing secret is emitted into the page.
 
   The markup below is rendered in full by Hugo and the script only fills in text,
-  `src`/`href` and the `hidden` toggle. That is deliberate: Tailwind v4 scans
-  `hugo_stats.json`, which only lists classes an actual build rendered, so a class
-  that exists solely inside the JS string below would ship unstyled. Anything the
-  script needs to *create* (toot bodies, media, CW) is styled by the hand-written
-  `.toot-*` rules in `main.css` instead.
+  `src`/`href` and the `hidden` toggle, so the shape of the section is visible in
+  this file rather than assembled at runtime. The few elements the script does
+  create — emoji, media, the CW disclosure — carry their utilities as literal
+  strings in the `className` assignments below, which is all Tailwind's scanner
+  needs to emit them.
+
+  The script finds its elements by `data-toot` / `data-profile` attributes, not by
+  class: styling here is utilities, and a utility is a poor hook — renaming a
+  colour would silently break a `querySelector`.
+
+  Two `display` traps, both real and both silent:
+
+  - `hidden` is a utility like any other, so it only beats another `display`
+  utility that Tailwind emits *earlier*. It wins over `block`, `contents`,
+  `flex` and `grid`, and loses to `inline-block` and `inline-flex` — which is
+  why the permalink below is `block w-fit` rather than `inline-block`.
+  - `loading="lazy"` must stay off the avatar. It starts `hidden`, so it has no
+  layout box, and a lazily-loaded image with no box is never fetched — no
+  fetch, no `load` event, and that handler is the only thing that unhides it.
 */}}
 
 {{ $mastodon := "" }}
@@ -62,50 +76,103 @@
         object the statuses response already embeds, so it costs no extra
         request. Hidden until then: a nameless avatar frame looks broken.
       */}}
+      {{/* Separated from the list by the same hairline the rows use, so the
+        header reads as the head of one object rather than a stray link.
+      */}}
       <a
         id="mastodon-toots-profile"
-        class="toot-profile no-ext-icon"
+        class="group flex items-center gap-3 pb-[0.9rem] border-b border-base-300 no-underline no-ext-icon"
         href="{{ .url }}"
         target="_blank"
         rel="me noopener noreferrer"
       >
-        <span class="toot-profile__avatar-skeleton skeleton"></span>
+        <span class="w-11 h-11 rounded-full shrink-0 skeleton" data-profile="avatar-skeleton"></span>
         {{/* 88 = 2× the 44px display size, so the box is reserved before the
           image lands and the avatar stays sharp on retina.
 
-          `loading="lazy"` must stay off this one. It starts life `hidden`, and
-          that class wins — `.toot-profile__avatar` is in `@layer components`,
-          the utility is in `@layer utilities` — so the element is `display:none`
-          with no layout box, and a lazily-loaded image that has no box is never
-          fetched. No fetch, no `load` event, and the handler below that removes
-          the skeleton and unhides it is the only thing that ever would. The
-          attribute buys nothing anyway: there is no `src` until the fetch has
-          already resolved.
+          It also carries no `loading="lazy"` — see the note at the top of this
+          file. The attribute would buy nothing anyway: there is no `src` until
+          the fetch has already resolved.
+
+          An avatar reads as a person, so it stays round: circles are the
+          documented exemption from the site's square corners.
         */}}
-        <img class="toot-profile__avatar hidden" width="88" height="88" alt="" decoding="async" />
-        <span class="toot-profile__id">
-          <span class="toot-profile__name"></span>
-          <span class="toot-profile__handle">@{{ $user }}@{{ $host }}</span>
+        <img
+          class="w-11 h-11 rounded-full shrink-0 object-cover border-2 border-base-300 bg-base-200 hidden"
+          width="88"
+          height="88"
+          alt=""
+          decoding="async"
+          data-profile="avatar"
+        />
+        {{/* `min-h-11` on the text column so the block does not grow when the
+          name arrives: the handle alone is one line, name plus handle is two.
+        */}}
+        <span class="flex flex-col justify-center gap-[0.1rem] min-h-11 min-w-0">
+          <span
+            class="font-heading text-sm/[1.3] font-medium text-heading decoration-accent decoration-1 underline-offset-[3px] group-hover:underline group-focus-visible:underline"
+            data-profile="name"
+          ></span>
+          <span class="text-xs/[1.3] wrap-anywhere text-base-content/70">@{{ $user }}@{{ $host }}</span>
         </span>
       </a>
 
-      <ul id="mastodon-toots-list" class="toot-list">
+      {{/* Rows separated by a hairline, not boxed cards — three short posts boxed
+        individually read as a stack of heavy tiles. The hover cue is borrowed
+        from the library rows: a 2px leading border that is always present but
+        transparent, so colouring it shifts nothing. The row cannot be one big
+        `a` — toot bodies contain their own links and nested anchors are invalid
+        — which is what this border is compensating for.
+
+        The two borders name their sides explicitly: a bare `border-transparent`
+        would set *every* side, wiping out the hairline above.
+      */}}
+      <ul id="mastodon-toots-list" class="list-none p-0 m-0">
         {{ range seq $limit }}
-          <li class="toot">
-            <div class="toot__skeleton skeleton"></div>
-            <div class="toot__content hidden">
-              <div class="toot__cw hidden"></div>
-              <div class="toot__body"></div>
-              <div class="toot__media hidden"></div>
+          <li
+            class="py-[0.85rem] border-t border-t-base-300 first:border-t-0 border-s-2 border-s-transparent ps-[0.6rem] -ms-[0.6rem] transition-colors duration-150 hover:border-s-accent"
+            data-toot="item"
+          >
+            {{/* Reserves roughly a two-line toot, so the fetch does not jolt the
+              artists grid below it down the page.
+            */}}
+            <div class="h-14 w-full skeleton" data-toot="skeleton"></div>
+            <div class="hidden" data-toot="content">
+              <div class="hidden" data-toot="cw"></div>
+              {{/* `anywhere`, not `break-word`: these posts are link-heavy and
+                Mastodon's shortened link text is one unbroken token, which
+                overflows the column at narrow widths without it.
+              */}}
+              <div class="text-[0.9375rem]/[1.6] wrap-anywhere [&_p+p]:mt-[0.6rem]" data-toot="body"></div>
+              {{/* Grid rather than a wrapping flex row so two attachments share
+                the width evenly instead of leaving a ragged gap. Capped at two
+                columns: at 4-up in this column each thumb is unreadable.
+              */}}
+              <div
+                class="hidden relative grid grid-cols-[repeat(auto-fit,minmax(6rem,1fr))] max-w-[22rem] gap-[0.4rem] mt-[0.6rem]"
+                data-toot="media"
+              ></div>
             </div>
-            <a class="toot__permalink hidden no-ext-icon" target="_blank" rel="noopener noreferrer">
-              <time class="toot__date"></time>
+            {{/* `group` sits here, not on the row: the date reacts to a hover on
+              the permalink itself, which is the only part of a toot that is a
+              link of ours.
+            */}}
+            <a
+              class="group hidden block w-fit mt-2 no-ext-icon"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-toot="permalink"
+            >
+              <time
+                class="text-xs tabular-nums text-base-content/70 group-hover:text-base-content group-hover:underline"
+                data-toot="date"
+              ></time>
             </a>
           </li>
         {{ end }}
       </ul>
 
-      <p id="mastodon-toots-error" class="hidden toot__error">{{ i18n "now_mastodon_error" }}</p>
+      <p id="mastodon-toots-error" class="hidden text-xs text-base-content/70">{{ i18n "now_mastodon_error" }}</p>
     </section>
 
     <script>
@@ -114,7 +181,7 @@
         const list = document.getElementById("mastodon-toots-list");
         const profile = document.getElementById("mastodon-toots-profile");
         const errorEl = document.getElementById("mastodon-toots-error");
-        const items = Array.from(list.querySelectorAll(".toot"));
+        const items = Array.from(list.querySelectorAll('[data-toot="item"]'));
 
         const host = section.dataset.host;
         const user = section.dataset.user;
@@ -200,7 +267,7 @@
             }
             /* Without this every hashtag, mention and link inside a toot gets the
                site's global ↗ marker stamped after it. */
-            el.setAttribute("class", "no-ext-icon");
+            el.setAttribute("class", "no-ext-icon link-dash");
           }
           el.appendChild(children);
           return el;
@@ -226,7 +293,7 @@
                 img.src = byCode.get(code);
                 img.alt = code;
                 img.title = part;
-                img.className = "toot__emoji";
+                img.className = "inline-block h-[1.2em] w-auto align-text-bottom mx-[0.05em]";
                 img.loading = "lazy";
                 frag.appendChild(img);
               } else if (part) {
@@ -250,20 +317,26 @@
             img.alt = m.description || "";
             img.loading = "lazy";
             img.decoding = "async";
-            img.className = "toot__media-img";
+            img.className = "w-full aspect-square object-cover border-2 border-base-300 bg-base-200";
             container.appendChild(img);
           }
 
           if (status.sensitive) {
-            container.classList.add("toot__media--sensitive");
+            /* The blur goes on each thumb rather than on a modifier class over
+               the container: with everything as utilities there is no descendant
+               rule to key it off, and toggling the class where it applies is
+               clearer than inventing one. */
+            const blur = "blur-[1.25rem]";
+            container.querySelectorAll("img").forEach(el => el.classList.add(blur));
             const reveal = document.createElement("button");
             reveal.type = "button";
-            reveal.className = "toot__reveal";
+            reveal.className =
+              "absolute inset-0 flex items-center justify-center cursor-pointer border-0 p-1 font-[inherit] text-xs font-medium text-center bg-base-100/80 text-base-content";
             reveal.textContent = sensitiveLabel;
             reveal.addEventListener(
               "click",
               () => {
-                container.classList.remove("toot__media--sensitive");
+                container.querySelectorAll("img").forEach(el => el.classList.remove(blur));
                 reveal.remove();
               },
               { once: true },
@@ -275,13 +348,13 @@
         }
 
         function renderToot(li, status) {
-          const skeleton = li.querySelector(".toot__skeleton");
-          const content = li.querySelector(".toot__content");
-          const cw = li.querySelector(".toot__cw");
-          const body = li.querySelector(".toot__body");
-          const media = li.querySelector(".toot__media");
-          const permalink = li.querySelector(".toot__permalink");
-          const date = li.querySelector(".toot__date");
+          const skeleton = li.querySelector('[data-toot="skeleton"]');
+          const content = li.querySelector('[data-toot="content"]');
+          const cw = li.querySelector('[data-toot="cw"]');
+          const body = li.querySelector('[data-toot="body"]');
+          const media = li.querySelector('[data-toot="media"]');
+          const permalink = li.querySelector('[data-toot="permalink"]');
+          const date = li.querySelector('[data-toot="date"]');
 
           const rendered = replaceEmoji(sanitize(status.content || ""), status.emojis);
 
@@ -290,10 +363,12 @@
                it, so nothing behind the warning is visible until it is opened. */
             const details = document.createElement("details");
             const summary = document.createElement("summary");
+            summary.className =
+              "cursor-pointer py-1 text-[0.8125rem] font-medium text-secondary focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-[3px]";
             summary.textContent = status.spoiler_text;
             details.appendChild(summary);
             const inner = document.createElement("div");
-            inner.className = "toot__cw-body";
+            inner.className = "mt-2";
             inner.appendChild(rendered);
             details.appendChild(inner);
             cw.appendChild(details);
@@ -323,9 +398,9 @@
             profile.classList.add("hidden");
             return;
           }
-          const avatar = profile.querySelector(".toot-profile__avatar");
-          const skeleton = profile.querySelector(".toot-profile__avatar-skeleton");
-          const name = profile.querySelector(".toot-profile__name");
+          const avatar = profile.querySelector('[data-profile="avatar"]');
+          const skeleton = profile.querySelector('[data-profile="avatar-skeleton"]');
+          const name = profile.querySelector('[data-profile="name"]');
 
           if (account.url) profile.href = account.url;
 

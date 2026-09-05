@@ -14,7 +14,7 @@
   {{ end }}
   {{ $color := partial "chip-color.html" (dict "family" "lang" "key" $lang) }}
   <span
-    class="badge badge-tint {{ with $color }}badge-{{ . }}{{ end }} badge-sm font-mono"
+    class="badge badge-tint {{ with $color }}badge-{{ . }}{{ end }} badge-sm font-mono self-center"
     title="{{ i18n "library_lang_only" (dict "Language" $label) }}"
     >{{ upper (substr $lang 0 2) }}</span
   >

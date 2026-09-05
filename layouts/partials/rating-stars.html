@@ -10,10 +10,27 @@
 */}}
 {{ $rating := . | default 0 }}
 {{ if gt $rating 0 }}
-  <span class="library-stars" role="img" aria-label="{{ i18n "library_rating_label" (dict "Rating" $rating) }}">
+  {{/* `self-center` is for the library row, whose head aligns on the text
+    baseline: an SVG is a replaced element whose baseline is its bottom margin
+    edge, so a baseline-aligned star run hangs above the x-height. In the card
+    meta, which centres everything anyway, it is a no-op.
+
+    Empty stars are outlined rather than absent, so a 3/5 still reads as a
+    five-point scale. Filled ones use `warning`, the only brand token whose hue
+    survives both themes as "gold".
+  */}}
+  <span
+    class="inline-flex items-center self-center gap-[0.05rem] leading-none"
+    role="img"
+    aria-label="{{ i18n "library_rating_label" (dict "Rating" $rating) }}"
+  >
     {{ range seq 5 }}
       <svg
-        class="library-stars__star {{ if le . $rating }}library-stars__star--on{{ end }}"
+        class="stroke-2 {{ if le . $rating }}
+          fill-warning stroke-warning
+        {{ else }}
+          fill-none stroke-base-content/45
+        {{ end }}"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         width="14"

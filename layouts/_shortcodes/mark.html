@@ -1,20 +1,42 @@
 {{- /* Hand-drawn annotation around a short phrase. Renders an inline SVG behind
   the text, stretched to the phrase via preserveAspectRatio="none".
-  Params: shape (underline|circle|marker|box), color (accent|primary|secondary|warning|error). */
--}}
+  Params: shape (underline|circle|marker|box), color (accent|primary|secondary|warning|error).
+
+  Every class below is a literal string in this file — the per-shape boxes and the
+  colour both come out of a dict rather than being assembled from the param, so
+  Tailwind's scanner can see them. `text-{{ .Get "color"
+}}`
+would compile to nothing at all. The `em` offsets are what let a shape scale with the surrounding font size, and
+`vector-effect: non-scaling-stroke` keeps the line an even weight despite the non-uniform stretch, which would otherwise
+thin out the near-vertical segments. */ -}}
+{{- $stroke := "fill-none stroke-current [stroke-width:0.09em] [stroke-linecap:round] [stroke-linejoin:round] [vector-effect:non-scaling-stroke]" -}}
+
+{{- /* `box` is how far each shape's frame extends past the text it wraps. */ -}}
 {{- $shapes := dict
   "underline" (dict
   "viewBox" "0 0 100 10"
+  "box" "left-[-0.1em] w-[calc(100%_+_0.2em)] bottom-[-0.18em] h-[0.34em]"
   "path" "M1.5,7.5 C14,4.2 32,3.1 50,3.6 C68,4.1 86,5.9 98.5,4.2")
   "circle" (dict
   "viewBox" "0 0 100 40"
+  "box" "left-[-0.35em] w-[calc(100%_+_0.7em)] top-[-0.25em] h-[calc(100%_+_0.5em)]"
   "path" "M88,7 C74,2.5 52,1 34,2.5 C14,4.2 3,11 3.5,20.5 C4,30 18,36.5 40,38 C62,39.5 84,35 92,27 C97.5,21.5 96.5,13 88,6.5 C82,3 72,1.5 62,1.8")
   "box" (dict
   "viewBox" "0 0 100 40"
+  "box" "left-[-0.3em] w-[calc(100%_+_0.6em)] top-[-0.2em] h-[calc(100%_+_0.4em)]"
   "path" "M4,4 C28,2.5 62,2 96,3.5 M96.5,3 C97.5,14 97,27 96,37 M96.5,36.5 C70,38.5 32,38 4,36.5 M4.5,37 C3,26 3.2,13 4,3.5")
   "marker" (dict
   "viewBox" "0 0 100 30"
+  "box" "left-[-0.15em] w-[calc(100%_+_0.3em)] top-[-0.05em] h-[calc(100%_+_0.1em)]"
+  "stroke" "fill-current stroke-none opacity-[0.28]"
   "path" "M1.5,5.5 C20,3 55,2.2 98.5,3.5 C99,12 98.6,20 98,26.5 C70,28.5 32,28 2,26 C1,19 1,12 1.5,5.5 Z")
+-}}
+{{- $colors := dict
+  "accent" "text-accent"
+  "primary" "text-primary"
+  "secondary" "text-secondary"
+  "warning" "text-warning"
+  "error" "text-error"
 -}}
 {{- $shape := .Get "shape" | default "underline" -}}
 {{- if not (index $shapes $shape) -}}
@@ -23,8 +45,22 @@
 {{- end -}}
 {{- $s := index $shapes $shape -}}
 {{- $color := .Get "color" | default "accent" -}}
-<span class="mark mark--{{ $shape }} mark--{{ $color }}"
-  ><svg class="mark__shape" viewBox="{{ $s.viewBox }}" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-    <path d="{{ $s.path }}" /></svg
-  ><span class="mark__text">{{ .Inner | .Page.RenderString }}</span></span
+{{- if not (index $colors $color) -}}
+  {{- warnf "mark shortcode: unknown color %q in %s, falling back to accent" $color .Page.File.Filename -}}
+  {{- $color = "accent" -}}
+{{- end -}}
+{{- /* The shape is absolutely positioned and cannot follow text across a line
+  break, so `whitespace-nowrap` keeps the phrase on one line — use `mark` on short
+  phrases only. */
+-}}
+<span class="relative inline-block whitespace-nowrap"
+  ><svg
+    class="absolute z-0 overflow-visible pointer-events-none {{ index $colors $color }} {{ $s.box }}"
+    viewBox="{{ $s.viewBox }}"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path class="{{ $s.stroke | default $stroke }}" d="{{ $s.path }}" /></svg
+  ><span class="relative z-1">{{ .Inner | .Page.RenderString }}</span></span
 >

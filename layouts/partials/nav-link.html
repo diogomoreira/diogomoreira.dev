@@ -15,22 +15,25 @@
 <a
   href="{{ $entry.URL }}"
   {{ if .active }}aria-current="page"{{ end }}
-  {{/* Children emit NO inline-padding, font-size or font-weight utility, so that
-    `.nav-link--child` can own all three. This is not a style preference — a
-    Tailwind utility lives in the utilities layer and beats `@layer components`
-    whatever the specificity, so `px-4`/`text-sm`/`font-medium` here would
-    silently make the matching declarations in main.css dead code.
+  {{/* The leading border sits on every link, active or not, so turning it on
+    does not shift the row's contents by 2px (same trick as `.toc a`). The active
+    tint is mixed from `primary`, so it tracks each theme's own accent — sunrise
+    #556ba3, midnight #7a92cc — with no per-theme override.
+
+    Children run a step smaller and lighter than their parent, and indent further
+    (the guide line they hang off is on the <ul> in nav-menu.html). The indent is
+    kept modest: the rail is only 13rem wide.
   */}}
-  class="nav-link flex font-heading items-center gap-2
+  class="flex font-heading items-center gap-2 border-s-2 border-transparent
     {{ if .child }}
-    nav-link--child py-2
+    text-[0.8125rem] font-normal ps-5 pe-3 py-2
   {{ else if .desktop }}
     text-sm px-4 py-2 font-medium
   {{ else }}
     text-sm px-3 py-2 font-medium
   {{ end }}
     {{ if .active }}
-    nav-link--active
+    bg-primary/12 border-s-primary text-primary
   {{ else }}
     text-heading/60 hover:text-heading hover:bg-base-content/5
   {{ end }}"

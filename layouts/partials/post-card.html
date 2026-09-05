@@ -26,8 +26,24 @@
 {{ end }}
 {{ $catColor := partial "chip-color.html" (dict "family" "category" "key" (urlize $cat)) | default "primary" }}
 
+{{/* The panel: `base-200` on a `base-300` hairline, the same recipe as the
+  library cards. Cover art is an object and a surface under it says so. The
+  reference design this came from is a white card on a grey page, which does not
+  translate — in sunrise `base-100` *is* the reading column, so a `base-100` card
+  would vanish into it.
 
-<a href="{{ $post.RelPermalink }}" class="post-card {{ if $featured }}post-card--featured{{ end }}">
+  Square, like everything else on the site: the three radius tokens are all 0.
+  Don't reach for a `rounded-*` utility here either — every value on Tailwind's
+  scale is a literal, so one would reintroduce a corner that no token can switch
+  off again. `rounded-box` is the only one that reads the token.
+
+  `group` is what lets the title and cover react to a hover on the card without
+  a descendant rule for each.
+*/}}
+<a
+  href="{{ $post.RelPermalink }}"
+  class="group block p-2 bg-base-200 border border-base-300 shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1)] transition-colors duration-150 hover:bg-base-300 focus-visible:bg-base-300"
+>
   {{/* `$post` is captured above rather than using `.` here: inside this `with`,
     `.` is the cover *string*, and responsive-image.html needs the page to
     resolve it against the post's own bundle resources. Every cover on the site
@@ -38,12 +54,13 @@
     source's own width and never upscales.
   */}}
   {{ with $post.Params.cover }}
-    <div class="post-card__cover">
+    {{/* The positioning context for the two overlay chips below. */}}
+    <div class="relative block">
       {{ partial "responsive-image.html" (dict
         "page" $post
         "src" .
         "alt" $post.Title
-        "class" "post-card__img"
+        "class" (printf "block w-full h-auto object-cover group-hover:opacity-90 group-focus-visible:opacity-90 %s" (cond $featured "aspect-[16/9]" "aspect-[16/10]"))
         "width" (cond $featured "1200" "640"))
       }}
       {{/* Both chips live in one positioned flex row rather than being pinned to
@@ -54,34 +71,75 @@
         `align-items: center` makes alignment structural instead of a coincidence
         of two elements happening to have the same height.
       */}}
-      <div class="post-card__cover-chips">
+      <div class="absolute top-2 inset-x-2 flex items-center gap-2">
         {{ with $cat }}
           {{/* Solid, not `badge-tint`: blog categories render solid everywhere on
             the site, and that is the only thing keeping them reading above the
             tinted tag chips.
           */}}
-          <span class="post-card__chip badge badge-{{ $catColor }} badge-sm">{{ . }}</span>
+          {{/* `min-w-0`: a long category can shrink, but it must never squeeze
+            the language badge.
+          */}}
+          <span class="min-w-0 badge badge-{{ $catColor }} badge-sm">{{ . }}</span>
         {{ end }}
-        <span class="post-card__lang">{{ partial "post-lang-badge.html" $post }}</span>
+        {{/* `ms-auto` rather than `justify-between` on the row: a post with no
+          category renders no chip, and `justify-between` would then strand the
+          language badge at the left edge. `flex` on this wrapper matters too —
+          it is what stops the badge inside from sitting in a line box and being
+          nudged off the category chip's baseline.
+        */}}
+        <span class="flex shrink-0 ms-auto">{{ partial "post-lang-badge.html" $post }}</span>
       </div>
     </div>
   {{ end }}
 
 
-  <div class="post-card__body">
-    <h3 class="post-card__title">{{ $post.Title }}</h3>
-    <p class="post-card__excerpt">
+  <div class="flex flex-col gap-[0.35rem] pt-3 px-[0.35rem] pb-1">
+    {{/* `link-dash` carries the dashed accent underline's colour, style and
+      thickness; the line itself only appears on hover. Those longhands have to
+      sit on the heading rather than being inherited from the anchor around it —
+      they are non-inherited properties, so the site-wide `a` rule in main.css
+      never reaches an element nested inside the link.
+    */}}
+    <h3
+      class="line-clamp-2 m-0 font-heading font-medium text-heading link-dash group-hover:underline group-focus-visible:underline {{ if $featured }}
+        text-[1.375rem]/[1.35]
+      {{ else }}
+        text-base/[1.35]
+      {{ end }}"
+    >
+      {{ $post.Title }}
+    </h3>
+    {{/* `/70` is the site-wide floor for muted text — `/50` and `/60` fall under
+      4.5:1 in one theme or the other. The featured card has the room for a third
+      line.
+    */}}
+    <p
+      class="m-0 text-base-content/70 {{ if $featured }}
+        line-clamp-3 text-sm/[1.5]
+      {{ else }}
+        line-clamp-2 text-[0.8125rem]/[1.5]
+      {{ end }}"
+    >
       {{ with $post.Description }}{{ . }}{{ else }}{{ $post.Plain | truncate 160 }}{{ end }}
     </p>
-    <div class="post-card__meta">
-      <span class="post-card__meta-item">
+    {{/* In pt-br this row is the tightest fit in the design — `10 de abr. de
+      2026 · 8 min de leitura · Em cultivo` — and wraps to two lines on a grid
+      card, which is what `flex-wrap` is for.
+    */}}
+    <div class="flex flex-wrap items-center gap-2 mt-[0.4rem] text-xs text-base-content/70">
+      <span class="inline-flex items-center gap-[0.3rem] whitespace-nowrap">
         {{ partial "icons/meta/calendar.html" }}
         <time datetime="{{ $post.Date.Format "2006-01-02" }}"
           >{{ partial "formatted-date-short.html" $post.Date }}</time
         >
       </span>
-      <span class="post-card__sep" aria-hidden="true"></span>
-      <span class="post-card__meta-item">
+      {{/* Mixed from `base-content`, not `base-300`: the card's hover state *is*
+        `base-300`, so a `base-300` divider would disappear exactly when the card
+        is being pointed at.
+      */}}
+      <span class="w-px h-3 bg-base-content/30" aria-hidden="true"></span>
+      <span class="inline-flex items-center gap-[0.3rem] whitespace-nowrap">
         {{ partial "icons/meta/clock.html" }}
         {{ i18n "reading_time_minutes" (dict "Count" $post.ReadingTime) }}
       </span>
@@ -93,15 +151,18 @@
         so a screen reader reads "Seed" once instead of announcing the glyph too.
       */}}
       {{ with partial "post-status-icon.html" $post }}
-        <span class="post-card__sep" aria-hidden="true"></span>
-        <span class="post-card__meta-item">
-          <span class="post-card__status-icon" role="img" aria-hidden="true" data-pagefind-ignore>{{ . }}</span>
+        <span class="w-px h-3 bg-base-content/30" aria-hidden="true"></span>
+        <span class="inline-flex items-center gap-[0.3rem] whitespace-nowrap">
+          {{/* An emoji, not an icon, so it does not take the SVGs' 14px — at the
+            row's 12px it is too small to read as a seedling.
+          */}}
+          <span class="text-[0.8125rem] leading-none" role="img" aria-hidden="true" data-pagefind-ignore>{{ . }}</span>
           {{ i18n (printf "status_%s" $post.Params.status) }}
         </span>
       {{ end }}
     </div>
     {{ if $featured }}
-      <span class="post-card__more">{{ i18n "blog_keep_reading" }}</span>
+      <span class="mt-2 text-sm text-primary">{{ i18n "blog_keep_reading" }}</span>
     {{ end }}
   </div>
 </a>
