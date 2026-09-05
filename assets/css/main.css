@@ -205,7 +205,8 @@ html[data-theme="midnight"] {
 }
 
 @theme {
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "IBM Plex Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-sans:
+    "Finlandica Text", -apple-system, BlinkMacSystemFont, "IBM Plex Sans", "Segoe UI", Helvetica, Arial, sans-serif;
   --font-body: var(--font-sans);
   --font-mono:
     "JetBrains Mono", ui-monospace, SFMono-Regular, "Cascadia Code", "IBM Plex Mono", "Roboto Mono", "DejaVu Sans Mono",
@@ -278,9 +279,6 @@ html[data-theme="midnight"] {
 
 @layer base {
   body {
-    font-family: var(--font-body);
-    font-weight: 400;
-    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
