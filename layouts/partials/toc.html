@@ -1,11 +1,12 @@
-{{/* Usage: {{ partial "toc.html" (dict "page" . "variant" "rail") }} — variant is
+{{/* Usage: `partial "toc.html" (dict "page" . "variant" "rail")` — variant is
   "rail" (right rail, desktop) or "mobile" (a `lg:hidden` collapsible above the
   post body, since the rail is hidden below `lg`).
 
   Renders nothing unless `has-toc.html` says the page has headings.
 
   The wrapper is a plain <div>: `.TableOfContents` already emits its own
-  <nav id="TableOfContents">, and nesting nav landmarks confuses screen readers. */}}
+  <nav id="TableOfContents">, and nesting nav landmarks confuses screen readers.
+*/}}
 {{ $page := .page }}
 {{ $rail := eq .variant "rail" }}
 {{ if partial "has-toc.html" $page }}

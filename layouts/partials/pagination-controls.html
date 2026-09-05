@@ -1,4 +1,4 @@
-{{/* Usage: {{ partial "pagination-controls.html" (dict "paginator" $paginator "size" "xs") }} */}}
+{{/* Usage: `partial "pagination-controls.html" (dict "paginator" $paginator "size" "xs")` */}}
 {{ $paginator := .paginator }}
 {{ $size := .size | default "xs" }}
 {{ $btn := printf "join-item btn btn-%s" $size }}

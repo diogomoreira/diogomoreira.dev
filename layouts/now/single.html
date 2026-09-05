@@ -13,6 +13,7 @@
       </figure>
     {{ end }}
 
+
     <div class="prose prose-headings:font-heading prose-base max-w-none">
       {{ partial "disclaimer-alert.html" . }}
       {{ .Content }}
@@ -20,7 +21,8 @@
   </article>
 
   {{/* Toots first, artists last: the closing line of the page's prose points at
-    the music grid as the bottom of the page. */}}
+    the music grid as the bottom of the page.
+  */}}
   {{ partial "mastodon-toots.html" . }}
   {{ partial "now-top-artists.html" . }}
 {{ end }}

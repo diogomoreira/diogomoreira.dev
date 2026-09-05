@@ -14,7 +14,7 @@
             <a
               href="{{ .link }}"
               class="link link-primary font-medium"
-              {{- if partial "is-external-link.html" .link }} target="_blank" rel="noopener noreferrer"{{ end }}
+              {{ if partial "is-external-link.html" .link }}target="_blank" rel="noopener noreferrer"{{ end }}
             >
               {{ .title }}
             </a>

@@ -1,9 +1,11 @@
-{{/* Usage: {{ partial "sidebar-footer-meta.html" (dict "page" . "variant" "desktop") }} — variant is "desktop" or "mobile" */}}
+{{/* Usage: `partial "sidebar-footer-meta.html" (dict "page" . "variant" "desktop")` — variant is "desktop" or "mobile" */}}
 {{ $desktop := eq .variant "desktop" }}
 <div class="text-center text-base-content">
   <span>© {{ now.Year }} {{ .page.Site.Title }}</span>
 </div>
 <div class="text-center text-base-content">
-  <strong{{ if $desktop }} class="font-mono"{{ end }}>v{{ .page.Site.Params.Version }}</strong>{{ if $desktop }} —{{ end }}
+  <strong {{ if $desktop }}class="font-mono"{{ end }}>v{{ .page.Site.Params.Version }}</strong>{{ if $desktop }}
+    —
+  {{ end }}
   {{ i18n "built_with_label" }} <a href="https://hugo.io" target="_blank" rel="noopener noreferrer">Hugo</a>
 </div>

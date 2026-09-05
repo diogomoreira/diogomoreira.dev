@@ -6,7 +6,9 @@
   "scripts": {
     "prebuild": "mkdir -p assets/photoswipe && cp node_modules/photoswipe/dist/photoswipe.css assets/photoswipe/ && cp node_modules/photoswipe/dist/photoswipe-lightbox.esm.min.js assets/photoswipe/ && cp node_modules/photoswipe/dist/photoswipe.esm.min.js assets/photoswipe/ && cp node_modules/photoswipe-dynamic-caption-plugin/dist/photoswipe-dynamic-caption-plugin.esm.min.js assets/photoswipe/ && cp node_modules/photoswipe-dynamic-caption-plugin/photoswipe-dynamic-caption-plugin.css assets/photoswipe/",
     "build": "hugo --minify && npx pagefind --site public",
-    "dev": "hugo server -D"
+    "dev": "hugo server -D",
+    "format": "prettier --write .",
+    "lint": "prettier --check ."
   },
   "repository": {
     "type": "git",

@@ -1,7 +1,8 @@
 {{- /* Front-matter alert rendered directly above .Content. `disclaimer` is the body
-       (inline markdown); optional `disclaimerType` picks the severity. The type is
-       validated before the icon lookup below, because a partial is resolved by name and
-       a missing one is a hard build failure — a typo has to warn, not break the build. */ -}}
+  (inline markdown); optional `disclaimerType` picks the severity. The type is
+  validated before the icon lookup below, because a partial is resolved by name and
+  a missing one is a hard build failure — a typo has to warn, not break the build. */
+-}}
 {{ with .Params.disclaimer }}
   {{- $types := slice "info" "success" "warning" "error" -}}
   {{- $type := $.Params.disclaimerType | default "warning" -}}

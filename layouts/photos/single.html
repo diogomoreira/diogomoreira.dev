@@ -8,7 +8,8 @@
             href="{{ .RelPermalink }}"
             class="inline-flex items-center gap-1 text-xs mb-6 text-secondary hover:text-secondary"
           >
-            ← {{ .Title }}
+            ←
+            {{ .Title }}
           </a>
         {{ end }}
       {{ end }}
@@ -20,6 +21,7 @@
           </time>
         </div>
       {{ end }}
+
 
       <h1 class="font-heading text-4xl lg:text-5xl font-semibold tracking-tight text-heading">
         {{ .Title }}
@@ -41,14 +43,13 @@
         {{ $full := $img.Resize "2000x jpg" }}
         <figure id="my-gallery" class="mb-10">
           <a href="{{ $full.RelPermalink }}" data-pswp-width="{{ $full.Width }}" data-pswp-height="{{ $full.Height }}">
-            {{
-              partial "responsive-image.html" (
-                dict
-                  "page" $
-                  "src" .
-                  "alt" $.Title
-                  "class" "w-full border-4 border-base-200 shadow-md object-cover cursor-zoom-in"
-                  "width" "1000"
+            {{ partial "responsive-image.html" (
+              dict
+              "page" $
+              "src" .
+              "alt" $.Title
+              "class" "w-full border-4 border-base-200 shadow-md object-cover cursor-zoom-in"
+              "width" "1000"
               )
             }}
             <span class="pswp-caption-content">
@@ -59,6 +60,7 @@
         </figure>
       {{ end }}
     {{ end }}
+
 
     <div class="prose prose-headings:font-heading max-w-none">
       {{ partial "disclaimer-alert.html" . }}

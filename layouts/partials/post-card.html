@@ -1,4 +1,4 @@
-{{/* Usage: {{ partial "post-card.html" (dict "page" $post "featured" true) }}
+{{/* Usage: `partial "post-card.html" (dict "page" $post "featured" true)`
   — the site's one blog post card. `featured` is optional and defaults false.
 
   Three surfaces call this: layouts/blog/list.html (the "Latest" card and the
@@ -7,24 +7,27 @@
   blog-posts.html owning the ordering — one partial owns the shape, so the three
   cannot drift apart. Callers own the grid around it, not the card itself.
 
-  The whole card is a single <a>: one tab stop, and the chips inside it are
-  therefore <span>s. A nested <a> for the category would be invalid HTML and
+  The whole card is a single `a`: one tab stop, and the chips inside it are
+  therefore `span`s. A nested `a` for the category would be invalid HTML and
   would split focus across the card. The card also can't pick up the global
   external-link ↗ marker — its href is relative, and the rule only matches
-  a[href^="http"]. */}}
+  a[href^="http"].
+*/}}
 
 {{ $post := .page }}
 {{ $featured := .featured | default false }}
 
 {{/* First category only — the cover has room for one chip, and `index` on a nil
-  slice is a build error, so it has to be guarded rather than indexed inline. */}}
+  slice is a build error, so it has to be guarded rather than indexed inline.
+*/}}
 {{ $cat := "" }}
 {{ with $post.Params.categories }}
   {{ $cat = index . 0 }}
 {{ end }}
 {{ $catColor := partial "chip-color.html" (dict "family" "category" "key" (urlize $cat)) | default "primary" }}
 
-<a href="{{ $post.RelPermalink }}" class="post-card rounded-box{{ if $featured }} post-card--featured{{ end }}">
+
+<a href="{{ $post.RelPermalink }}" class="post-card rounded-box {{ if $featured }}post-card--featured{{ end }}">
   {{/* `$post` is captured above rather than using `.` here: inside this `with`,
     `.` is the cover *string*, and responsive-image.html needs the page to
     resolve it against the post's own bundle resources. Every cover on the site
@@ -32,7 +35,8 @@
 
     The width is passed explicitly because responsive-image.html emits no
     `srcset`/`sizes` — the caller picks the rendered size. It clamps down to the
-    source's own width and never upscales. */}}
+    source's own width and never upscales.
+  */}}
   {{ with $post.Params.cover }}
     <div class="post-card__cover">
       {{ partial "responsive-image.html" (dict
@@ -48,18 +52,21 @@
         line box and gets pushed down by baseline alignment, while a chip that
         *is* the positioned element starts flush at the offset. One row with
         `align-items: center` makes alignment structural instead of a coincidence
-        of two elements happening to have the same height. */}}
+        of two elements happening to have the same height.
+      */}}
       <div class="post-card__cover-chips">
         {{ with $cat }}
           {{/* Solid, not `badge-tint`: blog categories render solid everywhere on
             the site, and that is the only thing keeping them reading above the
-            tinted tag chips. */}}
+            tinted tag chips.
+          */}}
           <span class="post-card__chip badge badge-{{ $catColor }} badge-sm">{{ . }}</span>
         {{ end }}
         <span class="post-card__lang">{{ partial "post-lang-badge.html" $post }}</span>
       </div>
     </div>
   {{ end }}
+
 
   <div class="post-card__body">
     <h3 class="post-card__title">{{ $post.Title }}</h3>
@@ -69,7 +76,9 @@
     <div class="post-card__meta">
       <span class="post-card__meta-item">
         {{ partial "icons/meta/calendar.html" }}
-        <time datetime="{{ $post.Date.Format "2006-01-02" }}">{{ partial "formatted-date-short.html" $post.Date }}</time>
+        <time datetime="{{ $post.Date.Format "2006-01-02" }}"
+          >{{ partial "formatted-date-short.html" $post.Date }}</time
+        >
       </span>
       <span class="post-card__sep" aria-hidden="true"></span>
       <span class="post-card__meta-item">
@@ -81,7 +90,8 @@
         calling `post-status-badge.html`, because that renders a coloured chip —
         loud next to two muted meta items, and the cover already carries a solid
         category chip. The emoji is `aria-hidden` with the label right beside it,
-        so a screen reader reads "Seed" once instead of announcing the glyph too. */}}
+        so a screen reader reads "Seed" once instead of announcing the glyph too.
+      */}}
       {{ with partial "post-status-icon.html" $post }}
         <span class="post-card__sep" aria-hidden="true"></span>
         <span class="post-card__meta-item">

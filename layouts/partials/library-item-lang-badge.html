@@ -1,10 +1,11 @@
-{{/* Usage: {{ partial "library-item-lang-badge.html" .lang }} — marks an entry whose
+{{/* Usage: `partial "library-item-lang-badge.html" .lang` — marks an entry whose
   *work* is tied to one language: a Portuguese-only podcast, an untranslated book.
 
   Explicit, not inferred. Favorites live in a single language-neutral data
   directory now, so there is no content dir to read this off — which is the better
   design anyway: you tag the handful of entries where language actually matters,
-  and nothing has to be exempted for being language-neutral in the first place. */}}
+  and nothing has to be exempted for being language-neutral in the first place.
+*/}}
 {{ $lang := . }}
 {{ if and $lang (ne $lang site.Language.Lang) }}
   {{ $label := $lang }}

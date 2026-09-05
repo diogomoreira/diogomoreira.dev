@@ -1,6 +1,7 @@
-{{/* Usage: {{ partial "responsive-image.html" (dict "page" . "src" .Params.cover "alt" .Title "class" "w-full border-4 border-base-200 shadow-md object-cover" "width" "800") }}
-Resolves src against the page's own bundle resources first, falling back to site-wide assets. Generates a responsive
-picture element with WebP and JPEG fallback, width/height, and lazy loading. */}}
+{{/* Usage: `partial "responsive-image.html" (dict "page" . "src" .Params.cover "alt" .Title "class" "w-full border-4 border-base-200 shadow-md object-cover" "width" "800")`
+  Resolves src against the page's own bundle resources first, falling back to site-wide assets. Generates a responsive
+  picture element with WebP and JPEG fallback, width/height, and lazy loading.
+*/}}
 {{ $img := "" }}
 {{ with .page }}
   {{ $img = .Resources.GetMatch $.src }}
@@ -12,7 +13,8 @@ picture element with WebP and JPEG fallback, width/height, and lazy loading. */}
   {{/* Never resize past the source's own width. `.Resize` happily upscales, and
     an upscale adds no detail — only bytes and softness. Clamping means a caller
     can ask for the size it actually renders at without having to know whether
-    every source is big enough. */}}
+    every source is big enough.
+  */}}
   {{ $width := int (.width | default 800) }}
   {{ if lt $img.Width $width }}
     {{ $width = $img.Width }}

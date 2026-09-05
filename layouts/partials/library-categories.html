@@ -1,4 +1,4 @@
-{{/* Ordered, non-empty library categories. Usage: {{ range partial "library-categories.html" . }}
+{{/* Ordered, non-empty library categories. Usage: `range partial "library-categories.html" .`
 
   `hugo.Data.library` is a map keyed by filename, and Go templates walk maps in
   key order — so ranging it directly would render Albums, Apps, Articles, Books…
@@ -7,16 +7,19 @@
 
   Sorting the items happens here too, once, so this page and the homepage row
   cannot disagree about what "newest" means. `sort`, not `.ByDate` — these are
-  plain maps, not pages. */}}
+  plain maps, not pages.
+*/}}
 {{/* A missing `date` means "in progress" — a book you are still reading, which
   has no finish date yet. Those sort above everything dated, since they are the
   most current thing in the category, and they keep their YAML order among
   themselves. Splitting the slice before sorting is also what keeps `sort` away
-  from a nil key. See library-item-date.html for the badge they render. */}}
+  from a nil key. See library-item-date.html for the badge they render.
+*/}}
 {{ $cats := slice }}
 {{ range $key, $cat := hugo.Data.library }}
   {{/* Skip categories with no entries: the eleven files all exist so the shape is
-    visible, but an empty heading is just noise on the page. */}}
+    visible, but an empty heading is just noise on the page.
+  */}}
   {{ with $cat.items }}
     {{ $dated := slice }}
     {{ $undated := slice }}
@@ -33,11 +36,13 @@
       an album says nothing useful. The one non-word value is `bare`, which shows
       the date with no label at all (articles, videos) — see
       library-item-date.html; it also has no in-progress badge, so an undated
-      entry there floats to the top rendering nothing. */}}
+      entry there floats to the top rendering nothing.
+    */}}
     {{/* `cover_ratio` is a category setting for the same reason `display` is:
       every film in Movies has the same shape, and the shape is a property of the
       medium, not of one entry. `square` (the default) suits album and podcast
-      art; `poster` is the 2:3 of a film poster or a game's vertical box art. */}}
+      art; `poster` is the 2:3 of a film poster or a game's vertical box art.
+    */}}
     {{ $cats = $cats | append (dict
       "key" $key
       "display" ($cat.display | default "list")
@@ -45,7 +50,8 @@
       "dateLabel" ($cat.date_label | default "")
       "coverRatio" ($cat.cover_ratio | default "square")
       "items" ($undated | append (sort $dated "date" "desc"))
-    ) }}
+      )
+    }}
   {{ end }}
 {{ end }}
 {{ return sort $cats "weight" }}

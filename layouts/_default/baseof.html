@@ -13,7 +13,7 @@
     {{ partial "sidebar-mobile-drawer.html" . }}
 
     {{/* No TOC to hold, so the right track shrinks to the width of its buttons. */}}
-    <div class="site-shell{{ if not (partial "has-toc.html" .) }} site-shell--slim-right{{ end }}">
+    <div class="site-shell {{ if not (partial "has-toc.html" .) }}site-shell--slim-right{{ end }}">
       {{ partial "rail-left.html" . }}
 
 
@@ -33,7 +33,7 @@
             which this site does not have. If lines start to feel long, the fix is to
             step this down to `max-w-3xl` (~78ch), not to reach back for `max-w-prose`.
           */}}
-          <div class="{{ if not .Params.wide }}max-w-4xl {{ end }}mx-auto">
+          <div class="{{ if not .Params.wide }}max-w-4xl{{ end }} mx-auto">
             {{ block "main" . }}{{ end }}
           </div>
         </main>

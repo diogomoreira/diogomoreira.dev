@@ -1,4 +1,4 @@
-{{/* Usage: {{ partial "page-list.html" .Pages }} — renders a "title + optional description + date" card list */}}
+{{/* Usage: `partial "page-list.html" .Pages` — renders a "title + optional description + date" card list */}}
 <ul class="space-y-6 list-none p-0 m-0">
   {{ range .ByDate.Reverse }}
     <li class="border-b border-base-300 pb-6">
