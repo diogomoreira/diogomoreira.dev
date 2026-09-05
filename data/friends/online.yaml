@@ -1,0 +1,27 @@
+# People whose work I follow from a distance. Heading text comes from the
+# `friends_group_online` i18n key — see known.yaml.
+weight: 2
+items:
+  - title: "Willian Justen"
+    link: "https://willianjusten.com.br/"
+    note:
+      en: "I like his content, especially the courses. I also admire him as a photographer."
+      pt-br: "Gosto muito do conteúdo dele, principalmente dos cursos. Também o admiro como fotógrafo."
+
+  - title: "Nick Gray"
+    link: "https://nickgray.net/"
+    note:
+      en: "He got in touch to introduce me to the `/friends` page concept."
+      pt-br: "Ele me procurou para apresentar o conceito da página `/friends`."
+
+  - title: "Henrique Dias"
+    link: "https://hacdias.com"
+    note:
+      en: "I discovered his website while browsing [personalsit.es](https://personalsit.es/) and find it very inspiring, especially his writing. Also, in his website I discovered [Indie WebRing](https://xn--sr8hvo.ws/)"
+      pt-br: "Descobri o site dele enquanto navegava pelo [personalsit.es](https://personalsit.es/) e achei muito inspirador, especialmente a escrita dele. Além disso, no site dele descobri o [Indie WebRing](https://xn--sr8hvo.ws/)."
+
+  - title: "Erika Heidi"
+    link: "https://eheidi.dev/"
+    note:
+      en: "I follow her work and find it very inspiring."
+      pt-br: "Sigo o trabalho dela e acho muito inspirador."

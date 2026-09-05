@@ -1,0 +1,15 @@
+{{/* Two people, one behind the other. Solid 24x24 with `fill="currentColor"` on
+  the root, matching the style the rest of the nav set uses — the child shapes
+  inherit the fill, so none of them declares its own.
+
+  The back figure is drawn smaller and offset rather than as a second full body:
+  at `w-4` the whole glyph is ~16px tall, and two equal heads read as a blob.
+*/}}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true">
+  <circle cx="9" cy="7" r="4" />
+  <path d="M9 13c-3.87 0-7 2.24-7 5v1.25c0 .41.34.75.75.75h12.5c.41 0 .75-.34.75-.75V18c0-2.76-3.13-5-7-5z" />
+  <circle cx="17.5" cy="8.5" r="3" />
+  <path
+    d="M17.5 13c-.87 0-1.7.13-2.45.36A7.4 7.4 0 0 1 18 18v1.25c0 .26-.05.51-.14.75h4.39c.41 0 .75-.34.75-.75V19c0-2.48-2.46-4-5.5-4z"
+  />
+</svg>
