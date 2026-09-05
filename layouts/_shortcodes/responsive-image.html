@@ -1,5 +1,36 @@
-{{ $src := resources.Get (.Get "src") }}
-{{ if $src }}
-  {{ $img := $src.Resize (printf "%s webp" (.Get "width" | default "800x")) }}
-  <img src="{{ $img.RelPermalink }}" alt="{{ .Get "alt" }}" {{ with .Get "class" }}class="{{ . }}"{{ end }} />
-{{ end }}
+{{- /* Photo in the site's cover treatment: a bordered image, full width of the
+  content column, with an optional caption under it. Deliberately the same
+  markup the `cover` front-matter figure gets in the single templates, so a
+  photo inside a page's prose and the page's own cover read as one thing.
+
+  Params:
+  src     — page-bundle resource name, or a site-wide asset path
+  (e.g. "/images/pages/uses.jpg"). Required.
+  alt     — alt text. Defaults to empty (decorative).
+  caption — line under the image. Rendered as markdown, so links and
+  emphasis work.
+  width   — source resample width in px, not the displayed size. The
+  image is always laid out at `w-full`. Default: 800.
+  class   — replaces the image's own classes outright.
+
+  Wrap several calls in `image-row` to lay them out side by side.
+
+  `not-prose` is load-bearing: `_default/single.html` puts
+  `prose-img:border-4 prose-img:shadow-md` on every image in content, which
+  would double the border this figure already carries. */
+-}}
+{{- $class := .Get "class" | default "w-full border-4 border-base-200 shadow-md object-cover" -}}
+<figure class="not-prose my-10 md:px-10">
+  {{ partial "responsive-image.html" (dict
+    "page" .Page
+    "src" (.Get "src")
+    "alt" (.Get "alt")
+    "class" $class
+    "width" (.Get "width" | default "800"))
+  }}
+  {{ with .Get "caption" }}
+    <figcaption class="mt-2 text-xs text-center text-secondary">
+      {{ . | $.Page.RenderString }}
+    </figcaption>
+  {{ end }}
+</figure>

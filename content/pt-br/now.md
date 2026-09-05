@@ -11,7 +11,7 @@ Nessa página compartilho as coisas que tenho feito nos últimos tempos. A idéi
 
 [Noivei](https://www.instagram.com/p/DYgJF_IDjL-FmgKJf0gQkHC0_s6TxVoxv6sF9g0/?igsh=NHdjdmJlOW5wOTc0) no dia 16/05 em Cancún, México. Depois de 8 anos e 4 meses juntos, eu e Bruno decidimos dar mais um passo na nossa história.
 
-{{< polaroid src="/images/pages/engagement.jpg" alt="@ Cancún" width="300" tilt="left" caption="@ Cancún" >}}
+{{< responsive-image src="/images/pages/engagement.jpg" alt="@ Cancún" caption="@ Cancún" >}}
 
 ## Redes sociais
 

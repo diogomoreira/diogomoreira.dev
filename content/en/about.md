@@ -5,17 +5,17 @@ description: "A little bit about me, my hobbies and my career as a software deve
 toc: false
 ---
 
-{{< polaroid src="/images/profile/cover.jpg" alt="@ Escadaria Selarón - Rio de Janeiro, RJ, Brazil" width="600" tilt="left" caption="@ Escadaria Selarón - Rio de Janeiro, RJ, Brazil" >}}
+{{< responsive-image src="/images/profile/cover.jpg" alt="@ Escadaria Selarón - Rio de Janeiro, RJ, Brazil" caption="@ Escadaria Selarón - Rio de Janeiro, RJ, Brazil" >}}
 
 Hello! I'm **Diogo Dantas Moreira**, born in Cajazeiras/PB, Brazil, where I still live and work today.
 
 I'm passionate about **music**. I'm always listening to something new and I try my best to stay open to new artists and genres. I recently started my [physical media](/pt-br/blog/colecao-vinil/) collection and it's been a fun hobby (even if a bit of an expensive one). I've been to over 100 concerts, and that's easily one of my favorite things to do.
 
-{{< polaroid-group >}}
-{{< polaroid src="/images/profile/lollapalooza.jpg" width="200" alt="Lollapalooza 2026" ratio="square" caption="Lollapalooza 2026" >}}
-{{< polaroid src="/images/profile/primavera-sound.jpg" width="200" alt="Primavera Sound 2023" ratio="square" caption="Primavera Sound 2023" >}}
-{{< polaroid src="/images/profile/rock-in-rio.jpg" width="200" alt="Rock in Rio 2022" ratio="square" caption="Rock in Rio 2022" >}}
-{{< /polaroid-group >}}
+{{< image-row >}}
+{{< responsive-image src="/images/profile/lollapalooza.jpg" width="400" alt="Lollapalooza 2026" caption="Lollapalooza 2026" >}}
+{{< responsive-image src="/images/profile/primavera-sound.jpg" width="400" alt="Primavera Sound 2023" caption="Primavera Sound 2023" >}}
+{{< responsive-image src="/images/profile/rock-in-rio.jpg" width="400" alt="Rock in Rio 2022" caption="Rock in Rio 2022" >}}
+{{< /image-row >}}
 
 I'm a **football** (soccer for my US visitor 😅) fan. I support **São Paulo FC**, and over the last few years I've been following other sports as well, like Formula 1 and tennis (which I've also been trying to play).
 

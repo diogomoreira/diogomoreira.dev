@@ -5,17 +5,17 @@ description: "Um pouco sobre mim, meus hobbies e minha carreira como desenvolved
 toc: false
 ---
 
-{{< polaroid src="/images/profile/cover.jpg" alt="@ Escadaria Selarón - Rio de Janeiro, RJ, Brasil" width="600" tilt="left" caption="@ Escadaria Selarón - Rio de Janeiro, RJ, Brasil" >}}
+{{< responsive-image src="/images/profile/cover.jpg" alt="@ Escadaria Selarón - Rio de Janeiro, RJ, Brasil" caption="@ Escadaria Selarón - Rio de Janeiro, RJ, Brasil" >}}
 
 Olá! Sou o **Diogo Dantas Moreira**, nascido em Cajazeiras/PB, Brasil onde ainda moro e trabalho hoje.
 
 Sou apaixonado por **música**. Estou sempre escutando algo novo e tento ao máximo estar aberto pra novos artistas e estilos. Recentemente, comecei minha coleção de [mídia física](/pt-br/blog/colecao-vinil/) e tem sido um hobby legal (apesar de ser um pouco caro). Já fui em mais de 100 shows de música e esse é definitivamente um dos meus programas favoritos.
 
-{{< polaroid-group >}}
-{{< polaroid src="/images/profile/lollapalooza.jpg" width="200" alt="Lollapalooza 2026" ratio="square" caption="Lollapalooza 2026" >}}
-{{< polaroid src="/images/profile/primavera-sound.jpg" width="200" alt="Primavera Sound 2023" ratio="square" caption="Primavera Sound 2023" >}}
-{{< polaroid src="/images/profile/rock-in-rio.jpg" width="200" alt="Rock in Rio 2022" ratio="square" caption="Rock in Rio 2022" >}}
-{{< /polaroid-group >}}
+{{< image-row >}}
+{{< responsive-image src="/images/profile/lollapalooza.jpg" width="400" alt="Lollapalooza 2026" caption="Lollapalooza 2026" >}}
+{{< responsive-image src="/images/profile/primavera-sound.jpg" width="400" alt="Primavera Sound 2023" caption="Primavera Sound 2023" >}}
+{{< responsive-image src="/images/profile/rock-in-rio.jpg" width="400" alt="Rock in Rio 2022" caption="Rock in Rio 2022" >}}
+{{< /image-row >}}
 
 Sou fã de **futebol**. Torço pro **São Paulo FC** e nos últimos anos tenho acompanhado outros esportes como Fórmula 1 e Tênis (que também tenho tentado praticar).
 
