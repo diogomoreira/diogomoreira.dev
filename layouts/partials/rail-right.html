@@ -3,10 +3,15 @@
   Renders on every page (even with no TOC) so the shell keeps three tracks.
 
   With no TOC there is nothing to be wide for: the track narrows to just the
-  buttons (`site-shell--slim-right`, set in baseof.html) and they stack.
+  buttons (the grid columns are picked in baseof.html) and they stack.
+
+  Sizing utilities are the left rail's minus its flex column — see the note there.
 */}}
 {{ $hasToc := partial "has-toc.html" . }}
-<div class="site-rail" data-pagefind-ignore>
+<div
+  class="hidden lg:block lg:sticky lg:top-0 lg:self-start lg:max-h-screen lg:overflow-y-auto lg:overscroll-contain lg:px-5 lg:py-8"
+  data-pagefind-ignore
+>
   <div class="flex items-center gap-2 mb-8 {{ if $hasToc }}flex-row{{ else }}flex-col{{ end }}">
     {{ partial "theme-toggle-button.html" "theme-toggle-rail" }}
     {{ partial "language-switcher.html" . }}

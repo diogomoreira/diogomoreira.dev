@@ -21,21 +21,57 @@
         still expanded if CSS or JS never arrives. The <h2> stays inside the
         <summary> — <summary> accepts heading content, and losing it would cost
         screen-reader users the ability to jump between categories. */}}
-      <details class="library-section" open>
-        <summary class="library-section__summary">
-          <h2 class="library-section__heading">{{ i18n (printf "library_category_%s" .key) | default .key }}</h2>
+      {{/* A *named* group: the cards and rows inside carry their own unnamed
+        `group` for their hover cues, and an unnamed `group-hover:` matches any
+        `.group` ancestor — so an anonymous group here would underline every
+        title in the section whenever the pointer entered it. The rule
+        under the summary is `base-300` — the one divider token that reads as a
+        surface step in both themes; `neutral` inverts between them and would
+        vanish in one. `list-none` plus the `::-webkit-details-marker` reset kill
+        the native disclosure triangle in every engine. */}}
+      <details class="group/section mb-12" open>
+        <summary
+          class="flex items-center gap-2 cursor-pointer list-none [&::-webkit-details-marker]:hidden pb-2 border-b border-base-300 text-secondary focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-[3px]"
+        >
+          <h2 class="font-heading text-xs font-medium uppercase tracking-widest text-inherit m-0">
+            {{ i18n (printf "library_category_%s" .key) | default .key }}
+          </h2>
+          {{/* `ms-auto` parks it at the far end of the rule. An inline SVG rather
+            than a masked `::after`, so its rotation is a variant on the group
+            rather than a second rule keyed to `[open]`. */}}
+          <span class="ms-auto w-[0.7rem] h-[0.7rem] transition-transform duration-150 group-open/section:rotate-90">
+            {{ partial "icons/chevron-right.html" }}
+          </span>
         </summary>
 
+        {{/* Cover shape is a category setting: `cover_ratio: poster` renders 2:3,
+          the shape of a film poster and of a game's vertical box art (Steam's
+          library capsule is 600x900). Unset means square, which suits album and
+          podcast art. Adding a shape is one entry here plus one `cover_ratio:`
+          line in the YAML — no structural change. */}}
+        {{ $aspect := cond (eq $coverRatio "poster") "aspect-[2/3]" "aspect-square" }}
+
         {{ if eq $display "poster" }}
-          <div class="library-grid">
+          {{/* `auto-fill` + `minmax` replaces the six breakpoints the old masonry
+            wall needed: grouping by category means fewer items per section and
+            similar aspect ratios within one, so a real grid beats a column
+            count. The top margin lives here rather than on the summary — a
+            collapsed section would otherwise keep a gap it has nothing to
+            separate. */}}
+          <div class="grid grid-cols-[repeat(auto-fill,minmax(8.5rem,1fr))] gap-4 mt-4">
             {{ range .items }}
               {{ $item := . }}
+              {{/* The panel: `base-200` on a `base-300` hairline, the same recipe
+                as the blog post cards — cover art is an object and a surface
+                under it says so. Square, like everything else; see the
+                concentricity note in CLAUDE.md before giving the panel or the
+                cover inside it a corner back. */}}
               <a
                 href="{{ .link }}"
-                class="library-card library-card--{{ $coverRatio }} no-ext-icon"
+                class="group block p-2 bg-base-200 border border-base-300 shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1)] transition-colors duration-150 hover:bg-base-300 focus-visible:bg-base-300 no-ext-icon"
                 {{ with .link }}target="_blank" rel="noopener noreferrer"{{ end }}
               >
-                <span class="library-card__cover">
+                <span class="block">
                   {{ with .cover }}
                     {{/* `.library-grid` lands six ~157px columns in the wide centre
                       rail, so a 2x display paints ~314px. 400 covers that with a
@@ -46,9 +82,22 @@
                       side of the wire. responsive-image clamps to the source, so a
                       cover smaller than this is served at its own size, never
                       stretched up to it. */}}
-                    {{ partial "responsive-image.html" (dict "src" . "alt" $item.title "class" "library-card__img" "width" "400") }}
+                    {{/* No shadow on the cover — the panel casts it, and two
+                      nested shadows read as an embossed edge. `aspect-ratio` +
+                      `object-fit` rather than each cover's natural shape: within
+                      a category the grid has to line up, and the sources are
+                      whatever the store or label published, so a mismatched one
+                      is centre-cropped. */}}
+                    {{ partial "responsive-image.html" (dict
+                      "src" .
+                      "alt" $item.title
+                      "class" (printf "block w-full h-auto object-cover border-2 border-base-300 group-hover:opacity-90 group-focus-visible:opacity-90 %s" $aspect)
+                      "width" "400")
+                    }}
                   {{ else }}
-                    <span class="library-card__placeholder">
+                    {{/* `base-100`, not `base-200`: the panel behind it is
+                      `base-200`, so a matching placeholder would disappear. */}}
+                    <span class="flex items-center justify-center border-2 border-base-300 bg-base-100 text-accent {{ $aspect }}">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -67,28 +116,41 @@
                   {{ end }}
                 </span>
 
-                <span class="library-card__body">
-                  <span class="library-card__title">{{ .title }}</span>
+                <span class="flex flex-col gap-[0.2rem] mt-2">
+                  {{/* `link-dash` holds the dashed accent underline's colour and
+                    style; the line itself only appears on hover. It sits on the
+                    title rather than the anchor because those longhands are
+                    non-inherited and would never reach a nested span. */}}
+                  <span
+                    class="line-clamp-2 text-[0.8125rem]/[1.3] font-medium text-base-content link-dash group-hover:underline group-focus-visible:underline"
+                    >{{ .title }}</span
+                  >
+                  {{/* Poster cards are ~8.5rem wide, so the creator drops a step
+                    to stay on one line. Rows have the room to keep both at the
+                    same size and deliberately do not. */}}
                   {{ with .creator }}
-                    <span class="library-card__creator">{{ . }}</span>
+                    <span class="text-xs text-base-content/70">{{ . }}</span>
                   {{ end }}
-                  <span class="library-card__meta">
+                  <span class="flex flex-wrap items-center gap-[0.35rem]">
                     {{ partial "rating-stars.html" .rating }}
                     {{ partial "library-item-lang-badge.html" .lang }}
                     {{ partial "library-item-date.html" (dict "date" .date "label" $dateLabel) }}
                   </span>
                   {{/* Most poster entries carry no note, so cards stay compact —
                     but silently dropping one that does would be worse than a
-                    slightly taller card. Clamped to two lines by the CSS. */}}
-                  {{ partial "library-item-note.html" .note }}
+                    slightly taller card. Clamped to two lines. */}}
+                  {{ partial "library-item-note.html" (dict "note" .note "clamp" true) }}
                 </span>
               </a>
             {{ end }}
           </div>
         {{ else }}
-          <ul class="library-list">
+          {{/* No panel, no border, no shadow: an article or a video is a line of
+            text, and boxing each one turns a short list into a stack of heavy
+            tiles. What separates rows is a single `base-300` hairline. */}}
+          <ul class="list-none p-0 m-0 mt-4">
             {{ range .items }}
-              <li>
+              <li class="border-t border-base-300 first:border-t-0">
                 {{/* `no-ext-icon`: the whole row is the link, so the global ↗
                   marker lands after the flex head and drops onto a line of its
                   own. Rated rows were already exempt by accident — the rule
@@ -100,20 +162,39 @@
                   page — so it degrades to a `<div>`, same switch the polaroid
                   partial makes between `<a>` and `<figure>`. The hover cue is
                   scoped to `a.library-row` in the CSS for the same reason. */}}
+                {{/* The hover cue is a 2px accent border on the leading edge,
+                  always present but transparent so the text does not shift, plus
+                  the title's underline. Both live on the `<a>` branch only: an
+                  accent edge on something that cannot be clicked is a lie. */}}
+                {{/* `group` is on the anchor branch only: an unlinked row must not
+                  underline its own title on hover. */}}
+                {{ $row := "block py-[0.55rem] border-s-2 border-transparent ps-[0.6rem] -ms-[0.6rem] transition-colors duration-150" }}
                 {{ if .link }}
-                  <a href="{{ .link }}" class="library-row no-ext-icon" target="_blank" rel="noopener noreferrer">
+                  <a href="{{ .link }}" class="group {{ $row }} hover:border-s-accent focus-visible:border-s-accent no-ext-icon" target="_blank" rel="noopener noreferrer">
                 {{ else }}
-                  <div class="library-row">
+                  <div class="{{ $row }}">
                 {{ end }}
-                  <span class="library-row__head">
-                    <span class="library-row__title">
+                  {{/* `items-baseline`, not `center`: centring aligns the *boxes*,
+                    and two boxes of different font sizes centred on each other do
+                    not put their text on one line — the 0.7rem date sat ~2px
+                    above the title's baseline and read as floating. The stars are
+                    exempted back to centre in their own partial: an SVG is a
+                    replaced element whose baseline is its bottom margin edge, so
+                    baseline-aligning hangs it above the x-height. */}}
+                  <span class="flex flex-wrap items-baseline gap-x-2 gap-y-[0.2rem]">
+                    <span class="leading-normal text-base-content link-dash group-hover:underline group-focus-visible:underline">
                       {{ .title }}
-                      {{ with .creator }}<span class="library-row__creator">{{ . }}</span>{{ end }}
+                      {{/* Same size as the title, not a step down: at 0.75rem the
+                        author read as a cramped afterthought hanging off the end.
+                        Separation comes from colour, which is enough hierarchy on
+                        a single line. The separator is punctuation, so it is
+                        muted further than the name itself. */}}
+                      {{ with .creator }}<span class="text-base-content/70 before:content-['·'] before:mx-[0.4em] before:text-base-content/45">{{ . }}</span>{{ end }}
                     </span>
                     {{/* Stars first: they sit right against the title/creator,
                       which is the point of not pushing this block to the far
                       edge. The finished date is secondary and trails. */}}
-                    <span class="library-row__meta">
+                    <span class="flex flex-wrap items-baseline gap-[0.35rem]">
                       {{ partial "rating-stars.html" .rating }}
                       {{ partial "library-item-lang-badge.html" .lang }}
                       {{ partial "library-item-date.html" (dict "date" .date "label" $dateLabel) }}

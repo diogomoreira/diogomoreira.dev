@@ -14,14 +14,34 @@
   logs: true;
 }
 
+/* Tailwind's automatic source detection already scans the project directory —
+   `layouts/`, `content/`, `assets/` — so a utility written in a template is
+   emitted by the build that renders it. (Verified: `mix-blend-soft-light` and
+   `isolate` appear only in partials/grain-effect.html, which nothing calls, so
+   they can never reach hugo_stats.json — and both are in the built stylesheet.)
+   `layouts` is named explicitly anyway: it is where nearly every class on the
+   site now lives, and an implicit dependency that large is worth writing down.
+
+   `hugo_stats.json` is separate because Tailwind respects .gitignore and that
+   file is ignored. It lists the classes an *earlier* build rendered, which is
+   what catches class names assembled at build time (`badge-{{ $color }}`) that
+   no scanner can see in the source. */
+@source "layouts";
 @source "hugo_stats.json";
 
-/* DaisyUI's alert variants are Tailwind-scanned like any other utility, and
-   hugo_stats.json only lists classes a build already rendered — the same two-build lag
-   that keeps .mark and .polaroid hand-written. `disclaimerType` (see
-   partials/disclaimer-alert.html) can name any of these on a page that has never been
-   built, so safelist all four rather than letting one ship unstyled. */
+/* The one real limit on scanning: a class name that does not exist as a literal
+   string anywhere. Both families below are built by string concatenation in a
+   template — `alert-{{ $type }}` in partials/disclaimer-alert.html from the
+   `disclaimerType` front matter, `badge-{{ $color }}` in the eight chip call
+   sites from partials/chip-color.html and post-status-color.html. hugo_stats
+   would catch them one build late; a page that sets a variant nobody has built
+   yet would ship unstyled. Safelisting is the sanctioned fix and costs nothing.
+
+   Keep in step with the maps in chip-color.html / post-status-color.html: the
+   four hues daisyUI does not ship are hand-written further down and need no
+   entry, but they are listed anyway so the set reads as one palette. */
 @source inline("alert-{info,success,warning,error}");
+@source inline("badge-{primary,secondary,accent,neutral,info,success,warning,error,ghost,orange,sea,azure,rose}");
 
 @plugin "daisyui/theme" {
   name: "sunrise";
@@ -195,66 +215,6 @@ html[data-theme="midnight"] {
 }
 
 @layer components {
-  /* ── Page shell ───────────────────────────────────────────────────────────
-     Three tracks: a slim rail pinned to each screen edge, and a `1fr` middle
-     that soaks up everything left over. Both rails share `--rail-w` so the
-     capped prose column inside the middle still reads as centred.
-
-     Written as real CSS rather than Tailwind arbitrary values because Tailwind
-     v4 only emits classes it finds in `hugo_stats.json`.
-
-     Note: `rem` in a media query resolves against the *initial* 16px, not the
-     18px set on `html` below — so 64rem here is 1024px, matching Tailwind `lg`.
-     Rail widths do scale at 18px/rem (13rem = 234px). */
-  .site-shell {
-    display: block;
-    --rail-w: 13rem;
-    --rail-w-right: var(--rail-w);
-  }
-
-  /* Pages with no table of contents: the right rail only has to fit a column of
-     square icon buttons (see rail-right.html). A `btn-sm btn-square` is 2rem and
-     the rail pads 1.25rem a side, so 5rem leaves a little slack for focus rings. */
-  .site-shell--slim-right {
-    --rail-w-right: 5rem;
-  }
-
-  /* Rails are desktop-only; below `lg` the mobile topbar + drawer take over. */
-  .site-rail {
-    display: none;
-  }
-
-  @media (min-width: 64rem) {
-    .site-shell {
-      display: grid;
-      grid-template-columns: var(--rail-w) 1fr var(--rail-w-right);
-    }
-
-    .site-rail {
-      display: block;
-      position: sticky;
-      top: 0;
-      align-self: start;
-      max-height: 100vh;
-      overflow-y: auto;
-      overscroll-behavior: contain;
-      padding: 2rem 1.25rem;
-    }
-
-    .site-rail--left {
-      /* Pushes the webring + copyright block to the bottom of a tall rail. */
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-  }
-
-  @media (min-width: 80rem) {
-    .site-shell {
-      --rail-w: 15rem;
-    }
-  }
-
   /* ── Table of contents ────────────────────────────────────────────────────
      Hugo's `.TableOfContents` emits `nav#TableOfContents > ul > li > a` with no
      hooks of its own, so it has to be styled from the outside. */
@@ -299,135 +259,6 @@ html[data-theme="midnight"] {
     border-inline-start-color: var(--color-primary);
   }
 
-  /* ── Rail / drawer nav links ──────────────────────────────────────────────
-     Real CSS rather than Tailwind utilities — `bg-primary/10` and
-     `border-primary` are used nowhere else, and Tailwind v4 only emits classes
-     already present in `hugo_stats.json`, which Hugo writes *during* the build.
-     Same reason `.mark` and `.polaroid` are hand-written.
-
-     The transparent border sits on every link, active or not, so turning it on
-     does not shift the row's contents by 2px (same trick as `.toc a`). */
-  .nav-link {
-    border-inline-start: 2px solid transparent;
-  }
-
-  /* `color-mix` against `--color-primary` means the tint tracks each theme's own
-     accent (sunrise #556ba3, midnight #7a92cc) with no per-theme override. */
-  .nav-link--active {
-    background-color: color-mix(in oklab, var(--color-primary) 12%, transparent);
-    border-inline-start-color: var(--color-primary);
-    color: var(--color-primary);
-  }
-
-  /* Child entries (Work, Academic under About), revealed by nav-menu.html only
-     while you are inside that group. `base-300` for the guide line because it is
-     the one divider token that reads as a surface step in both themes —
-     `neutral` flips from dark surface to near-black text and would vanish in
-     one of them. The indent stays small: `--rail-w` is only 13rem. */
-  /* nav-link.html deliberately withholds the `p-*`, `m-*`, `text-sm` and
-     `font-*` utilities from children so these declarations actually land —
-     utilities beat `@layer components` regardless of specificity. Keep it that
-     way: adding any of them back to the template silently kills the indent. */
-  .nav-submenu {
-    list-style: none;
-    margin-block: 0.125rem 0;
-    margin-inline: 1rem 0;
-    padding: 0;
-    border-inline-start: 1px solid var(--color-base-300);
-  }
-
-  .nav-link--child {
-    font-size: 0.8125rem;
-    font-weight: 400;
-    padding-inline: 1.25rem 0.75rem;
-  }
-
-  /* Hand-drawn annotations, emitted by the `mark` shortcode. The shape is an
-     inline SVG stretched to the phrase, sitting behind the text. Offsets are in
-     `em` so everything scales with the surrounding font size. */
-  .mark {
-    position: relative;
-    display: inline-block;
-    /* The shape is absolutely positioned, so it cannot follow text across a
-       line break — `mark` is for short phrases only. */
-    white-space: nowrap;
-  }
-
-  .mark__text {
-    position: relative;
-    z-index: 1;
-  }
-
-  .mark__shape {
-    position: absolute;
-    z-index: 0;
-    overflow: visible;
-    pointer-events: none;
-    color: var(--color-accent);
-  }
-
-  .mark__shape path {
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 0.09em;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    /* Keeps thickness uniform despite the non-uniform preserveAspectRatio="none"
-       stretch, which would otherwise thin out the near-vertical segments. */
-    vector-effect: non-scaling-stroke;
-  }
-
-  /* How far each shape's box extends past the text it wraps. */
-  .mark--underline .mark__shape {
-    left: -0.1em;
-    width: calc(100% + 0.2em);
-    bottom: -0.18em;
-    height: 0.34em;
-  }
-
-  .mark--circle .mark__shape {
-    left: -0.35em;
-    width: calc(100% + 0.7em);
-    top: -0.25em;
-    height: calc(100% + 0.5em);
-  }
-
-  .mark--box .mark__shape {
-    left: -0.3em;
-    width: calc(100% + 0.6em);
-    top: -0.2em;
-    height: calc(100% + 0.4em);
-  }
-
-  .mark--marker .mark__shape {
-    left: -0.15em;
-    width: calc(100% + 0.3em);
-    top: -0.05em;
-    height: calc(100% + 0.1em);
-  }
-
-  .mark--marker .mark__shape path {
-    fill: currentColor;
-    stroke: none;
-    opacity: 0.28;
-  }
-
-  .mark--primary .mark__shape {
-    color: var(--color-primary);
-  }
-
-  .mark--secondary .mark__shape {
-    color: var(--color-secondary);
-  }
-
-  .mark--warning .mark__shape {
-    color: var(--color-warning);
-  }
-
-  .mark--error .mark__shape {
-    color: var(--color-error);
-  }
-
   /* ── Pagefind search box ──────────────────────────────────────────────────
      Only the placeholder is stepped down; the input keeps Pagefind's 16px
      (`--pf-input-font-size`), because anything under 16px makes iOS zoom the
@@ -442,1005 +273,6 @@ html[data-theme="midnight"] {
      and this block is not. */
   .pf-searchbox-input::placeholder {
     font-size: 14px;
-  }
-
-  /* ── Polaroid prints ──────────────────────────────────────────────────────
-     Emitted by the `polaroid` and `polaroid-group` shortcodes.
-
-     Real CSS rather than Tailwind utilities for the same reason as the shell
-     above, only more so: no `rotate-*` utility appears anywhere on this site
-     yet, and Tailwind v4 only emits classes it already found in
-     `hugo_stats.json` — which Hugo writes *during* the build, so a brand-new
-     `rotate-[-2.5deg]` would take two builds to show up.
-
-     The shortcode also puts `not-prose` on `.polaroid`. Without it the inner
-     `<img>` picks up `prose-img:border-4` and `prose-img:shadow-md` from the
-     page wrappers, doubling the frame's own border and shadow — and those land
-     in the utilities layer, which beats this one whatever the specificity. */
-  .polaroid {
-    --polaroid-tilt: 2.5deg;
-    --polaroid-w: 340px;
-    /* A print is a physical object: it stays light whatever the page behind it
-       is doing, so paper and ink are pinned rather than following the active
-       theme. `--polaroid-ink` is a fixed near-black and everything inside the
-       frame tints against it — reaching for `--color-base-content` is the trap,
-       since it inverts to `#bbb6a6` in midnight and would put a near-white
-       caption on white paper. The paper is a shade brighter than sunrise's
-       `base-100` (#fbfaf7) so the print still lifts off the page in light mode,
-       where the two sit close together — keep it above whatever `base-100` is. */
-    --polaroid-paper: #fffefa;
-    --polaroid-ink: #100f0f;
-    width: min(var(--polaroid-w), 100%);
-    margin-block: 2rem;
-  }
-
-  .polaroid--center {
-    margin-inline: auto;
-  }
-
-  .polaroid--left {
-    float: left;
-    margin: 0.5rem 1.75rem 1.5rem 0;
-  }
-
-  .polaroid--right {
-    float: right;
-    margin: 0.5rem 0 1.5rem 1.75rem;
-  }
-
-  /* The content measure set in baseof.html leaves nothing worth wrapping beside
-     a floated print on a phone, so both floats become centred blocks. */
-  @media (width < 40rem) {
-    .polaroid--left,
-    .polaroid--right {
-      float: none;
-      margin-inline: auto;
-    }
-  }
-
-  /* Layout lives on `.polaroid` and rotation on `.polaroid__frame`, deliberately
-     split: a floated element that is itself rotated reserves an axis-aligned box
-     that no longer matches its corners, and the text wrapping beside it collides
-     with them. */
-  .polaroid__frame {
-    display: block;
-    background: var(--polaroid-paper);
-    /* Carries a little more weight than a hairline usually would: in sunrise the
-       paper and the page are close in tone, so the edge has to define itself. */
-    border: 1px solid color-mix(in oklab, var(--polaroid-ink) 14%, transparent);
-    /* No bottom padding — `.polaroid__strip` supplies the thick lower border. */
-    padding: 0.7rem 0.7rem 0;
-    box-shadow:
-      0 1px 2px color-mix(in oklab, var(--polaroid-ink) 18%, transparent),
-      0 8px 20px color-mix(in oklab, var(--polaroid-ink) 14%, transparent);
-    transform: rotate(var(--polaroid-tilt));
-  }
-
-  .polaroid__window {
-    overflow: hidden;
-    background: color-mix(in oklab, var(--polaroid-ink) 8%, transparent);
-  }
-
-  /* `--natural` needs no rule: the window takes the image's own ratio. */
-  .polaroid__window--square {
-    aspect-ratio: 1;
-  }
-
-  .polaroid__window--portrait {
-    aspect-ratio: 4 / 5;
-  }
-
-  .polaroid__window--landscape {
-    aspect-ratio: 3 / 2;
-  }
-
-  /* `responsive-image.html` wraps the img in `<picture class="contents">`, so
-     this really is the window's direct layout child. */
-  .polaroid__img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  /* Only a forced ratio crops; `--natural` leaves `height: auto` alone. */
-  .polaroid__window--square .polaroid__img,
-  .polaroid__window--portrait .polaroid__img,
-  .polaroid__window--landscape .polaroid__img {
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .polaroid__strip {
-    display: grid;
-    place-items: center;
-    gap: 0.35rem;
-    /* Holds the bottom border open even when there is no caption. */
-    min-height: 3rem;
-    padding: 0.7rem 0.4rem 0.9rem;
-    font-family: var(--font-heading);
-    font-size: 0.78rem;
-    line-height: 1.35;
-    text-align: center;
-    text-wrap: balance;
-    color: color-mix(in oklab, var(--polaroid-ink) 65%, transparent);
-  }
-
-  /* Optional caption sub-element: keeps a long title from making one print's
-     strip much taller than its neighbours' in a row. */
-  .polaroid__title {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    color: var(--polaroid-ink);
-    font-weight: 500;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .polaroid__frame {
-      transition:
-        transform 200ms ease,
-        box-shadow 200ms ease;
-    }
-  }
-
-  /* Straighten and lift on hover — decorative, so it is skipped entirely on
-     touch, and the transition above is skipped under reduced motion. */
-  @media (hover: hover) {
-    .polaroid__frame:hover {
-      transform: rotate(0deg) translateY(-4px);
-      box-shadow:
-        0 2px 4px color-mix(in oklab, var(--polaroid-ink) 20%, transparent),
-        0 14px 32px color-mix(in oklab, var(--polaroid-ink) 20%, transparent);
-    }
-  }
-
-  .polaroid-group {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: center;
-    margin-block: 2.5rem;
-  }
-
-  /* `margin-inline: 0` undoes `.polaroid--center`'s `auto`: on a flex item an
-     auto inline margin eats the free space, which would push the prints apart
-     and cancel the overlap below. */
-  .polaroid-group > .polaroid {
-    position: relative;
-    margin-block: 0.75rem;
-    margin-inline: 0;
-    --polaroid-w: 240px;
-  }
-
-  /* These overrides only bite because the shortcode omits the inline
-     `--polaroid-tilt` / `--polaroid-w` unless the author passed `tilt` / `width`
-     explicitly — an inline custom property would beat every rule here. Keep that
-     conditional in polaroid.html if you touch it. */
-  .polaroid-group > .polaroid:nth-child(odd) {
-    --polaroid-tilt: -3.5deg;
-  }
-
-  .polaroid-group > .polaroid:nth-child(even) {
-    --polaroid-tilt: 3deg;
-  }
-
-  .polaroid-group > .polaroid:nth-child(3n) {
-    --polaroid-tilt: -1.5deg;
-  }
-
-  .polaroid-group > .polaroid + .polaroid {
-    margin-inline-start: -1.5rem;
-  }
-
-  .polaroid-group > .polaroid:hover {
-    z-index: 2;
-  }
-
-  /* ---- Library ----------------------------------------------------------
-     Hand-written for the same reason as `.polaroid` above: Tailwind v4 emits
-     only the classes it found in `hugo_stats.json`, which Hugo writes *during*
-     the build, so a first-use utility would take two builds to exist.
-
-     Two card shapes, chosen per category by `display:` in data/library/*.yaml.
-     `poster` for things with cover art, `list` for things without — a person
-     worth following has no cover, and forcing one gives a wall of placeholders.
-
-     Both shapes share one surface treatment: a `base-200` panel on the
-     `base-100` main column, hairlined in `base-300` and stepping to `base-300`
-     on hover. Those two are the only safe tokens here — `base-200` is the
-     surface this palette's 4.5:1 contrast was measured against, and `base-300`
-     is the only divider that is a surface step in *both* themes (`neutral`
-     inverts between them and would vanish in one). */
-  /* Each section is a <details open>, so collapsing is native: no JS, keyboard
-     and screen-reader support for free, and the sections still render expanded
-     with CSS disabled. The <h2> stays inside the <summary> rather than being
-     replaced by it — <summary> accepts heading content, and dropping the heading
-     would cost screen-reader users the ability to navigate the page by section. */
-  .library-section {
-    margin-block-end: 3rem;
-  }
-
-  /* The summary carries the click target and the rule; the h2 inside carries the
-     type. `list-style: none` kills the marker in Firefox, the `::-webkit-` rule
-     does it in older WebKit, and `display: flex` covers the rest. */
-  .library-section__summary {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    list-style: none;
-    color: var(--color-secondary);
-    padding-block-end: 0.5rem;
-    border-block-end: 1px solid var(--color-base-300);
-  }
-
-  .library-section__summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .library-section__summary:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 3px;
-  }
-
-  /* Chevron built as a mask rather than a glyph, same technique as the
-     external-link marker below: it inherits the summary's colour through
-     `currentColor` and needs no font. Points right when collapsed, down when
-     open. `margin-inline-start: auto` parks it at the far end of the rule. */
-  .library-section__summary::after {
-    content: "";
-    inline-size: 0.7rem;
-    block-size: 0.7rem;
-    margin-inline-start: auto;
-    background-color: currentColor;
-    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E");
-    mask-size: contain;
-    mask-repeat: no-repeat;
-    mask-position: center;
-    transition: transform 150ms ease;
-  }
-
-  .library-section[open] > .library-section__summary::after {
-    transform: rotate(90deg);
-  }
-
-  .library-section__heading {
-    font-family: var(--font-heading);
-    font-size: 0.75rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: inherit;
-    margin: 0;
-  }
-
-  /* Lives on the content, not the summary — a collapsed section would otherwise
-     keep a 1rem gap it no longer has anything to separate. */
-  .library-section__summary + * {
-    margin-block-start: 1rem;
-  }
-
-  /* `auto-fill` + `minmax` replaces the six breakpoints the old masonry wall
-     needed: grouping by category means fewer items per section and similar
-     aspect ratios within one, so a real grid beats a column count here. */
-  .library-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
-    gap: 1rem;
-  }
-
-  /* ---- Poster cards ----
-     A panel: cover art is an object, and a surface under it says so. Rows get
-     the opposite treatment (below) — the two shapes deliberately do not share
-     this, which is why the rules are no longer grouped. */
-  .library-card {
-    display: block;
-    padding: 0.5rem;
-    background-color: var(--color-base-200);
-    border: 1px solid var(--color-base-300);
-    /* No corners: `--radius-box` is 0 and nothing here declares a radius of its
-       own. The panel and its cover were kept concentric by a `--radius-inset`
-       step until the site went square in 2026-09; with both at 0 the step has
-       nothing to compute, so it is gone rather than left as dead arithmetic. */
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-    transition: background-color 150ms ease;
-  }
-
-  .library-card:hover,
-  .library-card:focus-visible {
-    background-color: var(--color-base-300);
-  }
-
-  /* `text-decoration-line`, never the `text-decoration` shorthand — the shorthand
-     resets colour and style back to `currentColor`/`solid` and the dash is lost.
-     The longhands have to sit on the title itself rather than being inherited
-     from the `a`: `-color`, `-style` and `-thickness` are non-inherited
-     properties, so the site-wide `a` rule at the bottom of this file never
-     reaches a <span> nested inside the anchor. */
-  .library-card__title,
-  .library-row__title {
-    text-decoration-color: var(--color-accent);
-    text-decoration-style: dashed;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-  }
-
-  .library-card:hover .library-card__title,
-  .library-card:focus-visible .library-card__title {
-    text-decoration-line: underline;
-  }
-
-  .library-card:hover .library-card__img,
-  .library-card:focus-visible .library-card__img {
-    opacity: 0.9;
-  }
-
-  .library-card__cover {
-    display: block;
-  }
-
-  /* No shadow here — the panel casts it. Two nested shadows read as an embossed
-     edge rather than a print sitting on a surface.
-
-     `aspect-ratio` + `object-fit: cover` rather than letting each cover keep its
-     natural shape: within a category the grid has to line up, and the source
-     images are whatever the store or label happened to publish. The ratio comes
-     from the category's `cover_ratio` (see below), so a mismatched source is
-     centre-cropped rather than breaking the row.
-
-     No radius, like the panel around it. */
-  .library-card__img {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border: 2px solid var(--color-base-300);
-  }
-
-  /* Cover shapes, set per category by `cover_ratio` in data/library/*.yaml.
-     `square` is the default and needs no rule — it is the base above. `poster` is
-     the 2:3 of a film poster and a game's vertical box art (Steam's library
-     capsule is 600×900, the same shape). Adding a shape is one rule here plus one
-     `cover_ratio:` line in the YAML — no template edit. */
-  .library-card--poster .library-card__img,
-  .library-card--poster .library-card__placeholder {
-    aspect-ratio: 2 / 3;
-  }
-
-  /* `base-100` rather than `base-200`: the panel behind it is `base-200`, so a
-     matching placeholder would disappear into it. */
-  .library-card__placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    aspect-ratio: 1 / 1;
-    border: 2px solid var(--color-base-300);
-    background-color: var(--color-base-100);
-    color: var(--color-accent);
-  }
-
-  .library-card__body {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    margin-block-start: 0.5rem;
-  }
-
-  .library-card__title {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    line-height: 1.3;
-    color: var(--color-base-content);
-  }
-
-  /* Poster cards are ~8.5rem wide, so the creator drops a step to stay on one
-     line under the title. Rows have the room to keep both at the same size —
-     see `.library-row__creator` below, which deliberately does not. */
-  .library-card__creator {
-    font-size: 0.75rem;
-    color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
-  }
-
-  .library-card__meta,
-  .library-row__meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.35rem;
-  }
-
-  /* Shown only when the category sets `date_label` — see library-item-date.html.
-     Carries the label word too, except under `date_label: bare` (articles,
-     videos) where the date stands alone. */
-  .library-date {
-    font-size: 0.7rem;
-    font-variant-numeric: tabular-nums;
-    color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
-  }
-
-  /* ---- List rows ----
-     No panel, no border, no shadow: an article or a video is a line of text, and
-     boxing each one turns a short list into a stack of heavy tiles. What separates
-     rows is a single `base-300` hairline — the same token the section headings
-     use, and the only divider that is a surface step in both themes. */
-  .library-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .library-list > li + li {
-    border-block-start: 1px solid var(--color-base-300);
-  }
-
-  .library-row {
-    display: block;
-    padding-block: 0.55rem;
-  }
-
-  /* The hover cue is the title underline plus a hairline of accent on the leading
-     edge — enough to show the row is a link without reintroducing a filled box.
-     `border-inline-start` is always present so the text does not shift on hover. */
-  .library-row {
-    border-inline-start: 2px solid transparent;
-    padding-inline-start: 0.6rem;
-    margin-inline-start: -0.6rem;
-    transition: border-color 150ms ease;
-  }
-
-  /* Anchor-scoped: a row whose entry has no `link` renders as a `<div>`, and an
-     accent edge plus an underline on something that cannot be clicked is a lie. */
-  a.library-row:hover,
-  a.library-row:focus-visible {
-    border-inline-start-color: var(--color-accent);
-  }
-
-  /* See the note on `.library-card__title` above: line-only, so the dashed
-     accent longhands survive. */
-  a.library-row:hover .library-row__title,
-  a.library-row:focus-visible .library-row__title {
-    text-decoration-line: underline;
-  }
-
-  /* Meta trails the title rather than being pushed to the far edge: with
-     `space-between` the stars ended up marooned across a gap of whitespace and
-     read as belonging to the row, not to the thing. Wrapping still lets a long
-     title take the line and drop its stars underneath. */
-  /* `baseline`, not `center` — with the star run exempted back to `center` just
-     below. Centring aligns the *boxes*, and two boxes of different font sizes
-     centred on each other do not put their text on one line: the 0.7rem date
-     sat ~2px above the title's baseline and read as floating. Baseline
-     alignment is the fix for the text, and cannot be the fix for the stars —
-     an SVG is a replaced element whose baseline is its *bottom margin edge*, so
-     baseline-aligning hangs a 14px star box off the text baseline and leaves it
-     floating above the x-height. Text aligns on the baseline, boxes centre. */
-  .library-row__head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.2rem 0.5rem;
-  }
-
-  /* The row variant only — a card's meta sits on its own line under the title,
-     where there is no neighbouring text to align to and centring is right.
-     `baseline` here is also what makes the meta's *own* baseline usable by the
-     rule above: a flex container takes its baseline from its first
-     baseline-aligned item, and with everything centred there is none, so it
-     would be synthesised from the bottom margin edge. */
-  .library-row__meta {
-    align-items: baseline;
-  }
-
-  .library-row__meta .library-stars,
-  .library-row__meta .badge {
-    align-self: center;
-  }
-
-  .library-row__title {
-    line-height: 1.5;
-    color: var(--color-base-content);
-  }
-
-  /* Same size as the title, not a step down: at 0.75rem the author read as a
-     cramped afterthought hanging off the end of the title. Separation comes from
-     colour instead, which is enough hierarchy on a single line. */
-  .library-row__creator {
-    font-size: inherit;
-    color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
-  }
-
-  .library-row__creator::before {
-    content: "·";
-    margin-inline: 0.4em;
-    /* Muted further than the name itself — it is punctuation, not content. */
-    color: color-mix(in oklab, var(--color-base-content) 45%, transparent);
-  }
-
-  .library-row .library-note {
-    font-size: 0.75rem;
-  }
-
-  .library-note {
-    display: block;
-    margin-block-start: 0.3rem;
-    font-size: 0.8125rem;
-    line-height: 1.5;
-    color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
-  }
-
-  /* Poster cards are ~8.5rem wide, so an unclamped note would double a card's
-     height and break the grid's rhythm. Rows have the width to spare. */
-  .library-card .library-note {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    font-size: 0.75rem;
-  }
-
-  .library-note p {
-    margin: 0;
-  }
-
-  /* ---- Stars ---- */
-  .library-stars {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.05rem;
-    line-height: 1;
-  }
-
-  /* Empty stars are outlined rather than absent, so a 3/5 still reads as a
-     five-point scale. Filled ones use `warning`, the only brand token whose
-     hue survives both themes as "gold". */
-  .library-stars__star {
-    fill: none;
-    stroke: color-mix(in oklab, var(--color-base-content) 45%, transparent);
-    stroke-width: 2;
-  }
-
-  .library-stars__star--on {
-    fill: var(--color-warning);
-    stroke: var(--color-warning);
-  }
-
-  /* ---------------------------------------------------------------------------
-     Blog post cards
-
-     Rendered by `layouts/partials/post-card.html`, which three surfaces call:
-     /blog (the "Latest" card and the archive grid), the homepage row, and the
-     tag/category term pages. The caller owns the grid; this owns the card.
-
-     Hand-written for the same reason as `.library-*`: the two line-clamps below
-     have no Tailwind equivalent that would survive, since Hugo writes
-     `hugo_stats.json` *during* the build and a newly-used utility takes two
-     builds to be emitted. The grid classes the callers use
-     (`grid grid-cols-1 sm:grid-cols-2 gap-4`) are already in the stats file via
-     `layouts/snippets/list.html`, which is why those can stay utilities.
-
-     Deliberately built on the same panel recipe as `.library-card` — cover art
-     is an object, and a surface under it says so. The reference design this
-     came from is a white card on a grey page; that does not translate directly,
-     because in sunrise `base-100` *is* the reading column, so a `base-100` card
-     would vanish into it. `base-200` on a `base-300` hairline is this site's
-     established "panel sitting on the column" step, in both themes.
-     --------------------------------------------------------------------------- */
-
-  /* Square, like everything else — the site's three radius tokens are all 0 and
-     no rule here declares a corner of its own. Don't reach for a `rounded-*`
-     utility in the markup either: every value on Tailwind's scale is a literal,
-     so one would reintroduce a radius that no token can switch off again. */
-  .post-card {
-    display: block;
-    padding: 0.5rem;
-    background-color: var(--color-base-200);
-    border: 1px solid var(--color-base-300);
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-    transition: background-color 150ms ease;
-  }
-
-  .post-card:hover,
-  .post-card:focus-visible {
-    background-color: var(--color-base-300);
-  }
-
-  /* The positioning context for the two overlay chips below. */
-  .post-card__cover {
-    position: relative;
-    display: block;
-  }
-
-  /* `aspect-ratio` + `object-fit` rather than each cover's natural shape: within
-     a grid the cards have to line up, and the covers are whatever Unsplash or a
-     screenshot happened to be. A mismatched source is centre-cropped.
-
-     No corners, like the panel around it, and no shadow either — the panel
-     casts it, and two nested shadows read as an embossed edge. */
-  .post-card__img {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-  }
-
-  .post-card--featured .post-card__img {
-    aspect-ratio: 16 / 9;
-  }
-
-  /* One row holding both chips, inset from the cover's edges. `inset-inline`
-     rather than a start/end pair, and logical properties throughout: the site
-     runs LTR today, but these cost nothing and the rest of the file is written
-     the same way. */
-  .post-card__cover-chips {
-    position: absolute;
-    inset-block-start: 0.5rem;
-    inset-inline: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  /* `margin-inline-start: auto` rather than `justify-content: space-between` on
-     the row: a post with no category renders no chip, and space-between would
-     then leave the language badge stranded at the left edge. An auto margin
-     pins it to the end whether it has a sibling or not.
-
-     `display: flex` on the wrapper matters too — it is what stops the badge
-     inside it from sitting in a line box and being nudged down off the
-     category chip's baseline, which is the whole reason these two did not line
-     up before. */
-  .post-card__lang {
-    display: flex;
-    flex-shrink: 0;
-    margin-inline-start: auto;
-  }
-
-  /* A long category can shrink; it must never squeeze the language badge. */
-  .post-card__chip {
-    min-width: 0;
-  }
-
-  .post-card__body {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    padding: 0.75rem 0.35rem 0.25rem;
-  }
-
-  /* Same hover cue as `.library-card`: the title picks up the dashed accent
-     underline. The `text-decoration-*` longhands sit here rather than on the
-     anchor because they are non-inherited, so the site-wide `a` rule never
-     reaches a heading nested inside the card. Never the `text-decoration`
-     shorthand — it resets colour and style back to `currentColor`/`solid`. */
-  .post-card__title {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    margin: 0;
-    font-family: var(--font-heading);
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.35;
-    color: var(--color-heading);
-    text-decoration-color: var(--color-accent);
-    text-decoration-style: dashed;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-  }
-
-  .post-card--featured .post-card__title {
-    font-size: 1.375rem;
-  }
-
-  /* 70% is the documented floor for muted text on this site — `/50` and `/60`
-     fall under 4.5:1 in one theme or the other. Same `color-mix` form as
-     `.toc a` and `.library-note`. */
-  .post-card__excerpt {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    margin: 0;
-    font-size: 0.8125rem;
-    line-height: 1.5;
-    color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
-  }
-
-  .post-card--featured .post-card__excerpt {
-    -webkit-line-clamp: 3;
-    font-size: 0.875rem;
-  }
-
-  .post-card__meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem;
-    margin-block-start: 0.4rem;
-    font-size: 0.75rem;
-    color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
-  }
-
-  .post-card__meta-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    white-space: nowrap;
-  }
-
-  /* The icons carry no `w-4 h-4` — Tailwind sizing lands in `@layer utilities`
-     and would beat this rule regardless of specificity. See
-     `layouts/partials/icons/meta/calendar.html`. */
-  .post-card__meta svg {
-    width: 0.875rem;
-    height: 0.875rem;
-    flex-shrink: 0;
-    opacity: 0.75;
-  }
-
-  /* An emoji, not an icon, so `.post-card__meta svg` above doesn't reach it —
-     it renders at the row's 12px otherwise, which is too small to read as a
-     seedling. Kept a shade under the SVG icons' visual weight. */
-  .post-card__status-icon {
-    font-size: 0.8125rem;
-    line-height: 1;
-  }
-
-  /* Mixed from `base-content`, not `base-300`: the card's hover state *is*
-     `base-300`, so a `base-300` rule would disappear exactly when the card is
-     being pointed at. */
-  .post-card__sep {
-    width: 1px;
-    height: 0.75rem;
-    background-color: color-mix(in oklab, var(--color-base-content) 30%, transparent);
-  }
-
-  .post-card__more {
-    margin-block-start: 0.5rem;
-    font-size: 0.875rem;
-    color: var(--color-primary);
-  }
-
-  .post-card:hover .post-card__title,
-  .post-card:focus-visible .post-card__title {
-    text-decoration-line: underline;
-  }
-
-  .post-card:hover .post-card__img,
-  .post-card:focus-visible .post-card__img {
-    opacity: 0.9;
-  }
-
-  /* ---------------------------------------------------------------------------
-     Mastodon toots (/now)
-
-     Hand-written for the same reason as `.library-*` and `.polaroid`: the toot
-     body, media and CW are built by JS at runtime, so Tailwind — which only
-     emits classes it found in `hugo_stats.json` after Hugo rendered them — would
-     never see a utility used only there. Everything the script creates is styled
-     from here; everything Hugo renders can safely use utilities.
-
-     The section sits outside the page's `.prose` wrapper (like the artists grid
-     below it), so there is no typography-plugin specificity to fight.
-     --------------------------------------------------------------------------- */
-
-  /* One identity block for the section rather than a byline per toot — see the
-     partial for why. Sits above the list and is separated from it by the same
-     hairline the rows use, so the header reads as the head of one object. */
-  .toot-profile {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding-block-end: 0.9rem;
-    border-block-end: 1px solid var(--color-base-300);
-    text-decoration: none;
-  }
-
-  .toot-profile__avatar,
-  .toot-profile__avatar-skeleton {
-    width: 2.75rem;
-    height: 2.75rem;
-    border-radius: 9999px;
-    flex-shrink: 0;
-  }
-
-  .toot-profile__avatar {
-    object-fit: cover;
-    border: 2px solid var(--color-base-300);
-    background-color: var(--color-base-200);
-  }
-
-  /* Fixed height on the text column so the block does not grow when the name
-     arrives — the handle alone is one line, name plus handle is two. */
-  .toot-profile__id {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.1rem;
-    min-height: 2.75rem;
-    min-width: 0;
-  }
-
-  .toot-profile__name {
-    font-family: var(--font-heading);
-    font-size: 0.875rem;
-    font-weight: 500;
-    line-height: 1.3;
-    color: var(--color-heading);
-  }
-
-  .toot-profile__handle {
-    font-size: 0.75rem;
-    line-height: 1.3;
-    overflow-wrap: anywhere;
-    color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
-  }
-
-  .toot-profile:hover .toot-profile__name,
-  .toot-profile:focus-visible .toot-profile__name {
-    text-decoration-line: underline;
-    text-decoration-color: var(--color-accent);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-  }
-
-  .toot-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  /* Same hairline separator as the library list: rows, not boxed cards. Three
-     short posts boxed individually read as a stack of heavy tiles. */
-  .toot + .toot {
-    border-block-start: 1px solid var(--color-base-300);
-  }
-
-  /* Hover cue borrowed from `.library-row`: a 2px start border that is always
-     present but transparent, so colouring it on hover shifts nothing. The row
-     cannot be one big <a> — toot bodies contain their own links and nested
-     anchors are invalid — so this is what makes the whole row feel live. */
-  .toot {
-    padding-block: 0.85rem;
-    border-inline-start: 2px solid transparent;
-    padding-inline-start: 0.6rem;
-    margin-inline-start: -0.6rem;
-    transition: border-color 150ms ease;
-  }
-
-  .toot:hover {
-    border-inline-start-color: var(--color-accent);
-  }
-
-  /* Reserves roughly a two-line toot so the fetch doesn't jolt the artists grid
-     below it down the page. */
-  .toot__skeleton {
-    height: 3.5rem;
-    width: 100%;
-  }
-
-  /* `anywhere`, not `break-word`: these posts are link-heavy and Mastodon's
-     shortened link text is still one unbroken token, which overflows the content
-     column at narrow widths without this. */
-  .toot__body {
-    font-size: 0.9375rem;
-    line-height: 1.6;
-    overflow-wrap: anywhere;
-  }
-
-  .toot__body p + p {
-    margin-block-start: 0.6rem;
-  }
-
-  /* Longhands only, never the `text-decoration` shorthand — the unlayered `a`
-     rule at the bottom of this file sets colour/style/thickness separately and a
-     shorthand here would reset all three. */
-  .toot__body a {
-    text-decoration-color: var(--color-accent);
-    text-decoration-style: dashed;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-  }
-
-  /* Custom emoji sit on the text baseline at cap height. */
-  .toot__emoji {
-    display: inline-block;
-    height: 1.2em;
-    width: auto;
-    vertical-align: text-bottom;
-    margin-inline: 0.05em;
-  }
-
-  .toot__cw > details > summary {
-    cursor: pointer;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--color-secondary);
-    padding-block: 0.25rem;
-  }
-
-  .toot__cw > details > summary:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 3px;
-  }
-
-  .toot__cw-body {
-    margin-block-start: 0.5rem;
-  }
-
-  /* Grid rather than a wrapping flex row so two attachments share the width
-     evenly instead of leaving a ragged gap. Capped at 2 columns: at 4-up in the
-     content column each thumb is too small to read. */
-  .toot__media {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
-    max-width: 22rem;
-    gap: 0.4rem;
-    margin-block-start: 0.6rem;
-    position: relative;
-  }
-
-  /* Fixed ratio + `cover`: attachments are whatever aspect the poster uploaded,
-     and a natural-height image would resize the row after it loads. */
-  .toot__media-img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border: 2px solid var(--color-base-300);
-    background-color: var(--color-base-200);
-  }
-
-  .toot__media--sensitive .toot__media-img {
-    filter: blur(1.25rem);
-  }
-
-  .toot__reveal {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border: 0;
-    font-family: inherit;
-    font-size: 0.75rem;
-    font-weight: 500;
-    text-align: center;
-    padding: 0.25rem;
-    background-color: color-mix(in oklab, var(--color-base-100) 80%, transparent);
-    color: var(--color-base-content);
-  }
-
-  .toot__permalink {
-    display: inline-block;
-    margin-block-start: 0.5rem;
-  }
-
-  /* 70% is the documented floor for muted text — /50 and /60 fall under 4.5:1 in
-     one theme or the other. */
-  .toot__date {
-    font-size: 0.75rem;
-    font-variant-numeric: tabular-nums;
-    color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
-  }
-
-  .toot__permalink:hover .toot__date,
-  .toot__permalink:focus-visible .toot__date {
-    color: var(--color-base-content);
-    text-decoration-line: underline;
-  }
-
-  .toot__error {
-    font-size: 0.75rem;
-    color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
   }
 }
 
@@ -1605,11 +437,11 @@ a[href^="http"]:not([href*="diogomoreira.dev"]):not(.no-ext-icon):not(.btn):not(
 
 /* Pastel chip fill — replaces `badge-outline` on the site's tag/label chips.
 
-   Unlayered on purpose: daisyUI compiles `.badge` into `@layer utilities` (as
-   `@layer daisyui.l1.l2.l3` nested inside it) and sets `background-color` there.
-   `@layer components` — where `.mark`, `.polaroid` and `.nav-link` live — loses
-   to the utilities layer regardless of specificity, the same trap flagged for
-   `not-prose` and `.nav-submenu`. Unlayered beats every layer.
+   `@utility` rather than a plain rule: it registers with Tailwind and is emitted
+   into `@layer utilities` *after* daisyUI's own nested `@layer daisyui.*`
+   sub-layers, which is what lets it override the `background-color` `.badge`
+   sets. (The old hand-written version had to sit unlayered to win that fight;
+   the directive settles it by construction.)
 
    Written against `--badge-color`, daisyUI's own per-badge token that
    `badge-accent` & friends set, so one rule covers every colour variant —
@@ -1628,13 +460,13 @@ a[href^="http"]:not([href*="diogomoreira.dev"]):not(.no-ext-icon):not(.btn):not(
      `base-content` fixes both themes with one declaration because of the
      inverse-brightness pairing the themes are built on: it is near-black in
      sunrise and light in midnight, so it pushes the text away from the fill in
-     whichever direction that theme needs. Worst case across all 8 variants ×
-     both themes is 4.59:1.
+     whichever direction that theme needs. Worst case across all eleven chip
+     hues × both themes is 5.53:1 (sunrise `azure`).
 
    Hover steps the *border*, never the fill: raising the fill on hover drops
    midnight to 4.12–4.24 in every variant. Both border colours are always-on
    values on a border that is already 2px (`--border`), so nothing reflows. */
-.badge-tint {
+@utility badge-tint {
   --chip: var(--badge-color, var(--color-base-content));
   color: color-mix(in oklab, var(--chip) 70%, var(--color-base-content));
   background-color: color-mix(in oklab, var(--chip) 12%, var(--color-base-200));
@@ -1642,15 +474,64 @@ a[href^="http"]:not([href*="diogomoreira.dev"]):not(.no-ext-icon):not(.btn):not(
   background-image: none;
 }
 
-/* Every declaration above is a `color-mix`, and Lightning CSS wraps each one in
-   `@supports`, synthesising the *un-mixed* value as the fallback. That fallback
-   is `var(--chip)` for both `color` and `background-color` — the chip would be
-   its own text colour, i.e. invisible. Routing the fill through daisyUI's
-   `--badge-bg` hook does not dodge it; Lightning fills in custom properties too.
-   So the no-`color-mix` branch is neutralised by hand, back to the outline chip
-   this replaces. Only pre-2023 engines ever take it (`color-mix` has been
-   Baseline since Chrome 111 / Safari 16.2 / Firefox 113), but the failure mode
-   is unreadable text rather than an ugly chip, which is worth five lines. */
+/* Colour variants for the four hues daisyUI does not ship. daisyUI's own
+   `badge-primary` compiles to exactly these two declarations, so matching it
+   gives both chip shapes for free: with `badge-tint` the rule above reads
+   `--badge-color` and tints it; without it, daisyUI's `.badge` base uses the
+   pair as a solid fill (which is what the blog category chips want). */
+@utility badge-orange {
+  --badge-color: var(--color-orange);
+  --badge-fg: var(--color-orange-content);
+}
+@utility badge-sea {
+  --badge-color: var(--color-sea);
+  --badge-fg: var(--color-sea-content);
+}
+@utility badge-azure {
+  --badge-color: var(--color-azure);
+  --badge-fg: var(--color-azure-content);
+}
+@utility badge-rose {
+  --badge-color: var(--color-rose);
+  --badge-fg: var(--color-rose-content);
+}
+
+/* The dashed accent underline every card title and toot name shares. A utility
+   rather than four copies of the same four declarations in four templates,
+   and — unlike the panel recipe next to it in the markup — nothing else on the
+   site competes for these properties, so its position in the utilities layer
+   cannot bite.
+
+   `text-decoration-line` is deliberately absent: the hover state adds it with
+   `group-hover:underline`. Longhands only, never the `text-decoration`
+   shorthand, which resets colour and style back to `currentColor`/`solid`. And
+   they have to sit on the *title* rather than being inherited from the anchor
+   around it — these three are non-inherited properties, so the site-wide `a`
+   rule below never reaches an element nested inside the link. */
+@utility link-dash {
+  text-decoration-color: var(--color-accent);
+  text-decoration-style: dashed;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* Anchor-scoped and unlayered: a chip that is a link steps its border on hover,
+   a chip that is a `<span>` does not, and no variant expresses "only when this
+   is an anchor". */
+a.badge-tint:hover,
+a.badge-tint:focus-visible {
+  border-color: color-mix(in oklab, var(--chip) 60%, var(--color-base-200));
+}
+
+/* Every declaration in `badge-tint` is a `color-mix`, and Lightning CSS wraps
+   each one in `@supports`, synthesising the *un-mixed* value as the fallback.
+   That fallback is `var(--chip)` for both `color` and `background-color` — the
+   chip would be its own text colour, i.e. invisible. Routing the fill through
+   daisyUI's `--badge-bg` hook does not dodge it; Lightning fills in custom
+   properties too. So the no-`color-mix` branch is neutralised by hand, back to
+   the outline chip this replaces. Only pre-2023 engines ever take it
+   (`color-mix` has been Baseline since Chrome 111 / Safari 16.2 / Firefox 113),
+   but the failure mode is unreadable text rather than an ugly chip. */
 @supports not (color: color-mix(in lab, red, red)) {
   .badge-tint {
     color: var(--chip);
@@ -1659,36 +540,47 @@ a[href^="http"]:not([href*="diogomoreira.dev"]):not(.no-ext-icon):not(.btn):not(
   }
 }
 
-a.badge-tint:hover,
-a.badge-tint:focus-visible {
-  border-color: color-mix(in oklab, var(--chip) 60%, var(--color-base-200));
+/* ── Polaroid prints, in a group ──────────────────────────────────────────
+   Everything about a single print — paper, ink, frame, strip, tilt — is
+   utilities in `partials/polaroid.html`. What cannot be is the *pile*: each
+   print in a `polaroid-group` is a separate shortcode invocation, so no call
+   site knows its own index, and only a structural selector can give the row
+   its alternating lean and its overlap. `.polaroid` and `.polaroid-group` are
+   therefore hooks carrying no styling of their own.
+
+   Unlayered on purpose. The defaults these override are arbitrary-property
+   utilities (`[--polaroid-tilt:2.5deg]`) living in `@layer utilities`, which
+   beats `@layer components` whatever the specificity. An inline
+   `--polaroid-tilt` from an explicit `tilt=` still wins over both, which is
+   why polaroid.html emits that style attribute only when asked. */
+.polaroid-group > .polaroid {
+  position: relative;
+  margin-block: 0.75rem;
+  /* Undoes the print's own `mx-auto`: on a flex item an auto inline margin
+     eats the free space, which would push the prints apart and cancel the
+     overlap below. */
+  margin-inline: 0;
+  --polaroid-w: 240px;
 }
 
-/* Colour variants for the four hues daisyUI does not ship. daisyUI's own
-   `badge-primary` compiles to exactly these two declarations, so matching it
-   gives both chip shapes for free: with `.badge-tint` the rule above reads
-   `--badge-color` and tints it; without it, daisyUI's `.badge` base uses the
-   pair as a solid fill (which is what the blog category chips want).
+.polaroid-group > .polaroid:nth-child(odd) {
+  --polaroid-tilt: -3.5deg;
+}
 
-   Unlayered for the same reason as `.badge-tint` — `@layer components` loses to
-   daisyUI's utilities layer. Being hand-written CSS rather than Tailwind
-   utilities, they also sidestep the hugo_stats.json two-build lag that forces
-   the `@source inline(...)` safelist near the top of this file. */
-.badge-orange {
-  --badge-color: var(--color-orange);
-  --badge-fg: var(--color-orange-content);
+.polaroid-group > .polaroid:nth-child(even) {
+  --polaroid-tilt: 3deg;
 }
-.badge-sea {
-  --badge-color: var(--color-sea);
-  --badge-fg: var(--color-sea-content);
+
+.polaroid-group > .polaroid:nth-child(3n) {
+  --polaroid-tilt: -1.5deg;
 }
-.badge-azure {
-  --badge-color: var(--color-azure);
-  --badge-fg: var(--color-azure-content);
+
+.polaroid-group > .polaroid + .polaroid {
+  margin-inline-start: -1.5rem;
 }
-.badge-rose {
-  --badge-color: var(--color-rose);
-  --badge-fg: var(--color-rose-content);
+
+.polaroid-group > .polaroid:hover {
+  z-index: 2;
 }
 
 /* Pagefind's `<pagefind-searchbox>` overrides.

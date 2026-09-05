@@ -1,12 +1,19 @@
 {{/* ── Left rail ─────────────────────────────────────────────
-  Slim nav rail pinned to the left screen edge. Desktop only — below `lg`,
-  `.site-rail` hides and `mobile-topbar.html` + `sidebar-mobile-drawer.html`
-  take over. The h-card (avatar, bio, social) lives on the homepage instead.
+  Slim nav rail pinned to the left screen edge. Desktop only — below `lg` it
+  hides and `mobile-topbar.html` + `sidebar-mobile-drawer.html` take over. The
+  h-card (avatar, bio, social) lives on the homepage instead.
 */}}
 {{/* Not an <aside>/landmark itself — the <nav> from nav-menu.html inside already
   carries the label, and nesting a second one just duplicates it.
+
+  Sticky rail sizing is shared with rail-right.html and deliberately written out
+  in both rather than hidden behind a class: it is eight utilities, and the two
+  rails differ (this one is a flex column, so the footer block can be pushed to
+  the bottom with `mt-auto`; the right one is a plain block).
 */}}
-<div class="site-rail site-rail--left">
+<div
+  class="hidden lg:flex lg:flex-col lg:sticky lg:top-0 lg:self-start lg:min-h-screen lg:max-h-screen lg:overflow-y-auto lg:overscroll-contain lg:px-5 lg:py-8"
+>
   <a
     href="{{ .Site.Home.RelPermalink }}"
     class="flex items-center gap-2 mb-8 font-sans font-semibold tracking-tight text-base-content justify-center hover:opacity-80"
@@ -22,7 +29,7 @@
     {{ partial "search.html" . }}
   </div>
 
-  {{/* Pinned to the bottom of the rail by `.site-rail--left`'s flex column. */}}
+  {{/* Pinned to the bottom of the rail by the flex column above. */}}
   <div class="mt-auto">
     {{/* Tighter than the default row: 5 icons at w-6/gap-4 overflow a 13rem rail.
       No margin class — webring.html opens with its own `mt-6 … pt-6` rule.

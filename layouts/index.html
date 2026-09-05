@@ -139,10 +139,15 @@
                 class="order-first w-full text-sm font-medium text-base-content group-hover:opacity-70 md:order-none md:w-auto md:flex-1"
               >
                 {{ .title }}
-                {{/* Reuses the library row's creator class rather than restyling
-                  with utilities — it owns the separator and the muted mix.
+                {{/* Same shape as the library row's creator: a muted name behind
+                  a further-muted middot, which is punctuation rather than
+                  content.
                 */}}
-                {{ with .creator }}<span class="library-row__creator">{{ . }}</span>{{ end }}
+                {{ with .creator }}
+                  <span class="text-base-content/70 before:content-['·'] before:mx-[0.4em] before:text-base-content/45"
+                    >{{ . }}</span
+                  >
+                {{ end }}
               </span>
               {{ $color := partial "chip-color.html" (dict "family" "library" "key" .category) }}
               <span class="badge badge-tint {{ with $color }}badge-{{ . }}{{ end }} badge-sm shrink-0 ms-auto md:ms-0">

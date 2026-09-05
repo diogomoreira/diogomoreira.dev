@@ -6,14 +6,30 @@
 
   The `reflect.IsMap` guard is not paranoia — `index` on a plain string errors out
   at build time, and writing `note: "…"` is the obvious mistake to make.
+
+  `clamp` is for the poster cards: they are ~8.5rem wide, so an unclamped note
+  would double a card's height and break the grid's rhythm. Rows have the width
+  to spare. `markdownify` wraps the text in a `<p>`, whose margin has to go.
 */}}
+{{ $note := . }}
+{{ $clamp := false }}
 {{ if reflect.IsMap . }}
-  {{ $text := index . site.Language.Lang | default (index . "en") }}
+  {{ if isset . "note" }}
+    {{ $note = .note }}
+    {{ $clamp = .clamp }}
+  {{ end }}
+{{ end }}
+
+{{ $class := "block mt-[0.3rem] text-xs/[1.5] text-base-content/70 [&_p]:m-0" }}
+{{ if $clamp }}{{ $class = printf "%s line-clamp-2" $class }}{{ end }}
+
+{{ if reflect.IsMap $note }}
+  {{ $text := index $note site.Language.Lang | default (index $note "en") }}
   {{ with $text }}
-    <span class="library-note">{{ . | markdownify }}</span>
+    <span class="{{ $class }}">{{ . | markdownify }}</span>
   {{ end }}
 {{ else }}
-  {{ with . }}
-    <span class="library-note">{{ . | markdownify }}</span>
+  {{ with $note }}
+    <span class="{{ $class }}">{{ . | markdownify }}</span>
   {{ end }}
 {{ end }}

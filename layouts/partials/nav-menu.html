@@ -41,10 +41,11 @@
             same reveal with no JS.
           */}}
           {{ if and .HasChildren (or $isActive $childActive) }}
-            {{/* No `list-none p-0 m-0` here — those utilities would beat
-              `.nav-submenu`'s indent. main.css owns the box entirely.
+            {{/* `base-300` for the guide line: it is the one divider token that
+              reads as a surface step in both themes — `neutral` flips from dark
+              surface to near-black text and would vanish in one of them.
             */}}
-            <ul class="nav-submenu">
+            <ul class="list-none p-0 mt-0.5 mb-0 ms-4 me-0 border-s border-base-300">
               {{ range .Children }}
                 {{ if not .Params.hidden }}
                   <li>

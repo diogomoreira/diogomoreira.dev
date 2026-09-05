@@ -31,14 +31,14 @@
 {{ if .label }}
   {{ if .date }}
     {{ $when := time.AsTime .date }}
-    <span class="library-date">
+    <span class="text-[0.7rem] tabular-nums text-base-content/70">
       {{ if ne .label "bare" }}
         {{ i18n (printf "library_%s_on" .label) | default .label }}
       {{ end }}
       <time datetime="{{ $when.Format "2006-01-02" }}">{{ partial "formatted-date-short.html" $when }}</time>
     </span>
   {{ else if ne .label "bare" }}
-    <span class="badge badge-tint badge-accent badge-sm"
+    <span class="badge badge-tint badge-accent badge-sm self-center"
       >{{ i18n (printf "library_%s_in_progress" .label) | default .label }}</span
     >
   {{ end }}
