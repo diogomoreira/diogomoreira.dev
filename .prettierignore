@@ -15,8 +15,7 @@ package-lock.json
 
 # prettier-plugin-go-template cannot parse a tag that is opened in one branch of
 # an `if` and closed in another — `{{ if $link }}<a …>{{ else }}<div>{{ end }}`
-# … `{{ if $link }}</a>{{ else }}</div>{{ end }}`. Both files use that shape on
+# … `{{ if $link }}</a>{{ else }}</div>{{ end }}`. This file uses that shape on
 # purpose (a linked card is an `<a>`, an unlinked one a `<div>`), and the plugin
-# fails outright with "Found invalid node root" rather than formatting them.
+# fails outright with "Found invalid node root" rather than formatting it.
 layouts/library/single.html
-layouts/partials/polaroid.html

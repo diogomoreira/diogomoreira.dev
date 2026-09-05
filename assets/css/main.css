@@ -401,8 +401,8 @@ strong {
    `http(s)` minus our own host = off-site. Internal links are always relative
    (`/blog/…`), so they never match — including under `hugo server`, where
    baseURL is localhost.
-   Excluded on purpose: anchors wrapping an image/svg (social icons, polaroid
-   frames, CV icon links) and button/badge-shaped ones, where an arrow would sit
+   Excluded on purpose: anchors wrapping an image/svg (social icons, CV icon
+   links) and button/badge-shaped ones, where an arrow would sit
    on top of artwork instead of after a phrase. `.no-ext-icon` is the manual
    escape hatch, and `layouts/library/single.html` uses it on both card shapes:
    the whole card is the link, so the arrow would land after the content rather
@@ -536,49 +536,6 @@ a.badge-tint:focus-visible {
     background-color: #0000;
     border-color: var(--chip);
   }
-}
-
-/* ── Polaroid prints, in a group ──────────────────────────────────────────
-   Everything about a single print — paper, ink, frame, strip, tilt — is
-   utilities in `partials/polaroid.html`. What cannot be is the *pile*: each
-   print in a `polaroid-group` is a separate shortcode invocation, so no call
-   site knows its own index, and only a structural selector can give the row
-   its alternating lean and its overlap. `.polaroid` and `.polaroid-group` are
-   therefore hooks carrying no styling of their own.
-
-   Unlayered on purpose. The defaults these override are arbitrary-property
-   utilities (`[--polaroid-tilt:2.5deg]`) living in `@layer utilities`, which
-   beats `@layer components` whatever the specificity. An inline
-   `--polaroid-tilt` from an explicit `tilt=` still wins over both, which is
-   why polaroid.html emits that style attribute only when asked. */
-.polaroid-group > .polaroid {
-  position: relative;
-  margin-block: 0.75rem;
-  /* Undoes the print's own `mx-auto`: on a flex item an auto inline margin
-     eats the free space, which would push the prints apart and cancel the
-     overlap below. */
-  margin-inline: 0;
-  --polaroid-w: 240px;
-}
-
-.polaroid-group > .polaroid:nth-child(odd) {
-  --polaroid-tilt: -3.5deg;
-}
-
-.polaroid-group > .polaroid:nth-child(even) {
-  --polaroid-tilt: 3deg;
-}
-
-.polaroid-group > .polaroid:nth-child(3n) {
-  --polaroid-tilt: -1.5deg;
-}
-
-.polaroid-group > .polaroid + .polaroid {
-  margin-inline-start: -1.5rem;
-}
-
-.polaroid-group > .polaroid:hover {
-  z-index: 2;
 }
 
 /* Pagefind's `<pagefind-searchbox>` overrides.

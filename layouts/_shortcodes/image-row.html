@@ -1,0 +1,22 @@
+{{- /* A row of photos, each one a `responsive-image` call. The children keep
+  their own figure and caption markup; the row only lays them out and strips
+  the standalone spacing off them — `[&_figure]:…` at (0,1,1) beats the
+  child's own (0,1,0) utilities whatever order Tailwind emits them in.
+
+  Descendant (`_`), not child (`>`): Tailwind's source scanner reads a `.html`
+  file as markup and ends the candidate at the first `>`, so `[&>figure]:my-0`
+  is dropped from the build that renders it — silently, with no error and no
+  rule in the stylesheet. It comes back on the *next* build via
+  `hugo_stats.json`, which is the two-build lag at its worst: it looks fixed
+  locally and ships broken. Every other arbitrary variant on the site
+  (`[&_p]:m-0`, `[&::-webkit-details-marker]:hidden`) avoids `>` too.
+
+  `< image-row >`
+  `< responsive-image src="a.jpg" >`
+  `< responsive-image src="b.jpg" >`
+  `< /image-row >`
+
+  Takes no params. Stacks to one column below `sm`, where three photos side by
+  side leave nothing worth looking at. */
+-}}
+<div class="not-prose grid grid-cols-1 sm:grid-cols-3 gap-4 my-10 [&_figure]:my-0 [&_figure]:px-0">{{ .Inner }}</div>
