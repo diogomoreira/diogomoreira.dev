@@ -21,10 +21,18 @@
 
 <title>{{ if .IsHome -}}{{ .Site.Title }}{{- else -}}{{ .Title }} — {{ .Site.Title }}{{- end }}</title>
 
+{{/* `markdownify | plainify` rather than the raw string: a page's `description`
+  is rendered as markdown by header.html, so one written with a link or bold text
+  would otherwise ship its literal asterisks and brackets into the search snippet
+  and the social card. Rendering then stripping the tags leaves the plain words.
+  The two replaceRE calls clean up after the strip: an anchor spans several lines,
+  so removing its tags leaves a newline mid-sentence, and a link followed by a full
+  stop would otherwise read as "slashfriends ." in the snippet.
+*/}}
 <meta
   name="description"
   content="{{ with .Description }}
-    {{ . }}
+    {{ . | markdownify | plainify | replaceRE "\\s+" " " | replaceRE " ([.,;:!?])" "$1" }}
   {{ else }}
     {{ with .Site.Params.description }}{{ . }}{{ end }}
   {{ end }}"
@@ -55,7 +63,7 @@
 <meta
   property="og:description"
   content="{{ with .Description }}
-    {{ . }}
+    {{ . | markdownify | plainify | replaceRE "\\s+" " " | replaceRE " ([.,;:!?])" "$1" }}
   {{ else }}
     {{ .Site.Params.description }}
   {{ end }}"
