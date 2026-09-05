@@ -1,3 +1,15 @@
-{{/* Usage: `partial "post-status-color.html" .` — returns the DaisyUI color keyword (e.g. "primary") for a blog post's status param, or "" for archived/unset */}}
+{{/* Usage: `partial "post-status-color.html" .` — returns the DaisyUI color
+  keyword (e.g. "primary") for a blog post's status param, or "" for
+  archived/unset.
+
+  `return`, not rendered output, and that is load-bearing: a partial that ends
+  by printing hands its caller the *template's* text, newlines and all. This one
+  used to, so it returned "\n\nprimary" — which split the caller's concatenated
+  `badge-<color>` into two broken classes, and made the "" of an archived post a
+  whitespace string that an `if` reads as true, so the `badge-ghost` branch never
+  ran. Every status badge on the site was uncoloured, and the legend's
+  `text-<color>` was dead the same way. Same shape as chip-color.html, which is
+  why that one never had the bug.
+*/}}
 {{ $color := dict "seed" "info" "growing" "success" "living" "primary" "archived" "" }}
-{{ with .Params.status }}{{ index $color . }}{{ end }}
+{{ return index $color (.Params.status | default "") | default "" }}

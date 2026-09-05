@@ -39,9 +39,17 @@
 
    Keep in step with the maps in chip-color.html / post-status-color.html. Every
    name here is a daisyUI variant: the chip palette is the shipped set and
-   nothing else. */
+   nothing else.
+
+   The `text-*` line is the third concatenation: post-status-legend.html colours
+   each label with `text-` plus the keyword post-status-color.html returns. All
+   six do appear literally in some template today, so the legend renders either
+   way — which is exactly why it needs listing, since deleting the last literal
+   `text-info` anywhere in layouts/ would silently take the legend's colour with
+   it. */
 @source inline("alert-{info,success,warning,error}");
 @source inline("badge-{primary,secondary,accent,neutral,info,success,warning,error,ghost}");
+@source inline("text-{primary,secondary,accent,info,success,warning}");
 
 @plugin "daisyui/theme" {
   name: "sunrise";

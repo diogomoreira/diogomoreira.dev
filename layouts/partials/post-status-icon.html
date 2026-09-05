@@ -1,3 +1,11 @@
-{{/* Usage: `partial "post-status-icon.html" .` — returns the raw emoji for a blog post's status param, or "" */}}
+{{/* Usage: `partial "post-status-icon.html" .` — returns the raw emoji for a
+  blog post's status param, or "" when it has none.
+
+  `return` for the same reason as post-status-color.html: printing the emoji
+  wraps it in the template's own newlines, and every caller guards with a `with`
+  — which a whitespace string passes, so a post carrying no `status` would render
+  an empty badge and look up a `status_` i18n key that does not exist. Latent
+  rather than live today, since every post sets one.
+*/}}
 {{ $emoji := dict "seed" "🌱" "growing" "🌿" "living" "🪴" "archived" "🍂" }}
-{{ with .Params.status }}{{ index $emoji . }}{{ end }}
+{{ return index $emoji (.Params.status | default "") | default "" }}
