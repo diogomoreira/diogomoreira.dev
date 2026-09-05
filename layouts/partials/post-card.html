@@ -27,7 +27,7 @@
 {{ $catColor := partial "chip-color.html" (dict "family" "category" "key" (urlize $cat)) | default "primary" }}
 
 
-<a href="{{ $post.RelPermalink }}" class="post-card rounded-box {{ if $featured }}post-card--featured{{ end }}">
+<a href="{{ $post.RelPermalink }}" class="post-card {{ if $featured }}post-card--featured{{ end }}">
   {{/* `$post` is captured above rather than using `.` here: inside this `with`,
     `.` is the cover *string*, and responsive-image.html needs the page to
     resolve it against the post's own bundle resources. Every cover on the site
