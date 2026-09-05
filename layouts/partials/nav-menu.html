@@ -25,22 +25,13 @@
           */}}
           {{ $isActive := or ($page.IsMenuCurrent `main` .) (and (ne .URL $page.Site.Home.RelPermalink) (hasPrefix $current .URL)) }}
 
-          {{/* Whether the group is revealed — a separate value from $isActive.
-            Has to be computed explicitly: /work and /academic are children of
-            About in the menu but not under it in the URL space, so the
-            hasPrefix fallback above can never match them from the parent.
-          */}}
-          {{ $childActive := false }}
-          {{ range .Children }}
-            {{ if eq $current .URL }}{{ $childActive = true }}{{ end }}
-          {{ end }}
-
           {{ partial "nav-link.html" (dict "entry" . "page" $page "active" $isActive "desktop" $desktop "child" false) }}
 
-          {{/* Driven purely by the current page, so the mobile drawer gets the
-            same reveal with no JS.
+          {{/* Always rendered: /work and /academic are top-level destinations
+            in their own right, so the sub-list is permanent structure rather
+            than a reveal driven by the current page.
           */}}
-          {{ if and .HasChildren (or $isActive $childActive) }}
+          {{ if .HasChildren }}
             {{/* `base-300` for the guide line: it is the one divider token that
               reads as a surface step in both themes — `neutral` flips from dark
               surface to near-black text and would vanish in one of them.

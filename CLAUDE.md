@@ -79,6 +79,31 @@ So there are exactly two things a scanner cannot see, and both have an answer:
 
 **One cascade trap replaces the old layer trap.** With everything in `@layer utilities`, two utilities that set the same property are decided by the order Tailwind emits them, not by the order they appear in a `class` attribute. It bites `display`: `hidden` wins over `block`, `contents`, `flex` and `grid`, and _loses_ to `inline-block` and `inline-flex`. Anything that starts hidden and is revealed by JS must therefore avoid the inline pair — `mastodon-toots.html` uses `block w-fit` for exactly this reason. Base vs. variant is safe in the usual Tailwind way (`sm:` always wins over unprefixed), which is what lets the polaroid's float override its centred default.
 
+### Styling: utilities in the markup, not classes in `main.css`
+
+**Style with Tailwind utilities in the template. Do not add a custom class.** `main.css` went from 1712 lines to ~600 in 2026-09 by moving every component block into the markup, and the reason those blocks existed — a "two-build lag" that made new utilities unsafe — was never true (see **CSS Pipeline** above). Adding a `.thing__part` back would re-create a problem the site no longer has, and it would be the only one of its kind left.
+
+`main.css` is now allowed to hold exactly five things. Anything else belongs in a `class` attribute:
+
+1. **Tokens and config** — the `@plugin "daisyui/theme"` blocks, the `html[data-theme=…]` hues, `@theme`, `@source`.
+2. **Selectors for markup we do not write** — Hugo's `.TableOfContents` (`.toc a`), `@tailwindcss/typography`'s output (`.prose h2`, `.prose pre`), Pagefind's widget, element defaults in `@layer base`.
+3. **Selectors no class can express** — the external-link `a[href^="http"]…::after`, and structural sibling rules like `.polaroid-group > .polaroid:nth-child(odd)`, where the elements come from separate shortcode calls and no call site knows its own index.
+4. **`@utility` definitions**, for a recipe genuinely repeated across templates — `badge-tint`, `link-dash`. Three or more call sites, and only when nothing else competes for the same properties; two call sites is a copy-paste, not an abstraction.
+5. **Nothing else.** A class used once is a utility string in the one template that uses it.
+
+Before reaching for CSS, these cover almost everything that looks like it needs a rule:
+
+- **Arbitrary values** for anything off the scale: `aspect-[16/10]`, `gap-[0.35rem]`, `text-[0.8125rem]/[1.5]`, `grid-cols-[repeat(auto-fill,minmax(8.5rem,1fr))]`, `w-[calc(100%_+_0.2em)]` (underscores become spaces; `calc` still needs them around `+`).
+- **Arbitrary properties** for a declaration with no utility, custom properties included: `[stroke-width:0.09em]`, `[vector-effect:non-scaling-stroke]`, `[--polaroid-tilt:2.5deg]`, then read back with `rotate-(--polaroid-tilt)` / `bg-(--polaroid-paper)`.
+- **Arbitrary variants** for a descendant or pseudo-element you cannot reach: `[&_p]:m-0`, `[&_p+p]:mt-[0.6rem]`, `[&::-webkit-details-marker]:hidden`, `before:content-['·']`.
+- **`group`** instead of a descendant hover rule — `group` on the anchor, `group-hover:underline` on the title. Two rules about it, both learned the hard way: put it on the element that is actually a link (an unlinked row must not underline itself on hover), and **name it (`group/section`) whenever another `group` is nested inside**, because a bare `group-hover:` matches _any_ `.group` ancestor.
+- **`data-*` attributes as JS hooks**, never classes. A utility is a poor hook: renaming a colour would silently break a `querySelector`. See `mastodon-toots.html`.
+
+Two things to keep doing while you convert:
+
+- **Move the rationale, don't drop it.** A rule's comment becomes a `{{/* … */}}` comment above the markup it now explains. The measured contrast ratios, the cascade traps and the "we tried X and it did Y" notes are the expensive part of this file; the declarations are not.
+- **Verify structurally, not by eye.** Build to a scratch dir before and after (`hugo -d <tmpdir>`, twice — a running dev server owns `public/`), then diff the _element skeleton_ of every page, tags only, attributes stripped. The class churn makes a raw HTML diff useless, and the skeleton diff is what caught a partial being swapped into the wrong template during the 2026-09 conversion.
+
 ### Theming
 
 Two DaisyUI themes: **sunrise** (light default) and **midnight** (dark). The active theme is stored in `localStorage` and applied before first paint via an inline script in `head.html` to prevent flash. `theme-toggle-script.html` handles the toggle UI logic.
@@ -173,12 +198,9 @@ Menu entries are configured in `hugo.toml` under `[[menus.main]]`. Three things 
 - **`.Params.icon` resolves to `layouts/partials/icons/nav/<icon>.html`**, and a missing partial is a hard build failure.
 - **`.Params.hidden` skips an entry entirely** (`projects`, `snippets`, `photos` use this).
 
-**Nesting.** `work` and `academic` set `parent = "about"` (an entry-level key, _not_ under `[menus.main.params]`), so they render as an indented sub-list revealed only while you are inside that group. The reveal is pure page state — no JS — which is why the mobile drawer gets it for free.
+**Nesting.** `work` and `academic` set `parent = "about"` (an entry-level key, _not_ under `[menus.main.params]`), so they render as an indented sub-list under About. **The sub-list is always rendered**, in both variants — Work and Academic are destinations in their own right, not a detail of About, and a menu whose entries appear only once you are already inside the group cannot be used to get there. It was a reveal gated on the group being active until 2026-09; that needed a second boolean, `$childActive`, looping `.Children` explicitly because `/work` and `/academic` are children _in the menu only_ — their URLs are not nested under `/about`, so the parent's `hasPrefix` test could never match them. With the gate gone so is that value; the template now computes one boolean.
 
-The template computes **two separate booleans**, and collapsing them into one breaks it:
-
-- `$isActive` — the entry's own highlight. It deliberately omits `HasMenuCurrent`, which would light up About while you are on `/work`.
-- `$childActive` — whether the group opens. It has to loop `.Children` explicitly, because `/work` and `/academic` are children _in the menu only_; their URLs are not nested under `/about`, so the `hasPrefix $current .URL` fallback can never match them from the parent.
+`$isActive` — the entry's own highlight — deliberately omits `HasMenuCurrent`, which would light up About while you are on `/work`. Children are highlighted by an exact `eq $current .URL` instead.
 
 That flat-URL choice is deliberate: `content/<lang>/academic.md` binds to `layouts/academic/single.html` purely by its root-level content path (Hugo v0.146+ matches templates by path). Moving it into a subdirectory to get `/about/academic/` would silently fall back to `_default/single.html` and drop the publications list, unless `type: academic` were added to its front matter.
 
