@@ -1519,14 +1519,16 @@ a {
    colour.
 
    The plugin ships an 800/700/600 heading ramp built for a 400 body, which is
-   also what the `body` rule in `@layer base` sets — but the top of that ramp is
-   unreachable here: `head.html` loads Raleway over `300..600`, so 800 and 700
-   both clamp to 600 and would render as one weight. The ramp is therefore
-   written to the ceiling instead — 800/700 → 600, 600 → 500 — which keeps each
-   level distinct and every declared value inside the loaded range. Asking for a
-   weight outside that range does not fail; the browser silently clamps to the
-   nearest end, which is how the site rendered `font-extrabold` as 700 for as
-   long as it requested `400..700`. */
+   also what the `body` rule in `@layer base` sets. This site flattens it to
+   600/600/500, which is a choice about how heavy a heading should look — but it
+   started as a constraint: the body face was loaded over `300..600` at the
+   time, so 800 and 700 both clamped to 600 and rendered as one weight, and the
+   ramp was rewritten to that ceiling to keep each level distinct. The face now
+   loads `100..900`, so the upper end is reachable again and the values could be
+   raised. Worth knowing either way: asking for a weight outside the loaded
+   range does not fail, the browser silently clamps to the nearest end — which
+   is how the site rendered `font-extrabold` as 700 for as long as it requested
+   `400..700`. */
 .prose h1 {
   font-weight: 600;
 }
@@ -1546,7 +1548,7 @@ a {
 /* Emphasis is pulled a stop clear of the rest of the ramp. A heading has size
    and `--font-heading` to set it apart, so 500 against the 400 body is enough;
    an inline `<strong>` has nothing but weight, and one stop does not read as
-   emphasis in Raleway at body size. */
+   emphasis at body size. */
 .prose strong {
   font-weight: 600;
 }
