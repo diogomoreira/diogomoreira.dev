@@ -1,0 +1,116 @@
+{{/* Binds to content/<lang>/friends.md purely by its root-level content path
+  (Hugo ≥0.146 matches templates by path), the same rule that binds library.md
+  and academic.md. Moving that file into a subdirectory would silently fall back
+  to _default/single.html and drop everything below.
+
+  Entries live in `data/friends/`, language-neutral, for the same reason the
+  library's do: a person is the same person whichever language you read the site
+  in. Only the note is prose, so only the note is a per-language map — see
+  library-item-note.html, which resolves it and is shared with the library.
+
+  One file per section, carrying its own `weight` for section order. The heading
+  text comes from `friends_group_<filename>` in both i18n files, so adding a
+  section is a new YAML file plus two keys and no template edit; a missing key
+  renders the raw filename rather than failing the build.
+
+  The sort is inline rather than in a partial, which is the one place this parts
+  company with the library: `library-categories.html` exists because the library
+  page and the homepage row both read that data and must not disagree about
+  order. This page is the only reader of `data/friends`.
+*/}}
+{{ define "main" }}
+  <article data-pagefind-body>
+    {{ partial "header.html" . }}
+
+    {{ with .Content }}
+      <div class="prose prose-headings:font-heading prose-base max-w-none mb-10">{{ . }}</div>
+    {{ end }}
+
+    {{/* `hugo.Data.friends` is a plain map, and Go templates walk a map in key
+      order — i.e. alphabetically — so the weights have to be applied by hand.
+      `sort`, not `.ByWeight`: these are maps, not pages. Sections with no
+      entries are dropped rather than rendered as an empty heading.
+    */}}
+    {{ $groups := slice }}
+    {{ range $key, $group := hugo.Data.friends }}
+      {{ with $group.items }}
+        {{ $groups = $groups | append (dict "key" $key "weight" ($group.weight | default 99) "items" .) }}
+      {{ end }}
+    {{ end }}
+
+    {{ range sort $groups "weight" }}
+      <section class="mb-12">
+        {{/* The rule under the heading is what the library's category summaries
+          use, and it pairs with `first:border-t-0` on the rows below: the first
+          row leans on this line instead of drawing its own, so a section opens
+          with one hairline rather than two.
+        */}}
+        {{ $label := i18n (printf "friends_group_%s" .key) | default .key }}
+        {{ partial "section-label.html" (dict "text" $label "class" "mb-0 pb-2 border-b border-base-300") }}
+
+        {{/* The library's list-row shape, for the same reason it was chosen
+          there: a person is a line of text, and boxing each one turns a short
+          list into a stack of heavy tiles. Rows are separated by a single
+          `base-300` hairline — the one divider token that reads as a surface
+          step in both themes.
+
+          `no-ext-icon`: the whole row is the link, so the global ↗ marker would
+          land after the note rather than after a phrase. The `:has(svg)`
+          exclusion cannot be relied on here — there is no svg in a row.
+
+          Every entry has a link (a person with no URL has nothing to point at
+          and does not belong on a blogroll), so this needs none of the
+          `<a>`/`<div>` switch the library rows carry.
+        */}}
+        <ul class="list-none p-0 m-0 mt-2">
+          {{ range .items }}
+            <li class="border-t border-base-300 first:border-t-0">
+              {{/* The row is NOT a wrapping `<a>`, and that is the one place this
+                departs from the library rows it otherwise copies. A note here is
+                a sentence about a person and often cites where to read them, so
+                it carries markdown links, and library-item-note.html runs those
+                through markdownify — an anchor inside an anchor is invalid HTML
+                that the parser resolves by closing the outer one at the inner
+                start tag, silently dropping the rest of the row out of the link.
+                So only the name links, and the note's links are ordinary
+                siblings.
+              */}}
+              {{/* The accent edge is driven by the name link alone, not by
+                `hover:` on this wrapper: only the name is clickable now, and an
+                edge that lit up over dead space would promise a click that is
+                not there. The `data-friend-link` hook is what keeps the note's
+                own links from triggering it — a bare `has-[a:hover]` would.
+              */}}
+              <div
+                class="py-[0.55rem] border-s-2 border-transparent ps-[0.6rem] -ms-[0.6rem] transition-colors duration-150 has-[a[data-friend-link]:hover]:border-s-accent has-[a[data-friend-link]:focus-visible]:border-s-accent"
+              >
+                {{/* `link-dash` holds the dashed accent underline; those
+                  `text-decoration-*` longhands are non-inherited, so it sits on
+                  the anchor itself. The line only appears on hover.
+                  `inline-block`, not `block`: the click target should be the
+                  name, not the full width of the row.
+                */}}
+                <a
+                  href="{{ .link }}"
+                  data-friend-link
+                  class="inline-block leading-normal text-base-content link-dash hover:underline focus-visible:underline no-ext-icon font-bold"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >{{ .title }}</a
+                >
+                {{/* Note links need an underline of their own: the site-wide `a`
+                  rule sets only the decoration's colour and style, and the
+                  underline itself comes from prose styling this span sits
+                  outside of.
+                */}}
+                <span class="[&_a]:underline">
+                  {{ partial "library-item-note.html" .note }}
+                </span>
+              </div>
+            </li>
+          {{ end }}
+        </ul>
+      </section>
+    {{ end }}
+  </article>
+{{ end }}

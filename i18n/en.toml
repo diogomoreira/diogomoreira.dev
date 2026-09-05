@@ -9,6 +9,7 @@ uses = "Uses"
 snippets = "Snippets"
 library = "Library"
 photos = "Photos"
+friends = "Friends"
 nav_aria_label = "Main navigation"
 
 # Homepage
@@ -100,3 +101,7 @@ toc_label = "On this page"
 mobile_menu_toggle_aria = "Toggle menu"
 theme_toggle_aria = "Toggle dark mode"
 page_controls_aria = "Page controls"
+
+# Friends
+friends_group_known = "People I know"
+friends_group_online = "People I follow online"

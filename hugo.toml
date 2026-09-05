@@ -187,6 +187,13 @@ weight = 4
 icon = "now"
 
 [[menus.main]]
+identifier = "friends"
+pageRef = "/friends"
+weight = 5
+[menus.main.params]
+icon = "friends"
+
+[[menus.main]]
 identifier = "projects"
 pageRef = "/projects"
 weight = 6
