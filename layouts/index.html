@@ -19,7 +19,11 @@
     <div class="min-w-0">
       <h1 class="font-heading text-center md:text-left text-2xl font-medium text-heading">
         {{ i18n "home_greeting" }}
-        <a href="{{ .Site.Home.RelPermalink }}" class="block u-url font-semibold no-underline hover:opacity-80" rel="me">
+        <a
+          href="{{ .Site.Home.RelPermalink }}"
+          class="block u-url font-semibold no-underline hover:opacity-80"
+          rel="me"
+        >
           <span class="tracking-tighter text-6xl p-name">{{ .Title }}</span>
         </a>
       </h1>
@@ -37,7 +41,8 @@
   </section>
 
   {{/* Both languages in one list, newest first — the same partial /blog reads, so
-    this row is always the head of that feed. */}}
+    this row is always the head of that feed.
+  */}}
   {{ $posts := partial "blog-posts.html" . }}
   {{ if $posts }}
     <section class="mb-14">
@@ -140,9 +145,7 @@
                 {{ with .creator }}<span class="library-row__creator">{{ . }}</span>{{ end }}
               </span>
               {{ $color := partial "chip-color.html" (dict "family" "library" "key" .category) }}
-              <span
-                class="badge badge-tint {{ with $color }}badge-{{ . }}{{ end }} badge-sm shrink-0 ms-auto md:ms-0"
-              >
+              <span class="badge badge-tint {{ with $color }}badge-{{ . }}{{ end }} badge-sm shrink-0 ms-auto md:ms-0">
                 {{ i18n (printf "library_category_%s" .category) | default .category }}
               </span>
             </a>

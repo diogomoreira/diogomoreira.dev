@@ -1,4 +1,4 @@
-{{/* Usage: {{ partial "language-switcher.html" . }} — links to the translated version of the current page, falling back to that language's home */}}
+{{/* Usage: `partial "language-switcher.html" .` — links to the translated version of the current page, falling back to that language's home */}}
 {{ $page := . }}
 {{ range hugo.Sites }}
   {{ $lang := .Language.Lang }}
@@ -12,6 +12,7 @@
       class="btn btn-sm btn-square font-mono text-xs"
       title="{{ .Language.Label }}"
       hreflang="{{ $lang }}"
-    >{{ upper (substr $lang 0 2) }}</a>
+      >{{ upper (substr $lang 0 2) }}</a
+    >
   {{ end }}
 {{ end }}

@@ -1,9 +1,9 @@
 {{/* Compact one-line-per-entry listing of a work/education data file.
 
-  Usage: {{ partial "cv-entries.html" (dict
-    "entries"  (index hugo.Data site.Language.Lang "work")
-    "orgField" "company"   // "institution" for education
-    "heading"  "Work Experience") }}   // pass "" to omit the heading
+  Usage: partial "cv-entries.html" (dict
+  "entries"  (index hugo.Data site.Language.Lang "work")
+  "orgField" "company"   // "institution" for education
+  "heading"  "Work Experience")   // pass "" to omit the heading
 
   `not-prose` is load-bearing: this renders inside the `prose max-w-none`
   wrapper of `_default/single.html`, which would otherwise put list markers on
@@ -20,6 +20,7 @@
     {{ with $.heading }}
       <h3 class="font-heading text-xs font-medium uppercase tracking-widest text-secondary mb-4">{{ . }}</h3>
     {{ end }}
+
 
     <ul class="list-none p-0 m-0 space-y-2">
       {{ range sort . "endDate" "desc" }}
@@ -41,8 +42,9 @@
               <a
                 href="{{ . }}"
                 class="hover:text-primary"
-                {{- if partial "is-external-link.html" . }} target="_blank" rel="noopener noreferrer"{{ end }}
-              >{{ $org }}</a>
+                {{ if partial "is-external-link.html" . }}target="_blank" rel="noopener noreferrer"{{ end }}
+                >{{ $org }}</a
+              >
             {{ else }}
               {{ $org }}
             {{ end }}

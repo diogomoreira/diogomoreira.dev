@@ -19,11 +19,19 @@
         {{/* `overflow-hidden` on the card rather than a radius on the tile below:
           the card already carries `--radius-box`, so clipping to it keeps the
           artwork on the site's single radius without a second value to maintain.
-          The tile used to round only its own top corners. */}}
-        <a class="now-top-artists-cell card bg-base-100 group overflow-hidden" target="_blank" rel="noopener noreferrer">
+          The tile used to round only its own top corners.
+        */}}
+        <a
+          class="now-top-artists-cell card bg-base-100 group overflow-hidden"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <div class="aspect-square w-full overflow-hidden relative bg-base-200">
             <div class="now-top-artists-skeleton skeleton absolute inset-0 w-full h-full rounded-none"></div>
-            <img class="now-top-artists-img hidden absolute inset-0 w-full h-full object-cover group-hover:opacity-90" alt="" />
+            <img
+              class="now-top-artists-img hidden absolute inset-0 w-full h-full object-cover group-hover:opacity-90"
+              alt=""
+            />
             <div
               class="now-top-artists-fallback hidden absolute inset-0 w-full h-full items-center justify-center bg-base-200 text-base-content/70 font-sans text-2xl font-medium"
             ></div>
@@ -93,8 +101,10 @@
       async function fetchTopArtists() {
         const url =
           "https://ws.audioscrobbler.com/2.0/?method=user.gettopartists" +
-          "&user=" + encodeURIComponent(username) +
-          "&period=1month&limit=8&api_key=" + encodeURIComponent(lastfmKey) +
+          "&user=" +
+          encodeURIComponent(username) +
+          "&period=1month&limit=8&api_key=" +
+          encodeURIComponent(lastfmKey) +
           "&format=json";
         const res = await fetch(url);
         if (!res.ok) throw new Error("Last.fm request failed: " + res.status);
@@ -111,8 +121,7 @@
 
       async function fetchArtistPhoto(name) {
         const url =
-          "https://www.theaudiodb.com/api/v1/json/" + audiodbKey +
-          "/search.php?s=" + encodeURIComponent(name);
+          "https://www.theaudiodb.com/api/v1/json/" + audiodbKey + "/search.php?s=" + encodeURIComponent(name);
         const res = await fetch(url);
         if (!res.ok) throw new Error("TheAudioDB request failed: " + res.status);
         const data = await res.json();

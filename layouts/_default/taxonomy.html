@@ -1,5 +1,4 @@
 {{ define "main" }}
-
   {{ partial "header.html" . }}
   {{ $pages := .Pages }}
   {{ if not $pages }}
@@ -8,7 +7,8 @@
 
   {{/* Cards rather than `page-list.html`: every page in a taxonomy today is a
     blog post, and all of them carry a cover. `page-list.html` stays as
-    `_default/list.html`'s renderer, which serves sections with no cover art. */}}
+    `_default/list.html`'s renderer, which serves sections with no cover art.
+  */}}
   {{ if $pages }}
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {{ range $pages.ByDate.Reverse }}

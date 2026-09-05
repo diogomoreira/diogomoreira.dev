@@ -1,17 +1,18 @@
-{{/* Usage: {{ partial "social.html" . }} — centred row (default), or
-{{ partial "social.html" (dict "page" . "class" "justify-start" "iconClass" "w-5 h-5") }}. "class" replaces the row's
-alignment, gap and margin — everything positional, so a caller owns the spacing outright rather than fighting a
-hardcoded class it cannot cancel; "iconClass" sizes the icons — the icon partials are bare viewBox SVGs, so the wrapping
-`span` is what gives them a size.
+{{/* Usage: `partial "social.html" .` — centred row (default), or
+  `partial "social.html" (dict "page" . "class" "justify-start" "iconClass" "w-5 h-5")`. "class" replaces the row's
+  alignment, gap and margin — everything positional, so a caller owns the spacing outright rather than fighting a
+  hardcoded class it cannot cancel; "iconClass" sizes the icons — the icon partials are bare viewBox SVGs, so the wrapping
+  `span` is what gives them a size.
 
-Note the backticks on that last word: written as a bare tag it sat alone on its own line, and prettier balanced it by
-appending a matching closing tag *after* the final `{{ end }}` — outside the comment, so the partial emitted an orphan
-`</span>` into every page that called it. Keep tag names in this comment quoted.
+  Note the backticks on that last word: written as a bare tag it sat alone on its own line, and prettier balanced it by
+  appending a matching closing tag *after* the final ``end`` — outside the comment, so the partial emitted an orphan
+  `</span>` into every page that called it. Keep tag names in this comment quoted.
 
-The new-tab decision goes through `is-external-link.html`, which is scheme-gated: the `mailto:` entry in
-`[[params.social]]` stays in the current tab, where before it opened a blank one the mail client then abandoned. `rel`
-has to stay `me` for the IndieWeb/Mastodon verification links, so the external case appends to it rather than replacing
-it. */}}
+  The new-tab decision goes through `is-external-link.html`, which is scheme-gated: the `mailto:` entry in
+  `[[params.social]]` stays in the current tab, where before it opened a blank one the mail client then abandoned. `rel`
+  has to stay `me` for the IndieWeb/Mastodon verification links, so the external case appends to it rather than replacing
+  it.
+*/}}
 {{ $page := . }}
 {{ $class := "justify-center gap-4 my-8" }}
 {{ $iconClass := "w-8 h-8" }}
@@ -24,10 +25,16 @@ it. */}}
   <div class="flex {{ $class }} items-center text-content">
     {{ range . }}
       {{ $external := partial "is-external-link.html" .url }}
+      {{/* Built as a value rather than inline: an `if` inside the attribute is
+        long enough that prettier wraps it, and the newlines land inside the
+        attribute value. Harmless for a token list like `rel`, but not a habit
+        to keep.
+      */}}
+      {{ $rel := cond $external "me noopener noreferrer" "me" }}
       <a
         href="{{ .url }}"
-        rel="{{ if $external }}me noopener noreferrer{{ else }}me{{ end }}"
-        {{- if $external }} target="_blank"{{ end }}
+        rel="{{ $rel }}"
+        {{ if $external }}target="_blank"{{ end }}
         class="flex items-center text-content hover:text-content "
       >
         <span class="{{ $iconClass }}">

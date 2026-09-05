@@ -1,10 +1,11 @@
-{{/* Usage: {{ partial "post-lang-badge.html" . }} — marks which language a post is
+{{/* Usage: `partial "post-lang-badge.html" .` — marks which language a post is
   written in. Takes a page.
 
   Same chip as library-item-lang-badge.html, but without its
   `ne site.Language.Lang` guard: the blog feed mixes both languages
   (blog-posts.html), so every row is flagged rather than only the foreign ones —
-  an unbadged row would otherwise be ambiguous rather than implicit. */}}
+  an unbadged row would otherwise be ambiguous rather than implicit.
+*/}}
 {{ $lang := .Language.Lang }}
 {{ $color := partial "chip-color.html" (dict "family" "lang" "key" $lang) }}
 <span

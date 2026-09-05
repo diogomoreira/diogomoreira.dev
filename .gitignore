@@ -22,3 +22,9 @@ hugo.linux
 
 # direnv — local API keys for the Last.fm / TheAudioDB params
 .envrc
+
+# Shared editor config. A global ~/.gitignore_global excludes .vscode/, so the
+# directory has to be re-included before the two files inside it can be tracked.
+!.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json

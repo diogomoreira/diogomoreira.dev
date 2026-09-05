@@ -1,8 +1,8 @@
 {{/* A single nav anchor, shared by the rail and the drawer, parents and children.
 
-  Usage: {{ partial "nav-link.html" (dict
-    "entry" <menu entry> "page" <page>
-    "active" <bool> "desktop" <bool> "child" <bool>) }}
+  Usage: partial "nav-link.html" (dict
+  "entry" `menu entry` "page" `page`
+  "active" `bool` "desktop" `bool` "child" `bool`)
 
   Extracted out of nav-menu.html so the desktop/mobile split does not have to be
   written twice more for the child entries.
@@ -10,6 +10,7 @@
 
 {{ $entry := .entry }}
 {{ $page := .page }}
+
 
 <a
   href="{{ $entry.URL }}"
@@ -22,17 +23,17 @@
   */}}
   class="nav-link flex font-heading items-center gap-2
     {{ if .child }}
-      nav-link--child py-2
-    {{ else if .desktop }}
-      text-sm px-4 py-2 font-medium
-    {{ else }}
-      text-sm px-3 py-2 font-medium
-    {{ end }}
+    nav-link--child py-2
+  {{ else if .desktop }}
+    text-sm px-4 py-2 font-medium
+  {{ else }}
+    text-sm px-3 py-2 font-medium
+  {{ end }}
     {{ if .active }}
-      nav-link--active
-    {{ else }}
-      text-heading/60 hover:text-heading hover:bg-base-content/5
-    {{ end }}"
+    nav-link--active
+  {{ else }}
+    text-heading/60 hover:text-heading hover:bg-base-content/5
+  {{ end }}"
 >
   {{ with $entry.Params.icon }}{{ partial (printf "icons/nav/%s.html" .) $page }}{{ end }}
   {{ i18n $entry.Identifier }}

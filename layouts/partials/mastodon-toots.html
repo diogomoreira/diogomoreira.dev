@@ -23,7 +23,8 @@
 
 {{ with $mastodon }}
   {{/* `@user@host` → user, host. TrimPrefix first so the leading @ doesn't
-    produce an empty leading field. */}}
+    produce an empty leading field.
+  */}}
   {{ $parts := split (strings.TrimPrefix "@" .handle) "@" }}
   {{ $user := index $parts 0 }}
   {{ $host := "" }}
@@ -48,12 +49,9 @@
           {{ i18n "now_mastodon" }}
         </h2>
         {{/* `no-ext-icon`: the global external-link marker would otherwise stack
-          an arrow onto a link that already ends in one. */}}
-        <a
-          href="{{ .url }}"
-          class="text-xs link link-primary no-ext-icon"
-          target="_blank"
-          rel="me noopener noreferrer"
+          an arrow onto a link that already ends in one.
+        */}}
+        <a href="{{ .url }}" class="text-xs link link-primary no-ext-icon" target="_blank" rel="me noopener noreferrer"
           >{{ i18n "now_mastodon_all" }}</a
         >
       </div>
@@ -62,7 +60,8 @@
         every toot here is by the same person, so three copies of the same face
         and name would be noise in a narrow column. Filled from the `account`
         object the statuses response already embeds, so it costs no extra
-        request. Hidden until then: a nameless avatar frame looks broken. */}}
+        request. Hidden until then: a nameless avatar frame looks broken.
+      */}}
       <a
         id="mastodon-toots-profile"
         class="toot-profile no-ext-icon"
@@ -81,7 +80,8 @@
           fetched. No fetch, no `load` event, and the handler below that removes
           the skeleton and unhides it is the only thing that ever would. The
           attribute buys nothing anyway: there is no `src` until the fetch has
-          already resolved. */}}
+          already resolved.
+        */}}
         <img class="toot-profile__avatar hidden" width="88" height="88" alt="" decoding="async" />
         <span class="toot-profile__id">
           <span class="toot-profile__name"></span>
@@ -133,8 +133,21 @@
            rebuild it against an allowlist, unwrapping anything unknown to its text
            so no wording is lost. */
         const ALLOWED = new Set([
-          "P", "BR", "A", "SPAN", "EM", "STRONG", "B", "I",
-          "CODE", "PRE", "DEL", "UL", "OL", "LI", "BLOCKQUOTE",
+          "P",
+          "BR",
+          "A",
+          "SPAN",
+          "EM",
+          "STRONG",
+          "B",
+          "I",
+          "CODE",
+          "PRE",
+          "DEL",
+          "UL",
+          "OL",
+          "LI",
+          "BLOCKQUOTE",
         ]);
 
         function sanitize(html) {
@@ -247,10 +260,14 @@
             reveal.type = "button";
             reveal.className = "toot__reveal";
             reveal.textContent = sensitiveLabel;
-            reveal.addEventListener("click", () => {
-              container.classList.remove("toot__media--sensitive");
-              reveal.remove();
-            }, { once: true });
+            reveal.addEventListener(
+              "click",
+              () => {
+                container.classList.remove("toot__media--sensitive");
+                reveal.remove();
+              },
+              { once: true },
+            );
             container.appendChild(reveal);
           }
 
@@ -322,10 +339,14 @@
           name.appendChild(replaceEmoji(labelFrag, account.emojis));
 
           if (account.avatar) {
-            avatar.addEventListener("load", () => {
-              skeleton.remove();
-              avatar.classList.remove("hidden");
-            }, { once: true });
+            avatar.addEventListener(
+              "load",
+              () => {
+                skeleton.remove();
+                avatar.classList.remove("hidden");
+              },
+              { once: true },
+            );
             /* A broken avatar leaves the skeleton in place rather than an empty
                frame — the handle and name still identify the account. */
             avatar.addEventListener("error", () => avatar.remove(), { once: true });
@@ -362,10 +383,7 @@
 
         function writeCache(account, data) {
           try {
-            localStorage.setItem(
-              CACHE_KEY,
-              JSON.stringify({ t: Date.now(), account: account, data: data })
-            );
+            localStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), account: account, data: data }));
           } catch (err) {
             /* Private mode or a full quota — the section still works, just uncached. */
           }
@@ -383,8 +401,12 @@
         async function fetchStatuses() {
           const id = await resolveAccountId();
           const url =
-            api + "/accounts/" + encodeURIComponent(id) + "/statuses" +
-            "?exclude_replies=true&exclude_reblogs=true&limit=" + limit;
+            api +
+            "/accounts/" +
+            encodeURIComponent(id) +
+            "/statuses" +
+            "?exclude_replies=true&exclude_reblogs=true&limit=" +
+            limit;
           const res = await fetch(url);
           if (!res.ok) throw new Error("Mastodon request failed: " + res.status);
           const statuses = await res.json();
@@ -398,7 +420,9 @@
             url: author.url,
             avatar: author.avatar_static || author.avatar,
             emojis: (author.emojis || []).map(e => ({
-              shortcode: e.shortcode, url: e.url, static_url: e.static_url,
+              shortcode: e.shortcode,
+              url: e.url,
+              static_url: e.static_url,
             })),
           };
 
@@ -412,10 +436,14 @@
             spoiler_text: s.spoiler_text,
             sensitive: s.sensitive,
             emojis: (s.emojis || []).map(e => ({
-              shortcode: e.shortcode, url: e.url, static_url: e.static_url,
+              shortcode: e.shortcode,
+              url: e.url,
+              static_url: e.static_url,
             })),
             media_attachments: (s.media_attachments || []).map(m => ({
-              type: m.type, preview_url: m.preview_url, description: m.description,
+              type: m.type,
+              preview_url: m.preview_url,
+              description: m.description,
             })),
           }));
 
