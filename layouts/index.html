@@ -150,7 +150,11 @@
                 {{ end }}
               </span>
               {{ $color := partial "chip-color.html" (dict "family" "library" "key" .category) }}
-              <span class="badge badge-tint {{ with $color }}badge-{{ . }}{{ end }} badge-sm shrink-0 ms-auto md:ms-0">
+              <span
+                class="badge badge-tint {{ with $color }}
+                  badge-{{ . }}
+                {{ end }} badge-sm shrink-0 ms-auto md:ms-0 lowercase text-xs font-semibold"
+              >
                 {{ i18n (printf "library_category_%s" .category) | default .category }}
               </span>
             </a>
