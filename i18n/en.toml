@@ -15,7 +15,7 @@ nav_aria_label = "Main navigation"
 home_greeting = "Hi! I'm"
 home_recent_posts = "Recent Posts"
 home_all_posts = "All posts →"
-home_recently_added = "Recently Added"
+home_recently_added = "Recently Added in the library"
 home_browse_library = "Browse the library →"
 
 # Now page
