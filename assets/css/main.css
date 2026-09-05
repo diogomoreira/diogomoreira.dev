@@ -54,13 +54,13 @@
   --color-warning-content: #fbfaf7;
   --color-error: #cf292e;
   --color-error-content: #fbfaf7;
-  /* One radius for the whole site — see the shape-token note in CLAUDE.md.
-     daisyUI splits these three by component family (selector = badges/toggles,
-     field = buttons/inputs, box = cards/alerts/modals); holding them equal is
-     what stops a chip, a button and a card from each having their own corner. */
-  --radius-selector: 0.75rem;
-  --radius-field: 0.75rem;
-  --radius-box: 0.75rem;
+  /* No radius anywhere — see the shape-token note in CLAUDE.md. daisyUI splits
+     these three by component family (selector = badges/toggles, field =
+     buttons/inputs, box = cards/alerts/modals); holding all three at 0 is what
+     stops a chip, a button or a card from bringing a corner back on its own. */
+  --radius-selector: 0;
+  --radius-field: 0;
+  --radius-box: 0;
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
   --border: 2px;
@@ -120,9 +120,9 @@
   --color-error: #e65e58;
   --color-error-content: #1c1210;
   /* Identical to sunrise's, like every other shape token. */
-  --radius-selector: 0.75rem;
-  --radius-field: 0.75rem;
-  --radius-box: 0.75rem;
+  --radius-selector: 0;
+  --radius-field: 0;
+  --radius-box: 0;
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
   --border: 2px;
@@ -309,10 +309,6 @@ html[data-theme="midnight"] {
      does not shift the row's contents by 2px (same trick as `.toc a`). */
   .nav-link {
     border-inline-start: 2px solid transparent;
-    /* Square on the leading edge so the active bar reads as a bar, softened on
-       the trailing side. Logical props to match `border-inline-start` above. */
-    border-start-end-radius: 0.25rem;
-    border-end-end-radius: 0.25rem;
   }
 
   /* `color-mix` against `--color-primary` means the tint tracks each theme's own
@@ -739,18 +735,14 @@ html[data-theme="midnight"] {
      the opposite treatment (below) — the two shapes deliberately do not share
      this, which is why the rules are no longer grouped. */
   .library-card {
-    /* The cover is inset by the padding and the border below, so it cannot
-       carry the panel's own radius and still look concentric — see the note on
-       `.library-card__img`. Keep this in step with those two values. */
-    --radius-inset: max(0px, calc(var(--radius-box) - 0.5rem - 1px));
     display: block;
     padding: 0.5rem;
     background-color: var(--color-base-200);
     border: 1px solid var(--color-base-300);
-    /* Corners come from `rounded-box` in `layouts/library/single.html`, same as
-       `.post-card` — a utility here would beat any `border-radius` declared in
-       this layer anyway. Hand-written panels get no radius for free, so a card
-       that forgets the class is square. */
+    /* No corners: `--radius-box` is 0 and nothing here declares a radius of its
+       own. The panel and its cover were kept concentric by a `--radius-inset`
+       step until the site went square in 2026-09; with both at 0 the step has
+       nothing to compute, so it is gone rather than left as dead arithmetic. */
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
     transition: background-color 150ms ease;
   }
@@ -797,14 +789,7 @@ html[data-theme="midnight"] {
      from the category's `cover_ratio` (see below), so a mismatched source is
      centre-cropped rather than breaking the row.
 
-     `--radius-inset`, not `rounded-box`: two nested boxes with the same radius
-     are not concentric. The panel's corner curves from its outer edge, so 9px
-     in — the padding plus its border — only a 3px corner is left, and a 12px
-     cover corner inside that makes the frame bulge from 9px along the edges to
-     12.7px at the diagonal. Subtracting the inset gives both curves one centre.
-     Same reasoning and same value as `.post-card__img`; this is the one place
-     the site's single radius is stepped, and it is stepped so that it still
-     reads as a single radius. */
+     No radius, like the panel around it. */
   .library-card__img {
     display: block;
     width: 100%;
@@ -812,7 +797,6 @@ html[data-theme="midnight"] {
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border: 2px solid var(--color-base-300);
-    border-radius: var(--radius-inset);
   }
 
   /* Cover shapes, set per category by `cover_ratio` in data/library/*.yaml.
@@ -833,7 +817,6 @@ html[data-theme="midnight"] {
     justify-content: center;
     aspect-ratio: 1 / 1;
     border: 2px solid var(--color-base-300);
-    border-radius: var(--radius-inset);
     background-color: var(--color-base-100);
     color: var(--color-accent);
   }
@@ -1049,18 +1032,11 @@ html[data-theme="midnight"] {
      established "panel sitting on the column" step, in both themes.
      --------------------------------------------------------------------------- */
 
-  /* The corners come from a `rounded-box` utility in the markup, not from here.
-     It resolves to the same `--radius-box`, and being a utility it also sits in
-     a layer that wins over this one — so a `border-radius` declared here would
-     be dead code that reads as the source of truth. `rounded-box` is the only
-     `rounded-*` safe to reach for; the rest of Tailwind's scale carries its own
-     values and would reintroduce a second radius (see CLAUDE.md). */
+  /* Square, like everything else — the site's three radius tokens are all 0 and
+     no rule here declares a corner of its own. Don't reach for a `rounded-*`
+     utility in the markup either: every value on Tailwind's scale is a literal,
+     so one would reintroduce a radius that no token can switch off again. */
   .post-card {
-    /* The cover is inset by the padding and the border, so it cannot carry the
-       same radius as the panel and still look right — see `--radius-inset` on
-       `.library-card`, which derives it the same way from the same two values.
-       Keep this in step with the `padding` and `border` below it. */
-    --radius-inset: max(0px, calc(var(--radius-box) - 0.5rem - 1px));
     display: block;
     padding: 0.5rem;
     background-color: var(--color-base-200);
@@ -1084,22 +1060,14 @@ html[data-theme="midnight"] {
      a grid the cards have to line up, and the covers are whatever Unsplash or a
      screenshot happened to be. A mismatched source is centre-cropped.
 
-     Corners are `--radius-inset`, not `rounded-box`. Two nested boxes with the
-     same radius are not concentric: the panel's own corner curves from its
-     outer edge, so by the time it reaches the cover 9px in, the space left is a
-     3px corner — and a 12px cover corner inside it makes the frame bulge from
-     9px along the edges to 12.7px at the diagonal. Subtracting the inset gives
-     both curves one centre and a frame of even width. This is the one place the
-     site's single radius is stepped, and it is stepped to preserve the look of
-     a single radius rather than to introduce a second one. No shadow either;
-     the panel casts it, and two nested shadows read as an embossed edge. */
+     No corners, like the panel around it, and no shadow either — the panel
+     casts it, and two nested shadows read as an embossed edge. */
   .post-card__img {
     display: block;
     width: 100%;
     height: auto;
     aspect-ratio: 16 / 10;
     object-fit: cover;
-    border-radius: var(--radius-inset);
   }
 
   .post-card--featured .post-card__img {
@@ -1533,8 +1501,8 @@ a {
 /* @tailwindcss/typography hard-codes its own corners — `pre` at 0.375rem, `kbd`
    at 0.3125rem — and unlike the heading colour above there is no
    `--tw-prose-*` variable to retarget, so these have to be real declarations.
-   Code blocks are the most visible rounded thing on a post, and two of the
-   three radii on this site used to be theirs.
+   Without them a code block would be the one rounded thing left on a square
+   site; pointing them at the token is what keeps them in step with it.
 
    Unlayered for the same reason as the rule above; the plugin's
    `.prose :where(pre)` also only measures (0,1,0), since `:where()` contributes
