@@ -64,7 +64,7 @@
         */}}
         <ul class="list-none p-0 m-0 mt-2">
           {{ range .items }}
-            <li class="border-t border-base-300 first:border-t-0">
+            <li class="border-t border-base-300 first:border-t-0 py-[0.55rem]">
               {{/* The row is NOT a wrapping `<a>`, and that is the one place this
                 departs from the library rows it otherwise copies. A note here is
                 a sentence about a person and often cites where to read them, so
@@ -75,38 +75,35 @@
                 So only the name links, and the note's links are ordinary
                 siblings.
               */}}
-              {{/* The accent edge is driven by the name link alone, not by
-                `hover:` on this wrapper: only the name is clickable now, and an
-                edge that lit up over dead space would promise a click that is
-                not there. The `data-friend-link` hook is what keeps the note's
-                own links from triggering it — a bare `has-[a:hover]` would.
+              {{/* No accent edge on hover, unlike the library rows this
+                otherwise copies: only the name is clickable here, so an edge
+                lighting up across the whole row — most of which is dead space —
+                would promise a click that is not there. The name's own dashed
+                underline is the only hover cue, which is why the row carries no
+                `has-[…]` state and no wrapper of its own; the padding that
+                wrapper held now sits on the `li`.
               */}}
-              <div
-                class="py-[0.55rem] border-s-2 border-transparent ps-[0.6rem] -ms-[0.6rem] transition-colors duration-150 has-[a[data-friend-link]:hover]:border-s-accent has-[a[data-friend-link]:focus-visible]:border-s-accent"
+              {{/* `link-dash` holds the dashed accent underline; those
+                `text-decoration-*` longhands are non-inherited, so it sits on
+                the anchor itself. The line only appears on hover.
+                `inline-block`, not `block`: the click target should be the
+                name, not the full width of the row.
+              */}}
+              <a
+                href="{{ .link }}"
+                class="inline-block leading-normal text-base-content link-dash hover:underline focus-visible:underline no-ext-icon font-bold"
+                target="_blank"
+                rel="noopener noreferrer"
+                >{{ .title }}</a
               >
-                {{/* `link-dash` holds the dashed accent underline; those
-                  `text-decoration-*` longhands are non-inherited, so it sits on
-                  the anchor itself. The line only appears on hover.
-                  `inline-block`, not `block`: the click target should be the
-                  name, not the full width of the row.
-                */}}
-                <a
-                  href="{{ .link }}"
-                  data-friend-link
-                  class="inline-block leading-normal text-base-content link-dash hover:underline focus-visible:underline no-ext-icon font-bold"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >{{ .title }}</a
-                >
-                {{/* Note links need an underline of their own: the site-wide `a`
-                  rule sets only the decoration's colour and style, and the
-                  underline itself comes from prose styling this span sits
-                  outside of.
-                */}}
-                <span class="[&_a]:underline">
-                  {{ partial "library-item-note.html" .note }}
-                </span>
-              </div>
+              {{/* Note links need an underline of their own: the site-wide `a`
+                rule sets only the decoration's colour and style, and the
+                underline itself comes from prose styling this span sits
+                outside of.
+              */}}
+              <span class="[&_a]:underline">
+                {{ partial "library-item-note.html" .note }}
+              </span>
             </li>
           {{ end }}
         </ul>
