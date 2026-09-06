@@ -62,8 +62,10 @@
             {{ range .items }}
               {{ $item := . }}
               {{/* The panel: `base-200` on a `base-300` hairline, the same recipe
-                as the blog post cards — cover art is an object and a surface
-                under it says so. Square, like everything else; see the
+                as the blog post cards in partials/post-card.html — cover art is
+                an object and a surface under it says so. Keep the two in step:
+                the post card carried an opaque `neutral` plate for a while and
+                the pair read as two unrelated components. Square, like everything else; see the
                 concentricity note in CLAUDE.md before giving the panel or the
                 cover inside it a corner back. */}}
               <a

@@ -6,10 +6,16 @@
   buttons (the grid columns are picked in baseof.html) and they stack.
 
   Sizing utilities are the left rail's minus its flex column — see the note there.
+  `lg:min-h-screen` is *not* one it can drop, though: `self-start` stops the rail
+  stretching, and without a floor a page with a short TOC would paint a stub of
+  chrome a few hundred pixels tall instead of a full-height column.
+
+  `rail-chrome` paints it and rebinds the theme tokens inside — see main.css.
+  This file only picks the hue: `--rail-tools`, the lighter of the two.
 */}}
 {{ $hasToc := partial "has-toc.html" . }}
 <div
-  class="hidden lg:block lg:sticky lg:top-0 lg:self-start lg:max-h-screen lg:overflow-y-auto lg:overscroll-contain lg:px-5 lg:py-8"
+  class="hidden lg:block lg:sticky lg:top-0 lg:self-start lg:min-h-screen lg:max-h-screen lg:overflow-y-auto lg:overscroll-contain lg:px-5 lg:py-8 rail-chrome [--rail-bg:var(--rail-tools)]"
   data-pagefind-ignore
 >
   <div class="flex items-center gap-2 mb-8 {{ if $hasToc }}flex-row{{ else }}flex-col{{ end }}">

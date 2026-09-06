@@ -12,18 +12,35 @@
     {{ partial "mobile-topbar.html" . }}
     {{ partial "sidebar-mobile-drawer.html" . }}
 
-    {{/* Three tracks: a slim rail pinned to each screen edge, and a `1fr` middle
-      that soaks up everything left over. The two rails are the same width so the
-      capped column inside the middle still reads as centred — except when the
-      page has no table of contents, where the right track has only a column of
-      square icon buttons to fit (see rail-right.html). A `btn-sm btn-square` is
-      2rem and the rail pads 1.25rem a side, so 5rem leaves slack for focus rings.
+    {{/* Three tracks: a rail pinned to each screen edge, and a `1fr` middle that
+      soaks up everything left over.
+
+      The nav rail is the wider of the two — 15rem at `lg`, 17rem at `xl`, against
+      the tools rail's 13/15. It was 13/15 as well until 2026-09; it carries the
+      title, the menu, the search box, the social row, the webring and the footer
+      meta, where the right rail carries two buttons and a TOC, so the extra 2rem
+      goes where the content actually is.
+
+      That does mean the rails are no longer equal, and the capped column inside
+      the middle therefore sits 1rem right of the viewport centre on a page with a
+      TOC. It is deliberate and it is small — the cap is `max-w-4xl` and the
+      middle track is what shifts, not the measure — but it is the reason the two
+      used to match, so restore both to one value if the drift ever reads wrong.
+      Pages *without* a TOC were never symmetric anyway: the right track collapses
+      to a column of square icon buttons (see rail-right.html), and a
+      `btn-sm btn-square` is 2rem against the rail's 1.25rem of side padding, so
+      5rem leaves slack for focus rings. Now that both rails are painted, that
+      asymmetry is visible rather than merely structural.
 
       The grid only exists from `lg` up; below it the rails hide and the mobile
       topbar + drawer take over, so this is a plain block. Tailwind's `lg`/`xl`
       are 64rem/80rem, which is exactly where the hand-written media queries sat.
+      Widening the nav rail spends middle-track width at every viewport, and it
+      bites hardest at exactly `lg`: 64rem minus 15rem minus 13rem leaves a 36rem
+      middle, so the reading column loses 2rem there and only stops mattering
+      once the middle passes the 56rem cap.
     */}}
-    {{ $cols := cond (partial "has-toc.html" .) "lg:grid-cols-[13rem_1fr_13rem] xl:grid-cols-[15rem_1fr_15rem]" "lg:grid-cols-[13rem_1fr_5rem] xl:grid-cols-[15rem_1fr_5rem]" }}
+    {{ $cols := cond (partial "has-toc.html" .) "lg:grid-cols-[15rem_1fr_13rem] xl:grid-cols-[17rem_1fr_15rem]" "lg:grid-cols-[15rem_1fr_5rem] xl:grid-cols-[17rem_1fr_5rem]" }}
     <div class="lg:grid {{ $cols }}">
       {{ partial "rail-left.html" . }}
 

@@ -1,6 +1,24 @@
-{{/* Usage: `partial "post-status-color.html" .` — returns the DaisyUI color
-  keyword (e.g. "primary") for a blog post's status param, or "" for
-  archived/unset.
+{{/* Usage: `partial "post-status-color.html" .` — the single place a blog
+  post's status colour is decided. Takes a page (or anything with a
+  `.Params.status`) and returns a dict of literal class strings:
+
+  - `chip` — the flat chip, used by `post-status-badge.html` on a post page and
+  by `post-status-legend.html`. It sets daisyUI's own two per-badge tokens
+  rather than a `bg-`/`text-` pair, which is exactly what `badge-primary`
+  compiles to, so it paints fill, ink and border in one go and cannot lose a
+  cascade fight with `.badge` itself.
+  - `ramp` — the gradient chip in the post card's corner strip.
+
+  The colours are the `--status-*` variables in main.css: one Tailwind emerald
+  ramp, identical in both themes. See the block there for why they are fixed
+  (a chip is a fill, so its ink sits on the emerald and not on the page) and for
+  the measured ratios. Statuses used to map to three unrelated brand tokens —
+  `info`/`success`/`primary` — which spent three hues on what is really one axis
+  of maturity.
+
+  An unknown or archived status falls through to the paper chip, which is the
+  one entry that *is* theme-aware: "archived" is the absence of a colour rather
+  than a colour, so it reads from the base ramp like everything else.
 
   `return`, not rendered output, and that is load-bearing: a partial that ends
   by printing hands its caller the *template's* text, newlines and all. This one
@@ -10,6 +28,27 @@
   ran. Every status badge on the site was uncoloured, and the legend's
   `text-<color>` was dead the same way. Same shape as chip-color.html, which is
   why that one never had the bug.
+
+  Returning a dict rather than a colour keyword is what keeps the two chip
+  shapes in one file: the card wants a two-stop ramp and the badge a flat fill,
+  and they are the same colour by construction rather than by two maps agreeing.
+  It also means no call site concatenates a class name any more, so none of these
+  needs an `@source inline(...)` safelist — every string here is a literal.
 */}}
-{{ $color := dict "seed" "info" "growing" "success" "living" "primary" "archived" "" }}
-{{ return index $color (.Params.status | default "") | default "" }}
+{{ $archived := dict
+  "chip" "badge-ghost"
+  "ramp" "bg-linear-to-br from-base-100 to-base-200 text-base-content"
+}}
+{{ $status := dict
+  "seed" (dict
+  "chip" "[--badge-color:var(--status-seed-deep)] [--badge-fg:var(--status-seed-ink)]"
+  "ramp" "bg-linear-to-br from-(--status-seed-start) to-(--status-seed-deep) text-(--status-seed-ink)")
+  "growing" (dict
+  "chip" "[--badge-color:var(--status-growing-deep)] [--badge-fg:var(--status-growing-ink)]"
+  "ramp" "bg-linear-to-br from-(--status-growing-start) to-(--status-growing-deep) text-(--status-growing-ink)")
+  "living" (dict
+  "chip" "[--badge-color:var(--status-living-deep)] [--badge-fg:var(--status-living-ink)]"
+  "ramp" "bg-linear-to-br from-(--status-living-start) to-(--status-living-deep) text-(--status-living-ink)")
+  "archived" $archived
+}}
+{{ return index $status (.Params.status | default "") | default $archived }}

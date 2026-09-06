@@ -1,1 +1,11 @@
-<p class="bg-base-200 p-10 text-center text-sm text-secondary">{{ . | default (i18n "empty_state_default") }}</p>
+{{/* A Burning Flame wash with a `primary` edge rather than a flat `base-200`
+  panel: this is the one piece of chrome that only ever appears when a section
+  has nothing in it, so it should read as a deliberate placard. Burning Flame at 15% is a fill-tier
+  literal — 1.48:1 as text on the page ground, so it can only ever be a wash —
+  while the rule uses `primary`, which is a token and so tracks each theme. The
+  copy stays on `text-secondary`, which is measured against `base-200`; the tint
+  is faint enough not to move it.
+*/}}
+<p class="bg-[#ffb162]/15 border-s-4 border-primary p-10 text-center text-sm text-secondary">
+  {{ . | default (i18n "empty_state_default") }}
+</p>
