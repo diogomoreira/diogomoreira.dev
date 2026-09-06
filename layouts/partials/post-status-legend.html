@@ -1,16 +1,22 @@
 {{/* Usage: `partial "post-status-legend.html" .` — explains what the post status emoji (🌱🌿🪴🍂) mean */}}
+{{/* The label is the same chip a post carries, not a coloured word. It was
+  `text-<color>` until the statuses moved onto the fixed emerald ramp, and that
+  could not survive the move: no single emerald step clears 4.5:1 on both
+  themes' grounds at once, so a status colour that does not flip by theme can
+  only be a fill. Rendering the chip is the better legend anyway — it shows the
+  thing you actually see on a card rather than a recolouring of it.
+*/}}
 <div class="mb-10 text-xs text-base-content/70">
   {{ partial "section-label.html" (dict "text" (i18n "status_legend_title") "class" "mb-3") }}
   <ul class="list-none p-0 m-0 flex flex-col gap-1.5">
     {{ range slice "seed" "growing" "living" "archived" }}
       {{ $status := . }}
-      {{ $icon := partial "post-status-icon.html" (dict "Params" (dict "status" $status)) }}
-      {{ $color := partial "post-status-color.html" (dict "Params" (dict "status" $status)) }}
-      <li class="flex items-baseline gap-2">
+      {{ $page := dict "Params" (dict "status" $status) }}
+      {{ $icon := partial "post-status-icon.html" $page }}
+      {{ $chip := (partial "post-status-color.html" $page).chip }}
+      <li class="flex items-center gap-2">
         <span role="img" aria-hidden="true">{{ $icon }}</span>
-        <span class="font-medium {{ if $color }}text-{{ $color }}{{ else }}text-base-content{{ end }}"
-          >{{ i18n (printf "status_%s" $status) }}</span
-        >
+        <span class="badge badge-sm {{ $chip }}">{{ i18n (printf "status_%s" $status) }}</span>
         <span>— {{ i18n (printf "status_%s_description" $status) }}</span>
       </li>
     {{ end }}

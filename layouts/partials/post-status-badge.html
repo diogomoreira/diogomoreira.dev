@@ -1,16 +1,15 @@
 {{/* Usage: `partial "post-status-badge.html" .` — status badge (emoji + label) shown near the date on a blog post page */}}
 {{ $status := .Params.status }}
 {{ $icon := partial "post-status-icon.html" . }}
-{{ $color := partial "post-status-color.html" . }}
+{{/* The flat chip from post-status-color.html: two arbitrary properties setting
+  daisyUI's own `--badge-color` / `--badge-fg`, which is exactly what
+  `badge-primary` compiles to — so `.badge` paints fill, ink and border from
+  them and there is no cascade fight to lose. An archived post gets
+  `badge-ghost` from the same map.
+*/}}
+{{ $chip := (partial "post-status-color.html" .).chip }}
 {{ with $icon }}
-  <span
-    class="badge {{ if $color }}
-      badge-{{ $color }}
-    {{ else }}
-      badge-ghost
-    {{ end }} badge-sm gap-1"
-    title="{{ i18n (printf "status_%s" $status) }}"
-  >
+  <span class="badge badge-sm gap-1 {{ $chip }}" title="{{ i18n (printf "status_%s" $status) }}">
     <span role="img" aria-hidden="true">{{ . }}</span>
     {{ i18n (printf "status_%s" $status) }}
   </span>

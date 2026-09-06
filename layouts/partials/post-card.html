@@ -7,42 +7,116 @@
   blog-posts.html owning the ordering — one partial owns the shape, so the three
   cannot drift apart. Callers own the grid around it, not the card itself.
 
+  The shape: the cover fills the whole frame, a flush badge strip sits in the
+  top-left corner, and a padded text block across the bottom carries the category
+  kicker, the title, a rule and the meta line — all on the library's panel recipe,
+  `bg-base-200` inside a `base-300` hairline with a shadow. That recipe is shared
+  on purpose (see layouts/library/single.html): cover art is an object and a
+  surface under it says so, and the two card families on the site should not
+  disagree about what a card is made of.
+
+  It was an opaque `neutral` ink plate between 2026-09 and this change, which is
+  the only reason the category is a kicker rather than the solid chip it is
+  everywhere else — nothing coloured could sit on that surface.
+
   The whole card is a single `a`: one tab stop, and the chips inside it are
   therefore `span`s. A nested `a` for the category would be invalid HTML and
   would split focus across the card. The card also can't pick up the global
-  external-link ↗ marker — its href is relative, and the rule only matches
-  a[href^="http"].
+  external-link marker — its href is relative, and the rule only matches
+  `a[href^="http"]`.
 */}}
 
 {{ $post := .page }}
 {{ $featured := .featured | default false }}
 
-{{/* First category only — the cover has room for one chip, and `index` on a nil
+{{/* First category only — the plate's kicker is one line, and `index` on a nil
   slice is a build error, so it has to be guarded rather than indexed inline.
+
+  It is a kicker here, not a chip: the plate is near-black in both themes and
+  every brand colour on it falls under 4.5:1 (sunrise `primary` measures 3.02:1),
+  so a solid category chip cannot live on this surface. Categories still render
+  as solid chips everywhere else on the site — /blog's category row, the term
+  pages — which is what keeps them reading above the tinted tag chips.
 */}}
 {{ $cat := "" }}
 {{ with $post.Params.categories }}
   {{ $cat = index . 0 }}
 {{ end }}
-{{ $catColor := partial "chip-color.html" (dict "family" "category" "key" (urlize $cat)) | default "primary" }}
 
-{{/* The panel: `base-200` on a `base-300` hairline, the same recipe as the
-  library cards. Cover art is an object and a surface under it says so. The
-  reference design this came from is a white card on a grey page, which does not
-  translate — in sunrise `base-100` *is* the reading column, so a `base-100` card
-  would vanish into it.
+{{/* The status is a chip in the corner strip rather than a muted item in the
+  meta row, which is where it sat on the stacked card. The reasoning that put it
+  there is what moves it now: a coloured chip was loud beside two muted meta
+  items *in the same row*. On this card the meta row is date and reading time
+  only, and the chip is 400px away on the cover.
 
-  Square, like everything else on the site: the three radius tokens are all 0.
-  Don't reach for a `rounded-*` utility here either — every value on Tailwind's
-  scale is a literal, so one would reintroduce a corner that no token can switch
-  off again. `rounded-box` is the only one that reads the token.
+  post-status-color.html is the single place a status's colour is decided; the
+  `ramp` string it returns is this card's shape — a two-stop gradient in one
+  emerald band, fixed in both themes. `to-br` because the strip is flush in the
+  cover's top-left corner: the ramp runs light-to-dark away from that corner.
+  An archived or unset status falls through to the paper ramp there.
 
-  `group` is what lets the title and cover react to a hover on the card without
-  a descendant rule for each.
+  Each chip ramps *within its own band* rather than mixing toward
+  `base-content`, which is what it did while the colour came from the theme
+  tokens: the point of the emerald ramp is that a status is the same colour in
+  both themes, and a stop mixed from `base-content` would have been the one part
+  of the chip that still flipped. Both ends of every band are measured against
+  the chip's own ink, so the gradient cannot walk a chip out of contrast the way
+  a free-hand second stop could — see the `--status-*` block in main.css.
+*/}}
+{{ $statusClass := (partial "post-status-color.html" $post).ramp }}
+
+{{/* The branching class strings are variables interpolated whole rather than
+  inline `if` actions inside a `class` attribute: prettier-plugin-go-template
+  drops whitespace written *inside* an action body, which silently glues two
+  class names together. See the formatting notes in CLAUDE.md.
+
+  Featured is the full-width variant used once per /blog: same 16:9 cover, a
+  larger title, the excerpt (there is horizontal room for it here and none on a
+  285px grid card) and the `blog_keep_reading` line.
+*/}}
+{{ $platePad := cond $featured "p-5 md:p-6" "p-4" }}
+{{ $titleSize := cond $featured "text-2xl/[1.1] md:text-3xl/[1.05]" "text-xl/[1.15]" }}
+
+{{/* The card's micro-type: uppercase, letterspaced, 11px. Used by the corner
+  chips, the kicker and the meta row, so it is one string rather than three
+  copies. 11px rather than the mockup's 10px because pt-br's meta line is the
+  tightest fit in the design — `19 DE JUN. DE 2026 / 8 MIN DE LEITURA` — and
+  reads as noise any smaller.
+*/}}
+{{ $micro := "font-heading text-[0.6875rem]/[1.2] font-semibold uppercase tracking-[0.12em]" }}
+
+{{/* Square, like everything else on the site: the three radius tokens are all 0.
+  Don't reach for a `rounded-*` utility here — every value on Tailwind's scale is
+  a literal, so one would reintroduce a corner that no token can switch off
+  again. `rounded-box` is the only one that reads the token.
+
+  **The plate sits under the cover, not over it, and that is the one place this
+  departs from the mockup it came from.** There the plate is an overlay on a 3:4
+  frame, which has the height to give a plate ~130px and still show most of the
+  photo. A 16:9 frame does not: measured on /blog, a 367px archive card is 206px
+  tall against a plate that needs 134px of it, leaving a 70px band of cover — and
+  the homepage's three-up row is narrower still. The overlay and a 16:9 cover are
+  not both possible at these widths, so the cover keeps its full ratio and the
+  plate is stacked beneath it. Everything else about the shape survives: the cover
+  still runs edge to edge, the corner strip is still flush and overlapping, and
+  the plate is still ink.
+
+  This is also what makes the card's height content-driven again — no
+  `aspect-ratio` on the card itself, so nothing can clip and there is no
+  `min-h-fit` floor to keep in step with the plate.
+
+  `bg-base-200` on the card covers the coverless case too: every post carries a
+  cover today, but `archetypes/blog.md` emits `cover: ""`, and the cover box still
+  reserves its 16:9 so the corner strip has a surface. Such a post gets an empty
+  panel band above its text rather than a hole.
+
+  `group` is what lets the title react to a hover on the card without a descendant
+  rule. It is the card's only hover cue: the cover is deliberately static, with
+  no scale, no fade and no transition on it.
 */}}
 <a
   href="{{ $post.RelPermalink }}"
-  class="group block p-2 bg-base-200 border border-base-300 shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1)] transition-colors duration-150 hover:bg-base-300 focus-visible:bg-base-300"
+  class="group block overflow-hidden bg-base-200 border border-base-300 shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1)]"
 >
   {{/* `$post` is captured above rather than using `.` here: inside this `with`,
     `.` is the cover *string*, and responsive-image.html needs the page to
@@ -52,117 +126,108 @@
     The width is passed explicitly because responsive-image.html emits no
     `srcset`/`sizes` — the caller picks the rendered size. It clamps down to the
     source's own width and never upscales.
+
+    The covers stay in colour. The mockup this came from greyscales them, but
+    that is a treatment its whole design system applies to every image, and here
+    it would put the card's cover and the same photo on the post's own page in
+    two different worlds.
   */}}
-  {{ with $post.Params.cover }}
-    {{/* The positioning context for the two overlay chips below. */}}
-    <div class="relative block">
+  <div class="relative aspect-[16/9]">
+    {{ with $post.Params.cover }}
       {{ partial "responsive-image.html" (dict
         "page" $post
         "src" .
         "alt" $post.Title
-        "class" (printf "block w-full h-auto object-cover group-hover:opacity-90 group-focus-visible:opacity-90 %s" (cond $featured "aspect-[16/9]" "aspect-[16/10]"))
+        "class" "block w-full h-full object-cover"
         "width" (cond $featured "1200" "640"))
       }}
-      {{/* Both chips live in one positioned flex row rather than being pinned to
-        opposite corners individually. Two separately-positioned chips do not
-        line up: whichever one is wrapped in a positioning element sits inside a
-        line box and gets pushed down by baseline alignment, while a chip that
-        *is* the positioned element starts flush at the offset. One row with
-        `align-items: center` makes alignment structural instead of a coincidence
-        of two elements happening to have the same height.
+    {{ end }}
+    {{/* Both chips sit in one flush strip pinned to the corner rather than being
+      pushed to opposite ends of the cover. Two separately-positioned chips do not
+      line up: whichever one is wrapped in a positioning element sits inside a line
+      box and gets nudged down by baseline alignment, while a chip that *is* the
+      positioned element starts flush at the offset. One row makes the alignment
+      structural instead of a coincidence of two elements happening to match.
+
+      `items-stretch` (the flex default, left implicit) is what makes the two chips
+      share one bottom edge whatever their text lengths.
+    */}}
+    <div class="absolute top-0 start-0 flex {{ $micro }}">
+      <span
+        class="flex items-center px-2 py-1.5 font-mono bg-base-100 text-base-content border-e border-b border-base-300"
+        title="{{ i18n "post_lang_written_in" (dict "Language" $post.Language.Label) }}"
+        >{{ upper (substr $post.Language.Lang 0 2) }}</span
+      >
+      {{/* The blog feed mixes both languages (blog-posts.html), so every card is
+        badged rather than only the foreign ones — an unbadged card would be
+        ambiguous rather than implicit. The chip is uncoloured here, unlike the
+        library's: the coloured chip in this strip is the status, and two solid
+        colours side by side read as a collision.
       */}}
-      <div class="absolute top-2 inset-x-2 flex items-center gap-2">
-        {{ with $cat }}
-          {{/* Solid, not `badge-tint`: blog categories render solid everywhere on
-            the site, and that is the only thing keeping them reading above the
-            tinted tag chips.
-          */}}
-          {{/* `min-w-0`: a long category can shrink, but it must never squeeze
-            the language badge.
-          */}}
-          <span class="min-w-0 badge badge-{{ $catColor }} badge-sm">{{ . }}</span>
-        {{ end }}
-        {{/* `ms-auto` rather than `justify-between` on the row: a post with no
-          category renders no chip, and `justify-between` would then strand the
-          language badge at the left edge. `flex` on this wrapper matters too —
-          it is what stops the badge inside from sitting in a line box and being
-          nudged off the category chip's baseline.
-        */}}
-        <span class="flex shrink-0 ms-auto">{{ partial "post-lang-badge.html" $post }}</span>
-      </div>
+      {{ with $post.Params.status }}
+        <span class="flex items-center px-2 py-1.5 border-b border-base-300 {{ $statusClass }}"
+          >{{ i18n (printf "status_%s" .) }}</span
+        >
+      {{ end }}
     </div>
-  {{ end }}
+  </div>
 
+  {{/* The text block declares no background of its own — the card's `bg-base-200`
+    shows through — so there is one surface to keep in step rather than two. It
+    was an opaque `bg-neutral` ink plate from 2026-09 until the card moved onto
+    the library's panel recipe; everything below that reads a colour was re-inked
+    from `neutral-content` to the ordinary base tokens at the same time.
+  */}}
+  <div class="{{ $platePad }}">
+    {{/* `text-primary`, which the ink plate could not carry: on that surface every
+      brand token measured about 2:1, so the kicker had to be the fill-tier
+      Burning Flame literal instead. On `base-200` the tokens work again — 4.58:1
+      in sunrise, 10.42:1 in midnight — and a token is the better answer here
+      because it tracks each theme rather than pinning one colour across both.
 
-  <div class="flex flex-col gap-[0.35rem] pt-3 px-[0.35rem] pb-1">
-    {{/* `link-dash` carries the dashed accent underline's colour, style and
-      thickness; the line itself only appears on hover. Those longhands have to
-      sit on the heading rather than being inherited from the anchor around it —
-      they are non-inherited properties, so the site-wide `a` rule in main.css
-      never reaches an element nested inside the link.
+      Still a letterspaced kicker rather than the solid chip categories get
+      everywhere else (/blog's category row, the term pages). That was forced by
+      the plate and is now only a preference: this surface would take a chip.
+    */}}
+    {{ with $cat }}
+      <div class="text-primary {{ $micro }}">{{ . }}</div>
+    {{ end }}
+    {{/* `link-dash` again, rather than the four hand-written longhands the plate
+      needed: that utility's colour is `--color-accent`, which was all but
+      invisible on the ink surface and reads at 6.23:1 / 10.01:1 here. It has to
+      sit on the heading rather than be inherited from the anchor around it —
+      text-decoration longhands are not inherited, so the site-wide `a` rule in
+      main.css never reaches an element nested inside the link.
+
+      No colour utility: `@layer base` already paints h1–h6 with `--color-heading`.
     */}}
     <h3
-      class="line-clamp-2 m-0 font-heading font-medium text-heading link-dash group-hover:underline group-focus-visible:underline {{ if $featured }}
-        text-[1.375rem]/[1.35]
-      {{ else }}
-        text-base/[1.35]
-      {{ end }}"
+      class="mt-2 mb-3 line-clamp-2 font-heading font-semibold tracking-tight link-dash group-hover:underline group-focus-visible:underline {{ $titleSize }}"
     >
       {{ $post.Title }}
     </h3>
-    {{/* `/70` is the site-wide floor for muted text — `/50` and `/60` fall under
-      4.5:1 in one theme or the other. The featured card has the room for a third
-      line.
+    {{ if $featured }}
+      {{/* `/70` is the site-wide floor for muted text, held to on the plate as
+        well: `base-content/70` measures 5.77:1 in sunrise and 7.23:1 in midnight.
+      */}}
+      <p class="mb-3 line-clamp-2 text-sm/[1.5] text-base-content/70">
+        {{ with $post.Description }}{{ . }}{{ else }}{{ $post.Plain | truncate 160 }}{{ end }}
+      </p>
+    {{ end }}
+    {{/* Date and reading time only — the status moved to the corner strip, and
+      the calendar/clock icons went with the row's old shape: a 14px glyph beside
+      letterspaced 11px capitals reads as a bullet, not as an icon. In pt-br this
+      is the tightest fit in the design, which is what `flex-wrap` is for.
     */}}
-    <p
-      class="m-0 text-base-content/70 {{ if $featured }}
-        line-clamp-3 text-sm/[1.5]
-      {{ else }}
-        line-clamp-2 text-[0.8125rem]/[1.5]
-      {{ end }}"
+    <div
+      class="flex flex-wrap items-center gap-x-2 gap-y-1 pt-3 border-t border-base-300 text-base-content/70 {{ $micro }}"
     >
-      {{ with $post.Description }}{{ . }}{{ else }}{{ $post.Plain | truncate 160 }}{{ end }}
-    </p>
-    {{/* In pt-br this row is the tightest fit in the design — `10 de abr. de
-      2026 · 8 min de leitura · Em cultivo` — and wraps to two lines on a grid
-      card, which is what `flex-wrap` is for.
-    */}}
-    <div class="flex flex-wrap items-center gap-2 mt-[0.4rem] text-xs text-base-content/70">
-      <span class="inline-flex items-center gap-[0.3rem] whitespace-nowrap">
-        {{ partial "icons/meta/calendar.html" }}
-        <time datetime="{{ $post.Date.Format "2006-01-02" }}"
-          >{{ partial "formatted-date-short.html" $post.Date }}</time
-        >
-      </span>
-      {{/* Mixed from `base-content`, not `base-300`: the card's hover state *is*
-        `base-300`, so a `base-300` divider would disappear exactly when the card
-        is being pointed at.
-      */}}
-      <span class="w-px h-3 bg-base-content/30" aria-hidden="true"></span>
-      <span class="inline-flex items-center gap-[0.3rem] whitespace-nowrap">
-        {{ partial "icons/meta/clock.html" }}
-        {{ i18n "reading_time_minutes" (dict "Count" $post.ReadingTime) }}
-      </span>
-      {{/* Status sits in this row rather than as an emoji prefix on the title.
-        Built from `post-status-icon.html` + the `status_*` string rather than
-        calling `post-status-badge.html`, because that renders a coloured chip —
-        loud next to two muted meta items, and the cover already carries a solid
-        category chip. The emoji is `aria-hidden` with the label right beside it,
-        so a screen reader reads "Seed" once instead of announcing the glyph too.
-      */}}
-      {{ with partial "post-status-icon.html" $post }}
-        <span class="w-px h-3 bg-base-content/30" aria-hidden="true"></span>
-        <span class="inline-flex items-center gap-[0.3rem] whitespace-nowrap">
-          {{/* An emoji, not an icon, so it does not take the SVGs' 14px — at the
-            row's 12px it is too small to read as a seedling.
-          */}}
-          <span class="text-[0.8125rem] leading-none" role="img" aria-hidden="true" data-pagefind-ignore>{{ . }}</span>
-          {{ i18n (printf "status_%s" $post.Params.status) }}
-        </span>
+      <time datetime="{{ $post.Date.Format "2006-01-02" }}">{{ partial "formatted-date-short.html" $post.Date }}</time>
+      <span class="text-base-content/40" aria-hidden="true">/</span>
+      <span>{{ i18n "reading_time_minutes" (dict "Count" $post.ReadingTime) }}</span>
+      {{ if $featured }}
+        <span class="ms-auto text-base-content">{{ i18n "blog_keep_reading" }}</span>
       {{ end }}
     </div>
-    {{ if $featured }}
-      <span class="mt-2 text-sm text-primary">{{ i18n "blog_keep_reading" }}</span>
-    {{ end }}
   </div>
 </a>
