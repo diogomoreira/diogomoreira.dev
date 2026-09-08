@@ -1,10 +1,10 @@
 # People I know personally. `weight` orders the section on the page; the heading
 # text comes from the `friends_group_known` i18n key in both languages — the
 # filename is the key's suffix, so renaming this file means renaming the key.
+#
+# An entry is `title` + `link`, plus an optional per-language `note` that renders
+# inline after the name; leave `note` off and the row is just the name.
 weight: 1
 items:
   - title: "Manoel Amaro"
     link: "https://manoamaro.github.io/"
-    note:
-      en: "We worked together at Phoebus and we share similar views on software development, politics and music."
-      pt-br: "Trabalhamos juntos na Phoebus e temos visões parecidas sobre desenvolvimento de software, política e música."
