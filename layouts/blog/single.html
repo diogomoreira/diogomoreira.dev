@@ -76,50 +76,8 @@
       {{ .Content }}
     </div>
   </article>
-  <hr class="my-4 border-base-200" />
-  <div class="mt-4 flex flex-col gap-1 text-sm">
-    {{ with .Params.Categories }}
-      <div class="flex py-1 gap-1.5 flex-wrap items-center">
-        <span class="inline-flex text-base-content/70" title="{{ i18n "categories_label" }}">
-          {{ partial "icons/folder.html" . }}
-          <span class="sr-only">{{ i18n "categories_label" }}</span>
-        </span>
-        {{ $num := len . }}
-        {{ range $i, $cat := . }}
-          {{ $color := partial "chip-color.html" (dict "family" "category" "key" (urlize $cat)) | default "primary" }}
-          <a
-            href="{{ "/categories/" | relLangURL }}{{ $cat | urlize }}/"
-            data-pagefind-filter="category"
-            class="badge font-medium text-xs badge-{{ $color }}"
-            >{{ $cat }}</a
-          >{{ if lt (add $i 1) $num }}<span class="mx-1">·</span>{{ end }}
-        {{ end }}
-      </div>
-    {{ end }}
-
-    {{ with .Params.tags }}
-      <div class="flex py-1 gap-1.5 flex-wrap items-center">
-        <span class="inline-flex text-base-content/70" title="{{ i18n "tags_label" }}">
-          {{ partial "icons/tag.html" . }}
-          <span class="sr-only">{{ i18n "tags_label" }}</span>
-        </span>
-        {{ $num := len . }}
-        {{ range $i, $tag := . }}
-          {{ $color := partial "chip-color.html" (dict "family" "tag" "key" (urlize $tag)) | default "accent" }}
-          <a
-            href="{{ "/tags/" | relLangURL }}{{ $tag | urlize }}/"
-            data-pagefind-filter="tag"
-            class="badge text-xs badge-tint badge-{{ $color }}"
-            >#{{ $tag }}</a
-          >{{ if lt (add $i 1) $num }}<span class="mx-1">·</span>{{ end }}
-        {{ end }}
-      </div>
-    {{ end }}
-  </div>
-  <section data-pagefind-ignore class="mt-8 border-t-4 border-base-300 pt-8">
+  {{ partial "post-footer.html" . }}
+  <section data-pagefind-ignore class="mt-10 border-t border-base-300 pt-8">
     {{ partial "disqus.html" . }}
   </section>
-  <footer data-pagefind-ignore class="mt-6 border-t-4 border-base-300">
-    {{ partial "prev-next-nav.html" . }}
-  </footer>
 {{ end }}
