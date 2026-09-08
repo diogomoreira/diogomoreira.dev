@@ -1,6 +1,6 @@
 ---
 title: "Agora"
-updated: 2026-07-16
+updated: 2026-09-07
 description: "Inspirado em [now project](https://nownownow.com/about) de Derek Sivers"
 draft: false
 ---
@@ -9,11 +9,7 @@ Nessa página compartilho as coisas que tenho feito nos últimos tempos. A idéi
 
 ## Vida Pessoal
 
-[Noivei](https://www.instagram.com/p/DYgJF_IDjL-FmgKJf0gQkHC0_s6TxVoxv6sF9g0/?igsh=NHdjdmJlOW5wOTc0) no dia 16/05 em Cancún, México. Depois de 8 anos e 4 meses juntos, eu e Bruno decidimos dar mais um passo na nossa história.
-
-{{< responsive-image src="/images/pages/engagement.jpg" alt="@ Cancún" caption="@ Cancún" >}}
-
-## Redes sociais
+[**Noivei**](https://www.instagram.com/p/DYgJF_IDjL-FmgKJf0gQkHC0_s6TxVoxv6sF9g0/?igsh=NHdjdmJlOW5wOTc0) no dia 16/05 em Cancún, México. Depois de 8 anos e 4 meses juntos, eu e Bruno decidimos dar mais um passo na nossa história.
 
 Tenho _tentado_ adotar hábitos mais saudáveis em relação ao consumo de redes sociais esse ano e, consequentemente, saindo do mundo das _big techs_ na medida do possível.
 
@@ -27,13 +23,13 @@ Esse ano refiz totalmente esse site e tenho tentado mantê-lo atualizado. Toda s
 
 ## Livros
 
-- Você não merece ser feliz: Como conseguir mesmo assim (Daniel Furlan)
 - Metrópolis (Thea von Harbou)
 
 **Finalizados esse ano**:
 
 - A metamorfose (Franz Kafka)
 - Eu, Robô (Isaac Asimov)
+- Nadando no Escuro (Tomasz Jedrowski)
 
 ## Séries de TV
 
