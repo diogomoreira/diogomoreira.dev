@@ -1,7 +1,7 @@
 ---
 title: Amigos
-description: "Um blogroll à moda antiga — gente que eu conheço e gente cujo trabalho eu admiro de longe."
+description: "Um blogroll à moda antiga — gente que eu conheço e gente que admiro de longe."
 toc: false
 ---
 
-A web já foi cheia de páginas como esta — aqui vão algumas pessoas que valem o seu clique. Esta é uma página /friends, inspirada por [slashfriends.org](https://slashfriends.org) e [Nick Gray](https://nickgray.net).
+Eu descobri a ideia de uma página de `/friends` através de um e-mail do **Nick Gray**, que a [descreve](https://slashfriends.org/about) como “Uma página no seu site onde você coloca links para as pessoas que você gosta e acompanha.” A web antigamente costumava estar cheia de páginas como esta. Aqui estão alguns sites pessoais que valem a sua visita.
