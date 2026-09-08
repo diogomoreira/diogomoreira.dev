@@ -55,8 +55,8 @@ status_archived_description = "finished or preserved"
 post_updated_label = "Updated"
 
 # Prev/next nav
-nav_previous = "← Previous"
-nav_next = "Next →"
+nav_previous = "Previous"
+nav_next = "Next"
 
 # Empty state
 empty_state_default = "Nothing here yet."

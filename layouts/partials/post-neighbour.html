@@ -1,0 +1,47 @@
+{{/* Usage: `partial "post-neighbour.html" (dict "page" $p "label" "Previous" "micro" $micro)`
+  — one cell of the post footer's prev/next row.
+
+  Extracted from post-footer.html rather than written twice: the two cells differ
+  only in their label, and the pair had already drifted once (the old nav
+  right-aligned "next" and left-aligned "previous"). One partial makes them the
+  same shape by construction.
+
+  `micro` is passed in rather than redeclared so the cell's label matches the
+  `Categories` / `Tags` kickers in the row above it — one string, one caller.
+*/}}
+
+{{ $post := .page }}
+{{ $label := .label }}
+{{ $micro := .micro }}
+
+{{/* Every neighbour is badged, not only the foreign ones — the same call the
+  post card makes, for the same reason. The nav now walks the merged feed, so a
+  cell can hand an EN reader a pt-br post; an unbadged cell would leave that
+  implicit where the list the reader came from states it on every card. Badging
+  only the foreign one is worse still: it reads as a warning rather than as a
+  fact, and it makes the unbadged cell ambiguous.
+
+  Uncoloured on purpose. `badge-tint` falls through to `base-content` with no
+  `badge-<hue>` beside it, which is what the corner strip's language chip does
+  too — the colour in this row belongs to nothing, and a hue here would imply a
+  category the cell does not have.
+*/}}
+<a href="{{ $post.RelPermalink }}" class="group block">
+  <span class="flex flex-wrap items-center gap-2">
+    <span class="text-base-content/70 {{ $micro }}">{{ $label }}</span>
+    <span
+      class="badge badge-tint badge-sm font-mono"
+      title="{{ i18n "post_lang_written_in" (dict "Language" $post.Language.Label) }}"
+      >{{ upper (substr $post.Language.Lang 0 2) }}</span
+    >
+  </span>
+  {{/* `link-dash` has to sit on the title itself rather than be inherited from
+    the anchor: text-decoration longhands do not inherit into a nested element.
+    `group` on the anchor is the cell's only hover cue.
+  */}}
+  <span
+    class="mt-1.5 block font-heading text-lg/[1.2] md:text-xl/[1.15] font-semibold tracking-tight text-heading link-dash group-hover:underline group-focus-visible:underline"
+  >
+    {{ partial "post-status-emoji.html" $post }}{{ $post.Title }}
+  </span>
+</a>
