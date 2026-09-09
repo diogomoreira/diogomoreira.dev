@@ -21,6 +21,8 @@ Last year, I completely deactivated my old Twitter account and started using [Ma
 
 I completely rebuilt this site this year and have been trying to keep it updated. Every week, I set aside some time to tweak the layout, write something in this section, or add something to the [library]({{< relref "library" >}}) page.
 
+I've been using **Claude Code** to wire up some UI improvements here, but I'm keeping writing the texts myself.
+
 ## Books
 
 - Metropolis (Thea von Harbou)
@@ -65,5 +67,6 @@ This year, I’m on a mission to discover new artists and genres. For a long tim
 - **Gorillaz** - [The Mountain](https://music.apple.com/br/album/the-mountain/1837237742)
 - **Joyce Manor** - [I Used to Go to This Bar](https://music.apple.com/br/album/i-used-to-go-to-this-bar/1839918836)
 - **Panic! At the Disco** - [Vices & Virtues](https://music.apple.com/br/album/vices-virtues-deluxe-edition/424480029?l=en-GB)
+- **Phoebe Bridgers** - [Lost Weekend](https://music.apple.com/br/album/lost-weekend/6781051268)
 
 At the bottom of this page, you can see what I've been listening to lately.
