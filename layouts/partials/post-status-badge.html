@@ -1,11 +1,9 @@
 {{/* Usage: `partial "post-status-badge.html" .` — status badge (emoji + label) shown near the date on a blog post page */}}
 {{ $status := .Params.status }}
 {{ $icon := partial "post-status-icon.html" . }}
-{{/* The flat chip from post-status-color.html: two arbitrary properties setting
-  daisyUI's own `--badge-color` / `--badge-fg`, which is exactly what
-  `badge-primary` compiles to — so `.badge` paints fill, ink and border from
-  them and there is no cascade fight to lose. An archived post gets
-  `badge-ghost` from the same map.
+{{/* The flat chip from post-status-color.html: it sets daisyUI's own
+  `--badge-color` / `--badge-fg`, exactly what `badge-primary` compiles to, so
+  there is no cascade fight to lose.
 */}}
 {{ $chip := (partial "post-status-color.html" .).chip }}
 {{ with $icon }}

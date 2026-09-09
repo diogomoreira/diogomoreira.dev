@@ -2,8 +2,6 @@
   <article data-pagefind-body>
     {{ partial "header.html" . }}
 
-    {{/* Optional cover image — add `cover: "/path/to/image.jpg"` to front matter */}}
-
     {{ with .Params.cover }}
       <figure class="mb-10 md:px-10">
         {{ partial "responsive-image.html" (dict "page" $ "src" . "alt" $.Title "class" "w-full border-4 border-base-200 shadow-md object-cover" "width" "800") }}

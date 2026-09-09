@@ -24,11 +24,9 @@
             {{ partial "formatted-date.html" .Date }}
           </time>
 
-          {{/* Optional. Only shown when it lands on a *later day* than the published
-            date — see the note in CLAUDE.md. Compared as `2006-01-02` strings rather
-            than as instants because the row renders day granularity, and a date-only
-            `updated:` parses to UTC midnight, which `.After` would read as *earlier*
-            than a same-day `date:` carrying a -03:00 offset.
+          {{/* Only shown when it lands on a *later day*. Compared as `2006-01-02`
+            strings, not instants: a date-only `updated:` parses to UTC midnight,
+            which `.After` reads as earlier than a same-day `date:` at -03:00.
           */}}
           {{ with .Params.updated }}
             {{ $updated := time.AsTime . }}

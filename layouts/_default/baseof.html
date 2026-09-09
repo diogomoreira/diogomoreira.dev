@@ -6,39 +6,17 @@
   </head>
 
   <body class="min-h-screen">
-    {{/* Mobile chrome sits outside the shell grid — it only shows below `lg`,
-      where the shell is a plain block anyway.
+    {{/* Outside the shell grid: it only shows below `lg`, where the shell is a
+      plain block anyway.
     */}}
     {{ partial "mobile-topbar.html" . }}
     {{ partial "sidebar-mobile-drawer.html" . }}
 
-    {{/* Three tracks: a rail pinned to each screen edge, and a `1fr` middle that
-      soaks up everything left over.
-
-      The nav rail is the wider of the two — 15rem at `lg`, 17rem at `xl`, against
-      the tools rail's 13/15. It was 13/15 as well until 2026-09; it carries the
-      title, the menu, the search box, the social row, the webring and the footer
-      meta, where the right rail carries two buttons and a TOC, so the extra 2rem
-      goes where the content actually is.
-
-      That does mean the rails are no longer equal, and the capped column inside
-      the middle therefore sits 1rem right of the viewport centre on a page with a
-      TOC. It is deliberate and it is small — the cap is `max-w-4xl` and the
-      middle track is what shifts, not the measure — but it is the reason the two
-      used to match, so restore both to one value if the drift ever reads wrong.
-      Pages *without* a TOC were never symmetric anyway: the right track collapses
-      to a column of square icon buttons (see rail-right.html), and a
-      `btn-sm btn-square` is 2rem against the rail's 1.25rem of side padding, so
-      5rem leaves slack for focus rings. Now that both rails are painted, that
-      asymmetry is visible rather than merely structural.
-
-      The grid only exists from `lg` up; below it the rails hide and the mobile
-      topbar + drawer take over, so this is a plain block. Tailwind's `lg`/`xl`
-      are 64rem/80rem, which is exactly where the hand-written media queries sat.
-      Widening the nav rail spends middle-track width at every viewport, and it
-      bites hardest at exactly `lg`: 64rem minus 15rem minus 13rem leaves a 36rem
-      middle, so the reading column loses 2rem there and only stops mattering
-      once the middle passes the 56rem cap.
+    {{/* Three tracks from `lg` up, a plain block below it. The nav rail is the
+      wider of the two because it carries the title, menu, search, social row,
+      webring and footer meta where the tools rail carries two buttons and a TOC —
+      so the capped column sits 1rem right of centre on a TOC page. Deliberate;
+      restore both rails to one value if the drift ever reads wrong.
     */}}
     {{ $cols := cond (partial "has-toc.html" .) "lg:grid-cols-[15rem_1fr_13rem] xl:grid-cols-[17rem_1fr_15rem]" "lg:grid-cols-[15rem_1fr_5rem] xl:grid-cols-[17rem_1fr_5rem]" }}
     <div class="lg:grid {{ $cols }}">
@@ -47,19 +25,10 @@
 
       <div id="main-content" class="border-x border-base-300 bg-base-100 min-w-0 flex flex-col min-h-screen">
         <main class="w-full mx-auto p-6 sm:p-8 md:p-12">
-          {{/* Single content measure for the whole site — every page is 56rem (896px),
-            centred. Lives here rather than on <main> so the padding sits outside the
-            cap. `wide: true` in a page's front matter drops the cap so grids and
-            galleries can use the full centre rail (see the picks section indexes).
-
-            Was `max-w-prose` (65ch ≈ 637px at the 16px root) until 2026-08. The wider
-            measure is modelled on willianjusten.com.br, whose column runs 915px of text.
-            `max-w-4xl` is the closest step on Tailwind's container scale; `max-w-5xl`
-            (1024px) overshoots and `max-w-3xl` (768px) undershoots by four times as much.
-            Read as characters rather than pixels this is ~92ch, well past the classic
-            65–75 comfort band — the reference buys its width with a 20px body font,
-            which this site does not have. If lines start to feel long, the fix is to
-            step this down to `max-w-3xl` (~78ch), not to reach back for `max-w-prose`.
+          {{/* The site's single content measure, inside the padding rather than on
+            `main`. `wide: true` in front matter drops the cap. At ~92ch this runs
+            past the classic 65–75 band; if it reads long the step down is
+            `max-w-3xl` (~78ch), not back to `max-w-prose`.
           */}}
           <div class="{{ if not .Params.wide }}max-w-4xl{{ end }} mx-auto">
             {{ block "main" . }}{{ end }}

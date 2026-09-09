@@ -1,17 +1,15 @@
 {{/* Usage: `partial "social.html" .` — centred row (default), or
-  `partial "social.html" (dict "page" . "class" "justify-start" "iconClass" "w-5 h-5")`. "class" replaces the row's
-  alignment, gap and margin — everything positional, so a caller owns the spacing outright rather than fighting a
-  hardcoded class it cannot cancel; "iconClass" sizes the icons — the icon partials are bare viewBox SVGs, so the wrapping
-  `span` is what gives them a size.
+  `partial "social.html" (dict "page" . "class" "justify-start" "iconClass" "w-5 h-5")`.
+  "class" replaces the row's positioning outright; "iconClass" sizes the icons,
+  since the icon partials are bare viewBox SVGs and the wrapping `span` is what
+  gives them a size.
 
-  Note the backticks on that last word: written as a bare tag it sat alone on its own line, and prettier balanced it by
-  appending a matching closing tag *after* the final ``end`` — outside the comment, so the partial emitted an orphan
-  `</span>` into every page that called it. Keep tag names in this comment quoted.
+  Keep every tag name in this comment in backticks: written bare, prettier reads
+  it as real markup and appends a closing tag *after* the file's last action,
+  emitting an orphan into every page that calls this. It has happened here.
 
-  The new-tab decision goes through `is-external-link.html`, which is scheme-gated: the `mailto:` entry in
-  `[[params.social]]` stays in the current tab, where before it opened a blank one the mail client then abandoned. `rel`
-  has to stay `me` for the IndieWeb/Mastodon verification links, so the external case appends to it rather than replacing
-  it.
+  `rel` stays `me` for the IndieWeb verification links, so the external case
+  appends to it rather than replacing it.
 */}}
 {{ $page := . }}
 {{ $class := "justify-center gap-4 my-8" }}
@@ -25,10 +23,8 @@
   <div class="flex {{ $class }} items-center text-content">
     {{ range . }}
       {{ $external := partial "is-external-link.html" .url }}
-      {{/* Built as a value rather than inline: an `if` inside the attribute is
-        long enough that prettier wraps it, and the newlines land inside the
-        attribute value. Harmless for a token list like `rel`, but not a habit
-        to keep.
+      {{/* Built as a value: an inline `if` here is long enough that prettier wraps
+        it, landing newlines inside the attribute value.
       */}}
       {{ $rel := cond $external "me noopener noreferrer" "me" }}
       <a

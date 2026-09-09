@@ -1,31 +1,10 @@
-{{/* Latest original toots (no boosts, no replies) from the Mastodon account
-  configured in the `[[params.social]]` entry with `icon = "mastodon"` — the same
-  entry `head.html` reads for `fediverse:creator`, so the handle lives in one place.
+{{/* Latest original toots (no boosts, no replies) from the Mastodon account in
+  the `[[params.social]]` entry with `icon = "mastodon"`, fetched client-side.
+  Elements are found by `data-toot` / `data-profile`, never by class.
 
-  Fetched client-side, like `now-top-artists.html` next to it on /now, so the list
-  stays current without a redeploy. Unlike that one these endpoints need no key,
-  so nothing secret is emitted into the page.
-
-  The markup below is rendered in full by Hugo and the script only fills in text,
-  `src`/`href` and the `hidden` toggle, so the shape of the section is visible in
-  this file rather than assembled at runtime. The few elements the script does
-  create — emoji, media, the CW disclosure — carry their utilities as literal
-  strings in the `className` assignments below, which is all Tailwind's scanner
-  needs to emit them.
-
-  The script finds its elements by `data-toot` / `data-profile` attributes, not by
-  class: styling here is utilities, and a utility is a poor hook — renaming a
-  colour would silently break a `querySelector`.
-
-  Two `display` traps, both real and both silent:
-
-  - `hidden` is a utility like any other, so it only beats another `display`
-  utility that Tailwind emits *earlier*. It wins over `block`, `contents`,
-  `flex` and `grid`, and loses to `inline-block` and `inline-flex` — which is
-  why the permalink below is `block w-fit` rather than `inline-block`.
-  - `loading="lazy"` must stay off the avatar. It starts `hidden`, so it has no
-  layout box, and a lazily-loaded image with no box is never fetched — no
-  fetch, no `load` event, and that handler is the only thing that unhides it.
+  Two silent `display` traps: `hidden` loses to `inline-block` and `inline-flex`
+  (hence `block w-fit` on the permalink), and `loading="lazy"` must stay off the
+  avatar — it starts `hidden`, so it has no box and is never fetched.
 */}}
 
 {{ $mastodon := "" }}
@@ -36,9 +15,7 @@
 {{ end }}
 
 {{ with $mastodon }}
-  {{/* `@user@host` → user, host. TrimPrefix first so the leading @ doesn't
-    produce an empty leading field.
-  */}}
+  {{/* TrimPrefix first so the leading @ doesn't produce an empty leading field. */}}
   {{ $parts := split (strings.TrimPrefix "@" .handle) "@" }}
   {{ $user := index $parts 0 }}
   {{ $host := "" }}
@@ -62,22 +39,15 @@
         <h2 class="font-heading text-xs font-medium uppercase tracking-widest text-base-content/70">
           {{ i18n "now_mastodon" }}
         </h2>
-        {{/* `no-ext-icon`: the global external-link marker would otherwise stack
-          an arrow onto a link that already ends in one.
-        */}}
+        {{/* `no-ext-icon`: this link already ends in an arrow. */}}
         <a href="{{ .url }}" class="text-xs link link-primary no-ext-icon" target="_blank" rel="me noopener noreferrer"
           >{{ i18n "now_mastodon_all" }}</a
         >
       </div>
 
-      {{/* Identity block for the whole section rather than a per-toot byline —
-        every toot here is by the same person, so three copies of the same face
-        and name would be noise in a narrow column. Filled from the `account`
-        object the statuses response already embeds, so it costs no extra
-        request. Hidden until then: a nameless avatar frame looks broken.
-      */}}
-      {{/* Separated from the list by the same hairline the rows use, so the
-        header reads as the head of one object rather than a stray link.
+      {{/* One identity block for the section rather than a per-toot byline, filled
+        from the `account` object the statuses response already embeds. Hidden
+        until then: a nameless avatar frame looks broken.
       */}}
       <a
         id="mastodon-toots-profile"
@@ -87,14 +57,8 @@
         rel="me noopener noreferrer"
       >
         <span class="w-11 h-11 rounded-full shrink-0 skeleton" data-profile="avatar-skeleton"></span>
-        {{/* 88 = 2× the 44px display size, so the box is reserved before the
-          image lands and the avatar stays sharp on retina.
-
-          It also carries no `loading="lazy"` — see the note at the top of this
-          file. The attribute would buy nothing anyway: there is no `src` until
-          the fetch has already resolved.
-
-          An avatar reads as a person, so it stays round: circles are the
+        {{/* 88 = 2x the 44px display size. No `loading="lazy"` — see the top of
+          this file. Round because an avatar reads as a person: circles are the
           documented exemption from the site's square corners.
         */}}
         <img
@@ -105,9 +69,7 @@
           decoding="async"
           data-profile="avatar"
         />
-        {{/* `min-h-11` on the text column so the block does not grow when the
-          name arrives: the handle alone is one line, name plus handle is two.
-        */}}
+        {{/* `min-h-11` so the block does not grow when the name arrives. */}}
         <span class="flex flex-col justify-center gap-[0.1rem] min-h-11 min-w-0">
           <span
             class="font-heading text-sm/[1.3] font-medium text-heading decoration-accent decoration-1 underline-offset-[3px] group-hover:underline group-focus-visible:underline"
@@ -117,15 +79,10 @@
         </span>
       </a>
 
-      {{/* Rows separated by a hairline, not boxed cards — three short posts boxed
-        individually read as a stack of heavy tiles. The hover cue is borrowed
-        from the library rows: a 2px leading border that is always present but
-        transparent, so colouring it shifts nothing. The row cannot be one big
-        `a` — toot bodies contain their own links and nested anchors are invalid
-        — which is what this border is compensating for.
-
-        The two borders name their sides explicitly: a bare `border-transparent`
-        would set *every* side, wiping out the hairline above.
+      {{/* The row cannot be one big `a` — toot bodies carry their own links and
+        nested anchors are invalid — so the leading accent border is the hover cue.
+        Both borders name their sides: a bare `border-transparent` would set every
+        side and wipe out the hairline above.
       */}}
       <ul id="mastodon-toots-list" class="list-none p-0 m-0">
         {{ range seq $limit }}
@@ -133,30 +90,19 @@
             class="py-[0.85rem] border-t border-t-base-300 first:border-t-0 border-s-2 border-s-transparent ps-[0.6rem] -ms-[0.6rem] transition-colors duration-150 hover:border-s-accent"
             data-toot="item"
           >
-            {{/* Reserves roughly a two-line toot, so the fetch does not jolt the
-              artists grid below it down the page.
-            */}}
+            {{/* Reserves roughly a two-line toot so the fetch shifts nothing. */}}
             <div class="h-14 w-full skeleton" data-toot="skeleton"></div>
             <div class="hidden" data-toot="content">
               <div class="hidden" data-toot="cw"></div>
-              {{/* `anywhere`, not `break-word`: these posts are link-heavy and
-                Mastodon's shortened link text is one unbroken token, which
-                overflows the column at narrow widths without it.
-              */}}
+              {{/* `anywhere`, not `break-word`: shortened link text is one unbroken token. */}}
               <div class="text-[0.9375rem]/[1.6] wrap-anywhere [&_p+p]:mt-[0.6rem]" data-toot="body"></div>
-              {{/* Grid rather than a wrapping flex row so two attachments share
-                the width evenly instead of leaving a ragged gap. Capped at two
-                columns: at 4-up in this column each thumb is unreadable.
-              */}}
+              {{/* Grid, not a wrapping flex row, so two attachments share the width evenly. */}}
               <div
                 class="hidden relative grid grid-cols-[repeat(auto-fit,minmax(6rem,1fr))] max-w-[22rem] gap-[0.4rem] mt-[0.6rem]"
                 data-toot="media"
               ></div>
             </div>
-            {{/* `group` sits here, not on the row: the date reacts to a hover on
-              the permalink itself, which is the only part of a toot that is a
-              link of ours.
-            */}}
+            {{/* `group` here, not on the row: the permalink is the only link of ours. */}}
             <a
               class="group hidden block w-fit mt-2 no-ext-icon"
               target="_blank"
@@ -233,12 +179,10 @@
           }
           if (node.nodeType !== Node.ELEMENT_NODE) return null;
 
-          /* Mastodon shortens long URLs with marker classes rather than by
-             editing the text: `invisible` spans hold the head and tail to hide,
-             `ellipsis` the visible middle. Since this rebuild drops classes, not
-             honouring them here would print the entire raw URL — so an Apple
-             Music link would render as its full query string instead of
-             "music.apple.com/br/album/lorel…". */
+          /* Mastodon shortens URLs with marker classes, not by editing the text:
+             `invisible` holds the head and tail, `ellipsis` the visible middle.
+             This rebuild drops classes, so honouring them here is what keeps a
+             link from printing as its full query string. */
           const cls = node.getAttribute("class") || "";
           if (node.tagName === "SPAN" && /(^|\s)invisible(\s|$)/.test(cls)) return null;
 
@@ -391,9 +335,8 @@
         }
 
         function renderProfile(account) {
-          /* Unreachable today — `account` is only null when there are no
-             statuses, and init() removes the section in that case. Hiding beats
-             returning early, which would leave the skeleton spinning forever. */
+          /* Unreachable today: init() removes the section when there are no
+             statuses. Hiding beats returning early, which would spin forever. */
           if (!account) {
             profile.classList.add("hidden");
             return;

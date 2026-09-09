@@ -1,20 +1,9 @@
-{{/* ── Left rail ─────────────────────────────────────────────
-  Slim nav rail pinned to the left screen edge. Desktop only — below `lg` it
-  hides and `mobile-topbar.html` + `sidebar-mobile-drawer.html` take over. The
-  h-card (avatar, bio, social) lives on the homepage instead.
-*/}}
-{{/* Not an <aside>/landmark itself — the <nav> from nav-menu.html inside already
-  carries the label, and nesting a second one just duplicates it.
-
-  Sticky rail sizing is shared with rail-right.html and deliberately written out
-  in both rather than hidden behind a class: it is eight utilities, and the two
-  rails differ (this one is a flex column, so the footer block can be pushed to
-  the bottom with `mt-auto`; the right one is a plain block).
-
-  `rail-chrome` paints the rail and rebinds the theme tokens for everything
-  inside it — see the long note on that utility in main.css. The only thing this
-  file chooses is *which* rail hue: `--rail-nav`, the darker of the two in both
-  themes.
+{{/* Desktop nav rail; below `lg` the mobile topbar and drawer take over. Not an
+  `aside` landmark — the `nav` from nav-menu.html inside already carries the label.
+  The sticky sizing is deliberately written out here and in rail-right.html rather
+  than shared: the two rails differ, this one being a flex column so its footer can
+  be pushed down with `mt-auto`. `rail-chrome` paints it and rebinds the theme
+  tokens inside — see main.css; this file only picks the hue.
 */}}
 <div
   class="hidden lg:flex lg:flex-col lg:sticky lg:top-0 lg:self-start lg:min-h-screen lg:max-h-screen lg:overflow-y-auto lg:overscroll-contain lg:px-5 lg:py-8 rail-chrome [--rail-bg:var(--rail-nav)]"
@@ -34,13 +23,9 @@
     {{ partial "search.html" . }}
   </div>
 
-  {{/* Pinned to the bottom of the rail by the flex column above. */}}
   <div class="mt-auto">
-    {{/* Tighter than the default row. The default (5 icons at `w-6`, `gap-4`)
-      needs 11.5rem and overflowed the 13rem rail this was written against; at
-      15rem it would now fit inside the 12.5rem of inner width. Kept tight anyway
-      — a compact row reads better under the menu than one that spans the rail.
-      No margin class — webring.html opens with its own `mt-6 … pt-6` rule.
+    {{/* Tighter than the default row, which reads better under the menu than one
+      spanning the rail. No margin — webring.html opens with its own `mt-6 pt-6`.
     */}}
     {{ partial "social.html" (dict "page" . "class" "justify-center gap-3" "iconClass" "w-5 h-5") }}
     {{ partial "webring.html" }}

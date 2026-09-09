@@ -5,12 +5,9 @@
   "orgField" "company"   // "institution" for education
   "heading"  "Work Experience")   // pass "" to omit the heading
 
-  `not-prose` is load-bearing: this renders inside the `prose max-w-none`
-  wrapper of `_default/single.html`, which would otherwise put list markers on
-  the entries and prose link styling on the org names.
-
-  `sort … "endDate" "desc"` is a string sort, so the literal "Present" lands
-  above "2023-12" and current roles come first. That is the intended order.
+  `not-prose` is load-bearing: this renders inside a `prose` wrapper that would
+  otherwise put list markers on the entries. `sort … "endDate" "desc"` is a string
+  sort, so the literal "Present" lands above "2023-12" — that is the intent.
 */}}
 
 {{ $orgField := .orgField | default "company" }}

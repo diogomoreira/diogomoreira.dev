@@ -1,11 +1,7 @@
-{{/* Usage: `partial "section-label.html" (dict "text" "Latest" "class" "mb-6" "color" "text-secondary")` — "color" is optional, defaults to text-primary
-
-  The default is the signal orange, not the muted `text-secondary` it used to be.
-  A letterspaced 11px kicker in the brand colour is the poster convention this
-  palette is drawn from — every section on the reference opens with one — and
-  this partial is the only place the site's section headings are shaped, so the
-  default reaches all of them at once. Pass `"color" "text-secondary"` to opt a
-  heading back out where an orange one would compete with something louder.
+{{/* Usage: `partial "section-label.html" (dict "text" "Latest" "class" "mb-6" "color" "text-secondary")`
+  — "color" is optional and defaults to `text-primary`, the poster-convention
+  kicker this palette is drawn from. Pass `"color" "text-secondary"` to opt a
+  heading out where an orange one would compete with something louder.
 */}}
 <h2
   class="font-heading text-xs font-medium uppercase tracking-widest {{ .color | default "text-primary" }} {{ .class | default "mb-6" }}"

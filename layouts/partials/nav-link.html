@@ -1,11 +1,6 @@
 {{/* A single nav anchor, shared by the rail and the drawer, parents and children.
-
-  Usage: partial "nav-link.html" (dict
-  "entry" `menu entry` "page" `page`
+  Usage: partial "nav-link.html" (dict "entry" `entry` "page" `page`
   "active" `bool` "desktop" `bool` "child" `bool`)
-
-  Extracted out of nav-menu.html so the desktop/mobile split does not have to be
-  written twice more for the child entries.
 */}}
 
 {{ $entry := .entry }}
@@ -15,24 +10,11 @@
 <a
   href="{{ $entry.URL }}"
   {{ if .active }}aria-current="page"{{ end }}
-  {{/* The leading border sits on every link, active or not, so turning it on
-    does not shift the row's contents by 2px (same trick as `.toc a`). The active
-    tint is mixed from `primary`, so it tracks whatever `primary` resolves to
-    where the link is rendered, with no per-theme override. In the desktop rail
-    that is not the page's `primary` at all: `rail-chrome` rebinds it to the rail
-    accent (Burning Flame in sunrise, `amber-400` in midnight), so the active row
-    picks up the rail's own colour. In the mobile drawer it is the page value.
-
-    Children run a step smaller and lighter than their parent, and indent further
-    (the guide line they hang off is on the <ul> in nav-menu.html). The indent is
-    kept modest: the rail is 15rem wide, and was 13rem when this was tuned.
-
-    The inactive state is `/70`, not the `/60` it carried until 2026-09. `/70` is
-    the site-wide floor for muted text and `/60` was always below it — the note in
-    CLAUDE.md says so outright — but near-black rails hid the shortfall. Midnight's
-    rails are mid-dark greens now, where `/60` measures 3.74:1; `/70` restores it
-    to 4.54. It was also marginal on sunrise's mobile drawer at 4.48, so this is a
-    fix in both themes rather than a concession to one.
+  {{/* The leading border sits on every link, active or not, so turning it on does
+    not shift the row by 2px (same trick as `.toc a`). The active tint is mixed
+    from `primary`, which `rail-chrome` rebinds to the rail accent in the desktop
+    rail. Inactive is `/70`, the site-wide floor for muted text — `/60` measures
+    4.33:1 on sunrise's drawer and fails outright. Do not put it back.
   */}}
   class="flex font-heading items-center gap-2 border-s-2 border-transparent
     {{ if .child }}
