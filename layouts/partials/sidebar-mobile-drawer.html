@@ -1,9 +1,6 @@
-{{/* ── Mobile sidebar drawer ─────────────────────────────── */}}
 <div id="sidebar-drawer" class="lg:hidden hidden fixed inset-0 z-50">
-  {{/* Backdrop */}}
   <div id="sidebar-backdrop" class="absolute inset-0 bg-black/70" onclick="closeSidebar()"></div>
 
-  {{/* Drawer panel */}}
   <aside
     class="absolute top-0 left-0 h-full w-72 max-w-[85vw] bg-base-200 text-base-content flex flex-col px-8 py-10 overflow-y-auto"
   >
@@ -16,7 +13,6 @@
     {{ partial "nav-menu.html" (dict "page" . "variant" "mobile") }}
     {{ partial "social.html" . }}
     {{ partial "webring.html" }}
-    {{/* The language switcher lives in the top bar now, alongside the theme toggle. */}}
     <div class="mt-6 pt-6 border-t border-base-content/10 text-xs">
       {{ partial "sidebar-footer-meta.html" (dict "page" . "variant" "mobile") }}
     </div>

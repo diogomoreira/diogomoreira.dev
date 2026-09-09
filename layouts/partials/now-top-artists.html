@@ -16,10 +16,9 @@
 
     <div id="now-top-artists-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
       {{ range seq 8 }}
-        {{/* `overflow-hidden` on the card rather than a radius on the tile below:
-          the tile is clipped to whatever the card's own shape is, so there is no
-          second value to keep in step. That shape is square now — `--radius-box`
-          is 0 — but the clip is what makes it follow the token either way.
+        {{/* `overflow-hidden` on the card rather than a radius on the tile: the
+          tile follows the card's own shape, so there is no second value to keep
+          in step whatever `--radius-box` becomes.
         */}}
         <a
           class="now-top-artists-cell card bg-base-100 group overflow-hidden"

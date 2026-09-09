@@ -1,10 +1,7 @@
 {{/* Usage: `partial "post-status-legend.html" .` — explains what the post status emoji (🌱🌿🪴🍂) mean */}}
-{{/* The label is the same chip a post carries, not a coloured word. It was
-  `text-<color>` until the statuses moved onto the fixed emerald ramp, and that
-  could not survive the move: no single emerald step clears 4.5:1 on both
-  themes' grounds at once, so a status colour that does not flip by theme can
-  only be a fill. Rendering the chip is the better legend anyway — it shows the
-  thing you actually see on a card rather than a recolouring of it.
+{{/* The label is the same chip a post carries, not a coloured word: no single
+  emerald step clears 4.5:1 on both themes' grounds, so a status colour that does
+  not flip by theme can only be a fill.
 */}}
 <div class="mb-10 text-xs text-base-content/70">
   {{ partial "section-label.html" (dict "text" (i18n "status_legend_title") "class" "mb-3") }}

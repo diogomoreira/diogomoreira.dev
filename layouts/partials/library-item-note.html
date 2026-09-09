@@ -1,26 +1,13 @@
 {{/* Usage: `partial "library-item-note.html" .note`, or with options,
   `partial "library-item-note.html" (dict "note" .note "clamp" true)` — resolves a
-  per-language note.
+  per-language note (`note: {en: "…", pt-br: "…"}`), falling back to `en`.
 
-  Notes are the one part of an entry that is prose, so they are the one part
-  that has to be translated: `note: {en: "…", pt-br: "…"}`. Falls back to `en`
-  when a translation is missing, so half-translated data still renders.
-
-  The `reflect.IsMap` guard is not paranoia — `index` on a plain string errors out
-  at build time, and writing `note: "…"` is the obvious mistake to make.
-
-  `clamp` is for the poster cards: they are ~8.5rem wide, so an unclamped note
-  would double a card's height and break the grid's rhythm. Rows have the width
-  to spare. `markdownify` wraps the text in a `<p>`, whose margin has to go.
-
-  `class` replaces the default class string outright, for a caller whose note is
-  not a block under the title — the friends page runs its note inline, at the
-  name's own size, so it wants none of the block/margin/step-down above.
-  Overriding rather than appending is deliberate: the two shapes
-  disagree about `display` and `font-size`, and appending would leave the loser
-  of each pair to Tailwind's emission order (see the cascade note in CLAUDE.md).
-  Everything else here — the language lookup, the map guard, the empty check — is
-  what the caller comes for and stays shared.
+  The `reflect.IsMap` guard is not paranoia: `index` on a plain string is a build
+  error, and writing `note: "…"` is the obvious mistake. `clamp` is for the poster
+  cards, which are too narrow to take an unclamped note. `class` *replaces* the
+  default string rather than extending it — the two shapes disagree about
+  `display` and `font-size`, and appending would leave each loser to Tailwind's
+  emission order.
 */}}
 {{ $note := . }}
 {{ $clamp := false }}

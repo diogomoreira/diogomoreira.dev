@@ -1,19 +1,9 @@
 {{/* Usage: `$posts := partial "blog-posts.html" .` — every blog post in every
-  language, newest first.
+  language, newest first. The feed is deliberately mixed: EN and pt-br posts are
+  different writing, not translations, so a language-scoped list hides half of it.
 
-  The blog feed is deliberately mixed: the EN and pt-br posts are different
-  writing, not translations of each other, so a language-scoped list hides half
-  of it. Each post keeps its own URL and its own language site; only the listing
-  is merged, and every card carries a language chip in its corner strip
-  (post-card.html).
-
-  Built with `union`, which keeps the page.Pages type when both operands share
-  it — so .ByDate / .Reverse / .GroupByDate survive. `append` into a plain slice
-  would yield []page.Page and silently lose all three, and `site.AllRegularPages`
-  is not on the `site` wrapper type (only hugolib.Site has it).
-
-  Same shape as library-categories.html: one partial owns the ordering and every
-  surface reads it, so /blog, the homepage and the RSS feed cannot drift apart.
+  `union`, not `append`: it keeps the page.Pages type, so .ByDate / .Reverse /
+  .GroupByDate survive. One partial owns the ordering and four surfaces read it.
 */}}
 {{ $posts := where site.RegularPages "Section" "blog" }}
 {{ range hugo.Sites }}
@@ -22,9 +12,8 @@
   {{ end }}
 {{ end }}
 
-{{/* A post translated into both languages would otherwise appear twice. Keep the
-  current site's copy, drop the foreign one. No such pair exists today; this is
-  here so the first translated post does not silently duplicate.
+{{/* A translated post would otherwise appear twice: keep the current site's
+  copy, drop the foreign one. No such pair exists today.
 */}}
 {{ $dupes := slice }}
 {{ range $posts }}

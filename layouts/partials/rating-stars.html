@@ -1,23 +1,13 @@
-{{/* Usage: `partial "rating-stars.html" .rating` — five stars, the first N filled.
-
-  Inline SVG rather than ★/☆ text for the same reason the nav uses SVG icons:
-  the glyphs render at wildly different weights across platforms, and one of the
-  two is missing from some fonts entirely.
-
-  The whole run is a single `role="img"` with one label, so a screen reader says
-  "4 out of 5" instead of announcing five separate stars. Renders nothing when
-  `rating` is unset — an unrated entry should show no stars, not zero stars.
+{{/* Usage: `partial "rating-stars.html" .rating` — five stars, the first N
+  filled. Inline SVG, not ★/☆ text: the glyphs render at wildly different weights
+  across platforms. One `role="img"` label on the run, so a screen reader says
+  "4 out of 5". Renders nothing when `rating` is unset.
 */}}
 {{ $rating := . | default 0 }}
 {{ if gt $rating 0 }}
-  {{/* `self-center` is for the library row, whose head aligns on the text
-    baseline: an SVG is a replaced element whose baseline is its bottom margin
-    edge, so a baseline-aligned star run hangs above the x-height. In the card
-    meta, which centres everything anyway, it is a no-op.
-
-    Empty stars are outlined rather than absent, so a 3/5 still reads as a
-    five-point scale. Filled ones use `warning`, the only brand token whose hue
-    survives both themes as "gold".
+  {{/* `self-center` for the library row: an SVG's baseline is its bottom margin
+    edge, so a baseline-aligned star run hangs above the x-height. Empty stars are
+    outlined, not absent, so a 3/5 still reads as a five-point scale.
   */}}
   <span
     class="inline-flex items-center self-center gap-[0.05rem] leading-none"

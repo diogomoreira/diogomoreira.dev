@@ -1,7 +1,6 @@
 {{ define "main" }}
-  {{/* The representative h-card. It used to live in the desktop sidebar; the
-    homepage is the canonical IndieWeb spot for it, and the `rel="me"` links in
-    `social.html` need to be on the page Mastodon &co. verify against.
+  {{/* The representative h-card. The `rel="me"` links in social.html have to be
+    on the page Mastodon &co. verify against.
   */}}
   <header class="h-card mb-10 items-center flex flex-col sm:flex-row sm:items-center gap-6">
     {{ with resources.Get "images/profile/profile.jpg" }}
@@ -28,7 +27,6 @@
         </a>
       </h1>
       <div class="mt-4">
-        {{/* No margin — the `mt-4` wrapper above owns the spacing under the bio. */}}
         {{ partial "social.html" (dict "page" . "class" "justify-center md:justify-start gap-4") }}
       </div>
     </div>
@@ -40,8 +38,8 @@
     </div>
   </section>
 
-  {{/* Both languages in one list, newest first — the same partial /blog reads, so
-    this row is always the head of that feed.
+  {{/* Both languages in one list — the same partial /blog reads, so this row is
+    always the head of that feed.
   */}}
   {{ $posts := partial "blog-posts.html" . }}
   {{ if $posts }}
@@ -52,20 +50,9 @@
           >{{ i18n "home_all_posts" }}</a
         >
       </div>
-      {{/* Cards, via the same partial /blog and the term pages use — the three
-        surfaces share one shape by construction.
-
-        `first 3`, in a three-column grid, so the row is exactly one row: an
-        odd count in a two-column grid used to leave a lonely card below. The
-        grid is `sm:grid-cols-3` rather than a `lg:` step because
-        `sm:grid-cols-3` is already in `hugo_stats.json` (the photos gallery
-        uses it) and a newly-used utility takes two builds to be emitted.
-
-        This list and the "Recently Added" library list below it used to be
-        deliberately identical markup. That pairing is broken on purpose now:
-        posts have cover art and get cards, library entries mostly don't and stay
-        rows. The contrast is the point — a wall of placeholder-less poster cards
-        was the thing the library list was designed to avoid in the first place.
+      {{/* `first 3` in a three-column grid, so the row is exactly one row. Cards
+        here and rows in "Recently Added" below is a deliberate contrast — don't
+        pair them back up.
       */}}
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {{ range first 3 $posts }}
@@ -75,15 +62,9 @@
     </section>
   {{ end }}
 
-  {{/* Newest library entries across every category, from data/library/*.yaml.
-    `merge` folds the category key into each item so `sort` still finds `date` at
-    the top level — wrapping them in a dict would nest the sort key out of reach.
-    No cover filter: this is a list, so entries without artwork belong here too,
-    and articles and videos are most of what gets added.
-
-    Dateless entries are skipped: a book still being read has no position in a
-    newest-first list, and including it would pin it to the top of "recently
-    added" until it is finished. It shows on the library page instead.
+  {{/* `merge` folds the category key into each item so `sort` still finds `date`
+    at the top level. Dateless entries are skipped: a book still being read has no
+    position in a newest-first list.
   */}}
   {{ $entries := slice }}
   {{ range partial "library-categories.html" . }}
@@ -103,19 +84,14 @@
           >{{ i18n "home_browse_library" }}</a
         >
       </div>
-      {{/* Rows, not cards — deliberately unlike the Recent Posts grid above.
-        Most library entries are articles, videos and people, which have no cover
-        art, so a card grid here would be mostly placeholders. This is the same
-        row shape the /library page uses for its `display: list` categories, and
-        it keeps its own mobile wrap: title on its own line, date and chip
-        beneath, with a `md:min-w-32` date column.
+      {{/* Rows, not cards: most library entries have no cover art, so a card grid
+        here would be mostly placeholders.
       */}}
       <ul class="list-none p-0 m-0">
         {{ range $entries }}
           <li class="border-b py-2 border-base-300">
-            {{/* `no-ext-icon`: an external link whose only children are spans and
-              a badge is not covered by the global marker rule's exclusions, so
-              the ↗ would land after the flex container on a line of its own.
+            {{/* `no-ext-icon`: the global ↗ would land after the flex container,
+              on a line of its own.
             */}}
             <a
               href="{{ .link }}"
@@ -123,11 +99,8 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              {{/* `time.AsTime` rather than trusting the YAML: an unquoted
-                `2023-10-18` parses to a time but `"2023-10-18"` stays a string,
-                and only one of those survives a date formatter — the same reason
-                library-item-date.html does it. These entries always have a date;
-                the range above skips the dateless ones.
+              {{/* `time.AsTime` because an unquoted `2023-10-18` parses to a time
+                but a quoted one stays a string, and only one survives a formatter.
               */}}
               {{ $when := time.AsTime .date }}
               <time
@@ -139,10 +112,7 @@
                 class="order-first w-full text-sm font-medium text-base-content group-hover:opacity-70 md:order-none md:w-auto md:flex-1"
               >
                 {{ .title }}
-                {{/* Same shape as the library row's creator: a muted name behind
-                  a further-muted middot, which is punctuation rather than
-                  content.
-                */}}
+                {{/* Same shape as the library row's creator. */}}
                 {{ with .creator }}
                   <span class="text-base-content/70 before:content-['·'] before:mx-[0.4em] before:text-base-content/45"
                     >{{ . }}</span

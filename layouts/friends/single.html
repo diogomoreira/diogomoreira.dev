@@ -1,24 +1,11 @@
-{{/* Binds to content/<lang>/friends.md purely by its root-level content path
-  (Hugo ≥0.146 matches templates by path), the same rule that binds library.md
-  and academic.md. Moving that file into a subdirectory would silently fall back
-  to _default/single.html and drop everything below.
+{{/* Binds to content/<lang>/friends.md by its root-level content path; moving
+  that file into a subdirectory falls back to _default/single.html.
 
-  Entries live in `data/friends/`, language-neutral, for the same reason the
-  library's do: a person is the same person whichever language you read the site
-  in. Only the note is prose, so only the note is a per-language map — see
-  library-item-note.html, which resolves it and is shared with the library.
-
-  One file per section, carrying its own `weight` for section order. The heading
-  text comes from `friends_group_<filename>` in both i18n files, so adding a
-  section is a new YAML file plus two keys and no template edit; a missing key
-  renders the raw filename rather than failing the build.
-
-  The sort is inline rather than in a partial, which is the one place this parts
-  company with the library: `library-categories.html` exists because the library
-  page and the homepage row both read that data and must not disagree about
-  order. This page is the only reader of `data/friends`.
-*/}}
-{{ define "main" }}
+  Entries live in `data/friends/`, language-neutral — only the note is prose, and
+  library-item-note.html resolves that per-language map. One YAML file per
+  section, so adding a section is a file plus a `friends_group_<filename>` key in
+  both i18n files and no template edit.
+*/}}{{ define "main" }}
   <article data-pagefind-body>
     {{ partial "header.html" . }}
 
@@ -26,10 +13,8 @@
       <div class="prose prose-headings:font-heading prose-base max-w-none mb-10">{{ . }}</div>
     {{ end }}
 
-    {{/* `hugo.Data.friends` is a plain map, and Go templates walk a map in key
-      order — i.e. alphabetically — so the weights have to be applied by hand.
-      `sort`, not `.ByWeight`: these are maps, not pages. Sections with no
-      entries are dropped rather than rendered as an empty heading.
+    {{/* Go templates walk a map in key order, so the weights are applied by hand.
+      `sort`, not `.ByWeight`: these are maps, not pages.
     */}}
     {{ $groups := slice }}
     {{ range $key, $group := hugo.Data.friends }}
@@ -40,70 +25,23 @@
 
     {{ range sort $groups "weight" }}
       <section class="mb-12">
-        {{/* The rule under the heading is what the library's category summaries
-          use, and it is now the only hairline in a section: the entries below are
-          a bulleted list rather than the library's ruled rows, so this line
-          separates a section's heading from its items and nothing else draws
-          one.
-        */}}
         {{ $label := i18n (printf "friends_group_%s" .key) | default .key }}
         {{ partial "section-label.html" (dict "text" $label "class" "mb-0 pb-2 border-b border-base-300") }}
 
-        {{/* A plain bulleted list, which is where this parts company with the
-          library rows it started from. Those separate entries with a hairline;
-          here the marker does that job, and a rule as well as a bullet is two
-          separators for one break — heavier than a blogroll of one-line entries
-          wants. The row padding comes down with the rules: a bulleted list reads
-          as one block, not as a stack of bands.
-
-          `list-disc` is needed because Tailwind's preflight sets `list-style:
-          none` on every `ul`; preflight also zeroes the padding, so `ps-5` is
-          the whole indent rather than an adjustment to the browser's own 40px.
-          Do not pair it with `p-0` — one sets the shorthand and one the logical
-          longhand, and which of them wins would be left to Tailwind's emission
-          order (see the cascade note in CLAUDE.md).
-
-          The marker is muted to the same `/45` as the note's separator dot:
-          both are punctuation, and the site's `/70` floor is for text.
-          `marker:` on the `<ul>` reaches the `<li>`s — Tailwind compiles the
-          variant to `&::marker, & *::marker` for exactly this.
-
-          `no-ext-icon`: the name is the link, so the global ↗ marker would sit
-          between the name and the note. The `:has(svg)` exclusion cannot be
-          relied on here — there is no svg in a row.
-
-          Every entry has a link (a person with no URL has nothing to point at
-          and does not belong on a blogroll), so this needs none of the
-          `<a>`/`<div>` switch the library rows carry.
+        {{/* `list-disc` because Tailwind's preflight sets `list-style: none` on
+          every `ul`; preflight zeroes the padding too, so `ps-5` is the whole
+          indent — never pair it with `p-0`, shorthand vs. logical longhand. The
+          marker is muted to `/45`: a bullet is punctuation, and the `/70` floor
+          is for text.
         */}}
         <ul class="m-0 mt-2 ps-5 list-disc marker:text-base-content/45">
           {{ range .items }}
             <li class="py-[0.3rem]">
-              {{/* The row is NOT a wrapping `<a>`, and that is the one place this
-                departs from the library rows it otherwise copies. A note here is
-                a sentence about a person and often cites where to read them, so
-                it carries markdown links, and library-item-note.html runs those
-                through markdownify — an anchor inside an anchor is invalid HTML
-                that the parser resolves by closing the outer one at the inner
-                start tag, silently dropping the rest of the row out of the link.
-                So only the name links, and the note's links are ordinary
-                siblings.
-              */}}
-              {{/* No accent edge on hover, unlike the library rows this
-                otherwise copies: only the name is clickable here, so an edge
-                lighting up across the whole row — most of which is dead space —
-                would promise a click that is not there. The name's own dashed
-                underline is the only hover cue, which is why the row carries no
-                `has-[…]` state and no wrapper of its own; the padding that
-                wrapper held now sits on the `li`.
-              */}}
-              {{/* `link-dash` holds the dashed accent underline; those
-                `text-decoration-*` longhands are non-inherited, so it sits on
-                the anchor itself. The line only appears on hover.
-                `inline`, not `inline-block`: the note runs on from the name in
-                the same line box now, and an inline-block name would not share a
-                baseline with a note that wraps past it. The click target is
-                still the name rather than the full width of the row.
+              {{/* The row is NOT a wrapping `a`, unlike the library rows: a note
+                carries markdown links, and markdownify turns those into anchors —
+                nesting one closes the outer link early and silently drops the rest
+                of the row out of it. So only the name links, and there is no accent
+                edge on hover to promise a click the row does not have.
               */}}
               <a
                 href="{{ .link }}"
@@ -112,22 +50,10 @@
                 rel="noopener noreferrer"
                 >{{ .title }}</a
               >
-              {{/* The note runs inline after the name, at the name's own size —
-                the library's title/creator rule, for the same reason it holds
-                there: a step down in size read as a cramped afterthought, and
-                colour is enough hierarchy on one line. So the default class
-                string is replaced rather than extended (it is a 0.75rem block
-                with a top margin); `[&_p]:inline` undoes the `<p>` markdownify
-                wraps it in, and `[&_a]:underline` puts the underline back on the
-                note's own links — the site-wide `a` rule sets only the
-                decoration's colour and style, and the underline itself comes
-                from prose styling this span sits outside of.
-
-                The separator is the partial's business rather than the row's:
-                a `note` is optional now — a name and a link are the whole of a
-                blogroll entry — and a `·` written here would be left stranded
-                after the name of an entry that has none. The partial renders
-                nothing at all for an absent note, `before:` included.
+              {{/* The note runs inline at the name's own size, so this `class`
+                *replaces* the partial's default rather than extending it. The `·`
+                belongs to that string, not the row: a note is optional, and one
+                written here would be stranded after an entry that has none.
               */}}
               {{ partial "library-item-note.html" (dict "note" .note "class" "text-base-content/70 [&_p]:inline [&_p]:m-0 [&_a]:underline before:content-['·'] before:mx-[0.4em] before:text-base-content/45") }}
             </li>

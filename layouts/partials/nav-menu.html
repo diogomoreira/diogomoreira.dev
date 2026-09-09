@@ -2,10 +2,8 @@
 {{ $page := .page }}
 {{ $desktop := eq .variant "desktop" }}
 
-{{/* Path the highlight matches against. Taxonomy listings (/tags/…,
-  /categories/…) only index blog posts, so they light up Blog rather than
-  nothing; every other kind matches on its own permalink. Resolved via GetPage
-  rather than hardcoded so the pt-br site gets /pt-br/blog/ for free.
+{{/* Taxonomy listings only index blog posts, so they light up Blog. Resolved via
+  GetPage rather than hardcoded so the pt-br site gets /pt-br/blog/ for free.
 */}}
 {{ $current := $page.RelPermalink }}
 {{ if in (slice "taxonomy" "term") $page.Kind }}
@@ -18,24 +16,18 @@
     {{ range $page.Site.Menus.main }}
       {{ if not .Params.hidden }}
         <li>
-          {{/* The entry's own highlight. Deliberately leaves out HasMenuCurrent:
-            About must not read as the current page while you are on /work.
-            The `ne .URL` guard keeps a Home entry (URL `/`) from prefix-matching
-            every page and lighting up the whole menu.
+          {{/* No HasMenuCurrent: About must not light up while you are on /work.
+            The `ne .URL` guard keeps Home from prefix-matching every page.
           */}}
           {{ $isActive := or ($page.IsMenuCurrent `main` .) (and (ne .URL $page.Site.Home.RelPermalink) (hasPrefix $current .URL)) }}
 
           {{ partial "nav-link.html" (dict "entry" . "page" $page "active" $isActive "desktop" $desktop "child" false) }}
 
-          {{/* Always rendered: /work and /academic are top-level destinations
-            in their own right, so the sub-list is permanent structure rather
-            than a reveal driven by the current page.
+          {{/* Always rendered: /work and /academic are destinations in their own
+            right, so the sub-list is structure rather than a reveal.
           */}}
           {{ if .HasChildren }}
-            {{/* `base-300` for the guide line: it is the one divider token that
-              reads as a surface step in both themes — `neutral` flips from dark
-              surface to near-black text and would vanish in one of them.
-            */}}
+            {{/* `base-300`: the one divider token that reads in both themes. */}}
             <ul class="list-none p-0 mt-0.5 mb-0 ms-4 me-0 border-s border-base-300">
               {{ range .Children }}
                 {{ if not .Params.hidden }}

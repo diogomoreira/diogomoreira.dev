@@ -6,7 +6,6 @@
     <div class="prose prose-headings:font-heading prose-base max-w-none">
       {{ .Content }}
       {{ partial "section-label.html" (dict "text" (i18n "academic_latest_publications")) }}
-      {{/* Pull papers from data files */}}
       <ul>
         {{ $papers := index hugo.Data site.Language.Lang "papers" }}
         {{ range sort $papers "year" "desc" }}

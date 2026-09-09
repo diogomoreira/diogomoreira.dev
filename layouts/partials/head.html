@@ -21,13 +21,9 @@
 
 <title>{{ if .IsHome -}}{{ .Site.Title }}{{- else -}}{{ .Title }} — {{ .Site.Title }}{{- end }}</title>
 
-{{/* `markdownify | plainify` rather than the raw string: a page's `description`
-  is rendered as markdown by header.html, so one written with a link or bold text
-  would otherwise ship its literal asterisks and brackets into the search snippet
-  and the social card. Rendering then stripping the tags leaves the plain words.
-  The two replaceRE calls clean up after the strip: an anchor spans several lines,
-  so removing its tags leaves a newline mid-sentence, and a link followed by a full
-  stop would otherwise read as "slashfriends ." in the snippet.
+{{/* `markdownify | plainify` so a description written with a link or bold text
+  does not ship its literal brackets into the snippet. The replaceRE pair cleans
+  up after the strip: stripping an anchor leaves a newline mid-sentence.
 */}}
 <meta
   name="description"
@@ -38,7 +34,6 @@
   {{ end }}"
 />
 
-{{/* Prevent flash of wrong theme */}}
 <script>
   (function () {
     const stored = localStorage.getItem("theme");
@@ -52,11 +47,9 @@
   {{ partial "css.html" . }}
 {{ end }}
 
-{{/* Favicon */}}
 {{ with resources.Get "images/logo.png" }}
   <link rel="icon" type="image/png" href="{{ .RelPermalink }}" />
 {{ end }}
-{{/* Open Graph */}}
 
 
 <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}" />
@@ -89,10 +82,8 @@
 {{ if or (and $cover (ne $cover "")) .Site.Params.cover }}
   {{ $coverToUse := cond (and $cover (ne $cover "")) $cover .Site.Params.cover }}
 
-  {{/* Try page resource first */}}
   {{ $img := .Resources.GetMatch $coverToUse }}
 
-  {{/* Fallback to global assets if not found */}}
   {{ if not $img }}
     {{ $img = resources.Get $coverToUse }}
   {{ end }}
@@ -118,7 +109,6 @@
 
 <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ "/index.xml" | absURL }}" />
 
-{{/* Per-section feed when inside a section */}}
 {{ with .OutputFormats.Get "RSS" }}
   {{ if not $.IsHome }}
     <link
