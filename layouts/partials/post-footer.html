@@ -1,59 +1,14 @@
-{{/* Usage: `partial "post-footer.html" .` — the block that closes a blog post.
+{{/* Usage: `partial "post-footer.html" .` — the block that closes a blog post:
+  the post's taxonomy on top, prev/next beneath, one hairline between them.
 
-  Two rows separated by a single rule: the post's taxonomy on top (a category
-  kicker beside the tag chips) and prev/next beneath it. It replaced a loose
-  stack of five siblings — a rule, a folder-icon row, a tag-icon row, the
-  comments and a separate prev-next nav — where each block drew its own edge at
-  its own weight and none of them lined up with the next.
-
-  **One rule, and it is the site's ordinary hairline: `border-t border-base-300`.**
-  1px, the same edge the post card, the library card and the library's `li` rows
-  all draw, and the same one the comments section below now carries — so the page
-  ends with two rules of one weight rather than a boxed block competing with an
-  open one. It was a full `border-4` box for a day in 2026-09, the shape of the
-  mockup it came from, and both the frame and the weight went: nothing else on the
-  site draws a box, and 4px is the *image frame's* weight — every `border-4` left
-  in layouts/ is `border-base-200` around a photo, never a rule.
-  The vertical divider between the two neighbours went with the frame, since a
-  rule floating between two cells with no box around them is an orphan.
-
-  With the frame gone the cells carry no horizontal padding either. Inset content
-  only lines up with the article above it while a border is there to inset it
-  from; without one the padding would push the whole footer off the reading
-  column's left edge. Vertical padding stays, as the gap around the rule.
-
-  It owns both halves rather than calling a nav partial, because the rule between
-  them belongs to neither on its own, and because a post with no taxonomy and no
-  neighbours must render nothing at all. prev-next-nav.html was folded in here and
-  deleted; it had no other caller, which is also why `nav_previous`/`nav_next`
-  could drop their arrows.
-
-  **`data-pagefind-ignore` sits on the nav row only, never on the footer.** The
+  `data-pagefind-ignore` sits on the nav row only, never on the footer — the
   category and tag links carry `data-pagefind-filter`, and an ignored element is
-  dropped from the index outright — the filters inside it included — so ignoring
-  the whole footer would silently empty the search facets. The neighbours' titles
-  are the only part here that is genuinely another page's content.
+  dropped from the index outright, filters included.
 */}}
-
-{{/* The neighbours come from the merged feed, not from `.PrevInSection` /
-  `.NextInSection`. Those two are **language-scoped** — every language is its own
-  Hugo site with its own `contentDir`, so they only ever walk `content/en/blog/`
-  or `content/pt-br/blog/` — while /blog, the homepage and the RSS feed all read
-  blog-posts.html, which merges both. A reader browsing that mixed list would
-  click into a post and silently land on a shorter chain: measured in 2026-09,
-  four of the site's seven posts were dead ends in one direction, when only the
-  two true ends of the merged list should be. The newest EN post offered no Next
-  with a newer pt-br post sitting above it in the very list it came from, and the
-  oldest pt-br post offered no Previous with four older posts below it.
-
-  blog-posts.html is newest-first and already drops the foreign copy of a
-  translated post, so the neighbours are one index either side: a *lower* index is
-  newer, hence Next, and a higher one is older, hence Previous. This makes it the
-  fourth surface reading that partial, which is the point of it owning the
-  ordering — the nav cannot disagree with the list that led here.
-
-  Compared on `.Permalink` rather than by page identity: the slice mixes pages
-  from two sites, and a permalink is unique across both by construction.
+{{/* The neighbours come from the merged feed, not `.PrevInSection` /
+  `.NextInSection` — those are language-scoped and would hand a reader of the
+  mixed list a shorter chain. blog-posts.html is newest-first, so a *lower* index
+  is newer, hence Next. Matched on `.Permalink`: the slice mixes two sites.
 */}}
 {{ $posts := partial "blog-posts.html" . }}
 {{ $here := .Permalink }}
@@ -75,19 +30,12 @@
 {{ $tags := .Params.tags }}
 {{ $hasMeta := or $cats $tags }}
 
-{{/* The card's micro-type, verbatim from post-card.html: uppercase, letterspaced,
-  11px. The four labels here are the same kind of thing that card's kicker and
-  meta row are — a word naming the field under it — so they are typed the same.
-*/}}
+{{/* The card's micro-type, verbatim from post-card.html. */}}
 {{ $micro := "font-heading text-[0.6875rem]/[1.2] font-semibold uppercase tracking-[0.12em]" }}
 
-{{/* Branching class strings are built as variables and interpolated whole, never
-  written as inline `if` actions inside a `class` attribute — prettier's Go
-  template plugin drops whitespace inside an action body and glues the two class
-  names together. See the formatting notes in CLAUDE.md.
-
-  The nav row splits in two only when there are two neighbours; a lone one takes
-  the full width rather than sitting beside an empty cell.
+{{/* Branching class strings are variables interpolated whole, never inline `if`
+  actions inside a `class` attribute — see the formatting notes in CLAUDE.md.
+  A lone neighbour takes the full width rather than sitting beside an empty cell.
 */}}
 {{ $navCols := "" }}
 {{ if and $prev $next }}
@@ -97,24 +45,14 @@
 {{ if or $hasMeta $prev $next }}
   <footer class="mt-10">
     {{ if $hasMeta }}
-      {{/* The category column is fixed and narrow so the tags start on the same
-        line whatever a category is called; below `sm` the two stack instead.
-      */}}
+      {{/* Fixed narrow category column so the tags start on the same line. */}}
       <div class="grid grid-cols-1 gap-x-8 gap-y-5 pb-6 sm:grid-cols-[minmax(0,9rem)_1fr]">
         {{ with $cats }}
           <div>
             <div class="text-base-content/70 {{ $micro }}">{{ i18n "categories_label" }}</div>
-            {{/* A letterspaced kicker over the category *name*, not the solid chip
-              categories get on /blog and the term pages. Same reasoning as the
-              post card, which is the other surface that names its category rather
-              than chipping it: the chip's job is to pick one item out of a row of
-              many, and here the row is a single labelled field.
-
-              `text-primary` for every category rather than the hue chip-color.html
-              would give it — a `text-` class built by concatenation exists as a
-              literal string nowhere, and the safelist covers the `badge-` and
-              `alert-` families only. The hue still reads on the chips one column
-              over.
+            {{/* A kicker over the category name, not a chip: a chip picks one item
+              out of a row, and this is a single labelled field. `text-primary` for
+              every category — a concatenated `text-` class is in no safelist.
             */}}
             <div class="mt-1.5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
               {{ range $cats }}
@@ -133,7 +71,7 @@
             <div class="text-base-content/70 {{ $micro }}">{{ i18n "tags_label" }}</div>
             <div class="mt-1.5 flex flex-wrap gap-1.5">
               {{ range . }}
-                {{ $color := partial "chip-color.html" (dict "family" "tag" "key" (urlize .)) | default "accent" }}
+                {{ $color := partial "chip-color.html" (dict "family" "tag" "key" (urlize .)) | default "secondary" }}
                 <a
                   href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/"
                   data-pagefind-filter="tag"
@@ -148,17 +86,12 @@
     {{ end }}
 
     {{ if or $prev $next }}
-      {{/* The rule is unconditional: with taxonomy above it separates the two
-        rows, and without it separates the footer from the post's own content.
+      {{/* The rule is unconditional: with taxonomy above it separates the two rows,
+        without it separates the footer from the post's content.
       */}}
       <nav data-pagefind-ignore class="grid grid-cols-1 gap-x-8 gap-y-6 border-t border-base-300 pt-6 {{ $navCols }}">
-        {{/* Both cells read left-to-right: the old nav right-aligned "next", which
-          put the two labels at opposite ends of a wide row with nothing between
-          them. The label names the direction; the alignment does not have to.
-
-          `group` on the anchor rather than a descendant hover rule, and it is the
-          cell's only hover cue — `link-dash` has to sit on the title itself
-          because text-decoration longhands do not inherit into a nested element.
+        {{/* Both cells read left-to-right: the label names the direction, so the
+          alignment does not have to.
         */}}
         {{ with $prev }}
           {{ partial "post-neighbour.html" (dict "page" . "label" (i18n "nav_previous") "micro" $micro) }}
