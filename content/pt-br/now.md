@@ -21,6 +21,8 @@ No ano passado, desativei por completo minha antiga conta do Twitter e comecei a
 
 Esse ano refiz totalmente esse site e tenho tentado mantê-lo atualizado. Toda semana tenho tirado um tempo pra mexer alguma coisa no layout ou escrever alguma coisa nessa seção ou adicionar algo na página de [biblioteca]({{< relref "library" >}}).
 
+Tenho usado o **Claude Code** para construir algumas interfaces, mas mantenho escrevendo os textos aqui (como dá pra perceber, já que não são muitos).
+
 ## Livros
 
 - Metrópolis (Thea von Harbou)
@@ -65,6 +67,7 @@ Esse ano estou em uma missão para descobrir artistas e gêneros novos. Por muit
 - **Gorillaz** - [The Mountain](https://music.apple.com/br/album/the-mountain/1837237742)
 - **Joyce Manor** - [I Used to Go to This Bar](https://music.apple.com/br/album/i-used-to-go-to-this-bar/1839918836)
 - **Panic! At the Disco** - [Vices & Virtues](https://music.apple.com/br/album/vices-virtues-deluxe-edition/424480029?l=en-GB)
+- **Phoebe Bridgers** - [Lost Weekend](https://music.apple.com/br/album/lost-weekend/6781051268)
 
 Ao final dessa página, você consegue ver o que tenho escutado ultimamente.
 
