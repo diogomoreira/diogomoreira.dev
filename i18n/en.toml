@@ -103,5 +103,5 @@ theme_toggle_aria = "Toggle dark mode"
 page_controls_aria = "Page controls"
 
 # Friends
-friends_group_known = "People I know"
+friends_group_known = "Friends"
 friends_group_online = "People I follow online"
