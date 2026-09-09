@@ -14,39 +14,21 @@
   logs: true;
 }
 
-/* Tailwind's automatic source detection already scans the project directory —
-   `layouts/`, `content/`, `assets/` — so a utility written in a template is
-   emitted by the build that renders it. (Verified: `mix-blend-soft-light` and
-   `isolate` appear only in partials/grain-effect.html, which nothing calls, so
-   they can never reach hugo_stats.json — and both are in the built stylesheet.)
-   `layouts` is named explicitly anyway: it is where nearly every class on the
-   site now lives, and an implicit dependency that large is worth writing down.
+/* Automatic source detection already scans the project directory, so a utility
+   written in a template is emitted by the build that renders it. `layouts` is
+   named anyway: nearly every class on the site lives there.
 
-   `hugo_stats.json` is separate because Tailwind respects .gitignore and that
-   file is ignored. It lists the classes an *earlier* build rendered, which is
-   what catches class names assembled at build time (`badge-{{ $color }}`) that
-   no scanner can see in the source. */
+   `hugo_stats.json` is separate because Tailwind respects .gitignore. It lists
+   the classes an *earlier* build rendered, which is what catches class names
+   assembled at build time. */
 @source "layouts";
 @source "hugo_stats.json";
 
-/* The one real limit on scanning: a class name that does not exist as a literal
-   string anywhere. Both families below are built by string concatenation in a
-   template — `alert-{{ $type }}` in partials/disclaimer-alert.html from the
-   `disclaimerType` front matter, `badge-{{ $color }}` in the eight chip call
-   sites from partials/chip-color.html and post-status-color.html. hugo_stats
-   would catch them one build late; a page that sets a variant nobody has built
-   yet would ship unstyled. Safelisting is the sanctioned fix and costs nothing.
-
-   Keep in step with the maps in chip-color.html / post-status-color.html. Every
-   name here is a daisyUI variant: the chip palette is the shipped set and
-   nothing else.
-
-   There was a third line here, `text-{primary,…}`, for the way
-   post-status-legend.html used to colour each label with `text-` plus the
-   keyword post-status-color.html returned. That partial now returns whole
-   literal class strings — the status chips are the `--status-*` emerald ramp
-   below, read through `var()` — so nothing concatenates a `text-` class any
-   more and the line was dead. */
+/* The one real limit on scanning: a class name that exists as a literal string
+   nowhere. Both families below are built by concatenation — `alert-{{ $type }}`
+   and `badge-{{ $color }}` — so hugo_stats would catch them a build late and a
+   page setting a variant nobody has built yet would ship unstyled. Keep in step
+   with the map in chip-color.html. */
 @source inline("alert-{info,success,warning,error}");
 @source inline("badge-{primary,secondary,accent,neutral,info,success,warning,error,ghost}");
 
@@ -55,74 +37,54 @@
   default: true;
   prefersdark: false;
   color-scheme: "light";
-  /* Warm paper, cool ink. The six structural colours are the MP072 palette,
-     adopted 2026-09 and named in the comments below — Palladian, Oatmeal, Blue
-     Fantastic, Burning Flame, Truffle Trouble, Abyssal Anchorfish Blue. The
-     chip hues that palette does not supply stay on Tailwind's scale.
+  /* Monochrome, from the Odin's Crow palette — `#000`, `#9C9C9C`, `#ffffff` and
+     nothing else. The three are used at full strength where they fit (white is
+     the column, black is the ink) and the rest of the ramp is plain sRGB greys
+     between them, because the palette publishes three swatches and a site needs
+     a ramp.
 
-     That is the sourcing rule now, and it matters more than which of the two
-     sources a given line came from: **every value is looked up from a named
-     source, never picked by eye.** Sunrise reads from a published palette,
-     midnight from Tailwind's scale, and each line carries its source in a
-     trailing comment so the next change is a lookup rather than a colour-picking
-     session. Tailwind cannot reproduce this palette — its nearest steps to
-     Oatmeal and Truffle are off by dE 0.058 and 0.061, which is the difference
-     between a muted terracotta and an orange — so the palette wins where the two
-     disagree.
+     **One accent survives the switch**, and it is the Truffle Trouble / Burning
+     Flame pair the previous palette left behind: sunrise takes the dark member,
+     midnight the light one, which is the inverse-brightness rule already. It
+     carries links, the nav's active state, the post-status ramp and the rail
+     accent — the four places where losing colour would cost navigation rather
+     than only decoration. Everything else on the page is grey.
 
-     Cool ink on warm paper is the inverse of midnight's warm ground and warm
-     ink, which is what it has always been here; only the ink's hue moved, from a
-     warm stone to the palette's slate blue.
+     `#9C9C9C` is deliberately absent here. It measures **2.75:1 on white**, so
+     in this theme it can only be a surface or a divider, never text; it is
+     midnight's muted ink instead, where it reads 7.65:1 on black. That
+     asymmetry is the palette's own, not something imposed on it.
 
-     Two derived values, both forced and both noted where they appear:
-     `base-100` and `--color-heading`. Everything else is a palette or Tailwind
-     literal.
-
-     In this theme the colour is the *dark* member of each pair and `-content` is
-     the paper; midnight flips that. See the theming notes in CLAUDE.md. */
-  /* Derived: Palladian lifted 40% toward white. The palette has no step above
-     Palladian, and sunrise needs the reading column to be lighter than the
-     ground. 40% is what puts the column/ground step at 1.083:1, which is where
-     this ramp has always sat (1.080 before, 1.082 before that). */
-  --color-base-100: #f5f2ec; /* Palladian +40% white — the reading column */
-  --color-base-200: #eee9df; /* Palladian — the page ground, and the surface every ratio is measured against */
-  --color-base-300: #c9c1b1; /* Oatmeal — the only divider token */
-  --color-base-content: #1b2632; /* Abyssal Anchorfish Blue — 12.42:1 on the ground; at /70 still 5.77:1 */
-  /* Blue Fantastic is *not* the body ink: at /70 it measures 4.35:1, under the
-     muted-text floor the rest of this file is written to. It is the plate
-     instead, below. Abyssal is the only one of the two dark blues that can
-     carry `text-base-content/70`. */
-  /* Truffle Trouble clears the floor by 0.08 — the same tolerance `primary` has
-     always run at here. It only clears it because `base-200` is Palladian
-     exactly; on a ground mixed even 12% toward Oatmeal it measures 4.38 and
-     fails. That is what pins the ground to the palette's own paper value. */
-  --color-primary: #a35139; /* Truffle Trouble — 4.58:1 */
-  --color-primary-content: #f5f2ec;
-  /* The muted-caption slot before it is a chip hue — figcaptions, meta rows,
-     `section-label`'s non-default callers, `empty-state`, `feed-link`, the CV
-     entries. Slate rather than the olive it replaced: it sits in the palette's
-     own blue family, and at 2.02:1 against the body ink a caption still reads
-     as clearly muted. Blue Fantastic would be the palette-native choice and is
-     wrong here — 1.34:1 against the ink, so captions stop reading as captions. */
-  --color-secondary: #45556c; /* slate-600 — 6.27:1 */
-  --color-secondary-content: #f5f2ec;
-  --color-accent: #005f5a; /* teal-800 — 6.23:1; also the site-wide dashed-underline colour */
-  --color-accent-content: #f5f2ec;
-  /* The ink plate the post cards are built on, and the one place `neutral` is
-     right on this site — it is the surface in both themes rather than flipping
-     to text. Blue Fantastic rather than Abyssal on purpose: a plate *lighter*
-     than the body ink reads as its own panel, where matching the ink would make
-     it a block of the page's own text colour. */
-  --color-neutral: #2c3b4d; /* Blue Fantastic */
-  --color-neutral-content: #f5f2ec; /* 9.85:1 */
-  --color-info: #432dd7; /* indigo-700 — 6.69:1 */
-  --color-info-content: #f5f2ec;
-  --color-success: #006045; /* emerald-800 — 6.29:1 */
-  --color-success-content: #f5f2ec;
-  --color-warning: #894b00; /* yellow-800 — 5.65:1; the gold as ink, for stars and the `watch` chips */
-  --color-warning-content: #f5f2ec;
-  --color-error: #c10007; /* red-700 — 5.31:1 */
-  --color-error-content: #f5f2ec;
+     `primary` and `accent` are the same colour on purpose — with one accent
+     there is nothing for them to disagree about. `chip-color.html` was moved off
+     both so chips stay tonal; see its own note. */
+  --color-base-100: #ffffff; /* palette white — the reading column */
+  --color-base-200: #f5f5f5; /* the page ground, and the surface every ratio is measured against */
+  --color-base-300: #d0d0d0; /* the only divider token — 1.415:1 on the ground */
+  --color-base-content: #000000; /* palette black */
+  --color-primary: #a35139; /* Truffle Trouble — 5.08:1. The one accent. */
+  --color-primary-content: #ffffff;
+  --color-accent: #a35139; /* Truffle Trouble — the site-wide dashed-underline colour */
+  --color-accent-content: #ffffff;
+  /* The muted-caption slot — figcaptions, meta rows, `empty-state`, `feed-link`,
+     the CV entries — plus three more greys below it. The four are spread as far
+     apart as the 4.5:1 floor allows, because they are also the chip palette now
+     and tone is the only axis a chip has left. */
+  --color-secondary: #474747; /* 8.52:1 */
+  --color-info: #6e6e6e; /* 4.68:1 — the lightest step that still clears the floor is #707070 at 4.54, so this keeps a little room */
+  --color-success: #5e5e5e; /* 5.95:1 */
+  --color-warning: #303030; /* 12.11:1 */
+  --color-error: #1c1c1c; /* 15.63:1 — reserved for `disclaimerType` severity */
+  --color-secondary-content: #ffffff;
+  --color-info-content: #ffffff;
+  --color-success-content: #ffffff;
+  --color-warning-content: #ffffff;
+  --color-error-content: #ffffff;
+  /* Unused in `layouts/` — the post card moved onto the base-200 panel recipe —
+     but daisyUI compiles `badge-neutral` from it, so it is kept sane rather than
+     left at a stale value. */
+  --color-neutral: #1c1c1c;
+  --color-neutral-content: #ffffff;
   /* No radius anywhere — see the shape-token note in CLAUDE.md. daisyUI splits
      these three by component family (selector = badges/toggles, field =
      buttons/inputs, box = cards/alerts/modals); holding all three at 0 is what
@@ -142,58 +104,39 @@
   default: false;
   prefersdark: true;
   color-scheme: "dark";
-  /* The same MP072 palette as sunrise, laid over black. There is one palette on
-     this site now, not two: sunrise reads the colours at full strength on paper,
-     midnight mixes the same six with black for its surfaces and takes the light
-     members of each pair for its ink. Each value below names the palette colour
-     and the blend, so it stays a lookup rather than a colour-picking session.
+  /* The same three colours, inverted: black is the column, white is the ink, and
+     `#9C9C9C` finally gets a text role — 6.88:1 on this ground, against 2.75:1
+     on sunrise's white. Greys between them carry the ramp.
 
-     Every `-content` is `base-100`, the theme's own darkest step; the worst pair
-     is 6.49:1.
+     `base-100` sits *below* `base-200` — the reading column is the darkest
+     surface here, the inverse of sunrise, where it is the lightest. `base-200`
+     is the anchor because `<html>` carries `bg-base-200`.
 
-     `base-200` is the anchor because `<html>` carries `bg-base-200`: it is the
-     page ground *and* the surface every ratio below is measured against.
-     `base-100` sits *below* it — the reading column is the darkest surface here,
-     the inverse of sunrise, where it is the lightest.
-
-     The chrome does not flip at all: the two rails and the post-card plate keep
-     their sunrise values in this theme (see the shared `--rail-*` block below and
-     `--color-neutral` here). That is what makes the rails legible against a
-     blackened column — Abyssal and Blue Fantastic are *lighter* than everything
-     in this ramp — and it means every ratio inside the rails and on the plate is
-     literally the same number in both themes. */
-  --color-base-100: #03060a; /* Abyssal 45% over black — the reading column */
-  --color-base-200: #0c131b; /* Abyssal 70% over black — the page ground, and the surface every ratio is measured against */
-  --color-base-300: #32302b; /* Oatmeal 38% over black — the only divider token; 1.417:1 on the ground */
-  --color-base-content: #eee9df; /* Palladian — 15.91:1 on the ground; at /70 still 7.34:1 */
-  /* The warm brand colour flips to the light member of its own pair, which is
-     exactly what the palette already contains: Truffle Trouble and Burning Flame
-     are the same hue family, dark and light. Sunrise takes the dark one as a
-     token and leaves the light one to the fill tier; midnight does the reverse. */
-  --color-primary: #ffb162; /* Burning Flame — 10.74:1 */
-  --color-primary-content: #03060a;
-  /* The muted-caption slot — figcaptions, meta rows, `empty-state`, `feed-link`,
-     the CV entries. Oatmeal at full strength: it is the palette's own muted
-     neutral, and it is `base-300` in sunrise, so the same colour carries the same
-     "quiet warm grey" role in both themes at two different lightnesses. */
-  --color-secondary: #c9c1b1; /* Oatmeal — 10.77:1 */
-  --color-secondary-content: #03060a;
-  --color-accent: #00d5be; /* teal-400 — 10.32:1; the light sibling of sunrise's teal-800, and the site-wide dashed-underline colour */
-  --color-accent-content: #03060a;
-  /* The post-card plate, identical to sunrise's. The plate is ink in both themes
-     and here it is also the lightest surface on the page, sitting 1.78:1 above
-     the column — so it reads as raised rather than as a hole, with no per-theme
-     value to keep in step. */
-  --color-neutral: #2c3b4d; /* Blue Fantastic */
-  --color-neutral-content: #f5f2ec; /* 10.22:1 */
-  --color-info: #7c86ff; /* indigo-400 — 6.15:1 */
-  --color-info-content: #03060a;
-  --color-success: #00d492; /* emerald-400 — 9.93:1 */
-  --color-success-content: #03060a;
-  --color-warning: #ffb900; /* amber-400 — 11.18:1 */
-  --color-warning-content: #03060a;
-  --color-error: #ff6467; /* red-400 — 6.67:1 */
-  --color-error-content: #03060a;
+     The dark end of the ramp is written as plain sRGB greys rather than mixed in
+     OKLab, and that is not a style choice: OKLab lightness compresses hard near
+     black, so a 9% grey-into-black mix computes to `#010101` and the
+     column-to-ground step measures 1.006:1 — an invisible ramp. Mixing works
+     fine at sunrise's end and not at all at this one. */
+  --color-base-100: #000000; /* palette black — the reading column */
+  --color-base-200: #111111; /* the page ground, and the surface every ratio is measured against */
+  --color-base-300: #303030; /* the only divider token — 1.431:1 on the ground */
+  --color-base-content: #ffffff; /* palette white */
+  --color-primary: #ffb162; /* Burning Flame — 10.54:1. Truffle's light sibling; the one accent. */
+  --color-primary-content: #000000;
+  --color-accent: #ffb162; /* Burning Flame — the site-wide dashed-underline colour */
+  --color-accent-content: #000000;
+  --color-secondary: #9c9c9c; /* palette grey — 6.88:1, the muted-caption slot */
+  --color-info: #8a8a8a; /* 5.47:1 */
+  --color-success: #b0b0b0; /* 8.71:1 */
+  --color-warning: #c8c8c8; /* 11.29:1 */
+  --color-error: #e0e0e0; /* 14.30:1 — reserved for `disclaimerType` severity */
+  --color-secondary-content: #000000;
+  --color-info-content: #000000;
+  --color-success-content: #000000;
+  --color-warning-content: #000000;
+  --color-error-content: #000000;
+  --color-neutral: #303030;
+  --color-neutral-content: #ffffff;
   /* Identical to sunrise's, like every other shape token. */
   --radius-selector: 0;
   --radius-field: 0;
@@ -205,86 +148,63 @@
   --noise: 0;
 }
 
-/* Headings pull away from body text in both themes — toward white over
-   midnight's softer copy, toward black under sunrise's lighter ink.
-   Scoped with `html[data-theme=…]` (0,1,1) rather than a bare attribute
-   selector (0,1,0), which would tie with the `:root` block Tailwind emits
-   `@theme` vars into and be decided by source order. */
-/* Headings pull away from body text in both themes — toward white over
-   midnight's paper-coloured copy, toward black under sunrise's slate ink.
-   Scoped with `html[data-theme=…]` (0,1,1) rather than a bare attribute
-   selector (0,1,0), which would tie with the `:root` block Tailwind emits
-   `@theme` vars into and be decided by source order. */
+/* Headings pull away from body text in both themes. Scoped with
+   `html[data-theme=…]` (0,1,1) rather than a bare attribute selector (0,1,0),
+   which would tie with the `:root` block Tailwind emits `@theme` vars into and
+   be decided by source order. */
 html[data-theme="sunrise"] {
-  --color-heading: #121b24; /* Abyssal +18% black — the palette has no step below Abyssal, and headings pull away from the body ink (1.134:1) */
+  --color-heading: #000000; /* palette black — the body ink is already black, so headings match rather than pull away; there is nothing below it to pull to */
 }
 html[data-theme="midnight"] {
-  --color-heading: #f1ede5; /* Palladian +20% white — the palette has no step above Palladian */
+  --color-heading: #ffffff; /* palette white — same, from the other end */
 }
 
-/* Rail chrome — declared once, because it does not vary by theme.
-   Both desktop rails are the palette's two dark blues in *both* themes, with
-   Palladian ink and a Burning Flame accent on top. That is the whole reason the
-   dark theme's ramp is the palette laid over black: Abyssal and Blue Fantastic
-   then sit *above* every surface midnight has, so the rails read as raised
-   chrome there and as sunken chrome on sunrise's paper, from one set of values.
+/* Rail chrome — declared once, because it does not vary by theme. Both rails are
+   the palette's two dark blues in *both* themes, which is the whole reason
+   midnight is the palette laid over black: they then sit above every surface
+   midnight has and below every one sunrise has, so one set of values reads as
+   raised chrome in the dark theme and sunken chrome in the light one. Every ratio
+   inside a rail is literally the same number in both — ink 12.67:1 and 9.43:1,
+   accent 8.55 and 6.37, muted `/70` 6.50 and 5.30.
 
-   Every ratio inside a rail is therefore literally the same number in both
-   themes — ink 12.67:1 on the nav rail and 9.43:1 on the tools rail, accent
-   8.55:1 and 6.37:1, muted `/70` 6.50:1 and 5.30:1.
-
-   `--rail-nav` is the menu rail and `--rail-tools` the controls rail; the nav
-   rail is the darker and more strongly separated of the two. A plain `:root`
-   rather than the `html[data-theme=…]` blocks above: nothing competes for these,
-   so the specificity trick those need does not apply here. Not `@theme` either —
-   Tailwind v4 prunes theme variables no generated utility references, and these
-   are only ever read through `var()` in `rail-chrome`, which is exactly how the
-   old `--pf-font` silently never reached Pagefind. */
+   A plain `:root`: nothing competes for these. **Not `@theme`** — Tailwind v4
+   prunes theme variables no generated utility references, which is exactly how
+   the old `--pf-font` silently never reached Pagefind. */
 :root {
-  --rail-nav: #1b2632; /* Abyssal Anchorfish Blue */
-  --rail-tools: #2c3b4d; /* Blue Fantastic — also the post-card plate in both themes */
-  --rail-ink: #eee9df; /* Palladian */
-  --rail-accent: #ffb162; /* Burning Flame */
+  --rail-nav: #1c1c1c; /* 17.04:1 against sunrise's white column, 1.23:1 against midnight's black one */
+  --rail-tools: #242424; /* 15.52:1 and 1.35:1 */
+  --rail-ink: #ffffff; /* palette white — 17.04:1 and 15.52:1; at /70 still 8.13 and 7.74 */
+  --rail-accent: #ffb162; /* Burning Flame — 9.51:1 and 8.66:1 */
 }
 
-/* Blog post status chips — one emerald ramp, identical in both themes, and
-   declared here for the same reason the rail chrome above is: these do not vary
-   by theme, so a plain `:root` is the whole story and neither
-   `html[data-theme=…]` block needs a line. Not `@theme` either — Tailwind v4
-   prunes theme variables no generated utility references, and these are only
-   read through `var()` from the class strings in partials/post-status-color.html.
+/* Blog post status chips — one warm ramp, identical in both themes, in a plain
+   `:root` for the same reason the rail chrome above is. Not `@theme`: these are
+   only read through `var()` from post-status-color.html's class strings.
 
-   The statuses are a plant maturing (🌱🌿🪴), so the colour is one hue at three
-   lightnesses rather than three hues: pale mint for a seed, full emerald for
-   something growing, deep forest for something living. Reading the ramp as an
-   axis is the point — the previous mapping spent three unrelated brand tokens
-   (`info`/`success`/`primary`) on what is really a single scale.
+   🌱 seed / 🌿 growing / 🪴 living is a plant maturing, so it is one hue at three
+   lightnesses rather than three unrelated brand tokens. That hue is now the
+   site's single accent — the Truffle/Burning Flame family — because on a
+   monochrome page the status is one of the few things worth spending colour on.
+   It was an emerald ramp until the palette went black-and-white.
 
-   Every value is a Tailwind emerald step, named in its trailing comment, and the
-   *reason* they are fixed rather than theme-switched is that a chip is a fill:
-   the ink sits on the emerald, not on the page. Each pair is a card-chip ramp
-   (`-start` → `-deep`, see post-card.html) and the flat chip elsewhere is the
-   `-deep` end alone, so the two shapes cannot drift.
+   Contrast is measured chip-ink-on-fill at *both* ends of every ramp, and the
+   bands straddle the hole in the middle of the family exactly as the emerald
+   ones did: full Truffle measures 3.53:1 under the dark ink and the mid step
+   3.02:1 under the pale one, so neither band is allowed to contain that
+   crossover. Worst pair is living's light end at 5.18:1.
 
-   Contrast is measured chip-ink-on-fill at *both* ends of every ramp, which is
-   what fixes the steps: emerald 600 is the one hole in the scale — 4.16:1 under
-   the dark ink and 3.65:1 under white — so the bands straddle it rather than
-   touch it. Worst pair is living's light end at 5.09:1; the rest run 6.14–11.87.
-
-   Do not reach for these as *text* on a page surface. No single emerald step can
-   clear 4.5:1 on both grounds at once (the site's paper is L 0.79, midnight's
-   ground L 0.014 — the two requirements cross), which is why the status legend
-   now renders chips rather than coloured labels. */
+   Never use these as *text* on a page surface: no single step clears 4.5:1 on
+   both grounds at once, which is why the legend renders chips. */
 :root {
-  --status-seed-start: #a4f4cf; /* emerald-200 */
-  --status-seed-deep: #5ee9b5; /* emerald-300 */
-  --status-seed-ink: #002c22; /* emerald-950 — 11.87:1 / 9.97:1 across the ramp */
-  --status-growing-start: #00d492; /* emerald-400 */
-  --status-growing-deep: #00bc7d; /* emerald-500 */
-  --status-growing-ink: #002c22; /* emerald-950 — 7.83:1 / 6.14:1 */
-  --status-living-start: #007a55; /* emerald-700 */
-  --status-living-deep: #006045; /* emerald-800 */
-  --status-living-ink: #ecfdf5; /* emerald-50 — 5.09:1 / 7.23:1 */
+  --status-seed-start: #ffddbc; /* Burning Flame +55% white */
+  --status-seed-deep: #ffc185; /* Burning Flame +20% white — 15.20:1 / 12.31:1 across the ramp */
+  --status-seed-ink: #190704; /* Truffle +70% black */
+  --status-growing-start: #ffb162; /* Burning Flame */
+  --status-growing-deep: #cc7b4b; /* Burning Flame 45% into Truffle — 10.92:1 / 6.06:1 */
+  --status-growing-ink: #190704;
+  --status-living-start: #a35139; /* Truffle Trouble */
+  --status-living-deep: #783a28; /* Truffle +20% black — 5.18:1 / 8.07:1 */
+  --status-living-ink: #fff6ed; /* Burning Flame +88% white */
 }
 
 @theme {
@@ -299,19 +219,16 @@ html[data-theme="midnight"] {
 }
 
 @layer components {
-  /* ── Table of contents ────────────────────────────────────────────────────
-     Hugo's `.TableOfContents` emits `nav#TableOfContents > ul > li > a` with no
-     hooks of its own, so it has to be styled from the outside. */
+  /* Hugo's `.TableOfContents` emits no hooks of its own, so it has to be styled
+     from the outside. */
   .toc ul {
     list-style: none;
     margin: 0;
     padding: 0;
   }
 
-  /* `nav > ul` is the top level only — nested lists are children of an <li>.
-     `base-300` rather than a mix of `neutral`: `neutral` is a dark surface in
-     midnight but near-black text in sunrise, so any hairline mixed from it
-     works in one theme and vanishes in the other. */
+  /* `nav > ul` is the top level only. `base-300` rather than `neutral`, which
+     inverts between the themes and would vanish in one. */
   .toc nav > ul {
     border-inline-start: 1px solid var(--color-base-300);
   }
@@ -343,18 +260,11 @@ html[data-theme="midnight"] {
     border-inline-start-color: var(--color-primary);
   }
 
-  /* ── Pagefind search box ──────────────────────────────────────────────────
-     Only the placeholder is stepped down; the input keeps Pagefind's 16px
-     (`--pf-input-font-size`), because anything under 16px makes iOS zoom the
-     page when the field takes focus. Shrinking the placeholder alone is safe —
-     the zoom heuristic reads the input's own font size.
-
-     No specificity fight despite Pagefind's `:is(*, #\#)` triple hammer: its
-     `::placeholder` rule sets `color` only, so the size it renders at is
-     *inherited* from the input, and any specified value outranks inheritance
-     whatever the layer. Don't add other properties here expecting them to
-     land — anything Pagefind also declares wins, since its sheet is unlayered
-     and this block is not. */
+  /* Only the placeholder is stepped down: the input keeps Pagefind's 16px,
+     because anything smaller makes iOS zoom the page on focus. No specificity
+     fight, because Pagefind's `::placeholder` rule sets `color` only and the size
+     is inherited. Don't add other properties expecting them to land — anything
+     Pagefind also declares wins, its sheet being unlayered and this block not. */
   .pf-searchbox-input::placeholder {
     font-size: 14px;
   }
@@ -392,56 +302,30 @@ a {
   text-underline-offset: 3px;
 }
 
-/* Unlayered on purpose: daisyUI sets `--tw-prose-headings` on `:root .prose`
-   from inside its own layer, so an unlayered rule wins regardless of
-   specificity. Retargets the variable @tailwindcss/typography colours every
-   content heading from, instead of touching each `.prose` wrapper.
-
-   `line-height` rides along for the same cascade reason, and is set here on the
-   wrapper rather than on `.prose p` on purpose: @tailwindcss/typography gives
-   paragraphs no line-height of their own, so 1.75 reaches them by inheritance
-   from `.prose` — and reaches list items, blockquotes and definition lists by
-   the same route. Pinning only `p` would leave those at 1.75 and put a visible
-   step between a paragraph and the list under it. This also has to be unlayered
-   to beat `prose-base`, the size modifier `_default/single.html` carries, which
-   re-declares 1.75 as a (0,1,0) utility of its own. Headings are unaffected —
-   the plugin gives h1–h4 explicit values. */
+/* Unlayered on purpose: daisyUI sets `--tw-prose-headings` from inside its own
+   layer, so an unlayered rule wins regardless of specificity — and this also has
+   to beat `prose-base`, which re-declares its own line-height as a (0,1,0)
+   utility. `line-height` sits on the wrapper rather than on `.prose p` so it
+   reaches list items and blockquotes by inheritance too; pinning only `p` would
+   put a visible step between a paragraph and the list under it. */
 .prose {
   --tw-prose-headings: var(--color-heading);
   line-height: 1.7;
 }
 
-/* @tailwindcss/typography hard-codes its own corners — `pre` at 0.375rem, `kbd`
-   at 0.3125rem — and unlike the heading colour above there is no
-   `--tw-prose-*` variable to retarget, so these have to be real declarations.
-   Without them a code block would be the one rounded thing left on a square
-   site; pointing them at the token is what keeps them in step with it.
-
-   Unlayered for the same reason as the rule above; the plugin's
-   `.prose :where(pre)` also only measures (0,1,0), since `:where()` contributes
-   nothing, so `.prose pre` would win on specificity even in a layer. */
+/* @tailwindcss/typography hard-codes its own corners here and offers no
+   `--tw-prose-*` variable to retarget, so these have to be real declarations
+   pointed at the token. Unlayered for the same reason as the rule above. */
 .prose pre,
 .prose kbd {
   border-radius: var(--radius-box);
 }
 
-/* Weight scale, unlayered for the same cascade reason as the two rules above —
-   @tailwindcss/typography's `.prose :where(h1)` measures (0,1,0) because
-   `:where()` contributes nothing, so `.prose h1` outranks it even from a layer,
-   and there is no `--tw-prose-*` variable for weight the way there is for
-   colour.
-
-   The plugin ships an 800/700/600 heading ramp built for a 400 body, which is
-   also what the `body` rule in `@layer base` sets. This site flattens it to
-   600/600/500, which is a choice about how heavy a heading should look — but it
-   started as a constraint: the body face was loaded over `300..600` at the
-   time, so 800 and 700 both clamped to 600 and rendered as one weight, and the
-   ramp was rewritten to that ceiling to keep each level distinct. The face now
-   loads `100..900`, so the upper end is reachable again and the values could be
-   raised. Worth knowing either way: asking for a weight outside the loaded
-   range does not fail, the browser silently clamps to the nearest end — which
-   is how the site rendered `font-extrabold` as 700 for as long as it requested
-   `400..700`. */
+/* Weight scale, unlayered for the same cascade reason as the rules above. The
+   plugin's 800/700/600 ramp is flattened to 600/600/500. Worth knowing: asking
+   for a weight outside the loaded range does not fail, the browser silently
+   clamps to the nearest end — which is how this site rendered `font-extrabold`
+   as 700 for as long as the face requested `400..700`. */
 .prose h1 {
   font-weight: 600;
 }
@@ -458,10 +342,8 @@ a {
   font-weight: 500;
 }
 
-/* Emphasis is pulled a stop clear of the rest of the ramp. A heading has size
-   and `--font-heading` to set it apart, so 500 against the 400 body is enough;
-   an inline `<strong>` has nothing but weight, and one stop does not read as
-   emphasis at body size. */
+/* Emphasis is pulled a stop clear of the ramp: a heading has size and
+   `--font-heading` to set it apart, an inline `strong` has only weight. */
 .prose strong {
   font-weight: 600;
 }
@@ -470,33 +352,24 @@ a {
   font-weight: 400;
 }
 
-/* Preflight sets `b, strong { font-weight: bolder }`, which is *relative*: against
-   the 400 body it computes to 700, which clamps to 600 in the loaded range and
-   so happens to land right — but only by accident, and it would compute to 400
-   (no emphasis at all) under any lighter parent. Pinned instead. Prose gets its
-   own rule above; this covers `<strong>` outside a `.prose` wrapper. */
+/* Preflight's `font-weight: bolder` is *relative* and happens to land right only
+   by accident — it would compute to 400, no emphasis at all, under any lighter
+   parent. Pinned instead. This covers `strong` outside a `.prose` wrapper. */
 b,
 strong {
   font-weight: 600;
 }
 
-/* External-link marker.
-   `http(s)` minus our own host = off-site. Internal links are always relative
-   (`/blog/…`), so they never match — including under `hugo server`, where
-   baseURL is localhost.
-   Excluded on purpose: anchors wrapping an image/svg (social icons, CV icon
-   links) and button/badge-shaped ones, where an arrow would sit
-   on top of artwork instead of after a phrase. `.no-ext-icon` is the manual
-   escape hatch, and `layouts/library/single.html` uses it on both card shapes:
-   the whole card is the link, so the arrow would land after the content rather
-   than after a phrase — and relying on the `:has(svg)` exclusion there is a
-   trap, since it silently depends on the entry having a star rating.
-   The glyph is a mask, not `content:` text, so it inherits the link colour via
-   `currentColor` and renders identically in both themes with no font
-   dependency. `display: inline-block` makes it an atomic inline, which text
+/* External-link marker: `http(s)` minus our own host. Internal links are always
+   relative, so they never match. Anchors wrapping artwork and button/badge-shaped
+   ones are excluded; `.no-ext-icon` is the manual escape hatch, and relying on
+   the `:has(svg)` exclusion instead is a trap — on a library row it silently
+   depends on the entry having a star rating.
+
+   The glyph is a mask, not `content:` text, so it takes the link colour via
+   `currentColor`. `display: inline-block` makes it an atomic inline, which text
    decoration does not propagate into — that is what keeps the dashed underline
-   from running beneath the arrow; the leading gap is padding (inside the
-   undecorated box) rather than margin (outside it, and underlined). */
+   off the arrow, and why the leading gap is padding rather than margin. */
 a[href^="http"]:not([href*="diogomoreira.dev"]):not(.no-ext-icon):not(.btn):not(.badge):not(
     :has(img, svg, picture)
   )::after {
@@ -518,35 +391,23 @@ a[href^="http"]:not([href*="diogomoreira.dev"]):not(.no-ext-icon):not(.btn):not(
 
 /* Pastel chip fill — replaces `badge-outline` on the site's tag/label chips.
 
-   `@utility` rather than a plain rule: it registers with Tailwind and is emitted
-   into `@layer utilities` *after* daisyUI's own nested `@layer daisyui.*`
-   sub-layers, which is what lets it override the `background-color` `.badge`
-   sets. (The old hand-written version had to sit unlayered to win that fight;
-   the directive settles it by construction.)
+   `@utility` rather than a plain rule, and that is what makes it win: it is
+   emitted into `@layer utilities` *after* daisyUI's nested `@layer daisyui.*`
+   sub-layers, so it overrides `.badge`'s own fill by construction. Written
+   against `--badge-color`, daisyUI's per-badge token, so one rule covers every
+   variant — an uncoloured chip falls through to `base-content`.
 
-   Written against `--badge-color`, daisyUI's own per-badge token that
-   `badge-accent` & friends set, so one rule covers every colour variant —
-   including the uncoloured chips, which fall through to `base-content`.
+   Two measured numbers carry it. The fill mixes into `base-200`, the surface a
+   chip actually overlays. And the text is pulled 30% toward `base-content`,
+   without which the chip is unreadable: sunrise's brand colours clear 4.5:1 by
+   only ~0.1, so *any* fill behind pure-token text drops them to 3.75–4.16. That
+   one declaration fixes both themes precisely because of the inverse-brightness
+   pairing — near-black in sunrise, light in midnight. Worst case across all six
+   hues × both themes is 5.57:1 (sunrise `accent`); re-measure after any palette
+   change, since that figure has moved every time.
 
-   Two numbers carry the weight, and both were measured rather than eyeballed:
-
-   - The fill mixes into `base-200`, not `base-100`. `<html>` carries
-     `bg-base-200` and cards sit on it, so that is the surface a chip actually
-     overlays — the same worst-case surface the theme blocks measure against.
-     (daisyUI's own `badge-soft` mixes 8% into `base-100`: wrong ground, and too
-     faint here.)
-   - The text is pulled 30% toward `base-content`, and the chip is unreadable
-     without it. Sunrise's brand colours clear 4.5:1 on `base-200` by only ~0.1,
-     so *any* fill behind pure-token text drops them to 3.75–4.16. Mixing toward
-     `base-content` fixes both themes with one declaration because of the
-     inverse-brightness pairing the themes are built on: it is near-black in
-     sunrise and light in midnight, so it pushes the text away from the fill in
-     whichever direction that theme needs. Worst case across all six chip
-     hues × both themes is 5.57:1 (sunrise `accent`).
-
-   Hover steps the *border*, never the fill: raising the fill on hover drops
-   midnight to 4.12–4.24 in every variant. Both border colours are always-on
-   values on a border that is already 2px (`--border`), so nothing reflows. */
+   Hover steps the *border*, never the fill: raising the fill drops midnight to
+   4.12–4.24 in every variant. */
 @utility badge-tint {
   --chip: var(--badge-color, var(--color-base-content));
   color: color-mix(in oklab, var(--chip) 70%, var(--color-base-content));
@@ -555,18 +416,11 @@ a[href^="http"]:not([href*="diogomoreira.dev"]):not(.no-ext-icon):not(.btn):not(
   background-image: none;
 }
 
-/* The dashed accent underline every card title and toot name shares. A utility
-   rather than four copies of the same four declarations in four templates,
-   and — unlike the panel recipe next to it in the markup — nothing else on the
-   site competes for these properties, so its position in the utilities layer
-   cannot bite.
-
-   `text-decoration-line` is deliberately absent: the hover state adds it with
-   `group-hover:underline`. Longhands only, never the `text-decoration`
-   shorthand, which resets colour and style back to `currentColor`/`solid`. And
-   they have to sit on the *title* rather than being inherited from the anchor
-   around it — these three are non-inherited properties, so the site-wide `a`
-   rule below never reaches an element nested inside the link. */
+/* The dashed accent underline every card title and toot name shares. Nothing
+   else competes for these properties, so its place in the utilities layer cannot
+   bite. `text-decoration-line` is deliberately absent — the hover state adds it.
+   Longhands only, never the shorthand, which resets colour and style. They are
+   non-inherited, so this has to sit on the title, not the anchor around it. */
 @utility link-dash {
   text-decoration-color: var(--color-accent);
   text-decoration-style: dashed;
@@ -574,57 +428,32 @@ a[href^="http"]:not([href*="diogomoreira.dev"]):not(.no-ext-icon):not(.btn):not(
   text-underline-offset: 3px;
 }
 
-/* The two desktop rails are dark chrome in both themes, and this is what makes
-   everything inside them legible without touching a single child template.
+/* Paints a rail and makes everything inside it legible without touching a child
+   template. In sunrise `base-content` *is* the nav rail's background, so a
+   painted rail with un-rebound tokens renders its own menu invisible. Rather than
+   re-colour a dozen descendants this rebinds the tokens for the subtree: custom
+   properties inherit, so the nearest ancestor that sets one wins and every child
+   re-inks by construction — daisyUI's bare `.btn` included. The Pagefind block is
+   the same trick for markup we do not write, and re-skins its results dropdown.
 
-   The rails are full of `text-base-content`, `text-heading/60`, `border-base-300`
-   and daisyUI `btn`s — all of which resolve against the *page* ground. In sunrise
-   `base-content` is Abyssal, which is also the nav rail's background, so a
-   painted rail would render its own nav invisible. Rather than re-colour a dozen
-   descendants, this rebinds the tokens themselves for the subtree: custom
-   properties inherit, so the nearest ancestor that sets one wins, and every child
-   re-inks by construction. daisyUI's bare `.btn` follows too — it reads
-   `--btn-bg: var(--btn-color, var(--color-base-200))` and `--btn-fg:
-   var(--color-base-content)`, both of which are rebound here.
+   **Lightning CSS's `color-mix` fallback is dead code when the target is a custom
+   property**, which is worth knowing before trusting it elsewhere: for
+   `badge-tint` it emits an `@supports` guard that works, but here it emits the
+   un-mixed value as a plain preceding declaration, and an unregistered custom
+   property accepts any token stream at parse time, so the `color-mix` always
+   wins. The failure surfaces at substitution, where the *using* declaration falls
+   back to its initial value rather than to the earlier one.
 
-   `--rail-bg` is set per rail in the template; the two hues come from the
-   `html[data-theme=…]` blocks above, so the whole thing is two variables at the
-   call site.
-
-   The Pagefind block is the same trick for markup we do not write. Its widget
-   hardcodes a light field (`--pf-background: #fff`) on a plain unlayered
-   `:root` — already a stark white box in midnight today — which on a navy rail
-   would be louder still. Inheritance settles it without a specificity fight,
-   because these reach the widget as inherited values rather than as competing
-   declarations on the same element. Note this also re-skins the results dropdown,
-   which is anchored to the rail and so reads as part of it.
-
-   **Lightning CSS's `color-mix` fallback does not protect this block, and that is
-   worth knowing before trusting it elsewhere.** For `badge-tint` it synthesises
-   an `@supports` guard, which works. Here it emits the un-mixed value as a plain
-   preceding declaration of the same specificity instead — dead code, because an
-   unregistered custom property accepts *any* token stream at parse time, so the
-   `color-mix` declaration always wins even on an engine that cannot compute it.
-   The failure only surfaces at substitution: `background-color: var(--btn-bg)`
-   becomes invalid at computed-value time and falls back to the property's
-   initial value, not to the earlier declaration. So the fallback trick is real
-   for ordinary properties and illusory for custom ones.
-
-   Left unguarded on purpose, as `.toc a` already is. `--rail-bg` is a plain
-   variable and never mixed, so the rails still paint their own colour on such an
-   engine and only the raised surfaces and hairlines drop out — degraded chrome,
-   not unreadable chrome. `color-mix` has been Baseline since 2023. */
+   Left unguarded anyway, as `.toc a` is: `--rail-bg` is never mixed, so the rails
+   still paint and only the raised surfaces and hairlines drop out. */
 @utility rail-chrome {
   background-color: var(--rail-bg);
-  /* Load-bearing, and the reason this is not just a token remap. daisyUI
+  /* Load-bearing, and the reason this is not just a token remap: daisyUI
      declares `color: var(--color-base-content)` on `:root,[data-theme]`, which
-     resolves *at the root* — so the computed value that inherits into this
-     subtree is the page's ink, not the rail's, however many variables are
-     rebound below. Anything that relies on inheritance rather than naming a
-     token gets it: the social icons (`fill="currentColor"`), the webring
-     anchors, any bare text. Without this line those render Abyssal-on-Abyssal in
-     sunrise. Re-declaring `color` here is what makes the rebinding actually
-     reach them. */
+     resolves *at the root*, so what inherits here is the page's ink however many
+     variables are rebound below. Anything relying on inheritance rather than
+     naming a token — the social icons, the webring anchors, any bare text —
+     renders black-on-near-black on the rails without this line. */
   color: var(--rail-ink);
   --color-base-100: var(--rail-bg);
   --color-base-200: color-mix(in oklab, var(--rail-ink) 10%, var(--rail-bg));
@@ -632,15 +461,10 @@ a[href^="http"]:not([href*="diogomoreira.dev"]):not(.no-ext-icon):not(.btn):not(
   --color-base-content: var(--rail-ink);
   --color-heading: var(--rail-ink);
   --color-secondary: color-mix(in oklab, var(--rail-ink) 75%, var(--rail-bg));
-  /* Every semantic slot collapses to the one rail accent. `primary` drives the
-     nav's active tint and the TOC's active marker, `accent` the site-wide dashed
-     underline — and the other four are here because chrome has no semantic
-     states to signal: a nav rail is never "success". Leaving them bound to the
-     page palette is what put an `indigo-700` moon on the Blue Fantastic rail
-     (`icons/moon.html` carries `text-info`, `icons/sun.html` `text-warning`),
-     i.e. blue on blue. Only one of those two icons is ever visible — the theme
-     script hides the other — so the warm/cool pairing they were built for is
-     never actually seen, and one accent loses nothing. */
+  /* Every semantic slot collapses to the one rail accent: chrome has no semantic
+     states to signal, and leaving them bound to the page palette is what once put
+     an `indigo-700` moon on a slate rail. Only one of the sun/moon pair is ever
+     visible, so one accent loses nothing. */
   --color-primary: var(--rail-accent);
   --color-accent: var(--rail-accent);
   --color-info: var(--rail-accent);
@@ -661,22 +485,17 @@ a[href^="http"]:not([href*="diogomoreira.dev"]):not(.no-ext-icon):not(.btn):not(
 }
 
 /* Anchor-scoped and unlayered: a chip that is a link steps its border on hover,
-   a chip that is a `<span>` does not, and no variant expresses "only when this
-   is an anchor". */
+   a `span` chip does not, and no variant expresses "only when this is an anchor". */
 a.badge-tint:hover,
 a.badge-tint:focus-visible {
   border-color: color-mix(in oklab, var(--chip) 60%, var(--color-base-200));
 }
 
-/* Every declaration in `badge-tint` is a `color-mix`, and Lightning CSS wraps
-   each one in `@supports`, synthesising the *un-mixed* value as the fallback.
-   That fallback is `var(--chip)` for both `color` and `background-color` — the
-   chip would be its own text colour, i.e. invisible. Routing the fill through
-   daisyUI's `--badge-bg` hook does not dodge it; Lightning fills in custom
-   properties too. So the no-`color-mix` branch is neutralised by hand, back to
-   the outline chip this replaces. Only pre-2023 engines ever take it
-   (`color-mix` has been Baseline since Chrome 111 / Safari 16.2 / Firefox 113),
-   but the failure mode is unreadable text rather than an ugly chip. */
+/* Lightning CSS synthesises the *un-mixed* value as `badge-tint`'s fallback,
+   which is `var(--chip)` for both `color` and `background-color` — the chip would
+   be its own text colour, i.e. invisible. So the no-`color-mix` branch is
+   neutralised by hand, back to the outline chip this replaces. Only pre-2023
+   engines take it, but the failure mode is unreadable text. */
 @supports not (color: color-mix(in lab, red, red)) {
   .badge-tint {
     color: var(--chip);
@@ -685,21 +504,17 @@ a.badge-tint:focus-visible {
   }
 }
 
-/* Pagefind's `<pagefind-searchbox>` overrides.
+/* Pagefind overrides. Unlayered and at (0,1,1) for two compounding reasons:
+   `pagefind-component-ui.css` declares its defaults on a plain unlayered `:root`,
+   so a layered rule loses outright, and a matching `:root` would be decided by
+   stylesheet order. `html:root` settles both.
 
-   Unlayered, and at (0,1,1) rather than `:root`'s (0,1,0), for two compounding
-   reasons: `pagefind-component-ui.css` declares its own defaults on a plain
-   unlayered `:root`, so anything we put in a layer loses outright, and a
-   matching `:root` would then be decided by which stylesheet the browser sees
-   last. `html:root` settles both. Same trick, and the same reasoning, as the
-   `html[data-theme=…]` blocks near the top of this file.
-
-   These cannot live in the `@theme` block above: Tailwind v4 prunes theme
-   variables that no generated utility references, and nothing references
-   `--pf-*` — so a `--pf-font` declared there never reached Pagefind at all. */
+   **These cannot live in `@theme`** — Tailwind v4 prunes theme variables no
+   generated utility references, so a `--pf-font` declared there never reached
+   Pagefind at all. */
 html:root {
   --pf-font: var(--font-sans);
-  /* `--pf-border-radius`, not `--pagefind-ui-border-radius` — that one belongs
-     to the older `PagefindUI` widget, which this site does not use. */
+  /* `--pf-border-radius`, not `--pagefind-ui-border-radius`: that one belongs to
+     the older `PagefindUI` widget, which this site does not use. */
   --pf-border-radius: var(--radius-box);
 }

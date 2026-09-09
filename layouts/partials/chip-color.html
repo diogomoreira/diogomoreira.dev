@@ -1,43 +1,38 @@
 {{/* Usage: `partial "chip-color.html" (dict "family" "tag" "key" "java")`
-  — returns the DaisyUI colour keyword for a chip, or "" when unmapped.
+  — returns the DaisyUI colour keyword for a chip, or "" when unmapped. Callers
+  keep their own default for "", so a new tag is never unstyled.
 
-  The single place chip colour is decided. Same shape as post-status-color.html:
-  a dict lookup, no fallback logic in the callers beyond keeping their own
-  default when this returns "". A new tag is therefore never unstyled — it just
-  stays the colour it is today until someone maps it.
+  **Chips are tonal, not coloured**, and the map is down to four tokens because
+  of it: `secondary`, `info`, `success` and `warning`, which the monochrome
+  palette makes four greys of stepped weight. `primary` and `accent` are
+  deliberately absent — they are the site's single accent now, spent on links,
+  the nav's active state, the status ramp and the rail accent, and a chip wearing
+  it would read as one of those. `neutral` and `error` were already out (`error`
+  is reserved for alert severity).
 
-  The palette is daisyUI's shipped set and nothing else: primary, secondary,
-  accent, info, success and warning. The other two variants are deliberately
-  absent — `neutral` measures 1.70:1 as a midnight chip, and `error` is reserved
-  for alert severity. There were four hand-written hues here until 2026-09; with
-  them gone, six hues cover four families, so entries share a hue far more often
-  and the grouping below is what makes that read as deliberate rather than as a
-  collision. Adding a colour means adding a *token*, which is a theme change in
-  both blocks of main.css — not a map entry.
-
-  Keys are lowercased; callers pass `urlize`d terms for tags and categories,
-  matching how their term URLs are already built.
+  Be honest about what tone can carry: four greys are four levels, and as
+  `badge-tint` fills — 12% into `base-200` — the outer two are close and the
+  inner two are nearly indistinguishable. Grouping still shapes the map, but the
+  chip's own label is what actually disambiguates now. Adding a *colour* means
+  adding a token in both theme blocks of main.css, not a map entry.
 */}}
 
 {{ $family := .family }}
 {{ $key := lower .key }}
 
-{{/* Language of a post. */}}
 {{ $lang := dict
-  "en" "primary"
-  "pt-br" "accent"
+  "en" "info"
+  "pt-br" "secondary"
 }}
 
-{{/* Library categories — one per data/library/*.yaml. Twelve categories over
-  six hues, so hues repeat, and they repeat by what the thing *is*: things you
-  listen to (accent), things you watch (warning), things you read (secondary),
-  software you run (info), the web and the desk (primary), people (success).
-  The chip carries its own label, so a shared hue reads as grouping rather than
-  as a collision.
+{{/* Twelve categories over four tones, repeating by what the thing *is*: listen
+  and run (info), watch and the desk (warning), read (secondary), people
+  (success). It was six hues over the same twelve until the palette went
+  monochrome; the pairs that merged are the ones that were already adjacent.
 */}}
 {{ $library := dict
-  "albums" "accent"
-  "podcasts" "accent"
+  "albums" "info"
+  "podcasts" "info"
   "movies" "warning"
   "tv-shows" "warning"
   "books" "secondary"
@@ -45,18 +40,18 @@
   "videos" "warning"
   "games" "info"
   "apps" "info"
-  "websites" "primary"
-  "hardware" "primary"
+  "websites" "warning"
+  "hardware" "warning"
   "people" "success"
 }}
 
-{{/* Blog categories. These render as *solid* chips, which is what keeps them
-  reading above tags now that both families carry colour. Three categories, three
-  distinct hues — this is the one family that never shares.
+{{/* Blog categories render as *solid* chips, which is what keeps them reading
+  above the tinted tags — and with hue gone that fill is doing nearly all of the
+  work, so do not tint them. The one family that never shares a tone.
 */}}
 {{ $category := dict
-  "tech" "primary"
-  "hobbies" "accent"
+  "tech" "warning"
+  "hobbies" "success"
   "pessoal" "secondary"
 }}
 
@@ -81,10 +76,10 @@
   "til" "warning"
   "learning" "warning"
   "flashcard" "warning"
-  "vinyl" "primary"
-  "music" "primary"
-  "collections" "primary"
-  "hardware" "accent"
+  "vinyl" "success"
+  "music" "success"
+  "collections" "success"
+  "hardware" "info"
   "pessoal" "success"
   "positividade" "success"
 }}
