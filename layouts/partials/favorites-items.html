@@ -1,0 +1,209 @@
+{{/* Usage: `partial "favorites-items.html" (dict "items" $items "display" $display "aspect" $aspect "dateLabel" $dateLabel "grid" $grid "titleSize" $titleSize)`
+  — one block of entries in one of the three shapes. Extracted from
+  favorites/single.html so a page with headed groups can call it once per
+  group; the shapes themselves are unchanged.
+
+  This is the file `.prettierignore` names, not single.html: the list shape
+  opens an `a` in one branch and a `div` in the other, which
+  prettier-plugin-go-template cannot parse (see CLAUDE.md, Formatting).
+*/}}
+{{ $display := .display }}
+{{ $aspect := .aspect }}
+{{ $dateLabel := .dateLabel }}
+{{ $items := .items }}
+{{ $grid := .grid }}
+{{ $titleSize := .titleSize }}
+{{ if eq $display "card" }}
+  {{/* One horizontal card per entry: cover on the left, a text block on the
+    right. The shape games use — a collection page has the room a twelve-up
+    poster grid never did, and it lets an entry carry more than a name. The
+    panel is the poster card's recipe, plus the list row's accent edge on
+    hover: it is a row, so it gets the row's cue.
+
+    Two columns from `md`, because a full-width card is mostly blank: the
+    text block is a title and a kicker line, and at 56rem that left half
+    the width empty. ~26rem a card, which is what those two need. */}}
+  <div data-pagefind-ignore class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {{ range $items }}
+      {{ $item := . }}
+      <a
+        href="{{ .link }}"
+        class="group flex gap-4 p-2 bg-base-200 border border-base-300 border-s-2 border-s-transparent shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1)] transition-colors duration-150 hover:border-s-accent focus-visible:border-s-accent no-ext-icon"
+        {{ with .link }}target="_blank" rel="noopener noreferrer"{{ end }}
+      >
+        {{/* The cover column is a fixed width and stretches to the card's height,
+          so a 2:3 cover under a short text block is cropped rather than leaving
+          a strip of panel below it. `w-32` — it was `w-24` and the art read as
+          a thumbnail beside the title; at 8rem it is a third of the card and
+          the text block still keeps ~17rem, which a title and a kicker fit.
+          Inset by the card's `p-2` and framed by the same `border-2` as the
+          poster card's cover, so the two shapes treat art the same way: an
+          object on a panel, not a panel edge. It was flush to the card's edge
+          behind a hairline until 2026-09. `base-100` is the placeholder ground
+          for the same reason as on the poster card: the panel behind it is
+          `base-200`. */}}
+        <span class="flex shrink-0 w-32 border-2 border-base-300 bg-base-100 self-stretch overflow-hidden">
+          {{ with .cover }}
+            {{ partial "responsive-image.html" (dict
+              "src" .
+              "alt" $item.title
+              "class" "block w-full h-full object-cover group-hover:opacity-90 group-focus-visible:opacity-90"
+              "width" "400")
+            }}
+          {{ else }}
+            <span class="flex items-center justify-center w-full text-accent {{ $aspect }}">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+              </svg>
+            </span>
+          {{ end }}
+        </span>
+
+        <span class="flex flex-col gap-1.5 py-2 pe-2 min-w-0">
+          <span class="font-semibold link-dash group-hover:underline group-focus-visible:underline">
+            {{ .title }}
+          </span>
+
+          {{/* Two kicker rows in the post card's micro-type: the genre in
+            `primary`, as the card's category is, and under it mode and platform
+            as one `·`-separated run. They were one line joined by a short rule,
+            and at two columns the rule was the first thing to wrap, leaving a
+            dash stranded at the end of a line. Each piece is optional, so a game
+            with only a genre renders one row and one with only a platform the
+            other. */}}
+          {{ $micro := "font-heading text-[0.6875rem]/[1.2] font-semibold uppercase tracking-[0.12em]" }}
+          {{ with .genre }}
+            <span class="{{ $micro }} text-primary">{{ . }}</span>
+          {{ end }}
+          {{ $meta := slice }}
+          {{ with .mode }}{{ $meta = $meta | append . }}{{ end }}
+          {{ with .platform }}{{ $meta = $meta | append . }}{{ end }}
+          {{ with $meta }}
+            <span class="{{ $micro }} text-base-content/70">{{ delimit . " · " }}</span>
+          {{ end }}
+
+          {{ with .description }}
+            <span class="text-sm/[1.5] text-base-content/70">{{ . }}</span>
+          {{ end }}
+
+        </span>
+      </a>
+    {{ end }}
+  </div>
+{{ else if eq $display "poster" }}
+  {{/* The track list is the caller's: single.html resolves the category's `columns` to it. */}}
+  <div data-pagefind-ignore class="{{ $grid }}">
+    {{ range $items }}
+      {{ $item := . }}
+      {{/* The panel: the same recipe as the post cards in partials/post-card.html.
+        Keep the two in step. `link` is optional here as on the list row, and for
+        the same reason it degrades to a `div` rather than an empty-href `a`: that
+        is focusable and navigates to the current page. The `group`, the hover
+        fill and `no-ext-icon` live on the anchor branch only, so an unlinked
+        card promises nothing on hover. TV shows carry no links at all — where a
+        show streams changes too often to keep up with. */}}
+      {{ $panel := "block p-2 bg-base-200 border border-base-300 shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1)]" }}
+      {{ if .link }}
+        <a href="{{ .link }}" class="group {{ $panel }} transition-colors duration-150 hover:bg-base-300 focus-visible:bg-base-300 no-ext-icon" target="_blank" rel="noopener noreferrer">
+      {{ else }}
+        <div class="{{ $panel }}">
+      {{ end }}
+        <span class="block">
+          {{ with .cover }}
+            {{/* 400 covers a 2x display of a ~157px column with slack; higher only hands
+              the browser a steeper downscale than the one Hugo does under `[imaging]`. No
+              shadow on the cover — the panel casts it. */}}
+            {{ partial "responsive-image.html" (dict
+              "src" .
+              "alt" $item.title
+              "class" (printf "block w-full h-auto object-cover border-2 border-base-300 group-hover:opacity-90 group-focus-visible:opacity-90 %s" $aspect)
+              "width" "400")
+            }}
+          {{ else }}
+            {{/* `base-100`, not `base-200`: the panel behind it is `base-200`, so a
+              matching placeholder would disappear. */}}
+            <span class="flex items-center justify-center border-2 border-base-300 bg-base-100 text-accent {{ $aspect }}">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+              </svg>
+            </span>
+          {{ end }}
+        </span>
+
+        <span class="flex flex-col gap-[0.2rem] mt-2">
+          {{/* `link-dash` sits on the title rather than the anchor: those longhands are
+            non-inherited and would never reach a nested span. */}}
+          <span
+            class="line-clamp-2 {{ $titleSize }} font-bold text-base-content link-dash group-hover:underline group-focus-visible:underline"
+            >{{ .title }}</span
+          >
+          {{/* Poster cards are ~8.5rem wide, so the creator drops a step to stay on one line. */}}
+          {{ with .creator }}
+            <span class="text-xs text-base-content/70">{{ . }}</span>
+          {{ end }}
+          <span class="flex flex-wrap items-center gap-[0.35rem]">
+            {{ partial "favorites-item-lang-badge.html" .lang }}
+            {{ partial "favorites-item-date.html" (dict "date" .date "label" $dateLabel) }}
+          </span>
+          {{ partial "favorites-item-note.html" (dict "note" .note "clamp" true) }}
+        </span>
+      {{ if .link }}</a>{{ else }}</div>{{ end }}
+    {{ end }}
+  </div>
+{{ else }}
+  {{/* No panel, no border, no shadow: boxing each line of a text list turns a
+    short list into a stack of heavy tiles. Rows separate on a hairline. */}}
+  <ul data-pagefind-ignore class="list-none p-0 m-0">
+    {{ range $items }}
+      <li class="border-t border-base-300 first:border-t-0">
+        {{/* `link` is optional, and an unlinked row must not be an empty-href `a` — that
+          is focusable and navigates to the current page — so it degrades to a `div`.
+          The `group`, the accent edge and `no-ext-icon` live on the anchor branch only. */}}
+        {{ $row := "block py-[0.55rem] border-s-2 border-transparent ps-[0.6rem] -ms-[0.6rem] transition-colors duration-150" }}
+        {{ if .link }}
+          <a href="{{ .link }}" class="group {{ $row }} hover:border-s-accent focus-visible:border-s-accent no-ext-icon" target="_blank" rel="noopener noreferrer">
+        {{ else }}
+          <div class="{{ $row }}">
+        {{ end }}
+          {{/* `items-baseline`, not `center`: two boxes of different font sizes centred on
+            each other do not put their text on one line. */}}
+          <span class="flex flex-wrap items-baseline gap-x-2 gap-y-[0.2rem]">
+            <span class="leading-normal text-base-content link-dash group-hover:underline group-focus-visible:underline">
+              {{ .title }}
+              {{/* Same size as the title, not a step down: colour is enough hierarchy on one
+                line. The separator is punctuation, so it is muted further than the name. */}}
+              {{ with .creator }}<span class="text-base-content/70 before:content-['·'] before:mx-[0.4em] before:text-base-content/45">{{ . }}</span>{{ end }}
+            </span>
+            <span class="flex flex-wrap items-baseline gap-[0.35rem]">
+              {{ partial "favorites-item-lang-badge.html" .lang }}
+              {{ partial "favorites-item-date.html" (dict "date" .date "label" $dateLabel) }}
+            </span>
+          </span>
+          {{ partial "favorites-item-note.html" .note }}
+        {{ if .link }}</a>{{ else }}</div>{{ end }}
+      </li>
+    {{ end }}
+  </ul>
+{{ end }}

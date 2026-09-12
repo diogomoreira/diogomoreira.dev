@@ -1,22 +1,130 @@
+# No `date` on purpose: the order below is the order on the page —
+# favorites-categories.html keeps undated entries in file order, and a date on
+# one entry would float it above every undated one.
+#
+# `groups` splits the page into headed sections, in this order; each entry names
+# its `group`. A heading's text is `favorites_group_<key>` in both i18n files.
+# An entry with no `group` (or one not listed here) renders first, unheaded.
+#
+# No `link` on any entry, on purpose: where a show streams changes too often to
+# keep up with, and the card degrades to an unlinked panel without one.
+#
+# `running: true` on an entry marks a show still airing. Inside each group the
+# on-air entries render first under their own label, then the rest under theirs;
+# a group with nothing on air shows no labels at all.
+#
+# `columns: 4` — four to a row rather than the poster grid's default auto-fill
+# (~six at the full column). Show art is landscape-ish key art cropped square,
+# and at six-up the faces were too small to tell apart.
 weight: 7
 display: poster
+columns: 4
+groups: [series, anime]
 items:
   - title: "Severance"
-    link: "https://tv.apple.com/br/show/severance/umc.cmc.1srk2goyh2q2zdxcx605w8vtx"
+    group: series
+    running: true
     cover: "images/favorites/severance.png"
-    date: 2023-09-02
-
-  - title: "FLCL"
-    link: "https://www.adultswim.com/videos/flcl"
-    cover: "images/favorites/flcl.jpg"
-    date: 2023-06-04
 
   - title: "Hacks"
-    link: "https://www.hbomax.com/br/pt/shows/hacks/67e940b7-aab2-46ce-a62b-c7308cde9de7"
+    group: series
+    running: false
     cover: "images/favorites/hacks.jpeg"
-    date: 2026-05-30
 
-  - title: "Widow's Bay"
-    link: "https://tv.apple.com/br/show/o-segredo-de-widows-bay/umc.cmc.1zzly0vah46bnvnwf0qkrjhh2?ctx_agid=2797da03"
-    cover: "images/favorites/widows-bay.webp"
-    date: 2023-08-09
+  - title: "Mr. Robot"
+    group: series
+    running: false
+    cover: "images/favorites/mr-robot.jpg"
+
+  - title: "Breaking Bad"
+    group: series
+    running: false
+    cover: "images/favorites/breaking-bad.png"
+
+  - title: "Dark"
+    group: series
+    running: false
+    cover: "images/favorites/dark.png"
+
+  - title: "Foundation"
+    group: series
+    running: true
+    cover: "images/favorites/foundation.jpg"
+
+  - title: "How I Met Your Mother"
+    group: series
+    cover: "images/favorites/how-i-met-your-mother.jpg"
+
+  - title: "Succession"
+    group: series
+    cover: "images/favorites/succession.jpg"
+
+  - title: "Chernobyl"
+    group: series
+    cover: "images/favorites/chernobyl.jpg"
+
+  - title: "The White Lotus"
+    group: series
+    running: true
+    cover: "images/favorites/the-white-lotus.jpg"
+
+  - title: "Fleabag"
+    group: series
+    cover: "images/favorites/fleabag.jpg"
+
+  - title: "Arcane"
+    group: series
+    cover: "images/favorites/arcane.webp"
+
+  - title: "Sex and the City"
+    group: series
+    cover: "images/favorites/sex-and-the-city.jpg"
+
+  - title: "Skins"
+    group: series
+    cover: "images/favorites/skins.jpg"
+
+  - title: "The Office"
+    group: series
+    cover: "images/favorites/the-office.jpg"
+
+  - title: "FLCL"
+    group: anime
+    running: false
+    cover: "images/favorites/flcl.jpg"
+
+  - title: "Fullmetal Alchemist: Brotherhood"
+    group: anime
+    cover: "images/favorites/fullmetal-alchemist-brotherhood.jpg"
+
+  - title: "Death Note"
+    group: anime
+    cover: "images/favorites/death-note.jpg"
+
+  - title: "X"
+    group: anime
+    cover: "images/favorites/x-tv.jpg"
+
+  - title: "Neon Genesis Evangelion"
+    group: anime
+    cover: "images/favorites/neon-genesis-evangelion.jpg"
+
+  - title: "Attack on Titan"
+    group: anime
+    cover: "images/favorites/attack-on-titan.jpg"
+
+  - title: "Code Geass: Lelouch of the Rebellion"
+    group: anime
+    cover: "images/favorites/code-geass.jpg"
+
+  - title: "Anohana"
+    group: anime
+    cover: "images/favorites/anohana.png"
+
+  - title: "Elfen Lied"
+    group: anime
+    cover: "images/favorites/elfen-lied.jpg"
+
+  - title: "Yu Yu Hakusho"
+    group: anime
+    cover: "images/favorites/yu-yu-hakusho.jpg"
