@@ -3,8 +3,12 @@
 # No `date` on purpose: the order below is the order on the page —
 # favorites-categories.html keeps undated entries in file order, and a date on
 # one entry would float it above every undated one.
+#
+# `columns: 4` — four to a row rather than the poster grid's auto-fill (~six
+# at the full column), the same count TV uses: at six-up the art is a thumbnail.
 weight: 1
 display: poster
+columns: 4
 items:
   - title: "Heaven or Las Vegas"
     creator: "Cocteau Twins"
