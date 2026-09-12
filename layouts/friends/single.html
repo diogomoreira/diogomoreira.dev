@@ -2,7 +2,7 @@
   that file into a subdirectory falls back to _default/single.html.
 
   Entries live in `data/friends/`, language-neutral — only the note is prose, and
-  library-item-note.html resolves that per-language map. One YAML file per
+  favorites-item-note.html resolves that per-language map. One YAML file per
   section, so adding a section is a file plus a `friends_group_<filename>` key in
   both i18n files and no template edit.
 */}}{{ define "main" }}
@@ -37,7 +37,7 @@
         <ul class="m-0 mt-2 ps-5 list-disc marker:text-base-content/45">
           {{ range .items }}
             <li class="py-[0.3rem]">
-              {{/* The row is NOT a wrapping `a`, unlike the library rows: a note
+              {{/* The row is NOT a wrapping `a`, unlike the favorites rows: a note
                 carries markdown links, and markdownify turns those into anchors —
                 nesting one closes the outer link early and silently drops the rest
                 of the row out of it. So only the name links, and there is no accent
@@ -55,7 +55,7 @@
                 belongs to that string, not the row: a note is optional, and one
                 written here would be stranded after an entry that has none.
               */}}
-              {{ partial "library-item-note.html" (dict "note" .note "class" "text-base-content/70 [&_p]:inline [&_p]:m-0 [&_a]:underline before:content-['·'] before:mx-[0.4em] before:text-base-content/45") }}
+              {{ partial "favorites-item-note.html" (dict "note" .note "class" "text-base-content/70 [&_p]:inline [&_p]:m-0 [&_a]:underline before:content-['·'] before:mx-[0.4em] before:text-base-content/45") }}
             </li>
           {{ end }}
         </ul>

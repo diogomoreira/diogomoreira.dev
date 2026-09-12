@@ -25,19 +25,21 @@
   "pt-br" "secondary"
 }}
 
-{{/* Twelve categories over four tones, repeating by what the thing *is*: listen
-  and run (info), watch and the desk (warning), read (secondary), people
-  (success). It was six hues over the same twelve until the palette went
+{{/* The data-backed favorites collections over four tones, repeating by what the
+  thing *is*: listen and run (info), watch and the desk (warning), people
+  (success). It was six hues over twelve categories until the palette went
   monochrome; the pairs that merged are the ones that were already adjacent.
+
+  Only the homepage's "recently added" row reads this family, and that row is
+  built from data/favorites/ — so `articles`, `videos` and `books` are absent,
+  not forgotten: they are markdown pages now and have no entries to chip. The
+  `secondary` tone left with them and is free for the next collection that reads
+  rather than watches.
 */}}
-{{ $library := dict
+{{ $favorites := dict
   "albums" "info"
-  "podcasts" "info"
   "movies" "warning"
   "tv-shows" "warning"
-  "books" "secondary"
-  "articles" "secondary"
-  "videos" "warning"
   "games" "info"
   "apps" "info"
   "websites" "warning"
@@ -84,5 +86,5 @@
   "positividade" "success"
 }}
 
-{{ $maps := dict "lang" $lang "library" $library "category" $category "tag" $tag }}
+{{ $maps := dict "lang" $lang "favorites" $favorites "category" $category "tag" $tag }}
 {{ return index (index $maps $family | default dict) $key | default "" }}

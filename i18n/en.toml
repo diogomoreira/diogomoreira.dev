@@ -7,7 +7,7 @@ academic = "Academic"
 projects = "Projects"
 uses = "Uses"
 snippets = "Snippets"
-library = "Library"
+favorites = "Favorites"
 photos = "Photos"
 friends = "Friends"
 nav_aria_label = "Main navigation"
@@ -16,8 +16,8 @@ nav_aria_label = "Main navigation"
 home_greeting = "Hi! I'm"
 home_recent_posts = "Recent Posts"
 home_all_posts = "All posts →"
-home_recently_added = "Recently Added in the library"
-home_browse_library = "Browse the library →"
+home_recently_added = "Recently Added to the favorites"
+home_browse_favorites = "Browse the favorites →"
 
 # Now page
 now_mastodon = "Recent Toots"
@@ -72,27 +72,30 @@ built_with_label = "Built with"
 # Terms/taxonomy
 terms_last_updated = "Last updated:"
 
-# Library
-library_added_on = "Added on"
-library_finished_on = "Finished"
+# Favorites
+favorites_added_on = "Added on"
+favorites_finished_on = "Finished"
 # Badge for an entry with no date in a category that labels dates — see
-# library-item-date.html. Every `date_label` needs both `_on` and `_in_progress`.
-library_finished_in_progress = "Reading"
-library_lang_only = "Only available in {{ .Language }}"
-library_rating_label = "{{ .Rating }} out of 5"
-# One key per file in data/library/ — a missing key renders the raw filename.
-library_category_albums = "Albums"
-library_category_articles = "Articles"
-library_category_videos = "Videos"
-library_category_games = "Games"
-library_category_books = "Books"
-library_category_movies = "Movies"
-library_category_tv-shows = "TV Shows"
-library_category_podcasts = "Podcasts"
-library_category_websites = "Websites"
-library_category_apps = "Apps"
-library_category_hardware = "Hardware"
-library_category_people = "People worth following"
+# favorites-item-date.html. Every `date_label` needs both `_on` and `_in_progress`.
+favorites_finished_in_progress = "Reading"
+favorites_lang_only = "Only available in {{ .Language }}"
+# The /favorites index card's count. Two flat keys picked with `cond` rather
+# than a go-i18n plural table: a `[key]` table in a TOML file swallows every
+# bare key that follows it, and these files are all bare keys.
+favorites_entry_count_one = "{{ .Count }} entry"
+favorites_entry_count_other = "{{ .Count }} entries"
+# One key per file in data/favorites/ — a missing key renders the raw filename.
+favorites_category_albums = "Albums"
+favorites_category_articles = "Articles"
+favorites_category_videos = "Videos"
+favorites_category_games = "Games"
+favorites_category_books = "Books"
+favorites_category_movies = "Movies"
+favorites_category_tv-shows = "TV Shows"
+favorites_category_websites = "Websites"
+favorites_category_apps = "Apps"
+favorites_category_hardware = "Hardware"
+favorites_category_people = "People worth following"
 
 # Table of contents
 toc_label = "On this page"

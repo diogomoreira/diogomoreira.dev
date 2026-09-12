@@ -19,7 +19,7 @@ No ano passado, desativei por completo minha antiga conta do Twitter e comecei a
 
 ## Este site
 
-Esse ano refiz totalmente esse site e tenho tentado mantê-lo atualizado. Toda semana tenho tirado um tempo pra mexer alguma coisa no layout ou escrever alguma coisa nessa seção ou adicionar algo na página de [biblioteca]({{< relref "library" >}}).
+Esse ano refiz totalmente esse site e tenho tentado mantê-lo atualizado. Toda semana tenho tirado um tempo pra mexer alguma coisa no layout ou escrever alguma coisa nessa seção ou adicionar algo na página de [favoritos]({{< relref "/favorites" >}}).
 
 Tenho usado o **Claude Code** para construir algumas interfaces, mas mantenho escrevendo os textos aqui (como dá pra perceber, já que não são muitos).
 

@@ -18,4 +18,4 @@ package-lock.json
 # … `{{ if $link }}</a>{{ else }}</div>{{ end }}`. This file uses that shape on
 # purpose (a linked card is an `<a>`, an unlinked one a `<div>`), and the plugin
 # fails outright with "Found invalid node root" rather than formatting it.
-layouts/library/single.html
+layouts/favorites/single.html

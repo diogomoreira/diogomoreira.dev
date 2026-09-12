@@ -1,0 +1,159 @@
+{{/* One collection of /favorites — a page built by the content adapter in
+  content/<lang>/favorites/_content.gotmpl, not a file on disk. `collection` is
+  the data/favorites/ filename it was built from; everything else is looked up
+  through favorites-categories.html so this page and the index cannot disagree
+  about order.
+
+  The two card shapes below are styled in opposite directions on purpose. A
+  poster card is a panel — surface, hairline, shadow — because cover art is an
+  object and a surface under it says so. A list row is the opposite: boxing each
+  line of a text list turns a short list into a stack of heavy tiles.
+
+  There is no `details`/`summary` here, unlike the single page this was split out
+  of: the page's own `h1` names the collection, and a lone collapsible section
+  that hides the whole page has nothing to collapse *against*.
+*/}}
+{{ define "main" }}
+  {{/* "" for a prose-only collection, whose entries are markdown in the body and
+    whose `range` below therefore matches nothing. */}}
+  {{ $collection := partial "favorites-page-key.html" . }}
+  <div>
+    {{/* Micro-type, the post card's kicker string: a word naming what is above
+      this page rather than a heading of its own. */}}
+    {{ with .Site.GetPage "/favorites" }}
+      <a
+        href="{{ .RelPermalink }}"
+        data-pagefind-ignore
+        class="inline-block mb-4 font-heading text-[0.6875rem]/[1.2] font-semibold uppercase tracking-[0.12em] text-base-content/70 hover:text-primary"
+        >&larr; {{ .Title }}</a
+      >
+    {{ end }}
+
+    {{/* Only a hand-written page is searchable, and only its own prose is: the
+      attribute lands here just when `.Content` is non-empty, so the five adapter
+      pages stay out of the index entirely (as the whole of /library was). The
+      entries below are always ignored — they are other people's titles, scraped
+      into a list, and a search for a book's name should find the book, not this
+      page. `data-pagefind-body` has to sit outside `header.html` so the `h1`
+      Pagefind titles the result with is inside it. */}}
+    <div
+      {{ with .Content }}data-pagefind-body{{ end }}
+    >
+      {{ partial "header.html" . }}
+
+      {{ with .Content }}
+        <div class="prose prose-headings:font-heading max-w-none mb-10">{{ . }}</div>
+      {{ end }}
+    </div>
+
+    {{ range where (partial "favorites-categories.html" .) "key" $collection }}
+      {{ $display := .display }}
+      {{/* Category-level, so every entry in a collection labels its date the same way. */}}
+      {{ $dateLabel := .dateLabel }}
+
+      {{/* Cover shape is a category setting: `cover_ratio: poster` renders 2:3, the
+        shape of a film poster. Unset means square, which suits album art. */}}
+      {{ $aspect := cond (eq .coverRatio "poster") "aspect-[2/3]" "aspect-square" }}
+
+      {{ if eq $display "poster" }}
+        <div data-pagefind-ignore class="grid grid-cols-[repeat(auto-fill,minmax(8.5rem,1fr))] gap-4">
+          {{ range .items }}
+            {{ $item := . }}
+            {{/* The panel: the same recipe as the post cards in partials/post-card.html.
+              Keep the two in step. */}}
+            <a
+              href="{{ .link }}"
+              class="group block p-2 bg-base-200 border border-base-300 shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1)] transition-colors duration-150 hover:bg-base-300 focus-visible:bg-base-300 no-ext-icon"
+              {{ with .link }}target="_blank" rel="noopener noreferrer"{{ end }}
+            >
+              <span class="block">
+                {{ with .cover }}
+                  {{/* 400 covers a 2x display of a ~157px column with slack; higher only hands
+                    the browser a steeper downscale than the one Hugo does under `[imaging]`. No
+                    shadow on the cover — the panel casts it. */}}
+                  {{ partial "responsive-image.html" (dict
+                    "src" .
+                    "alt" $item.title
+                    "class" (printf "block w-full h-auto object-cover border-2 border-base-300 group-hover:opacity-90 group-focus-visible:opacity-90 %s" $aspect)
+                    "width" "400")
+                  }}
+                {{ else }}
+                  {{/* `base-100`, not `base-200`: the panel behind it is `base-200`, so a
+                    matching placeholder would disappear. */}}
+                  <span class="flex items-center justify-center border-2 border-base-300 bg-base-100 text-accent {{ $aspect }}">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                      <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                    </svg>
+                  </span>
+                {{ end }}
+              </span>
+
+              <span class="flex flex-col gap-[0.2rem] mt-2">
+                {{/* `link-dash` sits on the title rather than the anchor: those longhands are
+                  non-inherited and would never reach a nested span. */}}
+                <span
+                  class="line-clamp-2 text-[0.8125rem]/[1.3] font-medium text-base-content link-dash group-hover:underline group-focus-visible:underline"
+                  >{{ .title }}</span
+                >
+                {{/* Poster cards are ~8.5rem wide, so the creator drops a step to stay on one line. */}}
+                {{ with .creator }}
+                  <span class="text-xs text-base-content/70">{{ . }}</span>
+                {{ end }}
+                <span class="flex flex-wrap items-center gap-[0.35rem]">
+                  {{ partial "favorites-item-lang-badge.html" .lang }}
+                  {{ partial "favorites-item-date.html" (dict "date" .date "label" $dateLabel) }}
+                </span>
+                {{ partial "favorites-item-note.html" (dict "note" .note "clamp" true) }}
+              </span>
+            </a>
+          {{ end }}
+        </div>
+      {{ else }}
+        {{/* No panel, no border, no shadow: boxing each line of a text list turns a
+          short list into a stack of heavy tiles. Rows separate on a hairline. */}}
+        <ul data-pagefind-ignore class="list-none p-0 m-0">
+          {{ range .items }}
+            <li class="border-t border-base-300 first:border-t-0">
+              {{/* `link` is optional, and an unlinked row must not be an empty-href `a` — that
+                is focusable and navigates to the current page — so it degrades to a `div`.
+                The `group`, the accent edge and `no-ext-icon` live on the anchor branch only. */}}
+              {{ $row := "block py-[0.55rem] border-s-2 border-transparent ps-[0.6rem] -ms-[0.6rem] transition-colors duration-150" }}
+              {{ if .link }}
+                <a href="{{ .link }}" class="group {{ $row }} hover:border-s-accent focus-visible:border-s-accent no-ext-icon" target="_blank" rel="noopener noreferrer">
+              {{ else }}
+                <div class="{{ $row }}">
+              {{ end }}
+                {{/* `items-baseline`, not `center`: two boxes of different font sizes centred on
+                  each other do not put their text on one line. */}}
+                <span class="flex flex-wrap items-baseline gap-x-2 gap-y-[0.2rem]">
+                  <span class="leading-normal text-base-content link-dash group-hover:underline group-focus-visible:underline">
+                    {{ .title }}
+                    {{/* Same size as the title, not a step down: colour is enough hierarchy on one
+                      line. The separator is punctuation, so it is muted further than the name. */}}
+                    {{ with .creator }}<span class="text-base-content/70 before:content-['·'] before:mx-[0.4em] before:text-base-content/45">{{ . }}</span>{{ end }}
+                  </span>
+                  <span class="flex flex-wrap items-baseline gap-[0.35rem]">
+                    {{ partial "favorites-item-lang-badge.html" .lang }}
+                    {{ partial "favorites-item-date.html" (dict "date" .date "label" $dateLabel) }}
+                  </span>
+                </span>
+                {{ partial "favorites-item-note.html" .note }}
+              {{ if .link }}</a>{{ else }}</div>{{ end }}
+            </li>
+          {{ end }}
+        </ul>
+      {{ end }}
+    {{ end }}
+  </div>
+{{ end }}

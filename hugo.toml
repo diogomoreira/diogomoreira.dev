@@ -26,7 +26,7 @@ description = "My thoughts about life, software development, music and so forth.
 cover = "images/default-cover.png"
 
 # Hugo defaults to `Box` at quality 75, which leaves hard, brittle edges on a mild
-# downscale (the 600px library capsules landing at 400) and adds JPEG crunch around
+# downscale (the 600px favorites capsules landing at 400) and adds JPEG crunch around
 # high-contrast logo type.
 #
 # Measured on the South Park capsule, edge energy at the size a 2x display actually
@@ -155,7 +155,9 @@ weight = 1
 icon = "user"
 
 # Work and Academic are children of About in the menu only — their URLs stay at
-# the root. nav-menu.html reveals them when you are inside the group.
+# the root. The Favorites children are not configured here at all: they are one
+# page per file in data/favorites/, declared by the content adapter that builds
+# them (partials/favorites-adapter.html).
 [[menus.main]]
 identifier = "work"
 pageRef = "/work"
@@ -217,11 +219,11 @@ icon = "snippets"
 hidden = true
 
 [[menus.main]]
-identifier = "library"
-pageRef = "/library"
+identifier = "favorites"
+pageRef = "/favorites"
 weight = 9
 [menus.main.params]
-icon = "library"
+icon = "favorites"
 
 [[menus.main]]
 identifier = "photos"

@@ -1,4 +1,4 @@
-{{/* Usage: `partial "library-item-date.html" (dict "date" .date "label" $dateLabel)`
+{{/* Usage: `partial "favorites-item-date.html" (dict "date" .date "label" $dateLabel)`
 
   Renders an entry's `date` under a category-chosen label — `date_label: finished`
   gives "Finished <date>". Nothing renders unless the category set one.
@@ -6,7 +6,7 @@
   `date_label: bare` is the one label that is not a word: date, no leading text,
   so it needs no i18n keys and has no in-progress state. Under a *worded* label a
   dateless entry is one you have not finished, and renders a
-  `library_<label>_in_progress` badge — so a new worded label needs two keys in
+  `favorites_<label>_in_progress` badge — so a new worded label needs two keys in
   both i18n files, `_on` and `_in_progress`.
 
   `time.AsTime` because an unquoted `2023-10-18` parses to a time but a quoted one
@@ -17,13 +17,13 @@
     {{ $when := time.AsTime .date }}
     <span class="text-[0.7rem] tabular-nums text-base-content/70">
       {{ if ne .label "bare" }}
-        {{ i18n (printf "library_%s_on" .label) | default .label }}
+        {{ i18n (printf "favorites_%s_on" .label) | default .label }}
       {{ end }}
       <time datetime="{{ $when.Format "2006-01-02" }}">{{ partial "formatted-date-short.html" $when }}</time>
     </span>
   {{ else if ne .label "bare" }}
     <span class="badge badge-tint badge-secondary badge-sm self-center"
-      >{{ i18n (printf "library_%s_in_progress" .label) | default .label }}</span
+      >{{ i18n (printf "favorites_%s_in_progress" .label) | default .label }}</span
     >
   {{ end }}
 {{ end }}

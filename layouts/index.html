@@ -67,7 +67,7 @@
     position in a newest-first list.
   */}}
   {{ $entries := slice }}
-  {{ range partial "library-categories.html" . }}
+  {{ range partial "favorites-categories.html" . }}
     {{ $cat := .key }}
     {{ range .items }}
       {{ if .date }}
@@ -80,11 +80,11 @@
     <section class="mb-14">
       <div class="flex items-center justify-between mb-5">
         <h2 class="font-heading text-xs font-medium uppercase tracking-widest">{{ i18n "home_recently_added" }}</h2>
-        <a href="{{ (.Site.GetPage "library").RelPermalink }}" class="text-xs link link-primary"
-          >{{ i18n "home_browse_library" }}</a
+        <a href="{{ (.Site.GetPage "/favorites").RelPermalink }}" class="text-xs link link-primary"
+          >{{ i18n "home_browse_favorites" }}</a
         >
       </div>
-      {{/* Rows, not cards: most library entries have no cover art, so a card grid
+      {{/* Rows, not cards: most favorites entries have no cover art, so a card grid
         here would be mostly placeholders.
       */}}
       <ul class="list-none p-0 m-0">
@@ -112,20 +112,20 @@
                 class="order-first w-full text-sm font-medium text-base-content group-hover:opacity-70 md:order-none md:w-auto md:flex-1"
               >
                 {{ .title }}
-                {{/* Same shape as the library row's creator. */}}
+                {{/* Same shape as the favorites row's creator. */}}
                 {{ with .creator }}
                   <span class="text-base-content/70 before:content-['·'] before:mx-[0.4em] before:text-base-content/45"
                     >{{ . }}</span
                   >
                 {{ end }}
               </span>
-              {{ $color := partial "chip-color.html" (dict "family" "library" "key" .category) }}
+              {{ $color := partial "chip-color.html" (dict "family" "favorites" "key" .category) }}
               <span
                 class="badge badge-tint {{ with $color }}
                   badge-{{ . }}
                 {{ end }} badge-sm shrink-0 ms-auto md:ms-0 lowercase text-xs font-semibold"
               >
-                {{ i18n (printf "library_category_%s" .category) | default .category }}
+                {{ i18n (printf "favorites_category_%s" .category) | default .category }}
               </span>
             </a>
           </li>
