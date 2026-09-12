@@ -1,5 +1,8 @@
 # Favorites → Albums. See CLAUDE.md for the shape; `weight` sets the section's
 # position on /favorites, `display` picks the card shape (poster | list).
+# No `date` on purpose: the order below is the order on the page —
+# favorites-categories.html keeps undated entries in file order, and a date on
+# one entry would float it above every undated one.
 weight: 1
 display: poster
 items:
@@ -7,64 +10,38 @@ items:
     creator: "Cocteau Twins"
     link: "https://music.apple.com/br/album/heaven-or-las-vegas-remastered/258198881"
     cover: "images/favorites/heaven-or-las-vegas.jpg"
-    date: 2026-04-21
 
   - title: "Man On the Moon: The End of the Day"
     creator: "Kid Cudi"
     link: "https://open.spotify.com/album/6oPPKtAwNNlkW4wwHfQDfM?si=bRBnXLJsSG6brNo2lhbZ9Q"
     cover: "images/favorites/kid-cudi-man-on-the-moon.webp"
-    date: 2023-01-31
 
   - title: "Punisher"
     creator: "Phoebe Bridgers"
     link: "https://open.spotify.com/album/6Pp6qGEywDdofgFC1oFbSH?si=WZktdFvAQNGVHrbM_maTAw"
     cover: "images/favorites/punisher_album_cover.jpg"
-    date: 2023-05-10
-
-  - title: "с крыш наших домов (From our houses' rooftops)"
-    creator: "Molchat Doma"
-    link: "https://open.spotify.com/album/5JLoR1neszuPXlDwOSffYh?si=m-5kV8QKTQCxlrXtfGUsgA"
-    cover: "images/favorites/molchat-doma-houses-rooftop.webp"
-    date: 2022-10-09
-
-  - title: "Luv(sic) Hexalogy"
-    creator: "Nujabes"
-    link: "https://open.spotify.com/album/4oT4YRVe43ESrT9rx2LKCM?si=6m6eJkYNTsarpF5PEmvtoA"
-    cover: "images/favorites/luv-sic.jpg"
-    date: 2021-04-24
 
   - title: "Yoshimi Battles the Pink Robots"
     creator: "The Flaming Lips"
     link: "https://open.spotify.com/album/49LA20VMk65fQyEaIzYdvf?si=7v8MynKoSn-SRtUKuu-_cg"
     cover: "images/favorites/yoshimi-battles-the-pink-robots.jpg"
-    date: 2021-02-18
 
   - title: "Antisocialites"
     creator: "Alvvays"
     link: "https://open.spotify.com/album/7CCwkPweMxKq8yWkVerH6T?si=Plxrkxi4RuaJAX2GIDNOUw"
     cover: "images/favorites/antisocialites.jpg"
-    date: 2020-11-10
 
   - title: "Gone Now"
     creator: "Bleachers"
     link: "https://open.spotify.com/album/10HKbC9lKDHGQvndGck6XJ?si=HOCCXI02Ro6VeJ2mylxGgg"
     cover: "images/favorites/gone-now.jpg"
-    date: 2018-04-16
-
-  - title: "The Mountain"
-    creator: "Gorillaz"
-    link: "https://music.apple.com/br/album/the-mountain/1837237742"
-    cover: "images/favorites/gorillaz-the-mountain.jpg"
-    date: 2026-08-05
 
   - title: "A Fever You Can't Sweat Out"
     creator: "Panic! At the Disco"
     link: "https://music.apple.com/br/album/a-fever-you-cant-sweat-out-20th-anniversary-deluxe/1846923403"
     cover: "images/favorites/panic-fever.jpg"
-    date: 2026-08-05
 
   - title: "Perfect Symmetry"
     creator: "Keane"
     link: "https://music.apple.com/br/album/perfect-symmetry-deluxe-edition/1445742936"
     cover: "images/favorites/perfect-symmetry.jpg"
-    date: 2026-08-05

@@ -1,65 +1,73 @@
-# `cover_ratio: poster` — 2:3, matching vertical box art and Steam's 600×900
-# storefront capsule. Sources that aren't 2:3 are centre-cropped to fit.
+# `display: card` — one horizontal card per game, cover on the left, because a
+# collection page has the room a twelve-up poster grid never did. `cover_ratio`
+# still applies to the cover column: 2:3, matching vertical box art and Steam's
+# 600×900 storefront capsule; sources that aren't 2:3 are centre-cropped.
+#
+# Per entry, on top of the shared fields: `genre` (the kicker), `mode` and
+# `platform` (the two meta items after it — read as "Single-player · Switch")
+# and an optional `description`. Every one of them is optional and the card
+# drops what is missing.
+#
+# No `date` on purpose: the order below is the order on the page, since
+# favorites-categories.html keeps undated entries in file order. Adding a date
+# to one entry would float it above every undated one, and take it onto the
+# homepage's "recently added" row, which games are otherwise absent from.
 weight: 4
-display: poster
+display: card
 cover_ratio: poster
 items:
   - title: "Clair Obscur: Expedition 33"
     link: "https://store.steampowered.com/app/1903340/Clair_Obscur_Expedition_33"
     cover: "images/favorites/clair-obscur.webp"
-    date: 2026-05-31
+    genre: "Turn-based RPG"
+    mode: "Single-player"
+    platform: "XBOX"
 
   - title: "Final Fantasy VII (Remake)"
     link: "https://www.amazon.com.br/Final-Fantasy-VII-Remake-PlayStation/dp/B00ZS80PC2"
     cover: "images/favorites/final-fantasy-vii.jpg"
-    date: 2023-06-21
+    genre: "Action RPG"
+    mode: "Single-player"
+    platform: "PS4"
 
   - title: "Final Fantasy XV"
     link: "https://www.amazon.com.br/Final-Fantasy-XV-Royal-PlayStation/dp/B0792HGXB7"
     cover: "images/favorites/final-fantasy-xv.jpg"
-    date: 2023-06-21
+    genre: "Action RPG"
+    mode: "Single-player"
+    platform: "PS4"
 
   - title: "Persona 5"
     link: "https://www.amazon.com.br/Sega-PS-22026-7-Persona-Royal-PlayStation/dp/B085PS9F4H"
     cover: "images/favorites/persona5.jpg"
-    date: 2023-06-21
+    genre: "JRPG"
+    mode: "Single-player"
+    platform: "PS4"
 
   - title: "NieR: Automata"
     link: "https://amzn.to/3cC30xj"
     cover: "images/favorites/nier-automata.jpg"
-    date: 2021-04-17
-
-  - title: "Omori"
-    link: "https://store.steampowered.com/app/1150690/OMORI/"
-    cover: "images/favorites/omori.jpg"
-    date: 2023-06-30
-
-  - title: "South Park: The Stick of Truth"
-    link: "https://store.steampowered.com/app/213670/South_Park_The_Stick_of_Truth/"
-    cover: "images/favorites/south-park-stick-of-truth.jpg"
-    date: 2020-09-30
-
-  - title: "Forza Horizon 5"
-    link: "https://store.steampowered.com/app/1551360/Forza_Horizon_5/"
-    cover: "images/favorites/forza-horizon-5.jpg"
-    date: 2022-12-30
+    genre: "Action RPG"
+    mode: "Single-player"
+    platform: "PS4"
 
   - title: "Kingdom Hearts III"
     link: "https://store.steampowered.com/app/2552450/KINGDOM_HEARTS_III__ReMind/"
     cover: "images/favorites/kingdom-hearts-3.jpg"
-    date: 2019-02-15
+    genre: "Action RPG"
+    mode: "Single-player"
+    platform: "PS4"
 
   - title: "Kingdom Hearts: Birth by Sleep"
     link: "https://store.steampowered.com/app/1066780/Kingdom_Hearts_Birth_by_Sleep/"
     cover: "images/favorites/kingdom-hearts-bbs.webp"
-    date: 2012-12-30
+    genre: "Action RPG"
+    mode: "Single-player"
+    platform: "PSP/PS4"
 
   - title: "Kingdom Hearts II"
     link: "https://store.steampowered.com/app/1066780/Kingdom_Hearts_II/"
     cover: "images/favorites/kingdom-hearts-2.jpeg"
-    date: 2005-12-30
-
-  - title: "Kingdom Hearts"
-    link: "https://store.steampowered.com/app/1066780/Kingdom_Hearts/"
-    cover: "images/favorites/kingdom-hearts.webp"
-    date: 2005-12-30
+    genre: "Action RPG"
+    mode: "Single-player"
+    platform: "PS2/PS4"

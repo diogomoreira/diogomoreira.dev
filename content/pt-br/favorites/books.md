@@ -8,6 +8,8 @@ menus:
     identifier: favorites_category_books
     parent: favorites
     weight: 5
+    params:
+      icon: favorites/books
 ---
 
 ## Lendo

@@ -30,6 +30,17 @@
     text-heading/70 hover:text-heading hover:bg-base-content/5
   {{ end }}"
 >
-  {{ with $entry.Params.icon }}{{ partial (printf "icons/nav/%s.html" .) $page }}{{ end }}
+  {{/* A bare name is an `icons/nav/` glyph; one with a slash is any set under
+    `icons/` — the Favorites children point at `favorites/<key>`, the same files
+    the /favorites index cards use, so a collection has one glyph. That set
+    carries no size, hence the `[&_svg]:` wrapper; the nav set is already
+    `w-4 h-4` and the wrapper is a no-op on it.
+  */}}
+  {{ if hasPrefix $entry.Identifier "favorites_category_" }}
+  {{ end }}
+  {{ with $entry.Params.icon }}
+    {{ $icon := cond (in . "/") (printf "icons/%s.html" .) (printf "icons/nav/%s.html" .) }}
+    <span class="flex shrink-0 [&_svg]:w-4 [&_svg]:h-4">{{ partial $icon $page }}</span>
+  {{ end }}
   {{ i18n $entry.Identifier }}
 </a>

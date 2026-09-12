@@ -12,10 +12,11 @@
   The menu identifier IS the i18n key. nav-link.html labels every entry with
   `i18n .Identifier` and has no fallback, so an entry named anything else renders
   an empty link — naming it after the key the category already carries is what
-  keeps the twelve children from needing twelve more strings. They carry no
-  `icon` on purpose: `nav-link.html` guards it with `with`, and twelve copies of
-  one glyph down an indented list reads as noise where About's two distinct ones
-  do not.
+  keeps the twelve children from needing twelve more strings. Each carries the
+  collection's own glyph from `icons/favorites/` — the file the index card uses,
+  so a collection has one icon — with the star as the fallback for a data file
+  that has none yet; a hand-written page declares the same under
+  `menus.main.params.icon`.
 
   No `wide`, unlike the single /library page these replaced: that page carried the
   whole data directory at once and needed the centre rail for it. One collection
@@ -36,6 +37,10 @@
 {{ range partial "favorites-categories.html" . }}
   {{ $key := .key }}
   {{ if not (fileExists (printf "%s/%s.md" $dir $key)) }}
+    {{ $icon := printf "favorites/%s" $key }}
+    {{ if not (templates.Exists (printf "partials/icons/%s.html" $icon)) }}
+      {{ $icon = "favorites/default" }}
+    {{ end }}
     {{ $.AddPage (dict
       "path" $key
       "title" (i18n (printf "favorites_category_%s" $key) | default $key)
@@ -45,6 +50,7 @@
       "identifier" (printf "favorites_category_%s" $key)
       "parent" "favorites"
       "weight" .weight
+      "params" (dict "icon" $icon)
       ))
       )
     }}

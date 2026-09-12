@@ -16,8 +16,6 @@ nav_aria_label = "Navegação principal"
 home_greeting = "Olá! Eu sou"
 home_recent_posts = "Posts Recentes"
 home_all_posts = "Todos os posts →"
-home_recently_added = "Adicionados recentemente"
-home_browse_favorites = "Ver os favoritos →"
 
 # Now page
 now_mastodon = "Toots Recentes"
@@ -79,6 +77,11 @@ favorites_finished_on = "Terminado em"
 # favorites-item-date.html. Todo `date_label` precisa de `_on` e `_in_progress`.
 favorites_finished_in_progress = "Lendo"
 favorites_lang_only = "Disponível apenas em {{ .Language }}"
+# Rótulos dos dois blocos em que um grupo se divide por `running: true`.
+# "Finalizadas" concorda com séries; se um dia um anime sair do ar, o rótulo
+# aparece sobre animes também e vale rever.
+favorites_block_running = "No ar"
+favorites_block_ended = "Finalizadas"
 # Contagem no card do índice de /favoritos. Duas chaves simples escolhidas com
 # `cond`: uma tabela `[chave]` no TOML engoliria todas as chaves seguintes.
 favorites_entry_count_one = "{{ .Count }} item"
@@ -89,12 +92,15 @@ favorites_category_articles = "Artigos"
 favorites_category_videos = "Vídeos"
 favorites_category_games = "Jogos"
 favorites_category_books = "Livros"
-favorites_category_movies = "Filmes"
-favorites_category_tv-shows = "Séries"
+favorites_category_tv-shows = "Séries e Animes"
 favorites_category_websites = "Sites"
 favorites_category_apps = "Apps"
 favorites_category_hardware = "Hardware"
 favorites_category_people = "Pessoas que vale a pena seguir"
+# Uma chave por item da lista `groups:` de uma categoria — as seções com título
+# dentro da página de uma coleção. Sem a chave, o nome do grupo aparece cru.
+favorites_group_series = "Séries"
+favorites_group_anime = "Animes"
 
 # Table of contents
 toc_label = "Nesta página"

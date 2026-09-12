@@ -2,11 +2,25 @@
 
   Go templates walk a map in key order, so `hugo.Data.favorites` is rebuilt as a
   slice sorted by each file's own `weight`. The items are sorted here too, once,
-  so this page and the homepage row cannot disagree about "newest". `sort`, not
-  `.ByDate` — these are plain maps, not pages.
+  so every reader agrees about their order. `sort`, not `.ByDate` — these are
+  plain maps, not pages.
 
   A missing `date` means "in progress" and floats above everything dated.
   Splitting the slice first is also what keeps `sort` away from a nil key.
+
+  Each category also carries `groups`: its sorted items partitioned into the
+  headed sections its file declares under `groups:`, in that order, each entry
+  placed by its own `group`. Entries with no group, or a group the file does not
+  list, come first under an empty key, which the page renders unheaded — so a
+  file that declares no groups is one unheaded group and the page needs no
+  special case for it. `items` stays the flat, complete list for the callers
+  that only count or preview.
+
+  Inside a group, `running: true` splits once more, into `blocks`: the on-air
+  entries first under the key "running", the rest under "ended". A group with
+  nothing on air is one block with an empty key, which the page renders
+  unlabelled — the ended state is the default and only needs naming beside its
+  opposite. The same no-special-case shape as the groups themselves.
 */}}
 {{ $cats := slice }}
 {{ range $key, $cat := hugo.Data.favorites }}
@@ -25,13 +39,57 @@
       <date>". `bare` is the one non-word value: date, no label. `cover_ratio` is
       a category setting because shape is a property of the medium, not an entry.
     */}}
+    {{ $items := $undated | append (sort $dated "date" "desc") }}
+
+    {{ $declared := $cat.groups | default slice }}
+    {{ $groups := slice }}
+    {{ $loose := slice }}
+    {{ range $items }}
+      {{ if not (and .group (in $declared .group)) }}
+        {{ $loose = $loose | append . }}
+      {{ end }}
+    {{ end }}
+    {{ with $loose }}
+      {{ $groups = $groups | append (dict "key" "" "items" .) }}
+    {{ end }}
+    {{ range $g := $declared }}
+      {{ $members := slice }}
+      {{ range $items }}
+        {{ if eq .group $g }}{{ $members = $members | append . }}{{ end }}
+      {{ end }}
+      {{ with $members }}
+        {{ $groups = $groups | append (dict "key" $g "items" .) }}
+      {{ end }}
+    {{ end }}
+
+    {{/* Second pass: each group's `blocks`, split by `running`. */}}
+    {{ $split := slice }}
+    {{ range $groups }}
+      {{ $on := slice }}
+      {{ $off := slice }}
+      {{ range .items }}
+        {{ if .running }}{{ $on = $on | append . }}{{ else }}{{ $off = $off | append . }}{{ end }}
+      {{ end }}
+      {{ $blocks := slice }}
+      {{ if $on }}
+        {{ $blocks = $blocks | append (dict "key" "running" "items" $on) }}
+        {{ with $off }}{{ $blocks = $blocks | append (dict "key" "ended" "items" .) }}{{ end }}
+      {{ else }}
+        {{ $blocks = $blocks | append (dict "key" "" "items" $off) }}
+      {{ end }}
+      {{ $split = $split | append (merge . (dict "blocks" $blocks)) }}
+    {{ end }}
+    {{ $groups = $split }}
+
     {{ $cats = $cats | append (dict
       "key" $key
       "display" ($cat.display | default "list")
       "weight" ($cat.weight | default 99)
       "dateLabel" ($cat.date_label | default "")
       "coverRatio" ($cat.cover_ratio | default "square")
-      "items" ($undated | append (sort $dated "date" "desc"))
+      "columns" ($cat.columns | default "")
+      "items" $items
+      "groups" $groups
       )
     }}
   {{ end }}

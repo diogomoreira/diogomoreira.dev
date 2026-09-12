@@ -8,6 +8,8 @@ menus:
     identifier: favorites_category_videos
     parent: favorites
     weight: 3
+    params:
+      icon: favorites/videos
 ---
 
 A idéia é compartilhar alguns vídeos interessantes que encontro pela web com temas relacionados aos que falo aqui nesse site ou que acho de interesse do público geral. Alguns links podem estar indisponíveis pois não sou o detentor de nenhum deles.

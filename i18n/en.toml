@@ -16,8 +16,6 @@ nav_aria_label = "Main navigation"
 home_greeting = "Hi! I'm"
 home_recent_posts = "Recent Posts"
 home_all_posts = "All posts →"
-home_recently_added = "Recently Added to the favorites"
-home_browse_favorites = "Browse the favorites →"
 
 # Now page
 now_mastodon = "Recent Toots"
@@ -79,6 +77,9 @@ favorites_finished_on = "Finished"
 # favorites-item-date.html. Every `date_label` needs both `_on` and `_in_progress`.
 favorites_finished_in_progress = "Reading"
 favorites_lang_only = "Only available in {{ .Language }}"
+# Labels of the two blocks a group splits into by `running: true`.
+favorites_block_running = "On air"
+favorites_block_ended = "Finished"
 # The /favorites index card's count. Two flat keys picked with `cond` rather
 # than a go-i18n plural table: a `[key]` table in a TOML file swallows every
 # bare key that follows it, and these files are all bare keys.
@@ -90,12 +91,15 @@ favorites_category_articles = "Articles"
 favorites_category_videos = "Videos"
 favorites_category_games = "Games"
 favorites_category_books = "Books"
-favorites_category_movies = "Movies"
 favorites_category_tv-shows = "TV Shows"
 favorites_category_websites = "Websites"
 favorites_category_apps = "Apps"
 favorites_category_hardware = "Hardware"
 favorites_category_people = "People worth following"
+# One key per entry in a category's `groups:` list — the headed sections inside a
+# collection page. A missing key renders the raw group name.
+favorites_group_series = "TV Series"
+favorites_group_anime = "Anime"
 
 # Table of contents
 toc_label = "On this page"

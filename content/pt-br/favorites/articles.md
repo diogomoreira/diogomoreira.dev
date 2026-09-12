@@ -8,6 +8,8 @@ menus:
     identifier: favorites_category_articles
     parent: favorites
     weight: 2
+    params:
+      icon: favorites/articles
 ---
 
 - [Get your work recognized: write a brag document](https://jvns.ca/blog/brag-documents/) - Julia Evans

@@ -8,6 +8,8 @@ menus:
     identifier: favorites_category_videos
     parent: favorites
     weight: 3
+    params:
+      icon: favorites/videos
 ---
 
 These are some videos related to the topics I discuss about here or that I found interesting in general. Some links may be unavailable because I don't own them.
