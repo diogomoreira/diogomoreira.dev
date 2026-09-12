@@ -1,0 +1,14 @@
+{{/* Usage: `partial "favorites-page-key.html" .` — the data/favorites/ key a
+  /favorites page renders, or "" when it has none.
+
+  An adapter page carries it as `collection`; a hand-written one falls back to its
+  own filename, so `books.md` needs no such param. An adapter page has no `.File`
+  at all, hence the `with` rather than a `default` — Go templates evaluate both
+  arms of that. Shared by single.html and list.html: a page that resolved to one
+  key in the card grid and another on the page itself would be a silent mismatch.
+*/}}
+{{ $key := .Params.collection }}
+{{ if not $key }}
+  {{ with .File }}{{ $key = .ContentBaseName }}{{ end }}
+{{ end }}
+{{ return $key }}

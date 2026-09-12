@@ -1,0 +1,90 @@
+{{/* The /favorites index: one card per collection, and nothing else.
+
+  It ranges the section's own **pages**, not data/favorites/, because the two are
+  no longer the same list: `articles`, `videos` and `books` are hand-written
+  markdown with no YAML behind them, and a data-driven grid would have dropped
+  them silently. Every collection has a page — the content adapter builds one for
+  each remaining data file — so `.Pages` is the complete set by construction, and
+  `.ByWeight` is what keeps its order in step with the nav's.
+
+  A card is an icon, the name and a count, and nothing else — no preview of what
+  is inside, since the name says that. A data-backed collection counts its YAML
+  items; a prose one counts the `li` in its rendered body, which is the same
+  number as long as the page is written as a list, and the three that exist are.
+  The page's `description` is deliberately not used here: it renders under the
+  page's own `h1`, and repeating it on the card made the grid read as eight
+  paragraphs rather than eight doors.
+*/}}
+{{ define "main" }}
+  {{/* Keyed by collection so a page can find its own data in one lookup. Empty
+    categories never reach here — favorites-categories.html drops them.
+  */}}
+  {{ $data := dict }}
+  {{ range partial "favorites-categories.html" . }}
+    {{ $data = merge $data (dict .key .) }}
+  {{ end }}
+
+
+  <div data-pagefind-ignore>
+    {{ partial "header.html" . }}
+
+    {{ with .Content }}
+      <div class="prose prose-headings:font-heading max-w-none mb-10">{{ . }}</div>
+    {{ end }}
+
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {{ range .Pages.ByWeight }}
+        {{ $key := partial "favorites-page-key.html" . }}
+        {{ $cat := index $data $key }}
+
+        {{/* `<li>` is what Goldmark emits for a list item, attributes or not, so
+          the count is the page's items — nested lists included, which is a
+          reasonable reading of "items" for a page written as one.
+        */}}
+        {{ $count := 0 }}
+        {{ with $cat }}
+          {{ $count = len .items }}
+        {{ else }}
+          {{ $count = strings.Count "<li>" .Content }}
+        {{ end }}
+
+        {{/* Resolved with a fallback rather than built dynamically and hoped for:
+          an unresolvable partial name is a hard build failure, and a new data
+          file must not need a glyph before it can exist.
+        */}}
+        {{ $icon := printf "icons/favorites/%s.html" $key }}
+        {{ if not (templates.Exists (printf "partials/%s" $icon)) }}
+          {{ $icon = "icons/favorites/default.html" }}
+        {{ end }}
+
+        {{/* The panel: the same recipe as the poster cards one level down and as
+          partials/post-card.html. Keep the three in step. The icon is muted with
+          the count rather than coloured: the accent is spent on links and nav, and
+          a row of seven coloured glyphs would outshout the names beside them.
+        */}}
+        <a
+          href="{{ .RelPermalink }}"
+          class="group flex items-start gap-4 p-5 bg-base-200 border border-base-300 shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1)] transition-colors duration-150 hover:bg-base-300 focus-visible:bg-base-300"
+        >
+          <span class="shrink-0 mt-0.5 text-base-content/70">{{ partial $icon . }}</span>
+          <span class="flex flex-col min-w-0">
+            <span
+              class="font-heading text-lg/[1.3] font-semibold text-heading link-dash group-hover:underline group-focus-visible:underline"
+            >
+              {{ .Title }}
+            </span>
+            {{/* The post card's kicker string — a count is the same kind of thing as
+              its meta row, a fact about the card rather than a heading.
+            */}}
+            <span
+              class="mt-1 font-heading text-[0.6875rem]/[1.2] font-semibold uppercase tracking-[0.12em] text-base-content/70"
+            >
+              {{ i18n (cond (eq $count 1) "favorites_entry_count_one" "favorites_entry_count_other") (dict "Count" $count) }}
+            </span>
+          </span>
+        </a>
+      {{ end }}
+    </div>
+  </div>
+{{ end }}

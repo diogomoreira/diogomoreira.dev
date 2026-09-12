@@ -7,7 +7,7 @@ academic = "Acadêmico"
 projects = "Projetos"
 uses = "Setup"
 snippets = "Snippets"
-library = "Biblioteca"
+favorites = "Favoritos"
 photos = "Fotos"
 friends = "Amigos"
 nav_aria_label = "Navegação principal"
@@ -17,7 +17,7 @@ home_greeting = "Olá! Eu sou"
 home_recent_posts = "Posts Recentes"
 home_all_posts = "Todos os posts →"
 home_recently_added = "Adicionados recentemente"
-home_browse_library = "Ver a biblioteca →"
+home_browse_favorites = "Ver os favoritos →"
 
 # Now page
 now_mastodon = "Toots Recentes"
@@ -73,26 +73,28 @@ built_with_label = "Feito com"
 terms_last_updated = "Última atualização:"
 
 # Biblioteca
-library_added_on = "Adicionado em"
-library_finished_on = "Terminado em"
+favorites_added_on = "Adicionado em"
+favorites_finished_on = "Terminado em"
 # Selo para entradas sem data numa categoria que rotula datas — ver
-# library-item-date.html. Todo `date_label` precisa de `_on` e `_in_progress`.
-library_finished_in_progress = "Lendo"
-library_lang_only = "Disponível apenas em {{ .Language }}"
-library_rating_label = "{{ .Rating }} de 5"
-# Uma chave por arquivo em data/library/ — sem a chave, o nome do arquivo aparece cru.
-library_category_albums = "Álbuns"
-library_category_articles = "Artigos"
-library_category_videos = "Vídeos"
-library_category_games = "Jogos"
-library_category_books = "Livros"
-library_category_movies = "Filmes"
-library_category_tv-shows = "Séries"
-library_category_podcasts = "Podcasts"
-library_category_websites = "Sites"
-library_category_apps = "Apps"
-library_category_hardware = "Hardware"
-library_category_people = "Pessoas que vale a pena seguir"
+# favorites-item-date.html. Todo `date_label` precisa de `_on` e `_in_progress`.
+favorites_finished_in_progress = "Lendo"
+favorites_lang_only = "Disponível apenas em {{ .Language }}"
+# Contagem no card do índice de /favoritos. Duas chaves simples escolhidas com
+# `cond`: uma tabela `[chave]` no TOML engoliria todas as chaves seguintes.
+favorites_entry_count_one = "{{ .Count }} item"
+favorites_entry_count_other = "{{ .Count }} itens"
+# Uma chave por arquivo em data/favorites/ — sem a chave, o nome do arquivo aparece cru.
+favorites_category_albums = "Álbuns"
+favorites_category_articles = "Artigos"
+favorites_category_videos = "Vídeos"
+favorites_category_games = "Jogos"
+favorites_category_books = "Livros"
+favorites_category_movies = "Filmes"
+favorites_category_tv-shows = "Séries"
+favorites_category_websites = "Sites"
+favorites_category_apps = "Apps"
+favorites_category_hardware = "Hardware"
+favorites_category_people = "Pessoas que vale a pena seguir"
 
 # Table of contents
 toc_label = "Nesta página"

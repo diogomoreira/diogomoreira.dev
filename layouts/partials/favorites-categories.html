@@ -1,6 +1,6 @@
-{{/* Ordered, non-empty library categories. Usage: `range partial "library-categories.html" .`
+{{/* Ordered, non-empty favorites categories. Usage: `range partial "favorites-categories.html" .`
 
-  Go templates walk a map in key order, so `hugo.Data.library` is rebuilt as a
+  Go templates walk a map in key order, so `hugo.Data.favorites` is rebuilt as a
   slice sorted by each file's own `weight`. The items are sorted here too, once,
   so this page and the homepage row cannot disagree about "newest". `sort`, not
   `.ByDate` — these are plain maps, not pages.
@@ -9,7 +9,7 @@
   Splitting the slice first is also what keeps `sort` away from a nil key.
 */}}
 {{ $cats := slice }}
-{{ range $key, $cat := hugo.Data.library }}
+{{ range $key, $cat := hugo.Data.favorites }}
   {{/* Skip categories with no entries — an empty heading is noise. */}}
   {{ with $cat.items }}
     {{ $dated := slice }}

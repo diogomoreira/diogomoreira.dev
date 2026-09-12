@@ -1,0 +1,52 @@
+{{/* Usage: from `content/<lang>/favorites/_content.gotmpl`, as
+  `partial "favorites-adapter.html" .` — one page per non-empty file in
+  data/favorites/ that does not already have a hand-written page.
+
+  It reads favorites-categories.html, the same partial the pages themselves read,
+  so a new YAML file becomes a page, a menu entry and an index card at once: no
+  content file, no menu entry in hugo.toml and no template edit, only the two
+  i18n keys data/favorites/ already needed. Held in a partial rather than written
+  into both `_content.gotmpl` files because the two contentDirs are separate and
+  a copy in each is a copy that can drift.
+
+  The menu identifier IS the i18n key. nav-link.html labels every entry with
+  `i18n .Identifier` and has no fallback, so an entry named anything else renders
+  an empty link — naming it after the key the category already carries is what
+  keeps the twelve children from needing twelve more strings. They carry no
+  `icon` on purpose: `nav-link.html` guards it with `with`, and twelve copies of
+  one glyph down an indented list reads as noise where About's two distinct ones
+  do not.
+
+  No `wide`, unlike the single /library page these replaced: that page carried the
+  whole data directory at once and needed the centre rail for it. One collection
+  is a grid six posters across at `max-w-4xl`, and the list-shaped collections are
+  rows of text, which the site's one measure is for.
+
+  **A collection with a `<key>.md` beside this adapter's `_content.gotmpl` is
+  skipped, and the file owns the page instead** — that is how a collection gets
+  prose. It has to be a skip rather than a merge: a real content file and an
+  adapter page claiming one path do not collide, do not warn, and the adapter's
+  wins, so the file's markdown vanishes with no error at all. Checked per
+  language, so a collection can carry an intro in one language and not the other.
+  The path is spelled out rather than derived because `contentDir` is not
+  readable from a template; it mirrors `[languages.<lang>].contentDir` in
+  hugo.toml, and moving one means moving the other.
+*/}}
+{{ $dir := printf "content/%s/favorites" site.Language.Lang }}
+{{ range partial "favorites-categories.html" . }}
+  {{ $key := .key }}
+  {{ if not (fileExists (printf "%s/%s.md" $dir $key)) }}
+    {{ $.AddPage (dict
+      "path" $key
+      "title" (i18n (printf "favorites_category_%s" $key) | default $key)
+      "weight" .weight
+      "params" (dict "collection" $key "toc" false)
+      "menus" (dict "main" (dict
+      "identifier" (printf "favorites_category_%s" $key)
+      "parent" "favorites"
+      "weight" .weight
+      ))
+      )
+    }}
+  {{ end }}
+{{ end }}

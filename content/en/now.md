@@ -19,7 +19,7 @@ Last year, I completely deactivated my old Twitter account and started using [Ma
 
 ## This website
 
-I completely rebuilt this site this year and have been trying to keep it updated. Every week, I set aside some time to tweak the layout, write something in this section, or add something to the [library]({{< relref "library" >}}) page.
+I completely rebuilt this site this year and have been trying to keep it updated. Every week, I set aside some time to tweak the layout, write something in this section, or add something to the [favorites]({{< relref "/favorites" >}}) page.
 
 I've been using **Claude Code** to wire up some UI improvements here, but I'm keeping writing the texts myself.
 
