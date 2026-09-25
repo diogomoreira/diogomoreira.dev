@@ -15,6 +15,11 @@ items:
     link: "https://music.apple.com/br/album/heaven-or-las-vegas-remastered/258198881"
     cover: "images/favorites/heaven-or-las-vegas.jpg"
 
+  - title: "Take a Vacation"
+    creator: "The Young Veins"
+    link: "https://music.apple.com/br/album/take-a-vacation-deluxe-edition-remastered/1704640310"
+    cover: "images/favorites/take-a-vacation.jpg"
+
   - title: "Man On the Moon: The End of the Day"
     creator: "Kid Cudi"
     link: "https://open.spotify.com/album/6oPPKtAwNNlkW4wwHfQDfM?si=bRBnXLJsSG6brNo2lhbZ9Q"
@@ -25,27 +30,82 @@ items:
     link: "https://open.spotify.com/album/6Pp6qGEywDdofgFC1oFbSH?si=WZktdFvAQNGVHrbM_maTAw"
     cover: "images/favorites/punisher_album_cover.jpg"
 
-  - title: "Yoshimi Battles the Pink Robots"
-    creator: "The Flaming Lips"
-    link: "https://open.spotify.com/album/49LA20VMk65fQyEaIzYdvf?si=7v8MynKoSn-SRtUKuu-_cg"
-    cover: "images/favorites/yoshimi-battles-the-pink-robots.jpg"
-
   - title: "Antisocialites"
     creator: "Alvvays"
     link: "https://open.spotify.com/album/7CCwkPweMxKq8yWkVerH6T?si=Plxrkxi4RuaJAX2GIDNOUw"
     cover: "images/favorites/antisocialites.jpg"
+
+  - title: "The Father of the Bride"
+    creator: "Vampire Weekend"
+    link: "https://music.apple.com/br/album/father-of-the-bride/1454428976"
+    cover: "images/favorites/father-of-the-bride.jpg"
+
+  - title: "Yoshimi Battles the Pink Robots"
+    creator: "The Flaming Lips"
+    link: "https://open.spotify.com/album/49LA20VMk65fQyEaIzYdvf?si=7v8MynKoSn-SRtUKuu-_cg"
+    cover: "images/favorites/yoshimi-battles-the-pink-robots.jpg"
 
   - title: "Gone Now"
     creator: "Bleachers"
     link: "https://open.spotify.com/album/10HKbC9lKDHGQvndGck6XJ?si=HOCCXI02Ro6VeJ2mylxGgg"
     cover: "images/favorites/gone-now.jpg"
 
-  - title: "A Fever You Can't Sweat Out"
-    creator: "Panic! At the Disco"
-    link: "https://music.apple.com/br/album/a-fever-you-cant-sweat-out-20th-anniversary-deluxe/1846923403"
-    cover: "images/favorites/panic-fever.jpg"
+  - title: "The Stone Roses"
+    creator: "The Stone Roses"
+    link: "https://music.apple.com/br/album/the-stone-roses-20th-anniversary-collectors-edition/325539526"
+    cover: "images/favorites/stone-roses.jpg"
+
+  - title: "American Football"
+    creator: "American Football"
+    link: "https://music.apple.com/br/album/american-football-deluxe-edition/1651301990"
+    cover: "images/favorites/american-football.png"
+
+  - title: "Meds"
+    creator: "Placebo"
+    link: "https://music.apple.com/br/album/meds/961069448"
+    cover: "images/favorites/meds.jpg"
+
+  - title: "If Only You Were Lonely"
+    creator: "Hawthorne Heights"
+    link: "https://music.apple.com/br/album/if-only-you-were-lonely/1558593736"
+    cover: "images/favorites/if-only-you-were-lonely.jpg"
+
+  - title: "OK Computer"
+    creator: "Radiohead"
+    link: "https://music.apple.com/br/album/ok-computer/1097861387"
+    cover: "images/favorites/ok-computer.jpg"
+
+  - title: "The Invisible Band"
+    creator: "Travis"
+    link: "https://music.apple.com/br/album/the-invisible-band/1596000685"
+    cover: "images/favorites/invisible-band.jpg"
 
   - title: "Perfect Symmetry"
     creator: "Keane"
     link: "https://music.apple.com/br/album/perfect-symmetry-deluxe-edition/1445742936"
     cover: "images/favorites/perfect-symmetry.jpg"
+
+  - title: "The Black Parade"
+    creator: "My Chemical Romance"
+    link: "https://music.apple.com/br/album/the-black-parade-20th-anniversary-deluxe-edition/6801672993"
+    cover: "images/favorites/the-black-parade.jpg"
+
+  - title: "Sam's Town"
+    creator: "The Killers"
+    link: "https://music.apple.com/br/album/sams-town/1440507523"
+    cover: "images/favorites/sams-town.jpg"
+
+  - title: "Is This It"
+    creator: "The Strokes"
+    link: "https://music.apple.com/br/album/is-this-it/269080434"
+    cover: "images/favorites/is-this-it.jpg"
+
+  - title: "A Fever You Can't Sweat Out"
+    creator: "Panic! At the Disco"
+    link: "https://music.apple.com/br/album/a-fever-you-cant-sweat-out-20th-anniversary-deluxe/1846923403"
+    cover: "images/favorites/panic-fever.jpg"
+
+  - title: "Hybrid Theory"
+    creator: "Linkin Park"
+    link: "https://music.apple.com/br/album/hybrid-theory-deluxe-edition/590431776"
+    cover: "images/favorites/hybrid-theory.jpg"
