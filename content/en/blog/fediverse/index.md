@@ -5,7 +5,7 @@ categories:
   - Tech
   - Politics
 updated: ""
-description: "Let's talk about social media algorithms, politics and the Fediverse"
+description: "Let's talk about social media algorithms and the Fediverse"
 cover: "fediverse.png"
 coverCaption: ""
 tags: ["fediverse", "social network", "open source", "decentralization"]
