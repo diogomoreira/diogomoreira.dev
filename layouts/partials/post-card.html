@@ -78,7 +78,11 @@
     </h3>
     {{ if $featured }}
       <p class="mb-3 line-clamp-2 text-sm/[1.5] text-base-content/70">
-        {{ with $post.Description }}{{ . }}{{ else }}{{ $post.Plain | truncate 160 }}{{ end }}
+        {{ with $post.Description }}
+          {{ . | markdownify }}
+        {{ else }}
+          {{ $post.Plain | truncate 160 | markdownify }}
+        {{ end }}
       </p>
     {{ end }}
     {{/* Date and reading time only, no icons. `flex-wrap` is for pt-br, the

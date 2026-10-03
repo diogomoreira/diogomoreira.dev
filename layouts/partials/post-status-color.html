@@ -27,4 +27,4 @@
   "ramp" "bg-linear-to-br from-(--status-living-start) to-(--status-living-deep) text-(--status-living-ink)")
   "archived" $archived
 }}
-{{ return index $status (.Params.status | default "") | default $archived }}
+{{ return (index $status (.Params.status | default "") | default $archived) }}

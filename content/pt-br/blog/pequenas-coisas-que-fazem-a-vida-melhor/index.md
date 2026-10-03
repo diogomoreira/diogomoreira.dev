@@ -33,5 +33,6 @@ Esse post foi inspirado por [**esse vídeo**](https://www.youtube.com/watch?v=s7
 14. Re-jogar um jogo antigo
 15. Ler um livro do seu gênero favorito
 16. Apresentar um filme que você gosta para alguém
+17. Pensar em uma mudança de estilo (corte de cabelo, roupas, acessórios...)
 
 Essa lista provavelmente vai crescer indefinidamente. A intenção não é discutir profundamente sobre elas, mas apenas listá-las. Convido aos que gostaram da idéia a também fazer sua lista em seu espaço virtual.

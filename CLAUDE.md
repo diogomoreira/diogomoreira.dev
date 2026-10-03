@@ -57,7 +57,7 @@ What formatting does change in the output, harmlessly: whitespace inside tags (`
 
 ### Stack
 
-- **Hugo** static site generator (v0.159.1 extended, required for Tailwind CSS processing)
+- **Hugo** static site generator (v0.167.0 extended, required for Tailwind CSS processing)
 - **TailwindCSS v4** + **DaisyUI v5** for styling — configured entirely in `assets/css/main.css` (no `tailwind.config.js`)
 - **Pagefind** for client-side full-text search (index built post-hugo, served from `public/pagefind/`)
 - **PhotoSwipe v5** for photo lightbox (JS/CSS sourced from npm, copied to `assets/photoswipe/` at build time)

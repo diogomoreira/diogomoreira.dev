@@ -40,7 +40,20 @@ cover = "images/default-cover.png"
 # Site-wide by nature — this governs every processed image, photo albums included.
 [imaging]
 resampleFilter = "Gaussian"
+
+# Per-format since Hugo v0.163, which deprecated the single `imaging.quality` key.
+# Both carry the 82 that key used to set; `responsive-image.html` emits WebP + JPEG.
+[imaging.jpeg]
 quality = 82
+
+[imaging.webp]
+quality = 82
+
+# Hugo v0.167 checks the binary it actually spawns, so css.TailwindCSS needs
+# `tailwindcss` here as well as `node`. Setting `allow` replaces the default list
+# outright, so the defaults are repeated verbatim — drop one and that tool breaks.
+[security.exec]
+allow = ['^(dart-)?sass$', '^go$', '^git$', '^node$', '^postcss$', '^tailwindcss$']
 
 [build]
 [build.buildStats]

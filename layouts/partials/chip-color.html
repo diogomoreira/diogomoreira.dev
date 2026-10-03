@@ -65,4 +65,4 @@
 }}
 
 {{ $maps := dict "lang" $lang "category" $category "tag" $tag }}
-{{ return index (index $maps $family | default dict) $key | default "" }}
+{{ return (index (index $maps $family | default dict) $key | default "") }}

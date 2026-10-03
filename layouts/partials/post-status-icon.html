@@ -8,4 +8,4 @@
   rather than live today, since every post sets one.
 */}}
 {{ $emoji := dict "seed" "🌱" "growing" "🌿" "living" "🪴" "archived" "🍂" }}
-{{ return index $emoji (.Params.status | default "") | default "" }}
+{{ return (index $emoji (.Params.status | default "") | default "") }}

@@ -4,6 +4,6 @@
   "installCommand": "npm install",
   "framework": "hugo",
   "env": {
-    "HUGO_VERSION": "0.159.1"
+    "HUGO_VERSION": "0.167.0"
   }
 }
