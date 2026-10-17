@@ -85,6 +85,9 @@ favorites_block_ended = "Finalizadas"
 # `cond`: uma tabela `[chave]` no TOML engoliria todas as chaves seguintes.
 favorites_entry_count_one = "{{ .Count }} item"
 favorites_entry_count_other = "{{ .Count }} itens"
+# Contagem no card de álbum em /fotos, escolhida com `cond` como a dos favoritos.
+photos_count_one = "{{ .Count }} foto"
+photos_count_other = "{{ .Count }} fotos"
 # Uma chave por arquivo em data/favorites/ — sem a chave, o nome do arquivo aparece cru.
 favorites_category_albums = "Álbuns"
 favorites_category_articles = "Artigos"

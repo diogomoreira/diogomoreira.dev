@@ -30,11 +30,16 @@ collections:
 
   - name: "photos"
     label: "Photos"
-    folder: "content/photos"
+    # One album is one page bundle: content/en/photos/<date>-<slug>/index.md,
+    # with its images beside it. An empty media/public folder makes Decap save
+    # uploads into the bundle and store bare filenames, which is what `cover`
+    # and `src` must be — the templates resolve both with .Resources.GetMatch.
+    folder: "content/en/photos"
     create: true
-    slug: "{{year}}/{{month}}/{{slug}}"
-    media_folder: "assets/images/photos/{{year}}/{{month}}/{{slug}}"
-    public_folder: "/images/photos/{{year}}/{{month}}/{{slug}}"
+    path: "{{slug}}/index"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    media_folder: ""
+    public_folder: ""
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }
@@ -45,13 +50,24 @@ collections:
         name: "cover"
         widget: "image"
         required: false
-      - label: "Photos"
-        name: "photos"
+        hint: "Thumbnail on /photos. Defaults to the first photo by filename."
+      # Hugo's own `resources` front matter. Every image in the bundle shows in
+      # the grid whether it has an entry here or not; an entry only adds a caption.
+      - label: "Photo captions"
+        name: "resources"
         widget: "list"
         required: false
+        summary: "{{fields.src}} — {{fields.title}}"
         fields:
-          - { label: "Image", name: "image", widget: "image" }
-          - { label: "Caption", name: "caption", widget: "string", required: false }
+          - { label: "Photo", name: "src", widget: "image" }
+          - { label: "Title", name: "title", widget: "string", required: false }
+          - label: "Params"
+            name: "params"
+            widget: "object"
+            required: false
+            fields:
+              - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
       - { label: "Body", name: "body", widget: "markdown", required: false }
 
   - name: "snippets"

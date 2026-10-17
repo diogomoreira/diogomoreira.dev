@@ -15,67 +15,45 @@
     {{ end }}
   {{ end }}
 
+  {{/* A card is a door into its album, not a lightbox: the photos live on the
+    album page. The thumbnail is `cover` when set, else the bundle's first image
+    by filename — the same order the album grid uses.
+  */}}
   {{ if $galleryPages }}
-    <div id="my-gallery" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       {{ range $galleryPages.ByDate.Reverse }}
         {{ $page := . }}
+        {{ $photos := sort ($page.Resources.ByType "image") "Name" }}
         {{ $cover := "" }}
         {{ with $page.Params.cover }}
           {{ $cover = $page.Resources.GetMatch . }}
         {{ end }}
-
-        {{ if $cover }}
-          {{ $thumb := $cover.Fill "640x360 jpg" }}
-          {{ $full := $cover.Resize "2000x jpg" }}
-          <a
-            href="{{ $full.RelPermalink }}"
-            data-pswp-width="{{ $full.Width }}"
-            data-pswp-height="{{ $full.Height }}"
-            class="group block relative aspect-video overflow-hidden bg-base-200 cursor-zoom-in"
-          >
-            <img
-              src="{{ $thumb.RelPermalink }}"
-              alt="{{ $page.Title }}"
-              width="{{ $thumb.Width }}"
-              height="{{ $thumb.Height }}"
-              loading="lazy"
-              class="w-full h-full object-cover group-hover:scale-105"
-            />
-
-            <span class="pswp-caption-content">
-              {{ with $page.Params.location }}<strong class="block">{{ . }}</strong>{{ end }}
-              {{ with $page.Description }}<span class="block opacity-80">{{ . | markdownify }}</span>{{ end }}
-            </span>
-
-            <div
-              class="absolute inset-0 flex flex-col justify-end p-3 opacity-0 group-hover:opacity-100  duration-300"
-              style="background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 60%);"
-            >
-              <span class="text-xs font-medium text-white truncate">{{ $page.Title }}</span>
-              {{ with $page.Params.location }}
-                <span class="text-xs text-white/70 truncate">{{ . }}</span>
-              {{ end }}
-            </div>
-          </a>
-        {{ else }}
-          <div class="relative aspect-video overflow-hidden bg-base-200 flex items-center justify-center text-accent">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-              <circle cx="9" cy="9" r="2" />
-              <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-            </svg>
-          </div>
+        {{ if and (not $cover) $photos }}
+          {{ $cover = index $photos 0 }}
         {{ end }}
+        {{ $count := len $photos }}
+        <a href="{{ $page.RelPermalink }}" class="group block">
+          <div class="aspect-video overflow-hidden bg-base-200">
+            {{ with $cover }}
+              {{ $thumb := (.Filter images.AutoOrient).Fill "800x450 Smart jpg" }}
+              <img
+                src="{{ $thumb.RelPermalink }}"
+                alt="{{ $page.Title }}"
+                width="{{ $thumb.Width }}"
+                height="{{ $thumb.Height }}"
+                loading="lazy"
+                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            {{ end }}
+          </div>
+          <div class="mt-2">
+            <span class="font-heading font-semibold text-heading group-hover:underline">{{ $page.Title }}</span>
+            <div class="mt-0.5 flex flex-wrap gap-x-3 text-xs text-base-content/70">
+              {{ with $page.Params.location }}<span>{{ . }}</span>{{ end }}
+              <span>{{ i18n (cond (eq $count 1) "photos_count_one" "photos_count_other") (dict "Count" $count) }}</span>
+            </div>
+          </div>
+        </a>
       {{ end }}
     </div>
   {{ else }}

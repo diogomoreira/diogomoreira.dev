@@ -37,34 +37,85 @@
       </div>
     </header>
 
-    {{ with .Params.cover }}
-      {{ $img := $.Resources.GetMatch . }}
-      {{ if $img }}
-        {{ $full := $img.Resize "2000x jpg" }}
-        <figure id="my-gallery" class="mb-10">
-          <a href="{{ $full.RelPermalink }}" data-pswp-width="{{ $full.Width }}" data-pswp-height="{{ $full.Height }}">
-            {{ partial "responsive-image.html" (
-              dict
-              "page" $
-              "src" .
-              "alt" $.Title
-              "class" "w-full border-4 border-base-200 shadow-md object-cover cursor-zoom-in"
-              "width" "1000"
-              )
-            }}
-            <span class="pswp-caption-content">
-              {{ with $.Params.location }}<strong class="block">{{ . }}</strong>{{ end }}
-              {{ with $.Description }}<span class="block opacity-80">{{ . | markdownify }}</span>{{ end }}
-            </span>
-          </a>
-        </figure>
-      {{ end }}
-    {{ end }}
-
-
     <div class="prose prose-headings:font-heading max-w-none">
       {{ partial "disclaimer-alert.html" . }}
       {{ .Content }}
     </div>
+
+    {{/* Every image in the bundle, in filename order, so camera names
+      (`IMG_1573.jpg`) come out in the order they were shot. `cover` only picks
+      the album's thumbnail on /photos; it is not hoisted here.
+
+      A photo's caption comes from its `resources` front-matter entry: `title`
+      for a short line, `params.description` for longer text under it, either
+      optional and both markdown. They show in the lightbox only — the grid is
+      for scanning. Hugo defaults a resource's `.Title` to its `.Name`, so a
+      title counts only when the two differ — an untitled photo gets no filename
+      caption. The alt text is the title, then the description, then the album's.
+
+      The caption is a `template data-caption` _after_ the tile, never inside
+      it. A markdown link in a caption is an `a`, and inside the tile's own `a`
+      the parser would close the tile at the inner start tag. A `template` is
+      `display: none`, so it is no flex item and adds no gap; `baseof.html`'s
+      `captionContent` reads it from the tile's next sibling.
+
+      AutoOrient runs first: phone photos store rotation as an EXIF tag, and
+      Hugo's resize ops ignore it, so a portrait shot would otherwise come out
+      sideways, and its aspect ratio below would be the wrong way round.
+
+      The grid is a justified layout, Google Photos' shape: every photo in a row
+      is the same height, each keeps its own aspect ratio, and the row fills the
+      column. It is pure flexbox. Each tile's `flex-grow` and `flex-basis` are
+      both proportional to its aspect ratio `--ar`, so the space a row grows by
+      is shared out in that ratio, and `aspect-ratio` turns every tile's width
+      back into one common height. The basis is the target row height times
+      `--ar` — 8rem on a phone, 12rem from `sm` — and rows end up somewhat
+      taller than that, since they grow to fill.
+
+      `--ar` is an inline `style`, not an arbitrary-property class: the value
+      differs per photo and is computed at build time, so a `[--ar:1.333]`
+      class would exist as a literal nowhere and miss the build that renders it.
+
+      The trailing spacer is what keeps the last row from stretching: it
+      grows 999 times harder than any tile, so it takes a short row's slack and
+      leaves those photos at the target height. It has zero basis, so it fits
+      onto whichever line the last photo is on and never starts a row of its own.
+    */}}
+    {{ $photos := sort (.Resources.ByType "image") "Name" }}
+    {{ with $photos }}
+      <div data-gallery class="mt-8 flex flex-wrap gap-1" data-pagefind-ignore>
+        {{ range . }}
+          {{ $img := .Filter images.AutoOrient }}
+          {{ $thumb := $img.Resize "x720 jpg" }}
+          {{ $full := $img.Resize "2000x jpg" }}
+          {{ $ar := printf "%.4f" (div (float $thumb.Width) $thumb.Height) }}
+          {{ $title := cond (ne .Title .Name) .Title "" }}
+          {{ $description := .Params.description }}
+          <a
+            href="{{ $full.RelPermalink }}"
+            data-pswp-width="{{ $full.Width }}"
+            data-pswp-height="{{ $full.Height }}"
+            style="--ar: {{ $ar }}"
+            class="group block grow-(--ar) basis-[calc(var(--ar)*8rem)] sm:basis-[calc(var(--ar)*12rem)] aspect-(--ar) overflow-hidden bg-base-200 cursor-zoom-in"
+          >
+            <img
+              src="{{ $thumb.RelPermalink }}"
+              alt="{{ or ($title | markdownify | plainify) ($description | markdownify | plainify) $.Title }}"
+              width="{{ $thumb.Width }}"
+              height="{{ $thumb.Height }}"
+              loading="lazy"
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          </a>
+          {{ if or $title $description }}
+            <template data-caption>
+              {{ with $title }}<strong class="block">{{ . | markdownify }}</strong>{{ end }}
+              {{ with $description }}<span class="block opacity-80">{{ . | markdownify }}</span>{{ end }}
+            </template>
+          {{ end }}
+        {{ end }}
+        <div aria-hidden="true" class="grow-[999]"></div>
+      </div>
+    {{ end }}
   </article>
 {{ end }}

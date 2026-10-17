@@ -234,17 +234,16 @@ hidden = true
 [[menus.main]]
 identifier = "favorites"
 pageRef = "/favorites"
-weight = 9
+weight = 10
 [menus.main.params]
 icon = "favorites"
 
 [[menus.main]]
 identifier = "photos"
 pageRef = "/photos"
-weight = 10
+weight = 9
 [menus.main.params]
 icon = "photos"
-hidden = true
 
 [services]
 [services.disqus]

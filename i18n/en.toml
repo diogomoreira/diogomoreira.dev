@@ -84,6 +84,9 @@ favorites_block_ended = "Finished"
 # bare key that follows it, and these files are all bare keys.
 favorites_entry_count_one = "{{ .Count }} entry"
 favorites_entry_count_other = "{{ .Count }} entries"
+# The /photos album card's count, picked with `cond` like the favorites one.
+photos_count_one = "{{ .Count }} photo"
+photos_count_other = "{{ .Count }} photos"
 # One key per file in data/favorites/ — a missing key renders the raw filename.
 favorites_category_albums = "Albums"
 favorites_category_articles = "Articles"

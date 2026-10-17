@@ -51,13 +51,20 @@
       import PhotoSwipeLightbox from '{{ $lightbox.RelPermalink }}';
       import PhotoSwipeDynamicCaption from '{{ $pswpCaption.RelPermalink }}';
       const lightbox = new PhotoSwipeLightbox({
-        gallery: '#my-gallery',
-        children: 'a',
+        gallery: '[data-gallery]',
+        children: 'a[data-pswp-width]',
         pswpModule: () => import('{{ $pswp.RelPermalink }}'),
       });
 
+      // The caption is the tile's next-sibling template (see photos/single.html).
+      // A function, because the plugin's selector lookup falls back to the img
+      // alt, which put the album title under every uncaptioned photo.
       new PhotoSwipeDynamicCaption(lightbox, {
         type: 'auto',
+        captionContent: slide => {
+          const next = slide.data.element?.nextElementSibling;
+          return next?.matches('template[data-caption]') ? next.innerHTML : '';
+        },
       });
 
       lightbox.init();
