@@ -32,10 +32,10 @@ cv_now = "Atual"
 # Blog
 categories_label = "Categorias"
 tags_label = "Tags"
-blog_latest = "Mais recente"
 reading_time_minutes = "{{ .Count }} min de leitura"
-blog_keep_reading = "Continuar lendo →"
-blog_all_posts = "Todos os posts"
+# Day and month only, for a row under a year heading — see post-list.html.
+# A Go layout string; `time.Format` localises the month name.
+blog_date_in_year = "2 Jan"
 blog_view_in_language = "Ver em {{ .Language }}"
 # O feed do blog mistura os dois idiomas — ver blog-posts.html. Todo item leva selo.
 post_lang_written_in = "Escrito em {{ .Language }}"
@@ -43,7 +43,6 @@ status_seed = "Semente"
 status_growing = "Em cultivo"
 status_living = "Vivo"
 status_archived = "Arquivado"
-status_legend_title = "Status"
 status_seed_description = "uma ideia"
 status_growing_description = "em desenvolvimento"
 status_living_description = "maduro, mas atualizado continuamente"

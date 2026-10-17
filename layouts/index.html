@@ -50,15 +50,10 @@
           >{{ i18n "home_all_posts" }}</a
         >
       </div>
-      {{/* `first 3` in a three-column grid, so the row is exactly one row. Cards
-        here and rows in "Recently Added" below is a deliberate contrast — don't
-        pair them back up.
+      {{/* The same list /blog renders, flat and cut to the newest five: a year
+        heading over five rows would mostly be heading.
       */}}
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {{ range first 3 $posts }}
-          {{ partial "post-card.html" (dict "page" .) }}
-        {{ end }}
-      </div>
+      {{ partial "post-list.html" (dict "posts" (first 5 $posts)) }}
     </section>
   {{ end }}
 

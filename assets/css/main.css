@@ -187,23 +187,21 @@ html[data-theme="midnight"] {
    monochrome page the status is one of the few things worth spending colour on.
    It was an emerald ramp until the palette went black-and-white.
 
-   Contrast is measured chip-ink-on-fill at *both* ends of every ramp, and the
-   bands straddle the hole in the middle of the family exactly as the emerald
-   ones did: full Truffle measures 3.53:1 under the dark ink and the mid step
-   3.02:1 under the pale one, so neither band is allowed to contain that
-   crossover. Worst pair is living's light end at 5.18:1.
+   Contrast is measured chip-ink-on-fill. Each chip used to be a two-stop
+   gradient (a `-start` step beside each `-deep`) on the post card, which went
+   in 4.15.0; only the flat `-deep` fill is left. The steps still straddle the
+   hole in the middle of the family: full Truffle measures 3.53:1 under the dark
+   ink and the mid step 3.02:1 under the pale one, so no fill sits on that
+   crossover.
 
    Never use these as *text* on a page surface: no single step clears 4.5:1 on
    both grounds at once, which is why the legend renders chips. */
 :root {
-  --status-seed-start: #ffddbc; /* Burning Flame +55% white */
-  --status-seed-deep: #ffc185; /* Burning Flame +20% white — 15.20:1 / 12.31:1 across the ramp */
+  --status-seed-deep: #ffc185; /* Burning Flame +20% white — 12.31:1 */
   --status-seed-ink: #190704; /* Truffle +70% black */
-  --status-growing-start: #ffb162; /* Burning Flame */
-  --status-growing-deep: #cc7b4b; /* Burning Flame 45% into Truffle — 10.92:1 / 6.06:1 */
+  --status-growing-deep: #cc7b4b; /* Burning Flame 45% into Truffle — 6.06:1 */
   --status-growing-ink: #190704;
-  --status-living-start: #a35139; /* Truffle Trouble */
-  --status-living-deep: #783a28; /* Truffle +20% black — 5.18:1 / 8.07:1 */
+  --status-living-deep: #783a28; /* Truffle +20% black — 8.07:1 */
   --status-living-ink: #fff6ed; /* Burning Flame +88% white */
 }
 

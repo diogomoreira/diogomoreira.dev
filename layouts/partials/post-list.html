@@ -1,0 +1,73 @@
+{{/* Usage: `partial "post-list.html" (dict "posts" $posts "byYear" true)` — blog
+  posts as a plain list: the title, then a small date after it. Called by
+  blog/list.html and _default/taxonomy.html (one heading per year) and index.html
+  (flat, the newest few).
+
+  `byYear` changes the date as well as the grouping: under a year heading the year
+  is already said, so a row carries only day and month (`blog_date_in_year`, a
+  layout string per language because "Jul 7" and "7 de jul" disagree on order —
+  `time.Format` localises the month name itself). A flat list needs the full
+  medium date. Both shapes go through one `$groups` slice, the flat one as a
+  single group with no key, so there is one row's markup to keep in step.
+*/}}
+{{ $byYear := .byYear | default false }}
+
+{{ $groups := slice }}
+{{ $layout := ":date_medium" }}
+{{ if $byYear }}
+  {{ $layout = i18n "blog_date_in_year" }}
+  {{ range .posts.GroupByDate "2006" }}
+    {{ $groups = $groups | append (dict "key" .Key "pages" .Pages) }}
+  {{ end }}
+{{ else }}
+  {{ $groups = slice (dict "key" "" "pages" .posts) }}
+{{ end }}
+
+{{ range $groups }}
+  <section class="mb-10 last:mb-0">
+    {{ with .key }}
+      <h2 class="mb-0 pb-2 border-b border-base-300 font-heading text-lg font-semibold tracking-tight">
+        {{ . }}
+      </h2>
+    {{ end }}
+    {{/* The status emoji is the bullet: the list keeps its one decoration and the
+      /blog status key still has something to explain. A post with no status gets a
+      muted dot in the same slot, so titles stay on one left edge.
+    */}}
+    <ul class="m-0 mt-2 p-0 list-none">
+      {{ range .pages }}
+        {{ $post := . }}
+        <li class="flex items-baseline gap-2 py-[0.3rem]">
+          <span class="w-6 shrink-0 text-center">
+            {{/* `$post`: inside this `with`, `.` is the emoji. */}}
+            {{ with partial "post-status-icon.html" $post }}
+              {{ partial "post-status-emoji.html" $post }}
+            {{ else }}
+              <span class="text-base-content/45" aria-hidden="true">·</span>
+            {{ end }}
+          </span>
+          <div class="min-w-0">
+            <a
+              href="{{ .RelPermalink }}"
+              class="leading-normal font-semibold text-base-content link-dash hover:underline focus-visible:underline"
+              >{{ .Title }}</a
+            >
+            {{/* After the title, not right-aligned: a date pushed to the far edge
+              of a 56rem column is read as a separate column, not as the post's.
+              The language code is on every row, as on the cards it replaced — the
+              feed mixes both languages, and badging only the foreign one reads as
+              a warning.
+            */}}
+            <span class="ms-1 whitespace-nowrap text-xs text-base-content/70">
+              <time datetime="{{ .Date.Format "2006-01-02" }}">{{ time.Format $layout .Date }}</time>
+              <span class="mx-[0.3em] text-base-content/45" aria-hidden="true">·</span>
+              <span class="font-mono" title="{{ i18n "post_lang_written_in" (dict "Language" .Language.Label) }}"
+                >{{ upper (substr .Language.Lang 0 2) }}</span
+              >
+            </span>
+          </div>
+        </li>
+      {{ end }}
+    </ul>
+  </section>
+{{ end }}

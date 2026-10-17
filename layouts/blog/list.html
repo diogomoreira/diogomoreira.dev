@@ -49,19 +49,10 @@
     {{ partial "translation-link.html" . }}
   </div>
 
-  {{ partial "post-status-legend.html" . }}
-
-  {{/* Every language's posts in one feed, not just `.Pages` — the featured card,
-    the chips and the archive all read this and cannot disagree.
+  {{/* Every language's posts in one feed, not just `.Pages` — the chips and the
+    list both read this and cannot disagree.
   */}}
   {{ $posts := partial "blog-posts.html" . }}
-
-  {{ with index $posts 0 }}
-    <section class="mb-10">
-      {{ partial "section-label.html" (dict "text" (i18n "blog_latest")) }}
-      {{ partial "post-card.html" (dict "page" . "featured" true) }}
-    </section>
-  {{ end }}
 
   {{ $cats := slice }}
   {{ range $posts }}
@@ -89,17 +80,12 @@
     </section>
   {{ end }}
 
-  {{/* One flat grid: the cards carry their own dates. `after 1` drops the post
-    already shown as the featured card above.
+  {{/* The whole archive as one list under a heading per year — no featured card:
+    the newest post is simply the first row.
   */}}
-  {{ $rest := after 1 $posts }}
-  {{ if $rest }}
-    {{ partial "section-label.html" (dict "text" (i18n "blog_all_posts")) }}
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {{ range $rest }}
-        {{ partial "post-card.html" (dict "page" .) }}
-      {{ end }}
-    </div>
+  {{/* The status key sits directly over the list it explains. */}}
+  {{ with $posts }}
+    {{ partial "post-status-legend.html" . }}
+    {{ partial "post-list.html" (dict "posts" . "byYear" true) }}
   {{ end }}
-
 {{ end }}

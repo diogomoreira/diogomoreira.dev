@@ -30,7 +30,7 @@
 {{ $tags := .Params.tags }}
 {{ $hasMeta := or $cats $tags }}
 
-{{/* The card's micro-type, verbatim from post-card.html. */}}
+{{/* The site's kicker micro-type, letterspaced 11px capitals. */}}
 {{ $micro := "font-heading text-[0.6875rem]/[1.2] font-semibold uppercase tracking-[0.12em]" }}
 
 {{/* Branching class strings are variables interpolated whole, never inline `if`

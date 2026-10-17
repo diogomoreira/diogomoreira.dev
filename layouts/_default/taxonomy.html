@@ -5,15 +5,11 @@
     {{ $pages = .Data.Pages }}
   {{ end }}
 
-  {{/* Cards, not `page-list.html`: every page in a taxonomy is a blog post with
-    a cover. That partial serves sections with no cover art.
+  {{/* The /blog list, not `page-list.html`: every page in a taxonomy is a blog
+    post, and a term page should read as a filtered /blog.
   */}}
   {{ if $pages }}
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {{ range $pages.ByDate.Reverse }}
-        {{ partial "post-card.html" (dict "page" .) }}
-      {{ end }}
-    </div>
+    {{ partial "post-list.html" (dict "posts" $pages.ByDate.Reverse "byYear" true) }}
   {{ else }}
     {{ partial "empty-state.html" "" }}
   {{ end }}

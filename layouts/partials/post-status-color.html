@@ -1,9 +1,10 @@
 {{/* Usage: `partial "post-status-color.html" .` — the single place a blog post's
-  status colour is decided. Returns a dict of literal class strings: `chip` (the
-  flat badge) and `ramp` (the post card's gradient corner chip), so the two shapes
-  are the same colour by construction and neither needs a safelist.
+  status colour is decided. Returns a dict holding `chip`, a literal class string
+  for the flat badge, so it needs no safelist. (A dict rather than the string
+  because a second shape, the post card's gradient `ramp`, sat beside it until
+  the card was removed in 4.15.0.)
 
-  The colours are the `--status-*` variables in main.css — one emerald ramp,
+  The colours are the `--status-*` variables in main.css — one warm ramp,
   identical in both themes. An unknown or archived status falls through to the
   paper chip, the one entry that *is* theme-aware.
 
@@ -13,18 +14,14 @@
 */}}
 {{ $archived := dict
   "chip" "badge-ghost"
-  "ramp" "bg-linear-to-br from-base-100 to-base-200 text-base-content"
 }}
 {{ $status := dict
   "seed" (dict
-  "chip" "[--badge-color:var(--status-seed-deep)] [--badge-fg:var(--status-seed-ink)]"
-  "ramp" "bg-linear-to-br from-(--status-seed-start) to-(--status-seed-deep) text-(--status-seed-ink)")
+  "chip" "[--badge-color:var(--status-seed-deep)] [--badge-fg:var(--status-seed-ink)]")
   "growing" (dict
-  "chip" "[--badge-color:var(--status-growing-deep)] [--badge-fg:var(--status-growing-ink)]"
-  "ramp" "bg-linear-to-br from-(--status-growing-start) to-(--status-growing-deep) text-(--status-growing-ink)")
+  "chip" "[--badge-color:var(--status-growing-deep)] [--badge-fg:var(--status-growing-ink)]")
   "living" (dict
-  "chip" "[--badge-color:var(--status-living-deep)] [--badge-fg:var(--status-living-ink)]"
-  "ramp" "bg-linear-to-br from-(--status-living-start) to-(--status-living-deep) text-(--status-living-ink)")
+  "chip" "[--badge-color:var(--status-living-deep)] [--badge-fg:var(--status-living-ink)]")
   "archived" $archived
 }}
 {{ return (index $status (.Params.status | default "") | default $archived) }}
